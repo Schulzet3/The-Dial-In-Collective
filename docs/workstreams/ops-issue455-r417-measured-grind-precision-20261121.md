@@ -1,0 +1,23 @@
+# Issue #455 R417: original measured grinder precision [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+## Source / owner authorization
+- Preflight immutable branch `38c275c437302c25977b3203758dcf8f1237b70c`, verified Git blob `3742fed0176c809b115320c698a0e8b1675b2d3e`; original `site/lib/engine.js` blob `12f036ff2286c3e041d5ebf2a81c56ead6928c5c`, `site/cloud/mapping.js` blob `acbed6bd0f02cb7e626374a22cbeba1ab187ec2a`, queue blob `24d653862e7ddd74193fc4958709c96d14a32870`. Main `57adc419ed4b106e158435b465971f5986537b41` and release `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` read only.
+- Owner #455 Option B independently verified SAFE data-integrity repair; preserve five taste inputs, all-green, one-change advice, original note/history, equipment, style, slow feed, offline, privacy/RLS/Community, Locked decision and no deployment. The Master Specification 37.1E custom grinder step/wrap remains OPEN; this fixes storage precision only, not new grinder advice or science.
+- Negative source reproducer: calibrated espresso bounds permit 0.15–2.55, Log Shot uses number input with `novalidate` and accepts an explicit valid 0.15 original measurement; cloud `shotPayload` would silently persist it as 0.2; local/offline `saveShot` and `editShot` similarly rounded original. SQL `grind_setting numeric` does not enforce tenths. No real member occurrence established; preserving measured input is a correctness fix.
+
+## Same-commit changes / regression plan
+- `site/cloud/mapping.js`: use validated `C.num(d.grindSetting)` rather than `C.round` in new cloud shot payload.
+- `site/lib/engine.js`: preserve validated original numerical grind reading on new shots and edits with `num`; leave dose/yield/time rounding, tenth-step next recommendation and all remaining logic unchanged.
+- `tests/issue455-r417-measured-grind-precision.test.mjs`: four synthetic actual-module cases: cloud first save fractional; offline local save + history + immutable replay; edited value; zero/tenths and missing fifth taste. Positive and negative checks; no provider member data or empirical efficacy.
+- `docs/RELEASE_QUEUE.json`: one TESTING-only intake `DIC-Q-455-r417-measured-grind-precision`, scope_paths only two deployable application files. This journal in exact same commit provides preflight/source/paths/authority/tests/failure/next action. No new source register/approval policy or other research material.
+- Tests, lint, builds, hosted CI and browser/mobile/offline/SQL/Auth checks **NOT YET RUN** at creation, NOT PASS. Prior R415 evidence reused ONLY for unchanged recommended tenth-step behavior. Original 48 research reference tests not app CI.
+- Next: inspect exact PR diff; run hosted source-bound relevant Node22/UX/mobile/offline/accessibility/governance/SQL/security; diagnose/fix failures, merge nonforce with merge-commit message `[skip netlify]`, readback exact merged SHA/blobs and applicable CI; update queue/Issue #455. Remain TESTING until #3347 isolated five-check candidate prevalidation. S019 PDF original not retrieved, overall #455 OPEN; zero #267 audit credit. No production/main/release/Netlify/member/SQL/Auth/Edge/backup or visibility/schedule writes.
+
+## Concurrent development advancement: clean nonforce first-parent rebase [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=79be43fee64678ed6bb6af2575de3f9238b1f2e4 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- First-parent source 79be43fee64678ed6bb6af2575de3f9238b1f2e4 independently reverified. Development advanced during source-bound PR-head CI for disjoint #509 documentation; engine, mapping, release-queue and preflight blob SHAs were identical to prewrite, so original source/test/queue blobs stay byte-identical. Tree is based on the new development tree, with preceding feature head 54994f0e8d626a6d51b2635b4a8489663b998d85 as SECOND PARENT to preserve old branch ancestry and enable nonforce update. This journal gets a NEW same-commit preflight line; first-parent is the new live SHA. No unrelated source overwritten.
+- Original head checks all applicable SUCCESS (6031 PASS/0 FAIL/6 SKIPPED Node22; four R417 PASS), frozen603 SKIPPED not PASS. New merged-parent head CI must independently complete. No main, production, provider or member writes.

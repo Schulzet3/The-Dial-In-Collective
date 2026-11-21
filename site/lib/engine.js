@@ -966,7 +966,8 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
   throw new Error('Select an active basket before saving this shot.');
  const p=ensureCoffeeState(s,coffeeId);
- const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
+ // Preserve the validated original dial value even when finer than the advice grid.
+ const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:num(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
  sh.suggestion=nextAdvice(s,sh,recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode}));
@@ -983,7 +984,9 @@ export function editShot(s,id,input) {
  const merged={...old,...input};const errors=validateShot(merged,{allowLegacyCustom:old.style==='Custom'});if(errors.length)throw new Error(errors.join(' '));
  logAudit(s,'shot.edited',{shotId:id,before:{doseG:old.doseG,yieldG:old.yieldG,timeS:old.timeS,grindSetting:old.grindSetting,tempC:old.tempC,tasteScales:{...old.tasteScales},familyId:old.familyId},previousRevision:old.revision});
  const previousFamily=old.familyId;
- for(const k of ['doseG','yieldG','timeS','grindSetting'])old[k]=round(merged[k]);
+ for(const k of ['doseG','yieldG','timeS'])old[k]=round(merged[k]);
+ // Preserve measured grinder precision; 0.1 is the recommendation step, not a data limit.
+ old.grindSetting=num(merged.grindSetting);
  old.tempC=num(merged.tempC);old.notes=String(merged.notes||'');old.tasteScales={...merged.tasteScales};old.dialedIn=isDialed(old.tasteScales);old.editedAt=now();old.revision++;old.familyId=null;
  if(old.dialedIn)old.familyId=assignFamily(s,old);
  old.outlierReview=isExtreme(s,old)?'pending':'not_needed';
