@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-333",
+  "status": "IN_PROGRESS_ISOLATED_UNMERGED",
+  "preflight": {
+    "development_sha": "0482fa8b4b66c7264fd3b18e86bb20ece2e194d1",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true,
+    "verified_by": "immutable ref fetch_file sha equals native fetch_blob contents"
+  },
+  "refs": {
+    "development": "0482fa8b4b66c7264fd3b18e86bb20ece2e194d1",
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "scope": "Eight complete PR title/body observed metadata versions only; not issues/comments/review threads/diffs; no additional #267 credit",
+  "review": {
+    "objects": 8,
+    "words": 897,
+    "utf8_bytes": 7751,
+    "inclusive_bounds": "title word1-EOF; body physical line1-EOF and word1-EOF; per-object exact bounds and full literals below",
+    "content_integrity": "per-field SHA1 hashes and exact observed updated_at"
+  },
+  "prior_conditional": {
+    "objects": 2395,
+    "words": 418276
+  },
+  "cumulative_conditional": {
+    "objects": 2403,
+    "words": 419173
+  },
+  "canonical_unchanged": {
+    "through": "G1-186",
+    "metadata_objects": 1228,
+    "metadata_words": 292217,
+    "file_lines": 7919,
+    "file_words": 60754
+  },
+  "delegated_267": {
+    "receipt_blob": "aa67e9b7b0fe27617c81bfb2c234df0dd894a118",
+    "source": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C50-614-643-20261117-V11EZ.json",
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+    "pinned_lines": [
+      617,
+      619
+    ],
+    "current_commit": "7be75682ec5ee25bfb8c58f14245c9fc8ebddf44",
+    "current_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+    "current_lines": [
+      623,
+      625
+    ],
+    "verified_3_of_3": true,
+    "semantic_fields_per_line": 17,
+    "new_504_source_credit": 0,
+    "global_267_complete": false
+  },
+  "negative_findings": {
+    "unmerged_predecessor": [
+      2233
+    ],
+    "merged_complete": [
+      2230,
+      2231,
+      2232,
+      2234,
+      2235,
+      2236,
+      2237
+    ],
+    "archivable_after_receipt": [
+      2230
+    ],
+    "new_current_504_bugs_proven": 0,
+    "safe_deletions_proven": 0
+  },
+  "limitations": {
+    "pending_predecessor_integration": "G1-187 through G1-332 draft PRs; pending ordered integration/dedup",
+    "large_unreadable_api_content": [
+      "docs/CURRENT_STATUS.md",
+      "docs/RELEASE_QUEUE.json"
+    ],
+    "unreviewed": "Issue comments, PR discussions/reviews/patches, Actions job/log/artifact, release/tag/commit/trees/binaries, branch drift; entire delegated #267"
+  },
+  "tests": {
+    "functional": "NOT_RUN_DOCS_ONLY",
+    "governance_pr_head": "PENDING_NOT_PASS",
+    "merged_source": "NOT_RUN_NOT_PASS",
+    "provider": "NOT_APPLICABLE"
+  },
+  "next": {
+    "object": "PR complete title/body",
+    "number": 2238,
+    "title_word": 1,
+    "body_line": 1,
+    "body_word": 1
+  },
+  "objects": [
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2230,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2230",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T09:22:32Z",
+      "created_at": "2026-11-12T09:18:11Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T09:22:32Z",
+      "head_sha": "f9f1020b27667f39912ecd820d4fd9b798edf560",
+      "base_sha": "13cb0e9775de247f37e18699fa6b9692700559bb",
+      "merge_commit_sha": "b1c8723d269eda1493f5793458cbc27492359dcd",
+      "title_words": [
+        1,
+        9
+      ],
+      "body_word_range": [
+        1,
+        97
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 106,
+      "combined_utf8_bytes": 848,
+      "title_sha1": "58259f2e150e4f49dc81320d8fab76ff59817f62",
+      "body_sha1": "d27b30682d089ab5a8d57a9a7ad0383776e9f2e9",
+      "combined_sha1": "5f7251d1706c05284eec6e77bb244fc47e6f84c4",
+      "exact_observed_title": "docs(issue33): R142 merged-source verified #120 original603 receipt [skip netlify]",
+      "exact_observed_body": "Docs-only SAME-COMMIT scoped journal + machine-readable raw official selected source verification. Source PR2229 already safely merged with exact reviewed tree 13cb0e9775de247f37e18699fa6b9692700559bb. Actual selected official source and parser R142 run43189412186 SUCCESS, 12 focused/adversarial PASS, strict afterproof PASS, original selected H1 and all own fields verified, independent artifact/raw HTML SHA256 readback. Exact merged Node run43189412188 SUCCESS 4159 PASS/0 FAIL/6 intentional SKIP and lint PASS, applicable merged CI SUCCESS. Frozen603 SKIPPED, entire 603 not certified. Only docs files modified; preserve existing 320 queue items/READY and DEPLOYED, no production or Netlify release. Issue33 OPEN. No runtime change or new deployment authority.",
+      "semantic_finding": "MERGED #33 R142 selected official original603 #120; strict selected afterproof and 4159 Node tests are historical cited receipts, frozen603 SKIPPED; no global 603 acceptance or fresh release.",
+      "disposition": "HISTORICAL_MERGED_SELECTED_COFFEE; safe to archive title after preserving verbatim source",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2231,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2231",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T09:24:35Z",
+      "created_at": "2026-11-12T09:23:33Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T09:24:34Z",
+      "head_sha": "9e7d005c5a1646359f5dbe8d979072968886e3a6",
+      "base_sha": "b1c8723d269eda1493f5793458cbc27492359dcd",
+      "merge_commit_sha": "0427b21d76c97d6c15c01ae1a66d224ee6034dea",
+      "title_words": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        86
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 97,
+      "combined_utf8_bytes": 894,
+      "title_sha1": "41d6974f2cd0d9cbe2c19138bfe8c880b626e395",
+      "body_sha1": "9793d5d65a6440498584999993d795f8561c3cc5",
+      "combined_sha1": "27de3951bcae7d84fe3b838234917765e0545ad0",
+      "exact_observed_title": "Issue #267 A78-T11: 60 individually interpreted original source lines [skip netlify]",
+      "exact_observed_body": "Development-only and docs-only source-bound review. Frozen F165:181–210 (30) and pinned P134:321–350 (30); individually annotated 60/60 exact literal/source SHA-bound original and live readbacks. Current pinned lines shifted by +55. Separate same-commit receipt `ce36e9d576aba8ee75e48941c5050e05e60e23c5` and journal `d5bd408c5d5f8b0f61da6fef1aeecaeaa30046ae` at commit `9e7d005c5a1646359f5dbe8d979072968886e3a6`. Original F001:1–8 revalidated with zero duplicate credit. No runtime modifications; no reproduced active defects or READY/publish authorization. Only exact PR-head/merged-source governance should be marked passing after observed completion. Audit remains OPEN; next F165:211/P134:351; global review and live post-pin reconciliation incomplete. Preserve all other agents' work and no force.",
+      "semantic_finding": "MERGED #267 A78 60 pinned/frozen literal source-line reviews; direct semantics exclusively #267, original selected source and CI claims must be receipt-checked, zero code credit in #504.",
+      "disposition": "DELEGATE_267_KEEP_HISTORY",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2232,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2232",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T09:27:42Z",
+      "created_at": "2026-11-12T09:26:45Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T09:27:42Z",
+      "head_sha": "ead4e3142535ea3228bfc51d1a01f7fc3802a4d2",
+      "base_sha": "0427b21d76c97d6c15c01ae1a66d224ee6034dea",
+      "merge_commit_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "title_words": [
+        1,
+        10
+      ],
+      "body_word_range": [
+        1,
+        73
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 83,
+      "combined_utf8_bytes": 861,
+      "title_sha1": "b5b6599275c5e5d6f3bf2525ba8c196268ddaed7",
+      "body_sha1": "3af74008ee66e9c9798074cb47d00d762692ad01",
+      "combined_sha1": "2704e7a278b17ddb63b991509da83e8406b9acb8",
+      "exact_observed_title": "Issue #267 A79-T11: next 80 line-specific original reviews [skip netlify]",
+      "exact_observed_body": "Append-only independently SHA-bound disjoint continuation. Frozen F165:211–250 (40) and pinned P134:351–390 (40), source vs live 80/80 original line literal parity, 80 individually interpreted records, scoped same-commit journal. Exact original immutable source blobs `bc4ca3be971a35d21586d21bb985227a8c098f7b` and `b8d13f4f9c1f500a61db29da2ed40f8ef5ed6a29`; current pinned counterpart blob `ea2ef1db3a3f1ad6e1e6d40024fe71ef72e1a60c` offset +55. Receipt blob `09fbf10043fd22dfead3c204af0697f16cf7b5d0`, journal blob `eb2f21e93e6401b01279b6e560294d04400a379d`, commit `ead4e3142535ea3228bfc51d1a01f7fc3802a4d2`. No code change or prod/deploy/READY. Latest governance checks must be verified; app tests not run. Next F165:251/P134:391. Audit OPEN, postpin/global strict review pending.",
+      "semantic_finding": "MERGED #267 A79 80 individually interpreted pinned/frozen line receipts; source vs current parity is bounded original range, not all code or code-removal evidence.",
+      "disposition": "DELEGATE_267_KEEP_HISTORY",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2233,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2233",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T09:41:21Z",
+      "created_at": "2026-11-12T09:41:21Z",
+      "state": "open",
+      "merged": false,
+      "merged_at": null,
+      "head_sha": "3f6b63803c3f6d6e22c1161f8dd4382804e064eb",
+      "base_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "merge_commit_sha": "58ca731e3917e0accd91652b3362c1e3b90c085d",
+      "title_words": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        148
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 159,
+      "combined_utf8_bytes": 1175,
+      "title_sha1": "d16452c0c54ee04c755e3e46f798f026cca62c14",
+      "body_sha1": "dc2bc9d01aeb723695f2e1f67190f1e5d6f040b9",
+      "combined_sha1": "b28a442db43e48bed710e42e722e4363e79adc1f",
+      "exact_observed_title": "Issue #504 G1-200: direct historical PR #1159–1166 metadata review [skip netlify]",
+      "exact_observed_body": "Complete original historical PR titles and bodies #1159–1166 directly semantically reviewed: 8 distinct records / 870 whitespace words / 7,407 UTF-8 bytes. All complete verbatim literals, exact field word/line ranges, SHA1 and source commit IDs, individual findings in a same-commit append-only receipt, coverage shard, and scoped journal. All three exact Git blob readbacks, new tree/parent commit and branch readback PASS. Independently verified three #267 original pinned/live source lines 26–28 with 16 fields each; ZERO duplicate source credit. #455/#33 historic changes remain owned; no independently reproduced current #504 bug or safe deletion. Previous G1-187–199 PRs remain unmerged; conditional coverage only (1,340 records / 305,219 words) and current central fully merged unchanged. No runtime, queue, Locked, main/release, Netlify, provider/SQL/Auth/member or production changes. Require applicable exact PR-head CI and later merged-source governance; currently NOT PASS/NOT STARTED. Issue #504 remains OPEN / IN_PROGRESS, exact NEXT PR #1167 title word 1. [skip netlify]",
+      "semantic_finding": "OPEN, UNMERGED earlier #504 G1-200 metadata audit PR #1159-1166; its original 870-word credit belongs to its own conditional predecessor, not newly reviewed here.",
+      "disposition": "OPEN_PREDECESSOR_NO_DUPLICATE_CREDIT",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2234,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2234",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T09:51:21Z",
+      "created_at": "2026-11-12T09:47:12Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T09:51:20Z",
+      "head_sha": "b3885d29544b00b849cf64b81b9ee5f6ea2a3981",
+      "base_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "merge_commit_sha": "48ea950cd2942f03e1275ef4e5d0070f0416c0ad",
+      "title_words": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        187
+      ],
+      "body_physical_lines": [
+        1,
+        9
+      ],
+      "combined_words": 198,
+      "combined_utf8_bytes": 1881,
+      "title_sha1": "4d86b3d5e91b2a4ab90351e0e19fac1fa1f966f3",
+      "body_sha1": "6c6eadc390259cf60a8bb1c8d017663114e8a05e",
+      "combined_sha1": "20d04ef92680f6f0faa91a0e2c1916e2bc3179c2",
+      "exact_observed_title": "docs(issue455): R206 source-bound espresso sensory / aroma interaction evidence [skip netlify]",
+      "exact_observed_body": "## R455-206 — SAFE research-only, no app policy or deployment\n\nStarting development SHA `71ea6cfdd08e3365184ce88e13001c96613bfff9`; atomic same-commit head `b3885d29544b00b849cf64b81b9ee5f6ea2a3981`.\n\nNew distinct original Charles et al. (2015) DOI [10.1016/j.foodres.2014.11.036](https://doi.org/10.1016/j.foodres.2014.11.036). Compared author-affiliated [original journal abstract](https://openpub.fmach.it/handle/10449/25273) and [university conference methods](https://iris.unitn.it/handle/11572/263941). Related conference abstracts are not independent replications. Four espresso conditions (two roasts × with/without sugar), 18 trained judges, nine temporally dominant descriptors and instrument nosespace tracking; sensory/volatile perceptions are not an independent calibration of DIC's five recorded taste sliders. Licensed full paper, figures and raw data **not accessed**. No evidence to modify grinder, temperature, numeric priors or one-change recommendation.\n\n**Exactly 2 documentation files**: SHA-bound ledger `fe7b75a40092ca15f4d5aec08ee029cb1fc01b8d`; same-commit scoped journal `4d074e4a5c6545520e72dfbbeb7ed0f88ae77950`. JSON parsed, exact prior IDs and sequence preserved; 106/321/164 → **107 sources/323 checks/165 proposals**, one unique new DOI. Zero #267 strict-line review credit. S019 remains inaccessible; no source-original, app/test, approval, queue or release source changed.\n\n**CI required:** review applicable exact PR-head GitHub Actions and correctly distinguish executed PASS from NOT_APPLICABLE/SKIPPED; don't infer a real member or physical espresso trial. Non-force merge only if safe; verify exact merged SHA/blobs. No Netlify/production/provider/auth/SQL/Edge/member writes, purchases, force Git or Locked changes. Issue #455 remains open.",
+      "semantic_finding": "MERGED #455 research-only Charles et al. espresso aroma and sucrose perception evidence; source is not independent replication or numeric DIC taste-slider calibration. Locked policy unchanged.",
+      "disposition": "RETAIN_MERGED_RESEARCH_HISTORY",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2235,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2235",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T10:16:44Z",
+      "created_at": "2026-11-12T10:03:59Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T10:16:43Z",
+      "head_sha": "05df610d2d82c20fc235024f23270d5a962b389c",
+      "base_sha": "48ea950cd2942f03e1275ef4e5d0070f0416c0ad",
+      "merge_commit_sha": "40342a453a47209cb19a5c7883e19fe3bc31f5f0",
+      "title_words": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        68
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 79,
+      "combined_utf8_bytes": 731,
+      "title_sha1": "c126ce1670edb1ad5772d83e3a409a91aefbf8d0",
+      "body_sha1": "4cabc3a341527dc99c6f016f37f264badd01c1cd",
+      "combined_sha1": "ba678b063faa5b04a8ca7c4e28702bec9fd0b391",
+      "exact_observed_title": "test(issue33): R143 original603 #122 Favor Malaki exact selected source [skip netlify]",
+      "exact_observed_body": "Development-only test-first original603 #122. Current official selected H1/producer/origin/notes/varieties/elevation/washed; exclude historical Final Batch, missing Light roast and founding Edward as current producer. Thirteen focused tests, guarded official HTTPS + actual application parser, strict raw SHA afterproof and SAME-COMMIT scoped journal. No runtime/corpus/production/release edits. **TESTING, not READY** until exact PR-head and nonforce merged source tests and raw artifact verified. Parent 48ea950cd2942f03e1275ef4e5d0070f0416c0ad, head d803b68c9eb9f9187a18f9adf740892f4d1d9264. Do not conflate with 603-row semantic acceptance.",
+      "semantic_finding": "MERGED #33 R143 selected product #122 Favor Malaki source/test work; historical premerge TESTING superseded by merge, no blanket original603 or LIVE provider acceptance.",
+      "disposition": "RETAIN_MERGED_EXTRACTOR_TEST_HISTORY",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2236,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2236",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T10:24:07Z",
+      "created_at": "2026-11-12T10:21:14Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T10:24:06Z",
+      "head_sha": "dcbff6413bff78397b0d390f8e5106c7d100ec49",
+      "base_sha": "40342a453a47209cb19a5c7883e19fe3bc31f5f0",
+      "merge_commit_sha": "5bb5e77ddfdd68472173678d2cbff2aa75bf1b3c",
+      "title_words": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        77
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 88,
+      "combined_utf8_bytes": 671,
+      "title_sha1": "6cba727be9ad1eeaf6845f84fff7b0ff5deb0521",
+      "body_sha1": "b7950e5914de185700e0fe714d73c70b8ed3dc30",
+      "combined_sha1": "1f38722ba77ec95ecf9956f9716c14358968f6a9",
+      "exact_observed_title": "docs(issue33): R143 original603 #122 Favor merged official verification receipt [skip netlify]",
+      "exact_observed_body": "DEVELOPMENT-only docs follow-up to safely merged source PR #2235. Exact merged official current selected HTTPS/parser run 43198937494 SUCCESS 15/15 strict afterproof. Independent artifact #13934591156 ZIP SHA and raw HTML SHA verified. Exact merged Node/lint 43198937147 SUCCESS 4174 PASS/0 FAIL/6 SKIP; cloud UX, Python and governance SUCCESS; SQL on unchanged PR head SUCCESS. Original frozen603 SKIPPED and parent #33 OPEN. Two files machine-readable receipt + SAME-COMMIT scoped journal. No runtime, frozen corpus, queue/approval or production modification; no deployment.",
+      "semantic_finding": "MERGED #33 R143 independent selected official afterproof receipt with observed cited CI; entire original603 explicitly SKIPPED, cannot elevate to global PASS.",
+      "disposition": "RETAIN_MERGED_SELECTED_AFTERPROOF",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    },
+    {
+      "source": "GitHub fetch_pr complete observed title/body",
+      "number": 2237,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2237",
+      "numeric_object_id": "NOT_EXPOSED_BY_CONNECTOR",
+      "observed_updated_at": "2026-11-12T10:23:13Z",
+      "created_at": "2026-11-12T10:22:17Z",
+      "state": "closed",
+      "merged": true,
+      "merged_at": "2026-11-12T10:23:13Z",
+      "head_sha": "c23f7788dbed084f3eb9021f960a71e05428189f",
+      "base_sha": "40342a453a47209cb19a5c7883e19fe3bc31f5f0",
+      "merge_commit_sha": "32246ac1eee9a88e5cc8547831603cebd8f82914",
+      "title_words": [
+        1,
+        14
+      ],
+      "body_word_range": [
+        1,
+        73
+      ],
+      "body_physical_lines": [
+        1,
+        1
+      ],
+      "combined_words": 87,
+      "combined_utf8_bytes": 690,
+      "title_sha1": "3553bcd3e5d89631c3c710bfa344f7a0674557e0",
+      "body_sha1": "cb6fa373ef7d85d07d138605f99b5709ab60c402",
+      "combined_sha1": "78ca92298b380b7f3c882128ffe8d8a7e5db8dfc",
+      "exact_observed_title": "Issue #267 A80-T11: 60 individually reviewed original lines + 19 provisional live [skip netlify]",
+      "exact_observed_body": "Append-only SHA-bound per-line direct semantic evidence for F165:251–280 (30), pinned P134:391–420 (30), and 19 separately interpreted live-only P134:455–473 positions (provisional D2 dedup). Both original source blobs and exact mapped current counterpart literals rechecked; F001:1–8 source revalidated with 0 duplicate credit. SAME-COMMIT scoped journal; docs only, no app/SQL/Auth/member/provider changes, no READY or deployment. Do not merge until exact PR-head approval/continuity CI succeeds; verify merged-source CI separately. Issue #267 stays open; next F165:281 and P134:421.",
+      "semantic_finding": "MERGED #267 A80 bounded 60 original frozen/pinned + 19 provisional live-only lines; provisional D2 requires future dedup, no #504 source credit.",
+      "disposition": "DELEGATE_267_PROVISIONAL_KEEP_HISTORY",
+      "direct_semantic_read": true,
+      "comments_reviews_diffs": "UNREVIEWED"
+    }
+  ]
+}
