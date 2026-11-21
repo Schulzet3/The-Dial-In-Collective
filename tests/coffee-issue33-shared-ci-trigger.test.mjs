@@ -87,3 +87,15 @@ test('N508-075 R372 historically skipped selected #558/#241 synthetic contracts 
  assert.equal(yaml.split('node --test').length-1,1,'no duplicated live HTTP jobs');
  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+
+test('R374 current PageFly selected-H3 and cane decaf test triggers once on shared parser/UI change, offline only',()=>{
+ const file='tests/coffee-issue33-r374-original41.test.mjs';
+ assert.equal(yaml.split("- '"+file+"'").length-1,2);
+ assert.ok(yaml.includes('            '+file));
+ const body=readFileSync(new URL('../'+file,import.meta.url),'utf8');
+ assert.match(body,/selectedShopifyPageFlyH3Identity/);
+ assert.match(body,/extractPublicCoffeeFacts/);
+ assert.doesNotMatch(body,/\bfetch\s*\(|\bhttps?\.request\s*\(/);
+ assert.equal(yaml.split('node --test').length-1,1);
+ assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
+});
