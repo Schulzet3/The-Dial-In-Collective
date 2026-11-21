@@ -1,3 +1,19 @@
+# Issue #509 R412 — complete exposed PostgreSQL collation catalogue 861/861 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7e4ff817ce9965019410e2686e34f493d943e3c8 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Immutable GitHub development preflight and Git blob bytes were directly verified before other sources. Connected Supabase project `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11.0.003; provider access **READ-ONLY**.
+
+**New semantic catalogue review:** all **861/861** exposed `pg_catalog.pg_collation` tuples sorted by name/OID, **229813** full provider catalog literal characters. Five append-only raw-provider-literal ledgers store each tuple, OID, provider MD5, 1–end character range, ICU/locale, version, deterministic mode, PostgreSQL usage counts and per-item disposition. Provider kinds c=5, i=853, d=1, b=2. Reconciled native ICU language/territory collation name vs actual locale and installed version for all 853 ICU definitions; 1 automated semantic exceptions. Native libc/C/POSIX/builtin definitions retained. Database-default collation's NULL per-collation version is expected: PostgreSQL database recorded and actual versions both `153.121`, so no false drift alarm. All 861 are deterministic. **352** direct non-system attribute references and **101** non-system index-key references span native default and C; explicit C usages are provider Auth/Storage/Vault supporting infrastructure, not DIC app indexes. No safe deletion or measured application bottleneck.
+
+**Full literal evidence:** `docs/audits/issue509-r412-pg-catalog-collations-ranks1-180-20261121.json`; `docs/audits/issue509-r412-pg-catalog-collations-ranks181-360-20261121.json`; `docs/audits/issue509-r412-pg-catalog-collations-ranks361-540-20261121.json`; `docs/audits/issue509-r412-pg-catalog-collations-ranks541-720-20261121.json`; `docs/audits/issue509-r412-pg-catalog-collations-ranks721-861-20261121.json`. This is direct exposed catalog tuple/behavioral semantic review, **NOT** independent compiled-native/ICU source or original CREATE COLLATION SQL; those remain **UNVERIFIED**. No #267 code-line audit credit. Other provider surfaces remain pending; full baseline **IN_PROGRESS**.
+
+**Changes:** append-only R412 five ledger files and this scoped journal atomically in one nonforce Git commit, `[skip netlify]`. No app/Edge/migration/test/CI source changed; new source-bound tests **NOT_APPLICABLE**. READY/DEPLOYED **NOT_REVALIDATED**. No production/provider writes, backup, billing, release or schedule changes.
+
+**Next unreviewed catalog cursor:** `pg_catalog.pg_conversion` rank **1/128**, ordered conversion name/OID, character 1; prioritize newly changed DIC-owned provider logic if material drift appears. Preserve owner-action-only notification rule and hourly schedule.
+
+---
+
 # Issue #509 R411 — completed entire exposed pg_catalog.pg_type 469/469 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=06b1b25c2613aacb092ddc26f9887887dbbbd720 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
