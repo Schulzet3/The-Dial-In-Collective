@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-390",
+  "review_status": "SOURCE_ONLY_NOT_CENTRALLY_INTEGRATED",
+  "preflight": {
+    "first_development_sha": "6fb9ee4ab30b44982914f22679fd34899607bc2e",
+    "first_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "prewrite_development_sha": "6fb9ee4ab30b44982914f22679fd34899607bc2e",
+    "prewrite_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "whole_immutable_blob_verified": true
+  },
+  "source_method": "Native GitHub get_pr_info full original TITLE and BODY; directly word-level semantically read every word of these fields; no sampling/AST",
+  "word_definition": "Unicode nonwhitespace runs (\\S+)",
+  "metrics": {
+    "original_prs": 8,
+    "title_words": 79,
+    "body_words": 922,
+    "all_original_words": 1001,
+    "all_title_LF_body_utf8_bytes": 10720,
+    "completed_to_archive": [
+      2694,
+      2695,
+      2696,
+      2698,
+      2699,
+      2700,
+      2701
+    ]
+  },
+  "reviewed_original_record_ids": [
+    2694,
+    2695,
+    2696,
+    2697,
+    2698,
+    2699,
+    2700,
+    2701
+  ],
+  "records": [
+    {
+      "github_record_id": "PR#2694",
+      "number": 2694,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2694",
+      "original_title": "docs(#267): strict F194 2331-2390 with T20 evidence erratum [skip netlify]",
+      "original_body": "Development-only Issue #267. Independently read and semantically classified each original frozen F194 line 2331–2390 (60) from immutable `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` blob `a94447e07cb31623c68c834f800889f9c2f79bfd`. New per-line receipt `docs/audits/issue267-v2-strict-batches/S2-T21-F194-2331-2390-20261114.json` blob `2dfb937a5634495365e8a737fd77153ef949fa49`. Appended zero-credit corrective erratum `docs/audits/issue267-v2-strict-batches/S2-T21-ERRATUM-T20-L2275-20261114.json` blob `b0dd7730629ebe1a8112f4b24fcceac85bac6ff5`: earlier T20 line 2275 (`{`) was misclassified as an array separator rather than object start. Original merged receipt untouched and no duplicated semantic credit. SAME-COMMIT scoped journal `docs/workstreams/issue-267-T21-F194-2331-2390-20261114.md` blob `0092b3059ca91d9c4b31fd91c2af63a9dd5135eb` records verified immutable PREFLIGHT development `da82140a846e526e35f5827fd605d1ef13e7f7c9` and blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Three docs files, no application/test/code/provider/migration/queue/production/deploy change. PR-head and merged-source governance must pass; functional test suites NOT_RUN_DOCS_ONLY. #267 remains OPEN, global frozen/pinned/live delta unfinished; next frozen F194:2391.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:27:29Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:27:29Z",
+        "closed_at": "2026-11-14T14:27:29Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "da82140a846e526e35f5827fd605d1ef13e7f7c9",
+        "head_ref": "audit/issue267-t21-f194-2331-2390-erratum-20261114",
+        "head_sha": "d7c62d5d894ed7b3b2fc71e921ad27e01040d5d5",
+        "merge_sha": "093a6642c764df02da2e3a7e49e58d7b812d0862"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        98
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 98,
+      "title_LF_body_utf8_bytes": 1334,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Historical frozen F194 T21 2331-2390, plus correction to T20 L2275 array/object delimiter; retains original erroneous historical receipt and a zero-credit erratum. This PR text does not independently verify every 60 source line or current executable behavior.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2695",
+      "number": 2695,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2695",
+      "original_title": "docs(#267): T22 70 frozen F194 original lines 2391-2460 [skip netlify]",
+      "original_body": "Development-only Issue #267. Directly inspected each immutable frozen source F194 line 2391–2460 (70) from original commit abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, blob a94447e07cb31623c68c834f800889f9c2f79bfd; recorded exact original literal and per-line semantic classification, behavior, quality, security/privacy/performance, obsolescence, duplication, current counterpart, testability, fix/Locked-fit in docs/audits/issue267-v2-strict-batches/S2-T22-F194-2391-2460-20261114.json (blob f4d6bc6a9f4b582e1ef9423fe031a2e29286d729). Source parent 093a6642c764df02da2e3a7e49e58d7b812d0862 and mandatory immutable PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d verified; same-commit scoped journal docs/workstreams/issue-267-T22-F194-2391-2460-20261114.md (blob d304053d0c0a6a457c8090e7819ed3e05f7d6093). Previous T21 F194:2331–2390 verified 60/60 no duplicate; original source archival blob identical to current, 0 pinned/current-drift credit. Historical URL preview no autosave/overwrite, prior credits/grants and Agtron anchors triaged without live claims. PR HEAD CI must PASS before merge, and merged-source CI independently checked. No application, production, member, SQL/Auth/provider/Netlify/deploy/queue/backup changes. #267 OPEN, next F194:2461; broader frozen/current inventories and live drift incomplete.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:29:38Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:29:38Z",
+        "closed_at": "2026-11-14T14:29:38Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "093a6642c764df02da2e3a7e49e58d7b812d0862",
+        "head_ref": "audit/issue267-t22-f194-2391-2460-20261114",
+        "head_sha": "6ab53b78725414ece7cbf0a5c5150c6aa00cf331",
+        "merge_sha": "6b27d1eacc3ec8858d1511d3fb6fa53add29c123"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        116
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 116,
+      "title_LF_body_utf8_bytes": 1401,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Historical frozen F194 T22 2391-2460. Preview no-autosave and owner grant references are dated evidence; no present browser/security or release certification inferred.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2696",
+      "number": 2696,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2696",
+      "original_title": "docs(#267): T23 120 frozen F194 source lines 2461–2580 [skip netlify]",
+      "original_body": "Issue #267 strict historical source review, development-only. Direct AI reading/individual interpretation of frozen original F194 `docs/audits/2026-10-21-requirement-traceability.json` lines 2461–2580 (120), immutable source commit abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9 blob a94447e07cb31623c68c834f800889f9c2f79bfd; live archival blob equal. Individual physical source literals with behavior, quality, security/privacy/performance, dead/redundancy, exact counterpart, testability and Locked decision disposition in `docs/audits/issue267-v2-strict-batches/S2-T23-F194-2461-2580-20261114.json` blob 10f97eef9e2e42587c1076ad41bddc89ef3269e8. Source-bound SAME-COMMIT journal `docs/workstreams/issue-267-T23-F194-2461-2580-20261114.md` blob 5f23642fbdbf06ce01449b800cf2878efa06c955 records immutable PREFLIGHT development SHA 6b27d1eacc3ec8858d1511d3fb6fa53add29c123 and blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Prior T22 original 70/70 rechecked without duplicate. Source historical triage: provisional Agtron scale, unsupported outlier heuristics, Locked immediate confirm/correct, exhausted owner Netlify grant; no active defect asserted. No app, tests, migrations, database, member, provider, backup, production, release or deploy mutation; all app/live/provider tests NOT_RUN_DOCS_ONLY. Exact PR-head and merged-source governance must succeed before claim. #267 OPEN, remaining frozen/pinned/live-code review incomplete; next F194:2581. No owner decision needed.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:32:16Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:32:16Z",
+        "closed_at": "2026-11-14T14:32:16Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "6b27d1eacc3ec8858d1511d3fb6fa53add29c123",
+        "head_ref": "audit/issue267-t23-f194-2461-2580-20261114",
+        "head_sha": "80834d5f0fa0d53b2f68231afac47f94389486fa",
+        "merge_sha": "3b610cbe815dea4dfe5d15b88e52c225b3f7d32b"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        129
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 129,
+      "title_LF_body_utf8_bytes": 1547,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Historical frozen F194 T23 2461-2580. Provisional Agtron/outlier/confirmation prose is not a current product-policy override. Source assertions are delegated and cannot stand in for independently reviewed lines.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2697",
+      "number": 2697,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2697",
+      "original_title": "docs(issue504): G1-253 original PR #1583–1590 word review [skip netlify]",
+      "original_body": "Issue #504 G1-253: full direct original PR #1583–1590 title/body semantic coverage (8 records, 783 words, 6,882 original UTF-8 bytes), source-bound verbatim receipts, nonoverlap conditional ledger and exact next PR #1591. Immutable preflight development 6b27d1eacc3ec8858d1511d3fb6fa53add29c123 / blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; prewrite development 3b610cbe815dea4dfe5d15b88e52c225b3f7d32b unchanged blob. Independently validated #267 three pinned source lines, zero #504 code credit. Completed historical PR #1583 title cleaned with body/head intact. Three docs-only files, one commit [skip netlify], no source, CI, queue, deploy, provider or production changes. G1-187–252 remain draft/unmerged; cumulative totals conditional only. Preserve issue OPEN until full verified semantic completion.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:34:01Z",
+        "state": "open",
+        "draft": true,
+        "merged": false,
+        "merged_at": null,
+        "closed_at": null,
+        "base_ref": "development/backend-foundation",
+        "base_sha": "3b610cbe815dea4dfe5d15b88e52c225b3f7d32b",
+        "head_ref": "audit/issue504-g1-253-pr1583-1590",
+        "head_sha": "c817f23773e898ace10ab5c88a9ff9ce26f1c53c",
+        "merge_sha": "083e95c00c97c12b97d5202a0bc7d8cd3e1e9e1a"
+      },
+      "inclusive_title_words": [
+        1,
+        9
+      ],
+      "inclusive_body_words": [
+        1,
+        93
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 9,
+      "body_words": 93,
+      "title_LF_body_utf8_bytes": 889,
+      "semantic_review": {
+        "owner": "#504",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Earlier G1-253 source-only coverage of original PRs 1583-1590, explicitly draft/open at reading. Its 783-word claim is conditional and not new credit for the same metadata.",
+        "disposition": "PRESERVE_OPEN_DRAFT_NO_RE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "RETAIN_UNCHANGED"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2698",
+      "number": 2698,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2698",
+      "original_title": "docs(#267): T24 120 original frozen F194 lines 2581–2700 [skip netlify]",
+      "original_body": "Development-only #267: direct AI review of 120 distinct numbered original frozen F194 lines 2581–2700; original commit abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, Git blob a94447e07cb31623c68c834f800889f9c2f79bfd, same archival blob at source parent. Exact literal + per-line behavior, quality, security/privacy/performance, obsolete/duplicate, current counterpart, testability, Locked-fit and remediation in docs/audits/issue267-v2-strict-batches/S2-T24-F194-2581-2700-20261114.json (Git blob e90763eceef4955e7efda049f741a32526a97d77). SAME-COMMIT scoped journal docs/workstreams/issue-267-T24-F194-2581-2700-20261114.md (Git blob 173f51f8fe12c63c0b6a90ec075b44c1547df049), immutable preflight development SHA 3b610cbe815dea4dfe5d15b88e52c225b3f7d32b and independently verified PREFLIGHT blob **2fb236bbfa6bac48513eeb3bd157b260853af06d**. Prior T23 F194 2461–2580 reviewed literal positions rechecked 120/120 without double credit. Historical one-use PWA Netlify grant exhausted; owner iPhone offline success bounded without actual second-account privacy proof. Community old DTO identity caveat triaged, newer release identity rule controls. Only two docs, no app/test/SQL/Auth/provider/member/backup/queue/production/Netlify changes; Node/browser/SQL/Auth/603 suites NOT_RUN_DOCS_ONLY. Exact PR-head and merged-source governance must PASS before success claimed. #267 OPEN; next F194:2701; global frozen/pinned/live review incomplete.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:35:10Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:35:10Z",
+        "closed_at": "2026-11-14T14:35:10Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "3b610cbe815dea4dfe5d15b88e52c225b3f7d32b",
+        "head_ref": "audit/issue267-t24-f194-2581-2700-20261114",
+        "head_sha": "d9feef6e902fc9729c6d83f48245e1101d9955ae",
+        "merge_sha": "201b1a408bffcbc1db04fa7ec31f79472a5d85b4"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        129
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 129,
+      "title_LF_body_utf8_bytes": 1513,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Frozen F194 T24 2581-2700; dated exhausted publication grant and owner-device anecdote do not establish current provider/second-user privacy. Preserve original history and delegate source assessment.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2699",
+      "number": 2699,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2699",
+      "original_title": "docs(#267): T25 150 directly reviewed original F194 lines 2701–2850 [skip netlify]",
+      "original_body": "Development-only #267 direct AI semantic audit of original frozen historical F194 lines 2701–2850 (150, individually numbered and interpreted), immutable source abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, blob a94447e07cb31623c68c834f800889f9c2f79bfd, live archival blob identical. `docs/audits/issue267-v2-strict-batches/S2-T25-F194-2701-2850-20261114.json` SHA cf98ac9af08cd14e21963e8c366c052bfd391dc5 records each literal and quality, security/privacy/performance risk, exact counterpart/absence, obsolescence/duplicate, Locked-fit, testability and disposition; same-commit `docs/workstreams/issue-267-T25-F194-2701-2850-20261114.md` blob 6e38738e369368d9ada0db82d2f6c87f516f4aee records preflight development parent 201b1a408bffcbc1db04fa7ec31f79472a5d85b4 / immutable PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Previous T24 original 120 lines reverified, zero duplicate. Dated Community canonical release context, formal migration and owner browse don't establish present signed second-account privacy. October limited beta paid breached-password optout is narrow, not Auth/privacy waiver; original invite-code admission explicitly superseded by Nov9 owner Locked Admin signup approval. No code/test/provider/SQL/Auth/member/backup/queue/release/production/Netlify changes, no current functional tests claimed. Exact PR-head/merged-source governance must pass before merge/credit. #267 OPEN; next F194:2851; frozen 579961/pinned 57913 and all post-pin current drift incomplete.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:38:14Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:38:14Z",
+        "closed_at": "2026-11-14T14:38:14Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "201b1a408bffcbc1db04fa7ec31f79472a5d85b4",
+        "head_ref": "audit/issue267-t25-f194-2701-2850-20261114",
+        "head_sha": "1f67163efab6a9855eb3fd447b1a671d8a0fe7d9",
+        "merge_sha": "bdde04a04e9b44083bad0fc0a2decdb01e91efff"
+      },
+      "inclusive_title_words": [
+        1,
+        11
+      ],
+      "inclusive_body_words": [
+        1,
+        134
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 134,
+      "title_LF_body_utf8_bytes": 1585,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Frozen F194 T25 2701-2850; October invite access is narrowly superseded by November owner Admin approval, but old evidence remains historical. No live Auth bypass or test certification inferred.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2700",
+      "number": 2700,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2700",
+      "original_title": "docs(#455): R259 original 2026 pressure-flow study boundaries [skip netlify]",
+      "original_body": "Docs-only, nondeploy research increment for Issue #455. Direct original full arXiv v2 methods/results/limitations checked and published DOI cross-verified. 60 very long physical extractions on one fixed coffee/setup are not five-taste evidence or a universal pressure optimum. Three provisional checks and one no-runtime-change P3 proposal; canonical ledger counts deliberately unchanged because complete large ledger read was unavailable. Same-file preflight receipt and next action included. No app/test/SQL/provider/member writes, numeric policy or release queue changes. Applicable approval/continuity governance required; no duplicate expensive app test suites.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:39:41Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:39:41Z",
+        "closed_at": "2026-11-14T14:39:41Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "bdde04a04e9b44083bad0fc0a2decdb01e91efff",
+        "head_ref": "research/issue455-r259-poroelastic-20261114",
+        "head_sha": "0fee5b78bd7358defe2a6fd56559f8cac87f12de",
+        "merge_sha": "deb7db1aa30f45b5e9d9474a9d570546b37d46cd"
+      },
+      "inclusive_title_words": [
+        1,
+        9
+      ],
+      "inclusive_body_words": [
+        1,
+        82
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 9,
+      "body_words": 82,
+      "title_LF_body_utf8_bytes": 743,
+      "semantic_review": {
+        "owner": "#455",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Research R259 one-setup 60-long-extraction pressure/flow study cannot justify a universal pressure optimum; owner UX/research implementation belongs #455. Absent original study text in this batch, no new scientific or behavior credit.",
+        "disposition": "PRESERVE_DELEGATED_455_RESEARCH_NOT_FULL_STUDY",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    },
+    {
+      "github_record_id": "PR#2701",
+      "number": 2701,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2701",
+      "original_title": "docs(#267): T26 150 strict source lines F194 2851–3000 [skip netlify]",
+      "original_body": "Development-only #267. Original frozen F194 `docs/audits/2026-10-21-requirement-traceability.json` direct AI line-specific semantic review 2851–3000 (150 unique), immutable source abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, source and live archival blob a94447e07cb31623c68c834f800889f9c2f79bfd. Complete source-bound per-line literal/behavior/quality/security/privacy/performance/dead/duplicate/current counterpart/testability/Locked-fit in `docs/audits/issue267-v2-strict-batches/S2-T26-F194-2851-3000-20261114.json` Git blob `a85b9946b02bb7cecbcb092c7e942b4a5308c2ec`; same-commit scoped journal `docs/workstreams/issue-267-T26-F194-2851-3000-20261114.md` blob `9f3acfa13c57d5f94f2ce82adc6e5d297e159407`. Verified immutable PREFLIGHT development SHA `deb7db1aa30f45b5e9d9474a9d570546b37d46cd`, Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Before branch creation, development moved via unrelated #455 one-doc commit; re-fetched preflight and archived source, rebased source-bound evidence on new first parent; earlier unreferenced Git object never published. Prior T25 original 150 rechecked, no duplicate. Latest Nov9 Locked source decisions supersede October invitation-code signup and narrowly authorize source-only guarded Admin Delete Account; current members/admin protection/soft Remove/Restore retained. Old pilot prep and release grants exhausted. Only 2 docs, no app/tests/SQL/Auth/member/provider/backup/production/Netlify changes, and no present functional QA claimed. Require PR-head governance and merged-source checks separately, #267 OPEN, next F194:3001; both global frozen/pinned/live drift still incomplete.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:41:44Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:41:44Z",
+        "closed_at": "2026-11-14T14:41:44Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "deb7db1aa30f45b5e9d9474a9d570546b37d46cd",
+        "head_ref": "audit/issue267-t26-f194-2851-3000-20261114",
+        "head_sha": "33dc4360713c3692366e8ff684f61c7c347ed2c6",
+        "merge_sha": "35958e11025418fcf3fb1e4890a04ae04a385c7c"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        141
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 141,
+      "title_LF_body_utf8_bytes": 1708,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "PR metadata title+full body only; all words read; historical not automatically current",
+        "finding": "Frozen F194 T26 2851-3000 with historical invitation/Admin delete distinctions; test and current member privacy evidence separate. Owner auth security #96 not duplicated.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No current in-scope bug reproduced from metadata alone; preserve dated tests and source",
+        "safe_action": "ARCHIVE_TITLE_ONLY_AFTER_SEAL"
+      },
+      "excluded": "PR discussion comments/reviews/threads/patch/files/CI and implementation sources are not credited"
+    }
+  ],
+  "delegated_267_crosscheck": {
+    "receipt_blob": "59883231bc394a0f14c5c188906f5481f90c8989",
+    "frozen_blob": "0eefed42962849ba446571095b3d8dd72d74fe6b",
+    "source": "docs/audits/2026-10-21-link-replacements.json",
+    "lines": [
+      425,
+      426
+    ],
+    "individual_fields": 18,
+    "exact_literals": [
+      "    },",
+      "    {"
+    ],
+    "matched": "2/2",
+    "live_source_blob_equal": true,
+    "code_credit_for_504": 0
+  },
+  "excluded": "All issue and PR comments/reviews/threads/diffs, workflow logs/artifacts, unseen source/CI, member/production/provider data and earlier historical PR metadata"
+}
