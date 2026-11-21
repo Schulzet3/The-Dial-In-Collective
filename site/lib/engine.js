@@ -625,6 +625,12 @@ export function recommendation(s,coffeeId,options={}) {
   const missingActionCache=!!cached&&!cached.next&&cached.kind!=='diagnostic';
   const a=(oldNoOp||oldSmallYield||unsafeCachedNext||missingActionCache)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
+   // Actual current-basket rated feedback supersedes a starting fallback.
+   // Do not describe a measured next-shot adjustment as a starting estimate.
+   if(rec.basketCompatibilityNote){
+    delete rec.basketCompatibilityNote;
+    rec.inapplicableFamilyWithCurrentFeedback=true;
+   }
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
    // The owner-Locked Dose caption remains unchanged; the initial starting

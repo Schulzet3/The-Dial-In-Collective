@@ -90,3 +90,19 @@ test('R405 lower entry boundary: valid 40/5 history never suggests 0.6 g for 5 g
  assert.match(r.basketCompatibilityNote,/saved successful recipe/i);
  assert.deepEqual(s,original);
 });
+test('R405 current-basket rated feedback supersedes inapplicable basket starting notice',()=>{
+ const s=fixture(),from=s.shots[0];
+ s.shots.push({...structuredClone(from),id:'recent-current-feedback',
+  basketId:'basket-b',familyId:null,dialedIn:false,doseG:40,yieldG:120,
+  timeS:36,timestamp:'2026-11-20T12:01:00Z',
+  tasteScales:{...GREEN,sweetness:4}});
+ const original=structuredClone(s);
+ const r=recommendation(s,'coffee',{style:'Lungo',basketId:'basket-b',feedMode:'standard'});
+ assert.equal(r.source,'Adjustment from your latest taste rating');
+ assert.equal(r.yield.center,125,'single actual controllable yield step');
+ assert.equal(r.doseG,40);
+ assert.equal(r.basketCompatibilityNote,undefined,'no stale starting-estimate notice on current measured advice');
+ assert.equal(r.inapplicableFamilyWithCurrentFeedback,true);
+ assert.doesNotMatch(recipeGrid(r),/saved successful recipe cannot be used at this basket dose/i);
+ assert.deepEqual(s,original,'both original and newer shot, five ratings, private notes unchanged');
+});
