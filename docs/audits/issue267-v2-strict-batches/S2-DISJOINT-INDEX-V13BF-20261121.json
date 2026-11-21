@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BF",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BE-20261121.json",
+  "development_prewrite_sha": "8926020a18aa457c52496ff63745f1b90f839f21",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "DIRECT_AI_PER_LINE_IMMUTABLE_LITERAL_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "range": "347-376",
+      "lines": 30,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-347-376-20261121-V13BF.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 67,
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "path": "scripts/audit/provider-security-probes.py",
+      "source_blob_sha": "0f7c09be4f017fa7bed78d4d57fd3a24cf93a022",
+      "range": "44-73",
+      "lines": 30,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C67-44-73-20261121-V13BF.json",
+      "live_blob_equal": true
+    }
+  ],
+  "source_line_counts": {
+    "frozen": 30,
+    "pinned": 30,
+    "distinct": 60,
+    "prior_60_revalidated": true
+  },
+  "original_blob_parity": "2_OF_2_VERIFIED",
+  "archived_json_parse": "PASS_HISTORICAL_ONLY",
+  "pinned_live_parity": "PASS_SAME_BLOB",
+  "findings": [
+    {
+      "scope": "archived-next-shot-UI-Agtron-results",
+      "status": "HISTORICAL_ONLY",
+      "action": "preserve, not current PASS"
+    },
+    {
+      "scope": "pinned-read-only-probe",
+      "status": "LOW_NOT_REPRODUCED",
+      "action": "status-only checks, regex brittleness and bounded SHA require isolated reproduction before changes; #96 owns Auth/privacy"
+    }
+  ],
+  "tests": {
+    "immutable_git_literal": "PASS_60_OF_60",
+    "prior_immutable_literal": "PASS_60_OF_60",
+    "archived_json_parse": "PASS",
+    "node22_lint_build_original603_browser_mobile_offline_sql_auth": "NOT_RUN_DOCS_ONLY",
+    "github_ci": "PENDING_AT_JOURNAL_WRITE"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": "5451/6462_UNCHANGED_NO_BLIND_CREDIT",
+  "older_s2_historical_totals_unchanged": "7635/9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen_manifest_index": 220,
+    "frozen_path": "docs/audits/application_pass2_tests.json",
+    "frozen_line": 377,
+    "pinned_manifest_index": 67,
+    "pinned_path": "scripts/audit/provider-security-probes.py",
+    "pinned_line": 74
+  }
+}
