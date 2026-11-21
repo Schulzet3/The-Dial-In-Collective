@@ -1,3 +1,15 @@
+# Issue #509 R402 — new direct PostgreSQL core operator definitions 221–420/799 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=2f4677a9629cbeda569218e38a7931b2b36e4b32 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Mandatory immutable preflight file and blob content independently matched; live project azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11, production READ-ONLY. Resumed exactly after R401 rank 220. Directly inspected 200 full accessible core pg_operator catalog/underlying function declarations ranks **221–420/799**, 163424 literal characters. Unique OID/identity, exact complete provider canonical text/MD5 and 1–end character ranges, typed per-object semantic reviews, procedure/commutator/negator/dependency diagnostics recorded in [append-only R402 receipt](../audits/issue509-r402-pg-catalog-operators-ranks221-420-20261121.json). All 200 implementations are PostgreSQL internal; compiled implementation and original CREATE OPERATOR source **UNVERIFIED**; zero #267 source-line credit.
+
+Distinct overload semantics: integer division truncation versus decimal/float; geometric point division versus currency/interval; ordering (numeric/text/network/temporal/JSONB/geometric) and inclusive comparison; **<-> tsquery phrase-concatenation versus spatial distance**; **<<** network subnet versus bit shift, range-before and geometric left-of; <<= inclusive network containment; <<| below geometry. 163 commutator and 130 negator links checked reciprocal, zero missing functions or broken links; direct noncore relation edges 0 (NOT proof of zero runtime/indirect use). No new reproduced DIC application defect, justified removal or measured business-query bottleneck. Do not delete PostgreSQL core operators.
+
+GitHub docs-only ledger + same-commit scoped journal; new app/test/CI change NONE, exact-source new CI NOT_APPLICABLE. Release READY and current publication NOT_REVALIDATED. No Supabase SQL/data/Auth/Storage/Edge/config, migration, release, backup, billing or schedule writes. Entire baseline IN_PROGRESS. **Next unreviewed cursor** pg_catalog.pg_operator rank **421/799**, `<>(oidvector,oidvector)` OID **644**, character 1. Owner-action-only notification policy retained.
+
+---
+
 # Issue #509 R401 — direct PostgreSQL core operator definitions 1–220/799 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=cef0495a230cfc57b199030cc71a05c54635891f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
