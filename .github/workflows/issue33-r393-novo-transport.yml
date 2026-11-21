@@ -32,6 +32,25 @@ jobs:
         run: node scripts/audit/issue33-r393-novo-transport.mjs
         env:
           DIC_ISSUE33_R393_DIR: /tmp/dic33-r393
+      # Strict current selected product acceptance is an independent HARD gate;
+      # the transport diagnostic's 200 / JSON does not satisfy it.
+      - name: Exact original603 #241 selected official HTML parser and unsaved UI
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '241'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r393-strict
+      - name: Strict selected Buesaco conflicting-sensory afterproof
+        run: node scripts/audit/issue33-r171-241-check.mjs
+        env:
+          DIC_ISSUE33_R171_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r393-strict
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: dic33-r393-novo-strict
+          path: /tmp/dic33-r393-strict/
+          if-no-files-found: warn
+          retention-days: 1
       - uses: actions/upload-artifact@v7
         if: always()
         with:
