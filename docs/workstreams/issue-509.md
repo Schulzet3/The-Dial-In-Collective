@@ -1,3 +1,24 @@
+# Issue #509 R407 — complete directly exposed PostgreSQL operator-family catalogue 146/146 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=c2babaf506b9f7484ccd88a8ba4e831e84179b4d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Live development SHA and immutable PREFLIGHT.md blob independently content-matched (rechecked after concurrent #455 development commit). Main `57adc419ed4b106e158435b465971f5986537b41` and release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` previously read this run. Supabase project `azviqqejypsefzilgonr` independently `ACTIVE_HEALTHY`, PostgreSQL `17.11.0.003`; all provider SQL strictly **READ-ONLY**.
+
+**New direct catalog semantic review:** all **146/146 pg_catalog.pg_opfamily rows**, ascending `opf name/OID`, with **551,938/551,938 exposed canonical catalog characters**, **945 full typed pg_amop strategy/operator/implementation-function entries**, **696 full pg_amproc support entries**, per-associated opclass catalog/source/type/method, and **299 current non-system index references** (a family may appear in multiple consumers). Each family has original provider literal, MD5, OID, complete 1–end range, strategy/function signatures, per-family semantics/disposition and observed index DDL. Zero unresolved catalog operator/procedure/opclass references, zero empty family strategies or missing support routines; **native compiled implementations and original CREATE OPERATOR FAMILY SQL remain UNVERIFIED**. No #267 source-line review credit. Four append-only provider ledgers:
+
+- [R407 ranks 1–40](../audits/issue509-r407-pg-catalog-opfamilies-ranks1-40-20261121.json), **181,496** exposed characters, **336** operator entries and **228** support entries; development commit `ce9e7d82e8058c4aeddafd043a401359056d31c9`.
+- [R407 ranks 41–80](../audits/issue509-r407-pg-catalog-opfamilies-ranks41-80-20261121.json), **154,358** exposed characters, **305** operator entries and **210** support entries; commit `3dfc8be36c2ef49ceedd47ad4c657f12318e3c7c`.
+- [R407 ranks 81–120](../audits/issue509-r407-pg-catalog-opfamilies-ranks81-120-20261121.json), **131,955** exposed characters, **220** operator entries and **163** support entries; commit `bfd471274c65d35f4d68ea9659fcc2160a4f0aba`.
+- [R407 ranks 121–146](../audits/issue509-r407-pg-catalog-opfamilies-ranks121-146-20261121.json), **84,129** exposed characters, **84** operator entries and **95** support entries; commit `e0f1b5a076d7000ffde2e024dcfb22b27bd008b6`.
+
+**Semantic conclusions:** Hash equality vs B-tree ordering, BRIN bloom/minmax/multi/inclusion, GIN array/JSONB full-key vs JSONPath, GiST spatial/range, SP-GiST prefix/quadtree and text pattern/collation-aware families serve distinct strategies. The observed `realtime.subscription_subscription_id_entity_filters_hash_key` B-tree array family index is a concrete provider consumer, not a candidate for cleanup. Absence of a present indexed consumer for some native families does not establish no dynamic, extension or future dependency; no native family deletion justified. No new reproduced DIC application/Edge defect or demonstrated business-query bottleneck in this system-catalog batch. This is a full **exposed catalog metadata/typed strategy assessment**, not compiled PostgreSQL source proof or a complete audit of other provider surfaces.
+
+**GitHub/result:** Four docs-only append-only ledgers written nonforce with `[skip netlify]`, all four complete file contents and Git blobs read back and validated. Scoped journal written in a separate docs-only commit because the connected contents API has no atomic multi-file operation; **no application source, tests or CI changed**, therefore new CI **NOT_APPLICABLE**. No release readiness or current DEPLOYED state revalidated; do not promote queue. No production SQL/data/Auth/Storage/Edge/config writes, migrations, publication, backup, paid project or schedule changes.
+
+**Status:** `pg_catalog.pg_opfamily` exposed catalogue **146/146 reviewed**; prior classes **177/177** and operators **799/799** unchanged. Entire provider-wide baseline **IN_PROGRESS** with other accessible surfaces pending. **Next unreviewed catalog cursor:** `pg_catalog.pg_cast` rank **1/229** sorted by source regtype, target regtype and cast OID; `"char" → character`, OID **10132**, character 1. Prioritize any newly changed application-owned provider object/Edge drift ahead of unchanged built-in casts per November 16 owner focus. Retired directory remains governed by verified #2389 state and existing historical/legacy labels. Owner-action-only notification policy and hourly cadence retained.
+
+---
+
 # Issue #509 R405–R406 — full exposed PostgreSQL core opclass catalogue 177/177 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3a0e6c9b4701c9e7f8f95ed32a895c8d25b5cf67 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
