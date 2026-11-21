@@ -17891,25 +17891,36 @@
     {
       "id": "DIC-Q-455-r428-null-temperature-copy",
       "issue": 455,
-      "pr": null,
+      "pr": 3633,
       "title": "Do not copy or attribute absent temperature recommendation on Log Shot",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "52a506aff7c59018b07be0ffa8e90758aa9d3376",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE optional-temperature logging correctness; DIC_PREFLIGHT_VERIFIED development_sha=7ab0b3760e01069ca9f3d89d94601aab0ba5a893 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
         "Current source-bound negative: absent optional measured temperature overrides starting recommendation to null after physically valid, fully rated non-green shot, while tracked Log Shot still copies empty and records accepted temperature origin.",
-        "Two authored synthetic CloudApp positive/negative Node22 regression cases preserve all five ratings and no recommendation attribution on null, permit finite starting temperature. Hosted tests PENDING/NOT PASS."
+        "Two authored synthetic CloudApp positive/negative Node22 regression cases preserve all five ratings and no recommendation attribution on null, permit finite starting temperature. Hosted tests PENDING/NOT PASS.",
+        "PR #3633 head 2b5f4f1d4a43ed5101584a566f57ddc6d4fdcf0b: Node22 build/lint 44953251465 6,069 PASS / 0 FAIL / 6 SKIP of 6,075; both new cases #183/#184 PASS. Actual Chromium/mobile/offline/a11y 44953251584 SUCCESS, approval 44953251545 SUCCESS, isolated SQL 44953251523 SUCCESS, source security 44953251529 SUCCESS; relevant selected #33 shared regressions 44953251487/44953251528/44953251484 SUCCESS. Original frozen coffee corpus 44953251473 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] squash merge 52a506aff7c59018b07be0ffa8e90758aa9d3376; PR state MERGED and development ref verified. Exactly four files changed; all four PR-head and merge Git blob SHAs identical. Merged-push CI NOT VERIFIED through PR-trigger-only connector; no merged PASS claim."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44953251465,
+        44953251584,
+        44953251545,
+        44953251523,
+        44953251529,
+        44953251487,
+        44953251528,
+        44953251484
+      ],
       "blockers": [
-        "Exact PR-head Node22, mobile/browser/offline/accessibility and approval/continuity evidence PENDING; merged-source CI PENDING.",
-        "Independent #3347 isolated publishable READY candidate and five required checks not established; TESTING only.",
-        "New explicit Publish required for production. Standalone S019 and actual cup-quality outcome evidence remain incomplete."
+        "Merged-push exact-source Node22/UX/approval checks not independently verified; source file blob parity with passing PR-head verified, not a replacement for required CI.",
+        "Independent #3347 frozen source-isolated READY candidate/combined batch and five exact-source statuses not verified; queue remains TESTING, NOT READY.",
+        "No new owner Publish; original standalone S019 PDF and empirical next-shot outcome evidence incomplete."
       ],
-      "notes": "Narrow safe UI and accepted-action attribution correctness only; machine adjustability owner choice R423 remains HOLD. Original measurements/notes/history, feed/style/calibration, taste scales, privacy, persistence and Locked priors unchanged. No member/provider write or deployment.",
+      "notes": "Narrow safe UI and accepted-action attribution correctness only; machine adjustability owner choice R423 remains HOLD. Original measurements/notes/history, feed/style/calibration, taste scales, privacy, persistence and Locked priors unchanged. No member/provider write or deployment.\nR428 merged source fix 52a506aff7c59018b07be0ffa8e90758aa9d3376; PR-head all applicable runs completed SUCCESS, frozen corpus SKIPPED; no publication or provider writes. No novel machine temperature capability inference.",
       "production_deployed": false
     }
   ],

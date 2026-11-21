@@ -1,3 +1,15 @@
+## November 21, 2026 UTC — #455 R428 optional temperature-copy source integrity; exact PR-head CI and merge verified [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=52a506aff7c59018b07be0ffa8e90758aa9d3376 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- **Scope:** #455 Option B SAFE, no numeric policy, equipment-capability schema, member/provider, publication or production changes. Full original R428 source/test/queue/journal SAME-COMMIT attestation in [source journal](ops-issue455-r428-null-temperature-copy-20261121.md) records original preflight `7ab0b3760e01069ca9f3d89d94601aab0ba5a893` and Git blob `3742fed0176c809b115320c698a0e8b1675b2d3e`.
+- **Fix:** missing optional `tempC` no longer presents a usable copy button or accepted temperature recommendation; finite recommendation remains valid. All original measured shots, private notes/history, five taste scores, feed/style/calibration and R423 owner-held machine capability choice unchanged. No empirical taste outcome asserted.
+- **Git integration:** [PR #3633](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3633), PR head `2b5f4f1d4a43ed5101584a566f57ddc6d4fdcf0b`, nonforce squash merge `52a506aff7c59018b07be0ffa8e90758aa9d3376` with merge-title/message [skip netlify]. All four merged file Git blobs match passing source head; no unexpected merge-path differences. Concurrent #509 docs touched two other files, no overlap.
+- **CI exact PR head:** Node22/build/lint 44953251465 6,069 PASS, zero FAIL, six intentional SKIP (6,075 total), new synthetic positive/negative #183/#184 PASS; mobile/browser/offline/a11y 44953251584, approval 44953251545, SQL 44953251523, security 44953251529, selected #33 44953251487/44953251528/44953251484 all completed SUCCESS. Frozen corpus 44953251473 SKIPPED, not PASS. Merged-push CI not returned by PR-only connector, **UNVERIFIED not PASS**. No duplicate test runs ordered.
+- **Queue/status:** `DIC-Q-455-r428-null-temperature-copy` retained TESTING with actual PR, source and CI details; no independent READY isolated certificate, Publish, provider readback or new member data. This is docs-only reconciliation; Node/browser/SQL/Auth tests NOT RERUN for docs changes. #455 remains OPEN. Next: verify merged-source checks if accessible, independent #3347 READY assessment, continue distinct source claim/workflow findings; S019 standalone and real recommendation quality outcomes unresolved.
+
+---
+
 
 ## November 20, 2026 UTC — #455 R381 Log Shot accessible recommendation-copy names VERIFIED in DEVELOPMENT only [skip netlify]
 
