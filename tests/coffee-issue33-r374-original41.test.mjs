@@ -76,3 +76,19 @@ test('PageFly H3 must be tracker/product-id/cart-form exact; recommendation/SEO/
  assert.equal(selectedShopifyPageFlyH3Identity(valid,{...args,parsed_name:'Different Coffee'}),null);
  assert.equal(selectedShopifyPageFlyH3Identity(valid,{...args,source_url:'https://another.example/products/descafeinado'}),null);
 });
+
+test('PageFly H3 current selected exact product own paragraph feeds method without an H1; excludes sibling caffeine text',()=>{
+ const id='5039969009700';
+ const tracker='<script id="__st">var __st={"p":"product","rtyp":"product","rid":5039969009700,"pageurl":"brickhouseroasters.com/products/descafeinado"};</script>';
+ const page=(paragraph='',other='')=>'<html><head><meta property="og:title" content="Descafeinado Decaf Coffee, Colombia"><meta name="description" content="Roast info"></head><body>'+tracker+
+ '<div data-pf-type="ProductBox" data-product-id="'+id+'"><form id="product_form_'+id+'" class="pf-product-form" action="/cart/add"><input name="form_type" value="product"><input name="product-id" value="'+id+'"><h3 data-pf-type="ProductTitle" data-product-type="title" data-product-id="'+id+'">Descafeinado</h3><p>'+paragraph+'</p></form></div>'+
+ '<div data-pf-type="ProductList2"><div data-pf-type="ProductBox" data-product-id="333"><form id="product_form_333" class="pf-product-form" action="/cart/add"><h3 data-pf-type="ProductTitle" data-product-type="title" data-product-id="333" data-href="/products/other">Other Coffee</h3><p>'+other+'</p></form></div></div></body></html>';
+ const chosen=extractPublicCoffeeFacts(page(cane),{source_url:url});
+ assert.equal(chosen.ok,true);
+ assert.equal(chosen.fields.decaffeination_method,'Sugar Process');
+ assert.notEqual(chosen.fields.process,'Natural');
+ const missing=extractPublicCoffeeFacts(page('Dark-roasted coffee.',cane),{source_url:url});
+ assert.equal(missing.fields.decaffeination_method,undefined,'related sibling own cane method must not transfer');
+ const wrongPage=extractPublicCoffeeFacts(page(cane),{source_url:'https://coffee.example/products/other'});
+ assert.equal(wrongPage.fields.decaffeination_method,undefined,'unmatched source URL must not claim current method');
+});
