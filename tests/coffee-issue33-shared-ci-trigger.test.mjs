@@ -126,7 +126,7 @@ test('N508-075 R377 actual Netlify URL preview and transitive admission/request 
   assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
 
-test('R381 #508 N508-075 ICONIK synthetic dependency coverage without live per-case HTTP fanout on shared parser edits',()=>{
+test('R381b #508 N508-075 partial ICONIK offline coverage without weakening strict case-specific real source',()=>{
  const source='tests/coffee-issue33-r207-original310-312.test.mjs';
  const scoped=readFileSync(new URL('../.github/workflows/issue33-r207-original310-312.yml',import.meta.url),'utf8');
  assert.equal(yaml.split("- '"+source+"'").length-1,2,'shared offline PR and push trigger the actual selected case regression');
@@ -134,7 +134,7 @@ test('R381 #508 N508-075 ICONIK synthetic dependency coverage without live per-c
  const offline=readFileSync(new URL('../'+source,import.meta.url),'utf8');
  assert.match(offline,/extractPublicCoffeeFacts/,'the test invokes the actual parser');
  assert.doesNotMatch(offline,/\bfetch\s*\(|\bhttps?\.request\s*\(/,'the shared regression makes no live public product calls');
- assert.doesNotMatch(scoped,/^\s*-\s+src\/server\/coffee-page-metadata\.mjs\s*$/m,'shared parser edits alone must not dispatch three live ICONIK URLs');
+ assert.match(scoped,/^\s*-\s+src\/server\/coffee-page-metadata\.mjs\s*$/m,'R381b retains R207 strict live-source trigger; broader fanout remains an OPEN #508 case');
  for(const owned of [
   '.github/workflows/issue33-r207-original310-312.yml',
   'scripts/audit/issue33-r207-original310-312-check.mjs',
