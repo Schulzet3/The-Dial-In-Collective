@@ -50,3 +50,21 @@ test('N508-075 latest selected source tests have both PR/push triggers and stay 
  assert.equal(yaml.split('node --test').length-1,1,'one bounded Node test invocation');
  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+
+test('N508-075 R367 recent selected original603 adversarial cases run offline on shared-source changes',()=>{
+  const recent=['r357-original490','r358-original501','r359-original508','r360-original509',
+    'r361-original15','r362-original22','r364-original30','r365-original37','r366-original38'];
+  for(const id of recent){
+    const file='tests/coffee-issue33-'+id+'.test.mjs';
+    assert.equal(yaml.split("- '"+file+"'").length-1,2,file+' must trigger on PR and push');
+    assert.ok(yaml.includes('            '+file),file+' must be executed by offline Node job');
+    const contents=readFileSync(new URL('../'+file,import.meta.url),'utf8');
+    for(const shared of ['extractPublicCoffeeFacts','requiredFocusedSourceFailures',
+      'coffeeUrlPreviewMarkup','coffeeSourceReviewSnapshot'])
+      assert.ok(contents.includes(shared),id+' actual shared-parser or UI contract '+shared);
+    assert.doesNotMatch(contents,/\bfetch\s*\(|\bhttps?\.request\s*\(|DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS/,
+      id+' synthetic regression may not make a real source request');
+  }
+  assert.equal(yaml.split('node --test').length-1,1,'single bounded offline invocation');
+  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
+});
