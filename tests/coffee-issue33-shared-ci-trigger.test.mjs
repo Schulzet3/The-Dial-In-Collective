@@ -99,3 +99,28 @@ test('R374 current PageFly selected-H3 and cane decaf test triggers once on shar
  assert.equal(yaml.split('node --test').length-1,1);
  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+
+test('N508-075 R377 actual Netlify URL preview and transitive admission/request dependencies trigger the same one-job OFFLINE regression',()=>{
+  const imported=[
+    'site/cloud/client.js',
+    'netlify/functions/coffee-url-preview.mjs',
+    'supabase/functions/_shared/request-budget.mjs',
+    'supabase/functions/dic-preview-coffee/index.ts',
+    'supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql',
+    'tests/coffee-preview-role-policy.test.mjs'
+  ];
+  for(const file of imported)
+    assert.equal(yaml.split("- '"+file+"'").length-1,2,'both PR and push must trigger: '+file);
+  assert.ok(yaml.includes('            tests/coffee-preview-role-policy.test.mjs'),'synthetic mocked Netlify handler test is actually executed');
+  const handler=readFileSync(new URL('../netlify/functions/coffee-url-preview.mjs',import.meta.url),'utf8');
+  assert.match(handler,/from ['"]\.\.\/\.\.\/supabase\/functions\/_shared\/request-budget\.mjs['"]/);
+  assert.match(handler,/from ['"]\.\.\/\.\.\/src\/server\/coffee-page-metadata\.mjs['"]/);
+  assert.match(handler,/from ['"]\.\.\/\.\.\/src\/server\/coffee-url-guard\.mjs['"]/);
+  const roleTest=readFileSync(new URL('../tests/coffee-preview-role-policy.test.mjs',import.meta.url),'utf8');
+  assert.match(roleTest,/createPreviewHandler/,'actual handler exercised with injected API and HTML');
+  assert.match(roleTest,/apiFetch=async/,'no account or live product fetch in this job');
+  assert.doesNotMatch(roleTest,/\bfetch\s*\(/,'no direct public HTTPS/member network request');
+  assert.match(readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8'),/previewPath='\\/api\\/coffee-preview'/);
+  assert.equal(yaml.split('node --test').length-1,1,'a single bounded offline Node invocation');
+  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
+});
