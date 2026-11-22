@@ -29,7 +29,10 @@ export function selectFullSuiteShard(plan,shard='all'){
  if(!/^[01]\/2$/.test(shard))throw Error('Invalid full-suite shard selector');
  const index=Number(shard[0]);
  const parallel=plan.parallel.filter((_,i)=>i%2===index);
- const serial=index===0?plan.serial:[];
+ // The historically faster cloud-tests shard can absorb the isolated
+ // 4-second-budget corpus without contending with other tests on its runner.
+ // This balances the two required jobs without removing or duplicating files.
+ const serial=index===1?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
  return {parallel,serial};
 }
