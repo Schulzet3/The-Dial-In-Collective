@@ -150,3 +150,18 @@ test('source-bound approval push jobs cannot be canceled by unrelated later push
  assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B),'superseded PR jobs still coalesce');
  assert.equal(classifyImpactPaths(['.github/workflows/approval-continuity.yml']).tier,'high');
 });
+
+test('exact-SHA development cloud and browser push checks finish despite subsequent pushes',()=>{
+ for(const [filename,prefix] of [
+  ['cloud-beta-ci.yml','dic-cloud-beta-ci'],
+  ['cloud-regression.yml','dic-cloud-regression']
+ ]){
+  const workflow=readFileSync(new URL('../.github/workflows/'+filename,import.meta.url),'utf8');
+  assert.ok(workflow.includes("group: "+prefix+"-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"),filename);
+  assert.ok(workflow.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"),filename);
+  assert.equal(classifyImpactPaths(['.github/workflows/'+filename]).tier,'high');
+ }
+ const group=(kind,ref,sha)=>ref+'-'+(kind==='push'?sha:'pr');
+ assert.notEqual(group('push','refs/heads/development/backend-foundation',A),group('push','refs/heads/development/backend-foundation',B));
+ assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B));
+});

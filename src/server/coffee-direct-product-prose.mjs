@@ -323,6 +323,29 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     /[|–—]\s*(?:Swiss|Mountain)[ -]?Water\s*[®™]?\s+Process(?:ed|ing)?\s*$/iu.test(name)&&
     inferDecaffeinationMethod({name,selectedMethod:name})==='Water Process')
   decafEvidence.add(name);
+ // A full-decaf selected H1 may identify the water process between "Decaf"
+ // and its roast. Title alone is insufficient. Require a same-method direct
+ // claim in the exact selected product's description (not SEO, nav or siblings).
+ const selectedTitleWater=String(name).match(/^Decaf(?:feinated)?\s*[-–—]\s*(Swiss|Mountain)[ -]?Water\s+Process\s*[-–—]\s*(?:Ultra[- ]Light|Very[- ]Light|Medium[- ]Light|Medium[- ]Dark|Light|Medium|Dark)\s+Roast$/iu);
+ if(selectedTitleWater&&decafOnlyCoffee(name)){
+  const processName=selectedTitleWater[1].toLowerCase();
+  const directMethod=new RegExp('^'+processName+'[ -]?water\\s+process\\s+leads?\\s+to\\s+(?:an?\\s+)?[^.!?]{0,125}\\bdecaf(?:feinated)?\\s+coffee\\b','iu');
+  for(const block of body){
+   if(!['p','div'].includes(block.tag)||block.educational||block.text.length>1100||
+      /^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(block.section||'').trim()))continue;
+   const sentences=block.text.split(/(?<=[.!?])\s+/u).slice(0,8);
+   const sentence=sentences.find(line=>directMethod.test(line.trim()));
+   if(!sentence||NONCURRENT_DECAF_METHOD.test(sentence)||
+      /\b(?:not|never|without|instead of|rather than|unlike|hypothetical)\b/iu.test(sentence))continue;
+   // A contrary direct assertion for this coffee must remain reviewable.
+   if(sentences.some(line=>/\b(?:this|our)\s+(?:decaf|coffee|beans?)\b[^.!?]{0,70}\b(?:uses?|decaffeinated)\b[^.!?]{0,40}\b(?:ethyl[ -]?acetate|sugar[ -]?cane|co\s*[- ]?2|carbon[ -]?dioxide)\b/iu.test(line)))continue;
+   const claim=sentence.trim();
+   if(inferDecaffeinationMethod({name,selectedMethod:claim})==='Water Process'&&!decafEvidence.has(claim)){
+    if(decafEvidence.size<4)decafEvidence.add(claim);
+    else decafEvidenceOverflow=true;
+   }
+  }
+ }
  const selectedTitleTier=String(name).match(/\s+[—–-]\s+(Ultra Light|Very Light|Light|Medium[- ]Light|Medium|Medium[- ]Dark|Dark)$/iu);
  if(selectedTitleTier)roasts.add(normalizeRoastLabel(selectedTitleTier[1]));
  // A single current Product 'Coffee roast' option is a product-specific fixed tier,

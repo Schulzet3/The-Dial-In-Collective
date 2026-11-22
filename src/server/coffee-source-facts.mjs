@@ -528,6 +528,30 @@ export function collectCoffeePageGuidanceFacts(html,{source_url}={}){
   if(!value||value.length>10_000)continue;
   result.add(question,value,undefined,'Roaster general coffee guidance');count++;budget-=length;
  }
+ // Educational location examples belong in Source Review, not selected facts.
+ // Identity-scoped canonical extraction masks these labels; keep the
+ // original printed literal as an UNTYPED, bounded educational witness.
+ // Do not replay raw other-coffee captions into selected source rankings.
+ let educationalLevel=0,educationalActive=false,educationalCount=0;
+ for(let i=0;i<nodes.length&&educationalCount<12;i++){
+  const node=nodes[i];if(blocked.has(i))continue;
+  if(/^h[2-6]$/u.test(node.tag)&&node.contentEnd-node.headEnd<=400){
+   const level=Number(node.tag[1]);
+   if(!educationalActive||level<=educationalLevel){
+    const title=plain(html.slice(node.headEnd,node.contentEnd),105);
+    educationalActive=/^(?:origins? explained|learn(?:ing)? about (?:coffee )?origins?|understanding (?:coffee )?origins?)$/iu.test(title);
+    educationalLevel=educationalActive?level:0;
+   }
+   continue;
+  }
+  if(!educationalActive||!['p','li'].includes(node.tag)||node.contentEnd-node.headEnd>1200)continue;
+  const claim=plain(html.slice(node.headEnd,node.contentEnd),500)
+   .match(/^(Region(?:s)?|Origin|Country(?: of Origin)?)\s*[:：]\s*(.{3,360})$/iu);
+  if(!claim)continue;
+  result.add(claim[1],claim[2],undefined,'Roaster general coffee guidance');
+  educationalCount++;
+ }
+
  return result.finish();
 }
 
