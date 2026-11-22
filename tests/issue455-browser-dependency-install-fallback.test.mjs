@@ -36,10 +36,10 @@ if(existsSync(candidateReceipt)){
 }
 
 
-test('R190 retains strict original Chromium plus OS dependency install',()=>{
- assert.match(requiredSourceWorkflow,/if ! python -m playwright install --with-deps chromium; then/);
+test('R190 retains strict headless Chromium plus OS dependency install',()=>{
+ assert.match(requiredSourceWorkflow,/if ! python -m playwright install --with-deps --only-shell chromium; then/);
  assert.match(requiredSourceWorkflow,/sudo apt-get update -o Acquire::Retries=2/);
- assert.equal((requiredSourceWorkflow.match(/python -m playwright install --with-deps chromium/g)||[]).length,2);
+ assert.equal((requiredSourceWorkflow.match(/python -m playwright install --with-deps --only-shell chromium/g)||[]).length,2);
  assert.doesNotMatch(requiredSourceWorkflow,/continue-on-error:\s*true/);
  assert.doesNotMatch(workflow,/continue-on-error:\s*true/);
 });
