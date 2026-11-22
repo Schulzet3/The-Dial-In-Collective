@@ -228,3 +228,52 @@ test('#3667 exact zero-READY queue blob short-circuits checkout; proof gaps fail
  assert.ok(workflow.includes('workflow_dispatch:'));
  for(const phrase of ['contents: read','actions: read','checks: read'])assert.ok(workflow.includes(phrase));
 });
+
+test('#3667 real >1 MiB queue Git blob falls back to immutable Git Blobs API',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ const marker='      - name: Fast skip stale or queue-unchanged approvals before checkout\n';
+ const segment=workflow.split(marker)[1]?.split('      - uses: actions/checkout@v7')[0];
+ assert.ok(segment);
+ const script=segment.split('        run: |\n')[1].split('\n').map(s=>s.startsWith('          ')?s.slice(10):s).join('\n');
+ assert.ok(script.includes('/git/blobs/'));
+ const dir=mkdtempSync(join(tmpdir(),'dic-ready-large-queue-'));
+ const out=join(dir,'out'),meta=join(dir,'meta.json'),full=join(dir,'blob.json');
+ const source='b'.repeat(40);
+ const queue=(ready)=>JSON.stringify({schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',items:[{state:ready?'READY':'TESTING'}],history:'x'.repeat(1100000)});
+ const write=(ready,badSha=false)=>{
+  const bytes=queue(ready);
+  const sha=cryptoCreateHash('sha1').update('blob '+Buffer.byteLength(bytes)+'\0').update(bytes).digest('hex');
+  writeFileSync(meta,JSON.stringify({sha,encoding:'none',content:'',size:Buffer.byteLength(bytes)}));
+  writeFileSync(full,JSON.stringify({sha:badSha?'f'.repeat(40):sha,encoding:'base64',content:Buffer.from(bytes).toString('base64')}));
+ };
+ const mock=`gh() {
+  if [[ "$2" == *"/git/ref/heads/development/backend-foundation" ]]; then
+    printf '%s\\n' "$DIC_FAKE_LIVE"
+  elif [[ "$2" == *"/commits/"* ]]; then
+    printf '%s\\n' "queue"
+  elif [[ "$2" == *"/contents/docs/RELEASE_QUEUE.json?"* ]]; then
+    cat "$DIC_META_PATH"
+  elif [[ "$2" == *"/git/blobs/"* ]]; then
+    if [[ "$DIC_BLOB_FAIL" = '1' ]]; then return 1; fi
+    cat "$DIC_BLOB_PATH"
+  else return 1
+  fi
+ }
+ `;
+ function check(ready,badSha,expected,fail='0'){
+  write(ready,badSha);writeFileSync(out,'');
+  execFileSync('bash',['-c',mock+script],{encoding:'utf8',env:{
+    ...process.env,GITHUB_OUTPUT:out,GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective',
+    EVENT_HEAD:source,DIC_FAKE_LIVE:source,DIC_META_PATH:meta,DIC_BLOB_PATH:full,DIC_BLOB_FAIL:fail
+  }});
+  assert.equal(readFileSync(out,'utf8').trim(),'proceed='+expected);
+ }
+ try{
+  check(false,false,'false');
+  check(true,false,'true');
+  check(false,true,'true');
+  check(false,false,'true','1');
+ }finally{rmSync(dir,{recursive:true,force:true});}
+ assert.ok(workflow.includes('contents: read'));
+ assert.ok(workflow.includes('checks: read'));
+});
