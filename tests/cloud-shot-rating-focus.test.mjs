@@ -88,8 +88,11 @@ test('missing taste score focuses the first incomplete group; no score is presel
 test('Log Shot keeps semantic error announcement and re-enables fields before focusing validation',()=>{
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.ok(main.includes('role=alert id=shot-validation-feedback'));
- assert.ok(main.includes("const initiallyDisabled=new Set([...form.querySelectorAll('button')].filter(b=>b.disabled))"));
- assert.ok(main.includes("form.querySelectorAll('button').forEach(b=>b.disabled=initiallyDisabled.has(b));if(id==='shot'&&shotValidation?.length)U.focusShotValidationError"));
+ assert.ok(main.includes("const controls=[...form.querySelectorAll(id==='shot'?'button,input,select,textarea':'button')]"));
+ assert.ok(main.includes("form.setAttribute?.('aria-busy','true')"));
+ assert.ok(main.includes("form.removeAttribute?.('aria-busy')"));
+ assert.ok(main.includes("controls.forEach(control=>control.disabled=initiallyDisabled.has(control))"));
+ assert.ok(main.includes("if(shotValidation?.length)U.focusShotValidationError"));
  assert.ok(main.includes('target.closest('));
  assert.ok(main.includes("U.acknowledgeShotRating(target.closest('[role=\"group\"]'),sheet.querySelector('#shot-validation-feedback'))"));
 });
