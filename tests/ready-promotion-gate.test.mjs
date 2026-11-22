@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {setImmediate} from 'node:timers';
+import {readFileSync} from 'node:fs';
 import {readySelectionFingerprint,verifyReadyPromotion,READY_CERT_KIND,
  gitReadyAncestry,githubReadyPromotionReaders} from '../scripts/release/ready-promotion-gate.mjs';
 
@@ -135,4 +136,17 @@ test('frozen READY verification overlaps independent source and five-job evidenc
  });
  assert.equal(denied.ready,false);
  assert.match(denied.errors.join(' '),/source temporarily unavailable/);
+});
+
+test('approval workflow runs exactly one live immutable READY verifier with negative regression',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ const evidence=readFileSync(new URL('../scripts/release/ready-evidence-gate.mjs',import.meta.url),'utf8');
+ assert.equal(workflow.split('node scripts/release/ready-evidence-gate.mjs').length-1,1,
+  'READY certification must be a single source-bound live read');
+ assert.equal(workflow.includes('node scripts/release/ready-promotion-gate.mjs'),false,
+  'second CLI duplicated identical source/run/status readback');
+ assert.equal(workflow.includes('node --test tests/ready-promotion-gate.test.mjs'),true,
+  'retain negative fail-closed unit acceptance');
+ assert.equal(evidence.includes('return verifyReadyPromotion(args)'),true,
+  'surviving live gate must delegate to full immutable five-job verifier');
 });

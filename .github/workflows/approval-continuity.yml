@@ -51,13 +51,13 @@ jobs:
         # separate --validate and nonblocking --status invocations duplicated
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
+      - name: Exercise immutable READY rejection regressions before live certification
+        # No remote GETs: the synthetic tests cover missing refs, stale fingerprints,
+        # failed/SKIPPED five-job receipts and incomplete source isolation.
+        run: node --test tests/ready-promotion-gate.test.mjs
       - name: Verify every READY item against live recorded Actions and source/test blobs
+        # One strict live gate: ready-evidence-gate delegates to exactly the
+        # same verifyReadyPromotion used by the former redundant second CLI.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/release/ready-evidence-gate.mjs
-      - name: Require frozen five-job CI before any READY promotion (owner #3347)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          node --test tests/ready-promotion-gate.test.mjs
-          node scripts/release/ready-promotion-gate.mjs
