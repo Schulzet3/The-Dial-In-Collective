@@ -18273,24 +18273,40 @@
     {
       "id": "DIC-Q-455-r444-pending-shot-form-lock",
       "issue": 455,
-      "pr": null,
+      "pr": 3770,
       "title": "Keep all Log Shot fields and five rating controls immutable during pending Save",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Owner #455 Option B SAFE bounded UX correction. DIC_PREFLIGHT_VERIFIED development_sha=fdb63255433ebe7c9684efa42447eb56e3dd2828 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob 7a1c84eff7a6a8b825e0688a73114001e73f3390; R443 verified continuation.",
       "tests": [
-        "R444 synthetic actual CloudApp delayed Save success/error: pending rating/measurement/feed/notes controls freeze and aria-busy; restore original disabled state and draft on both outcomes. CI pending at authoring.",
-        "R443 existing three unavailable-copy negative/positive tests and focus/accessibility static assertions updated for expanded control locking; Node22/UX/approval exact-source pending."
+        "R444 source-bound PR head 578b1a5bc1a5d86899ab4c2336db9136e6999c5e: validate 45029642285 SUCCESS, cloud/mobile 45029642236 SUCCESS (both jobs), approval 45029642264 SUCCESS, isolated SQL 45029642237 SUCCESS, security 45029642202 SUCCESS, #33 shared 45029642214 / R171 45029642327 / R172 45029642213 all SUCCESS; original frozen corpus 45029642249 SKIPPED NOT PASS.",
+        "R444 two actual CloudApp deferred Save synthetic tests PASS in PR-head cloud-tests job 137230168127, 2690 PASS / 0 FAIL / 6 SKIPPED (shard). Existing R443 positive/negative PASS in validate job 137230168094 (2097 PASS /0 FAIL).",
+        "Nonforce PR #3770 merged source c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99, exact six file Git blob IDs match PR head; merged validate 45029844994 SUCCESS (2097 PASS/0 FAIL); cloud/mobile 45029845033 SUCCESS (cloud 2690 PASS/0 FAIL/6 SKIPPED, both R444 tests named PASS); approval 45029845014 SUCCESS, #33 shared 45029845028 and R171 45029845026 SUCCESS.",
+        "Source same-commit preflight journal receipt independently read and verified; no duplicate full suites. The original research-pack 48/48 reference cases do not constitute app CI or real cup-quality validation."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45029642285,
+        45029642236,
+        45029642264,
+        45029642237,
+        45029642202,
+        45029642214,
+        45029642327,
+        45029642213,
+        45029642249,
+        45029844994,
+        45029845033,
+        45029845014,
+        45029845028,
+        45029845026
+      ],
       "blockers": [
-        "Exact PR-head and merged-source applicable CI must complete successfully; pending or skipped is NOT PASS.",
-        "Separate #3347 frozen nonpublishing READY candidate plus five exact candidate-success jobs required before READY; owner Publish required for deployment."
+        "Independent #3347 frozen candidate source isolation and five exact-source native successful READY checks remain unverified; item stays TESTING and never grants Publish."
       ],
-      "notes": "No new recipe/taste/temperature/science rule or member/telemetry change. Existing five ratings and original measurements/notes/history are preserved. No Netlify, production, provider, SQL/Auth/Edge, release, backup, purchase, forced Git or visibility changes.",
+      "notes": "SAFE source-only development correction and original R443 controls retained. All six tested source/test/journal/queue Git blobs equal merged PR head. PR head and five applicable merged push workflows completed SUCCESS; six intentionally skipped Node tests not PASS. No measured member incident or espresso quality improvement; no deployment, production provider/SQL/Auth/Edge/member writes or Locked target change.",
       "production_deployed": false
     }
   ],
