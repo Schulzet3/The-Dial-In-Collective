@@ -1,3 +1,18 @@
+# Issue #509 R446 — direct constraint dependency semantics ranks 3001–3500 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=728f475747cc2a0822457081f37f0d790f88ae98 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Immutable development preflight source Git commit 728f475747cc2a0822457081f37f0d790f88ae98 / independently matched PREFLIGHT blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f first; independently checked live branch 728f475747cc2a0822457081f37f0d790f88ae98 and scoped journal before atomic nonforce write. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY, PostgreSQL 17.11.0.003, strictly **PRODUCTION READ ONLY**.
+
+**Substantive NEW provider work:** Directly reviewed **500/500 complete pg_depend dependency edges**, ranks **3001–3500/5414** (full `row_to_json` source with classids/OIDs/subids, original source/reference descriptions, complete referenced SQL constraint definition, validation and referential existence flags, PG MD5 and 1–end character range), **220,571 literal catalog characters** and **198 unique live constraint definitions**. [Append-only per-edge ledger](../audits/issue509-r446-pg-depend-ranks3001-3500-constraints-20261122.json). {"RETAIN_CHECK_CONSTRAINT_DEPENDENCY":207,"RETAIN_PRIMARY_KEY_DEPENDENCY":52,"RETAIN_UNIQUE_KEY_DEPENDENCY":31,"RETAIN_FOREIGN_KEY_DEPENDENCY":206,"RETAIN_REALTIME_MANAGED_NOT_VALID_CONSTRAINT":4}. Independently checked all 500 targets exist and all catalog SQL definitions resolve; **0 missing sources/targets or unused objects proved**. Application composite owner-key FKs/deferrable active version cycles, coffee self-merge/state guards, backup checks and managed Auth/Storage relations have distinct purposes; retain.
+
+**Provider guardrail, NOT confirmed bug:** exactly 4 dependency edges (ranks 3176–3179) belong to managed `realtime.messages_payload_exclusive` CHECK `(payload IS NULL OR binary_payload IS NULL) NOT VALID`. Its `convalidated=false` means historical-row compliance is **UNVERIFIED**, not proof of actual corrupt data or DIC app defect. This managed constraint remains retained; no provider schema changes. All other 496 constraint dependency entries are validated. 198 distinct SQL constraints are represented by the 500 edges. The complete dependent function/client source outside this range remains UNVERIFIED; this audit does not recredit #267's original-code line audit.
+
+**Outcome:** No newly reproduced application/Edge defect, migration drift, objectively measured performance bottleneck, or justified safe deletion from this range. No GitHub code/test/CI changes; new exact-source CI **NOT_APPLICABLE, not PASS**; existing community guard queue remains TESTING, not READY. No production SQL/data/Auth/Storage/Edge/config, migration, deployment, staging, release, backup, paid branch, billing, schedule or owner-notification policy changes. Full Supabase baseline **IN_PROGRESS**.
+
+**Next exact cursor:** `pg_depend` rank **3501/5414**, first character using the same seven-column numeric ordering; recheck live first edge and inventory count before continuing. No owner decision required.
+
+---
+
 # Issue #509 R445 — live dependency review ranks 2001–3000 and new SQL behavior review [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=f22f1b8c4d84e5561240d0b6c0d0e6a87f3ed91b preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
