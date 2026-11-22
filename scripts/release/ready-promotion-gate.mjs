@@ -52,13 +52,17 @@ export async function verifyReadyPromotion({queue,certificate,developmentSha,
   if(certificate.ready_selection_sha256!==fingerprint)
    throw Error('READY selection or published base changed since certification');
   const expectedIds=selected.map(x=>x.id);
-  const ref=await loadCandidateRef(certificate.candidate_branch);
+  // Independent, immutable candidate reads share one round trip window.
+  // All four values are still independently verified before accepting a batch.
+  const [ref,commit,manifest,frozenQueue]=await Promise.all([
+   loadCandidateRef(certificate.candidate_branch),
+   loadCommit(certificate.candidate_sha),
+   loadCandidateFile(certificate.candidate_sha,'docs/RELEASE_CANDIDATE.json'),
+   loadCandidateFile(certificate.candidate_sha,'docs/RELEASE_QUEUE.json')
+  ]);
   if(ref?.ref!=='refs/heads/'+certificate.candidate_branch||
      ref?.object?.sha!==certificate.candidate_sha)
    throw Error('Frozen candidate Git ref is absent or moved');
-  const commit=await loadCommit(certificate.candidate_sha);
-  const manifest=await loadCandidateFile(certificate.candidate_sha,'docs/RELEASE_CANDIDATE.json');
-  const frozenQueue=await loadCandidateFile(certificate.candidate_sha,'docs/RELEASE_QUEUE.json');
   if(!manifest||manifest.schema_version!==1||manifest.kind!=='DIC-READY-ONLY-SOURCE-1'||
      manifest.candidate_branch!==certificate.candidate_branch||
      manifest.published_source_sha!==queue.published_base.tested_source_sha||
@@ -78,7 +82,11 @@ export async function verifyReadyPromotion({queue,certificate,developmentSha,
      canonical(sorted(manifest.risk_classification.checks))!==canonical(sorted(PRODUCTION_CHECKS))||
      manifest.risk_classification.builds!==1)
    throw Error('Frozen candidate omitted required five checks or single-build contract');
-  const runs=await Promise.all(certificate.run_ids.map(id=>loadRun(id)));
+  // Five run receipts and source-bound check statuses are independent reads.
+  const [runs,liveChecks]=await Promise.all([
+   Promise.all(certificate.run_ids.map(id=>loadRun(id))),
+   loadChecks(certificate.candidate_sha)
+  ]);
   for(let i=0;i<runs.length;i++){
    const run=runs[i],id=certificate.run_ids[i];
    if(run?.id!==id||run.head_sha!==certificate.candidate_sha||
@@ -86,7 +94,7 @@ export async function verifyReadyPromotion({queue,certificate,developmentSha,
       run.status!=='completed'||run.conclusion!=='success')
     throw Error('Certified GitHub Actions run '+id+' is not a successful exact-candidate push');
   }
-  const checks=exactRecordedChecks(await loadChecks(certificate.candidate_sha),
+  const checks=exactRecordedChecks(liveChecks,
    certificate.candidate_sha,certificate.run_ids);
   if(checks.length!==PRODUCTION_CHECKS.length||checks.some(check=>
      check.status!=='completed'||check.conclusion!=='success'||check.recorded!==true))

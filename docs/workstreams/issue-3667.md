@@ -148,6 +148,21 @@ DIC_PREFLIGHT_VERIFIED development_sha=9dd8fb10123cb563e3be8776e08f6cc126c5b0f8 
 
 DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
+## November 22, 2026 — parallel frozen READY provenance readback [skip netlify]
+- AUTHORITY: owner #3667 speed-first and Locked #3347; immutable nonpublishing candidate remains mandatory. Exact live preflight dd4423f4a5bfe9af0a380acd348f9955c678fed6, blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. No publication, GitHub grant, Netlify, private data, SQL or provider changes.
+- ROOT BOTTLENECK: once a READY batch exists, the read-only verification of its frozen candidate ref, parent Git commit, manifest and frozen queue was four serial GitHub reads, followed by a separate serial phase for five CI run receipts then the check-status list. These reads depend only on the same immutable candidate SHA, NOT on each other's result.
+- CHANGE: issue #3667 limits independent reads to one concurrent four-source group and one concurrent native-check/five-run group, preserving every original equality, ancestry, five SUCCESS/latest-status, immutable Git ref and queue-fingerprint assertion. Fail-closed transport errors remain HOLD. No existing test or status skipped and no approval gate weakened.
+- TESTS/ACCEPTANCE: regression in tests/ready-promotion-gate.test.mjs asserts all four source reads overlap, all five runs plus check read overlap, complete READY acceptance, and source failure HOLD; hosted HIGH-risk checks required before nonforce merge. Compare an actual READY candidate's elapsed check later; no real READY elapsed speedup or full under-15-minute implementation-to-READY asserted without source-bound evidence.
+- NEXT: verify exact PR and postmerge CI, keep DIC-Q-3667-ci-parallel-full-suite TESTING until separately frozen #3347 candidate passes all five exact-SHA native SUCCESS checks. Do not touch ongoing #455/#33/#267 source.
+
+DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22, 2026 — fix exact PR #3731 HIGH lint fail [skip netlify]
+- Exact first PR SHA bc15e2765ea19e95fe1b6aacad3915582dc71107: approval 45002874041 and SQL 45002874058 SUCCESS; cloud-tests job 137148015025 FAILED at ESLint `no-undef` on regression test's Node global `setImmediate`. The timing behavior under Node 22 was valid but check is mandatory, so no PASS claimed for this source. The full Node shard ran before lint and passed; no broad functional failure.
+- FIX: explicitly import `setImmediate` from `node:timers` in the test, preserving deterministic asynchronous concurrency assertions and fail-closed negative case. Retest exact changed source with five named statuses and nonforce integration; do not reuse the old failed cloud-tests as a PASS.
+
+DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
 ## November 22, 2026 — retain exact merged-source approval receipts [skip netlify]
 - AUTHORITY: owner #3667 speed-first (10/10 speed; 9/10 reliability) and #3347 frozen five-job release candidate. Live development dd4423f4a5bfe9af0a380acd348f9955c678fed6; preflight blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. GitHub-only CI orchestration; no Auth/privacy/offline/SQL/runtime, queue state, provider, release or production changes.
 - MEASURED BOTTLENECK: approval push run 44995038079 for dd64c9a... started 06:43:51 UTC and was CANCELLED at 06:44:03 UTC during bursty audit/dev pushes; separate #3686 merged approval run 44988722819 required selective retry after cancellation. Approval currently takes ~30 seconds (run 45001900651 08:14:52 to 08:15:22 UTC), so losing even a correct exact-source receipt causes avoidable recheck/blocked merge evidence.
@@ -155,3 +170,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 
 - PERFORMANCE EXPECTATION: eliminate 12-second interrupted approval and manual rerun for each overlapping push; no hosted timing improvement claimed before exact CI. Tradeoff: short overlapping approval runs may consume additional GitHub Actions runner seconds during unusually rapid pushes; favors immutable reliable per-commit evidence over lost results.
 - ACCEPTANCE: focused Node regression PASS; five exact PR-head jobs SUCCESS; nonforce [skip netlify] merge; exact merged-push approval SUCCESS and source/test blob parity. SKIPPED is not PASS. Queue #3667 remains TESTING; no frozen-candidate certification or Publish.
 - NEXT ACTION: inspect exact hosted PR/push jobs, measure cancellation avoidance and reconcile issue #3667; independent under-15-min frozen-source to READY remains UNVERIFIED.
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=4c10b6831abadf4baedddee0458bb5a8921b867a preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## Concurrent #3731 source-preserving reconciliation [skip netlify]
+- Source-only READY read parallelism PR #3731 independently merged first as 4c10b6831abadf4baedddee0458bb5a8921b867a. Its tests, code, approved journal entries and immutable source-read safeguards are retained byte-for-byte in this PR's reconciled tree. This branch's own approval push SHA-bound workflow/test bytes are unchanged from the original e9dd83d1281cd4f1a68bc17857d54b862a2fddb7 head.
+- Nonforce two-parent feature-branch merge (parents original #3732 head then live #3731 merged development); no force/rewrite, no duplicated full test/build, no provider/release changes. Exact PR source CI must rerun on the reconciled head; no stale check is accepted for READY or a merged result.
+- NEXT ACTION: verify five required exact reconciled PR jobs and postmerge approval, then record #3667 issue readback; queue remains TESTING.
