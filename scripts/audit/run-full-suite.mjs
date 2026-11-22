@@ -13,6 +13,16 @@ export function planFullSuite(root=ROOT){
   .filter(entry=>entry.isFile()&&entry.name.endsWith('.test.mjs'))
   .map(entry=>prefix+entry.name);
  const files=[...find('tests','tests/'),...find('tests/audit','tests/audit/')].sort();
+ // Node 22 --test sorts input paths internally (even with reversed CLI args).
+ // Keep previous per-index/shard owners stable after moving the slow intact
+ // synthetic 6000-shot test alphabetically early for actual runner scheduling.
+ const renamed='tests/00-issue161-synthetic-load-concurrency.test.mjs',historical='tests/issue161-synthetic-load-concurrency.test.mjs';
+ const pos=files.indexOf(renamed);
+ if(pos!==-1){
+  files.splice(pos,1);
+  const at=files.findIndex(path=>path>historical);
+  files.splice(at===-1?files.length:at,0,renamed);
+ }
  if(!files.length||!files.includes(ISOLATED))
   throw Error('Full suite requires the resource-security test and a nonempty corpus');
  const serial=files.filter(path=>path===ISOLATED);

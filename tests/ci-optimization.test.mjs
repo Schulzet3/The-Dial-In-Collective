@@ -65,6 +65,15 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.equal(pkg.scripts.test,'node scripts/audit/run-full-suite.mjs');
  assert.equal(FULL_SUITE_CONCURRENCY,4);
  const plan=planFullSuite();
+ const load='tests/00-issue161-synthetic-load-concurrency.test.mjs',legacy='tests/issue161-synthetic-load-concurrency.test.mjs';
+ assert.ok(plan.parallel.includes(load),'real 6000-shot integrity test is retained exactly once');
+ assert.ok(!plan.parallel.includes(legacy),'old test path cannot run twice');
+ const expectedHistoricalOrder=[...plan.parallel.filter(p=>p!==load),legacy].sort();
+ const historicalIndex=expectedHistoricalOrder.indexOf(legacy);
+ assert.equal(plan.parallel.indexOf(load),historicalIndex,
+  'virtual ordering keeps every other test at its prior index and shard');
+ assert.match(file(load),/synthetic 600-coffee and 6000-shot load retains historical notes/);
+
  assert.deepEqual(plan.serial,['tests/html-resource-security.test.mjs']);
  assert.ok(plan.parallel.length>100);
  assert.ok(plan.parallel.includes('tests/ci-optimization.test.mjs'));
