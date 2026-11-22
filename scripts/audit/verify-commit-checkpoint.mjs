@@ -76,7 +76,8 @@ export function verifyLatestCommit(){
  let verifiedReceipts=0;
  for(const entry of entries){
   const parent=run(['log','-1','--format=%P',entry.sha]).split(/\s+/)[0];
-  const evidence=auditPreflightReceipt({sha:entry.sha,parent,paths:entry.paths,run});
+  const evidence=auditPreflightReceipt({sha:entry.sha,parent,paths:entry.paths,run,
+    requireDevelopmentAncestor:process.env.DIC_EVENT_NAME==='pull_request'});
   verifiedReceipts+=evidence.validated;
   for(const error of evidence.errors)errors.push(entry.sha+': Preflight: '+error);
  }
