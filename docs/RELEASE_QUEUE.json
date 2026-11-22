@@ -18044,11 +18044,15 @@
       "id": "DIC-Q-3667-ci-parallel-full-suite",
       "issue": 3667,
       "pr": 3668,
-      "title": "Reduce CI full-suite runtime with bounded parallelism and isolated time-budget security regression",
+      "title": "Accelerate CI with parallel full suite and scoped QA-only fast checks",
       "state": "TESTING",
       "merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
       "scope_paths": [
-        "package.json"
+        ".github/workflows/cloud-beta-ci.yml",
+        "package.json",
+        "scripts/audit/ci-scope.mjs",
+        "tests/ci-optimization.test.mjs",
+        "tests/ci-scope.test.mjs"
       ],
       "owner_source": "Owner Nov 21, 2026 implementation-to-READY acceleration; existing #457 risk-based testing and #3347 source-bound READY must be preserved. DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
@@ -18057,7 +18061,8 @@
         "Final first full sharded PR head 72bfa04224baaf253bb86100bacfab90374ef16b: validate shard 0/2 run 44984227423 115 seconds SUCCESS; cloud-tests shard 1/2 and mobile-browser-qa run 44984227361 102 seconds/SUCCESS; approval 44984227364 SUCCESS; SQL 44984227371 SUCCESS; source security 44984227329 SUCCESS. Four-thousand-plus checks executed with exact 2-way union and time-budget HTML isolated; no omitted files. Original frozen603 workflow SKIPPED, not PASS.",
         "Verified nonforce squash merge PR #3668 at 8e89dfe942422789bae59338364139b274143e63: package, runner, two workflow and CI optimization test blobs identical to exact tested final PR head 6910f241fa312aa2f3f39828d05e619ec484f8c8.",
         "Exact PR final five SUCCESS: validate 44984483650, cloud-tests/mobile-browser-qa 44984483653, approval 44984483687, SQL 44984483657. Merged push exact-SHA applicable four SUCCESS: validate 44984692927, cloud-tests/mobile 44984692870, approval 44984692878. Merged SQL workflow NOT_APPLICABLE, not PASS; PR SQL success retained.",
-        "Merged full Node corpus: 3,003 general+4 isolated HTML +3,114 other = 6,121 tests; 6,115 PASS, 0 FAIL, 6 intentional SKIP, every test file once; two separate required runners. Merged shard0 136s; shard1 67s. Single runner prior benchmark 227s. No production or member writes."
+        "Merged full Node corpus: 3,003 general+4 isolated HTML +3,114 other = 6,121 tests; 6,115 PASS, 0 FAIL, 6 intentional SKIP, every test file once; two separate required runners. Merged shard0 136s; shard1 67s. Single runner prior benchmark 227s. No production or member writes.",
+        "Owner #3667 scoped QA-only test selection now proposed: four Node 22 source/CI fixture tests for six explicit nonshipped diagnostic/test paths; no unrelated full corpus, SQL/Chromium/build/lint. Exact PR CI pending; cannot mark READY without #3347 certificate."
       ],
       "ci_runs": [
         44984227423,

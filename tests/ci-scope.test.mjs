@@ -90,3 +90,35 @@ test('Issue #267 post-S2 historical Git-tree inventory delta stays docs-only wit
   assert.equal(mixed.sql,bare.sql,runtime);
  }
 });
+
+// #3667 owner speed-first: no full app/browser/SQL suite for narrowly proven CI-only paths.
+test('known non-shipped CI diagnostic changes take the focused QA-only route',()=>{
+ const paths=['tests/ci-optimization.test.mjs','tests/ci-scope.test.mjs',
+  'tests/fast-pr-check.test.mjs','scripts/audit/fast-pr-check.mjs',
+  'scripts/audit/measure-stage.mjs','scripts/audit/syntax-batch.mjs'];
+ for(const path of paths){
+  const scoped=classifyImpactPaths([path,'docs/workstreams/issue-3667.md']);
+  assert.equal(scoped.tier,'low',path);
+  assert.equal(scoped.node_mode,'qa',path);
+  assert.equal(scoped.sql,false,path);
+  assert.equal(scoped.cloud_mode,'none',path);
+  assert.equal(scoped.browser_mode,'none',path);
+  assert.equal(scoped.lint,false,path);
+  assert.equal(scoped.build_browser||scoped.build_validate,false,path);
+  assert.equal(scoped.provider_guard,false,path);
+ }
+});
+test('mixed changes, unknown paths and sensitive CI remain conservatively covered',()=>{
+ for(const source of ['site/cloud/main.js','supabase/migrations/new.sql',
+  '.github/workflows/cloud-beta-ci.yml','scripts/audit/ci-scope.mjs',
+  'scripts/release/ready-promotion-gate.mjs','tests/auth-new.test.mjs',
+  'scripts/audit/unknown-regression.mjs']){
+  const impact=classifyImpactPaths([source,'tests/ci-optimization.test.mjs']);
+  assert.equal(impact.tier,'high',source);
+  assert.equal(impact.node_mode,'full',source);
+  assert.equal(impact.browser_mode,source.endsWith('.sql')?'none':'high',source);
+  assert.equal(impact.sql,true,source);
+ }
+ assert.equal(classifyImpactPaths(['docs/CURRENT_STATUS.md']).tier,'docs');
+ assert.equal(classifyImpactPaths(['site/cloud/main.js']).tier,'high');
+});
