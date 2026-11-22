@@ -1,3 +1,4 @@
+import {armStartupRecovery} from './startup-recovery.js';
 import * as C from '../lib/constants.js';
 import * as M from '../lib/model.js';
 import * as E from '../lib/engine.js';
@@ -1268,16 +1269,12 @@ export async function startCloudApp(){
  root.innerHTML='<main class="shell welcome" role="status" aria-live="polite"><h1>The Dial In Collective</h1><p class="helper">Opening your workspace…</p></main>';
  // If session setup stalls, offer a safe reload rather than leaving a permanent
  // loading screen. Never paint private state or bypass admission on timeout.
- const startupShell=root.innerHTML;
- const recoveryTimer=setTimeout(()=>{
-  if(root.innerHTML!==startupShell)return;
-  root.innerHTML='<main class="shell welcome" role="alert"><h1>The Dial In Collective</h1><p class="helper">Opening is taking longer than expected.</p><p><a href="/">Try opening again</a></p></main>';
- },12000);
+ const stopRecovery=armStartupRecovery(root);
  try{
   secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
   if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');
   // Shell worker stores only static public files; it never handles identity data.
-  if(globalThis.navigator?.serviceWorker)globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
+  if(globalThis.navigator?.serviceWorker)setTimeout(()=>globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
    // iOS Home Screen apps can stay resident across deploys without a navigation.
    // Check when returning to the app; the new worker activates for the next
    // navigation, never discarding an in-progress draft or offline shot queue.
@@ -1285,10 +1282,10 @@ export async function startCloudApp(){
    const check=()=>{if(globalThis.document?.visibilityState==='hidden'||Date.now()-lastCheck<60_000)return;
     lastCheck=Date.now();reg.update().catch(()=>{});};
    check();globalThis.document?.addEventListener?.('visibilitychange',check);
-  }).catch(()=>{});
+  }).catch(()=>{}),0);
   const sdk=globalThis.supabase.createClient(CLOUD_CONFIG.supabaseUrl,CLOUD_CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'dic_cloud_auth_v1'}});
   const client=createCloudClient(sdk,{redirectUrl:new URL(location.pathname,location.origin).href});const app=new CloudApp(client);await app.init();return app;
- }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}finally{clearTimeout(recoveryTimer);}
+ }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}finally{stopRecovery();}
 }
 startCloudApp();
 export {CloudApp};

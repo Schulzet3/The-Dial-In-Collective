@@ -18001,6 +18001,30 @@
       "production_deployed": false
     },
     {
+      "id": "DIC-Q-455-startup-recovery-deferred-worker",
+      "issue": 455,
+      "pr": 3666,
+      "title": "Neutral stalled-startup recovery, deferred nonessential worker, and focused startup regression coverage",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/startup-recovery.js",
+        "build_cloud.mjs"
+      ],
+      "tests": [
+        "tests/cloud-startup-recovery.test.mjs",
+        "tests/cloud-fast-start.test.mjs",
+        "tests/cloud-auth-startup-verification.test.mjs"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head CI and development merge pending"
+      ],
+      "owner_source": "Owner explicitly approved startup items 3–5 on 2026-11-21",
+      "notes": "No publication authorization; source-isolated candidate certification still required."
+    },
+    {
       "id": "DIC-Q-3667-ci-parallel-full-suite",
       "issue": 3667,
       "pr": 3668,
@@ -18013,14 +18037,21 @@
       "owner_source": "Owner Nov 21, 2026 implementation-to-READY acceleration; existing #457 risk-based testing and #3347 source-bound READY must be preserved. DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
         "Same test file enumeration preserved (tests/*.test.mjs and tests/audit/*.test.mjs); time-budget HTML security tests isolated as serial subset.",
-        "PR #3668 first head a9322514367770288d0259ab9d3e94a952bc2045: approval 44983557010 HOLD for package.json missing from intake; this queue TESTING record repairs tracking. Remaining exact CI/results pending."
+        "PR #3668 first head a9322514367770288d0259ab9d3e94a952bc2045: approval 44983557010 HOLD for package.json missing from intake; this queue TESTING record repairs tracking. Remaining exact CI/results pending.",
+        "Final first full sharded PR head 72bfa04224baaf253bb86100bacfab90374ef16b: validate shard 0/2 run 44984227423 115 seconds SUCCESS; cloud-tests shard 1/2 and mobile-browser-qa run 44984227361 102 seconds/SUCCESS; approval 44984227364 SUCCESS; SQL 44984227371 SUCCESS; source security 44984227329 SUCCESS. Four-thousand-plus checks executed with exact 2-way union and time-budget HTML isolated; no omitted files. Original frozen603 workflow SKIPPED, not PASS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44984227423,
+        44984227361,
+        44984227364,
+        44984227371,
+        44984227329,
+        44984227409
+      ],
       "blockers": [
-        "New PR-head exact five mandatory checks and end-to-end timing need completion; development/READY certification unverified.",
-        "No published candidate or owner Publish authority."
+        "Final merged-branch development head and new PR merge-reconciliation head exact five-job CI not yet verified. READY candidate frozen exact source and owner Publish grant absent."
       ],
-      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings.",
+      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings. Measured ~1.97x shorter full Node critical-path time: 115s vs 227s single runner. PR head all five SUCCESS; still TESTING pending nonforce merge, merged CI and READY candidate.",
       "production_deployed": false
     }
   ],

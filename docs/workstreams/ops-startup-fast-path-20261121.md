@@ -39,3 +39,22 @@ DIC_PREFLIGHT_VERIFIED development_sha=cef6e4a951509cb0b9ca4c26fd8529310543fe4b 
 
 - If initialization leaves the neutral startup shell unchanged for 12 seconds, replace it with a data-free recovery message and safe same-origin retry link. Timer is cleared after initialization resolves/rejects. Late auth initialization may still complete; the recovery link never grants admission or accesses private cache.
 - Preserve existing session/auth, offline queue, and Community review rules. Exact CI and integration required. No publication.
+
+## Complete startup recovery, deferred nonessential worker, regression coverage — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Owner-authorized items 3–5: isolate neutral 12-second stalled-startup recovery in independently testable module; verify no overwrite of completed/error views and no private data in fallback. Preserve identity/admission and cached fast path.
+- Defer nonessential service-worker registration to next event-loop turn instead of performing registration before auth SDK setup; registration still occurs while identity is pending, remains nonblocking, preserves offline worker and update behavior.
+- Focused startup regression cases cover timeout, late successful paint, failure paint, and timer cancellation; existing cloud-fast-start and offline/security CI suites remain required. No production publication.
+- Required: exact-head CI, nonforce merge, readback and queue reconciliation. NOT READY until proven.
+
+## CI repair: asset graph and queue intake — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Exact PR head 52ff76a3be24f3dfd12ec37297edbec8183491df: approval FAILED because newly added production module lacked queue intake; mobile-browser-qa FAILED because build allowlist omitted the imported module. Neither failure is counted as PASS.
+- Fix: explicitly include startup-recovery.js in pinned public shell build asset inventory and track all three deployable paths in TESTING queue item DIC-Q-455-startup-recovery-deferred-worker. No test/build bypass. New exact-head CI required.
+
+## Browser QA fixture dependency repair — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Exact PR head 430c148df060ac9938b1b5d01e56ed12c5072126 browser QA FAILED waiting for .current-mark: browser's synthetic module bundle omitted newly imported startup-recovery.js, preventing CloudApp boot. Production build and approval fixed and passed. Add new module to existing synthetic browser fixture dependency inventory; no relaxed assertion, no new suite, no product behavior change. New exact-head CI required.
