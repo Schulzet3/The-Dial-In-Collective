@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
+      "issue": 455,
+      "pr": 3810,
+      "title": "Keep Log Shot dialog header Close unavailable during pending Save",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE Log Shot reliability. DIC_PREFLIGHT_VERIFIED development_sha=797f6b4badc418b6443133735d7159ff92413360 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob b5e7243fe6df2ca0e503348e41a656a7a550dd8b; same-commit journal e5961bcf99dde9d096aa9f1ba8ffb372a304fb42.",
+      "tests": [
+        "Two new actual CloudApp synthetic deferred-save positive/negative regressions in tests/issue455-r444-save-shot-pending-lock.test.mjs; full suite/PR-head applicability PENDING, not PASS.",
+        "Original R444 two cases retained. Source test blob b2e86fa154cddd39c2c7907f13c16af8324aef97; app blob 5c24e203db233692589f064fadb819fe68302cf6."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Verify exact PR-head relevant Node22, browser/mobile/offline, SQL/security, approval and relevant code checks; SKIPPED is not PASS.",
+        "Recheck concurrent Git and nonforce merge, verify exact merged source and source-bound CI.",
+        "Independent #3347 READY frozen candidate and exact-source certification required for any READY; no Publish without separate owner authority."
+      ],
+      "notes": "Source-proven modal header Close remained outside R444 form-disable guard; async save could complete after dialog dismissal. Conservative bug fix locks current header and handler until save completion, restores on failure, preserves all five taste inputs, original shot, notes/history, privacy, styles/grinder/feed/temperature, no new science target or data capture. No production member data or deployed assertion.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r443-validation-recommendation-button-state",
       "issue": 455,
       "pr": null,
