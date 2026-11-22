@@ -17960,6 +17960,30 @@
       ],
       "notes": "Narrow SAFE polite aria-live explanation only, no form clearing, equipment/autoswitch semantics, five taste threshold, recommendation numeric policy, new telemetry, member data or provider effects. Existing R423 fixed-temperature owner decision remains HOLD. Original measured shot/notes/history, Turbo/Fast-Flow, feed behavior and grinder calibration remain intact.\nR432 source merged-push Node22/UX/approval/selected #33 44973217188/44973217153/44973217131/44973217156 completed SUCCESS; documentation PR #3651 merged 1f27937d81063d2fc6171dd9859d088ecc49a620 with original queue retained. No publication/production.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r433-slowfeed-copy-action-availability",
+      "issue": 455,
+      "pr": null,
+      "title": "Refresh Log Shot Grind/Temperature copy-button availability after Slow Feed mode changes",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Source negative: initial temperature copy disabled under missing Standard Feed feedback while Slow Feed has a finite start, toggle refreshes displayed recipe but does not re-enable the button; reverse leaves stale enabled state, though direct activation is guarded.",
+        "Two synthetic current CloudApp positive/negative regressions added: after Slow Feed toggle update both copy buttons' availability/title from current recipe; preserve form values, five tastes, no false accepted recommendation. Hosted Node22/UX/approval CI PENDING/NOT PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact source PR-head and merged applicable CI not yet run; TESTING not READY.",
+        "Independent #3347 frozen source-isolated candidate and all five READY tests unverified. No NEW Publish authorization.",
+        "Original S019 and observed same-coffee recommendation effectiveness still unavailable."
+      ],
+      "notes": "SAFE display/action affordance only; no numeric, equipment-schema, historical notes/measurements, taste, Community, privacy/RLS, feed-science policy or deployment change.",
+      "production_deployed": false
     }
   ],
   "history": [

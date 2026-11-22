@@ -10,12 +10,15 @@ import {basketDoseAdvisory} from '../site/cloud/dose-advisory.js';
 let form;
 const reference={innerHTML:''};
 const copiedStatus={textContent:''};
+const copyActions={grind:null,temperature:null};
 const sheet={
  close(){},
  querySelector(selector){
   if(selector==='#shot')return form;
   if(selector==='#log-reference')return reference;
   if(selector==='#shot-recommendation-feedback')return copiedStatus;
+  if(selector==='[data-action="use-grind"]')return copyActions.grind;
+  if(selector==='[data-action="use-temp"]')return copyActions.temperature;
   const name=selector.match(/^\[name=(\w+)\]$/)?.[1];
   return name?form.elements[name]:null;
  }
@@ -36,6 +39,7 @@ function bindForm(draft){
  form={elements};
  reference.innerHTML='';
  copiedStatus.textContent='';
+ copyActions.grind=null;copyActions.temperature=null;
 }
 async function firstShotFixture(){
  const raw=rawFixture();
@@ -252,5 +256,72 @@ test('Slow Feed toggle without current copied recommendations does not warn or c
  assert.equal(copiedStatus.textContent,'','no copied values means no stale-copy warning');
  assert.equal(form.elements.grindSetting.value,grinder);
  assert.equal(app.draft.recommendationContext,null);
+ assert.deepEqual(app.draft.tasteScales,ratings);
+});
+
+test('Slow Feed enables an available temperature copy after standard-feed feedback has no measured temperature',async()=>{
+ const {app,raw}=await firstShotFixture();
+ raw.shots=[rawShot({id:'standard-missing-temp',style:'Turbo',feed_mode:'standard',temperature_c:null,
+  is_dialed_in:false,personal_family_id:null,extraction:3,body:3,clarity:4,sweetness:5,astringency:1})];
+ app.state=hydrate(raw);
+ const standard=E.recommendation(app.state,'coffee',{style:'Turbo',feedMode:'standard'});
+ const slow=E.recommendation(app.state,'coffee',{style:'Turbo',feedMode:'slow'});
+ assert.equal(standard.tempC,null,'same-context measured feedback cannot invent temperature');
+ assert.ok(Number.isFinite(slow.tempC),'other-feed baseline has a temperature starting point');
+ let markup='';
+ app.show=(_title,html)=>{markup=html;};
+ app.showLog('coffee',null,'Turbo');
+ const initialButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(initialButton,'temperature copy control exists');
+ assert.match(initialButton,/\bdisabled\b/,'initial unavailable temperature is disabled');
+ bindForm(app.draft);
+ copyActions.temperature={disabled:true,title:'No temperature recommendation available'};
+ copyActions.grind={disabled:false,title:''};
+ const initialGrind=form.elements.grindSetting.value;
+ const ratings=structuredClone(app.draft.tasteScales);
+ form.elements.slowFeed.checked=true;
+ app.change({target:{name:'slowFeed',closest:()=>null}});
+ assert.equal(copyActions.temperature.disabled,false,'updated Slow Feed recommendation is usable without reopening Log Shot');
+ assert.equal(copyActions.temperature.title,'');
+ assert.equal(copyActions.grind.disabled,false);
+ assert.equal(reference.innerHTML,recipeGrid(slow,true,'C'));
+ assert.equal(form.elements.grindSetting.value,initialGrind);
+ assert.deepEqual(app.draft.tasteScales,ratings);
+ await click(app,'use-temp');
+ assert.equal(Number(form.elements.temperature.value),slow.tempC);
+ assert.deepEqual(app.draft.recommendationContext.used_controls,['temperature']);
+ assert.deepEqual(app.draft.tasteScales,ratings);
+});
+test('Slow Feed disables stale temperature copy after switching into missing-temperature feedback',async()=>{
+ const {app,raw}=await firstShotFixture();
+ raw.shots=[rawShot({id:'slow-missing-temp',style:'Turbo',feed_mode:'slow',temperature_c:null,
+  is_dialed_in:false,personal_family_id:null,extraction:3,body:3,clarity:4,sweetness:5,astringency:1})];
+ app.state=hydrate(raw);
+ const standard=E.recommendation(app.state,'coffee',{style:'Turbo',feedMode:'standard'});
+ const slow=E.recommendation(app.state,'coffee',{style:'Turbo',feedMode:'slow'});
+ assert.ok(Number.isFinite(standard.tempC),'initial standard-feed starting temperature exists');
+ assert.equal(slow.tempC,null,'measured slow-feed shot has unrecorded temperature');
+ let markup='';
+ app.show=(_title,html)=>{markup=html;};
+ app.showLog('coffee',null,'Turbo');
+ const initialButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(initialButton,'temperature copy control exists');
+ assert.doesNotMatch(initialButton,/\bdisabled\b/,'initial standard-feed copy is enabled');
+ bindForm(app.draft);
+ copyActions.temperature={disabled:false,title:''};
+ copyActions.grind={disabled:false,title:''};
+ const ratings=structuredClone(app.draft.tasteScales);
+ const measuredGrind=form.elements.grindSetting.value;
+ form.elements.slowFeed.checked=true;
+ app.change({target:{name:'slowFeed',closest:()=>null}});
+ assert.equal(copyActions.temperature.disabled,true,'stale available action no longer suggests copyability');
+ assert.equal(copyActions.temperature.title,'No temperature recommendation available');
+ assert.equal(copyActions.grind.disabled,false);
+ assert.equal(reference.innerHTML,recipeGrid(slow,true,'C'));
+ assert.equal(form.elements.grindSetting.value,measuredGrind);
+ await click(app,'use-temp'); // direct activation must also remain harmless
+ assert.equal(form.elements.temperature.value,'');
+ assert.equal(app.draft.recommendationContext,null,'no accepted recommendation falsely recorded');
+ assert.match(copiedStatus.textContent,/No temperature recommendation is available/);
  assert.deepEqual(app.draft.tasteScales,ratings);
 });
