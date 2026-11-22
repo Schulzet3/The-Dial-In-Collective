@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13CI",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CH-20261122.json",
+  "development_prewrite_sha": "f0204b59c0bf1f5bc7a7f96cc9836bad57452791",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-627-656-20261122-V13CI.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 627,
+          "last_line": 656,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C78-207-213-C79-1-23-20261122-V13CI.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 78,
+          "path": "scripts/backups/isolated-recovery-drill.sh",
+          "source_blob_sha": "d026f09e042c3ce7748101b10efe401b29cb026e",
+          "first_line": 207,
+          "last_line": 213,
+          "line_count": 7
+        },
+        {
+          "manifest_index_1_based": 79,
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "source_blob_sha": "22b4cd101006130513b45c6c5e932b5543ca8141",
+          "first_line": 1,
+          "last_line": 23,
+          "line_count": 23
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "source_blob_parity": "PASS_THREE_INDEPENDENTLY",
+  "archived_json_parse": "PASS",
+  "live_pinned_blob_sha": {
+    "scripts/backups/isolated-recovery-drill.sh": "d026f09e042c3ce7748101b10efe401b29cb026e",
+    "scripts/netlify/should-ignore-build.mjs": "c02d68a0e069a6f8402e40a2575559f00f694fa8"
+  },
+  "source_remediation": "NO_CURRENT_REPRODUCED_RUNTIME_DEFECT; NODE18_COMMENT_VS_NODE22_CONFIG_TRIAGED_NONBLOCKING",
+  "not_tested": [
+    "Node22",
+    "lint",
+    "build",
+    "mobile",
+    "browser",
+    "offline",
+    "SQL",
+    "Auth",
+    "RLS",
+    "coffee603",
+    "performance",
+    "actual backup restore"
+  ],
+  "next": {
+    "frozen": {
+      "index_1_based": 221,
+      "line_1_based": 657
+    },
+    "pinned": {
+      "index_1_based": 79,
+      "line_1_based": 24
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY",
+  "post_pin_drift": "INCOMPLETE; NETLIFY_GUARD_CHANGED_SINCE_PIN"
+}
