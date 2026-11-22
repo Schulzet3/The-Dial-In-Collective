@@ -1,3 +1,9 @@
+## November 22, 2026 UTC — startup five-item clean source pinned; original development source restored, READY still requires candidate [skip netlify]
+
+- Source-only clean startup reference [PR #3675](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3675) exact five hosted checks SUCCESS, merged ffbf4656de2969326988d7b0ac0a21c3117575a6, only published+startup code (clean main.js blob fe9124fa). All unrelated unfinished Log Shot main.js changes and full original tests restored byte-identically immediately in nonforce successor; original DIC-Q-455-startup-recovery-deferred-worker remains TESTING, no publication. #3347 frozen exact-source candidate/five jobs still to complete. Owner original startup scope 1–5 preserved, no weakened checks or data/provider changes.
+
+---
+
 ## November 22, 2026 UTC — Five owner startup improvements: merged/exact CI VERIFIED, source-isolated READY HOLD [skip netlify]
 
 - Mandatory DIC_PREFLIGHT_VERIFIED development_sha=10a3d9d4128e49d002ab395eb1e4e7fc0be68314 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Merged PRs #3658 (warm authenticated owner cache + admission coalescing), #3660 (immediate neutral loading shell), #3661 (12-second recovery), #3666 (tested recovery helper + deferred nonessential service worker). Last merge c9d86f460580faf71ed27a1d5ec54568ef2e2321; all affected runtime/build/focused test Git blobs match tested final PR head f8c565532653fa0ba96986c40d1f2c0ce60835d8 and current development. Identity, offline outbox, Community and data privacy preserved in source and deterministic tests; no physical-device acceptance claim.
