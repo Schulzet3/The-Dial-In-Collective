@@ -91,8 +91,11 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+      - name: Run focused CI-only regression tests (no app install, browser or build)
+        if: steps.scope.outputs.node_mode == 'qa'
+        run: node --test tests/ci-optimization.test.mjs tests/ci-scope.test.mjs tests/fast-pr-check.test.mjs tests/site-integrity.test.mjs
       - name: Install locked dependencies for affected Node/build tasks
-        if: steps.scope.outputs.node_mode != 'none' || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
+        if: (steps.scope.outputs.node_mode != 'none' && steps.scope.outputs.node_mode != 'qa') || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests (HIGH risk only)
         if: steps.scope.outputs.node_mode == 'full'

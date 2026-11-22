@@ -97,3 +97,15 @@ test('full Node suite fails closed if the isolated resource-security test disapp
   });
  }finally{rmSync(root,{recursive:true,force:true});}
 });
+
+test('QA-only lane runs four scoped tests on Node 22 without dependency install or browser',()=>{
+ const beta=file('.github/workflows/cloud-beta-ci.yml');
+ const node=beta.indexOf("node-version: '22'");
+ const qa=beta.indexOf("name: Run focused CI-only regression tests");
+ const install=beta.indexOf("name: Install locked dependencies for affected Node/build tasks");
+ assert.ok(node>=0&&qa>node&&install>qa);
+ assert.match(beta,/if: steps\.scope\.outputs\.node_mode == 'qa'/);
+ assert.match(beta,/run: node --test tests\/ci-optimization\.test\.mjs tests\/ci-scope\.test\.mjs tests\/fast-pr-check\.test\.mjs tests\/site-integrity\.test\.mjs/);
+ assert.match(beta,/steps\.scope\.outputs\.node_mode != 'qa'/);
+ assert.match(file('scripts/audit/ci-scope.mjs'),/const QA_ONLY_PATHS=new Set/);
+});
