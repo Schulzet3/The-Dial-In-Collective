@@ -136,3 +136,16 @@ test('frozen READY verification overlaps independent source and five-job evidenc
  assert.equal(denied.ready,false);
  assert.match(denied.errors.join(' '),/source temporarily unavailable/);
 });
+
+test('approval workflow runs one live immutable READY verifier and keeps focused negative regression',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ const evidence=readFileSync(new URL('../scripts/release/ready-evidence-gate.mjs',import.meta.url),'utf8');
+ assert.equal((workflow.match(/node scripts\\/release\\/ready-evidence-gate\\.mjs/g)||[]).length,1,
+  'READY certification must be a single source-bound live read');
+ assert.doesNotMatch(workflow,/node scripts\\/release\\/ready-promotion-gate\\.mjs/,
+  'second CLI duplicated the identical live ref, source, run and native checks');
+ assert.match(workflow,/node --test tests\\/ready-promotion-gate\\.test\\.mjs/,
+  'fail-closed synthetic tests must remain');
+ assert.match(evidence,/return verifyReadyPromotion\\(args\\)/,
+  'the surviving live check must delegate to the full immutable five-job verifier');
+});

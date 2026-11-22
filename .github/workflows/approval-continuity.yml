@@ -49,13 +49,12 @@ jobs:
         # separate --validate and nonblocking --status invocations duplicated
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
-      - name: Verify every READY item against live recorded Actions and source/test blobs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/release/ready-evidence-gate.mjs
-      - name: Require frozen five-job CI before any READY promotion (owner #3347)
+      - name: Verify immutable five-job READY batch in one live check (owner #3347)
+        # ready-evidence-gate delegates to the SAME verifyReadyPromotion function;
+        # the former second CLI fetched the identical ref, four source objects,
+        # five runs and native check statuses a second time. No gate removed.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node --test tests/ready-promotion-gate.test.mjs
-          node scripts/release/ready-promotion-gate.mjs
+          node scripts/release/ready-evidence-gate.mjs
