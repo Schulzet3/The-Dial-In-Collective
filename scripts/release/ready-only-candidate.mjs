@@ -33,20 +33,17 @@ export const REVIEWED_WORKFLOW_TEST=Object.freeze({
  sourceBlob:'32174be8c42ba9ae73085e0f6f1f42613b2b08db',
  restoredWorkflow:'.github/workflows/cloud-regression.yml'
 });
+export const REVIEWED_FAST_PR_WORKFLOW_TEST=Object.freeze({
+ path:'tests/fast-pr-check.test.mjs',sourceBlob:'d11a0f702d35032e3442bfc8ee8671216f3496f8',
+ restoredWorkflow:'.github/workflows/cloud-beta-ci.yml'
+});
 export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
- if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows)||
-    !restoredWorkflows.includes(REVIEWED_WORKFLOW_TEST.restoredWorkflow))return [];
- const path=REVIEWED_WORKFLOW_TEST.path;
- // This reviewed three-test R190 workflow check preserves strict candidate provenance;
- // it reads the development workflow while candidate workflows are restored.
- // above; it is not an app feature test. Never match by filename alone.
- return sourceObjectAt(publishedSourceSha,path)===null&&
-  sourceObjectAt(developmentSourceSha,path)==='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob?
-  [path]:[];
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows))return [];
+ return sorted([REVIEWED_WORKFLOW_TEST,REVIEWED_FAST_PR_WORKFLOW_TEST].filter(x=>
+  restoredWorkflows.includes(x.restoredWorkflow)&&
+  sourceObjectAt(publishedSourceSha,x.path)===null&&
+  sourceObjectAt(developmentSourceSha,x.path)==='100644:'+x.sourceBlob).map(x=>x.path));
 }
-
-
-
 
 export const REVIEWED_SOURCE_PATH_CASE_SQL_TEST=Object.freeze({
  path:'supabase/tests/coffee_identity_matching.sql',
@@ -339,8 +336,20 @@ export const REVIEWED_STARTUP_MIXED_TESTS=Object.freeze({
    unready:'c7357cd031bab6b8bb9ae031a5aa1e477c651f6d'})
  ])
 });
+export const REVIEWED_STARTUP_ADJACENT_TESTS=Object.freeze([
+ {path:'tests/ci-optimization.test.mjs',published:'91aadb1eccb64764253dc1344d6524ef42621fcc',
+  unready:['4702f245499fde64922af965ceb23d73cf7a9a88','8df6d90ea1499e7ea9bf324ba28bfa748f36df53'],
+  dependency:'.github/workflows/cloud-beta-ci.yml',workflow:true},
+ {path:'tests/issue2258-member-approval-notices.test.mjs',published:'179dc171aa7ab11b182b8832c3fd3f733dbc6824',
+  unready:['48ac09eaf2a000200b444cc9104ffba50893e246'],
+  dependency:'supabase/functions/dic-member-approval-broker/core.mjs'},
+ {path:'tests/sql-runner-coverage.test.mjs',published:'587d36c5931b1c14220914bd32460af5690984e9',
+  unready:['9550fd21ff0edc93adbeed716e657a504a41d2e9'],
+  dependency:'supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql'}
+]);
 export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
- publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
+ restoredPaths=[],restoredWorkflows=[],publishedSourceSha,developmentSourceSha,
+ sourceObjectAt,selectedReadyItems=[]}={}){
  const s=REVIEWED_STARTUP_MIXED_TESTS;
  const selected=selectedReadyItems.find(i=>i.id===s.id);
  if(!selected)return [];
@@ -366,7 +375,21 @@ export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
       obj(ready.merged_source_sha,spec.path)!==obj(ready.merged_source_sha+'^',spec.path))
     throw Error('Another selected READY merge modified startup-coupled test: '+spec.path);
  }
- return s.tests.map(x=>x.path).sort();
+ const adjacent=[];
+ for(const spec of REVIEWED_STARTUP_ADJACENT_TESTS){
+  if(!(spec.workflow?restoredWorkflows:restoredPaths).includes(spec.dependency))continue;
+  const current=obj(developmentSourceSha,spec.path);
+  if(obj(publishedSourceSha,spec.path)!=='100644:'+spec.published||
+     !spec.unready.some(sha=>current==='100644:'+sha)||
+     obj(publishedSourceSha,spec.dependency)===obj(developmentSourceSha,spec.dependency)||
+     obj(s.merge,spec.path)!==obj(s.merge+'^',spec.path))
+   throw Error('Unready startup-adjacent test/CI provenance differs from reviewed published bytes: '+spec.path);
+  for(const ready of selectedReadyItems.filter(i=>i.id!==s.id))
+   if(obj(ready.merged_source_sha,spec.path)!==obj(ready.merged_source_sha+'^',spec.path))
+    throw Error('Another selected READY merge modified startup-adjacent regression: '+spec.path);
+  adjacent.push(spec.path);
+ }
+ return [...s.tests.map(x=>x.path),...adjacent].sort();
 }
 
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
@@ -396,10 +419,10 @@ export const REVIEWED_PINNED_COFFEE_TEST=Object.freeze({
  merge:'c9b1bf2a1cecce9a67c84983eb1fd8d379f2d5f2',
  blob:'9a1263d7022311a5d313db64f1604e91504fce23'
 });
-function reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
+function reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths=[],restoredPaths=[],
  publishedSourceSha,developmentSourceSha,sourceObjectAt}){
  const s=REVIEWED_PINNED_COFFEE_TEST;
- if(path!==s.path||!pinnedReadyPaths.includes(s.runtime))return false;
+ if(path!==s.path||!(pinnedReadyPaths.includes(s.runtime)||restoredPaths.includes(s.runtime)))return false;
  const obj=(ref,p)=>sourceObjectAt(ref,p);
  if(!(queue?.items||[]).some(i=>i.issue===33&&
     ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
@@ -428,7 +451,7 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pi
     developmentSourceSha,sourceObjectAt});
   const support=reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths,
    publishedSourceSha,developmentSourceSha,sourceObjectAt});
-  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
+  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,restoredPaths,
    publishedSourceSha,developmentSourceSha,sourceObjectAt});
   if(!m&&!ownerDrive&&!support&&!pinnedCoffee)continue;
   const issue=pinnedCoffee?33:ownerDrive?28:support?.issue??Number(m[1]);
@@ -829,8 +852,9 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    })))
   reject('Only one byte-pinned, reviewed workflow-only test can be excluded when its workflow was restored');
  for(const path of workflowOnlyTests){
-  if(path!==REVIEWED_WORKFLOW_TEST.path||sourceObjectAt(candidateSha,path)!==null||
-     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob||
+  const reviewed=[REVIEWED_WORKFLOW_TEST,REVIEWED_FAST_PR_WORKFLOW_TEST].find(x=>x.path===path);
+  if(!reviewed||sourceObjectAt(candidateSha,path)!==null||
+     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+reviewed.sourceBlob||
      sourceObjectAt(publishedSourceSha,path)!==null)
    reject('Workflow-only test exclusion source/blob/absence mismatch: '+path);
   // Never exclude a test introduced or modified by ANY selected READY merge.
@@ -870,7 +894,8 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
  const startupTests=discoverReviewedRestoredStartupTests({queue,
-  pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
+  pinnedReadyPaths:plan.pinned_ready_paths,restoredPaths:plan.restored_paths,
+  restoredWorkflows:frozenWorkflows,publishedSourceSha,
   developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
  const approvedTests=[...sqlTests,...coffeeTests,...adminTests,...startupTests].sort();
@@ -897,7 +922,8 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
   const eligibleSupport=Boolean(support)&&sourceObjectAt(candidateSha,path)===null;
   const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths:plan.pinned_ready_paths,
-   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+   restoredPaths:plan.restored_paths,publishedSourceSha,
+   developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
   if(!m&&!ownerDrive&&!eligibleSupport&&!pinnedCoffee)
    reject('Only proven issue-scoped, pinned coffee, owner Drive, or exact unready support tests can be excluded');
   const issue=pinnedCoffee?33:ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
@@ -918,7 +944,8 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   const unfinishedRestored=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.length>0&&i.scope_paths.every(x=>plan.restored_paths.includes(x)));
-  if(!unfinishedMixed&&!unfinishedRestored&&!frozenOtherReady)
+  if(!unfinishedMixed&&!unfinishedRestored&&!frozenOtherReady&&
+     !(pinnedCoffee&&plan.restored_paths.includes(REVIEWED_PINNED_COFFEE_TEST.runtime)))
    reject('Excluded test does not belong to a frozen unselected READY or unfinished mixed-source item, nor wholly restored unfinished source');
   if(sourceObjectAt(publishedSourceSha,path)!==null||
      sourceObjectAt(manifest.development_source_sha,path)===null||

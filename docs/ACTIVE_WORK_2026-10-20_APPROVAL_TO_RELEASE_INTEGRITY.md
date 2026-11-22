@@ -167,3 +167,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=07ee71084cfac00152600ba6bb17aff209880e4e 
 - Root cause: planReadyOnlyCandidate returns compact ready_items without state after checking queue state, but discoverReviewedRestoredStartupTests read selected.state and incorrectly rejected every real READY selection. Synthetic test passed an unprojected full queue row, masking this integration bug.
 - Exact fix: use the original immutable queue row state instead of compact planner field. Keep all selected source/issue/merge, pinned overlap, published and first-parent test blob proofs, other exact Git checks, five native candidate CI checks and Publish-only gate. Add unit regression for compact READY selected object and a TESTING queue that MUST HOLD.
 - Requires exact main controller CI and nonforce merge; then verify source receipt again. Do not label READY before frozen five exact candidate checks. No feature code, Auth, SQL, Netlify, member or secret changes.
+
+## November 22, 2026 UTC — exact published candidate test-source isolation repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Owner-approved startup 1–5 and #3347 nonpublishing READY repair. Main base 797a2bbbf82083c46ac1c56a066cdee4e8306add; dev ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f. Existing candidate d505fb50 validate 44988381095 FAILED fourteen unrelated postpublished/unready tests; source-only receipt 44988817244 PASS does not make candidate READY. No deployment/grant.
+- New exact reviewed test provenance: selected startup main.js pinned to clean PR3675; preserve original published whole-file tests when their exact newer CI, member approval broker and unfinished SQL dependencies are restored. Exclude only byte-verified new tests of excluded workflow or unfinished coffee parser, both absent from published. Every selected READY merge, exact test Git blob and restored dependency is verified before inclusion/exclusion; all other tests unchanged. Full five candidate checks and publication grant unchanged.
+- This source-contract commit is not final until stage caller, focused adversarial tests and controller CI pass. No provider, production, member or DB changes.
