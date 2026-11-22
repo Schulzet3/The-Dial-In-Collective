@@ -18006,23 +18006,34 @@
       "pr": 3666,
       "title": "Neutral stalled-startup recovery, deferred nonessential worker, and focused startup regression coverage",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "c9d86f460580faf71ed27a1d5ec54568ef2e2321",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/startup-recovery.js",
         "build_cloud.mjs"
       ],
       "tests": [
-        "tests/cloud-startup-recovery.test.mjs",
-        "tests/cloud-fast-start.test.mjs",
-        "tests/cloud-auth-startup-verification.test.mjs"
+        "tests/cloud-fast-start.test.mjs — owner-gated warm-cache paint, concurrent admission, account switch, damaged cache and dual outage",
+        "tests/cloud-startup-recovery.test.mjs — 12-second public fallback, late success/error preservation and cancellation",
+        "tests/cloud-auth-startup-verification.test.mjs — real pending/rejected/revoked vs neutral status and no pre-admission private paint",
+        "tests/browser/cloud_owner_qa.py — updated synthetic dependency inventory; mobile/Chromium/offline checks"
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44983899987,
+        44983900004,
+        44983900084,
+        44983900050,
+        44983899994,
+        44984255308,
+        44984255272,
+        44984255262
+      ],
       "blockers": [
-        "Exact-head CI and development merge pending"
+        "New #3347 exact-source isolated immutable candidate including only these five owner-approved startup changes plus dependencies, with all five required candidate-SHA CI jobs SUCCESS, has NOT been constructed/certified. Keep TESTING; do not stage or publish.",
+        "site/cloud/main.js is also touched by seven independently TESTING #455 changes. Isolate their unready bytes (and current unfinished tests/workflows) against published source before claiming READY; passing PR/merged development CI alone does not certify a publishable startup batch."
       ],
       "owner_source": "Owner explicitly approved startup items 3–5 on 2026-11-21",
-      "notes": "No publication authorization; source-isolated candidate certification still required."
+      "notes": "No publication authorization; source-isolated candidate certification still required.\n2026-11-22 verified: owner startup changes 1–5 were nonforce merged by PR #3658 (8868768e), #3660 (cef6e4a9), #3661 (e4190258) and final #3666 (c9d86f46). PR #3666 head f8c565532653fa0ba96986c40d1f2c0ce60835d8 has actual validate/cloud/mobile/approval/SQL/security jobs COMPLETED SUCCESS. Exact merged push c9d86f46 has validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 SUCCESS; SQL/security not triggered on merged push, reuse unchanged PR-head source only. Current development source/main, public recovery helper, build and focused tests match tested head Git blobs byte-for-byte. Source implementation VERIFIED; release READY candidate NOT VERIFIED. Do not confuse with original failed pre-fix heads or skipped original603."
     },
     {
       "id": "DIC-Q-3667-ci-parallel-full-suite",

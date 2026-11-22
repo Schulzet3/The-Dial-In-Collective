@@ -1,3 +1,11 @@
+## November 22, 2026 UTC — Five owner startup improvements: merged/exact CI VERIFIED, source-isolated READY HOLD [skip netlify]
+
+- Mandatory DIC_PREFLIGHT_VERIFIED development_sha=10a3d9d4128e49d002ab395eb1e4e7fc0be68314 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Merged PRs #3658 (warm authenticated owner cache + admission coalescing), #3660 (immediate neutral loading shell), #3661 (12-second recovery), #3666 (tested recovery helper + deferred nonessential service worker). Last merge c9d86f460580faf71ed27a1d5ec54568ef2e2321; all affected runtime/build/focused test Git blobs match tested final PR head f8c565532653fa0ba96986c40d1f2c0ce60835d8 and current development. Identity, offline outbox, Community and data privacy preserved in source and deterministic tests; no physical-device acceptance claim.
+- Exact final PR-head five core CI jobs SUCCESS: validate 44983899987; cloud-tests + mobile-browser-qa 44983900004; approval 44983900084; isolated SQL 44983900050; source security 44983899994. Exact merged push validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 all SUCCESS; merged SQL/security NOT TRIGGERED, not counted PASS. Older failed heads are not PASS.
+- Updated one already-tracked TESTING queue item DIC-Q-455-startup-recovery-deferred-worker to remove stale missing-merge/CI claims, with exact source/run receipts. Still TESTING: #3347 requires independently frozen published-byte-isolated candidate and FIVE candidate-SHA successful jobs; seven other TESTING items share site/cloud/main.js and may not silently enter release. Candidate and deployment have not occurred. Next: coordinate #3347 source-only isolation, tests, freeze and correct promotion to READY once proven. No Publish, Netlify, provider, SQL/Auth/member or ops changes.
+
+---
+
 ## November 22, 2026 UTC — #3667 full-suite CI sharding verified in development; READY pending [skip netlify]
 
 - Owner-directed throughput fix [PR #3668](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3668) nonforce squash merged at `8e89dfe942422789bae59338364139b274143e63`. All five changed executable file blobs match exact tested PR head `6910f241fa312aa2f3f39828d05e619ec484f8c8`; current full 6,121-test Node suite split with no dropped tests across existing required validate/cloud-tests runners.
