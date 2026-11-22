@@ -122,3 +122,20 @@ test('mixed changes, unknown paths and sensitive CI remain conservatively covere
  assert.equal(classifyImpactPaths(['docs/CURRENT_STATUS.md']).tier,'docs');
  assert.equal(classifyImpactPaths(['site/cloud/main.js']).tier,'high');
 });
+
+test('official PR and push QA-only path stays focused, frozen candidate remains conservative',()=>{
+ const paths=['docs/ai/PREFLIGHT.md','docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',
+  'docs/workstreams/issue-3667.md','tests/ci-scope.test.mjs'];
+ const git=()=>paths.join('\n')+'\n';
+ for(const event of ['pull_request','push']){
+  const impact=classifyChanges({base:A,head:B,event,git});
+  assert.equal(impact.node_mode,'qa',event);
+  assert.equal(impact.tier,'low',event);
+  assert.equal(impact.sql,false,event);
+  assert.equal(impact.browser_mode,'none',event);
+  assert.equal(impact.build_browser||impact.build_validate,false,event);
+ }
+ const candidate=classifyChanges({base:A,head:B,event:'candidate',git});
+ assert.equal(candidate.tier,'high');
+ assert.equal(candidate.node_mode,'full');
+});
