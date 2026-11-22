@@ -6,40 +6,6 @@ const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
 // First-match and row-order semantics stay intact; lookups no longer scan every dataset repeatedly.
 const groupBy=(items,key)=>{const result=new Map();for(const item of items){const k=item[key];if(!result.has(k))result.set(k,[]);result.get(k).push(item);}return result;};
 const firstBy=(items,key)=>{const result=new Map();for(const item of items)if(!result.has(item[key]))result.set(item[key],item);return result;};
-// Preserve History's SQL row positions. Equal instants only affect latest
-// advice when they share the same setup version, coffee and shot style.
-// Stabilize ties *within* that advice partition, not across different coffees
-// or styles (which broke established 210/6000-shot History-order contracts).
-const shotAdviceTieKey=sh=>{
- const time=Date.parse(sh.pulled_at||'');
- return Number.isFinite(time)
-  ?JSON.stringify([sh.setup_id,sh.setup_version_id,sh.library_entry_id,sh.style,time])
-  :null;
-};
-const stableShotTies=items=>{
- const groups=new Map(),positions=new Map();
- for(const sh of items){
-  const key=shotAdviceTieKey(sh);
-  if(key===null)continue;
-  if(!groups.has(key))groups.set(key,[]);
-  groups.get(key).push(sh);
- }
- for(const group of groups.values())if(group.length>1)
-  group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||'')));
- return items.map(sh=>{
-  const key=shotAdviceTieKey(sh);
-  if(key===null)return sh;
-  const pos=positions.get(key)||0;
-  positions.set(key,pos+1);
-  return groups.get(key)[pos];
- });
-};
-// SQL jsonb_agg order is unspecified for calibrations; use chronology before the legacy fallback.
-const byCalibrationAge=(a,b)=>{
- const aParsed=Date.parse(a.created_at||''),bParsed=Date.parse(b.created_at||'');
- const at=Number.isFinite(aParsed)?aParsed:-Infinity,bt=Number.isFinite(bParsed)?bParsed:-Infinity;
- return at===bt?String(a.id||'').localeCompare(String(b.id||'')):(at<bt?-1:1);
-};
 export function hydrate(raw){
  const s=M.blankState();s.theme=raw.preferences?.theme||'system';s.preferences=raw.preferences?.tasting_preferences||'';s.activeSetupId=raw.preferences?.active_setup_id||null;
  const versionsBySetup=groupBy(rows(raw,'versions'),'setup_id'),
@@ -56,7 +22,7 @@ export function hydrate(raw){
  for(const setup of rows(raw,'setups')){
   const versions=(versionsBySetup.get(setup.id)||[]).map(v=>{
    const pref=prefsByVersion.get(v.id)||{};
-   const calibrations=(calibrationsBySetup.get(setup.id)||[]).filter(g=>g.grinder_model===v.grinder_model&&g.burr_set===v.burr_set).sort(byCalibrationAge);
+   const calibrations=(calibrationsBySetup.get(setup.id)||[]).filter(g=>g.grinder_model===v.grinder_model&&g.burr_set===v.burr_set);
    const g=calibrations.find(g=>g.id===pref.calibration_id)||calibrations.at(-1)||{};
    const baskets=(basketsBySetup.get(setup.id)||[]).map(b=>{const meta=basketById.get(b.basket_id)||{};return {id:b.id,logicalId:b.basket_id,doseG:number(b.basket_dose_g),name:meta.name||'Basket',archived:!!meta.archived_at,createdAt:b.created_at};});
    return {id:v.id,label:v.label,createdAt:v.created_at,machine:v.machine_model||'',grinder:v.grinder_model||'',burrs:v.burr_set||'',grinderMin:number(g.finest_setting),grinderMax:number(g.coarsest_setting),calibrationId:g.id,calibrations:calibrations.map(g=>({id:g.id,min:number(g.finest_setting),max:number(g.coarsest_setting),at:g.created_at})),baskets,defaultBasketId:pref.default_basket_version_id,tempUnit:pref.temperature_unit||'F',advanced:{temperature:!!pref.track_temperature,slowFeed:!!pref.track_slow_feed,baskets:!!pref.multiple_baskets},slowFeed:!!pref.slow_feed};
@@ -76,7 +42,7 @@ export function hydrate(raw){
  s.families=rows(raw,'families').map(f=>({id:f.id,coffeeId:f.library_entry_id,style:f.style,seedRatio:number(f.statistics?.ratio?.center),createdAt:f.created_at}));
  const setupById=firstBy(s.setups,'id'),versionsBySetupId=new Map();
  for(const setup of s.setups)if(!versionsBySetupId.has(setup.id))versionsBySetupId.set(setup.id,firstBy(setup.versions,'id'));
- for(const sh of stableShotTies(rows(raw,'shots'))){
+ for(const sh of rows(raw,'shots')){
   const old=sh.equipment_snapshot||{},setup=setupById.get(sh.setup_id),version=versionsBySetupId.get(sh.setup_id)?.get(sh.setup_version_id);
   // A historical server success flag cannot promote missing or invalid taste ratings.
   // This conservative client-only eligibility check never rewrites the original row.
@@ -159,5 +125,5 @@ export function applyPending(state,events){
 export function shotPayload(s,coffeeId,d){
  const v=M.activeVersion(s),setup=M.activeSetup(s);if(!v||!setup)throw new Error('Choose a setup.');
  const validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
- return {id:d.id,setup_id:setup.id,setup_version_id:v.id,library_entry_id:coffeeId,basket_version_id:d.basketId,calibration_id:v.calibrationId,style:d.style,pulled_at:d.timestamp||new Date().toISOString(),dose_g:C.round(d.doseG),yield_g:C.round(d.yieldG),time_s:C.round(d.timeS),grind_setting:C.num(d.grindSetting),temperature_c:v.advanced.temperature?C.num(d.tempC):null,feed_mode:v.advanced.slowFeed?d.feedMode:'standard',taste:{...d.tasteScales},notes:String(d.notes||''),...(d.recommendationContext?{recommendation_context:d.recommendationContext}:{})};
+ return {id:d.id,setup_id:setup.id,setup_version_id:v.id,library_entry_id:coffeeId,basket_version_id:d.basketId,calibration_id:v.calibrationId,style:d.style,pulled_at:d.timestamp||new Date().toISOString(),dose_g:C.round(d.doseG),yield_g:C.round(d.yieldG),time_s:C.round(d.timeS),grind_setting:C.round(d.grindSetting),temperature_c:v.advanced.temperature?C.num(d.tempC):null,feed_mode:v.advanced.slowFeed?d.feedMode:'standard',taste:{...d.tasteScales},notes:String(d.notes||''),...(d.recommendationContext?{recommendation_context:d.recommendationContext}:{})};
 }
