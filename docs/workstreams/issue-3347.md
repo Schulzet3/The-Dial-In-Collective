@@ -149,3 +149,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=636bf35eda034579caae5ace5c4aa8772fe8de2b 
 DIC_PREFLIGHT_VERIFIED development_sha=b73860d698e31fae566b832a84cfc57a80d58029 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 
 - One-off read-only P2 job 44987713650 FAILED CLOSED at strict candidate staged-path equality; no remote candidate source ref or READY. Temporary isolated-branch workflow instrumented only inside a detached main-tools worktree to log precise missing/unexpected Git file paths in the original fail-closed error. No assertion bypass, no repeated test suites, no production/SQL/Netlify/grant/source changes.
+
+## 2026-11-22 — corrected strict candidate path-set accounting integrated; rerun one read-only source proof [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=b73860d698e31fae566b832a84cfc57a80d58029 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Exact source root cause proven in job 44987893946: actual staged Git changed-path set and expected provenance union had **zero missing and zero unexpected** paths, but one workflow-only test also separately qualified as an unready issue-scoped test and was counted twice. This is not a runtime failure or permission to waive Auth/offline checks.
+- Main operations [PR #3679](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3679) nonforce [skip netlify] merged to fdac142ed5eccae8cc499127a787f574ab4ff8ae; exact PR head 44988074760 controller CI SUCCESS, three merged Git blobs independently match tested head. Strict gate now compares the unique expected union while retaining both independent path proofs and rejecting absent/unrelated paths. Main merged-push controller CI is separately checked; no release/source provider write.
+- Remove temporary diagnostic patch from this read-only, branch-only workflow. Re-run one source proof with fresh main software, fail closed on ANY further isolation mismatch. No READY/deploy/grant/Netlify/SQL writes.
