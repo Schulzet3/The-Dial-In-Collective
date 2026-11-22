@@ -172,3 +172,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=1eb9f62abb89a395052e0dcde7fe19015cb190b1 
 
 - Corrected main release-control projection bug nonforce merged PR #3690 SHA 797a2bbbf82083c46ac1c56a066cdee4e8306add, exact main controller PR run 44988729989 release-controller-validate SUCCESS, owner #3347. One old read-only source trial held because real planner's selected READY projection omits state; main helper now checks the immutable queue record state, retains source/git provenance and TESTING rejection.
 - This is one source-only RETRY on existing temporary test branch, no application suite/duplicate build, no candidate remote write/Publish/Netlify/provider/database. Existing temporary branch queue remains provisional READY solely for source proof; live development row remains TESTING. Candidate requires reviewed exact manifest/tree and five official candidate-SHA successes to promote live READY.
+
+## 2026-11-22 - V2 distinct immutable startup-only candidate source freeze [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=35aedde4b04286aea67521a1a997a414076bb081 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- First source proof 44988817244 SUCCESS on 3e644ff97ca3d2c516cac05802f28e2eca73cb53: exact local candidate Git tree 61dd9f7cecc559def7987f4b52104056ce68aa19; did not create remote candidate. Original frozen branch release-candidates/ready3347-a7625f02b1667b9257d0 exists from older unreviewed candidate d505fb5 and its validate 44988381095 FAILED; never force/reuse or count FAILED as PASS.
+- New temporary branch work/startup-ready-precert-v2-20261122 retains precisely one provisional READY row, one additional ACTUAL successful clean-source shared-dependency CI run 44987142718 and all exact three app scope paths; this creates a distinct deterministic future frozen branch fingerprint. No release or providers. The branch workflow is READ ONLY and must return exact candidate tree/delta before any connector-mediated freeze; final READY promotion requires five NEW exact candidate CI SUCCESS, full test provenance, no mixed unready source.
