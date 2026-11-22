@@ -186,3 +186,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 
 - Owner approved five startup enhancements to READY. Live dev ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f, main 611ee43c0ed3f7e45e72c766070df0cb88678383; earlier provisional source-run 44989382451 FAILED source-only guard because final validator expected one workflow-only test while discovery knew two. Independently merged main fix 611ee43c0ed3f7e45e72c766070df0cb88678383 has controller SUCCESS 44989594073 and pre-certification SUCCESS 44989594086; do not duplicate that fix/CI.
 - Re-run only existing nonpublishing startup source receipt on this immutable provisional queue/branch. All selected app/runtime and already-verified clean source pins remain unchanged; no test suite, build, provider contact, grant, Publish or deployment. Maintain live TESTING state until separate frozen candidate five exact-SHA CI SUCCESS. This append-only journal ensures traceability.
+
+## 2026-11-22 — strict dual workflow-only test provenance fixed on main [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Source-proof run 44989382451 FAILED CLOSED because candidate validator still hardcoded a sole exact workflow-only test. Concurrent main #3347 operations repair 611ee43c0ed3f7e45e72c766070df0cb88678383 (release-controller validate 44989543913 SUCCESS) now checks both independently source-reviewed workflow-only tests with each exact Git blob. Duplicate PR #3695 closed UNMERGED to avoid duplicate work/CI. Previous failed candidate d505fb5 and failed proof remain FAILED; no READY, no provider write or deploy.
+- Re-run exactly one nonpublishing provisional source receipt at this branch against corrected live main, preserving the same temporary selected READY one-item test queue, current live development queue remains TESTING. A new actual immutable candidate and all five native exact-source CI SUCCESS required before source READY promotion. No publication.
