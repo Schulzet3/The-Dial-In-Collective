@@ -13,3 +13,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d 
 
 ## PR first-head approval HOLD, safely repaired
 - Exact PR #3668 run 44983557010 job 137089092114 failed intake: `package.json` had no TESTING queue owner, while all affected runtime/product code remains unchanged. Added `DIC-Q-3667-ci-parallel-full-suite` TESTING scoped to package.json in the same documentation reconciliation. Do NOT claim earlier failure passed; rerun current exact PR five checks.
+
+## Measured benchmark and two-runner corrective acceleration — November 21/22, 2026
+DIC_PREFLIGHT_VERIFIED development_sha=d3dbfb43ab1515ce254d5d91ea1275243ba6aa10 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- First measured exact PR head 44c1a04466fd908996eeba537cd6220556a5fa32: five named CI jobs, security and Python COMPLETED SUCCESS; original603 SKIPPED. Node full-suite 04:08:47–04:12:34 UTC = 227s. Compared with baseline 204/216/282s (mean 234s), ~3% average improvement is insufficient.
+- Correction: partition exact same Node test files into deterministic disjoint 0/2 and 1/2; existing required validate and cloud-tests jobs execute concurrently on separate GitHub runners. The malicious HTML resource-budget file remains serial only in shard0. No test removed/repeated; both named jobs must be completed-success for source-bound READY. Unsharded npm test remains full for local/release contexts. One app build remains owned by mobile-browser-qa for high UI/Auth.
+- Cloud regression PR path exclusions and push filters now cover every source category accepted by validate, preventing half-corpus execution without second job. Focused medium and docs-only applicability unchanged; targeted cloud tests are NOT_APPLICABLE under HIGH, while its full-corpus shard remains mandatory.
+- Added tests for full union/disjoint coverage, security once, invalid shard rejection and trigger parity. Exact five PR and merged push CI required. No Publish, provider/DB/member write, READY promotion, Netlify build, secrets, or force update. TESTING until proven.

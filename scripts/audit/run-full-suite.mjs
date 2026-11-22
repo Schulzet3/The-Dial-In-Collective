@@ -22,6 +22,18 @@ export function planFullSuite(root=ROOT){
  return {parallel,serial};
 }
 
+// Two disjoint shards run on existing validate/cloud-tests runners.
+// The unsharded npm test command still executes every file.
+export function selectFullSuiteShard(plan,shard='all'){
+ if(shard==='all')return plan;
+ if(!/^[01]\/2$/.test(shard))throw Error('Invalid full-suite shard selector');
+ const index=Number(shard[0]);
+ const parallel=plan.parallel.filter((_,i)=>i%2===index);
+ const serial=index===0?plan.serial:[];
+ if(!parallel.length)throw Error('Full-suite shard is empty');
+ return {parallel,serial};
+}
+
 function execute(files,concurrency,label){
  const start=performance.now();
  console.log('[DIC full suite] '+label+': '+files.length+' files; concurrency '+concurrency);
@@ -38,7 +50,11 @@ function execute(files,concurrency,label){
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
  try{
-  const {parallel,serial}=planFullSuite();
+  const shardArg=process.argv[2];
+  if(process.argv.length>3||(shardArg&&!/^--shard=[01]\/2$/.test(shardArg)))
+   throw Error('Unexpected full-suite arguments');
+  const plan=planFullSuite();
+  const {parallel,serial}=selectFullSuiteShard(plan,shardArg?shardArg.slice('--shard='.length):'all');
   // Always run isolated security tests even if the general corpus fails.
   const main=execute(parallel,FULL_SUITE_CONCURRENCY,'general');
   const security=execute(serial,1,'time-critical-security');
