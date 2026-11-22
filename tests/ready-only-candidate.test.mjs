@@ -754,7 +754,7 @@ test('#3347 validator admits both independently proven workflow-only tests but n
  assert.equal(validateReadyOnlyCandidate(q,args).ready,true);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...args,
   sourceObjectAt:(ref,p)=>ref===B&&p===REVIEWED_CI_FAST_PR_TEST.path?
-   '100644:'+'f'.repeat(40):objectAt(ref,p)}),/workflow-only test exclusion source\/blob\/absence mismatch/i);
+   '100644:'+'f'.repeat(40):objectAt(ref,p)}),/Only one byte-pinned, reviewed workflow-only test|Workflow-only test exclusion source\/blob\/absence mismatch/i);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...args,
   manifest:{...args.manifest,excluded_unpublished_workflow_test_paths:[...paths,'tests/unowned-workflow-only.test.mjs']}}),
   /Only one byte-pinned, reviewed workflow-only test/);
