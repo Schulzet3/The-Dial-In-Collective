@@ -112,3 +112,16 @@ test('#3347 main workflow pushes to changed controller source trigger read-only 
  assert.match(workflow,/node scripts\/release\/precertify-ready-source.mjs/);
  assert.doesNotMatch(workflow,/git push|deploy to netlify|POST.*publish/i);
 });
+
+test('#3667 READY handoff persists a machine-readable exact Git-tree receipt without granting publication',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ assert.match(workflow,/sed -n 's\/\^/);
+ assert.match(workflow,/ready-source\/receipt\.json/);
+ assert.match(workflow,/JSON\.parse\(require\('node:fs'\)\.readFileSync/);
+ assert.match(workflow,/LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE/);
+ assert.match(workflow,/expected_tree_sha/);
+ assert.match(workflow,/actions\/upload-artifact@v7/);
+ assert.match(workflow,/if-no-files-found: error/);
+ assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
+ assert.doesNotMatch(workflow,/git push|POST.*publish|deploy to netlify/i);
+});

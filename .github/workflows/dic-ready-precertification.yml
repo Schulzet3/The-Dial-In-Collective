@@ -63,4 +63,16 @@ jobs:
           echo "development_sha=$head_sha" >> "$GITHUB_OUTPUT"
       - name: Prove exact candidate Git tree and print source-bound read-only receipt
         if: steps.source.outputs.development_sha != ''
-        run: node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt
+        run: |
+          set -euo pipefail
+          mkdir -p qa_artifacts/ready-source
+          node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt |
+            sed -n 's/^\\[DIC READY pre-certification\\] //p' > qa_artifacts/ready-source/receipt.json
+          node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/ready-source/receipt.json','utf8')); if(!['NO_READY_ITEMS','LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE'].includes(r.status)) process.exit(2); if(r.status==='LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE' && (!/^[0-9a-f]{40}$/.test(r.development_source_sha) || !/^[0-9a-f]{40}$/.test(r.expected_tree_sha) || r.manifest?.candidate_branch!==r.candidate_branch)) process.exit(2)"
+      - uses: actions/upload-artifact@v7
+        if: steps.source.outputs.development_sha != ''
+        with:
+          name: dic-ready-source-receipt-${{ github.run_id }}
+          path: qa_artifacts/ready-source/receipt.json
+          if-no-files-found: error
+          retention-days: 7
