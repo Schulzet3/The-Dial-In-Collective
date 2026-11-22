@@ -1,3 +1,14 @@
+# Issue #509 R457 — internal pg_rewrite AST ranks 10–25 (read-only) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=8ede8147e7312e792428ebbd7304965fe56b1447 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory immutable preflight verified first at GitHub 8ede8147e7312e792428ebbd7304965fe56b1447 and blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Recovered other refs, #509, journal, Locked authority. Connected Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003. Production READ ONLY; no member/Auth identities, secrets or sensitive logs accessed.
+
+**New provider-source coverage:** 16 previously unreviewed pg_rewrite.ev_action ASTs, 637,763 complete literal characters, ranks 10–25, and 30,248 exposed rule SQL characters compared semantically (prior R454 SQL coverage NOT double-counted). Each exact full AST text, reconstructed SQL, MD5, literal 1–end range, typed node families, role/constraint/identity dependency semantics and separate verdict are in append-only [R457a](../audits/issue509-r457a-pg-rewrite-internal-ast-ranks10-18-20261122.json) and [R457b](../audits/issue509-r457b-pg-rewrite-internal-ast-ranks19-25-20261122.json). Views cover composite attributes; collation/encoding; CHECK/not-null synthesis; generated-column, domain, identity and UDT metadata; grants/column privileges and constraint dependencies. They are PostgreSQL-managed information_schema views, not DIC-authored SQL. No reproducible DIC defect, consumer-proven dead object or justified safe deletion. AST hasRowSecurity=false is not evidence that RLS is disabled.
+
+**Coverage:** internal AST now 25/148 and 717,673/3,030,174 characters. Next rank 26/148: `information_schema.domain_udt_usage::_RETURN` OID 13376, char 1/7450; remaining 123 trees and 2,312,501 AST chars. Other provider-only/native/secret console surfaces UNVERIFIED. Full Supabase baseline IN_PROGRESS. Existing deployed dic-verify-coffee parser drift BLOCKED_OWNER_PUBLISH, unchanged, previously alerted. No application source/tests/CI edits (new exact-source CI NOT_APPLICABLE, not PASS), no queue/READY/DEPLOYED claim, no production mutation/deploy/migration, no backup/billing, main/release/schedule/alert changes, and no #267 source-line credit.
+
+---
+
 # Issue #509 R456 — complete new internal pg_rewrite AST ranks 1–9 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
