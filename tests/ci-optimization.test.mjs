@@ -212,3 +212,19 @@ test('SQL release regression retains immutable source push CI and superseded-PR 
  assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-signed-http-regression\.sh/);
  assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-backup-snapshot-regression\.sh/);
 });
+
+
+test('Chromium setup skips apt only after an actual pinned headless-shell DOM smoke',()=>{
+ const browser=file('.github/workflows/cloud-regression.yml').split('  mobile-browser-qa:')[1];
+ const install=browser.split('name: Install one isolated Chromium browser for all relevant acceptance')[1]
+  .split('name: Run all browser acceptances with parallel visual assertions')[0];
+ assert.match(install,/python -m playwright install --only-shell chromium/);
+ assert.match(install,/chromium_smoke\(\) \{/);
+ assert.match(install,/pw\.chromium\.launch\(headless=True\)/);
+ assert.match(install,/page\.locator\("#dic-ready"\)\.inner_text\(\) == "ready"/);
+ assert.match(install,/if chromium_smoke; then[\s\S]*?else[\s\S]*?if ! python -m playwright install --with-deps --only-shell chromium; then/);
+ assert.match(install,/azure\.archive\.ubuntu\.com/);
+ assert.match(install,/sudo apt-get update -o Acquire::Retries=2/);
+ assert.match(install,/python -m playwright install --with-deps --only-shell chromium[\s\S]*?fi\n            chromium_smoke\n          fi/);
+ assert.match(browser,/name: Run all browser acceptances with parallel visual assertions[\s\S]*?node scripts\/audit\/run-browser-qa\.mjs/);
+});

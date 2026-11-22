@@ -160,17 +160,38 @@ jobs:
         if: steps.scope.outputs.browser_mode != 'none'
         run: |
           python -m pip install playwright==1.55.0
-          if ! python -m playwright install --with-deps --only-shell chromium; then
-            # Retry only the runner's Ubuntu package mirror; never bypass
-            # Playwright's dependency installation or browser acceptance.
-            mirror_file=/etc/apt/sources.list.d/ubuntu.sources
-            if ! grep -q 'azure.archive.ubuntu.com' "$mirror_file"; then
-              echo 'Browser dependency install failed; Azure mirror recovery unavailable.' >&2
-              exit 1
+          # Reuse the cached pinned browser, then prove the actual binary launches
+          # before paying for apt update/install. Missing runtime libraries get the
+          # original official --with-deps installer and mirror recovery unchanged.
+          python -m playwright install --only-shell chromium
+          chromium_smoke() {
+            python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as pw:
+              browser = pw.chromium.launch(headless=True)
+              page = browser.new_page()
+              page.set_content("<html><body><p id='dic-ready'>ready</p></body></html>")
+              assert page.locator("#dic-ready").inner_text() == "ready"
+              browser.close()
+          PY
+          }
+          if chromium_smoke; then
+            echo 'Chromium launch + DOM passed; apt dependencies already usable.'
+          else
+            echo 'Chromium runtime smoke failed; install official Playwright OS dependencies.'
+            if ! python -m playwright install --with-deps --only-shell chromium; then
+              # Retry only the runner's Ubuntu package mirror; never bypass
+              # dependency recovery or mandatory browser acceptance.
+              mirror_file=/etc/apt/sources.list.d/ubuntu.sources
+              if ! grep -q 'azure.archive.ubuntu.com' "$mirror_file"; then
+                echo 'Browser dependency install failed; Azure mirror recovery unavailable.' >&2
+                exit 1
+              fi
+              sudo sed -i 's#azure.archive.ubuntu.com#archive.ubuntu.com#g' "$mirror_file"
+              sudo apt-get update -o Acquire::Retries=2
+              python -m playwright install --with-deps --only-shell chromium
             fi
-            sudo sed -i 's#azure.archive.ubuntu.com#archive.ubuntu.com#g' "$mirror_file"
-            sudo apt-get update -o Acquire::Retries=2
-            python -m playwright install --with-deps --only-shell chromium
+            chromium_smoke
           fi
       - name: Run all browser acceptances with parallel visual assertions
         if: steps.scope.outputs.browser_mode != 'none'
