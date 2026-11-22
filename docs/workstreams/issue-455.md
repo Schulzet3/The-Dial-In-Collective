@@ -1,3 +1,15 @@
+## November 22, 2026 UTC — #455 R451 pending Log Shot Save modal Close race guard [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=797f6b4badc418b6443133735d7159ff92413360 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- **Source and scope:** Immutable live preflight Git blob/content verified before AGENTS/docs/issues/providers, at source parent `797f6b4badc418b6443133735d7159ff92413360`, PREFLIGHT `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`. Starting application `b5e7243fe6df2ca0e503348e41a656a7a550dd8b`, synthetic regression `9deeff7205cbf9afde3655342ccac0b27c8322b9`, journal `aa3503d0dbfdf39e84bafb56d9132e106b1d3a29`. Owner-authorized #455 Option B SAFE Log Shot reliability only; no Locked product, numeric/science, telemetry, production, release or backup authority extended.
+- **Repro / severity:** R444 froze five taste ratings, measurements, feed and notes inside `#shot` while async `save_shot` awaited, but the dialog **header Close** is outside `#shot`, remained enabled and its delegated `click('close')` lacked a busy guard. Closing during Save permits asynchronous completion to later close another unsaved dialog; potential reliability/draft-loss race. No real member incident claimed. Retain original captured shot, five ratings and private notes.
+- **Narrow SAFE fix:** `site/cloud/main.js` disables existing header Close during `#shot` Save, restores its prior disabled state on success/failure, and guards delegated close while the current shot remains busy. Other modals unaffected. No new inputs or recommendation targets; styles, grinder, Slow Feed, offline history and privacy unchanged.
+- **Focused new negative/positive regression:** Two additional real CloudApp synthetic deferred-promise tests in `tests/issue455-r444-save-shot-pending-lock.test.mjs`: pending Close cannot dismiss/rewrite original Save; success closes once; failure leaves the draft/five tastes/notes available and re-enables Close. Original R444 test cases retained. **At authoring: app Node22, browser/mobile/offline, PR-head and merged CI NOT YET RUN / NOT PASS.** No real-user experiments or data reads.
+- **Next:** inspect exact PR-head applicable CI and fix failures; recheck concurrent development and nonforce merge with `[skip netlify]` on merge commit; verify exact merged code/test/journal and relevant source-bound checks, then reconcile #455 and TESTING queue/CURRENT_STATUS. No READY without independent certification; standalone original S019 and real next-shot effectiveness still UNVERIFIED; #455 remains OPEN. #33/#267/#96 ownership preserved. No main/release, Netlify, SQL/Auth/Edge/member/provider, backup, force, visibility or schedule changes.
+
+---
+
 ## November 22, 2026 UTC — #455 R433 SAFE Slow Feed copy affordances merged and source CI checked [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=d8f247aa63754adb52d9e8f9994f1821f46bcadc preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

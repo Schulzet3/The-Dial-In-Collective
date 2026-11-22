@@ -6,7 +6,10 @@ import {rawFixture} from './cloud-fixtures/raw.js';
 // Exercise the actual CloudApp Save Shot path using only a synthetic in-memory
 // promise. No account, provider, SQL, live browser or member data is accessed.
 const root={innerHTML:''};
-const sheet={close(){},querySelector(){return null;}};
+const sheet={closeCount:0,activeShot:null,headerClose:null,
+ close(){this.closeCount++;this.activeShot=null;},
+ querySelector(selector){return selector==='[data-action="close"]'?this.headerClose:selector==='#shot'?this.activeShot:null;}
+};
 globalThis.document={querySelector:selector=>selector==='#app'?root:sheet};
 const {CloudApp}=await import('../site/cloud/main.js');
 delete globalThis.document;
@@ -54,11 +57,12 @@ function pendingShot({fail=false}={}){
   setAttribute(name,value){attrs[name]=value;},
   removeAttribute(name){delete attrs[name];}
  };
+ sheet.activeShot=form;sheet.headerClose={disabled:false};const closeCountBefore=sheet.closeCount;
  const OriginalFormData=globalThis.FormData;
  globalThis.FormData=class {*[Symbol.iterator](){}};
  const task=app.submit({preventDefault(){},target:form})
   .finally(()=>{globalThis.FormData=OriginalFormData;});
- return {app,baseline,controls,attrs,task,errors,writes:()=>writes,action:()=>action,payload:()=>payload,resolve,reject,fail};
+ return {app,baseline,controls,attrs,task,errors,writes:()=>writes,action:()=>action,payload:()=>payload,resolve,reject,fail,headerClose:sheet.headerClose,closeCountBefore,closeCount:()=>sheet.closeCount,form};
 }
 
 test('R444 in-flight Save freezes all five ratings, all measurements, feed and notes',async()=>{
@@ -92,4 +96,38 @@ test('R444 failed asynchronous Save restores previous controls and original draf
  assert.equal(s.controls[7].disabled,true);
  assert.ok(s.controls.filter((c,i)=>i!==7).every(c=>!c.disabled));
  assert.deepEqual(s.app.draft,s.baseline,'member retains five ratings, measurements and notes for retry');
+});
+
+function clickHeaderClose(app){
+ return app.click({target:{closest(selector){return selector==='[data-action]'?{dataset:{action:'close'}}:null;}}});
+}
+
+test('R451 Save Shot locks header Close and preserves its pending draft',async()=>{
+ const s=pendingShot();
+ assert.equal(s.headerClose.disabled,true,'header Close outside #shot must be locked');
+ await clickHeaderClose(s.app);
+ assert.equal(s.closeCount(),s.closeCountBefore,'pending Save must not dismiss the draft');
+ assert.equal(sheet.activeShot,s.form,'original in-flight form stays open');
+ assert.equal(s.writes(),1);
+ s.resolve();await s.task;
+ assert.equal(s.closeCount(),s.closeCountBefore+1,'successful Save closes once');
+ assert.equal(s.headerClose.disabled,false,'header Close restored');
+ assert.equal(s.app.justSavedId,s.baseline.id);
+ assert.deepEqual(s.app.draft,s.baseline,'five tastes and private notes unchanged');
+ assert.equal(s.errors.length,0);
+});
+
+test('R451 failed Save restores header Close and retains five ratings for retry',async()=>{
+ const s=pendingShot({fail:true});
+ assert.equal(s.headerClose.disabled,true);
+ await clickHeaderClose(s.app);
+ assert.equal(s.closeCount(),s.closeCountBefore);
+ s.reject(new Error('Synthetic deferred save failure'));
+ await s.task;
+ assert.equal(s.headerClose.disabled,false);
+ assert.deepEqual(s.errors,['Synthetic deferred save failure']);
+ assert.deepEqual(s.app.draft,s.baseline);
+ assert.equal(s.closeCount(),s.closeCountBefore,'failed Save leaves draft open');
+ await clickHeaderClose(s.app);
+ assert.equal(s.closeCount(),s.closeCountBefore+1,'Close works again after failure');
 });
