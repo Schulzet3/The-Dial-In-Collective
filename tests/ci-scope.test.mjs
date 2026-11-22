@@ -82,7 +82,7 @@ test('Issue #267 post-S2 historical Git-tree inventory delta stays docs-only wit
  }
  for(const runtime of ['scripts/audit/ci-scope.mjs',
   '.github/workflows/roaster-source-probe.yml',
-  'supabase/migrations/new.sql','site/lib/engine.js','tests/ci-scope.test.mjs']){
+  'supabase/migrations/new.sql','site/lib/engine.js','tests/approval-coverage.test.mjs']){
   const mixed=classifyImpactPaths([...listed,runtime]);
   const bare=classifyImpactPaths([runtime]);
   assert.equal(mixed.tier,bare.tier,runtime);
