@@ -55,9 +55,45 @@ jobs:
           if [ "$kind" = 'unrelated' ]; then
             echo 'NOT_APPLICABLE: exact source has no queue change'
             decide false
-          else
-            decide true
+            exit 0
           fi
+          # A queue-changing approval can still have zero eligible READY work.
+          # Only skip when the exact event-SHA Git blob and schema prove that.
+          # An unknown value or failed request runs the old full Git check.
+          if [ "$kind" = 'queue' ]; then
+            response="$(gh api "repos/${GITHUB_REPOSITORY}/contents/docs/RELEASE_QUEUE.json?ref=${EVENT_HEAD}" 2>/dev/null)" || { decide true; exit 0; }
+            blob="$(printf '%s' "$response" | jq -er '.sha | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
+            encoding="$(printf '%s' "$response" | jq -er '.encoding | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
+            if [[ ! "$blob" =~ ^[0-9a-f]{40}$ || "$encoding" != 'base64' ]]; then
+              decide true
+              exit 0
+            fi
+            queue_file="$(mktemp)"
+            trap 'rm -f "$queue_file"' EXIT
+            if ! printf '%s' "$response" | jq -er '.content | select(type=="string")' | base64 --decode > "$queue_file" 2>/dev/null; then
+              decide true
+              exit 0
+            fi
+            actual="$(git hash-object "$queue_file" 2>/dev/null)" || { decide true; exit 0; }
+            if [ "$actual" != "$blob" ]; then
+              decide true
+              exit 0
+            fi
+            count="$(jq -er '
+              if (.schema_version == 1)
+                and (.authority == "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022")
+                and ((.items | type) == "array")
+                and (all(.items[]; (.state == "READY" or .state == "DEPLOYED" or .state == "TESTING" or .state == "IN_PROGRESS" or .state == "BLOCKED")))
+              then ([.items[] | select(.state == "READY")] | length)
+              else -1 end
+            ' "$queue_file" 2>/dev/null)" || { decide true; exit 0; }
+            if [ "$count" = '0' ]; then
+              echo 'NOT_APPLICABLE: verified exact queue has zero READY entries'
+              decide false
+              exit 0
+            fi
+          fi
+          decide true
       - uses: actions/checkout@v7
         if: steps.event_gate.outputs.proceed != 'false'
         with:
