@@ -18,7 +18,7 @@ export function assertBrowserFixtureClosure(mainSource,fixtureSource){
   if(!spec.startsWith('.'))throw Error('Unexpected external CloudApp fixture import: '+spec);
   const rel=posix.normalize(posix.join('cloud',spec));
   if(rel==='cloud/config.js')continue; // fixture uses a deliberately disabled synthetic config
-  if(!/^(?:lib|cloud)\/[a-z0-9-]+\.js$/.test(rel))
+  if(!/^(?:lib|cloud)\/[a-z0-9_-]+\.js$/.test(rel))
    throw Error('Unexpected CloudApp fixture dependency: '+rel);
   const name=posix.basename(rel,'.js');required.add(name);
   if(!listed.includes(name))missing.push(rel);

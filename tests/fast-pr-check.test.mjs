@@ -12,7 +12,7 @@ test('cheap gate checks production graph and CloudApp browser fixture imports',(
 test('omitted browser fixture module fails before Chromium rather than after timeout',()=>{
  const main=file('site/cloud/main.js'),fixture=file('tests/browser/cloud_owner_qa.py');
  assert.throws(()=>assertBrowserFixtureClosure(main+"import {missing} from './new-startup-helper.js';\n",fixture),/missing imported CloudApp module/);
- assert.throws(()=>assertBrowserFixtureClosure(main,fixture.replace("'startup-recovery',","")),/startup-recovery/);
+ assert.throws(()=>assertBrowserFixtureClosure(main,fixture.replace("'startup-recovery'","")),/startup-recovery/);
  assert.throws(()=>assertBrowserFixtureClosure(main+"import {\n missing\n} from './new-startup-helper.js';\n",fixture),/Unrecognized top-level/);
 });
 test('expensive CI runners reject cheap source/queue/receipt problems before installing',()=>{
