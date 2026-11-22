@@ -165,3 +165,47 @@ test('exact-SHA development cloud and browser push checks finish despite subsequ
  assert.notEqual(group('push','refs/heads/development/backend-foundation',A),group('push','refs/heads/development/backend-foundation',B));
  assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B));
 });
+
+
+test('Issue #267 disjoint semantic evidence JSON does not waste HIGH CI on docs-only pushes',()=>{
+ const prefix='docs/audits/issue267-v2-strict-batches/';
+ const safe=[
+  'S2-DISJOINT-F221-477-506-20261122-V13CD.json',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.json',
+  'S2-DISJOINT-INDEX-V13CD-20261122.json',
+  'S2-DISJOINT-F221-507-536-20261123-V13CE.json',
+  'S2-DISJOINT-CURRENT-C78-87-116-20261123-V13CE.json',
+  'S2-DISJOINT-INDEX-V13CE-20261123.json'
+ ].map(name=>prefix+name);
+ const paths=[...safe,'docs/workstreams/issue-267.md'];
+ for(const event of ['pull_request','push']){
+  const proof=classifyChanges({base:A,head:B,event,git:()=>paths.join('\n')+'\n'});
+  assert.equal(proof.tier,'docs',event);
+  assert.equal(proof.reason,'NON_RUNTIME_ONLY',event);
+  assert.equal(proof.node_mode,'none',event);
+  assert.equal(proof.sql,false,event);
+  assert.equal(proof.browser_mode,'none',event);
+  assert.equal(proof.build_browser||proof.build_validate,false,event);
+ }
+ for(const invalid of [
+  'S2-DISJOINT-INDEX-V13CD-20261122.json.bak',
+  'S2-DISJOINT-INDEX-BAD-20261122.json',
+  'S2-DISJOINT-INDEX-V13CD-20261122.js',
+  'S2-DISJOINT-F221-477-506-20261122.json',
+  'S2-DISJOINT-F0-477-506-20261122-V13CD.json',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.sql',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.json.bak',
+  'S2-DISJOINT-INDEX-V13CD-20261122/../app.js'
+ ])assert.equal(classifyImpactPaths([prefix+invalid]).tier,'high',invalid);
+ for(const changed of ['site/cloud/main.js','scripts/audit/ci-scope.mjs',
+  '.github/workflows/approval-continuity.yml','supabase/migrations/new.sql']){
+  const bare=classifyImpactPaths([changed]);
+  const mixed=classifyImpactPaths([...paths,changed]);
+  assert.equal(mixed.tier,bare.tier,changed);
+  assert.equal(mixed.node_mode,bare.node_mode,changed);
+  assert.equal(mixed.sql,bare.sql,changed);
+ }
+ const frozen=classifyChanges({base:A,head:B,event:'candidate',git:()=>paths.join('\n')+'\n'});
+ assert.equal(frozen.tier,'high','no candidate PASS from documentation-only evidence');
+ assert.equal(frozen.node_mode,'full');
+});
