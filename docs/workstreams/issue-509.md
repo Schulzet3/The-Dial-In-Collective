@@ -1,3 +1,16 @@
+# Issue #509 R465 — 300 new native catalog comments and bounded performance interpretation [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=38649a5e0c0571ca0b0746f53ead0bc989239539 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory immutable first SHA/blob GitHub preflight established before authority/provider access. Live development source 38649a5e0c0571ca0b0746f53ead0bc989239539; main 1c7f77844e899776d2f866f9c824a4a0cba58d56; release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264. Supabase azviqqejypsefzilgonr read-only.
+
+**New word-level semantic coverage:** Read **300 full live `pg_description` comments at ranks 1101–1400/5,344**, 8639 complete characters. All 300 are pg_catalog built-in functions: 285 internal/native declarations and 15 SQL functions. Exact OID, function schema/name/identity arguments, literal full description, MD5, 1-end complete character range, behavior class, meaning and retention verdict recorded per item in [R465 append-only ledger](../audits/issue509-r465-core-comments-1101-1400-20261122.json). Previous Run67 lexical captures and #267 original/current source review are **not** credited a second time. These are built-in operators/typed casts/aggregate helpers/SQL pattern planner selectivity/time and statistics routines; shared generic descriptions across overloads do not establish duplicate implementations or justify removal. Compiled implementation internals remain UNVERIFIED.
+
+**New bounded performance interpretation:** Live pg_stat_user_tables read-only estimates show high scan counts on small singleton operational tables: `private.dic_admin_push_runtime` 9,153 sequential scans, 1 estimated live/47 dead tuples at only 32 kB; `private.dic_member_approval_poll_gate` 2,926 sequential scans, 1 estimated live/39 dead tuples at 56 kB. These are not demonstrated latency/bloat bugs; no unsupported VACUUM/index removal/production action. No new reproducible DIC bug, obsolete dependency-proven object, or justified source fix found in this increment.
+
+No application code/test/CI edits; exact-source CI **NOT_APPLICABLE**, not PASS. Prior R461 comment migration remains TESTING and deployed verifier parser drift remains existing owner-Publish blocker; no new decision. Production unchanged, baseline IN_PROGRESS. **Next precise unreviewed semantic comment rank 1401/5,344**, ordered (classoid,objoid,objsubid); prioritize newly reproducible DIC behavior over system-text repetition. Keep current hourly task and owner-action-only alert policy unchanged.
+
+---
+
 # Issue #509 R464 — new native catalog comment semantics and index dependency verification [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=f19d8986534d61331621167d607f6ff926ff61c4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
