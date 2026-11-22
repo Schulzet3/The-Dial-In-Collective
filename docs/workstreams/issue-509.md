@@ -1,3 +1,17 @@
+# Issue #509 R442 — direct pg_depend dependency semantics ranks 1001–1500/5414 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=fd941409552dc28bc6f5df158ed7a548d08843c9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Immutable preflight verified before GitHub/provider work. Connected Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11.0.003; production strictly READ-ONLY. Retrieved current GitHub development head `1e129b07c3f66d975e0c95e6c1ce5f9298de14cb` before atomic nonforce docs write.
+
+Resumed R441 exact pg_depend rank 1001. Directly reviewed **500 newly unreviewed complete dependency edge records**, ranks **1001–1500/5414**, **177917 source literal characters**, with per-object complete PG catalog text/MD5/1–end character coverage, source/target identities, semantic classification and disposition in append-only [R442 ledger](../audits/issue509-r442-pg-depend-ranks1001-1500-20261122.json). Cumulative pg_depend **1500/5414**. Categories: {"RETAIN_FUNCTION_SCHEMA":36,"RETAIN_FUNCTION_LANGUAGE":25,"RETAIN_FUNCTION_SIGNATURE_TYPE":1,"RETAIN_VIEW_SCHEMA":33,"RETAIN_VIEW_COLUMN_TYPE":405}. Range covers live SQL function schema/language/signature references, and Information Schema views/typed view columns. Independently validated 500/500 sources and referenced schemas/languages/types, with **0** missing objects and **0** column-to-type mismatches; `information_schema.sql_identifier`, `cardinal_number`, and `yes_or_no` referenced by current views are real types, not redundant DIC implementations.
+
+No confirmed DIC application behavior bug, source drift, unused database object with proven absent consumers, or performance bottleneck in the specific metadata range; no deletion or source fix justified. Does NOT count as rereading underlying function bodies, view SQL or #267 original code lines. Other provider definitions and console-only fields UNVERIFIED; full baseline IN_PROGRESS. New exact-source CI NOT_APPLICABLE (no app code/test/CI changes); READY/DEPLOYED NOT_REVALIDATED. No production provider SQL/data/Auth/Storage/Edge/config write, migration, publication, backup, billing, schedule or alert-policy modification.
+
+**Next exact cursor:** pg_depend rank **1501/5414**, character 1, same seven-column sort. No new owner-action requirement.
+
+---
+
 # Issue #509 R441 — read-only pg_depend full edge semantics ranks 501–1000/5414 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=fd941409552dc28bc6f5df158ed7a548d08843c9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
