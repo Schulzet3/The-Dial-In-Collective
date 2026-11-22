@@ -1,3 +1,16 @@
+# Issue #509 R464 — new native catalog comment semantics and index dependency verification [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=f19d8986534d61331621167d607f6ff926ff61c4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Immutable development preflight verified before all other tools; subsequently recovered f19d8986534d61331621167d607f6ff926ff61c4 and current #509 authority, main/release refs, journal and ACTIVE_HEALTHY Supabase PG17.11.0.003. Production READ ONLY.
+
+**New semantic text coverage:** Directly read and interpreted all **100 complete native PostgreSQL pg_description comments ranks 1001–1100**, 2405 literal characters; source OIDs, full words, per-object MD5, complete ranges, semantic explanation and verdict in [R464 append-only ledger](../audits/issue509-r464-core-comments-1001-1100-and-index-dependency-check-20261122.json). Earlier Run67 only captured/automatically categorized these descriptions; do not duplicate prior capture, native function declarations or #267 code-line credit. Assessed geometry/math, sequence, pattern, text/regex, catalog metadata, and referential integrity trigger semantics. All are standard built-ins, no justified removal; compiled native implementations UNVERIFIED.
+
+**New dependency-aware index comparison:** Freshly inspected all 106 public/private index identities (71 public, 35 private), exact keys/method, uniqueness/predicate/expression and constraint relationships. **Zero true identical duplicates.** Initial many-to-one pg_constraint join produced false matches, explicitly corrected using DISTINCT indexrelid. Three leading-key pairs are **not removable**: account_preferences PK plus active_setup index (316 observed larger scans); recipe_preferences PK plus preferred_example_idx (4,871 larger scans); setups unique (4 FK consumers plus UNIQUE) plus setup_active_version_idx (430 scans). All have required constraints and/or distinct key usage. **24 zero-scan indexes are not proven dead**, do not remove based on stats. Full index DDL review was previously credited, not duplicated here. No new reproducible DIC defect or source fix justified.
+
+R461 COMMENT-only development fix remains TESTING with prior exact-source PG17 and hosted relevant CI PASS; no new code/tests/CI changes, this documentation-only increment CI NOT_APPLICABLE, not PASS. Existing deployed verifier parser drift BLOCKED_OWNER_PUBLISH unchanged. Full Supabase baseline IN_PROGRESS. Next exact unreviewed manual-semantic native description cursor rank **1101/5,344**, or earlier app-specific drift finding. No provider/production SQL/data/Auth/Edge/Storage, Publish, backup, billing, main/release or schedule/owner-notification change.
+
+---
+
 # Issue #509 R463 — exact-source isolated PostgreSQL CI verified for stale comment source fix [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
