@@ -1,3 +1,16 @@
+# Issue #509 R443 - active source proof and Community fingerprint parity [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=fd941409552dc28bc6f5df158ed7a548d08843c9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Verified immutable GitHub preflight first. Production Supabase azviqqejypsefzilgonr read-only, PostgreSQL 17.11.0.003. Atomic documentation write anchored to development bbaf4fc5b4c71c6b5b4372ee3f30969e31151d48.
+
+**Source review:** Directly inspected and retained two complete live SQL function definitions (2425 characters) with MD5, complete 1-end range, exact source migration Git blob and independent byte-identical function body comparison. [R443 structured ledger](../audits/issue509-r443-active-roaster-community-source-parity-20261122.json). Both MATCH current development source.
+
+private.dic_verified_roaster_page_proof(text) is **LEGACY ACTIVE** for trusted verified official-domain proof; live SQL callers private.dic_promote_pending_coffee(...) and public.dic_source_check_target(uuid). It does NOT restore retired URL preview allowlisting; retained private.dic_official_source_attestations is not proof of obsolete directory gating. private.dic_community_fingerprint(community_shots) is **ACTIVE** for Community review and confirmation; live SQL callers private.dic_review_community_shot(uuid), public.dic_confirm_community_outlier(uuid,bigint). No proof of safely removable SQL; no reproducible new logic bug or provider/source drift in these exact bodies.
+
+Sequential pg_depend remains 1500/5414; next rank 1501 pg_class OID 13448 information_schema.sql_features -> pg_namespace OID 13265, deptype n, character 1. Other provider definitions, Edge clients and native implementations UNVERIFIED. Full baseline IN_PROGRESS; #267 source-code-line credit zero. No application code/test/CI changes (new exact-source CI NOT_APPLICABLE, not PASS), READY/DEPLOYED not asserted. No production/provider/release/backup/billing/schedule writes or changed notification policy. No owner action.
+
+---
+
 # Issue #509 R442 — direct pg_depend dependency semantics ranks 1001–1500/5414 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=fd941409552dc28bc6f5df158ed7a548d08843c9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
