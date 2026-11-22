@@ -733,7 +733,9 @@ test('#3347 #509 new SQL regression excluded only with its own TESTING migration
 });
 test('#3347 preserves five full published startup source-coupled suites',()=>{
  const s=REVIEWED_STARTUP_MIXED_TESTS;
- assert.equal(s.tests.length,5);
+ assert.equal(s.tests.length,6,'five original tests and full published original603 audit');
+ assert.equal(s.tests.filter(x=>x.path.startsWith('tests/')).length,5);
+ assert.equal(s.tests.find(x=>x.path==='scripts/audit/issue33-original603-focused-source-review.mjs')?.published,'49b50fa3c1a1a07e61943ad98bbb2cc31c119fac');
  assert.ok(s.tests.every(x=>/^[a-f0-9]{40}$/.test(x.published)&&/^[a-f0-9]{40}$/.test(x.unready)));
 });
 test('#3347 new CI-only regression is excluded only with its exact restored original workflow',()=>{
@@ -758,4 +760,45 @@ test('#3347 new unready coffee R324 test follows restored parser source, not onl
    changedPaths:[spec.path],sourceObjectAt:at};
  assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
  assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
+});
+test('#3347 two new independent SQL tests are absent only when their unready owning migrations are restored',()=>{
+ for(const name of ['admin_account_delete_completed_receipt.sql','personal_family_refresh_single_pass_post.sql']){
+  const spec=REVIEWED_UNREADY_SQL_SUITE.find(x=>x.path==='supabase/tests/'+name);
+  assert.ok(spec,'reviewed SQL migration/test pair exists');
+  assert.equal(spec.publishedBlob,null,'not in last-published SQL suite');
+  assert.match(spec.unpublishedBlob,/^[a-f0-9]{40}$/);
+  assert.match(spec.sourceMerge,/^[a-f0-9]{40}$/);
+  const owner={id:'DIC-Q-509-review',issue:509,state:'TESTING',scope_paths:[spec.migration]};
+  const at=(r,p)=>{
+   if(p===spec.path)return r===B||r===spec.sourceMerge?'100644:'+spec.unpublishedBlob:null;
+   if(p===spec.migration)return r===B?'100644:'+'f'.repeat(40):null;
+   return null;
+  };
+  const args={queue:{items:[owner]},restoredPaths:[spec.migration],
+   publishedSourceSha:A,developmentSourceSha:B,selectedReadyItems:[{id:'DIC-Q-1',merged_source_sha:C}],
+   sourceObjectAt:at};
+  assert.deepEqual(discoverReviewedRestoredSqlTests(args),[spec.path]);
+  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(r,p)=>
+   r===B&&p===spec.path?'100644:'+'e'.repeat(40):at(r,p)}),
+   /Unreviewed current or published SQL test bytes/);
+ }
+});
+test('#3347 unpublished PageFly audit helper excluded only with exact R374 scope and reviewed source blob',()=>{
+ const path='scripts/audit/issue33-r374-original41-check.mjs';
+ const runtime='src/server/coffee-pagefly-selected-h3.mjs';
+ const scope=['src/server/coffee-decaffeination-method.mjs',
+  'src/server/coffee-direct-product-prose.mjs',runtime];
+ const owner={id:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',
+  issue:33,state:'TESTING',scope_paths:scope};
+ const chosen={id:REVIEWED_STARTUP_MIXED_TESTS.id,merged_source_sha:REVIEWED_STARTUP_MIXED_TESTS.merge};
+ const blob='6b47cfa4736189d91df71ed6867f9455065ce4b3';
+ const at=(r,p)=>p===path?(r===B||r===chosen.merged_source_sha||r===chosen.merged_source_sha+'^'?'100644:'+blob:null):
+  p===runtime?(r===B?'100644:'+'f'.repeat(40):null):null;
+ const args={queue:{items:[owner,chosen]},selectedIds:[chosen.id],
+  restoredPaths:scope,pinnedReadyPaths:['site/cloud/main.js'],
+  publishedSourceSha:A,developmentSourceSha:B,changedPaths:[path],sourceObjectAt:at};
+ assert.deepEqual(discoverExcludedUnreadyTests(args),[path]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...args,sourceObjectAt:(r,p)=>
+  r===B&&p===path?'100644:'+'0'.repeat(40):at(r,p)}),[]);
 });
