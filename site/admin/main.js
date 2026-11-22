@@ -74,11 +74,10 @@ async function start(){
     // The summary is always current; private listings are loaded only for
     // operator-expanded sections. Accounts share one disclosure; signup requests have their own review panel.
     const kinds=[...new Set([...openSections].flatMap(kindsForSection))];
-    // Account search filters paged results, not unfinished deletion recovery actions.
     const loadAccess=openSections.has('accounts');
     const [dashboard,nextAccess,nextSignups,...pages]=await Promise.all([
      adminRpc('dic_admin_dashboard'),
-     loadAccess?adminRpc('dic_admin_access_overview'):Promise.resolve(null),
+     loadAccess?(searchText?Promise.resolve({members:[],members_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
       adminRpc('dic_admin_signup_requests',{p_offset:signupOffset,p_limit:50}),
      ...kinds.map(async kind=>{
       try{
@@ -93,10 +92,7 @@ async function start(){
     if(invalidated)return;
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
-    access=loadAccess?(searchText?{
-      members:[],members_total:0,
-      pending_deletions:nextAccess?.pending_deletions||[]
-    }:nextAccess):null;
+    access=loadAccess?nextAccess:null;
      signupRequests=nextSignups;
      const stats=dashboard?.counts||{};
      lastAttentionCount=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions'].reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);

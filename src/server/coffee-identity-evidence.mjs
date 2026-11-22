@@ -1081,10 +1081,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
     const selectedLotHarvest=/\b(?:this|our|the|current|selected)\s+(?:coffee|lot|beans?|cherries|batch|offering|release)\b/i.test(sentence) ||
      /^This is the 20\d{2}\s+(?:harvest|crop)\b/i.test(sentence);
     if(harvest&&selectedLotHarvest)add('Harvest',harvest[1],sentence);
-    // A seasonal first/last selection or offering in a given calendar year is
-    // not a distinct coffee release/lot identifier. Require an actual release,
-    // explicit named lot, harvest or current selected-coffee comparison.
-    const datedOffering=sentence.match(/\b(?:our|this)\s+(?:(?:first|last|new|current|rotating|washed|natural|honey|anaerobic|single)\s+){0,5}release\b[^.!?]{0,65}\b(?:of|for)\s+(20\d{2})\b/i)||
+    const datedOffering=sentence.match(/\b(?:our|this)\s+(?:(?:first|last|new|current|rotating|washed|natural|honey|anaerobic|single)\s+){0,5}(?:selection|offering|release|single origin)\b[^.!?]{0,65}\b(?:of|for)\s+(20\d{2})\b/i)||
      sentence.match(/\bbring\s+you\s+(?:the\s+)?(20\d{2})\s+lot\b/i)||
      (!/\b(?:could|would|might|may|hypothetical|imagine|suppose)\b/i.test(sentence)&&
       sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));

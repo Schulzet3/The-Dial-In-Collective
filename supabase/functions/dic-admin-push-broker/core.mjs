@@ -142,12 +142,11 @@ export function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetc
    if(spec.op!=='poll'||Object.keys(spec).length!==1)return denied(400);
    const acquired=await (await rest('rpc/dic_admin_push_claim_poll',{method:'POST',body:{}})).json();
    if(acquired!==true)return reply({ok:true});
+   const key=await keys();
+   if(!key)return reply({ok:true});
    const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();
    if(!Array.isArray(snap?.admin_ids))return denied(503);
    const active=new Set(snap.admin_ids),tokens=cleanTokens(snap.tokens);
-   // Only actionable pushes need Vault's signing key; share one lookup per poll.
-   let keyPromise;
-   const getKey=()=>keyPromise||(keyPromise=keys());
    const PAGE=50,route='dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash.asc&limit='+PAGE;
    let cursor='',failed=0;
    const process=async row=>{
@@ -159,8 +158,6 @@ export function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetc
     }
     const seen=cleanTokens(row.seen_tokens),added=tokens.filter(t=>!seen.includes(t));
     if(added.length){
-     const key=await getKey();
-     if(!key)return; // Leave unseen tokens retryable while Vault is uninitialized.
      const push=await signedPush(endpoint,key,fetcher,now);
      if(push.gone){await rest(query,{method:'DELETE'});return;}
      if(!push.ok){failed++;return;}
