@@ -85,6 +85,40 @@ test('#3347 startup coupled Log Shot suites use only proven published-source tes
   ref===s.merge+'^'&&path===s.tests[1].path?'100644:'+'1'.repeat(40):sourceObjectAt(ref,path)}),
   /first-parent drift/);
 });
+test('#3347 isolate exact unpublished R374 review and #509 standalone SQL fixtures',()=>{
+ const specs=[
+  {path:'scripts/audit/issue33-r374-original41-check.mjs',blob:'6b47cfa4736189d91df71ed6867f9455065ce4b3',
+   id:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',issue:33,required:'src/server/coffee-pagefly-selected-h3.mjs'},
+  {path:'supabase/tests/admin_account_delete_completed_receipt.sql',blob:'5a9fc2b8d1c61d8b7c885d8bfec6f128160c35c2',
+   id:'DIC-Q-509-admin-completed-delete-retry-count',issue:509,required:'supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql'},
+  {path:'supabase/tests/personal_family_refresh_single_pass_post.sql',blob:'a04c6e40693577caec79d2678d155786bcfd26da',
+   id:'DIC-Q-509-classify-family-single-refresh',issue:509,required:'supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql'}
+ ];
+ const reviewed=REVIEWED_STARTUP_MIXED_TESTS.tests.find(s=>s.path==='scripts/audit/issue33-original603-focused-source-review.mjs');
+ assert.equal(reviewed?.published,'49b50fa3c1a1a07e61943ad98bbb2cc31c119fac');
+ assert.equal(reviewed?.unready,'74d78a80b72305d67a9d346e60fc5fe977de2031');
+ const selected={id:'DIC-Q-455-startup-recovery-deferred-worker',issue:455,state:'READY',merged_source_sha:D,
+  scope_paths:['site/cloud/main.js']};
+ const queue={...q,items:[selected,...specs.map(s=>({id:s.id,issue:s.issue,state:'TESTING',
+  scope_paths:[s.required]}))]};
+ const sourceObjectAt=(ref,path)=>{
+  const spec=specs.find(s=>s.path===path);
+  if(spec)return ref===B?'100644:'+spec.blob:null;
+  if(specs.some(s=>s.required===path))return ref===B?'100644:'+'b'.repeat(40):null;
+  return null;
+ };
+ const input={queue,selectedIds:[selected.id],restoredPaths:specs.map(s=>s.required),
+  pinnedReadyPaths:['site/cloud/main.js'],publishedSourceSha:A,developmentSourceSha:B,
+  changedPaths:specs.map(s=>s.path),sourceObjectAt};
+ assert.deepEqual(discoverExcludedUnreadyTests(input),specs.map(s=>s.path).sort());
+ assert.deepEqual(discoverExcludedUnreadyTests({...input,sourceObjectAt:(ref,path)=>
+  ref===B&&path===specs[0].path?'100644:'+'0'.repeat(40):sourceObjectAt(ref,path)}),
+  specs.slice(1).map(s=>s.path).sort(),'unverified source bytes cannot be excluded');
+ assert.deepEqual(discoverExcludedUnreadyTests({...input,queue:{...queue,items:queue.items.filter(s=>s.id!==specs[1].id)}}),
+  [specs[0].path,specs[2].path].sort(),'missing unready owner cannot cause an omission');
+ assert.deepEqual(discoverExcludedUnreadyTests({...input,restoredPaths:[]}),[],
+  'all standalone SQL and audit tests must stay when their source is present');
+});
 test('stage only selected READY source and restore unfinished paths to published bytes',()=>{
  const plan=planReadyOnlyCandidate(q,opts);
  assert.equal(plan.ready,true,plan.errors.join('; '));

@@ -342,7 +342,10 @@ export const REVIEWED_STARTUP_MIXED_TESTS=Object.freeze({
   Object.freeze({path:'tests/issue2258-member-approval-notices.test.mjs',
    published:'179dc171aa7ab11b182b8832c3fd3f733dbc6824',unready:'48ac09eaf2a000200b444cc9104ffba50893e246'}),
   Object.freeze({path:'tests/sql-runner-coverage.test.mjs',
-   published:'587d36c5931b1c14220914bd32460af5690984e9',unready:'9550fd21ff0edc93adbeed716e657a504a41d2e9'})
+   published:'587d36c5931b1c14220914bd32460af5690984e9',unready:'9550fd21ff0edc93adbeed716e657a504a41d2e9'}),
+  Object.freeze({path:'scripts/audit/issue33-original603-focused-source-review.mjs',
+   published:'49b50fa3c1a1a07e61943ad98bbb2cc31c119fac',
+   unready:'74d78a80b72305d67a9d346e60fc5fe977de2031'})
  ])
 });
 export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
@@ -480,6 +483,21 @@ const REVIEWED_UNREADY_SUPPORT=Object.freeze({
   itemId:'DIC-Q-509-workspace-inactive-selection-guards',issue:509,
   requiredRuntime:'supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql',
   sourceBlob:'12bb65b7f4e1ea2c52a1b1704dcefa75cee931b7'
+ },
+ 'scripts/audit/issue33-r374-original41-check.mjs':{
+  itemId:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',issue:33,
+  requiredRuntime:'src/server/coffee-pagefly-selected-h3.mjs',
+  sourceBlob:'6b47cfa4736189d91df71ed6867f9455065ce4b3'
+ },
+ 'supabase/tests/admin_account_delete_completed_receipt.sql':{
+  itemId:'DIC-Q-509-admin-completed-delete-retry-count',issue:509,
+  requiredRuntime:'supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql',
+  sourceBlob:'5a9fc2b8d1c61d8b7c885d8bfec6f128160c35c2'
+ },
+ 'supabase/tests/personal_family_refresh_single_pass_post.sql':{
+  itemId:'DIC-Q-509-classify-family-single-refresh',issue:509,
+  requiredRuntime:'supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql',
+  sourceBlob:'a04c6e40693577caec79d2678d155786bcfd26da'
  }
 });
 function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
