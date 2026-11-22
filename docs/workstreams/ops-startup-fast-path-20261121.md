@@ -33,3 +33,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=8868768e23de37c7cbeaeae3737f927adcf63f57 
 - Acceptance: show a neutral, accessible loading shell before SDK/session setup; never expose private cache or member identity before authoritative admission. Existing error fallback and owner-specific cached fast path remain intact.
 - Change: synchronous data-free shell paint at startCloudApp entry; no auth, storage, schema, Community or offline semantics changed.
 - Tests: reuse exact prior PR #3658 cloud/approval/security/SQL/imported-source checks for unchanged paths; new exact-head CI required. No deployment or publication.
+
+## Stalled startup recovery — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=cef6e4a951509cb0b9ca4c26fd8529310543fe4b preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- If initialization leaves the neutral startup shell unchanged for 12 seconds, replace it with a data-free recovery message and safe same-origin retry link. Timer is cleared after initialization resolves/rejects. Late auth initialization may still complete; the recovery link never grants admission or accesses private cache.
+- Preserve existing session/auth, offline queue, and Community review rules. Exact CI and integration required. No publication.

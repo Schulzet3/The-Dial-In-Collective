@@ -1266,6 +1266,13 @@ export async function startCloudApp(){
  // Paint a neutral, data-free shell before SDK/session initialization. Never
  // display cached private workspace until server admission has completed.
  root.innerHTML='<main class="shell welcome" role="status" aria-live="polite"><h1>The Dial In Collective</h1><p class="helper">Opening your workspace…</p></main>';
+ // If session setup stalls, offer a safe reload rather than leaving a permanent
+ // loading screen. Never paint private state or bypass admission on timeout.
+ const startupShell=root.innerHTML;
+ const recoveryTimer=setTimeout(()=>{
+  if(root.innerHTML!==startupShell)return;
+  root.innerHTML='<main class="shell welcome" role="alert"><h1>The Dial In Collective</h1><p class="helper">Opening is taking longer than expected.</p><p><a href="/">Try opening again</a></p></main>';
+ },12000);
  try{
   secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
   if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');
@@ -1281,7 +1288,7 @@ export async function startCloudApp(){
   }).catch(()=>{});
   const sdk=globalThis.supabase.createClient(CLOUD_CONFIG.supabaseUrl,CLOUD_CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'dic_cloud_auth_v1'}});
   const client=createCloudClient(sdk,{redirectUrl:new URL(location.pathname,location.origin).href});const app=new CloudApp(client);await app.init();return app;
- }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}
+ }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}finally{clearTimeout(recoveryTimer);}
 }
 startCloudApp();
 export {CloudApp};
