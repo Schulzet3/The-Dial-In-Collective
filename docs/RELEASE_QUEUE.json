@@ -18308,6 +18308,30 @@
       ],
       "notes": "SAFE source-only development correction and original R443 controls retained. All six tested source/test/journal/queue Git blobs equal merged PR head. PR head and five applicable merged push workflows completed SUCCESS; six intentionally skipped Node tests not PASS. No measured member incident or espresso quality improvement; no deployment, production provider/SQL/Auth/Edge/member writes or Locked target change.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-3781-returning-session-background-admission",
+      "issue": 3781,
+      "pr": 3782,
+      "title": "Open previously admitted same-owner cached workspace while rechecking access in background",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Owner Nov22 direct approval; live preflight development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+      "tests": [
+        "Initial PR head d5e1eb5 failed cheap queue-intake guard before exercising Node/Chromium: missing TESTING scope entry. Corrected here with new approval-coverage inventory.",
+        "New 6 Node regressions for local session, provisional cache, cross-account, admission revocation, read-only and background retry; exact PR-head hosted checks PENDING; no PASS inferred."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and postmerge Auth/privacy/browser/SQL/approval checks must finish SUCCESS; no early READY.",
+        "Frozen READY source isolation and five candidate CI SUCCESS certificate under #3347 not yet available."
+      ],
+      "notes": "Development-only read-only optimistic own-cache preview; every server cloud read/write still requires current admission. Retains owner-bound outbox, session isolation, preexisting offline/cache and history. No production, SQL, Auth, member data, Netlify or publisher write.",
+      "production_deployed": false
     }
   ],
   "history": [
