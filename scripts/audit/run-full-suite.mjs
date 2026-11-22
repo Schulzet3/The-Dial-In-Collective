@@ -29,8 +29,20 @@ export function selectFullSuiteShard(plan,shard='all'){
  if(shard==='all')return plan;
  if(!/^(?:[01]\/2|[012]\/3)$/.test(shard))throw Error('Invalid full-suite shard selector');
  const [selected,lanes]=shard.split('/').map(Number);
- const parallel=plan.parallel.filter((_,i)=>lanes===3?i%3===selected:
-  (i%2===0||i%12===1?0:1)===selected);
+ // Existing official HIGH runs showed 48s validate / 53s cloud / 85s approval
+ // general corpus. Shift only half of approval's original files onto the two
+ // faster required runners; keep every file exactly once and all jobs intact.
+ // The four-slot round-robin prevents a single contiguous test-family takeover.
+ const parallel=plan.parallel.filter((_,i)=>{
+  if(lanes===3){
+   const original=i%3;
+   if(original!==2)return original===selected;
+   const slot=Math.floor(i/3)%4;
+   const balanced=slot===0?0:slot===1?1:2;
+   return balanced===selected;
+  }
+  return (i%2===0||i%12===1?0:1)===selected;
+ });
  // Keep the time-budgeted HTML corpus isolated on the final runner
  // (cloud for legacy 2-way, approval for high-risk 3-way).
  // Four measured HIGH CI pairs show a recurring cloud Node tail: 89/90/89/89s
