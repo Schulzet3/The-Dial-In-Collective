@@ -735,3 +735,31 @@ test('#3347 new unready coffee R324 test follows restored parser source, not onl
  assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
  assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
 });
+
+
+test('#3347 final gate validates both independently reviewed workflow-only test exclusions',()=>{
+ const specs=[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST];
+ const paths=specs.map(x=>x.path),workflows=specs.map(x=>x.restoredWorkflow);
+ const at=(ref,path)=>{
+  const spec=specs.find(x=>x.path===path);
+  if(spec)return ref===A||ref===C?null:'100644:'+spec.sourceBlob;
+  if(workflows.includes(path))return ref===A||ref===C?'100644:published':'100644:unready';
+  return validate.sourceObjectAt(ref,path);
+ };
+ const input={...validate,manifest:{...manifest,restored_unpublished_workflow_paths:workflows,
+   excluded_unpublished_workflow_test_paths:paths},sourceObjectAt:at,
+   developmentChangedPaths:[...validate.developmentChangedPaths,...workflows],
+   stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,...workflows,...paths]};
+ assert.equal(validateReadyOnlyCandidate(q,input).ready,true);
+ for(const spec of specs){
+  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+   sourceObjectAt:(ref,p)=>ref===B&&p===spec.path?'100644:'+'f'.repeat(40):at(ref,p)}),
+   /reviewed workflow-only test/,'changed test bytes must HOLD');
+  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+   sourceObjectAt:(ref,p)=>ref===C&&p===spec.path?'100644:'+spec.sourceBlob:at(ref,p)}),
+   /Workflow-only test exclusion source/,'candidate containing excluded test must HOLD');
+ }
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+   manifest:{...input.manifest,excluded_unpublished_workflow_test_paths:[...paths,'tests/unreviewed.test.mjs']}}),
+   /reviewed workflow-only test/,'third unreviewed test must HOLD');
+});
