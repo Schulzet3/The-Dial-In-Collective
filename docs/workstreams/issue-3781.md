@@ -45,3 +45,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 
 - This branch records ONE provisional selected READY row to create a read-only frozen candidate; no production/Netlify/Supabase writes, no one-use grant, no claim of ready or deployment.
 - Current production tested 64d6f50de9562c0442a05e865e9ed33f0cd2925a, release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, deploy 6b0284543511466fd75b4573. Unready same-file espresso changes must remain excluded.
 - Reproduce exact approved source/CI and restore all unselected runtime/tests/workflow bytes to last-published Git objects. Full Auth/privacy high-risk checks required.
+
+DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — independent nonpublishing candidate tree evidence runner [skip netlify]
+- Authority: owner #3781 new explicit Deploy after preserving exact #3347 certification. This temporary preparation-branch push workflow runs published main's reviewed stageReadyOnlyCandidate/precertifyReadySource purely in GitHub runner local Git memory, emits exact immutable expected-tree/manifest/journal delta artifact, and pushes NO refs.
+- Source preparation branch first parent 44e4f95573027c5f8b6a4bec69d1811a8e13a688, current live development preflight 5d36f3e612a8bc756cb72eb4184c22fbac149ec4/c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Workflow triggers ONLY on this scoped branch+file path, does NOT grant READY on development, perform provider writes, grant or release. Its result PENDING until actual official hosted run; failures need root-cause repair, not PASS.
+- Exact frozen candidate Git ref must later be created by authenticated connector with independent tree SHA match, five native exact candidate-SHA SUCCESS jobs, and a strict READY certificate before any main release controller. No full/duplicate build in this receipt job.

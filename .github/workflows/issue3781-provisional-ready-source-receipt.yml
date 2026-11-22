@@ -1,0 +1,41 @@
+name: DIC #3781 isolated READY candidate source receipt (nonpublishing)
+# One-shot preparation branch: no pushes, grants, production, Netlify or provider access.
+on:
+  push:
+    branches: ['prep/issue3781-ready-provisional-20261122']
+    paths: ['.github/workflows/issue3781-provisional-ready-source-receipt.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  source-receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify exact preparation source and use reviewed main staging engine
+        shell: bash
+        env:
+          FROZEN_PREPARATION_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          test "$(git rev-parse HEAD)" = "$FROZEN_PREPARATION_SHA"
+          git checkout --detach origin/main
+          git cat-file -e "$FROZEN_PREPARATION_SHA^{commit}"
+          mkdir -p qa_artifacts/issue3781
+          node scripts/release/precertify-ready-source.mjs "$FROZEN_PREPARATION_SHA" --receipt |
+            sed -n 's/^\[DIC READY pre-certification\] //p' > qa_artifacts/issue3781/receipt.json
+          node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/issue3781/receipt.json','utf8')); if(r.status!=='LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE'||r.development_source_sha!==process.env.FROZEN_PREPARATION_SHA||!r.expected_tree_sha||!r.candidate_branch) process.exit(2); console.log('DIC SOURCE RECEIPT PASS:',r.candidate_branch,r.expected_tree_sha,'restorations:',r.delta_entries.length)"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dic-issue3781-frozen-source-receipt-${{ github.run_id }}
+          path: qa_artifacts/issue3781/receipt.json
+          retention-days: 7
+          if-no-files-found: error
