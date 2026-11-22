@@ -76,3 +76,19 @@ test('#3347 READY exact source parity accepts only matching deleted test bytes, 
   path===deleted?undefined:blob}).ready,false,
   'unknown Git object readback is not deletion evidence');
 });
+
+
+test('#3347 candidate source evidence only accepts exact dual-absent test paths',()=>{
+ const head=B,merged=S,path='tests/unpublished-recommendation-feature.test.mjs';
+ const selected={...item,tests:[path+': scoped proof']};
+ const cases={mergedSha:merged,ciSourceSha:head,changedPaths:item.scope_paths,
+  checks:names.map(name=>({name,sha:head,conclusion:'success',status:'completed'})),testPaths:[path]};
+ const present='100644:'+'f'.repeat(40);
+ assert.equal(assessReadyEvidence(selected,{...cases,sourceObjectAt:(sha,p)=>p===path?null:present}).ready,true);
+ for(const f of [
+  (sha,p)=>p!==path?present:sha===head?null:present,
+  (sha,p)=>p!==path?present:sha===merged?null:present,
+  (sha,p)=>p!==path?present:undefined,
+  (sha,p)=>p!==path?present:sha===head?'100644:'+'a'.repeat(40):present
+ ])assert.equal(assessReadyEvidence(selected,{...cases,sourceObjectAt:f}).ready,false);
+});

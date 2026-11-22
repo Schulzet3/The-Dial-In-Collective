@@ -57,7 +57,8 @@ export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],change
    // A first-parent-deleted test is exactly absent from BOTH immutable refs.
    // This is parity only for changed test provenance, never an owned runtime path.
    if(a===null&&b===null&&!(item?.scope_paths||[]).includes(path))continue;
-   if(typeof a!=='string'||!a||a!==b)
+   // Identical absence is exact parity; reject one-sided deletion or unknown reads.
+   if(!((a===null&&b===null)||(typeof a==='string'&&a.length>0&&a===b)))
     errors.push('tested head differs from merged code/test blob: '+path);
   }
  }
