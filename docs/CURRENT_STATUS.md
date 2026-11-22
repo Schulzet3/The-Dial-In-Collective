@@ -1,3 +1,12 @@
+## November 22, 2026 UTC — #3667 focused QA-only CI path tested, merged and timed [skip netlify]
+
+- Mandatory source preflight verified at development `1eb9f62abb89a395052e0dcde7fe19015cb190b1`, `docs/ai/PREFLIGHT.md` blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`. Owner speed-first authorization recorded in BOTH Locked Master and Ledger.
+- [PR #3681](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3681) nonforce merged at `5012964b0c03b61ab34d8d34cdfcbe84eb75b06e`; exact corrected PR five check jobs SUCCESS (validate `44988286966`, cloud/mobile `44988286960`, approval `44988286947`, SQL `44988286941`). Eight tested code/test/policy blobs exactly matched merge. Exact merged-push validate `44988489617`, cloud/mobile `44988489650`, approval `44988489607` SUCCESS; SQL push NOT_APPLICABLE, PR SQL SUCCESS. No production.
+- Native follow-up [PR #3689](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3689) confirmed the actual QA-only route: five required jobs SUCCESS; validate `44988720734` 36s vs HIGH baseline 140s (3.9x), cloud/mobile `44988720688` each 28s vs 106s/110s, SQL `44988720740` 14s job success with SQL regression NOT_APPLICABLE, approval `44988720731` SUCCESS. Four focused Node test files executed; no Chromium/build/npm ci/lint/full app suite. This PR closed UNMERGED after overlapping improved concurrent tests arrived; those stronger current source changes were preserved.
+- Earlier speed wins retained: two-runner Node critical path 227s→115s; one-process syntax stage 30.27s→0.50s. **Under-15-minute implementation-to-READY remains UNVERIFIED** because #3347 frozen candidate and five exact-source CI are still separate. Queue item #3667 stays TESTING. No new owner Publish, deploy, Netlify/DB/member/provider/backup, secrets, billing or force.
+
+---
+
 ## November 22, 2026 UTC — #3667 speed-first CI preflight and batch parser MERGED/VERIFIED [skip netlify]
 
 - Owner approved removing/replacing unnecessary checks to prioritize implementation-to-READY speed (9–10/10; security testing 1/10), targeting routine end-to-end under 15 minutes, not a guarantee. Narrow override recorded in BOTH Master Spec and Decision Ledger, AGENTS and coverage by PR #3676, nonforce squash merged cfd8bdd7b79b503d849f1a1824ad1ddd3e95c0b4. Seven executable file blobs exactly match tested PR head 0c1700cf0d741c37a6d12ec737666b603e2a8e68.

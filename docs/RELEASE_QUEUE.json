@@ -18059,7 +18059,9 @@
         "Exact PR final five SUCCESS: validate 44984483650, cloud-tests/mobile-browser-qa 44984483653, approval 44984483687, SQL 44984483657. Merged push exact-SHA applicable four SUCCESS: validate 44984692927, cloud-tests/mobile 44984692870, approval 44984692878. Merged SQL workflow NOT_APPLICABLE, not PASS; PR SQL success retained.",
         "Merged full Node corpus: 3,003 general+4 isolated HTML +3,114 other = 6,121 tests; 6,115 PASS, 0 FAIL, 6 intentional SKIP, every test file once; two separate required runners. Merged shard0 136s; shard1 67s. Single runner prior benchmark 227s. No production or member writes.",
         "Owner #3667 scoped QA-only test selection now proposed: four Node 22 source/CI fixture tests for six explicit nonshipped diagnostic/test paths; no unrelated full corpus, SQL/Chromium/build/lint. Exact PR CI pending; cannot mark READY without #3347 certificate.",
-        "PR #3681 first head 0b3122f2a96e9075b69e52e7bd4cf477c03e111f early queue-intake HOLD: non-deployable scripts/tests/workflow paths incorrectly listed as scope_paths. Corrected to the existing exact deployable package.json only; CI-only paths are recorded in this test note and #3667 journal. Prior failure is not a PASS."
+        "PR #3681 first head 0b3122f2a96e9075b69e52e7bd4cf477c03e111f early queue-intake HOLD: non-deployable scripts/tests/workflow paths incorrectly listed as scope_paths. Corrected to the existing exact deployable package.json only; CI-only paths are recorded in this test note and #3667 journal. Prior failure is not a PASS.",
+        "PR #3681 exact corrected head 260b4fa66235be2b5e1deaa65b11a2dcd643aa73 five jobs SUCCESS: validate 44988286966, cloud-tests/mobile 44988286960, approval 44988286947, SQL 44988286941. Nonforce merge 5012964b0c03b61ab34d8d34cdfcbe84eb75b06e; eight executable and governance blobs matched tested PR. Exact merged push validate 44988489617, cloud-tests/mobile 44988489650, approval 44988489607 SUCCESS; push SQL NOT_APPLICABLE (PR SQL SUCCESS).",
+        "Hosted QA-only four-file Node proof, PR #3689 exact head c69a90e549f516ffb41784c7cacdc22a50d9c93c: validate 44988720734 SUCCESS 36s vs high-risk #3681 140s (3.9x); cloud-tests + mobile 44988720688 SUCCESS 28s each vs 106/110s; SQL job 44988720740 SUCCESS with isolated SQL regression NOT_APPLICABLE; approval 44988720731 SUCCESS. PR #3689 closed UNMERGED after concurrent stronger test/preflight edits; no stale source overwritten."
       ],
       "ci_runs": [
         44984227423,
@@ -18075,13 +18077,24 @@
         44984692927,
         44984692870,
         44984692878,
-        44984692941
+        44984692941,
+        44988286966,
+        44988286960,
+        44988286947,
+        44988286941,
+        44988489617,
+        44988489650,
+        44988489607,
+        44988720734,
+        44988720688,
+        44988720740,
+        44988720731
       ],
       "blockers": [
         "Independent #3347 frozen source-isolated READY candidate and five candidate-bound SUCCESS statuses are not established; remain TESTING, not READY.",
         "No owner Publish authorization; no release/production or provider writes."
       ],
-      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings. Measured ~1.97x shorter full Node critical-path time: 115s vs 227s single runner. PR head all five SUCCESS; still TESTING pending nonforce merge, merged CI and READY candidate. VERIFIED dev-only integration; future READY still requires separate source-bound frozen candidate. The 100x aspirational owner speed target is NOT demonstrated: best measured full Node critical-path improvement 227s/115s=1.97x.",
+      "notes": "VERIFIED nonpublishing development CI optimization (PR #3681, merge 5012964b). Two-runner full suite ~227s to 115s critical path; single-process syntax ~30.27s to 0.50s; hosted QA-only validate 140s (HIGH) vs 36s (QA-only). PR and merged development source CI passed. Under-15-minute REQUEST-to-frozen-READY candidate still NOT VERIFIED; #3347 exact frozen source and five successful candidate-sha statuses are required before READY. TESTING is accurate. No Publish or provider writes.",
       "production_deployed": false
     },
     {
