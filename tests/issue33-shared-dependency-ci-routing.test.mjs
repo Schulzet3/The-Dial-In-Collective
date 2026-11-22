@@ -46,3 +46,14 @@ test('direct parser Agtron import is covered on PR and merged pushes without bro
  for(const group of groups)assert.ok(covered(group,'src/server/agtron-roast.mjs'));
  for(const group of groups)assert.ok(!covered(group,'src/server/unrelated-roaster-sandbox.mjs'));
 });
+
+test('transitive selected Add Coffee UI constants dependency triggers guarded source evidence on both events',()=>{
+ const renderer=readFileSync('site/cloud/coffee-url-autofill.js','utf8');
+ const ui=readFileSync('site/lib/ui.js','utf8');
+ assert.ok(renderer.includes("from '../lib/ui.js'"),'actual selected renderer must import UI');
+ assert.ok(ui.includes("from './constants.js'"),'actual UI must import constants');
+ for(const group of groups){
+  assert.ok(covered(group,'site/lib/constants.js'),'missing transitive UI constants');
+  assert.ok(!covered(group,'site/lib/noncoffee-demo.js'),'unrelated UI library must not fan out');
+ }
+});
