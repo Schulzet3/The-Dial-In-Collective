@@ -1,8 +1,8 @@
-name: DIC one-shot startup nonpublishing source proof V3
+name: DIC one-shot startup nonpublishing source proof V4
 on:
   push:
     branches:
-      - 'work/startup-ready-precert-v3-20261122'
+      - 'work/startup-ready-precert-v4-20261122'
 permissions:
   contents: read
   actions: read
@@ -26,7 +26,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$GITHUB_REF" = 'refs/heads/work/startup-ready-precert-v3-20261122'
+          test "$GITHUB_REF" = 'refs/heads/work/startup-ready-precert-v4-20261122'
           git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main' '+refs/heads/release/production:refs/remotes/origin/release/production' '+refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation'
           git worktree add --detach "$RUNNER_TEMP/dic-ready-main-tools" refs/remotes/origin/main
           node "$RUNNER_TEMP/dic-ready-main-tools/scripts/release/precertify-ready-source.mjs" "$GITHUB_SHA" --receipt
