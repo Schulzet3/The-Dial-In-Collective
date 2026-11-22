@@ -167,3 +167,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=07ee71084cfac00152600ba6bb17aff209880e4e 
 - Root cause: planReadyOnlyCandidate returns compact ready_items without state after checking queue state, but discoverReviewedRestoredStartupTests read selected.state and incorrectly rejected every real READY selection. Synthetic test passed an unprojected full queue row, masking this integration bug.
 - Exact fix: use the original immutable queue row state instead of compact planner field. Keep all selected source/issue/merge, pinned overlap, published and first-parent test blob proofs, other exact Git checks, five native candidate CI checks and Publish-only gate. Add unit regression for compact READY selected object and a TESTING queue that MUST HOLD.
 - Requires exact main controller CI and nonforce merge; then verify source receipt again. Do not label READY before frozen five exact candidate checks. No feature code, Auth, SQL, Netlify, member or secret changes.
+
+## November 22, 2026 UTC - candidate second workflow-only Git validator parity [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Owner-approved #3347 / five startup changes, NONPUBLISHING. Source-only startup receipt run 44989382451 FAILED because discoverReviewedWorkflowTestExclusions already recognized the exact new fast-pr-check test, but validateReadyOnlyCandidate hard-coded the older single workflow-only test ID/sha. It rejected a source-proven excluded test despite the published source lacking it. Retain FAIL evidence.
+- Minimal repair: both discovery and validation use identical two immutable allowlisted test-to-workflow entries; keep strict exact candidate absence, current source Git blob, published absence, selected READY first-parent test provenance, manifest, Auth/SQL/offline, static imports, five exact candidate SUCCESS, and owner-only Publish gates. New full candidate validator regression accepts ONLY approved second entry and rejects candidate leakage or selected first-parent changes. No app, migration, grant, Netlify or provider writes.
+- Exact main controller PR/run + nonforce integration, then a new nonpublishing startup read-only source receipt and frozen five native candidate checks before live READY.

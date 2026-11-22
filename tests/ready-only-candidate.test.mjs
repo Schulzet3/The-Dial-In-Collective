@@ -455,6 +455,30 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
 });
 
 
+test('#3347 strict candidate accepts second reviewed CI workflow-only test without accepting drift',()=>{
+ const spec=REVIEWED_CI_FAST_PR_TEST;
+ const path=spec.path,workflow=spec.restoredWorkflow,testSha='100644:'+spec.sourceBlob;
+ const objectAt=(ref,p)=>{
+  if(p===path)return ref===A||ref===C?null:testSha;
+  if(p===workflow)return ref===A||ref===C?'100644:published-workflow':'100644:new-workflow';
+  return validate.sourceObjectAt(ref,p);
+ };
+ const args={...validate,
+  manifest:{...manifest,restored_unpublished_workflow_paths:[workflow],
+   excluded_unpublished_workflow_test_paths:[path]},
+  sourceObjectAt:objectAt,
+  developmentChangedPaths:[...validate.developmentChangedPaths,workflow],
+  candidateChangedPaths:[...validate.candidateChangedPaths],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,workflow,path]};
+ assert.equal(validateReadyOnlyCandidate(q,args).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...args,
+  sourceObjectAt:(ref,p)=>ref===C&&p===path?testSha:objectAt(ref,p)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...args,
+  sourceObjectAt:(ref,p)=>ref===D+'^'&&p===path?null:objectAt(ref,p)}),
+  /Selected READY merge introduced or modified a workflow-only test/);
+});
+
 test('#2169 reviewed workflow-only test exclusion is pinned to actual source',()=>{
  const t=REVIEWED_WORKFLOW_TEST;
  assert.equal(t.sourceBlob,'32174be8c42ba9ae73085e0f6f1f42613b2b08db');
