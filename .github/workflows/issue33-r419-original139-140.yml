@@ -33,10 +33,10 @@ jobs:
           node --check scripts/audit/issue33-r419-original139-140-check.mjs
       - name: Guarded first-party selected official HTML parser and unsaved UI
         env:
-          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R419_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '139,140'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r419
-        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+        run: GITHUB_SHA="$DIC_R419_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
       - name: Strict exact-source first-party SHA identity and conflicting notes
         if: always()
         env:
