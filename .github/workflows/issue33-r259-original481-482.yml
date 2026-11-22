@@ -1,0 +1,54 @@
+name: DIC Issue33 R259 exact original481 482 public source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r259-original481-482.yml
+      - scripts/audit/issue33-r259-481-482-check.mjs
+      - tests/coffee-issue33-r259-481-482.test.mjs
+      - docs/workstreams/ops-issue33-r259-481-482-current-source-20261116.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r259-original481-482.yml
+      - scripts/audit/issue33-r259-481-482-check.mjs
+      - tests/coffee-issue33-r259-481-482.test.mjs
+      - docs/workstreams/ops-issue33-r259-481-482-current-source-20261116.md
+permissions:
+  contents: read
+jobs:
+  selected-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected current and hostile parser regression
+        run: node --test tests/coffee-issue33-r259-481-482.test.mjs
+      - name: Fresh bounded exact original481 482 official HTTPS actual parser Add Coffee Source Review
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '481,482'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r259
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent selected-source and raw SHA afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r259
+          DIC_R259_VERIFY: '1'
+          DIC_R259_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R259_EVENT_SHA: ${{ github.sha }}
+        run: node scripts/audit/issue33-r259-481-482-check.mjs
+      - name: Expiring selected official bytes and result
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r259-selected481-482
+          path: /tmp/dic33-r259/
+          retention-days: 1
+          if-no-files-found: warn
