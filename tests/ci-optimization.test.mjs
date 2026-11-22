@@ -71,6 +71,9 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.equal(new Set([...plan.parallel,...plan.serial]).size,plan.parallel.length+plan.serial.length);
  const shard0=selectFullSuiteShard(plan,'0/2'),shard1=selectFullSuiteShard(plan,'1/2');
  assert.deepEqual([...shard0.parallel,...shard1.parallel].sort(),plan.parallel);
+ assert.deepEqual(shard0.parallel,plan.parallel.filter((_,i)=>i%2===0||i%12===1),'retains existing validate files and moves only every sixth cloud file');
+ assert.deepEqual(shard1.parallel,plan.parallel.filter((_,i)=>i%2===1&&i%12!==1),'retains all other cloud files');
+ assert.ok(shard0.parallel.length>shard1.parallel.length,'the imbalance is intentionally corrected');
  assert.deepEqual(shard0.serial,[]);
  assert.deepEqual(shard1.serial,plan.serial);
  assert.match(file('scripts/audit/run-full-suite.mjs'),/if\(!files\.length\)/,
