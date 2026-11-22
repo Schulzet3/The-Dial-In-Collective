@@ -20,7 +20,7 @@ Read [CONTEXT_ENTRYPOINT.md](CONTEXT_ENTRYPOINT.md) **after this preflight** for
 
 ## 2. Approve the actual action, not a guessed process
 
-Identify explicit owner scope and current Locked decisions (Master Spec **and** Decision Ledger), applicable supersessions, data/privacy impact, and required recovery. No research or brainstorming automatically approves a product change. Use the existing #457 risk-tier test matrix: **one applicable build**, no duplicate test suite, reuse matching exact-source PASS evidence. SKIPPED, pending, NOT_APPLICABLE and PR-only status are not PASS. Respect `development/backend-foundation` = app, `main` = operations, `release/production` = publication. No invented release steps, manual owner GitHub triggers or unapproved releases.
+Identify explicit owner scope and current Locked decisions (Master Spec **and** Decision Ledger), applicable supersessions, data/privacy impact, and required recovery. No research or brainstorming automatically approves a product change. Use #457 and the owner-Locked #3667 speed-first supersession: **one applicable build**, no duplicate suite, reuse matching exact-source PASS evidence. Exact allowlisted source-neutral CI test/helper edits use focused Node checks without app build, SQL, Chromium or dependency install; mixed/runtime/Auth/SQL/unknown changes keep conservative broader coverage. Five exact-source successful frozen-candidate jobs and #3347 nonpublishing READY prevalidation remain mandatory. SKIPPED, pending, NOT_APPLICABLE and PR-only status are not PASS. Respect `development/backend-foundation` = app, `main` = operations, `release/production` = publication. No invented release steps, manual owner GitHub triggers or unapproved releases.
 
 ## 3. Execute, verify and close the loop
 

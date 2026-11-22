@@ -34,6 +34,8 @@ test('one build per scoped change and no routine duplicate browser/full suites',
  assert.equal((cloud.match(/npm run build:cloud/g)||[]).length,1);
  assert.equal((beta.match(/npm run build:cloud/g)||[]).length,1);
  assert.match(visual,/node scripts\/audit\/site-integrity\.mjs --dist/);
+ assert.match(beta,/Focused source-neutral CI helper and fixture regressions[\s\S]*?node --test tests\/ci-optimization\.test\.mjs tests\/ci-scope\.test\.mjs/);
+ assert.match(beta,/node_mode != 'ci-fast'\) \|\| steps\.scope\.outputs\.lint/);
 });
 test('CI stage receipts cannot escape artifact dir or inject shell',()=>{
  assert.deepEqual(parseStageArgs(['--name','lint','--out','qa_artifacts/ci-metrics/validate.jsonl','--','npm','run','lint']),{

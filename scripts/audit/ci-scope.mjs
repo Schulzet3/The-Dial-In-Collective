@@ -7,6 +7,15 @@ import {resolve} from 'node:path';
 const SHA=/^[a-f0-9]{40}$/;
 const LEVEL={docs:0,low:1,medium:2,high:3};
 const APP_PREFIX=['site/','src/server/','netlify/functions/','supabase/migrations/','supabase/functions/'];
+// Only these source-neutral CI helpers/tests have complete focused coverage.
+// Mixed code, Auth, SQL, workflows and unknown paths still use full risk routing.
+const CI_FAST_PATHS=new Set([
+ 'tests/ci-optimization.test.mjs','tests/ci-scope.test.mjs',
+ 'tests/fast-pr-check.test.mjs','tests/required-check-workflows.test.mjs',
+ 'tests/site-integrity.test.mjs',
+ 'scripts/audit/measure-stage.mjs','scripts/audit/syntax-batch.mjs',
+ 'scripts/audit/fast-pr-check.mjs'
+]);
 const APP_FILES=new Set(['build_cloud.mjs','netlify.toml','package.json','package-lock.json',
  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
  'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']);
@@ -46,6 +55,7 @@ export function docsOnlyPaths(paths){
 }
 function impactKind(path){
  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
+ if(CI_FAST_PATHS.has(path))return 'ci-fast';
  if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
   AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
   POST_PIN_AUDIT_EVIDENCE_RECEIPT.test(path)||POST_PIN_PENDING_REVIEW_INDEX.test(path)||
@@ -73,6 +83,7 @@ function impactKind(path){
 export function classifyImpactPaths(paths){
  if(!Array.isArray(paths)||!paths.length)paths=['[unknown]'];
  const kinds=new Set(paths.map(impactKind));
+ const fastCiOnly=kinds.has('ci-fast')&&[...kinds].every(k=>k==='ci-fast'||k==='docs');
  const tier=[...kinds].reduce((v,k)=>{
   const t=k==='docs'?'docs':k==='style'?'low':
    ['shots','coffee','ui'].includes(k)?'medium':'high';
@@ -81,14 +92,14 @@ export function classifyImpactPaths(paths){
  const ui=['style','ui','auth','unknown','infrastructure'].some(k=>kinds.has(k));
  const sql=['sql','auth','unknown','infrastructure'].some(k=>kinds.has(k));
  const mixedMedium=['shots','coffee','ui'].filter(k=>kinds.has(k)).length>1;
- const finalTier=mixedMedium?'high':tier;
+ const finalTier=fastCiOnly?'medium':mixedMedium?'high':tier;
  return {
   tier:finalTier,docs_only:finalTier==='docs',
-  node_mode:finalTier==='high'?'full':kinds.has('shots')?'shots':kinds.has('coffee')?'coffee':'none',
+  node_mode:fastCiOnly?'ci-fast':finalTier==='high'?'full':kinds.has('shots')?'shots':kinds.has('coffee')?'coffee':'none',
   cloud_mode:finalTier==='high'?'none':kinds.has('ui')?'targeted':'none',
   browser_mode:!ui?'none':finalTier==='low'?'visual':finalTier==='high'?'high':'ui',
-  sql:sql||mixedMedium,lint:LEVEL[finalTier]>=LEVEL.medium,
-  build_validate:finalTier!=='docs'&&!ui,build_browser:ui,
+  sql:sql||mixedMedium,lint:!fastCiOnly&&LEVEL[finalTier]>=LEVEL.medium,
+  build_validate:finalTier!=='docs'&&!ui&&!fastCiOnly,build_browser:ui,
   provider_guard:kinds.has('infrastructure')||kinds.has('unknown'),kinds:[...kinds].sort(),paths
  };
 }

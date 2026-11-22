@@ -90,3 +90,36 @@ test('Issue #267 post-S2 historical Git-tree inventory delta stays docs-only wit
   assert.equal(mixed.sql,bare.sql,runtime);
  }
 });
+
+test('strict CI-only allowlist skips redundant app build, SQL and Chromium but keeps five statuses',()=>{
+ const isolated=[
+  'tests/ci-optimization.test.mjs','tests/ci-scope.test.mjs',
+  'tests/fast-pr-check.test.mjs','tests/required-check-workflows.test.mjs',
+  'tests/site-integrity.test.mjs','scripts/audit/measure-stage.mjs',
+  'scripts/audit/syntax-batch.mjs','scripts/audit/fast-pr-check.mjs'
+ ];
+ const result=classifyImpactPaths([...isolated,'docs/workstreams/issue-3667.md']);
+ assert.equal(result.tier,'medium');assert.equal(result.node_mode,'ci-fast');
+ assert.equal(result.cloud_mode,'none');assert.equal(result.browser_mode,'none');
+ assert.equal(result.sql,false);assert.equal(result.lint,false);
+ assert.equal(result.build_validate,false);assert.equal(result.build_browser,false);
+ assert.equal(result.provider_guard,false);
+ for(const path of isolated)
+  assert.equal(classifyImpactPaths([path]).node_mode,'ci-fast',path);
+ const unsafe=[
+  'site/cloud/main.js','site/lib/engine.js','src/server/coffee-parser.mjs',
+  'supabase/migrations/new.sql','netlify/functions/new.mjs',
+  '.github/workflows/cloud-beta-ci.yml','scripts/audit/ci-scope.mjs',
+  'scripts/audit/run-full-suite.mjs','scripts/release/ready-promotion-gate.mjs',
+  'tests/admin-admission.test.mjs','tests/offline-queue.test.mjs','docs/audits/unknown.json'
+ ];
+ for(const path of unsafe){
+  const mixed=classifyImpactPaths([...isolated,path]);
+  assert.equal(mixed.tier,'high','unsafe mix must be HIGH: '+path);
+  assert.equal(mixed.node_mode,'full',path);
+ }
+ const run=()=>isolated.join('\n')+'\n';
+ assert.equal(classifyChanges({base:A,head:B,event:'pull_request',git:run}).node_mode,'ci-fast');
+ assert.equal(classifyChanges({base:A,head:B,event:'candidate',git:run}).tier,'high',
+  'published-to-candidate CI may never bypass frozen-source checks');
+});
