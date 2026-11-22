@@ -735,3 +735,33 @@ test('#3347 new unready coffee R324 test follows restored parser source, not onl
  assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
  assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
 });
+
+test('#3347 fast CI-only workflow test is accepted under exact same rules as approved browser-only test',()=>{
+ const spec=REVIEWED_CI_FAST_PR_TEST;
+ const objectAt=(ref,p)=>{
+  if(p===spec.path)return ref===A||ref===C?null:
+   '100644:'+spec.sourceBlob;
+  if(p===spec.restoredWorkflow)return ref===A||ref===C?
+   '100644:published-workflow':'100644:unready-workflow';
+  return validate.sourceObjectAt(ref,p);
+ };
+ const input={...validate,sourceObjectAt,
+  manifest:{...manifest,
+   restored_unpublished_workflow_paths:[spec.restoredWorkflow],
+   excluded_unpublished_workflow_test_paths:[spec.path]},
+  developmentChangedPaths:[...validate.developmentChangedPaths,spec.restoredWorkflow],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,spec.restoredWorkflow,spec.path]};
+ assert.equal(validateReadyOnlyCandidate(q,input).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===C&&p===spec.path?
+   '100644:'+spec.sourceBlob:objectAt(r,p)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===B&&p===spec.path?
+   '100644:unreviewed':objectAt(r,p)}),
+  /Only one byte-pinned, reviewed workflow-only test/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===D+'^'&&p===spec.path?
+   null:objectAt(r,p)}),
+  /Selected READY merge introduced or modified a workflow-only test/);
+});

@@ -850,8 +850,9 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    })))
   reject('Only one byte-pinned, reviewed workflow-only test can be excluded when its workflow was restored');
  for(const path of workflowOnlyTests){
-  if(path!==REVIEWED_WORKFLOW_TEST.path||sourceObjectAt(candidateSha,path)!==null||
-     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob||
+  const reviewed=[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST].find(x=>x.path===path);
+  if(!reviewed||sourceObjectAt(candidateSha,path)!==null||
+     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+reviewed.sourceBlob||
      sourceObjectAt(publishedSourceSha,path)!==null)
    reject('Workflow-only test exclusion source/blob/absence mismatch: '+path);
   // Never exclude a test introduced or modified by ANY selected READY merge.
