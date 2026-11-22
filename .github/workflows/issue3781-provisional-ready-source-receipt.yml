@@ -33,6 +33,11 @@ jobs:
           node scripts/release/precertify-ready-source.mjs "$FROZEN_PREPARATION_SHA" --receipt |
             sed -n 's/^\[DIC READY pre-certification\] //p' > qa_artifacts/issue3781/receipt.json
           node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/issue3781/receipt.json','utf8')); if(r.status!=='LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE'||r.development_source_sha!==process.env.FROZEN_PREPARATION_SHA||!r.expected_tree_sha||!r.candidate_branch) process.exit(2); console.log('DIC SOURCE RECEIPT PASS:',r.candidate_branch,r.expected_tree_sha,'restorations:',r.delta_entries.length)"
+      - name: Emit bounded receipt chunks for independent connector verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          node -e 'const fs=require("node:fs");const s=fs.readFileSync("qa_artifacts/issue3781/receipt.json","utf8");for(let i=0;i<s.length;i+=2048)console.log("DIC_RECEIPT_CHUNK:"+i+":"+JSON.stringify(s.slice(i,i+2048)))'
       - uses: actions/upload-artifact@v7
         with:
           name: dic-issue3781-frozen-source-receipt-${{ github.run_id }}
