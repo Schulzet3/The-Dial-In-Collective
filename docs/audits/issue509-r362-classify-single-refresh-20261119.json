@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R362",
+  "date_utc": "2026-11-19",
+  "preflight_development_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "live_classification": {
+    "signature": "private.classify_personal_shot(uuid)",
+    "chars": 3219,
+    "md5": "5183deb46474c10468638cef08d2bd05",
+    "range": "1-3219",
+    "old_refresh_calls_on_previous_equals_new_family": 2,
+    "after_candidate_calls": 1
+  },
+  "consumers": [
+    "private.mutate(uuid,text,jsonb)",
+    "private.dic_admin_edit_record(uuid,bigint,jsonb,text,text)"
+  ],
+  "live_safe_aggregate": {
+    "total_shots": 27,
+    "eligible_family_shots": 13
+  },
+  "finding": "When an already-green eligible shot stays in its prior personal family, classification performs two identical refresh_personal_family calls, each rescanning green shots and updating the same family derived row; duplicate semantic work, not measured latency.",
+  "fix": "Replace only second previous-family refresh guard with previous IS DISTINCT FROM fid. Hidden/non-green and genuinely moved-shot paths unchanged.",
+  "migration": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
+  "test": "supabase/tests/personal_family_refresh_single_pass_post.sql",
+  "conditional_disposable_pg17": true,
+  "first_time_provider_words": 0,
+  "issue267_source_line_credit": 0,
+  "production_writes": 0,
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "ci": "PENDING_PR_HEAD",
+  "next": "Verify exact PR-head PG17/Node22/browser/approval, repair failures, merge nonforce [skip netlify] only on passing applicable checks, retain production read-only."
+}

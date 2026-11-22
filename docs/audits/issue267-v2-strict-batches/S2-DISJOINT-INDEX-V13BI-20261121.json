@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BI",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BH-20261121.json",
+  "development_prewrite_sha": "7b7f6b758fba6ec75ccfd54478afac6cff5321aa",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_PER_PHYSICAL_LINE_LITERAL_SEMANTIC_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "first_line": 437,
+      "last_line": 466,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-437-466-20261121-V13BI.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 68,
+      "path": "scripts/audit/public-product-endpoint-probe.mjs",
+      "source_blob_sha": "68b72e56ab6d2429011ae180477abfe25a8c0a87",
+      "first_line": 32,
+      "last_line": 59,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C68-32-59-20261121-V13BI.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 69,
+      "path": "scripts/audit/security-inventory.mjs",
+      "source_blob_sha": "7ce0c8bd0540deb50034f9f8c4a950312324e50c",
+      "first_line": 1,
+      "last_line": 2,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C69-1-2-20261121-V13BI.json"
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "original_blob_parity": "PASS_3_SOURCE_FILES_SEPARATELY_MATCH_GIT_BLOB",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C68_MATCH_C69_LIVE_DIFFERS",
+  "findings": [
+    {
+      "severity": "LOW",
+      "source": "scripts/audit/public-product-endpoint-probe.mjs:34,50,55-59",
+      "disposition": "NOT_REPRODUCED_NO_EDIT"
+    },
+    {
+      "severity": "INVENTORY",
+      "source": "scripts/audit/security-inventory.mjs",
+      "pinned_blob": "7ce0c8bd0540deb50034f9f8c4a950312324e50c",
+      "live_blob": "b260d40f1b6d5b47d3f5f4f8f3afa8262b3ce412",
+      "disposition": "LIVE_DELTA_NOT_REVIEWED_NOT_CREDITED"
+    }
+  ],
+  "tests": {
+    "new_and_previous_numbered_line_identity": "PASS_60_60",
+    "original_blob_identity": "PASS_3_FILES",
+    "historical_json_parse": "PASS",
+    "pr_head_actions": "PENDING",
+    "merged_push_actions": "PENDING",
+    "node22_lint_build_original603_browser_mobile_offline_sql_auth_rls_performance": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_historical_totals_unchanged": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen_manifest_index": 220,
+    "frozen_path": "docs/audits/application_pass2_tests.json",
+    "frozen_line": 467,
+    "pinned_manifest_index": 69,
+    "pinned_path": "scripts/audit/security-inventory.mjs",
+    "pinned_line": 3
+  }
+}

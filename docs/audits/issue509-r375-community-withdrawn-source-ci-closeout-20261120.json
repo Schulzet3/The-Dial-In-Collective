@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R375",
+  "utc_date": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "7da1ed83c98c9646e478c81e4d53c0250621bbb0",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "immutable_file_blob_content_matched": true
+  },
+  "development_parent_sha": "d6edb19ec1d760f0ab0a53aac2ea32ff74b0f0c8",
+  "published_release_sha": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5",
+  "provider_read_only": true,
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres": "17.11.0.003",
+  "complete_semantic_recheck": [
+    "private.dic_review_community_shot(uuid) full production definition; unverified coffee branch precedes withdrawn guard",
+    "private.dic_on_community_coffee_verification() full production definition; excludes withdrawn in direct update",
+    "private.dic_review_pending_community(integer) full production definition; scoped pending-only ordered batch",
+    "private.dic_recheck_after_link() existing full trigger handler and complete AFTER INSERT/UPDATE OF shot_id,source_revision trigger DDL"
+  ],
+  "caller_dependency": "private.contribution_links AFTER INSERT OR UPDATE OF shot_id,source_revision invokes dic_recheck_after_link -> dic_review_community_shot for the changed projection; a withdrawn projection's coffee can be pending/unverified.",
+  "read_only_3_case_truth_table": [
+    {
+      "state": "withdrawn",
+      "verification": "pending",
+      "live": "held",
+      "unpublished_fix": "withdrawn"
+    },
+    {
+      "state": "withdrawn",
+      "verification": "verified",
+      "live": "withdrawn",
+      "unpublished_fix": "withdrawn"
+    },
+    {
+      "state": "pending_quality",
+      "verification": "pending",
+      "live": "held",
+      "unpublished_fix": "held"
+    }
+  ],
+  "source_fix": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+  "source_fix_git_blob": "d629d2f0cbd6c9f291a8b4538340c1de549f04a1",
+  "regression": "supabase/tests/community_quality_integrity.sql",
+  "regression_git_blob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+  "sql_workflow_git_blob": "de10846d8fad93f907307a8fe3ac8114443583bb",
+  "tested_pr_head": "acf3be0f95c0b19ef5542a1a46e820c6e30e595f",
+  "source_blob_parity_current_vs_tested": true,
+  "isolated_postgres17_ci": {
+    "run": 44632533924,
+    "job": 135942643052,
+    "conclusion": "success",
+    "actual_log_evidence": "Migration applied on disposable PostgreSQL, Running community_quality_integrity, PASS isolated community quality integration; no hosted writes"
+  },
+  "other_pr_head_checks": {
+    "node22": 44632533926,
+    "browser": 44632533969,
+    "approval": 44632534071,
+    "security": 44632533919
+  },
+  "merged_source_checks": {
+    "merge_sha": "a788b3e31c2e1f0d7921a52f67a9035d3eda5a6a",
+    "node22": 44640068642,
+    "browser": 44640068703,
+    "approval": 44640068720,
+    "conclusions": "success"
+  },
+  "read_only_current_aggregate": {
+    "withdrawn_total": 0,
+    "withdrawn_unverified": 0,
+    "withdrawn_unverified_with_link": 0,
+    "held_total": 0,
+    "pending_total": 0
+  },
+  "real_member_incident": "NOT_ESTABLISHED",
+  "semantic_verdict": "Existing source-only guard correctly changes withdrawn/unverified branch priority; no duplicate migration. Pre-existing R265 queue lacked test evidence, now reconciled to actual exact-source log. This is source testing and proof, NOT deployed SQL.",
+  "first_time_provider_words_credited": 0,
+  "issue267_line_credit": 0,
+  "publication": "NONE",
+  "production_writes": 0,
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "remaining": "Independent frozen candidate #3347 five exact tests and #96 hosted real-member assurance; require a NEW owner Publish for production. Next: first changed/new or previously unreviewed provider definition, app/Edge correctness or measurable bottleneck, never recredit unchanged bodies."
+}

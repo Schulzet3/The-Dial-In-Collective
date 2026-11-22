@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R390a",
+  "date_utc": "2026-11-20",
+  "amends": "docs/audits/issue509-r390-pg-catalog-current-schemas-float4-20261120.json",
+  "scope": "Read-only aggregate type count erratum only; preserve prior 200 object source reviews and hashes, no re-review credit.",
+  "incorrect_field": "dependency_context.non_system_type_counts.native_enum_columns",
+  "previous_value": 12,
+  "corrected_value": 13,
+  "sql": "SELECT count(*) FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace n ON n.oid=c.relnamespace JOIN pg_type t ON t.oid=a.atttypid WHERE n.nspname NOT IN ('pg_catalog','information_schema') AND n.nspname NOT LIKE 'pg_toast%' AND n.nspname NOT LIKE 'pg_temp%' AND c.relkind IN ('r','p','v','m','f') AND a.attnum>0 AND NOT a.attisdropped AND t.typtype='e'",
+  "evidence": "Independent live provider aggregate verified exactly 13 enum-typed columns; R390 per-object DDL chars/hash/coverage remain correct.",
+  "source_reference_commit": "019269373e83f12231c96071250c0a899313a957",
+  "preflight_development_sha": "8254135b2c4741e9559dfbaa4e73bf626766161b",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "production_writes": false,
+  "app_semantic_changes": false
+}

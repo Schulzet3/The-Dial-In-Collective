@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R368",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "branch_sha": "ac8b82ee9fbca4c3ea2c5b3dc854c2bab3ea919e",
+    "file_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "file_equals_immutable_git_blob": true
+  },
+  "github": {
+    "source_pr": 3445,
+    "source_pr_head": "c0980ab013e6d9193a7a6c8fd0feeca3a5cb6aba",
+    "development_merged_sha": "367e290386b1f659af4d6a2e54e21fbd43bbb841",
+    "safe_nonforce_two_parent_merge": true,
+    "merge_message_skip_netlify": true,
+    "migration_blob": "dfd7f2d505af9e121c09eb20ed7af2e19253faef",
+    "fixture_blob": "5a9fc2b8d1c61d8b7c885d8bfec6f128160c35c2",
+    "exact_pr_head_checks": "SQL PostgreSQL17, Node22 cloud, cloud UX/browser, approval and Python SUCCESS",
+    "other_workflow": "selected #33 R171 failed on PR head but independent merged SHA rerun SUCCESS"
+  },
+  "merged_sha_ci": {
+    "success": [
+      {
+        "name": "DIC approval, implementation and continuity contract",
+        "id": 44590982261
+      },
+      {
+        "name": "DIC isolated SQL release regression",
+        "id": 44590982128
+      },
+      {
+        "name": "DIC Issue33 R171 original241 Buesaco current selected disagreement",
+        "id": 44590981487
+      },
+      {
+        "name": "DIC coffee audit Python checks",
+        "id": 44590981411
+      },
+      {
+        "name": "DIC cloud UX regression checks",
+        "id": 44590981819
+      }
+    ],
+    "pending": [
+      {
+        "name": "DIC cloud app build and tests",
+        "id": 44590982169
+      }
+    ],
+    "failed": [],
+    "skipped": [
+      "DIC controlled public roaster source probe"
+    ],
+    "not_all_applicable_pass": true
+  },
+  "new_provider_review": {
+    "schema": "storage",
+    "object_kind": "SQL/plpgsql function full source",
+    "reviewed": 24,
+    "total": 24,
+    "source_characters": 92288,
+    "source_method": "READ ONLY pg_get_functiondef 22 full bodies plus 2 segmented complete sources across 1..31522 and 1..32892; per-function MD5; semantic crosscall/trigger analysis",
+    "definition_digest_source": "MD5 each complete body",
+    "functions": [
+      {
+        "signature": "storage.allow_any_operation(text[])",
+        "source_md5": "ccefb34283c346cc88e224d075bd5312",
+        "chars": 791
+      },
+      {
+        "signature": "storage.allow_only_operation(text)",
+        "source_md5": "e2f7d55adc027df69ec4b42c6c08f50f",
+        "chars": 773
+      },
+      {
+        "signature": "storage.can_insert_object(text,text,uuid,jsonb)",
+        "source_md5": "73733c9319875273d5937b05d68a7930",
+        "chars": 433
+      },
+      {
+        "signature": "storage.delete_lifecycle_objects(uuid[])",
+        "source_md5": "b9737ba9f65ae16796874a5ff3b82a33",
+        "chars": 2327
+      },
+      {
+        "signature": "storage.enforce_bucket_lifecycle_service_role()",
+        "source_md5": "b4b21fec5ffef02e74e2477049138937",
+        "chars": 655
+      },
+      {
+        "signature": "storage.enforce_bucket_name_length()",
+        "source_md5": "11b3bd509f6b254ec1cd859e712e8c78",
+        "chars": 309
+      },
+      {
+        "signature": "storage.enforce_versioning_status_transition()",
+        "source_md5": "47dc86fbd138d125125250b28b31d7ff",
+        "chars": 539
+      },
+      {
+        "signature": "storage.extension(text)",
+        "source_md5": "75d83971130753081a84c3270878d8e7",
+        "chars": 515
+      },
+      {
+        "signature": "storage.filename(text)",
+        "source_md5": "0e8171709dc2934861de959d743ff809",
+        "chars": 255
+      },
+      {
+        "signature": "storage.foldername(text)",
+        "source_md5": "93671af66e1fe108a56068ad4137d001",
+        "chars": 356
+      },
+      {
+        "signature": "storage.get_common_prefix(text,text,text)",
+        "source_md5": "0dc62b74fb855d4f504f50f900f93927",
+        "chars": 486
+      },
+      {
+        "signature": "storage.get_size_by_bucket(text,text)",
+        "source_md5": "75dc6041ab2b273a08279126efecbcd0",
+        "chars": 1229
+      },
+      {
+        "signature": "storage.list_multipart_uploads_with_delimiter(text,text,text,integer,text,text,text)",
+        "source_md5": "961eef74f03a12751abf768384b84371",
+        "chars": 2378
+      },
+      {
+        "signature": "storage.list_objects_with_delimiter(text,text,text,integer,text,text,text,text,text,timestamp with time zone,text)",
+        "source_md5": "7747efec8583d78cd01449d9b99cd2eb",
+        "chars": 32892
+      },
+      {
+        "signature": "storage.operation()",
+        "source_md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+        "chars": 178
+      },
+      {
+        "signature": "storage.protect_active_lifecycle_states()",
+        "source_md5": "fce9d03398ec222c77feec887c25c384",
+        "chars": 1016
+      },
+      {
+        "signature": "storage.protect_bucket_control_columns()",
+        "source_md5": "7c31ae406e2f6281ead4009fff69fc68",
+        "chars": 1858
+      },
+      {
+        "signature": "storage.protect_delete()",
+        "source_md5": "4371ae544fb1ef704f9c5d42265ac324",
+        "chars": 535
+      },
+      {
+        "signature": "storage.reconcile_lifecycle_state(text,boolean)",
+        "source_md5": "271a57ecfb24df02a5d9100c2a801323",
+        "chars": 2912
+      },
+      {
+        "signature": "storage.search_by_timestamp(text,text,integer,integer,text,text,text,text,text,text,text)",
+        "source_md5": "323c4e2739e9c9bcfc082f7f14289338",
+        "chars": 6929
+      },
+      {
+        "signature": "storage.search_v2(text,text,integer,integer,text,text,text,text,text,text,timestamp with time zone,text,boolean)",
+        "source_md5": "7a010a87c94770b1c8f0b49a616082f4",
+        "chars": 2862
+      },
+      {
+        "signature": "storage.search(text,text,integer,integer,integer,text,text,text,text,text)",
+        "source_md5": "fed15c85bb96faaa21ec40176026a0fd",
+        "chars": 31522
+      },
+      {
+        "signature": "storage.update_updated_at_column()",
+        "source_md5": "bfecc08a6034296258f0c3e10193076c",
+        "chars": 178
+      },
+      {
+        "signature": "storage.wake_lifecycle_state()",
+        "source_md5": "326028b9d567ca2de47e9ecf67a4553b",
+        "chars": 360
+      }
+    ],
+    "full_sources_already_covered_in_prior_ledger": "R300 24/24, this run reconfirms current corpus; DO NOT CREDIT FIRST-TIME WORDS",
+    "first_time_unique_word_credit": 0,
+    "issue267_code_line_credit": 0,
+    "trigger_definitions": 11,
+    "explicit_storage_policies": 0,
+    "actual_buckets": 0,
+    "actual_objects": 0,
+    "actual_owned_objects": 0,
+    "actual_lifecycle_state_rows": 0,
+    "verdict": "NO_NEW_REPRODUCIBLE_APPLICATION_DEFECT; no deletion or performance optimization justified in unused platform-managed Storage; hosted worker implementation UNVERIFIED"
+  },
+  "production": {
+    "writes": 0,
+    "migrations_applied": 0,
+    "publish": false,
+    "auth_storage_edge_sql_data_config_unchanged_by_audit": true
+  },
+  "release": {
+    "state": "TESTING",
+    "independent_3347_candidate_source_certification": "UNVERIFIED",
+    "owner_publish": "NOT_AUTHORIZED"
+  },
+  "full_audit": "IN_PROGRESS",
+  "next": "Verify remaining exact merged-source CI when complete and record read-back; continue first truly unreviewed/changed live provider object/Edge source (not already R300 Storage) or measurable application defect; never count repeat review as new coverage."
+}

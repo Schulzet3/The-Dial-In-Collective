@@ -1,0 +1,4708 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R421",
+  "project_id": "azviqqejypsefzilgonr",
+  "git_preflight_development_sha": "742a041a903db00bace7b19994e23835e3ff6fd9",
+  "git_preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider": "Supabase PostgreSQL 17.11",
+  "audit_scope": "private.pg_class physical tables+sequences; 28 tables 6 identity sequences ordered by OID; exposed relation metadata, full column expressions and constraint/policy/trigger texts, dependencies",
+  "read_only": true,
+  "reviewed": 34,
+  "total": 34,
+  "full_catalog_projection_characters": 72053,
+  "verdict_counts": {
+    "identity_sequences": 6,
+    "historical_archives": 2,
+    "other_active_or_pending": 26
+  },
+  "limits": [
+    "This covers defined provider pg_class private table/sequence route only; no claim of all PostgreSQL native source or all provider objects.",
+    "Relation-specific runtime consumers/complete source-migration parity and unpublished changes are not certified.",
+    "No private row values, credentials or sequence current values were read.",
+    "Unchanged earlier index definitions retain independent R416 receipts. No code/test/CI edits."
+  ],
+  "next_cursor": "public.pg_class relkind=r rank 1/24 OID 17702, char 1",
+  "entries": [
+    {
+      "rank": 1,
+      "oid": 17616,
+      "identity": "private.beta_members",
+      "projection_md5": "d4cd8de1c0f2d4183a167fb78dadb05e",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2193",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Invite/admission status; separate pending/approved/rejected state and admission invariant; preserve.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 17616,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "enabled",
+            "type": "boolean",
+            "attnum": 2,
+            "comment": null,
+            "default": "false",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "admitted_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "signup_review_state",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": "'pending'::text",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "17621",
+            "name": "beta_members_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "beta_members",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "20455",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "beta_members_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id)"
+          },
+          {
+            "name": "beta_members_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "beta_members_signup_review_state_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (signup_review_state = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text]))"
+          },
+          {
+            "name": "beta_members_enabled_requires_admission",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (NOT enabled OR admitted_at IS NOT NULL)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 65536,
+        "relreplident": "d",
+        "estimated_rows": "5",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 2,
+      "oid": 17628,
+      "identity": "private.app_admins",
+      "projection_md5": "84c9a4ed597123cc1b4d148022ed8dc6",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1346",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Admin role mapping with auth.users FK; do not infer empty row-estimate means unused.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 17628,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "17632",
+            "name": "app_admins_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "app_admins",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "app_admins_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id)"
+          },
+          {
+            "name": "app_admins_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 24576,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 3,
+      "oid": 17639,
+      "identity": "private.contributors",
+      "projection_md5": "cacc65d3b8c49a08955bd4afa4f4aca9",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2023",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Privacy-preserving detached community contributor identity; ON DELETE SET NULL intentionally retains contributions.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 17639,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": "gen_random_uuid()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Private mapping between account and contribution grouping. Account removal detaches identity without deleting shared evidence. Never returned by community APIs.",
+        "indexes": [
+          {
+            "oid": "17644",
+            "name": "contributors_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "17646",
+            "name": "contributors_owner_id_key",
+            "valid": true,
+            "unique": true,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "contributors",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "contributors_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "contributors_owner_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (owner_id)"
+          },
+          {
+            "name": "contributors_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 73728,
+        "relreplident": "d",
+        "estimated_rows": "7",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": [
+          {
+            "from": "private.contribution_links",
+            "name": "contribution_links_contributor_id_fkey",
+            "definition": "FOREIGN KEY (contributor_id) REFERENCES private.contributors(id)"
+          }
+        ]
+      }
+    },
+    {
+      "rank": 4,
+      "oid": 17669,
+      "identity": "private.mutation_receipts",
+      "projection_md5": "31d190b72efd04b7ba5b709cd3fb5c45",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1856",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Owner/mutation scoped idempotency receipt; request hash and JSON response are not redundant with shot audit.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 17669,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "mutation_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "request_hash",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "response",
+            "type": "jsonb",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "17675",
+            "name": "mutation_receipts_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "mutation_receipts",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "17673",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "mutation_receipts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id, mutation_id)"
+          },
+          {
+            "name": "mutation_receipts_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 147456,
+        "relreplident": "d",
+        "estimated_rows": "43",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 5,
+      "oid": 17682,
+      "identity": "private.backup_runs",
+      "projection_md5": "05a7539426b838156594ccb96105b85b",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2725",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Encrypted-backup status metadata only; explicitly not a scheduler or external encrypted archive.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 17682,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": "gen_random_uuid()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "started_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "finished_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "status",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "encrypted_object_id",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "checksum_sha256",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "coverage",
+            "type": "jsonb",
+            "attnum": 7,
+            "comment": null,
+            "default": "'{}'::jsonb",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "restore_tested_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "error_summary",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Status only. This migration does not schedule backups or configure Drive credentials.",
+        "indexes": [
+          {
+            "oid": "17692",
+            "name": "backup_runs_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "backup_runs",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "17690",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "backup_runs_status_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (status = ANY (ARRAY['running'::text, 'succeeded'::text, 'failed'::text]))"
+          },
+          {
+            "name": "backup_runs_coverage_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (jsonb_typeof(coverage) = 'object'::text)"
+          },
+          {
+            "name": "backup_runs_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 16384,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 6,
+      "oid": 18430,
+      "identity": "private.contribution_links",
+      "projection_md5": "2e8079e9e992aaf59a384f14f5fc2ed3",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2719",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Provenance bridge between community shot, member shot and contributor; FK ON DELETE SET NULL preserves community evidence.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 18430,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "community_shot_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "shot_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "contributor_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "source_revision",
+            "type": "bigint",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "18434",
+            "name": "contribution_links_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "18436",
+            "name": "contribution_links_shot_id_key",
+            "valid": true,
+            "unique": true,
+            "primary": false
+          },
+          {
+            "oid": "18453",
+            "name": "contribution_contributor_idx",
+            "valid": true,
+            "unique": false,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "contribution_links",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [
+          {
+            "name": "dic_recheck_after_link",
+            "enabled": "O",
+            "definition": "CREATE TRIGGER dic_recheck_after_link AFTER INSERT OR UPDATE OF shot_id, source_revision ON private.contribution_links FOR EACH ROW EXECUTE FUNCTION private.dic_recheck_after_link()"
+          }
+        ],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "contribution_links_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (community_shot_id)"
+          },
+          {
+            "name": "contribution_links_shot_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (shot_id)"
+          },
+          {
+            "name": "contribution_links_community_shot_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (community_shot_id) REFERENCES community_shots(id)"
+          },
+          {
+            "name": "contribution_links_shot_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (shot_id) REFERENCES shots(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "contribution_links_contributor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (contributor_id) REFERENCES private.contributors(id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 57344,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 7,
+      "oid": 18454,
+      "identity": "private.shot_audit_id_seq",
+      "projection_md5": "c6db70704dc32f14673af42b2c26a380",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1211",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.shot_audit.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": "{postgres=rwU/postgres,service_role=rU/postgres}",
+        "oid": 18454,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "shot_audit_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.shot_audit",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 8,
+      "oid": 18455,
+      "identity": "private.shot_audit",
+      "projection_md5": "2f048de64a2ce68cd8160757af3cf0fd",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2198",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Private per-shot history; identity sequence and owner FK, preserve revision history.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 18455,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "shot_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "action",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "before_values",
+            "type": "jsonb",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "after_values",
+            "type": "jsonb",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "18461",
+            "name": "shot_audit_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "18468",
+            "name": "shot_audit_owner_idx",
+            "valid": true,
+            "unique": false,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "shot_audit",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "18459",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "shot_audit_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "shot_audit_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 319488,
+        "relreplident": "d",
+        "estimated_rows": "46",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 9,
+      "oid": 18596,
+      "identity": "private.import_control",
+      "projection_md5": "2036d08b3c8f81efd73f57b48020806a",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-3210",
+      "verdict": "KEEP_PENDING_RUNTIME_CONSUMER_CHECK",
+      "semantic_assessment": "Singleton import/recovery safeguard; expiration checks need function/caller review before any modification.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 18596,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "singleton",
+            "type": "boolean",
+            "attnum": 1,
+            "comment": null,
+            "default": "true",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "saves_enabled",
+            "type": "boolean",
+            "attnum": 2,
+            "comment": null,
+            "default": "false",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "recovery_verified_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_only_exception_owner_id",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": "Explicit owner-only single-import exception; does not establish hosted recovery verification.",
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_only_exception_approved_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_only_exception_expires_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": "Exception expires no later than 24 hours after approval. Commit auto-relocks.",
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "18603",
+            "name": "import_control_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "import_control",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 3,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "import_control_singleton_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (singleton)"
+          },
+          {
+            "name": "import_control_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (singleton)"
+          },
+          {
+            "name": "import_control_owner_only_exception_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_only_exception_owner_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "import_control_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (NOT saves_enabled OR recovery_verified_at IS NOT NULL OR owner_only_exception_owner_id IS NOT NULL AND owner_only_exception_approved_at IS NOT NULL AND owner_only_exception_expires_at IS NOT NULL)"
+          },
+          {
+            "name": "import_control_exception_complete_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (owner_only_exception_owner_id IS NULL AND owner_only_exception_approved_at IS NULL AND owner_only_exception_expires_at IS NULL OR owner_only_exception_owner_id IS NOT NULL AND owner_only_exception_approved_at IS NOT NULL AND owner_only_exception_expires_at IS NOT NULL AND owner_only_exception_expires_at > owner_only_exception_approved_at AND owner_only_exception_expires_at <= (owner_only_exception_approved_at + '24:00:00'::interval))"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 24576,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 10,
+      "oid": 18605,
+      "identity": "private.import_batches",
+      "projection_md5": "4acbb6d0009810a8d1c75094376e70a4",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2267",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Owner-scoped source and pre-import state recovery; not a replacement for external backup.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 18605,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "source_hash",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "source_document",
+            "type": "jsonb",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "before_state",
+            "type": "jsonb",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "result",
+            "type": "jsonb",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Owner-protected exact source JSON and pre-import state. Not an external backup and not a substitute for Google Drive disaster recovery.",
+        "indexes": [
+          {
+            "oid": "18612",
+            "name": "import_batches_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "import_batches",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "18610",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "import_batches_source_hash_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (source_hash ~ '^[a-f0-9]{64}$'::text)"
+          },
+          {
+            "name": "import_batches_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id, source_hash)"
+          },
+          {
+            "name": "import_batches_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 98304,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 11,
+      "oid": 19234,
+      "identity": "private.dic_roaster_identity_provenance_archive",
+      "projection_md5": "b07542119e521eee81fde679f4d93515",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-3222",
+      "verdict": "KEEP_HISTORICAL_ARCHIVE",
+      "semantic_assessment": "HISTORICAL archive from retired legacy directory, retained for evidence; predecessor constraints/index names remain historical, not active directory.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19234,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": "gen_random_uuid()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "canonical_name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "canonical_key",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "official_domain",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "evidence_url",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "verified_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Historical evidence only. NOT queried to grant URL access or global Verified coffee status.",
+        "indexes": [
+          {
+            "oid": "19246",
+            "name": "dic_roaster_directory_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "19248",
+            "name": "dic_roaster_directory_canonical_key_key",
+            "valid": true,
+            "unique": true,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_roaster_identity_provenance_archive",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 4,
+        "toast_oid": "19244",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_roaster_directory_canonical_name_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (length(btrim(canonical_name)) >= 2 AND length(btrim(canonical_name)) <= 200)"
+          },
+          {
+            "name": "dic_roaster_directory_canonical_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (canonical_key ~ '^[a-z0-9]{3,}$'::text)"
+          },
+          {
+            "name": "dic_roaster_directory_official_domain_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (official_domain ~ '^[a-z0-9-]+(\\.[a-z0-9-]+)+$'::text)"
+          },
+          {
+            "name": "dic_roaster_directory_evidence_url_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (evidence_url ~ '^https://'::text)"
+          },
+          {
+            "name": "dic_roaster_directory_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "dic_roaster_directory_canonical_key_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (canonical_key)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 49152,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": [
+          {
+            "from": "private.dic_roaster_alias_provenance_archive",
+            "name": "dic_roaster_aliases_roaster_id_fkey",
+            "definition": "FOREIGN KEY (roaster_id) REFERENCES private.dic_roaster_identity_provenance_archive(id) ON DELETE CASCADE"
+          }
+        ]
+      }
+    },
+    {
+      "rank": 12,
+      "oid": 19250,
+      "identity": "private.dic_roaster_alias_provenance_archive",
+      "projection_md5": "bebba71a7f4c61b5ae05ab2626a308f6",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2117",
+      "verdict": "KEEP_HISTORICAL_ARCHIVE",
+      "semantic_assessment": "HISTORICAL alias archive, FK to historical directory; retention required.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19250,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "alias_key",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "roaster_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "evidence_url",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Preserved historical alias records. The new protected alias map supplies identity normalization.",
+        "indexes": [
+          {
+            "oid": "19258",
+            "name": "dic_roaster_aliases_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_roaster_alias_provenance_archive",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "19256",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_roaster_aliases_alias_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (alias_key ~ '^[a-z0-9]{3,}$'::text)"
+          },
+          {
+            "name": "dic_roaster_aliases_evidence_url_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (evidence_url ~ '^https://'::text)"
+          },
+          {
+            "name": "dic_roaster_aliases_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (alias_key)"
+          },
+          {
+            "name": "dic_roaster_aliases_roaster_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (roaster_id) REFERENCES private.dic_roaster_identity_provenance_archive(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 13,
+      "oid": 19777,
+      "identity": "private.dic_coffee_aliases",
+      "projection_md5": "15c963e469bbb27048419318a3b1cb88",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2208",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Active canonical coffee alias evidence, keyed by coffee and normalized alias; cannot infer unneeded without consumer proof.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19777,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "coffee_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "alias_key",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "original_name",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "origin_kind",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "19786",
+            "name": "dic_coffee_aliases_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_coffee_aliases",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 3,
+        "toast_oid": "19784",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_coffee_aliases_alias_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (alias_key ~ '^[a-z0-9]+$'::text)"
+          },
+          {
+            "name": "dic_coffee_aliases_original_name_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (length(original_name) >= 1 AND length(original_name) <= 200)"
+          },
+          {
+            "name": "dic_coffee_aliases_origin_kind_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (origin_kind = ANY (ARRAY['user_confirmed'::text, 'source_confirmed'::text, 'admin_entry'::text]))"
+          },
+          {
+            "name": "dic_coffee_aliases_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (coffee_id, alias_key)"
+          },
+          {
+            "name": "dic_coffee_aliases_coffee_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 14,
+      "oid": 19793,
+      "identity": "private.dic_coffee_first_entry",
+      "projection_md5": "044ffb0fba0faf366cd70bbab11574af",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1931",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "First-entry canonicalization/first submission metadata; referential integrity to coffee and submission.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19793,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "coffee_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "first_seen_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "first_submission_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "primary_name",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "19799",
+            "name": "dic_coffee_first_entry_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_coffee_first_entry",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "19797",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_coffee_first_entry_primary_name_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (length(primary_name) >= 1 AND length(primary_name) <= 200)"
+          },
+          {
+            "name": "dic_coffee_first_entry_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (coffee_id)"
+          },
+          {
+            "name": "dic_coffee_first_entry_coffee_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)"
+          },
+          {
+            "name": "dic_coffee_first_entry_first_submission_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (first_submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 15,
+      "oid": 19811,
+      "identity": "private.dic_coffee_audit_id_seq",
+      "projection_md5": "bd2230d3916dccbe1946f411102fd321",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1177",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.dic_coffee_audit.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": null,
+        "oid": 19811,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "dic_coffee_audit_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.dic_coffee_audit",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 16,
+      "oid": 19812,
+      "identity": "private.dic_coffee_audit",
+      "projection_md5": "733091300f2c108e8fb93890ccf28119",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2711",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Private coffee-review event history with bounded evidence JSON; preserve.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19812,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "coffee_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "submission_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "event_kind",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "evidence",
+            "type": "jsonb",
+            "attnum": 6,
+            "comment": null,
+            "default": "'{}'::jsonb",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "19821",
+            "name": "dic_coffee_audit_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_coffee_audit",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "19819",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_coffee_audit_evidence_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (jsonb_typeof(evidence) = 'object'::text AND octet_length(evidence::text) <= 12000)"
+          },
+          {
+            "name": "dic_coffee_audit_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "dic_coffee_audit_coffee_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)"
+          },
+          {
+            "name": "dic_coffee_audit_event_kind_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (event_kind = ANY (ARRAY['admin_approved'::text, 'official_verified'::text, 'user_confirmed'::text, 'canonical_reused'::text, 'needs_review'::text, 'owner_roast_reclassified'::text, 'admin_reviewed'::text, 'admin_reviewed_merge'::text, 'member_auto_approved'::text]))"
+          },
+          {
+            "name": "dic_coffee_audit_submission_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 17,
+      "oid": 19908,
+      "identity": "private.dic_source_attempts",
+      "projection_md5": "3fd901bd20bbd20902e3caaf263d0a1f",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2028",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Per-submission source-attempt window/cap tracking; no inferred removal from current row estimate.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19908,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "submission_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "started_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "window_started_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "attempts",
+            "type": "integer",
+            "attnum": 5,
+            "comment": null,
+            "default": "0",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "19915",
+            "name": "dic_source_attempts_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_source_attempts",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_source_attempts_attempts_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (attempts >= 0 AND attempts <= 6)"
+          },
+          {
+            "name": "dic_source_attempts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (submission_id)"
+          },
+          {
+            "name": "dic_source_attempts_submission_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (submission_id) REFERENCES coffee_submissions(id)"
+          },
+          {
+            "name": "dic_source_attempts_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 18,
+      "oid": 19949,
+      "identity": "private.dic_url_preview_attempts",
+      "projection_md5": "8ef5493f5cd860fb8dc750b2655554cc",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2217",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Owner-scoped autofill preview attempt and ticket gating; no inferred removal from absence of rows.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 19949,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "window_started_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "last_attempt_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "attempts",
+            "type": "integer",
+            "attnum": 4,
+            "comment": null,
+            "default": "0",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "preview_ticket",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "preview_ticket_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "19956",
+            "name": "dic_url_preview_attempts_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_url_preview_attempts",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_url_preview_attempts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id)"
+          },
+          {
+            "name": "dic_url_preview_attempts_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_url_preview_attempts_attempts_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (attempts >= 0 AND attempts <= 12)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 24576,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 19,
+      "oid": 20004,
+      "identity": "private.community_quality_checks",
+      "projection_md5": "d15c5052c32846d63830c2cf5b073aae",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2656",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Community eligibility/withdrawal and source revision audit; preserve privacy and quality gates.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20004,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "community_shot_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "source_revision",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "outcome",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "reason",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "confirmed_fingerprint",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "reviewed_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": "Private source revision and review reasons for detached/quality-gated community projections. No client access, and never part of member-facing output.",
+        "indexes": [
+          {
+            "oid": "20012",
+            "name": "community_quality_checks_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "community_quality_checks",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "20010",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "community_quality_checks_outcome_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (outcome = ANY (ARRAY['eligible'::text, 'held'::text, 'withdrawn'::text]))"
+          },
+          {
+            "name": "community_quality_checks_reason_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (reason = ANY (ARRAY['valid'::text, 'unverified_coffee'::text, 'source_detached'::text, 'source_mismatch'::text, 'not_dialed_in'::text, 'extreme_outlier'::text]))"
+          },
+          {
+            "name": "community_quality_checks_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (community_shot_id)"
+          },
+          {
+            "name": "community_quality_checks_community_shot_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (community_shot_id) REFERENCES community_shots(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 20,
+      "oid": 20063,
+      "identity": "private.admin_access_events_id_seq",
+      "projection_md5": "aa0898fb58b5460af94bdc0421bb04f4",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1183",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.admin_access_events.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": null,
+        "oid": 20063,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "admin_access_events_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.admin_access_events",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 21,
+      "oid": 20064,
+      "identity": "private.admin_access_events",
+      "projection_md5": "8fa3dc261b18a29edd3ada0b88c4426c",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2189",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Account access grant/revocation event history; actor and member nullable on deletion intentionally preserve event.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20064,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "action",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "member_id",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20071",
+            "name": "admin_access_events_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "admin_access_events",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "20069",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "admin_access_events_action_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (action = ANY (ARRAY['issue_invite'::text, 'revoke_invite'::text, 'remove_access'::text, 'restore_access'::text]))"
+          },
+          {
+            "name": "admin_access_events_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "admin_access_events_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "admin_access_events_member_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 22,
+      "oid": 20157,
+      "identity": "private.admin_content_edits_id_seq",
+      "projection_md5": "b779343972d970b9f8487c6d91f4cd98",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1183",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.admin_content_edits.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": null,
+        "oid": 20157,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "admin_content_edits_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.admin_content_edits",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 23,
+      "oid": 20158,
+      "identity": "private.admin_content_edits",
+      "projection_md5": "1b5c5fba382a29eeb1caa1ed97919523",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-3090",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Admin content-edit audit with before/after JSON and reason; distinct from member shot audit.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20158,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "subject_owner_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "record_kind",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "record_id",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "before_revision",
+            "type": "bigint",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "reason",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "before_values",
+            "type": "jsonb",
+            "attnum": 8,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "after_values",
+            "type": "jsonb",
+            "attnum": 9,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20166",
+            "name": "admin_content_edits_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "admin_content_edits",
+        "policies": [
+          {
+            "name": "no_direct_user_content_edits",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "20164",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "admin_content_edits_record_kind_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (record_kind = ANY (ARRAY['shot'::text, 'submission'::text, 'approved'::text]))"
+          },
+          {
+            "name": "admin_content_edits_reason_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (length(reason) >= 8 AND length(reason) <= 1000)"
+          },
+          {
+            "name": "admin_content_edits_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "admin_content_edits_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "admin_content_edits_subject_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (subject_owner_id) REFERENCES auth.users(id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 49152,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 24,
+      "oid": 20196,
+      "identity": "private.dic_first_style_prompt_seen",
+      "projection_md5": "86346f16e60815992764eb7e8f3d8196",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1683",
+      "verdict": "KEEP_PENDING_RUNTIME_CONSUMER_CHECK",
+      "semantic_assessment": "Per-coffee first style prompt flag; owner Nov 8 supersession means dynamic consumer check required before calling it obsolete.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20196,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "owner_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "library_entry_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "seen_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20200",
+            "name": "dic_first_style_prompt_seen_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_first_style_prompt_seen",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_first_style_prompt_seen_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id, library_entry_id)"
+          },
+          {
+            "name": "dic_first_style_prompt_seen_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_first_style_prompt_seen_owner_id_library_entry_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id, library_entry_id) REFERENCES library_entries(owner_id, id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 24576,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 25,
+      "oid": 20248,
+      "identity": "private.dic_admin_delete_receipts_id_seq",
+      "projection_md5": "a38b183f2a6c450915cd0dadf818b1a1",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1216",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.dic_admin_delete_receipts.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": "{postgres=rwU/postgres}",
+        "oid": 20248,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "dic_admin_delete_receipts_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.dic_admin_delete_receipts",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 26,
+      "oid": 20249,
+      "identity": "private.dic_admin_delete_receipts",
+      "projection_md5": "510b218ae13106f94b77dc77d506ff7b",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1702",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Admin deletion receipt/effect metadata; missing actor FK may support retained historical actor ID and is not proof of defect.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres}",
+        "oid": 20249,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "record_kind",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "record_id",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "impact",
+            "type": "jsonb",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20255",
+            "name": "dic_admin_delete_receipts_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_admin_delete_receipts",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "20253",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_admin_delete_receipts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 27,
+      "oid": 20413,
+      "identity": "private.dic_admin_account_delete_operations",
+      "projection_md5": "6e90545e46a5005e908cc0878fc0e686",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-3276",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Durable two-phase account-delete transaction state; partial active-operation index prevents duplicate concurrent operations.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20413,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "default": "gen_random_uuid()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "target_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "community_mode",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "expected_impact",
+            "type": "jsonb",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "phase",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "default": "'requested'::text",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "contributor_ids",
+            "type": "uuid[]",
+            "attnum": 7,
+            "comment": null,
+            "default": "'{}'::uuid[]",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "community_removed",
+            "type": "integer",
+            "attnum": 8,
+            "comment": null,
+            "default": "0",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "requested_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "prepared_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "completed_at",
+            "type": "timestamp with time zone",
+            "attnum": 11,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20425",
+            "name": "dic_admin_account_delete_operations_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "20432",
+            "name": "dic_admin_account_delete_one_active",
+            "valid": true,
+            "unique": true,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_admin_account_delete_operations",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 2,
+        "toast_oid": "20423",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_admin_account_delete_operations_community_mode_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (community_mode = ANY (ARRAY['keep'::text, 'remove'::text]))"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_phase_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (phase = ANY (ARRAY['requested'::text, 'prepared'::text, 'completed'::text]))"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 49152,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 28,
+      "oid": 20457,
+      "identity": "private.dic_signup_review_events_id_seq",
+      "projection_md5": "9904e45f9590b5afa5fd285794db42a3",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1193",
+      "verdict": "KEEP_SEQUENCE_IDENTITY_OWNED",
+      "semantic_assessment": "Identity sequence private.dic_signup_review_events.id, deptype i; retain with owning table, never read current value.",
+      "catalog_projection": {
+        "acl": null,
+        "oid": 20457,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [],
+        "relkind": "S",
+        "relname": "dic_signup_review_events_id_seq",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 0,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [],
+        "relhasindex": false,
+        "relhasrules": false,
+        "total_bytes": 8192,
+        "relreplident": "n",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": false,
+        "sequence_details": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1",
+          "owned_column": "id",
+          "owned_relation": "private.dic_signup_review_events",
+          "ownership_deptype": "i"
+        },
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 29,
+      "oid": 20458,
+      "identity": "private.dic_signup_review_events",
+      "projection_md5": "c21658ff86f70c705fcfcfb8190c1eb2",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2686",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Admission review event stream and notice enqueue trigger; both email and push depend on the durable event.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20458,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "member_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "actor_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "action",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "previous_state",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "reviewed_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20465",
+            "name": "dic_signup_review_events_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_signup_review_events",
+        "policies": [],
+        "triggers": [
+          {
+            "name": "dic_enqueue_member_approval_notices_on_review",
+            "enabled": "O",
+            "definition": "CREATE TRIGGER dic_enqueue_member_approval_notices_on_review AFTER INSERT ON private.dic_signup_review_events FOR EACH ROW EXECUTE FUNCTION private.dic_enqueue_member_approval_notices()"
+          }
+        ],
+        "relchecks": 1,
+        "toast_oid": "20463",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_signup_review_events_action_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (action = ANY (ARRAY['approve'::text, 'reject'::text]))"
+          },
+          {
+            "name": "dic_signup_review_events_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "dic_signup_review_events_member_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": [
+          {
+            "from": "private.dic_member_approval_deliveries",
+            "name": "dic_member_approval_deliveries_event_id_fkey",
+            "definition": "FOREIGN KEY (event_id) REFERENCES private.dic_signup_review_events(id) ON DELETE CASCADE"
+          }
+        ]
+      }
+    },
+    {
+      "rank": 30,
+      "oid": 20519,
+      "identity": "private.dic_admin_push_runtime",
+      "projection_md5": "aa8cc8ace683a0053e462762ad6e5d0f",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1530",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Singleton VAPID configuration and poll timestamp; source-only lazy Vault fix known pending separate release, do not touch live.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres}",
+        "oid": 20519,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "singleton",
+            "type": "boolean",
+            "attnum": 1,
+            "comment": null,
+            "default": "true",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "vapid_public",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "vault_secret_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "last_polled_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20526",
+            "name": "dic_admin_push_runtime_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_admin_push_runtime",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "20524",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_admin_push_runtime_singleton_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (singleton = true)"
+          },
+          {
+            "name": "dic_admin_push_runtime_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (singleton)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 31,
+      "oid": 20594,
+      "identity": "private.dic_member_approval_deliveries",
+      "projection_md5": "788fef3a04cfb1b78c5bb4b9135264ec",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-3426",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Idempotent approval email/push delivery state, lease and retry scheduling; preserves pending notifications.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwd/postgres}",
+        "oid": 20594,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "event_id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "member_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "channel",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": "'pending'::text",
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "attempt_count",
+            "type": "integer",
+            "attnum": 5,
+            "comment": null,
+            "default": "0",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "claim_token",
+            "type": "uuid",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "lease_until",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "next_attempt_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "completed_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "default": "now()",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20606",
+            "name": "dic_member_approval_deliveries_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "oid": "20618",
+            "name": "dic_member_approval_claim_idx",
+            "valid": true,
+            "unique": false,
+            "primary": false
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_member_approval_deliveries",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 3,
+        "toast_oid": "20604",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_member_approval_deliveries_channel_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (channel = ANY (ARRAY['email'::text, 'push'::text]))"
+          },
+          {
+            "name": "dic_member_approval_deliveries_state_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (state = ANY (ARRAY['pending'::text, 'sending'::text, 'sent'::text, 'skipped'::text]))"
+          },
+          {
+            "name": "dic_member_approval_deliveries_attempt_count_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (attempt_count >= 0 AND attempt_count <= 100000)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (event_id, channel)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_event_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (event_id) REFERENCES private.dic_signup_review_events(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_member_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 24576,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": true,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 32,
+      "oid": 20621,
+      "identity": "private.dic_member_approval_poll_gate",
+      "projection_md5": "352bdd2c1477e7d0606b65d54f33513d",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1300",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "Singleton delivery poll throttling state; separate from admin broker runtime.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=rw/postgres}",
+        "oid": 20621,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "singleton",
+            "type": "boolean",
+            "attnum": 1,
+            "comment": null,
+            "default": "true",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "last_polled_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "default": "'-infinity'::timestamp with time zone",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20627",
+            "name": "dic_member_approval_poll_gate_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_member_approval_poll_gate",
+        "policies": [],
+        "triggers": [],
+        "relchecks": 1,
+        "toast_oid": "0",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_member_approval_poll_gate_singleton_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (singleton = true)"
+          },
+          {
+            "name": "dic_member_approval_poll_gate_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (singleton)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 57344,
+        "relreplident": "d",
+        "estimated_rows": "1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 33,
+      "oid": 20638,
+      "identity": "private.dic_roaster_name_aliases",
+      "projection_md5": "3e1848fc42f0f233a8b901203d4124c7",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-1982",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "LEGACY-REPLACEMENT ACTIVE alias key normalization, separate from retired roaster directory.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20638,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "alias_key",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "canonical_key",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "evidence_url",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20646",
+            "name": "dic_roaster_name_aliases_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_roaster_name_aliases",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 3,
+        "toast_oid": "20644",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_roaster_name_aliases_alias_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (alias_key ~ '^[a-z0-9]{3,}$'::text)"
+          },
+          {
+            "name": "dic_roaster_name_aliases_canonical_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (canonical_key ~ '^[a-z0-9]{3,}$'::text)"
+          },
+          {
+            "name": "dic_roaster_name_aliases_evidence_url_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (evidence_url ~ '^https://'::text)"
+          },
+          {
+            "name": "dic_roaster_name_aliases_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (alias_key)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    },
+    {
+      "rank": 34,
+      "oid": 20649,
+      "identity": "private.dic_official_source_attestations",
+      "projection_md5": "810adca919865466d6b015e3db38ce62",
+      "reviewed_projection": "all stored fields, columns, complete constraint/policy/trigger text, FK/index references and sequence config",
+      "reviewed_character_range": "1-2399",
+      "verdict": "KEEP_ACTIVE",
+      "semantic_assessment": "LEGACY-REPLACEMENT ACTIVE trusted official source proofs, not global whitelist.",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "oid": 20649,
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "name": "canonical_key",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "canonical_name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "official_domain",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "evidence_url",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "default": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "verified_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "default": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "compression": ""
+          }
+        ],
+        "comment": null,
+        "indexes": [
+          {
+            "oid": "20657",
+            "name": "dic_official_source_attestations_pkey",
+            "valid": true,
+            "unique": true,
+            "primary": true
+          }
+        ],
+        "relkind": "r",
+        "relname": "dic_official_source_attestations",
+        "policies": [
+          {
+            "name": "no_client_access",
+            "qual": "false",
+            "roles": "{16484,16485}",
+            "command": "*",
+            "permissive": true,
+            "with_check": "false"
+          }
+        ],
+        "triggers": [],
+        "relchecks": 3,
+        "toast_oid": "20655",
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "dic_official_source_attestations_canonical_key_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (canonical_key ~ '^[a-z0-9]{3,}$'::text)"
+          },
+          {
+            "name": "dic_official_source_attestations_official_domain_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (official_domain ~ '^[a-z0-9-]+(\\.[a-z0-9-]+)+$'::text)"
+          },
+          {
+            "name": "dic_official_source_attestations_evidence_url_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (evidence_url ~ '^https://'::text)"
+          },
+          {
+            "name": "dic_official_source_attestations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (canonical_key)"
+          }
+        ],
+        "relhasindex": true,
+        "relhasrules": false,
+        "total_bytes": 32768,
+        "relreplident": "d",
+        "estimated_rows": "-1",
+        "relhassubclass": false,
+        "relhastriggers": false,
+        "relispartition": false,
+        "relpersistence": "p",
+        "relrowsecurity": true,
+        "sequence_details": null,
+        "relforcerowsecurity": false,
+        "inbound_foreign_keys": []
+      }
+    }
+  ]
+}

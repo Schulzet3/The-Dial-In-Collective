@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R423",
+  "purpose": "Cross-dependency semantic verification: assess seemingly obsolete private provider tables/handlers against complete active live SQL, current app sources and Locked owner supersessions; targeted recheck, no fresh broad baseline review credit",
+  "git_preflight_development_sha": "742a041a903db00bace7b19994e23835e3ff6fd9",
+  "git_preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "development_head_for_source_read": "5256574e0c479c85467232bb6d7258be0129fd26",
+  "project_id": "azviqqejypsefzilgonr",
+  "provider": "read-only PostgreSQL 17.11",
+  "provider_routines": [
+    {
+      "oid": 18564,
+      "signature": "private.mutate(uuid,text,jsonb)",
+      "provider_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+      "complete_definition_characters": 10881,
+      "reviewed_range": "1-10881",
+      "authenticated_execute": false,
+      "verdict": "KEEP_OWNER_DEFERRED_INTERNAL_BRANCH"
+    },
+    {
+      "oid": 18585,
+      "signature": "dic_apply_client_change(uuid,uuid,text,jsonb)",
+      "provider_md5": "da434f17a21539d72ebb8fc04c13f214",
+      "complete_definition_characters": 1286,
+      "reviewed_range": "1-1286",
+      "authenticated_execute": true,
+      "verdict": "KEEP_ACTIVE_REJECT_PUBLIC_HIDE"
+    },
+    {
+      "oid": 18625,
+      "signature": "private.import_operation(uuid,jsonb,boolean,text,boolean)",
+      "provider_md5": "b684a6af862302d9d4bb7c212208f5e0",
+      "complete_definition_characters": 3124,
+      "reviewed_range": "1-3124",
+      "authenticated_execute": true,
+      "verdict": "KEEP_ACTIVE_IMPORT_GUARD"
+    },
+    {
+      "oid": 20212,
+      "signature": "private.dic_claim_first_style_prompt_impl(uuid)",
+      "provider_md5": "31f06eec62a745bf998b749af71816db",
+      "complete_definition_characters": 940,
+      "reviewed_range": "1-940",
+      "authenticated_execute": true,
+      "verdict": "KEEP_LEGACY_FIRST_STYLE_IMPLEMENTATION_PENDING_CONSUMERS"
+    },
+    {
+      "oid": 20213,
+      "signature": "dic_claim_first_style_prompt(uuid)",
+      "provider_md5": "5f652895cd7e0775e9fecd39f36fc34e",
+      "complete_definition_characters": 236,
+      "reviewed_range": "1-236",
+      "authenticated_execute": true,
+      "verdict": "KEEP_PUBLIC_FIRST_STYLE_WRAPPER_PENDING_CONSUMERS"
+    }
+  ],
+  "source_check": {
+    "client_path": "site/cloud/client.js",
+    "client_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "client_has_rpc_method": true,
+    "main_path": "site/cloud/main.js",
+    "main_blob": "bc16dd47e0a18800c4e9accc88748d74df7987b3",
+    "main_has_rpc_call": false,
+    "main_has_method_call": false,
+    "latest_locked_style_decision": "UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108",
+    "private_handler_deferred_decision": "UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021"
+  },
+  "determinations": [
+    "import_control is actively read by live import_operation and runtime clock_timestamp expiration is checked; not redundant, no static-CHECK bug proven.",
+    "dic_first_style_prompt_seen is still referenced and written by live private.dic_claim_first_style_prompt_impl, exposed via authenticated public RPC, and source client helper exists; November 8 app UI moved to recurring until first logged shot, so legacy route may be obsolete to current UI but external dynamic consumers and historical pending calls unverified. No removal.",
+    "private.mutate still contains internal hide_shot branch, but owner specifically DEFERRED its physical removal by Locked UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021; public dic_apply_client_change rejects hide_shot before dispatch and authenticated lacks direct private.mutate EXECUTE. Do not change deferred routine.",
+    "Previously archived roaster tables remain HISTORICAL; active aliases/proofs remain active, per R421; do not delete."
+  ],
+  "no_provider_writes": true,
+  "no_code_test_ci_changes": true,
+  "baseline": "IN_PROGRESS",
+  "next_action": "Continue next unreviewed provider schema pg_class relation after 58 private/public entities; link any legacy first-style removal proposal to #267 source-owner and prove no external RPC consumers before making a change"
+}

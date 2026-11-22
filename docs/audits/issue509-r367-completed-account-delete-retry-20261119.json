@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R367",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "branch": "development/backend-foundation",
+  "preflight_development_sha": "96a848fde0011f48adede2be289d2f5bbdd97626",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "preflight_file_blob_equal_git_blob": true,
+  "main_sha": "57adc419ed4b106e158435b465971f5986537b41",
+  "release_sha": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5",
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "app_sql_functions": 114,
+    "app_tables": 52,
+    "applied_migrations": 69,
+    "active_edge_functions": 5,
+    "completed_account_deletions": 6,
+    "completed_with_positive_removed_community": 0,
+    "pending_deletions": 0,
+    "member_delivery_pending": 0,
+    "writes": 0
+  },
+  "full_reused_semantic_evidence": [
+    {
+      "object": "private.dic_admin_account_delete_prepare(uuid,uuid)",
+      "chars": 3899,
+      "source_md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "range": "entire source 1..3899",
+      "existing_full_receipt": "R312"
+    },
+    {
+      "object": "private.dic_admin_account_delete_finish(uuid,uuid)",
+      "chars": 2492,
+      "source_md5": "51cd64deed985a9ddf622926b8784a84",
+      "range": "entire source 1..2492",
+      "existing_full_receipt": "R312"
+    },
+    {
+      "object": "public.dic_admin_account_delete_prepare(uuid,uuid)",
+      "chars": 259,
+      "source_md5": "a0c67fbfbbfd122a8e16596c79333092",
+      "range": "entire source",
+      "existing_full_receipt": "R312"
+    },
+    {
+      "object": "public.dic_admin_account_delete_finish(uuid,uuid)",
+      "chars": 257,
+      "source_md5": "2fc16586443318c1594d1939544920dd",
+      "range": "entire source",
+      "existing_full_receipt": "R312"
+    },
+    {
+      "object": "dic-delete-member-account/index.ts",
+      "chars": 4518,
+      "git_blob": "45706c9c78e0755a35159e8a96152cc2aa293d2c",
+      "range": "entire Edge file",
+      "existing_full_receipt": "R312",
+      "exact_dev_and_release": true
+    },
+    {
+      "object": "_shared/request-budget.mjs",
+      "chars": 2455,
+      "git_blob": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+      "range": "entire Edge file",
+      "existing_full_receipt": "R312"
+    }
+  ],
+  "finding": {
+    "classification": "REPRODUCIBLE_DORMANT_API_RESPONSE_MISMATCH",
+    "mechanism": "SQL completed prepare omits community_removed; Edge completed-path treats missing value as zero",
+    "counterexample": "Persisted completed remove-mode receipt with community_removed=2 returns API field 0 rather than 2",
+    "production_current_affected_count": 0,
+    "hosted_real_member_incident": "NOT_OBSERVED",
+    "current_admin_ui_consumer": "checks only ok/completed, not count",
+    "security_classification": "not a standalone security issue"
+  },
+  "fix": {
+    "type": "FUTURE_PUBLICATION_GITHUB_DEVELOPMENT_ONLY",
+    "migration_path": "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql",
+    "migration_blob_sha": "dfd7f2d505af9e121c09eb20ed7af2e19253faef",
+    "test_path": "supabase/tests/admin_account_delete_completed_receipt.sql",
+    "test_blob_sha": "5a9fc2b8d1c61d8b7c885d8bfec6f128160c35c2",
+    "runner_path": "scripts/audit/isolated-sql-regression.sh",
+    "runner_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+    "dispatcher_path": "tests/sql-runner-coverage.test.mjs",
+    "dispatcher_blob_sha": "9550fd21ff0edc93adbeed716e657a504a41d2e9",
+    "sql_change_scope": "one completed-path JSON field; full current function definition copied otherwise byte-exact",
+    "isolated_test": "synthetic rollback count 2, no Auth deletion",
+    "provider_writes": 0,
+    "source_bound_ci": "PENDING_NOT_PASS",
+    "release_queue_state": "TESTING",
+    "ready": "NOT_CLAIMED"
+  },
+  "telemetry": {
+    "pgss_readonly": "three high-temp SQL shapes attributed to postgres-role pg_stat_statements observability, not member queries",
+    "authenticated_personal_state_cumulative_calls": 4789,
+    "authenticated_personal_state_mean_ms": 15.29,
+    "authenticated_personal_state_temp_blocks": 0,
+    "new_measured_member_facing_bottleneck": false
+  },
+  "first_time_provider_words": 0,
+  "issue267_code_lines": 0,
+  "full_baseline": "IN_PROGRESS",
+  "unverified": [
+    "hosted Auth/API/Vault-only controls",
+    "genuine signed-in #96 acceptance",
+    "exact-source PR/merged checks",
+    "release source isolation"
+  ],
+  "next": "Review new PR exact-source checks and repair before merging; then resume next genuinely new or unreviewed live provider source."
+}

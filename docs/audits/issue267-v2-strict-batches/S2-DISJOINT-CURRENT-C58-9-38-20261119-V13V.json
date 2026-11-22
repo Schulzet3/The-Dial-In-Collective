@@ -1,0 +1,683 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13V",
+  "authority": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "preflight": {
+    "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "exact_content_verified": true
+  },
+  "strict_method": "Directly read 30 exact physical original Git lines in range, annotate each literal individually; source Git blob and immutable path and selected live source full-blob equality verified; metadata/inventory is not semantic proof; V1/provisional R2/C2/S2-143 not recredited.",
+  "track": "PINNED_CURRENT_V2_DIRECT",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "manifest_index_1_based": 58,
+  "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+  "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+  "start_line": 9,
+  "end_line": 38,
+  "new_direct_lines": 30,
+  "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C57-54-75-C58-1-8-20261119-V13U.json",
+  "raw_blob_parity_verified": true,
+  "live_blob_parity_verified": true,
+  "post_pin_drift": "UNFINISHED_FULL_LIVE_TREE",
+  "tests": {
+    "source_line_literals": "PASS_30_OF_30",
+    "direct_source_read": "PERFORMED",
+    "runtime_node22": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_offline": "NOT_RUN_DOCS_ONLY",
+    "sql_auth_rls": "NOT_RUN_DOCS_ONLY",
+    "historic_ci": "NOT_INDEPENDENTLY_REEXECUTED",
+    "provider": "NOT_APPLICABLE",
+    "pr_head_ci": "PENDING_AT_COMMIT",
+    "merged_ci": "PENDING_AT_COMMIT"
+  },
+  "findings": [
+    {
+      "severity": "INFORMATIONAL",
+      "lines": [
+        9,
+        10,
+        14,
+        23,
+        36,
+        38
+      ],
+      "description": "Arithmetic/provenance checks require actual Git object direct verification and individual semantic receipts; validator itself does not certify semantic completeness."
+    }
+  ],
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 9,
+      "source_literal": "const positive=n=>Number.isSafeInteger(n)&&n>=1;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "`positive` accepts only safe integers >=1 for interval boundaries.",
+      "quality_bug_security_privacy_performance": "Does not independently enforce first<=last; adjacent count and cursor checks must do so.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Negative cases for zero, negative, floats, unsafe integers.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 10,
+      "source_literal": "const count=r=>r.last_line-r.first_line+1;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "`count` calculates inclusive last-first+1 for intervals.",
+      "quality_bug_security_privacy_performance": "Can be nonpositive on malformed reverse range until later guard rejects it.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test first=last, adjacent ranges, reverse and out-of-bounds ranges.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 11,
+      "source_literal": "",
+      "inspection_class": "mechanical_direct_read_individually_accounted",
+      "behavior": "Blank line separates utility helpers from validator.",
+      "quality_bug_security_privacy_performance": "Formatting only.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "No executable test.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 12,
+      "source_literal": "export function validateIssue267Coverage({inventory,ledger,batches}){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Exports validator taking inventory, ledger and batch metadata for arithmetic comparison.",
+      "quality_bug_security_privacy_performance": "Static metadata validation cannot prove semantic review, Git object authenticity or human approval.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Use isolated synthetic inventory/ledger/batch tests, not source-review certification.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 13,
+      "source_literal": " const errors=[],add=message=>errors.push(message);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Creates errors array and local reporting closure.",
+      "quality_bug_security_privacy_performance": "Accumulates all detected defects rather than fail fast.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Check multiple independent error accumulation.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 14,
+      "source_literal": " if(inventory?.source_commit!==SOURCE||inventory?.source_tree!==TREE||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Checks inventory source commit and tree against constants, with short-circuit across line break.",
+      "quality_bug_security_privacy_performance": "Exact string equality protects ledger provenance labels, not actual remote Git object existence.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Mutation test inventory commit and tree.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 15,
+      "source_literal": "    ledger?.frozen_source_commit!==SOURCE||ledger?.frozen_tree_sha!==TREE||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Checks ledger source commit and tree against frozen values.",
+      "quality_bug_security_privacy_performance": "Claims may be self-attested unless independently fetched Git source.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Mutation test ledger frozen SHA mismatch.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 16,
+      "source_literal": "    batches?.source_tree!==TREE)add('Original frozen source commit/tree changed');",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Checks batch tree; appends source/tree mismatch error if any of lines14-16 fail.",
+      "quality_bug_security_privacy_performance": "Error collapses several locations into one report; acceptable diagnostic detail limitation.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test changed batches tree and multiple-source mismatch case.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 17,
+      "source_literal": " if(!Array.isArray(inventory?.files)||!Array.isArray(ledger?.files)||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Checks inventory and ledger files are arrays before iteration.",
+      "quality_bug_security_privacy_performance": "Optional chaining avoids throws on missing inventory/ledger, but batches checked next.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test null inventory/ledger and malformed array types.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 18,
+      "source_literal": "    !Array.isArray(batches?.batches))return [...errors,'Missing original inventory, ledger or batches'];",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Returns early on missing batches array or missing source arrays.",
+      "quality_bug_security_privacy_performance": "Early return prevents subsequent numeric checks on malformed inputs; deliberate fail-closed validation.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test null batches, wrong types and expected missing-arrays error.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 19,
+      "source_literal": " if(inventory.files.length!==TOTALS.files||ledger.files.length!==TOTALS.files)add('757 path count mismatch');",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Validates frozen inventory and ledger each list exactly 757 paths.",
+      "quality_bug_security_privacy_performance": "Equal list length alone does not prove path-by-path matching, handled later.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test duplicate/missing path combinations of equal length.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 20,
+      "source_literal": " const it=inventory.totals||{};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Loads inventory totals with empty-object fallback.",
+      "quality_bug_security_privacy_performance": "Fallback surfaces expected-count mismatch rather than exception for absent totals.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test missing totals object.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 21,
+      "source_literal": " if(it.tracked_files!==TOTALS.files||it.text_files!==TOTALS.text||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Compares tracked and text-file counts to fixed manifest constants.",
+      "quality_bug_security_privacy_performance": "Only arithmetic/provenance claims, not current repository state.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test tracked_files and text_files mutations.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 22,
+      "source_literal": "    it.binary_files!==TOTALS.binary||it.text_lines!==TOTALS.lines||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Compares binary count and text-line denominator with fixed originals.",
+      "quality_bug_security_privacy_performance": "Overcount/undercount rejected when reported totals change.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test binary_files and text_lines discrepancy.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 23,
+      "source_literal": "    it.total_bytes!==TOTALS.bytes)add('Original measured totals changed');",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Compares total byte count and emits measured-total error.",
+      "quality_bug_security_privacy_performance": "Static byte-count cross-check is not SHA256 rehash of content.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test total_bytes mismatch and verify error.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 24,
+      "source_literal": " const inventoryByPath=new Map(),ledgerByPath=new Map();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Creates path maps for inventory and coverage ledger.",
+      "quality_bug_security_privacy_performance": "Map keys rely on exact path strings; does not normalize path aliases.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test duplicate and absent path handling.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 25,
+      "source_literal": " for(const entry of inventory.files){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins inventory-file iteration.",
+      "quality_bug_security_privacy_performance": "Input array type was guarded; element shapes inspected indirectly below.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test malformed inventory item if needed before claiming hardened arbitrary input.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 26,
+      "source_literal": "  if(inventoryByPath.has(entry.path))add('Duplicate inventory path '+entry.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects duplicate inventory path via key lookup.",
+      "quality_bug_security_privacy_performance": "Detection is preserved even though later map.set overwrites duplicate.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test duplicate path triggers error, even with last-write-wins map.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 27,
+      "source_literal": "  inventoryByPath.set(entry.path,entry);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Inserts path to inventory map.",
+      "quality_bug_security_privacy_performance": "Duplicate insertion overwrites map value but earlier error remains; no silent certified pass.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test map cardinality vs input list when duplicate path present.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 28,
+      "source_literal": " }",
+      "inspection_class": "mechanical_direct_read_individually_accounted",
+      "behavior": "Ends inventory loop.",
+      "quality_bug_security_privacy_performance": "Control flow delimiter; no standalone runtime behavior.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Covered by iteration fixtures.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 29,
+      "source_literal": " let textFiles=0,binaryFiles=0,sourceLines=0,reviewed=0,remaining=0,fully=0,partial=0;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Initializes aggregate text/binary/line/coverage and file-state counters.",
+      "quality_bug_security_privacy_performance": "Counters start zero and only become evidence through complete traversal.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test empty or missing ledger classifications.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 30,
+      "source_literal": " const ledgerReview=new Map();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Creates map to guard duplicate reviewed intervals.",
+      "quality_bug_security_privacy_performance": "Key composition from earlier helper depends on path + inclusive bounds.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test duplicate same interval and adjacent disjoint intervals.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 31,
+      "source_literal": " for(const file of ledger.files){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins per-file ledger iteration.",
+      "quality_bug_security_privacy_performance": "Input ledger.files array already validated for array-ness.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test ordinary ledger file pass and unexpected entries.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 32,
+      "source_literal": "  if(ledgerByPath.has(file.path))add('Duplicate ledger path '+file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects duplicate ledger path before insertion.",
+      "quality_bug_security_privacy_performance": "Does not abort on duplicate; final error list still rejects it.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test repeated ledger path with otherwise valid structure.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 33,
+      "source_literal": "  ledgerByPath.set(file.path,file);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Inserts ledger record keyed by path.",
+      "quality_bug_security_privacy_performance": "Last-write-wins would be unsafe alone, mitigated by explicit duplicate error.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test mismatch detected even if last duplicate matches inventory.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 34,
+      "source_literal": "  const src=inventoryByPath.get(file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Looks up corresponding frozen inventory source.",
+      "quality_bug_security_privacy_performance": "Missing source handling next line avoids dereferencing absent object.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test unrecognized ledger path.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 35,
+      "source_literal": "  if(!src){add('Unrecognized path '+file.path);continue;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Records unrecognized path and continues before hash/byte checks.",
+      "quality_bug_security_privacy_performance": "May omit additional per-path diagnostics for unknown source, but fails validation.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test unknown path continues to other files without throw.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 36,
+      "source_literal": "  if(file.source_blob_sha!==src.source_blob_sha||file.sha256!==src.sha256||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Compares Git blob SHA and source SHA256 claim against inventory corresponding record.",
+      "quality_bug_security_privacy_performance": "Metadata-to-metadata equality cannot establish actual Git blob bytes; independent Git fetch remains required.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test altered blob and sha256 fields individually.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 37,
+      "source_literal": "     file.source_bytes!==src.bytes||file.original_line_count!==src.line_count)",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Compares ledger byte and physical-line counts to frozen inventory.",
+      "quality_bug_security_privacy_performance": "Detects size or line metadata drift, not semantic accounting correctness.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Test one-byte and one-line mismatches.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 38,
+      "source_literal": "   add('Original source/hash/count mismatch '+file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Emits mismatch diagnostic using path for any hash/size/count discrepancy.",
+      "quality_bug_security_privacy_performance": "One aggregated error may hide which field mismatched; low usability only, not a bypass.",
+      "dead_obsolete_duplicate": "Original pinned executable validator; no dead path or redundant code proven by this isolated line; preserve pending caller and negative testing.",
+      "counterpart_or_absence": {
+        "development_sha": "be3534da227ed70c743d0914513c83d6d0a04a80",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 coverage validator; #96 owns current live Auth/privacy"
+      },
+      "testability_remediation_opportunity": "Assert expected error string for each altered field.",
+      "locked_fit": "Arithmetic-only review proof is not semantic approval; preserve immutable frozen/pin source, private data, Auth/privacy and Locked releases; no provider writes."
+    }
+  ],
+  "next_source": "C58:39"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R388",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_branch_sha": "f2daba164a6c6c003c1261576b4a0e7b21dcbb12",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "source_prechange_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+  "queue_prechange_blob_sha": "ddfeab664af37d9f80befa6b7f11eaf4569ce457",
+  "scope_paths": [
+    "supabase/functions/dic-admin-push-broker/core.mjs",
+    "tests/issue509-admin-push-lazy-vault.test.mjs",
+    "docs/RELEASE_QUEUE.json",
+    "docs/workstreams/issue-509.md"
+  ],
+  "reproduced_prior_finding": "R383 conditional push key unnecessary for no-op poll; owner-approved safe cleanup in development",
+  "source_change": "Remove unconditional Vault keys() fetch after claim; defer memoized keys() lookup to added-token branch only. Missing key leaves unseen tokens retryable. Do not alter Manage/bootstrap or delivery response.",
+  "tests_added": 5,
+  "tests_status": "NOT_YET_RUN",
+  "exact_source_ci": "PENDING",
+  "source_review_credit_issue267": 0,
+  "production_writes": 0,
+  "publication": "NOT_AUTHORIZED",
+  "baseline": "IN_PROGRESS",
+  "release_queue_state": "TESTING"
+}

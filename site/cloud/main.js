@@ -1,3 +1,4 @@
+import {armStartupRecovery} from './startup-recovery.js';
 import * as C from '../lib/constants.js';
 import * as M from '../lib/model.js';
 import * as E from '../lib/engine.js';
@@ -278,6 +279,20 @@ class CloudApp {
   }
  }
  async connect(){
+  const owner=this.identity?.id,epoch=this.epoch;
+  if(!owner)return;
+  // Auth callbacks, visibility and reconnect can arrive together. Share the
+  // admission request only within the same owner/session, never across users.
+  if(this.connecting&&this.connectingOwner===owner&&this.connectingEpoch===epoch)
+   return this.connecting;
+  this.connectingOwner=owner;this.connectingEpoch=epoch;
+  const task=this.performConnect();
+  const active=task.finally(()=>{
+   if(this.connecting===active){this.connecting=null;this.connectingOwner=null;this.connectingEpoch=null;}
+  });
+  this.connecting=active;return active;
+ }
+ async performConnect(){
   const user=this.identity,epoch=this.epoch;if(!user)return;
   if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
   const wasPending=this.status?.approvalState==='pending'&&this.status?.admitted===false;
@@ -287,7 +302,31 @@ class CloudApp {
    }
    this.deniedOfflineOwners.delete(user.id);
    clearOfflineDenial(user.id);
-   const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
+   // Once the server has admitted this owner, paint their saved workspace
+   // before queued writes, the full cloud read and Community review fetch.
+   // This cache is never an authorization token or shared across accounts.
+   // A damaged/unavailable local cache must not prevent an admitted
+   // member from reaching the authoritative cloud read.
+   let startupCache=null;
+   try{
+    startupCache=await this.inSession(()=>Promise.all([
+     this.store.readCache(user.id),this.store.list(user.id)
+    ]));
+   }catch(err){
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(isAccessDenied(err))throw err;
+   }
+   if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   const [cache,pending]=startupCache||[];
+   if(cache?.owner===user.id&&cache.snapshot){
+    this.raw=cache.snapshot;this.pending=pending;
+    this.state=applyPending(hydrate(this.raw),this.pending);
+    this.state.communityEvidence=this.recommendationEvidence;
+    if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)
+     this.expanded.add(M.workspace(this.state).currentCoffeeId);
+    this.syncState='connecting';
+    this.render();
+   }
    await this.sync();
    if((wasPending||awaitingApproval(user.id))&&epoch===this.epoch&&user.id===this.identity?.id){
     clearApprovalAwaited(user.id);
@@ -325,7 +364,7 @@ class CloudApp {
   this.syncState=outcome.state;const pending=await this.store.list(who.id);
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
-  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
+  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';let saved=null;try{saved=await this.store.readCache(who.id);}catch{/* Retain an already loaded same-owner snapshot. */}if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved?.owner===who.id&&saved.snapshot)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;
   // A known flagged shot cannot be deferred. A failed refresh cannot erase
@@ -1207,11 +1246,17 @@ class CloudApp {
  }
 }
 export async function startCloudApp(){
+ // Paint a neutral, data-free shell before SDK/session initialization. Never
+ // display cached private workspace until server admission has completed.
+ root.innerHTML='<main class="shell welcome" role="status" aria-live="polite"><h1>The Dial In Collective</h1><p class="helper">Opening your workspace…</p></main>';
+ // If session setup stalls, offer a safe reload rather than leaving a permanent
+ // loading screen. Never paint private state or bypass admission on timeout.
+ const stopRecovery=armStartupRecovery(root);
  try{
   secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
   if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');
   // Shell worker stores only static public files; it never handles identity data.
-  if(globalThis.navigator?.serviceWorker)globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
+  if(globalThis.navigator?.serviceWorker)setTimeout(()=>globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
    // iOS Home Screen apps can stay resident across deploys without a navigation.
    // Check when returning to the app; the new worker activates for the next
    // navigation, never discarding an in-progress draft or offline shot queue.
@@ -1219,10 +1264,10 @@ export async function startCloudApp(){
    const check=()=>{if(globalThis.document?.visibilityState==='hidden'||Date.now()-lastCheck<60_000)return;
     lastCheck=Date.now();reg.update().catch(()=>{});};
    check();globalThis.document?.addEventListener?.('visibilitychange',check);
-  }).catch(()=>{});
+  }).catch(()=>{}),0);
   const sdk=globalThis.supabase.createClient(CLOUD_CONFIG.supabaseUrl,CLOUD_CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'dic_cloud_auth_v1'}});
   const client=createCloudClient(sdk,{redirectUrl:new URL(location.pathname,location.origin).href});const app=new CloudApp(client);await app.init();return app;
- }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}
+ }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}finally{stopRecovery();}
 }
 startCloudApp();
 export {CloudApp};

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": 365,
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "preflight_development_sha": "943c3f66c9999bf8b4da23d84f491f3b45e3fb00",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "supabase_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "provider_read_only": true,
+  "verified_sources": [
+    {
+      "object": "private.read_personal_state()",
+      "pg_get_functiondef_chars": 2339,
+      "md5": "037d248b67cc3e8490c1689d3200990f",
+      "semantics": "calibrations JSON aggregate has no ORDER BY; consumer fallback assumes last row is latest"
+    },
+    {
+      "object": "public.dic_read_personal_state()",
+      "chars": 175,
+      "md5": "811aee397f3505117fcc38715e09af94"
+    }
+  ],
+  "direct_provider_catalog": "setup_preferences.calibration_id nullable; grinder_calibrations.created_at NOT NULL; existing 4 versions, 0 NULL selected calibrations, 0 ambiguous current fallback, max 1 candidate/version",
+  "reproduction": "Reverse synthetic historical matching calibration array order while no preferred calibration is pinned: current hydrate selects a different fallback; fix sorts chronologically with id tie-break while keeping pinned selection",
+  "observed_production_incident": false,
+  "changes": [
+    "site/cloud/mapping.js",
+    "tests/issue509-calibration-order.test.mjs"
+  ],
+  "ci": "PENDING exact PR-head Node22/browser/approval, no PASS asserted",
+  "first_time_provider_words": 0,
+  "issue267_original_line_credit": 0,
+  "other_evidence": {
+    "app_snapshots_calls": 4787,
+    "cumulative_mean_ms": 15.284,
+    "not_time_window": true,
+    "measurable_bottleneck": "NOT_CONFIRMED"
+  },
+  "source_queue_state": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "release": "NOT_AUTHORIZED",
+  "production_writes": 0,
+  "next": "Check PR-head source-bound CI, preserve #455 ownership and disjoint source changes; nonforce [skip netlify] merge only after applicable PASS, verify merged-source CI; continue first unreviewed provider object"
+}

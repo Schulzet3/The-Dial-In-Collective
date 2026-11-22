@@ -32,6 +32,13 @@ for migration in supabase/migrations/*.sql; do
       | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
   fi
   run_sql "$migration"
+  # R362 isolated same-family double-refresh regression after this replacement.
+  if [[ "$migration" == *20261119133000_dic_classify_family_refresh_single_pass.sql ]]; then
+    echo "Running single-pass personal-family classification fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql \
+      supabase/tests/personal_family_refresh_single_pass_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
   # Historical suites run at the schema boundary they were written to protect.
   # Later migrations intentionally replace some of those permissions/gates.
   case "$migration" in
@@ -132,5 +139,18 @@ if [[ -f supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh
   run_sql supabase/tests/admin_shot_delete_family_refresh.sql
 else
   echo "NOT_APPLICABLE: #509 Admin shot-family refresh; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql ]]; then
+  echo "Running admin_account_delete_completed_receipt"
+  run_sql supabase/tests/admin_account_delete_completed_receipt.sql
+else
+  echo "NOT_APPLICABLE: #509 completed account deletion count; migration excluded from tested source"
+fi
+# #509 R379: development migration must be present for the matching synthetic regression.
+if [[ -f supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql ]]; then
+  echo "Running workspace_inactive_selection_guards"
+  run_sql supabase/tests/workspace_inactive_selection_guards.sql
+else
+  echo "NOT_APPLICABLE: #509 inactive workspace selection; migration excluded from tested source"
 fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'

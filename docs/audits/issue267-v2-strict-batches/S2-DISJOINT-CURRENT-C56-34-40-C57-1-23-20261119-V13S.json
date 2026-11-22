@@ -1,0 +1,776 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13S-20261119-AUT11",
+  "scope": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "preflight": {
+    "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "byte_for_byte_verified": true
+  },
+  "nonoverlap": "V13R C56 through line33; new C56:34-40 then C57:1-23; original pin manifest indices 56/57.",
+  "track": "PINNED_EXECUTABLE_V2_DIRECT_REVIEW",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "segments": [
+    {
+      "manifest_index": 56,
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "start_line": 34,
+      "last_line": 40,
+      "physical_lines": 7,
+      "original_file_lines": 40,
+      "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+      "live_file_lines": 149,
+      "exact_live_blob_parity": false
+    },
+    {
+      "manifest_index": 57,
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "start_line": 1,
+      "last_line": 23,
+      "physical_lines": 23,
+      "original_file_lines": 75,
+      "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "live_file_lines": 75,
+      "exact_live_blob_parity": true
+    }
+  ],
+  "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C56-4-33-20261119-V13R.json",
+  "new_direct_lines": 30,
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 34,
+      "source_literal": "# No second draft application: privacy and identity regressions use final schema.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Records no second draft migration; final schema used for privacy/identity suite.",
+      "quality_bug_security_privacy_performance": "Pinned comment describes migration ordering; current expanded runner independently drifted.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          56
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Synthetic migration order assertion and bash syntax.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 35,
+      "source_literal": "run_sql tests/sql/owner-fixture.sql",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Runs owner-fixture.sql with docker psql wrapper before the regression loop.",
+      "quality_bug_security_privacy_performance": "Fixture is synthetic, not member/production data; fixture contents not reviewed here.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          57
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Run isolated Postgres fixture; no hosted SQL.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 36,
+      "source_literal": "for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review admin_shot_coffee_group_identity coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission first_style_prompt fast_flow_hybrid_style admin_server_search community_server_search preview_two_phase_cache ready_queue_release admin_safe_delete recipe_family_lifecycle security_surface_inventory retired_experiments retired_bag_history decaffeination_method; do",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Lists historical named final-schema SQL regression cases in a Bash iteration.",
+      "quality_bug_security_privacy_performance": "Original suite list differs from current expanded 149-line script; no current PASS inferred.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Check each historical file and current expanded regression list separately.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 37,
+      "source_literal": "  echo \"Running $regression\"",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Echoes selected regression name before execution.",
+      "quality_bug_security_privacy_performance": "Progress logging is not evidence of completion.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          59
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Confirm logging before error exit on synthetic failure.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 38,
+      "source_literal": "  run_sql \"supabase/tests/$regression.sql\"",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Runs relative supabase/tests/$regression.sql through run_sql.",
+      "quality_bug_security_privacy_performance": "Path constructed from hardcoded list; ON_ERROR_STOP psql set earlier; no provider endpoint.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          60
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Run scoped negative SQL syntax fixture with disposable Docker.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 39,
+      "source_literal": "done",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Closes Bash regression case loop.",
+      "quality_bug_security_privacy_performance": "No side effect independent of loop; live script has multiple 'done' tokens.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          13,
+          54,
+          61
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Bash -n and selected scope test if editing runner.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 40,
+      "source_literal": "echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Prints PASS summary only after synchronous loops return.",
+      "quality_bug_security_privacy_performance": "Echo is not proof external CI/test succeeded; no current run done; cleanup after exit unverified.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "exact_live_blob_parity": false,
+        "exact_literal_live_line_numbers": [
+          149
+        ],
+        "live_drift_unreviewed": true
+      },
+      "testability": "Exact-source hosted Docker/Postgres test required before a test PASS.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 1,
+      "source_literal": "// Issue #161: read every tracked byte and screen every UTF-8 source line.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "States Issue161 tool scans tracked bytes/UTF-8 physical lines.",
+      "quality_bug_security_privacy_performance": "Tool metadata not human semantic review evidence.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          1
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Check runAudit with tracked sample fixture.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 2,
+      "source_literal": "// No credentials or source text are placed in the audit report. This is an",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "States report will omit raw credentials/source text.",
+      "quality_bug_security_privacy_performance": "Downstream serializer excludes raw source despite scanning complete content; verify with harmless fake secret.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          2
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Test generated JSON excludes synthetic secret literal.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 3,
+      "source_literal": "// exhaustive automated inventory, not a human semantic audit or pen test.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Disclaims semantic manual audit and pen-test status.",
+      "quality_bug_security_privacy_performance": "Prevents automatic regex screening being claimed full security coverage.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          3
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Ensure screen output labeled inventory.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 4,
+      "source_literal": "import {execFileSync} from 'node:child_process';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Imports execFileSync for subsequent fixed git ls-files/rev-parse commands.",
+      "quality_bug_security_privacy_performance": "Local synchronous child process, no provider calls; fixed args later in file.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          4
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Exercise git unavailable/error case.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 5,
+      "source_literal": "import {readFileSync,lstatSync,mkdirSync,writeFileSync} from 'node:fs';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Imports synchronous file/stat/read and audit-artifact directory/file writers.",
+      "quality_bug_security_privacy_performance": "Reads repo files, creates local report; symlink/IO failures not tested.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          5
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Synthetic nonregular file and output failure fixtures.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 6,
+      "source_literal": "import {resolve} from 'node:path';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Imports path resolver for direct-entry invocation guard.",
+      "quality_bug_security_privacy_performance": "Module path normalization is not a security proof.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          6
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Confirm import-only execution avoids main.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 7,
+      "source_literal": "import {createHash} from 'node:crypto';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Imports crypto createHash for SHA-256 checksum.",
+      "quality_bug_security_privacy_performance": "Digest protects byte identity but does not attest semantic review.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          7
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Known vector SHA-256 fixtures.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 8,
+      "source_literal": "import {fileURLToPath} from 'node:url';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Imports fileURLToPath for module-entry comparison.",
+      "quality_bug_security_privacy_performance": "No credential or network access.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          8
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Direct run vs module import test.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 9,
+      "source_literal": "",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Physical blank separator between imports and helper declarations.",
+      "quality_bug_security_privacy_performance": "No executable effect on this physical line.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Mechanically accounted after direct read.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 10,
+      "source_literal": "export const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Exports SHA-256 hex helper over supplied bytes.",
+      "quality_bug_security_privacy_performance": "Source-bound byte hashing, not full provenance/correctness evidence.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          10
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Known binary and Unicode byte digest vectors.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 11,
+      "source_literal": "const patterns=[",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins static rule recognizer table.",
+      "quality_bug_security_privacy_performance": "Finite machine patterns are not complete detection.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          11
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Positive/negative synthetic recognizer matrix.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 12,
+      "source_literal": " {id:'private_key',risk:'critical',re:/-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects PEM private key header strings as critical candidates.",
+      "quality_bug_security_privacy_performance": "Header match is not whole-secret detection and can be present in docs.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          12
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Fake PEM header positive and false-positive tests.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 13,
+      "source_literal": " {id:'github_token',risk:'critical',re:/\\b(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{36,255}\\b/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects five legacy gh-prefixed GitHub token forms.",
+      "quality_bug_security_privacy_performance": "Unlisted token formats escape; text match does not prove exposure.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          13
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Fake token prefix/boundary fixtures, never real credential.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 14,
+      "source_literal": " {id:'supabase_secret',risk:'critical',re:/\\bsb_secret_[A-Za-z0-9_-]{20,}\\b/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects sb_secret_ token-shaped string.",
+      "quality_bug_security_privacy_performance": "Fixed prefix/length detector does not cover other Supabase values.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          14
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Synthetic scoped secret-like shapes.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 15,
+      "source_literal": " {id:'aws_access_key',risk:'critical',re:/\\b(?:AKIA|ASIA)[A-Z0-9]{16}\\b/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects AWS AKIA/ASIA access-key identifier patterns.",
+      "quality_bug_security_privacy_performance": "Identifiers are candidates, no active credential determination.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          15
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Fake AWS key and nonkey controls.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 16,
+      "source_literal": " {id:'private_env_assignment',risk:'review',re:/^\\s*(?:SUPABASE_SERVICE_ROLE_KEY|SUPABASE_DB_URL|POSTGRES_PASSWORD|BACKUP_AGE_IDENTITY|NETLIFY_AUTH_TOKEN)\\s*=\\s*[^\\s#]{8,}/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects listed sensitive shell env assignments with noncomment values.",
+      "quality_bug_security_privacy_performance": "Misses different serializers/multiline syntax; reports metadata only.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          16
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Fake assignment tests and ensure no raw value in output.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 17,
+      "source_literal": " {id:'dynamic_execution',risk:'review',re:/\\b(?:eval\\s*\\(|new\\s+Function\\s*\\()/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects eval/new Function dynamic execution token shapes.",
+      "quality_bug_security_privacy_performance": "May match comments or miss aliases; review real call sites.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          17
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Synthetic dynamic invocation controls.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 18,
+      "source_literal": " {id:'raw_html_sink',risk:'review',re:/\\.innerHTML\\s*=|insertAdjacentHTML\\s*\\(/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects .innerHTML and insertAdjacentHTML DOM sink names.",
+      "quality_bug_security_privacy_performance": "Sink presence is not XSS exploit; context-specific escaping matters.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          18
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Trace matching call sites with safe/unsafe HTML tests.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 19,
+      "source_literal": " {id:'destructive_sql',risk:'review',re:/\\b(?:DROP\\s+(?:TABLE|SCHEMA|FUNCTION|POLICY)|TRUNCATE\\s+TABLE|DELETE\\s+FROM)\\b/i},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects DROP/TRUNCATE/DELETE SQL forms as review candidates.",
+      "quality_bug_security_privacy_performance": "Limited SQL grammar; no SQL execution or schema deletion here.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          19
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Synthetic SQL with whitespace/comment variants.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 20,
+      "source_literal": " {id:'security_definer',risk:'review',re:/\\bSECURITY\\s+DEFINER\\b/i},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects SECURITY DEFINER SQL spelling.",
+      "quality_bug_security_privacy_performance": "Not automatically vulnerability; grants/search_path/RLS require direct inspect.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          20
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Review isolated function context under #96/#509.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 21,
+      "source_literal": " {id:'unsafe_auth_pattern',risk:'review',re:/\\b(?:auth\\.role\\s*\\(|raw_user_meta_data|user_metadata\\s*\\.)/},",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects auth.role/raw_user_meta_data/user_metadata syntax.",
+      "quality_bug_security_privacy_performance": "User-metadata auth is sensitive; pattern alone no exploit proof.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          21
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Direct RLS/caller checks only under #96.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 22,
+      "source_literal": " {id:'incomplete_work',risk:'review',re:/\\bTODO\\b|\\bFIXME\\b|\\bHACK\\b/}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Detects TODO/FIXME/HACK strings.",
+      "quality_bug_security_privacy_performance": "Heuristic incomplete-work markers do not prove dead code.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          22
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Manually triage each matched source path.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 23,
+      "source_literal": "];",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Closes pattern array with delimiter.",
+      "quality_bug_security_privacy_performance": "No matching runs on this line; syntactic accounting only.",
+      "dead_obsolete_duplicate": "PINNED_EXECUTABLE_NO_PROVEN_DEAD_OR_DUPLICATE; live differences require separate drift review",
+      "counterpart_or_absence": {
+        "development_sha": "437d2e5c44342c9fb5d32bc3e249a81e444fb79a",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "exact_literal_live_line_numbers": [
+          23
+        ],
+        "live_drift_unreviewed": false
+      },
+      "testability": "Node syntax test where applicable.",
+      "remediation_opportunity": "Do not edit immutable pin; reproduce actual current bug before safe focused change, coordinate #96/#509 for SQL/Auth paths.",
+      "locked_fit": "Machine screen is NOT semantic security certification; preserve isolated SQL/RLS/Auth and private member/shot/offline/Community and original603; development only",
+      "disposition": "DIRECT_SEMANTIC_SOURCE_REVIEW_NO_CURRENT_RUNTIME_PASS"
+    }
+  ],
+  "findings": [
+    "Pinned C56 40 lines vs development 149; current loop literal at pinned line36 not present in live script, other lines moved; full live drift semantic review outstanding.",
+    "C57 exact source blob preserved live, screening rules are finite and do not certify security; no new confirmed current exploit.",
+    "Previously reproduced LOW/local malformed OCR TSV AttributeError (outside this source range) remains OPEN for current-code negative test/fix."
+  ],
+  "tests": {
+    "git_blob_full_byte_compare": "PASS_2_OF_2",
+    "source_literal_receipts": "PASS_30",
+    "node22_sql_docker_auth_rls_browser_mobile_original603_python_ocr": "NOT_RUN_DOCS_ONLY_NOT_PASS",
+    "provider_readback": "NOT_APPLICABLE"
+  },
+  "next_pinned": "C57:24",
+  "global_completion": "INCOMPLETE_579961_FROZEN_57913_PINNED_ALL_LIVE_DRIFT_NON_TEXT"
+}

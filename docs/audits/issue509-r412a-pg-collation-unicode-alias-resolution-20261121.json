@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R412a",
+  "date_utc": "2026-11-21",
+  "project": "azviqqejypsefzilgonr",
+  "production_read_only": true,
+  "commit_under_review": "d8fca75643278b0113009c7e23519294879ba079",
+  "preflight_development_sha": "7e4ff817ce9965019410e2686e34f493d943e3c8",
+  "preflight_git_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "anomaly_from_r412": "pg_catalog.pg_collation rank 796, OID 963, unicode, colllocale=und, was flagged by a generic ICU locale-to-name assertion because its name does not end in '-x-icu'.",
+  "provider_readback": {
+    "unicode": {
+      "oid": 963,
+      "name": "unicode",
+      "provider": "i",
+      "locale": "und",
+      "version": "153.121",
+      "actual_version": "153.121",
+      "deterministic": true
+    },
+    "root_icu": {
+      "oid": 12354,
+      "name": "und-x-icu",
+      "provider": "i",
+      "locale": "und",
+      "version": "153.121",
+      "actual_version": "153.121",
+      "deterministic": true
+    },
+    "default_db_collation_version": {
+      "recorded": "153.121",
+      "actual": "153.121"
+    }
+  },
+  "authoritative_reference": "https://www.postgresql.org/docs/17/collation.html",
+  "authoritative_meaning": "PostgreSQL 17 standard collation unicode is a predefined SQL-standard name for the Unicode Collation Algorithm using the ICU root locale. Documentation explicitly states it has the same behavior as und-x-icu. The ICU naming rule applied to initdb-generated BCP47 names does not apply to the standardized name.",
+  "verdict": "BENIGN_EXPECTED_SQL_STANDARD_ALIAS_FALSE_POSITIVE",
+  "corrected_exposed_catalog_validation": "861/861 consistent after allowing documented unicode standard alias",
+  "application_bug": false,
+  "safe_cleanup": false,
+  "remaining_unverified": "native compiled ICU/PostgreSQL implementation and original CREATE COLLATION SQL",
+  "follow_up": "No edit to immutable R412 literal ledger; preserve raw original anomaly plus append-only resolution and journal. Next catalog: pg_catalog.pg_conversion rank 1/128."
+}

@@ -1,0 +1,742 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13R-20261119-AUT11",
+  "scope": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "preflight": {
+    "development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "byte_for_byte_verified": true
+  },
+  "nonoverlap": "Prior merged V13Q ends F216:16 and C56:3; new disjoint F216:17-46 and C56:4-33.",
+  "track": "PINNED_EXECUTABLE_V2_DIRECT_REVIEW",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "segments": [
+    {
+      "manifest_index": 56,
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "start_line": 4,
+      "last_line": 33,
+      "physical_lines": 30,
+      "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+      "live_file_has_additional_lines": true
+    }
+  ],
+  "preceding_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C55-31-57-C56-1-3-20261119-V13Q.json",
+  "new_direct_lines": 30,
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 4,
+      "source_literal": "DIC_SQL_CONTAINER=\"dic-sql-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}\"",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Creates container name from CI run ID/attempt with local defaults.",
+      "quality_bug_security_privacy_performance": "Unique across many GitHub runs; local repeated or concurrent calls may collide; unproven failure.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          4
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Inspect reuse of local name in callers; CI concurrency test only if safe.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 5,
+      "source_literal": "trap 'docker rm -f \"$DIC_SQL_CONTAINER\" >/dev/null 2>&1 || true' EXIT",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "EXIT trap forcibly removes named Docker container, silencing failed removal.",
+      "quality_bug_security_privacy_performance": "Ordinary shell exit cleanup, SIGKILL cannot trap; no actual orphan observed.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          5
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Run isolated failure-path cleanup test only with local Docker.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 6,
+      "source_literal": "docker run -d --rm --network none --name \"$DIC_SQL_CONTAINER\" \\",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Starts Docker PostgreSQL detached, --rm and --network none, without host port mapping.",
+      "quality_bug_security_privacy_performance": "Network isolation is central to test-only no-provider assurance.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          6
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Verify docker inspect NetworkMode=none if environment permits.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 7,
+      "source_literal": "  -e POSTGRES_DB=dic_ci -e POSTGRES_HOST_AUTH_METHOD=trust postgres:17.11 >/dev/null",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Sets isolated dic_ci DB and trust auth inside networkless PostgreSQL 17.11 container.",
+      "quality_bug_security_privacy_performance": "Trust acceptable only within networkless test container; mutable patch tag not digest-pinned, reproducibility hypothesis.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          7
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Inspect Docker runtime and image digest in local CI; never expose trust auth to network.",
+      "remediation_opportunity": "Consider digest pin for reproducibility only if isolated CI evidence warrants, no unproved change",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 8,
+      "source_literal": "ready=false",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Initializes readiness flag false before health polling.",
+      "quality_bug_security_privacy_performance": "Fail-closed default under set -e.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          8
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Test unavailable-container path.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 9,
+      "source_literal": "for attempt in {1..60}; do",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins bounded 60-attempt health check loop.",
+      "quality_bug_security_privacy_performance": "Up to roughly 60s sleep plus command durations, not unbounded wait.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          9
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Simulate container not ready in isolated CI.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 10,
+      "source_literal": "  # Initialization uses a temporary socket-only server. Wait for final TCP readiness.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Comment clarifies temporary initialization socket and final TCP readiness distinction.",
+      "quality_bug_security_privacy_performance": "Documentation needs to match postgres startup semantics.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          10
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Compare pg_isready target with spawned container.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 11,
+      "source_literal": "  if docker exec \"$DIC_SQL_CONTAINER\" pg_isready -h 127.0.0.1 -U postgres -d dic_ci >/dev/null 2>&1; then ready=true; break; fi",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Executes pg_isready inside container at 127.0.0.1 on dic_ci; sets ready=true and breaks on success.",
+      "quality_bug_security_privacy_performance": "Loopback is inside isolated Docker, not public host; suppresses health output.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          11
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Test readiness and failed host scenarios without provider access.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 12,
+      "source_literal": "  sleep 1",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Sleeps one second between unsuccessful attempts.",
+      "quality_bug_security_privacy_performance": "Adds bounded delay to CI runtime; performance impact only on slow startup.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          12
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Measure CI warm/cold startup latency if optimizing.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 13,
+      "source_literal": "done",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Closes health-check loop.",
+      "quality_bug_security_privacy_performance": "Bash structural line, no independent behavior.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          13,
+          54,
+          61
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Confirm shellcheck/syntax in applicable test.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 14,
+      "source_literal": "test \"$ready\" = true",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Asserts ready flag true; exits on false via set -e.",
+      "quality_bug_security_privacy_performance": "Prevents applying migrations before DB is ready.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          14
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Check negative isolation path.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 15,
+      "source_literal": "run_sql() { docker exec -i \"$DIC_SQL_CONTAINER\" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci < \"$1\"; }",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Defines run_sql helper that streams named local file into docker exec psql with ON_ERROR_STOP=1.",
+      "quality_bug_security_privacy_performance": "Fail-closed SQL execution; tests use synthetic DB, caller paths must be trusted repository-controlled.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          15
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Review tests/sql/bootstrap.sql and migration/test file inventory for expected scope.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 16,
+      "source_literal": "run_sql tests/sql/bootstrap.sql",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Applies synthetic bootstrap schema before checked-in migrations.",
+      "quality_bug_security_privacy_performance": "Foundation prerequisite for subsequent RLS/security suites; not a hosted DB operation.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          16
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Read bootstrap fixture and apply in disconnected Postgres.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 17,
+      "source_literal": "for migration in supabase/migrations/*.sql; do",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Loops through checked-in supabase/migrations/*.sql in shell glob order.",
+      "quality_bug_security_privacy_performance": "File naming governs migration order; unmatched glob would fail rather than silently skip.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          17
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Validate lexical filenames against migration ordering in separate drift review.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 18,
+      "source_literal": "  echo \"Applying $migration to isolated PostgreSQL\"",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Echoes the migration path for per-file CI diagnostics.",
+      "quality_bug_security_privacy_performance": "Logs only repository path, not secrets.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": true,
+        "exact_literal_live_line_numbers": [
+          18
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Match migration failure logs to source path.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 19,
+      "source_literal": "  run_sql \"$migration\"",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Applies each migration once through psql helper.",
+      "quality_bug_security_privacy_performance": "Original pin differs from live here: live inserts R360/R361/R362 synthetic historical tests before migration apply; not exact current location.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          34
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Review post-pin live 19-41 separately; current script still applies migration later.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 20,
+      "source_literal": "  # Historical suites run at the schema boundary they were written to protect.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Comment says historical test suites run at schema boundaries.",
+      "quality_bug_security_privacy_performance": "Explains why tests are not all executed only against final schema.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          42
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Confirm keyed migration callbacks and historical schema contract.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 21,
+      "source_literal": "  # Later migrations intentionally replace some of those permissions/gates.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Comment says later migrations intentionally replace permissions/gates.",
+      "quality_bug_security_privacy_performance": "Warns that a dated assertion may be invalid at final schema; privacy boundary must be tested again.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          43
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Trace final-schema RLS/permission tests under #96/#509.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 22,
+      "source_literal": "  case \"$migration\" in",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins case dispatch keyed by exact migration filename.",
+      "quality_bug_security_privacy_performance": "Boundaries avoid running dated tests on wrong schema version.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          44
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Verify filename globs and presence of test scripts.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 23,
+      "source_literal": "    *20261012015655_dic_internal_function_access.sql)",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Matches internal function access migration suffix.",
+      "quality_bug_security_privacy_performance": "Security foundation suite triggers only at matching migration.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          45
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Inspect migration exact file and security_foundation.sql.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 24,
+      "source_literal": "      run_sql supabase/tests/security_foundation.sql ;;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Executes security_foundation.sql at this migration stage.",
+      "quality_bug_security_privacy_performance": "Important Auth/RLS regression test, but NOT run in this batch.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          46
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Run isolated SQL suite when applicable, without hosted DB.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 25,
+      "source_literal": "    *20261012183845_dic_import_qualified_validation.sql)",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Matches import-qualified validation migration suffix.",
+      "quality_bug_security_privacy_performance": "Tests staged import rules at historical schema.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          47
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Trace migration and native_import fixture.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 26,
+      "source_literal": "      run_sql supabase/tests/native_import.sql ;;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Executes native_import.sql.",
+      "quality_bug_security_privacy_performance": "Synthetic import contract; no evidence it writes production.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          48
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Run only isolated Docker regression.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 27,
+      "source_literal": "    *20261014152014_dic_owner_only_import_exception.sql)",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Matches owner-only import exception migration.",
+      "quality_bug_security_privacy_performance": "Ownership/privacy sensitive historic boundary.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          49
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Cross-check owner-only test expectation versus final schema under #96.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 28,
+      "source_literal": "      run_sql supabase/tests/owner_only_import_exception.sql ;;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Runs owner_only_import_exception.sql at intended migration boundary.",
+      "quality_bug_security_privacy_performance": "Data scope/permissions assertions are synthetic and date-specific.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          50
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Check negative cross-account cases in isolated suite.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 29,
+      "source_literal": "    *20261014200634_dic_setup_rename_feed_memory.sql)",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Matches setup rename/feed memory migration.",
+      "quality_bug_security_privacy_performance": "Historical rename tests must run before later migrations change schema.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          51
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Read corresponding migration and fixture under separate audit.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 30,
+      "source_literal": "      run_sql supabase/tests/setup_rename_feed_memory.sql ;;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Runs setup_rename_feed_memory.sql.",
+      "quality_bug_security_privacy_performance": "Protects migration rename semantics; not current UI/backend proof.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          52
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Use isolated SQL suite; verify no external credentials.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 31,
+      "source_literal": "  esac",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Closes case arms for migration-specific regressions.",
+      "quality_bug_security_privacy_performance": "Control-flow closure, not separate behavior.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          53
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "bash -n or shellcheck on exact script.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 32,
+      "source_literal": "done",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Closes migration loop.",
+      "quality_bug_security_privacy_performance": "All globbed migrations processed unless set -e fails.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          13,
+          54,
+          61
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Test synthetic migration error fails pipeline.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    },
+    {
+      "immutable_path": "scripts/audit/isolated-sql-regression.sh",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "line": 33,
+      "source_literal": "# Formal CLI-generated release migration is applied ONCE by the loop above.",
+      "inspection_class": "mechanical_direct_read",
+      "behavior": "Comments that formally generated release migration was applied once in loop.",
+      "quality_bug_security_privacy_performance": "Documentation-only assertion avoids duplicate draft SQL; post-pin live still contains analogous comment later.",
+      "dead_obsolete_duplicate": "ORIGINAL_PINNED_TEST_SCRIPT; no proven dead/duplicated line; later live inserts require independent drift review",
+      "counterpart_or_absence": {
+        "live_blob_sha": "0842fba82acd46af202df410bb32f22dcc9eeff3",
+        "same_physical_line": false,
+        "exact_literal_live_line_numbers": [
+          55
+        ],
+        "live_reconciliation": "Original pin 40 lines; development 149 physical lines, post-pin extra migration/test branches not yet direct-reviewed"
+      },
+      "testability": "Verify exactly-once application in isolated logs if needed.",
+      "remediation_opportunity": "No modification without reproduced CURRENT defect and scoped SQL/Auth ownership review",
+      "locked_fit": "Synthetic no-provider SQL test only; preserve Auth/RLS and member data; #96/#509 ownership, no production SQL or release",
+      "disposition": "REVIEWED_SOURCE_LITERAL_ONLY_NO_CURRENT_RUNTIME_PASS"
+    }
+  ],
+  "findings": [
+    "Pinned test is --network none, no host port; trust auth only within isolated container; local Docker run not performed.",
+    "Current C56 live script adds separate R360/R361/R362 historical fixture paths before migration application and #509 optional suites; this post-pin/live delta remains NOT semantically complete, no pinned-to-live full-blob parity.",
+    "Docker image postgres:17.11 tag vs digest pin and SIGKILL trap omission are untested reproducibility/cleanup hypotheses, not reproduced bugs.",
+    "Previously reproducible OCR malformed TSV AttributeError remains open for scoped negative test/current fix."
+  ],
+  "tests": {
+    "source_literal_git_blob": "PASS_30_OF_30",
+    "same_physical_line_live_4_through_18": "PASS",
+    "whole_live_blob": "DRIFT_UNREVIEWED",
+    "sql_docker_runtime": "NOT_RUN_DOCS_ONLY",
+    "github_pr_head": "PENDING",
+    "github_merged": "PENDING",
+    "provider": "NOT_APPLICABLE"
+  },
+  "next_pinned": "C56:34",
+  "global_completion": "IN_PROGRESS_NOT_COMPLETE"
+}

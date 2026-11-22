@@ -1,0 +1,5161 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R424",
+  "project_id": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "c853405e14e5374977602bec6a73d2f36e1817d3",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider": "Supabase PostgreSQL 17.11.0.003",
+  "read_only": true,
+  "scope": "auth.pg_class 27 tables and one sequence rank 1-28 OID ascending",
+  "reviewed": 28,
+  "total": 28,
+  "full_selected_catalog_projection_characters": 92139,
+  "source_measurement": "PostgreSQL md5(projection::text) and char_length(projection::text) on jsonb catalog projection",
+  "limits": [
+    "All selected catalog fields, columns, constraints, triggers, policies, index references, inbound FK, ACL, sequence parameters and views are read, but not claim of original CREATE TABLE/VIEW scripts or compiled native source.",
+    "Physical CREATE INDEX source already independently covered by R418/R419, not recredited.",
+    "Platform runtime/dynamic upstream consumers and console-only settings unverified.",
+    "No identities, Auth user/shot rows, credentials, stored object records, secrets or sequence counters read.",
+    "No #267 original/current source line credit."
+  ],
+  "next_cursor": "extensions.pg_class views rank 1/2 OID 16407, then information_schema and pg_catalog relation definitions",
+  "entries": [
+    {
+      "rank": 1,
+      "oid": 16499,
+      "identity": "auth.users",
+      "projection_md5": "cf81ab9931bb2e0a6fbaa2c32a85ce73",
+      "reviewed_character_range": "1-15644",
+      "projection_characters": 15644,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Identity root; 47 incoming foreign keys and DIC signup trigger; protect owner-scoped data",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin,postgres=ar*wdDxtm/supabase_auth_admin}",
+        "oid": "16499",
+        "rls": true,
+        "kind": "r",
+        "name": "users",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "instance_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "aud",
+            "type": "character varying(255)",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "role",
+            "type": "character varying(255)",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email",
+            "type": "character varying(255)",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "encrypted_password",
+            "type": "character varying(255)",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email_confirmed_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "invited_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "confirmation_token",
+            "type": "character varying(255)",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "confirmation_sent_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "recovery_token",
+            "type": "character varying(255)",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "recovery_sent_at",
+            "type": "timestamp with time zone",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email_change_token_new",
+            "type": "character varying(255)",
+            "attnum": 13,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email_change",
+            "type": "character varying(255)",
+            "attnum": 14,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email_change_sent_at",
+            "type": "timestamp with time zone",
+            "attnum": 15,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_sign_in_at",
+            "type": "timestamp with time zone",
+            "attnum": 16,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "raw_app_meta_data",
+            "type": "jsonb",
+            "attnum": 17,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "raw_user_meta_data",
+            "type": "jsonb",
+            "attnum": 18,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_super_admin",
+            "type": "boolean",
+            "attnum": 19,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 20,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 21,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "phone",
+            "type": "text",
+            "attnum": 22,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "NULL::character varying"
+          },
+          {
+            "name": "phone_confirmed_at",
+            "type": "timestamp with time zone",
+            "attnum": 23,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "phone_change",
+            "type": "text",
+            "attnum": 24,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "''::character varying"
+          },
+          {
+            "name": "phone_change_token",
+            "type": "character varying(255)",
+            "attnum": 25,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "''::character varying"
+          },
+          {
+            "name": "phone_change_sent_at",
+            "type": "timestamp with time zone",
+            "attnum": 26,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "confirmed_at",
+            "type": "timestamp with time zone",
+            "attnum": 27,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "s",
+            "default_expr": "LEAST(email_confirmed_at, phone_confirmed_at)"
+          },
+          {
+            "name": "email_change_token_current",
+            "type": "character varying(255)",
+            "attnum": 28,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "''::character varying"
+          },
+          {
+            "name": "email_change_confirm_status",
+            "type": "smallint",
+            "attnum": 29,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "banned_until",
+            "type": "timestamp with time zone",
+            "attnum": 30,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "reauthentication_token",
+            "type": "character varying(255)",
+            "attnum": 31,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "''::character varying"
+          },
+          {
+            "name": "reauthentication_sent_at",
+            "type": "timestamp with time zone",
+            "attnum": 32,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_sso_user",
+            "type": "boolean",
+            "attnum": 33,
+            "comment": "Auth: Set this column to true when the account comes from SSO. These accounts can have duplicate emails.",
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "attnum": 34,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_anonymous",
+            "type": "boolean",
+            "attnum": 35,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [
+          "CREATE TRIGGER dic_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION private.handle_new_auth_user()"
+        ],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "account_preferences_owner_id_fkey",
+            "source": "account_preferences",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "admin_access_events_actor_id_fkey",
+            "source": "private.admin_access_events",
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "admin_access_events_member_id_fkey",
+            "source": "private.admin_access_events",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "admin_content_edits_actor_id_fkey",
+            "source": "private.admin_content_edits",
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "admin_content_edits_subject_owner_id_fkey",
+            "source": "private.admin_content_edits",
+            "definition": "FOREIGN KEY (subject_owner_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "admin_reviews_reviewer_id_fkey",
+            "source": "admin_reviews",
+            "definition": "FOREIGN KEY (reviewer_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "app_admins_owner_id_fkey",
+            "source": "private.app_admins",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "bags_owner_id_fkey",
+            "source": "bags",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "basket_versions_owner_id_fkey",
+            "source": "basket_versions",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "baskets_owner_id_fkey",
+            "source": "baskets",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "beta_members_owner_id_fkey",
+            "source": "private.beta_members",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "coffee_submissions_owner_id_fkey",
+            "source": "coffee_submissions",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "contributors_owner_id_fkey",
+            "source": "private.contributors",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_actor_id_fkey",
+            "source": "private.dic_admin_account_delete_operations",
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_admin_push_subscriptions_owner_id_fkey",
+            "source": "dic_admin_push_subscriptions",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_first_style_prompt_seen_owner_id_fkey",
+            "source": "private.dic_first_style_prompt_seen",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_member_id_fkey",
+            "source": "private.dic_member_approval_deliveries",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_owner_id_fkey",
+            "source": "dic_member_approval_push_subscriptions",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_signup_review_events_actor_id_fkey",
+            "source": "private.dic_signup_review_events",
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_member_id_fkey",
+            "source": "private.dic_signup_review_events",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_source_attempts_owner_id_fkey",
+            "source": "private.dic_source_attempts",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "dic_url_preview_attempts_owner_id_fkey",
+            "source": "private.dic_url_preview_attempts",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "grinder_calibrations_owner_id_fkey",
+            "source": "grinder_calibrations",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "identities_user_id_fkey",
+            "source": "auth.identities",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "import_batches_owner_id_fkey",
+            "source": "private.import_batches",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "import_control_owner_only_exception_owner_id_fkey",
+            "source": "private.import_control",
+            "definition": "FOREIGN KEY (owner_only_exception_owner_id) REFERENCES auth.users(id)"
+          },
+          {
+            "name": "library_entries_owner_id_fkey",
+            "source": "library_entries",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_factors_user_id_fkey",
+            "source": "auth.mfa_factors",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_user_id_fkey",
+            "source": "auth.mfa_recovery_code_sets",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mutation_receipts_owner_id_fkey",
+            "source": "private.mutation_receipts",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "oauth_authorizations_user_id_fkey",
+            "source": "auth.oauth_authorizations",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "oauth_consents_user_id_fkey",
+            "source": "auth.oauth_consents",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "one_time_tokens_user_id_fkey",
+            "source": "auth.one_time_tokens",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "personal_recipe_families_owner_id_fkey",
+            "source": "personal_recipe_families",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "recipe_preferences_owner_id_fkey",
+            "source": "recipe_preferences",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_users_user_id_fkey",
+            "source": "auth.scim_users",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "sessions_user_id_fkey",
+            "source": "auth.sessions",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "setup_preferences_owner_id_fkey",
+            "source": "setup_preferences",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "setup_versions_owner_id_fkey",
+            "source": "setup_versions",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "setups_owner_id_fkey",
+            "source": "setups",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "shot_audit_owner_id_fkey",
+            "source": "private.shot_audit",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "shot_notes_owner_id_fkey",
+            "source": "shot_notes",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "shots_owner_id_fkey",
+            "source": "shots",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "webauthn_challenges_user_id_fkey",
+            "source": "auth.webauthn_challenges",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "webauthn_credentials_user_id_fkey",
+            "source": "auth.webauthn_credentials",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "workspace_coffees_owner_id_fkey",
+            "source": "workspace_coffees",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "workspace_state_owner_id_fkey",
+            "source": "workspace_state",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.users_pkey",
+          "auth.users_instance_id_idx",
+          "auth.users_instance_id_email_idx",
+          "auth.confirmation_token_idx",
+          "auth.recovery_token_idx",
+          "auth.email_change_token_current_idx",
+          "auth.email_change_token_new_idx",
+          "auth.reauthentication_token_idx",
+          "auth.users_email_partial_key",
+          "auth.users_phone_key",
+          "auth.users_is_anonymous_idx",
+          "auth.idx_users_email",
+          "auth.idx_users_created_at_desc",
+          "auth.idx_users_last_sign_in_at_desc",
+          "auth.idx_users_name"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "users_email_change_confirm_status_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (email_change_confirm_status >= 0 AND email_change_confirm_status <= 2)"
+          },
+          {
+            "name": "users_phone_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (phone)"
+          },
+          {
+            "name": "users_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 6,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 2,
+      "oid": 16510,
+      "identity": "auth.refresh_tokens_id_seq",
+      "projection_md5": "6012510f3c9a5cc61712ab3e75a4d4b2",
+      "reviewed_character_range": "1-1111",
+      "projection_characters": 1111,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Sequence owned by auth.refresh_tokens.id",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=rwU/supabase_auth_admin,dashboard_user=rwU/supabase_auth_admin,postgres=rwU/supabase_auth_admin}",
+        "oid": "16510",
+        "rls": false,
+        "kind": "S",
+        "name": "refresh_tokens_id_seq",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "type": "bigint",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1"
+        },
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [],
+        "reloptions": null,
+        "constraints": [],
+        "persistence": "p",
+        "estimated_rows": 1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 3,
+      "oid": 16511,
+      "identity": "auth.refresh_tokens",
+      "projection_md5": "8d7ed34e6fb673c5605794ee4f532511",
+      "reviewed_character_range": "1-2707",
+      "projection_characters": 2707,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Refresh rotation, session cascade, unique token",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin,postgres=ar*wdDxtm/supabase_auth_admin}",
+        "oid": "16511",
+        "rls": true,
+        "kind": "r",
+        "name": "refresh_tokens",
+        "owner": "supabase_auth_admin",
+        "pages": 4,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "instance_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "nextval('auth.refresh_tokens_id_seq'::regclass)"
+          },
+          {
+            "name": "token",
+            "type": "character varying(255)",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "character varying(255)",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "revoked",
+            "type": "boolean",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "parent",
+            "type": "character varying(255)",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "session_id",
+            "type": "uuid",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.refresh_tokens_pkey",
+          "auth.refresh_tokens_instance_id_idx",
+          "auth.refresh_tokens_instance_id_user_id_idx",
+          "auth.refresh_tokens_token_unique",
+          "auth.refresh_tokens_parent_idx",
+          "auth.refresh_tokens_session_id_revoked_idx",
+          "auth.refresh_tokens_updated_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "refresh_tokens_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "refresh_tokens_session_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "refresh_tokens_token_unique",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (token)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 192,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 4,
+      "oid": 16522,
+      "identity": "auth.instances",
+      "projection_md5": "5eafe6650ae8e6f436b3e8142a1ac577",
+      "reviewed_character_range": "1-1454",
+      "projection_characters": 1454,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "GoTrue instance settings; provider-managed historical schema",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin,postgres=ar*wdDxtm/supabase_auth_admin}",
+        "oid": "16522",
+        "rls": true,
+        "kind": "r",
+        "name": "instances",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "uuid",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "raw_base_config",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.instances_pkey"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "instances_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 5,
+      "oid": 16529,
+      "identity": "auth.audit_log_entries",
+      "projection_md5": "e270f03e09cb71667552c3d138edee14",
+      "reviewed_character_range": "1-1529",
+      "projection_characters": 1529,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Auth audit lifecycle records",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin,postgres=ar*wdDxtm/supabase_auth_admin}",
+        "oid": "16529",
+        "rls": true,
+        "kind": "r",
+        "name": "audit_log_entries",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "instance_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "payload",
+            "type": "json",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "ip_address",
+            "type": "character varying(64)",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "''::character varying"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.audit_log_entries_pkey",
+          "auth.audit_logs_instance_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "audit_log_entries_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 6,
+      "oid": 16537,
+      "identity": "auth.schema_migrations",
+      "projection_md5": "c0930469957a0c1bc54d378d2f2edc9c",
+      "reviewed_character_range": "1-780",
+      "projection_characters": 780,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Auth platform migration version history",
+      "catalog_projection": {
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,postgres=r*/supabase_auth_admin}",
+        "oid": "16537",
+        "rls": true,
+        "kind": "r",
+        "name": "schema_migrations",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "version",
+            "type": "character varying(255)",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.schema_migrations_pkey"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "schema_migrations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (version)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 82,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 7,
+      "oid": 16686,
+      "identity": "auth.identities",
+      "projection_md5": "43e1bb7f7a87fcc7d6bb7bea0c8e7445",
+      "reviewed_character_range": "1-2659",
+      "projection_characters": 2659,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Unique provider/user binding, normalized generated email",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16686",
+        "rls": true,
+        "kind": "r",
+        "name": "identities",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "provider_id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "identity_data",
+            "type": "jsonb",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "provider",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_sign_in_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email",
+            "type": "text",
+            "attnum": 8,
+            "comment": "Auth: Email is a generated column that references the optional email property in the identity_data",
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "s",
+            "default_expr": "lower((identity_data ->> 'email'::text))"
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.identities_user_id_idx",
+          "auth.identities_email_idx",
+          "auth.identities_pkey",
+          "auth.identities_provider_id_provider_unique"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "identities_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "identities_provider_id_provider_unique",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (provider_id, provider)"
+          },
+          {
+            "name": "identities_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 8,
+      "oid": 16716,
+      "identity": "auth.sessions",
+      "projection_md5": "5efc461e517ee2be195cd1d11e793e98",
+      "reviewed_character_range": "1-4242",
+      "projection_characters": 4242,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Session ownership, MFA assurance, OAuth client, expiry",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16716",
+        "rls": true,
+        "kind": "r",
+        "name": "sessions",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "factor_id",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "aal",
+            "type": "auth.aal_level",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "not_after",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": "Auth: Not after is a nullable column that contains a timestamp after which the session should be regarded as expired.",
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "refreshed_at",
+            "type": "timestamp without time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_agent",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "ip",
+            "type": "inet",
+            "attnum": 10,
+            "comment": null,
+            "storage": "m",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "tag",
+            "type": "text",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "oauth_client_id",
+            "type": "uuid",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "refresh_token_hmac_key",
+            "type": "text",
+            "attnum": 13,
+            "comment": "Holds a HMAC-SHA256 key used to sign refresh tokens for this session.",
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "refresh_token_counter",
+            "type": "bigint",
+            "attnum": 14,
+            "comment": "Holds the ID (counter) of the last issued refresh token.",
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "scopes",
+            "type": "text",
+            "attnum": 15,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "mfa_amr_claims_session_id_fkey",
+            "source": "auth.mfa_amr_claims",
+            "definition": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "refresh_tokens_session_id_fkey",
+            "source": "auth.refresh_tokens",
+            "definition": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.sessions_pkey",
+          "auth.user_id_created_at_idx",
+          "auth.sessions_user_id_idx",
+          "auth.sessions_not_after_idx",
+          "auth.sessions_oauth_client_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "sessions_oauth_client_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (oauth_client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "sessions_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "sessions_scopes_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(scopes) <= 4096)"
+          },
+          {
+            "name": "sessions_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 21,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 9,
+      "oid": 16751,
+      "identity": "auth.mfa_factors",
+      "projection_md5": "102756d33853da132c1b1fdf5e9c0bb6",
+      "reviewed_character_range": "1-3747",
+      "projection_characters": 3747,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Typed MFA factors, uniqueness and challenge linkage",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16751",
+        "rls": true,
+        "kind": "r",
+        "name": "mfa_factors",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "friendly_name",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "factor_type",
+            "type": "auth.factor_type",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "status",
+            "type": "auth.factor_status",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "secret",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "phone",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_challenged_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "web_authn_credential",
+            "type": "jsonb",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "web_authn_aaguid",
+            "type": "uuid",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_webauthn_challenge_data",
+            "type": "jsonb",
+            "attnum": 13,
+            "comment": "Stores the latest WebAuthn challenge data including attestation/assertion for customer verification",
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "mfa_challenges_auth_factor_id_fkey",
+            "source": "auth.mfa_challenges",
+            "definition": "FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_mfa_factor_id_fkey",
+            "source": "auth.mfa_recovery_code_sets",
+            "definition": "FOREIGN KEY (mfa_factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.mfa_factors_pkey",
+          "auth.mfa_factors_user_friendly_name_unique",
+          "auth.factor_id_created_at_idx",
+          "auth.mfa_factors_user_id_idx",
+          "auth.unique_phone_factor_per_user",
+          "auth.mfa_factors_last_challenged_at_key"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "mfa_factors_last_challenged_at_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (last_challenged_at)"
+          },
+          {
+            "name": "mfa_factors_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_factors_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 10,
+      "oid": 16764,
+      "identity": "auth.mfa_challenges",
+      "projection_md5": "a6600989a8d4d94903f4c2f99f680259",
+      "reviewed_character_range": "1-2010",
+      "projection_characters": 2010,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "MFA factor verification challenges",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16764",
+        "rls": true,
+        "kind": "r",
+        "name": "mfa_challenges",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "factor_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "verified_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "ip_address",
+            "type": "inet",
+            "attnum": 5,
+            "comment": null,
+            "storage": "m",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "otp_code",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "web_authn_session_data",
+            "type": "jsonb",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.mfa_challenges_pkey",
+          "auth.mfa_challenge_created_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "mfa_challenges_auth_factor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_challenges_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 11,
+      "oid": 16776,
+      "identity": "auth.mfa_amr_claims",
+      "projection_md5": "306fcc3bd2e129332c70687a87b43eec",
+      "reviewed_character_range": "1-1849",
+      "projection_characters": 1849,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Unique per-session authentication method receipts",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16776",
+        "rls": true,
+        "kind": "r",
+        "name": "mfa_amr_claims",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "session_id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "authentication_method",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.mfa_amr_claims_session_id_authentication_method_pkey",
+          "auth.amr_id_pk"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "amr_id_pk",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_amr_claims_session_id_authentication_method_pkey",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (session_id, authentication_method)"
+          },
+          {
+            "name": "mfa_amr_claims_session_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 27,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 12,
+      "oid": 16794,
+      "identity": "auth.sso_providers",
+      "projection_md5": "a82f826ee8938bc06b995627b504aa47",
+      "reviewed_character_range": "1-2722",
+      "projection_characters": 2722,
+      "verdict": "UPSTREAM_CHECK_DEFECT_HOLD",
+      "semantic_assessment": "SSO config; broken optional nonempty resource_id CHECK, no configured rows",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16794",
+        "rls": true,
+        "kind": "r",
+        "name": "sso_providers",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "resource_id",
+            "type": "text",
+            "attnum": 2,
+            "comment": "Auth: Uniquely identifies a SSO provider according to a user-chosen resource ID (case insensitive), useful in infrastructure as code.",
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "saml_providers_sso_provider_id_fkey",
+            "source": "auth.saml_providers",
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "saml_relay_states_sso_provider_id_fkey",
+            "source": "auth.saml_relay_states",
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_tokens_sso_provider_id_fkey",
+            "source": "auth.scim_tokens",
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_users_sso_provider_id_fkey",
+            "source": "auth.scim_users",
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "sso_domains_sso_provider_id_fkey",
+            "source": "auth.sso_domains",
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.sso_providers_pkey",
+          "auth.sso_providers_resource_id_idx",
+          "auth.sso_providers_resource_id_pattern_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "resource_id not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (resource_id = NULL::text OR char_length(resource_id) > 0)"
+          },
+          {
+            "name": "sso_providers_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 13,
+      "oid": 16803,
+      "identity": "auth.sso_domains",
+      "projection_md5": "a590d23443da7a824a5896169305bcb6",
+      "reviewed_character_range": "1-1823",
+      "projection_characters": 1823,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Nonempty SSO domain provider mapping",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16803",
+        "rls": true,
+        "kind": "r",
+        "name": "sso_domains",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sso_provider_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "domain",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.sso_domains_pkey",
+          "auth.sso_domains_sso_provider_id_idx",
+          "auth.sso_domains_domain_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "domain not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(domain) > 0)"
+          },
+          {
+            "name": "sso_domains_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "sso_domains_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 14,
+      "oid": 16818,
+      "identity": "auth.saml_providers",
+      "projection_md5": "2ecea88531224ba7b80f886920e3b73a",
+      "reviewed_character_range": "1-3059",
+      "projection_characters": 3059,
+      "verdict": "UPSTREAM_CHECK_DEFECT_HOLD",
+      "semantic_assessment": "SAML metadata; broken optional nonempty metadata_url CHECK, no configured rows",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16818",
+        "rls": true,
+        "kind": "r",
+        "name": "saml_providers",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sso_provider_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "entity_id",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "metadata_xml",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "metadata_url",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "attribute_mapping",
+            "type": "jsonb",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name_id_format",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "dedicated_scope",
+            "type": "boolean",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.saml_providers_pkey",
+          "auth.saml_providers_entity_id_key",
+          "auth.saml_providers_sso_provider_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "entity_id not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(entity_id) > 0)"
+          },
+          {
+            "name": "metadata_url not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (metadata_url = NULL::text OR char_length(metadata_url) > 0)"
+          },
+          {
+            "name": "metadata_xml not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(metadata_xml) > 0)"
+          },
+          {
+            "name": "saml_providers_entity_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (entity_id)"
+          },
+          {
+            "name": "saml_providers_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "saml_providers_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 15,
+      "oid": 16836,
+      "identity": "auth.saml_relay_states",
+      "projection_md5": "a1fbcb0e9114079c1959ac316d77655a",
+      "reviewed_character_range": "1-2571",
+      "projection_characters": 2571,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "SAML request/flow correlation",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16836",
+        "rls": true,
+        "kind": "r",
+        "name": "saml_relay_states",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sso_provider_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "request_id",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "for_email",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "redirect_to",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "flow_state_id",
+            "type": "uuid",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.saml_relay_states_pkey",
+          "auth.saml_relay_states_sso_provider_id_idx",
+          "auth.saml_relay_states_for_email_idx",
+          "auth.saml_relay_states_created_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "request_id not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(request_id) > 0)"
+          },
+          {
+            "name": "saml_relay_states_flow_state_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (flow_state_id) REFERENCES auth.flow_state(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "saml_relay_states_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "saml_relay_states_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 16,
+      "oid": 16889,
+      "identity": "auth.flow_state",
+      "projection_md5": "b274643a5afbf7e798ae62edf33824b8",
+      "reviewed_character_range": "1-3770",
+      "projection_characters": 3770,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "PKCE/OAuth temporary flow state",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16889",
+        "rls": true,
+        "kind": "r",
+        "name": "flow_state",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "auth_code",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_challenge_method",
+            "type": "auth.code_challenge_method",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_challenge",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "provider_type",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "provider_access_token",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "provider_refresh_token",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "authentication_method",
+            "type": "text",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "auth_code_issued_at",
+            "type": "timestamp with time zone",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "invite_token",
+            "type": "text",
+            "attnum": 13,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "referrer",
+            "type": "text",
+            "attnum": 14,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "oauth_client_state_id",
+            "type": "uuid",
+            "attnum": 15,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "linking_target_id",
+            "type": "uuid",
+            "attnum": 16,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "email_optional",
+            "type": "boolean",
+            "attnum": 17,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "saml_relay_states_flow_state_id_fkey",
+            "source": "auth.saml_relay_states",
+            "definition": "FOREIGN KEY (flow_state_id) REFERENCES auth.flow_state(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.flow_state_pkey",
+          "auth.idx_auth_code",
+          "auth.idx_user_id_auth_method",
+          "auth.flow_state_created_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "flow_state_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 17,
+      "oid": 16939,
+      "identity": "auth.one_time_tokens",
+      "projection_md5": "8ed71f475b541291c5b9fa68b191eb4e",
+      "reviewed_character_range": "1-2640",
+      "projection_characters": 2640,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Token hashes/types/expiry; timezone-without-zone default caveat",
+      "catalog_projection": {
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16939",
+        "rls": true,
+        "kind": "r",
+        "name": "one_time_tokens",
+        "owner": "supabase_auth_admin",
+        "pages": 1,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "token_type",
+            "type": "auth.one_time_token_type",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "token_hash",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "relates_to",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp without time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp without time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "link_token_hash",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.one_time_tokens_pkey",
+          "auth.one_time_tokens_token_hash_hash_idx",
+          "auth.one_time_tokens_relates_to_hash_idx",
+          "auth.one_time_tokens_user_id_token_type_key",
+          "auth.one_time_tokens_link_token_hash_hash_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "one_time_tokens_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "one_time_tokens_token_hash_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(token_hash) > 0)"
+          },
+          {
+            "name": "one_time_tokens_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 18,
+      "oid": 16971,
+      "identity": "auth.oauth_clients",
+      "projection_md5": "d53e540650c05114437d8058af9b51ea",
+      "reviewed_character_range": "1-4073",
+      "projection_characters": 4073,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "OAuth registration/client configuration, upstream-owned",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "16971",
+        "rls": false,
+        "kind": "r",
+        "name": "oauth_clients",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_secret_hash",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "registration_type",
+            "type": "auth.oauth_registration_type",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "redirect_uris",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "grant_types",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_name",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_uri",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "logo_uri",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 11,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_type",
+            "type": "auth.oauth_client_type",
+            "attnum": 13,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'confidential'::auth.oauth_client_type"
+          },
+          {
+            "name": "token_endpoint_auth_method",
+            "type": "text",
+            "attnum": 14,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "oauth_authorizations_client_id_fkey",
+            "source": "auth.oauth_authorizations",
+            "definition": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "oauth_consents_client_id_fkey",
+            "source": "auth.oauth_consents",
+            "definition": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "sessions_oauth_client_id_fkey",
+            "source": "auth.sessions",
+            "definition": "FOREIGN KEY (oauth_client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.oauth_clients_pkey",
+          "auth.oauth_clients_deleted_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "oauth_clients_client_name_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(client_name) <= 1024)"
+          },
+          {
+            "name": "oauth_clients_client_uri_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(client_uri) <= 2048)"
+          },
+          {
+            "name": "oauth_clients_logo_uri_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(logo_uri) <= 2048)"
+          },
+          {
+            "name": "oauth_clients_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "oauth_clients_token_endpoint_auth_method_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (token_endpoint_auth_method = ANY (ARRAY['client_secret_basic'::text, 'client_secret_post'::text, 'none'::text]))"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 19,
+      "oid": 17001,
+      "identity": "auth.oauth_authorizations",
+      "projection_md5": "92a5b2b3b1ac3b26bdba356250d4aa2e",
+      "reviewed_character_range": "1-5460",
+      "projection_characters": 5460,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Short-lived OAuth/PKCE authorization and bounded scopes",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17001",
+        "rls": false,
+        "kind": "r",
+        "name": "oauth_authorizations",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "authorization_id",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "redirect_uri",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "scope",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "state",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "resource",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_challenge",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_challenge_method",
+            "type": "auth.code_challenge_method",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "response_type",
+            "type": "auth.oauth_response_type",
+            "attnum": 11,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'code'::auth.oauth_response_type"
+          },
+          {
+            "name": "status",
+            "type": "auth.oauth_authorization_status",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'pending'::auth.oauth_authorization_status"
+          },
+          {
+            "name": "authorization_code",
+            "type": "text",
+            "attnum": 13,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 14,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp with time zone",
+            "attnum": 15,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "(now() + '00:03:00'::interval)"
+          },
+          {
+            "name": "approved_at",
+            "type": "timestamp with time zone",
+            "attnum": 16,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "nonce",
+            "type": "text",
+            "attnum": 17,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.oauth_authorizations_pkey",
+          "auth.oauth_authorizations_authorization_id_key",
+          "auth.oauth_authorizations_authorization_code_key",
+          "auth.oauth_auth_pending_exp_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "oauth_authorizations_authorization_code_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (authorization_code)"
+          },
+          {
+            "name": "oauth_authorizations_authorization_code_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(authorization_code) <= 255)"
+          },
+          {
+            "name": "oauth_authorizations_authorization_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (authorization_id)"
+          },
+          {
+            "name": "oauth_authorizations_client_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "oauth_authorizations_code_challenge_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(code_challenge) <= 128)"
+          },
+          {
+            "name": "oauth_authorizations_expires_at_future",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (expires_at > created_at)"
+          },
+          {
+            "name": "oauth_authorizations_nonce_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(nonce) <= 255)"
+          },
+          {
+            "name": "oauth_authorizations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "oauth_authorizations_redirect_uri_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(redirect_uri) <= 2048)"
+          },
+          {
+            "name": "oauth_authorizations_resource_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(resource) <= 2048)"
+          },
+          {
+            "name": "oauth_authorizations_scope_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(scope) <= 4096)"
+          },
+          {
+            "name": "oauth_authorizations_state_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(state) <= 4096)"
+          },
+          {
+            "name": "oauth_authorizations_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 20,
+      "oid": 17034,
+      "identity": "auth.oauth_consents",
+      "projection_md5": "4b489622e022c8d815ea6197e2e950b4",
+      "reviewed_character_range": "1-2666",
+      "projection_characters": 2666,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Unique user/client scopes and revocation invariant",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17034",
+        "rls": false,
+        "kind": "r",
+        "name": "oauth_consents",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "scopes",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "granted_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "revoked_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.oauth_consents_pkey",
+          "auth.oauth_consents_user_client_unique",
+          "auth.oauth_consents_active_user_client_idx",
+          "auth.oauth_consents_user_order_idx",
+          "auth.oauth_consents_active_client_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "oauth_consents_client_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "oauth_consents_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "oauth_consents_revoked_after_granted",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (revoked_at IS NULL OR revoked_at >= granted_at)"
+          },
+          {
+            "name": "oauth_consents_scopes_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(scopes) <= 2048)"
+          },
+          {
+            "name": "oauth_consents_scopes_not_empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(TRIM(BOTH FROM scopes)) > 0)"
+          },
+          {
+            "name": "oauth_consents_user_client_unique",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (user_id, client_id)"
+          },
+          {
+            "name": "oauth_consents_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 21,
+      "oid": 17074,
+      "identity": "auth.oauth_client_states",
+      "projection_md5": "c3c8fc9375dc140014754cf13ab928c0",
+      "reviewed_character_range": "1-1357",
+      "projection_characters": 1357,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "OAuth client-state/PKCE transient data",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17074",
+        "rls": false,
+        "kind": "r",
+        "name": "oauth_client_states",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "provider_type",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_verifier",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.oauth_client_states_pkey",
+          "auth.idx_oauth_client_states_created_at"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "oauth_client_states_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 22,
+      "oid": 17084,
+      "identity": "auth.custom_oauth_providers",
+      "projection_md5": "f45cc5e495c04cbd2a5daf177b3b5196",
+      "reviewed_character_range": "1-8422",
+      "projection_characters": 8422,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Typed OIDC/OAuth settings; overlapping identifier index R418 upstream HOLD, zero rows",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17084",
+        "rls": false,
+        "kind": "r",
+        "name": "custom_oauth_providers",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "provider_type",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "identifier",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_id",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "client_secret",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "acceptable_client_ids",
+            "type": "text[]",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::text[]"
+          },
+          {
+            "name": "scopes",
+            "type": "text[]",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::text[]"
+          },
+          {
+            "name": "pkce_enabled",
+            "type": "boolean",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "true"
+          },
+          {
+            "name": "attribute_mapping",
+            "type": "jsonb",
+            "attnum": 10,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::jsonb"
+          },
+          {
+            "name": "authorization_params",
+            "type": "jsonb",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::jsonb"
+          },
+          {
+            "name": "enabled",
+            "type": "boolean",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "true"
+          },
+          {
+            "name": "email_optional",
+            "type": "boolean",
+            "attnum": 13,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "issuer",
+            "type": "text",
+            "attnum": 14,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "discovery_url",
+            "type": "text",
+            "attnum": 15,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "skip_nonce_check",
+            "type": "boolean",
+            "attnum": 16,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "cached_discovery",
+            "type": "jsonb",
+            "attnum": 17,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "discovery_cached_at",
+            "type": "timestamp with time zone",
+            "attnum": 18,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "authorization_url",
+            "type": "text",
+            "attnum": 19,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "token_url",
+            "type": "text",
+            "attnum": 20,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "userinfo_url",
+            "type": "text",
+            "attnum": 21,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "jwks_uri",
+            "type": "text",
+            "attnum": 22,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 23,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 24,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "custom_claims_allowlist",
+            "type": "text[]",
+            "attnum": 25,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::text[]"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.custom_oauth_providers_pkey",
+          "auth.custom_oauth_providers_identifier_key",
+          "auth.custom_oauth_providers_identifier_idx",
+          "auth.custom_oauth_providers_provider_type_idx",
+          "auth.custom_oauth_providers_enabled_idx",
+          "auth.custom_oauth_providers_created_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "custom_oauth_providers_authorization_url_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (authorization_url IS NULL OR authorization_url ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_authorization_url_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (authorization_url IS NULL OR char_length(authorization_url) <= 2048)"
+          },
+          {
+            "name": "custom_oauth_providers_client_id_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(client_id) >= 1 AND char_length(client_id) <= 512)"
+          },
+          {
+            "name": "custom_oauth_providers_discovery_url_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (discovery_url IS NULL OR char_length(discovery_url) <= 2048)"
+          },
+          {
+            "name": "custom_oauth_providers_identifier_format",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (identifier ~ '^[a-z0-9][a-z0-9:-]{0,48}[a-z0-9]$'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_identifier_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (identifier)"
+          },
+          {
+            "name": "custom_oauth_providers_issuer_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (issuer IS NULL OR char_length(issuer) >= 1 AND char_length(issuer) <= 2048)"
+          },
+          {
+            "name": "custom_oauth_providers_jwks_uri_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (jwks_uri IS NULL OR jwks_uri ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_jwks_uri_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (jwks_uri IS NULL OR char_length(jwks_uri) <= 2048)"
+          },
+          {
+            "name": "custom_oauth_providers_name_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(name) >= 1 AND char_length(name) <= 100)"
+          },
+          {
+            "name": "custom_oauth_providers_oauth2_requires_endpoints",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (provider_type <> 'oauth2'::text OR authorization_url IS NOT NULL AND token_url IS NOT NULL AND userinfo_url IS NOT NULL)"
+          },
+          {
+            "name": "custom_oauth_providers_oidc_discovery_url_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (provider_type <> 'oidc'::text OR discovery_url IS NULL OR discovery_url ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_oidc_issuer_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (provider_type <> 'oidc'::text OR issuer IS NULL OR issuer ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_oidc_requires_issuer",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (provider_type <> 'oidc'::text OR issuer IS NOT NULL)"
+          },
+          {
+            "name": "custom_oauth_providers_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "custom_oauth_providers_provider_type_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (provider_type = ANY (ARRAY['oauth2'::text, 'oidc'::text]))"
+          },
+          {
+            "name": "custom_oauth_providers_token_url_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (token_url IS NULL OR token_url ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_token_url_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (token_url IS NULL OR char_length(token_url) <= 2048)"
+          },
+          {
+            "name": "custom_oauth_providers_userinfo_url_https",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (userinfo_url IS NULL OR userinfo_url ~~ 'https://%'::text)"
+          },
+          {
+            "name": "custom_oauth_providers_userinfo_url_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (userinfo_url IS NULL OR char_length(userinfo_url) <= 2048)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 23,
+      "oid": 17126,
+      "identity": "auth.webauthn_credentials",
+      "projection_md5": "4ebceac5a37cf03a4f3762c2e7ce74ee",
+      "reviewed_character_range": "1-3274",
+      "projection_characters": 3274,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "WebAuthn public-key credential counters/user linkage",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17126",
+        "rls": false,
+        "kind": "r",
+        "name": "webauthn_credentials",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "credential_id",
+            "type": "bytea",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "public_key",
+            "type": "bytea",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "attestation_type",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "''::text"
+          },
+          {
+            "name": "aaguid",
+            "type": "uuid",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sign_count",
+            "type": "bigint",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "transports",
+            "type": "jsonb",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'[]'::jsonb"
+          },
+          {
+            "name": "backup_eligible",
+            "type": "boolean",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "backed_up",
+            "type": "boolean",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "friendly_name",
+            "type": "text",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "''::text"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 12,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 13,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "last_used_at",
+            "type": "timestamp with time zone",
+            "attnum": 14,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.webauthn_credentials_pkey",
+          "auth.webauthn_credentials_credential_id_key",
+          "auth.webauthn_credentials_user_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "webauthn_credentials_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "webauthn_credentials_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 24,
+      "oid": 17149,
+      "identity": "auth.webauthn_challenges",
+      "projection_md5": "4036129ac6a860aee1ffe46c9bb2545e",
+      "reviewed_character_range": "1-2116",
+      "projection_characters": 2116,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "WebAuthn registration/authentication challenges",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17149",
+        "rls": false,
+        "kind": "r",
+        "name": "webauthn_challenges",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "challenge_type",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "session_data",
+            "type": "jsonb",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.webauthn_challenges_pkey",
+          "auth.webauthn_challenges_user_id_idx",
+          "auth.webauthn_challenges_expires_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "webauthn_challenges_challenge_type_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (challenge_type = ANY (ARRAY['signup'::text, 'registration'::text, 'authentication'::text]))"
+          },
+          {
+            "name": "webauthn_challenges_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "webauthn_challenges_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 25,
+      "oid": 17167,
+      "identity": "auth.scim_users",
+      "projection_md5": "5b4532a77a8e13e99f88db6305da109a",
+      "reviewed_character_range": "1-3038",
+      "projection_characters": 3038,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "SCIM user provisioning and generated fields",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17167",
+        "rls": false,
+        "kind": "r",
+        "name": "scim_users",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sso_provider_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "resource",
+            "type": "jsonb",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_name",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "s",
+            "default_expr": "lower((resource ->> 'userName'::text))"
+          },
+          {
+            "name": "external_id",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "s",
+            "default_expr": "(resource ->> 'externalId'::text)"
+          },
+          {
+            "name": "active",
+            "type": "boolean",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "s",
+            "default_expr": "COALESCE(((resource ->> 'active'::text))::boolean, true)"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.scim_users_pkey",
+          "auth.scim_users_user_name_key",
+          "auth.scim_users_external_id_key",
+          "auth.scim_users_user_id_idx",
+          "auth.scim_users_id_idx",
+          "auth.scim_users_user_name_idx",
+          "auth.scim_users_created_at_idx",
+          "auth.scim_users_updated_at_idx",
+          "auth.scim_users_sso_provider_id_idx",
+          "auth.scim_users_deleted_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "scim_users_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "scim_users_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_users_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 26,
+      "oid": 17198,
+      "identity": "auth.scim_tokens",
+      "projection_md5": "e9b4bac2f95af6b59ad4579e824b9732",
+      "reviewed_character_range": "1-2742",
+      "projection_characters": 2742,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Hashed SCIM tokens, expiry/revocation guards",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17198",
+        "rls": false,
+        "kind": "r",
+        "name": "scim_tokens",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "sso_provider_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "token_hash",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "prefix",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "revoked_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_used_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.scim_tokens_pkey",
+          "auth.scim_tokens_token_hash_key",
+          "auth.scim_tokens_sso_provider_id_idx",
+          "auth.scim_tokens_expires_at_idx",
+          "auth.scim_tokens_revoked_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "scim_tokens_expires_at_future",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (expires_at IS NULL OR expires_at > created_at)"
+          },
+          {
+            "name": "scim_tokens_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "scim_tokens_revoked_after_created",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (revoked_at IS NULL OR revoked_at >= created_at)"
+          },
+          {
+            "name": "scim_tokens_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_tokens_token_hash_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (token_hash ~ '^[0-9a-f]{64}$'::text)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 27,
+      "oid": 17219,
+      "identity": "auth.mfa_recovery_code_sets",
+      "projection_md5": "3599d807d8791e815101d1fa6667ada7",
+      "reviewed_character_range": "1-2923",
+      "projection_characters": 2923,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "One recovery set per user/factor, lockout metadata",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17219",
+        "rls": false,
+        "kind": "r",
+        "name": "mfa_recovery_code_sets",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "mfa_factor_id",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "failed_verification_count",
+            "type": "integer",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "verification_locked_until",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "mfa_recovery_codes_mfa_recovery_code_set_id_fkey",
+            "source": "auth.mfa_recovery_codes",
+            "definition": "FOREIGN KEY (mfa_recovery_code_set_id) REFERENCES auth.mfa_recovery_code_sets(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "auth.mfa_recovery_code_sets_pkey",
+          "auth.mfa_recovery_code_sets_user_id_key",
+          "auth.mfa_recovery_code_sets_mfa_factor_id_key"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "mfa_recovery_code_sets_failed_verification_count_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (failed_verification_count >= 0)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_mfa_factor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (mfa_factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_mfa_factor_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (mfa_factor_id)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_user_id_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (user_id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 28,
+      "oid": 17242,
+      "identity": "auth.mfa_recovery_codes",
+      "projection_md5": "389bd5199730b65e925e9e43587bf69d",
+      "reviewed_character_range": "1-1751",
+      "projection_characters": 1751,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Single-use hashed MFA recovery codes",
+      "catalog_projection": {
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "oid": "17242",
+        "rls": false,
+        "kind": "r",
+        "name": "mfa_recovery_codes",
+        "owner": "supabase_auth_admin",
+        "pages": 0,
+        "schema": "auth",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "mfa_recovery_code_set_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "code_hash",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "consumed_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "auth.mfa_recovery_codes_pkey",
+          "auth.mfa_recovery_codes_set_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "mfa_recovery_codes_mfa_recovery_code_set_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (mfa_recovery_code_set_id) REFERENCES auth.mfa_recovery_code_sets(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_codes_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    }
+  ]
+}

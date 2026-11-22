@@ -1,0 +1,4034 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R389",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "preflight_development_sha": "2b8589670bd35d25e2871a9ba2d66f45db771f69",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "source_reference_commit": "2b8589670bd35d25e2871a9ba2d66f45db771f69",
+  "read_only": true,
+  "review_scope": "New contiguous pg_catalog routines ordered proname COLLATE C, identity arguments COLLATE C, oid; raw full pg_get_functiondef (SQL body or native declaration), every exposed character 1 through end.",
+  "prior_cursor": {
+    "rn": 280,
+    "oid": 4106,
+    "proname": "brin_inclusion_add_value",
+    "args": "internal, internal, internal, internal"
+  },
+  "new_cursor": {
+    "rn": 500,
+    "oid": 1402,
+    "proname": "current_schema",
+    "args": ""
+  },
+  "coverage": {
+    "new_declarations": 220,
+    "first_rn": 281,
+    "last_rn": 500,
+    "contiguous_total": 500,
+    "pg_catalog_declarations_denominator": 3162,
+    "full_accessible_ddl_chars": 38652,
+    "sql_functions": 1,
+    "internal_native": 219,
+    "c_native": 0,
+    "window_declarations": 1,
+    "first_object": "brin_inclusion_consistent",
+    "last_object": "current_schema"
+  },
+  "dependency_context": {
+    "index_am_counts": {
+      "btree": 251,
+      "hash": 3,
+      "brin": 0
+    },
+    "non_system_column_counts": {
+      "boolean": 34,
+      "bytea": 5,
+      "double precision": 21,
+      "inet": 2,
+      "money": 0,
+      "circle": 0,
+      "box": 0,
+      "point": 0
+    },
+    "note": "Read-only catalog aggregates; provider systems use index callbacks. Absence of app columns or BRIN indexes is not permission to delete built-in functions."
+  },
+  "findings": {
+    "new_reproducible_dic_bugs": 0,
+    "justified_source_fixes": 0,
+    "measured_bottlenecks": 0,
+    "notes": [
+      "PostgreSQL aliases ceiling/ceil and character_length/char_length share internal symbols intentionally; not an application-level redundant object eligible for deletion.",
+      "Every reviewed declaration uses PostgreSQL built-in SQL or internal handlers, not DIC-owned removable source.",
+      "Only col_description(oid,integer) contains a full SQL body in this range; native compiled implementations cannot be semantically read from hosted SQL.",
+      "Prior Admin push fix #3511 merged development, distinct release candidate remains TESTING; no provider changes in this run."
+    ]
+  },
+  "status": "IN_PROGRESS",
+  "release_status": "TESTING",
+  "production_writes": false,
+  "github_code_line_review_credit": 0,
+  "records": [
+    {
+      "rn": 281,
+      "oid": 4107,
+      "proname": "brin_inclusion_consistent",
+      "args": "internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 211,
+      "ddl_md5": "46fb55fb37a5deee89ddf93cb4d35f14",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_inclusion_consistent(internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_inclusion_consistent$function$\n",
+      "definition_chars_range": "1-211",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 282,
+      "oid": 4105,
+      "proname": "brin_inclusion_opcinfo",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 186,
+      "ddl_md5": "f635623f89708b28310d3c14cab985e1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_inclusion_opcinfo(internal)\n RETURNS internal\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_inclusion_opcinfo$function$\n",
+      "definition_chars_range": "1-186",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 283,
+      "oid": 4108,
+      "proname": "brin_inclusion_union",
+      "args": "internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 201,
+      "ddl_md5": "12c6df041a1eeaa042d819607789ae44",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_inclusion_union(internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_inclusion_union$function$\n",
+      "definition_chars_range": "1-201",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 284,
+      "oid": 3384,
+      "proname": "brin_minmax_add_value",
+      "args": "internal, internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 213,
+      "ddl_md5": "f7670037092de9bbb080bc9f5f4ee654",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_add_value(internal, internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_add_value$function$\n",
+      "definition_chars_range": "1-213",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 285,
+      "oid": 3385,
+      "proname": "brin_minmax_consistent",
+      "args": "internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 205,
+      "ddl_md5": "35e76b5819f9f210576febbef195df72",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_consistent(internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_consistent$function$\n",
+      "definition_chars_range": "1-205",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 286,
+      "oid": 4617,
+      "proname": "brin_minmax_multi_add_value",
+      "args": "internal, internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 225,
+      "ddl_md5": "58f417647844cd65d6a0326576d06b16",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_add_value(internal, internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_add_value$function$\n",
+      "definition_chars_range": "1-225",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 287,
+      "oid": 4618,
+      "proname": "brin_minmax_multi_consistent",
+      "args": "internal, internal, internal, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 226,
+      "ddl_md5": "6e31a55ff75110abc75dc2bdcd115a79",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_consistent(internal, internal, internal, integer)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_consistent$function$\n",
+      "definition_chars_range": "1-226",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 288,
+      "oid": 4629,
+      "proname": "brin_minmax_multi_distance_date",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "aa6150051b4a82014d8f57edc0beee8b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_date(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_date$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 289,
+      "oid": 4624,
+      "proname": "brin_minmax_multi_distance_float4",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 226,
+      "ddl_md5": "1f0089ac7c38d9cad1410a5fc279bd91",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_float4(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_float4$function$\n",
+      "definition_chars_range": "1-226",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 290,
+      "oid": 4625,
+      "proname": "brin_minmax_multi_distance_float8",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 226,
+      "ddl_md5": "5285c223476cc80d092bbf817be41bb9",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_float8(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_float8$function$\n",
+      "definition_chars_range": "1-226",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 291,
+      "oid": 4636,
+      "proname": "brin_minmax_multi_distance_inet",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "40e8fdfdb3124d52ea5457102d0bb8e0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_inet(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_inet$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 292,
+      "oid": 4621,
+      "proname": "brin_minmax_multi_distance_int2",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "ff9017ff684a93e16760ed23e791abab",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_int2(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_int2$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 293,
+      "oid": 4622,
+      "proname": "brin_minmax_multi_distance_int4",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "24330a01ea5bced1ad6372bc809c772f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_int4(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_int4$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 294,
+      "oid": 4623,
+      "proname": "brin_minmax_multi_distance_int8",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "21b04aee07940822e5722b4821a27a73",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_int8(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_int8$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 295,
+      "oid": 4631,
+      "proname": "brin_minmax_multi_distance_interval",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 230,
+      "ddl_md5": "16b84945b2d924703697505e17937b29",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_interval(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_interval$function$\n",
+      "definition_chars_range": "1-230",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 296,
+      "oid": 4634,
+      "proname": "brin_minmax_multi_distance_macaddr",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 228,
+      "ddl_md5": "99b3c193b7cddc526dfdacef591caf32",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_macaddr(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_macaddr$function$\n",
+      "definition_chars_range": "1-228",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 297,
+      "oid": 4635,
+      "proname": "brin_minmax_multi_distance_macaddr8",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 230,
+      "ddl_md5": "f5b0f6e205ef466b3a4b516b9eec939a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_macaddr8(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_macaddr8$function$\n",
+      "definition_chars_range": "1-230",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 298,
+      "oid": 4626,
+      "proname": "brin_minmax_multi_distance_numeric",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 228,
+      "ddl_md5": "2e71e6ad3edea96edf7efcecdee237b7",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_numeric(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_numeric$function$\n",
+      "definition_chars_range": "1-228",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 299,
+      "oid": 4633,
+      "proname": "brin_minmax_multi_distance_pg_lsn",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 226,
+      "ddl_md5": "80973f22227b9aed53fc0819f77c9dda",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_pg_lsn(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_pg_lsn$function$\n",
+      "definition_chars_range": "1-226",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 300,
+      "oid": 4627,
+      "proname": "brin_minmax_multi_distance_tid",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 220,
+      "ddl_md5": "242367fd1e05c6e3b17170f1c714ee53",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_tid(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_tid$function$\n",
+      "definition_chars_range": "1-220",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 301,
+      "oid": 4630,
+      "proname": "brin_minmax_multi_distance_time",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "3dffc0c824a70f29204d08445a55df83",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_time(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_time$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 302,
+      "oid": 4637,
+      "proname": "brin_minmax_multi_distance_timestamp",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 232,
+      "ddl_md5": "a9d256f1ca299639ad5e51b7054cb904",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_timestamp(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_timestamp$function$\n",
+      "definition_chars_range": "1-232",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 303,
+      "oid": 4632,
+      "proname": "brin_minmax_multi_distance_timetz",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 226,
+      "ddl_md5": "871f57cac54d134678ee1add2dcbf5ca",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_timetz(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_timetz$function$\n",
+      "definition_chars_range": "1-226",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 304,
+      "oid": 4628,
+      "proname": "brin_minmax_multi_distance_uuid",
+      "args": "internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 222,
+      "ddl_md5": "37950d2f3851ea30e779a4f7b211b71e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_distance_uuid(internal, internal)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_distance_uuid$function$\n",
+      "definition_chars_range": "1-222",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 305,
+      "oid": 4616,
+      "proname": "brin_minmax_multi_opcinfo",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 192,
+      "ddl_md5": "dbcec0168d7d82026c856fdefb43af32",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_opcinfo(internal)\n RETURNS internal\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_opcinfo$function$\n",
+      "definition_chars_range": "1-192",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 306,
+      "oid": 4620,
+      "proname": "brin_minmax_multi_options",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 181,
+      "ddl_md5": "9a4325b99a7077b4d19d1c17422212c1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_options(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE\nAS $function$brin_minmax_multi_options$function$\n",
+      "definition_chars_range": "1-181",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 307,
+      "oid": 4638,
+      "proname": "brin_minmax_multi_summary_in",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 217,
+      "ddl_md5": "a4553b7473c25d519d40344291ac7852",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_summary_in(cstring)\n RETURNS pg_brin_minmax_multi_summary\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_summary_in$function$\n",
+      "definition_chars_range": "1-217",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 308,
+      "oid": 4639,
+      "proname": "brin_minmax_multi_summary_out",
+      "args": "pg_brin_minmax_multi_summary",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 219,
+      "ddl_md5": "07aaf8e675268a61f0cd96dabddd4b34",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_summary_out(pg_brin_minmax_multi_summary)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_summary_out$function$\n",
+      "definition_chars_range": "1-219",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 309,
+      "oid": 4640,
+      "proname": "brin_minmax_multi_summary_recv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 219,
+      "ddl_md5": "3ba6d73906088ee10e60404461bf5e86",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_summary_recv(internal)\n RETURNS pg_brin_minmax_multi_summary\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_summary_recv$function$\n",
+      "definition_chars_range": "1-219",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 310,
+      "oid": 4641,
+      "proname": "brin_minmax_multi_summary_send",
+      "args": "pg_brin_minmax_multi_summary",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 216,
+      "ddl_md5": "67d43a982b0f84f98a9665651c19d37e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_summary_send(pg_brin_minmax_multi_summary)\n RETURNS bytea\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_summary_send$function$\n",
+      "definition_chars_range": "1-216",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 311,
+      "oid": 4619,
+      "proname": "brin_minmax_multi_union",
+      "args": "internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 207,
+      "ddl_md5": "25e506e385704489ecc2dbf836a53a10",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_multi_union(internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_multi_union$function$\n",
+      "definition_chars_range": "1-207",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 312,
+      "oid": 3383,
+      "proname": "brin_minmax_opcinfo",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "7f48bef0b6adae11d7c2bf0ed2fc8ffe",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_opcinfo(internal)\n RETURNS internal\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_opcinfo$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 313,
+      "oid": 3386,
+      "proname": "brin_minmax_union",
+      "args": "internal, internal, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 195,
+      "ddl_md5": "b920d908fb5063b33a72de04bc215249",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_minmax_union(internal, internal, internal)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$brin_minmax_union$function$\n",
+      "definition_chars_range": "1-195",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 314,
+      "oid": 3952,
+      "proname": "brin_summarize_new_values",
+      "args": "regclass",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "7d3098bf7b2b1cf13c9777c27432dcc4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_summarize_new_values(regclass)\n RETURNS integer\n LANGUAGE internal\n STRICT\nAS $function$brin_summarize_new_values$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 315,
+      "oid": 3999,
+      "proname": "brin_summarize_range",
+      "args": "regclass, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "e569b64f68588d9366ed82ba3bc2daf8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brin_summarize_range(regclass, bigint)\n RETURNS integer\n LANGUAGE internal\n STRICT\nAS $function$brin_summarize_range$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 316,
+      "oid": 335,
+      "proname": "brinhandler",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "e679efb1a75f952cf2e439b98bce32d6",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.brinhandler(internal)\n RETURNS index_am_handler\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$brinhandler$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "core_brin_support",
+        "semantic": "PostgreSQL BRIN access method, summarization or support callback; zero app BRIN indexes does not prove removable core code",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 317,
+      "oid": 698,
+      "proname": "broadcast",
+      "args": "inet",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 160,
+      "ddl_md5": "44f1a13aed23d083b0c1a73e4feaa4c4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.broadcast(inet)\n RETURNS inet\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$network_broadcast$function$\n",
+      "definition_chars_range": "1-160",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 318,
+      "oid": 382,
+      "proname": "btarraycmp",
+      "args": "anyarray, anyarray",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "9dc986249a62c080d392e00d6f3f6ac7",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btarraycmp(anyarray, anyarray)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btarraycmp$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 319,
+      "oid": 1693,
+      "proname": "btboolcmp",
+      "args": "boolean, boolean",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 177,
+      "ddl_md5": "827dd6c0db012d75dd81536f15628b3f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btboolcmp(boolean, boolean)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btboolcmp$function$\n",
+      "definition_chars_range": "1-177",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 320,
+      "oid": 2180,
+      "proname": "btbpchar_pattern_cmp",
+      "args": "character, character",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 203,
+      "ddl_md5": "3a9b61e9f72561f2a2465e0282cb2faa",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btbpchar_pattern_cmp(character, character)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btbpchar_pattern_cmp$function$\n",
+      "definition_chars_range": "1-203",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 321,
+      "oid": 3333,
+      "proname": "btbpchar_pattern_sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 194,
+      "ddl_md5": "655128cf61c484d45068ef53f13833ed",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btbpchar_pattern_sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btbpchar_pattern_sortsupport$function$\n",
+      "definition_chars_range": "1-194",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 322,
+      "oid": 358,
+      "proname": "btcharcmp",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "e19e3a652734aabc62ea4a6125cdf75d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btcharcmp(\"char\", \"char\")\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btcharcmp$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 323,
+      "oid": 5051,
+      "proname": "btequalimage",
+      "args": "oid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 160,
+      "ddl_md5": "ae55272f87a398b9082b28e3d9168dbe",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btequalimage(oid)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btequalimage$function$\n",
+      "definition_chars_range": "1-160",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 324,
+      "oid": 2194,
+      "proname": "btfloat48cmp",
+      "args": "real, double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 189,
+      "ddl_md5": "0907a591bbc5533991a5204eb1333a43",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat48cmp(real, double precision)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btfloat48cmp$function$\n",
+      "definition_chars_range": "1-189",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 325,
+      "oid": 354,
+      "proname": "btfloat4cmp",
+      "args": "real, real",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "fa34a49822fbfeddc9c196acc1a0acb8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat4cmp(real, real)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btfloat4cmp$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 326,
+      "oid": 3132,
+      "proname": "btfloat4sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 176,
+      "ddl_md5": "cae0c262d82ba07b1621092d9a563880",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat4sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btfloat4sortsupport$function$\n",
+      "definition_chars_range": "1-176",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 327,
+      "oid": 2195,
+      "proname": "btfloat84cmp",
+      "args": "double precision, real",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 189,
+      "ddl_md5": "77530a7f5b460e1810fbc81769b74b99",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat84cmp(double precision, real)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btfloat84cmp$function$\n",
+      "definition_chars_range": "1-189",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 328,
+      "oid": 355,
+      "proname": "btfloat8cmp",
+      "args": "double precision, double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 199,
+      "ddl_md5": "fcd9f99034958bb626ad15ee02097b60",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat8cmp(double precision, double precision)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btfloat8cmp$function$\n",
+      "definition_chars_range": "1-199",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 329,
+      "oid": 3133,
+      "proname": "btfloat8sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 176,
+      "ddl_md5": "8002db5cf2bd6b2ced92de95e78a4ae5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btfloat8sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btfloat8sortsupport$function$\n",
+      "definition_chars_range": "1-176",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 330,
+      "oid": 330,
+      "proname": "bthandler",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 158,
+      "ddl_md5": "404640bde32ee7703877410fb8327fd4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bthandler(internal)\n RETURNS index_am_handler\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$bthandler$function$\n",
+      "definition_chars_range": "1-158",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 331,
+      "oid": 2190,
+      "proname": "btint24cmp",
+      "args": "smallint, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "695afe5135cba2bfc8dea5036a79dda0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint24cmp(smallint, integer)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint24cmp$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 332,
+      "oid": 2192,
+      "proname": "btint28cmp",
+      "args": "smallint, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "b6a7834735a89227ff694908022a7bf6",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint28cmp(smallint, bigint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint28cmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 333,
+      "oid": 350,
+      "proname": "btint2cmp",
+      "args": "smallint, smallint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "9fa7e923e7b857ee11b15d25577f85dc",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint2cmp(smallint, smallint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint2cmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 334,
+      "oid": 3129,
+      "proname": "btint2sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "6bd5f4eb35bcf44b7d05f75b5aa4114a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint2sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btint2sortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 335,
+      "oid": 2191,
+      "proname": "btint42cmp",
+      "args": "integer, smallint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "d9313cf2f2c33cc32a4c0d1ab1c69132",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint42cmp(integer, smallint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint42cmp$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 336,
+      "oid": 2188,
+      "proname": "btint48cmp",
+      "args": "integer, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 178,
+      "ddl_md5": "1ba8b1fd3ecfb7ee6dd03ef4b1947a4e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint48cmp(integer, bigint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint48cmp$function$\n",
+      "definition_chars_range": "1-178",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 337,
+      "oid": 351,
+      "proname": "btint4cmp",
+      "args": "integer, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 177,
+      "ddl_md5": "6382d44b58cf6dcc283ed0feea608e69",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint4cmp(integer, integer)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint4cmp$function$\n",
+      "definition_chars_range": "1-177",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 338,
+      "oid": 3130,
+      "proname": "btint4sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "f969fae6c4db76f70ca8db23131a8356",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint4sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btint4sortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 339,
+      "oid": 2193,
+      "proname": "btint82cmp",
+      "args": "bigint, smallint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "b6cd02d939585d984af3ea803cbc9e06",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint82cmp(bigint, smallint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint82cmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 340,
+      "oid": 2189,
+      "proname": "btint84cmp",
+      "args": "bigint, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 178,
+      "ddl_md5": "9893ce001472fe6e3cbbff67e74dbf7b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint84cmp(bigint, integer)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint84cmp$function$\n",
+      "definition_chars_range": "1-178",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 341,
+      "oid": 842,
+      "proname": "btint8cmp",
+      "args": "bigint, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "a63dc16acca069c5c4ed0f7a99636c59",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint8cmp(bigint, bigint)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btint8cmp$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 342,
+      "oid": 3131,
+      "proname": "btint8sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "b6daf599ab685a111e2997b28f0b2d34",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btint8sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btint8sortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 343,
+      "oid": 359,
+      "proname": "btnamecmp",
+      "args": "name, name",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "877acbed8d088d4bbe15062e011119e3",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btnamecmp(name, name)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btnamecmp$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 344,
+      "oid": 3135,
+      "proname": "btnamesortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "d9c7f4dd22c7a9407f08f8faf230d67b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btnamesortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btnamesortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 345,
+      "oid": 246,
+      "proname": "btnametextcmp",
+      "args": "name, text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "8a9af5eb03776b78ffcc6983180a90c5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btnametextcmp(name, text)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btnametextcmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 346,
+      "oid": 356,
+      "proname": "btoidcmp",
+      "args": "oid, oid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "2ee82ed811529a6c53ae5e3b09fa5919",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btoidcmp(oid, oid)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btoidcmp$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 347,
+      "oid": 3134,
+      "proname": "btoidsortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "336a159d3ac5f0339793db82ac833038",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btoidsortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btoidsortsupport$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 348,
+      "oid": 404,
+      "proname": "btoidvectorcmp",
+      "args": "oidvector, oidvector",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 191,
+      "ddl_md5": "0e3e4c3df92430f515f91e0322dd4133",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btoidvectorcmp(oidvector, oidvector)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$btoidvectorcmp$function$\n",
+      "definition_chars_range": "1-191",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 349,
+      "oid": 2987,
+      "proname": "btrecordcmp",
+      "args": "record, record",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "42da53d5f30de1ae8378c535005c11dd",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btrecordcmp(record, record)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btrecordcmp$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 350,
+      "oid": 3187,
+      "proname": "btrecordimagecmp",
+      "args": "record, record",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "508f681cfe0082a4b251b1d343bde2db",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btrecordimagecmp(record, record)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btrecordimagecmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 351,
+      "oid": 2015,
+      "proname": "btrim",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "da56a6e5010eda40ca51d931c39d854f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btrim(bytea, bytea)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteatrim$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 352,
+      "oid": 885,
+      "proname": "btrim",
+      "args": "text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 145,
+      "ddl_md5": "55d1692a69434a5836f53d32e123a85a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btrim(text)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btrim1$function$\n",
+      "definition_chars_range": "1-145",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 353,
+      "oid": 884,
+      "proname": "btrim",
+      "args": "text, text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 150,
+      "ddl_md5": "a42069ce9ebc7bbb9f7a17d9624397ea",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btrim(text, text)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btrim$function$\n",
+      "definition_chars_range": "1-150",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 354,
+      "oid": 2166,
+      "proname": "bttext_pattern_cmp",
+      "args": "text, text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 189,
+      "ddl_md5": "77d92ee0ec464935419156a9a41b4237",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttext_pattern_cmp(text, text)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$bttext_pattern_cmp$function$\n",
+      "definition_chars_range": "1-189",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 355,
+      "oid": 3332,
+      "proname": "bttext_pattern_sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 190,
+      "ddl_md5": "da23ec329350259ba3ec15a0ce8843a9",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttext_pattern_sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bttext_pattern_sortsupport$function$\n",
+      "definition_chars_range": "1-190",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 356,
+      "oid": 360,
+      "proname": "bttextcmp",
+      "args": "text, text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "0c58e8f40b4a42d878a4da02fcc6a95e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttextcmp(text, text)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$bttextcmp$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 357,
+      "oid": 253,
+      "proname": "bttextnamecmp",
+      "args": "text, name",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "ee11ba85190c7901abb2a3f963ab8abe",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttextnamecmp(text, name)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$bttextnamecmp$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 358,
+      "oid": 3255,
+      "proname": "bttextsortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "c0c6e030a5b314672a53571dcd570cb3",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttextsortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bttextsortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 359,
+      "oid": 2794,
+      "proname": "bttidcmp",
+      "args": "tid, tid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "7722546e17d94dfa3b4c75f26a3a3cdc",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bttidcmp(tid, tid)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$bttidcmp$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 360,
+      "oid": 5050,
+      "proname": "btvarstrequalimage",
+      "args": "oid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "da74bbad6efbdf858b0e698ca953badf",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.btvarstrequalimage(oid)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$btvarstrequalimage$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 361,
+      "oid": 3331,
+      "proname": "bytea_sortsupport",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "d4399335726961afb4ee9bc7c7b83a4d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytea_sortsupport(internal)\n RETURNS void\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bytea_sortsupport$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "core_btree_support",
+        "semantic": "PostgreSQL B-tree comparator/sort-support/handler or index value comparison; active btree indexes across app/provider schemas",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 362,
+      "oid": 3544,
+      "proname": "bytea_string_agg_finalfn",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "76caae5d7b0e282c53be1b90c249075a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytea_string_agg_finalfn(internal)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE\nAS $function$bytea_string_agg_finalfn$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 363,
+      "oid": 3543,
+      "proname": "bytea_string_agg_transfn",
+      "args": "internal, bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 197,
+      "ddl_md5": "2bb356a21f02af756a3d1376c4a1a72e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytea_string_agg_transfn(internal, bytea, bytea)\n RETURNS internal\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE\nAS $function$bytea_string_agg_transfn$function$\n",
+      "definition_chars_range": "1-197",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 364,
+      "oid": 2011,
+      "proname": "byteacat",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "004e44dd62449e85fd97bcda92eec7c0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteacat(bytea, bytea)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteacat$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 365,
+      "oid": 1954,
+      "proname": "byteacmp",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "20074df30cf4f0de194e8975e05a9394",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteacmp(bytea, bytea)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteacmp$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 366,
+      "oid": 1948,
+      "proname": "byteaeq",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "29b3ded5cb611dc226bbc9e407ee618b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteaeq(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteaeq$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 367,
+      "oid": 1952,
+      "proname": "byteage",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "43b729b80a9c133a925ceb4a34b5a562",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteage(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteage$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 368,
+      "oid": 1951,
+      "proname": "byteagt",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "322e8fb92c30e76a7c93713f8b0f3773",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteagt(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteagt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 369,
+      "oid": 1244,
+      "proname": "byteain",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 152,
+      "ddl_md5": "4a87b3d25de6de3722b6887f9e266c86",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteain(cstring)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteain$function$\n",
+      "definition_chars_range": "1-152",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 370,
+      "oid": 1950,
+      "proname": "byteale",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "b4383b7c44109616b558fe65775ed2c2",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteale(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteale$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 371,
+      "oid": 2005,
+      "proname": "bytealike",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 188,
+      "ddl_md5": "99b213b245823ecda97c1426b03811d4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytealike(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT SUPPORT textlike_support\nAS $function$bytealike$function$\n",
+      "definition_chars_range": "1-188",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 372,
+      "oid": 1949,
+      "proname": "bytealt",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "7340736c24c7518725b4fed345b142ff",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytealt(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$bytealt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 373,
+      "oid": 1953,
+      "proname": "byteane",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "d8cc9654691cd00b16c6a3e1aebfd684",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteane(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$byteane$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 374,
+      "oid": 2006,
+      "proname": "byteanlike",
+      "args": "bytea, bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "14bdc6aa723e8242bc9e9173fb97af08",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteanlike(bytea, bytea)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteanlike$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 375,
+      "oid": 31,
+      "proname": "byteaout",
+      "args": "bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 154,
+      "ddl_md5": "b4ed98a3503ff7a433c5e578a569785d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteaout(bytea)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteaout$function$\n",
+      "definition_chars_range": "1-154",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 376,
+      "oid": 2412,
+      "proname": "bytearecv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "076ab43910d6763ae367b1d3e5b54f75",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.bytearecv(internal)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bytearecv$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 377,
+      "oid": 2413,
+      "proname": "byteasend",
+      "args": "bytea",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 154,
+      "ddl_md5": "e7fb63243c8299f615c82c118a541042",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.byteasend(bytea)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$byteasend$function$\n",
+      "definition_chars_range": "1-154",
+      "review": {
+        "category": "bytea_operators",
+        "semantic": "Built-in bytea/text conversion, comparison, pattern/aggregation or trimming; 5 non-system bytea columns currently exist",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 378,
+      "oid": 3179,
+      "proname": "cardinality",
+      "args": "anyarray",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "1596abc6548cd30e11a1b96328b75ce6",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cardinality(anyarray)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$array_cardinality$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 379,
+      "oid": 377,
+      "proname": "cash_cmp",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "f5ed653d70e0b7648222ac6281e4c4e7",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_cmp(money, money)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_cmp$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 380,
+      "oid": 3822,
+      "proname": "cash_div_cash",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "41830144170f6f5d47754357b37c341a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_cash(money, money)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_cash$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 381,
+      "oid": 847,
+      "proname": "cash_div_flt4",
+      "args": "money, real",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 168,
+      "ddl_md5": "afdcb13fc44b97cd3906dc9034741290",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_flt4(money, real)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_flt4$function$\n",
+      "definition_chars_range": "1-168",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 382,
+      "oid": 897,
+      "proname": "cash_div_flt8",
+      "args": "money, double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "e146dcc90246f80121284a43faede2d5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_flt8(money, double precision)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_flt8$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 383,
+      "oid": 867,
+      "proname": "cash_div_int2",
+      "args": "money, smallint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "0bd2d16649d8d227dc07c1382d67a896",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_int2(money, smallint)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_int2$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 384,
+      "oid": 865,
+      "proname": "cash_div_int4",
+      "args": "money, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "3050cbcdab30cc1f1c48cd63be492701",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_int4(money, integer)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_int4$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 385,
+      "oid": 3345,
+      "proname": "cash_div_int8",
+      "args": "money, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "e4bcc2ec3b55efbc8892e45725f90603",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_div_int8(money, bigint)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_div_int8$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 386,
+      "oid": 888,
+      "proname": "cash_eq",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "5d3138999d0644d6b52e04c5e4ac81e0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_eq(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_eq$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 387,
+      "oid": 893,
+      "proname": "cash_ge",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "03892e2c8d89c4960baae3ae4f420985",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_ge(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_ge$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 388,
+      "oid": 892,
+      "proname": "cash_gt",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "bb8ff42be082b547cfde68cc6e5565b4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_gt(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_gt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 389,
+      "oid": 886,
+      "proname": "cash_in",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 149,
+      "ddl_md5": "db0bc55417e23e718a4256c4b195961d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_in(cstring)\n RETURNS money\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$cash_in$function$\n",
+      "definition_chars_range": "1-149",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 390,
+      "oid": 891,
+      "proname": "cash_le",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "7fcc157079a4a17fd9ca553d60c454d6",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_le(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_le$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 391,
+      "oid": 890,
+      "proname": "cash_lt",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "19eb5dfb471870ebd1a0de5b1176634c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_lt(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_lt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 392,
+      "oid": 895,
+      "proname": "cash_mi",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "dfbe6ab7cebab1c0228d945f0b187fb1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mi(money, money)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mi$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 393,
+      "oid": 846,
+      "proname": "cash_mul_flt4",
+      "args": "money, real",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 168,
+      "ddl_md5": "0db87a3557ec83bdb2119866e9396e63",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mul_flt4(money, real)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mul_flt4$function$\n",
+      "definition_chars_range": "1-168",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 394,
+      "oid": 896,
+      "proname": "cash_mul_flt8",
+      "args": "money, double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "3c9f5e9ab8e5173f7974f2dc86ae8a9e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mul_flt8(money, double precision)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mul_flt8$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 395,
+      "oid": 866,
+      "proname": "cash_mul_int2",
+      "args": "money, smallint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 172,
+      "ddl_md5": "848bef3fe938c8304ceed78388335e0d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mul_int2(money, smallint)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mul_int2$function$\n",
+      "definition_chars_range": "1-172",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 396,
+      "oid": 864,
+      "proname": "cash_mul_int4",
+      "args": "money, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "ad8b95012eb111b22766344923f591b1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mul_int4(money, integer)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mul_int4$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 397,
+      "oid": 3344,
+      "proname": "cash_mul_int8",
+      "args": "money, bigint",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "f386e523c0f918638adc5c6b4152bc9d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_mul_int8(money, bigint)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_mul_int8$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 398,
+      "oid": 889,
+      "proname": "cash_ne",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "f8387dfc153fb280b17f84a0307f2487",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_ne(money, money)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cash_ne$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 399,
+      "oid": 887,
+      "proname": "cash_out",
+      "args": "money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "76e234a70167e8cc1b3e761f58f6ab5d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_out(money)\n RETURNS cstring\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$cash_out$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 400,
+      "oid": 894,
+      "proname": "cash_pl",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "1b77fde079d8738be98218ce43196b30",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_pl(money, money)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_pl$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 401,
+      "oid": 2492,
+      "proname": "cash_recv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "e114e21e9ea06bd0a47d549e51260ae2",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_recv(internal)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_recv$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 402,
+      "oid": 2493,
+      "proname": "cash_send",
+      "args": "money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 154,
+      "ddl_md5": "66a86797361d23aaa66501cd835d0187",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_send(money)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_send$function$\n",
+      "definition_chars_range": "1-154",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 403,
+      "oid": 935,
+      "proname": "cash_words",
+      "args": "money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 155,
+      "ddl_md5": "337c18200ec6f57130e11dcaf489d19e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cash_words(money)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cash_words$function$\n",
+      "definition_chars_range": "1-155",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 404,
+      "oid": 898,
+      "proname": "cashlarger",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 163,
+      "ddl_md5": "118aec6530557a1ec8ce47c6aecc79aa",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cashlarger(money, money)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cashlarger$function$\n",
+      "definition_chars_range": "1-163",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 405,
+      "oid": 899,
+      "proname": "cashsmaller",
+      "args": "money, money",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "ca42bfc36554ec29c18b4afa1137a590",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cashsmaller(money, money)\n RETURNS money\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cashsmaller$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "money_ops",
+        "semantic": "PostgreSQL built-in money arithmetic, comparison, cast/input/output; no non-system money columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 406,
+      "oid": 1345,
+      "proname": "cbrt",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "494a138715c3d52b85cc787b1f9a594b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cbrt(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcbrt$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 407,
+      "oid": 2308,
+      "proname": "ceil",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "a13cf99ff2738a11c2852e38e48942ff",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.ceil(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dceil$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 408,
+      "oid": 1711,
+      "proname": "ceil",
+      "args": "numeric",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "2f8fa7b910bf6e3ecc864f11b3fe83d1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.ceil(numeric)\n RETURNS numeric\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$numeric_ceil$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 409,
+      "oid": 2320,
+      "proname": "ceiling",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "c4a8a98bcd9c10b6ef88eef43518165d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.ceiling(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dceil$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 410,
+      "oid": 2167,
+      "proname": "ceiling",
+      "args": "numeric",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "6617bdbcd66abb80037b9aa31165ec9d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.ceiling(numeric)\n RETURNS numeric\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$numeric_ceil$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 411,
+      "oid": 1542,
+      "proname": "center",
+      "args": "box",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 150,
+      "ddl_md5": "0e03d22f86a2b3637290283fe3eaa1c7",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.center(box)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$box_center$function$\n",
+      "definition_chars_range": "1-150",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 412,
+      "oid": 1543,
+      "proname": "center",
+      "args": "circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "ca7b92a16bcf46547447aa361e2b7499",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.center(circle)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_center$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 413,
+      "oid": 78,
+      "proname": "char",
+      "args": "integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 153,
+      "ddl_md5": "c1ab10699e40a5c3fa7328dee552dda1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.\"char\"(integer)\n RETURNS \"char\"\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$i4tochar$function$\n",
+      "definition_chars_range": "1-153",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 414,
+      "oid": 944,
+      "proname": "char",
+      "args": "text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "be660eded57fbed9c9b21c8a0b169249",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.\"char\"(text)\n RETURNS \"char\"\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$text_char$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 415,
+      "oid": 1372,
+      "proname": "char_length",
+      "args": "character",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "4bc861c2f6d6e94a06592138a70f6cbc",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.char_length(character)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bpcharlen$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 416,
+      "oid": 1381,
+      "proname": "char_length",
+      "args": "text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 155,
+      "ddl_md5": "740889fac3ce320490100c2eb2fb91e0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.char_length(text)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$textlen$function$\n",
+      "definition_chars_range": "1-155",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 417,
+      "oid": 1367,
+      "proname": "character_length",
+      "args": "character",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "182d26409f3a6705f200f38f9f388444",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.character_length(character)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$bpcharlen$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 418,
+      "oid": 1369,
+      "proname": "character_length",
+      "args": "text",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 160,
+      "ddl_md5": "5225d5f80fcc2f6909b2aeed78d8be2a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.character_length(text)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$textlen$function$\n",
+      "definition_chars_range": "1-160",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 419,
+      "oid": 61,
+      "proname": "chareq",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "be23271cdad907afd2faa7ee469c63f8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.chareq(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$chareq$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 420,
+      "oid": 74,
+      "proname": "charge",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "7440284b80d2ad4d011f0104157b465f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charge(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$charge$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 421,
+      "oid": 73,
+      "proname": "chargt",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "feec28cce78aa1d135010f06ac3318e0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.chargt(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$chargt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 422,
+      "oid": 1245,
+      "proname": "charin",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "0cce6ba435812293e2b791edf8f9a323",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charin(cstring)\n RETURNS \"char\"\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$charin$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 423,
+      "oid": 72,
+      "proname": "charle",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "7aed22f2be1bfbd6566b444cdacbee0d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charle(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$charle$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 424,
+      "oid": 1246,
+      "proname": "charlt",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "5382c0a72593e5ef530efdfc7da22ab1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charlt(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$charlt$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 425,
+      "oid": 70,
+      "proname": "charne",
+      "args": "\"char\", \"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "059dd0cab39dda0177b0294458cbb9e5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charne(\"char\", \"char\")\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$charne$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 426,
+      "oid": 33,
+      "proname": "charout",
+      "args": "\"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 153,
+      "ddl_md5": "d78e02ad5c736a6fa42085b3fcc76e1f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charout(\"char\")\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$charout$function$\n",
+      "definition_chars_range": "1-153",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 427,
+      "oid": 2434,
+      "proname": "charrecv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "f91f304548b7169a9513c87f8e7d9109",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charrecv(internal)\n RETURNS \"char\"\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$charrecv$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 428,
+      "oid": 2435,
+      "proname": "charsend",
+      "args": "\"char\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 153,
+      "ddl_md5": "0be2c744411bcd8bd2d4ae3a9eaa1d29",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.charsend(\"char\")\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$charsend$function$\n",
+      "definition_chars_range": "1-153",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 429,
+      "oid": 1621,
+      "proname": "chr",
+      "args": "integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 143,
+      "ddl_md5": "0167cc0b9f32f623fd2558a840bad57a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.chr(integer)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$chr$function$\n",
+      "definition_chars_range": "1-143",
+      "review": {
+        "category": "character_ops",
+        "semantic": "Built-in character/char conversion, I/O, length or comparison; char_length aliases map to same native implementation as character_length",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 430,
+      "oid": 69,
+      "proname": "cideq",
+      "args": "cid, cid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 161,
+      "ddl_md5": "ca3ae36e99b03d0b4964f90a6a6cac9e",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cideq(cid, cid)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$cideq$function$\n",
+      "definition_chars_range": "1-161",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 431,
+      "oid": 52,
+      "proname": "cidin",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 146,
+      "ddl_md5": "e6b7d756fe62d2fdb2cd788da7b23038",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidin(cstring)\n RETURNS cid\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidin$function$\n",
+      "definition_chars_range": "1-146",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 432,
+      "oid": 53,
+      "proname": "cidout",
+      "args": "cid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 148,
+      "ddl_md5": "faa22b780d3d2ec654ccfc9183f055c0",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidout(cid)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidout$function$\n",
+      "definition_chars_range": "1-148",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 433,
+      "oid": 1715,
+      "proname": "cidr",
+      "args": "inet",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 150,
+      "ddl_md5": "27de57fa22a75ec40002d2d0e31bde94",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidr(inet)\n RETURNS cidr\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$inet_to_cidr$function$\n",
+      "definition_chars_range": "1-150",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 434,
+      "oid": 1267,
+      "proname": "cidr_in",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "33810a1655cf58612e8da1310e10986f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidr_in(cstring)\n RETURNS cidr\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidr_in$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 435,
+      "oid": 1427,
+      "proname": "cidr_out",
+      "args": "cidr",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 153,
+      "ddl_md5": "0258fd033037afca24318b5cc09186d1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidr_out(cidr)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidr_out$function$\n",
+      "definition_chars_range": "1-153",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 436,
+      "oid": 2498,
+      "proname": "cidr_recv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "7b1ef24042c5b1e1f23dfe6a56fdb40b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidr_recv(internal)\n RETURNS cidr\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidr_recv$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 437,
+      "oid": 2499,
+      "proname": "cidr_send",
+      "args": "cidr",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 153,
+      "ddl_md5": "83ff989f070c9eb48de890b657813bd4",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidr_send(cidr)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidr_send$function$\n",
+      "definition_chars_range": "1-153",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 438,
+      "oid": 2442,
+      "proname": "cidrecv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "9392eb8b457c4e31378fb3ed0ed1612b",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidrecv(internal)\n RETURNS cid\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidrecv$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 439,
+      "oid": 2443,
+      "proname": "cidsend",
+      "args": "cid",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 148,
+      "ddl_md5": "e103228f04793f6b41a5f11d6acbf206",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cidsend(cid)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidsend$function$\n",
+      "definition_chars_range": "1-148",
+      "review": {
+        "category": "network_and_catalog_ops",
+        "semantic": "Built-in network/address or internal command identifier conversion/comparison; 2 non-system inet columns found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 440,
+      "oid": 1479,
+      "proname": "circle",
+      "args": "box",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "5255aefb5d30a4daebe10dfbd6d3233c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle(box)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$box_circle$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 441,
+      "oid": 1473,
+      "proname": "circle",
+      "args": "point, double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "01e009c80483a03b45871748e42aa0bb",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle(point, double precision)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cr_circle$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 442,
+      "oid": 1474,
+      "proname": "circle",
+      "args": "polygon",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "52d80f153c8f9c756a4695e284190b10",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle(polygon)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$poly_circle$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 443,
+      "oid": 1461,
+      "proname": "circle_above",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "69fce131f256283989f09de5476e9a42",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_above(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_above$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 444,
+      "oid": 1146,
+      "proname": "circle_add_pt",
+      "args": "circle, point",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "124ce63f0feb5fe7507e9bd6871fd7ed",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_add_pt(circle, point)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_add_pt$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 445,
+      "oid": 1460,
+      "proname": "circle_below",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "65ed724cf64772f1b189f94b067b70a3",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_below(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_below$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 446,
+      "oid": 1472,
+      "proname": "circle_center",
+      "args": "circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 163,
+      "ddl_md5": "61d65f1e58993bb14e4de073762a9d5d",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_center(circle)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_center$function$\n",
+      "definition_chars_range": "1-163",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 447,
+      "oid": 1453,
+      "proname": "circle_contain",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "ba41a80344b744d72be235921859c6f1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_contain(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_contain$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 448,
+      "oid": 1477,
+      "proname": "circle_contain_pt",
+      "args": "circle, point",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 180,
+      "ddl_md5": "aeb7ec400ee08b40517e168b09a94479",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_contain_pt(circle, point)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_contain_pt$function$\n",
+      "definition_chars_range": "1-180",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 449,
+      "oid": 1458,
+      "proname": "circle_contained",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "9084402db160f094597fd46b5aea4efd",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_contained(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_contained$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 450,
+      "oid": 1471,
+      "proname": "circle_distance",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 186,
+      "ddl_md5": "f46ddab98c0962a87057f896c2ccf305",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_distance(circle, circle)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_distance$function$\n",
+      "definition_chars_range": "1-186",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 451,
+      "oid": 1149,
+      "proname": "circle_div_pt",
+      "args": "circle, point",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "0911b38072af1d19f8734a4aa381965f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_div_pt(circle, point)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_div_pt$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 452,
+      "oid": 1462,
+      "proname": "circle_eq",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "be7d6f7c9031a52743312ac62bb44bf8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_eq(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_eq$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 453,
+      "oid": 1467,
+      "proname": "circle_ge",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "bbb6308d8cbeeb8475baf28ce68494d9",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_ge(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_ge$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 454,
+      "oid": 1465,
+      "proname": "circle_gt",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "6a44be47066c234fdb9616b0ac880505",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_gt(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_gt$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 455,
+      "oid": 1450,
+      "proname": "circle_in",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "5ea746fd0fe7d2a8c1c9733d5243e796",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_in(cstring)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_in$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 456,
+      "oid": 1466,
+      "proname": "circle_le",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "22a48ec057e9dbbbeed88312d726d809",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_le(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_le$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 457,
+      "oid": 1454,
+      "proname": "circle_left",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "06a2b2dd7000cb60deba614493796668",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_left(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_left$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 458,
+      "oid": 1464,
+      "proname": "circle_lt",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "f43c2d9ff32de277a2c6ef63ef119e0f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_lt(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_lt$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 459,
+      "oid": 1148,
+      "proname": "circle_mul_pt",
+      "args": "circle, point",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "46bf8f72f3d94b5a523f1e352a84171f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_mul_pt(circle, point)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_mul_pt$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 460,
+      "oid": 1463,
+      "proname": "circle_ne",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "55e3991cd166ca2c37ae6ca08dcfe85c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_ne(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT LEAKPROOF\nAS $function$circle_ne$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 461,
+      "oid": 1451,
+      "proname": "circle_out",
+      "args": "circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "5fd3148ba92587d4afb8dccc921d35c6",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_out(circle)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_out$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 462,
+      "oid": 2588,
+      "proname": "circle_overabove",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "3af809250cae8c9ecf1d7b8fa68112a1",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_overabove(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_overabove$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 463,
+      "oid": 2587,
+      "proname": "circle_overbelow",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "858229d189edc4c6df7126ed31dd55e2",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_overbelow(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_overbelow$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 464,
+      "oid": 1459,
+      "proname": "circle_overlap",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 175,
+      "ddl_md5": "4ca7a538be9b7b7796a0ccd5ff9a8b65",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_overlap(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_overlap$function$\n",
+      "definition_chars_range": "1-175",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 465,
+      "oid": 1455,
+      "proname": "circle_overleft",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 177,
+      "ddl_md5": "10b3dbe1c9b06f8aa7464dc390884ce5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_overleft(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_overleft$function$\n",
+      "definition_chars_range": "1-177",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 466,
+      "oid": 1456,
+      "proname": "circle_overright",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 179,
+      "ddl_md5": "9f17566e3f5180b57d4862efcd7c3073",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_overright(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_overright$function$\n",
+      "definition_chars_range": "1-179",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 467,
+      "oid": 2490,
+      "proname": "circle_recv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "c37a3c8f262ce264d664d6e681e487c3",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_recv(internal)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_recv$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 468,
+      "oid": 1457,
+      "proname": "circle_right",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "a1c02ef49fb1ec56a507bfaa1c110f00",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_right(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_right$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 469,
+      "oid": 1452,
+      "proname": "circle_same",
+      "args": "circle, circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 169,
+      "ddl_md5": "a7b79cbd68f028c5d08ca34244f12954",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_same(circle, circle)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_same$function$\n",
+      "definition_chars_range": "1-169",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 470,
+      "oid": 2491,
+      "proname": "circle_send",
+      "args": "circle",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "43995ee83780685a9106dac41b7aa56c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_send(circle)\n RETURNS bytea\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_send$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 471,
+      "oid": 1147,
+      "proname": "circle_sub_pt",
+      "args": "circle, point",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 171,
+      "ddl_md5": "5b15915f09f150b9a9efe24a222d15ef",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.circle_sub_pt(circle, point)\n RETURNS circle\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$circle_sub_pt$function$\n",
+      "definition_chars_range": "1-171",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 472,
+      "oid": 2649,
+      "proname": "clock_timestamp",
+      "args": "",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 170,
+      "ddl_md5": "8d2169161b7d205a4e39151b44e60985",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.clock_timestamp()\n RETURNS timestamp with time zone\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$clock_timestamp$function$\n",
+      "definition_chars_range": "1-170",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 473,
+      "oid": 1488,
+      "proname": "close_ls",
+      "args": "line, lseg",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "6e736d4a3734006b1e0f82703b8035a2",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_ls(line, lseg)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_ls$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 474,
+      "oid": 1489,
+      "proname": "close_lseg",
+      "args": "lseg, lseg",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 161,
+      "ddl_md5": "3b13c1a5122db3cdf4595dee1239de15",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_lseg(lseg, lseg)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_lseg$function$\n",
+      "definition_chars_range": "1-161",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 475,
+      "oid": 367,
+      "proname": "close_pb",
+      "args": "point, box",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 157,
+      "ddl_md5": "d3a04f20114bb4ef83dd0b3181c49423",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_pb(point, box)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_pb$function$\n",
+      "definition_chars_range": "1-157",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 476,
+      "oid": 961,
+      "proname": "close_pl",
+      "args": "point, line",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 158,
+      "ddl_md5": "dba7d668caa21cd33821144cb7daf803",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_pl(point, line)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_pl$function$\n",
+      "definition_chars_range": "1-158",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 477,
+      "oid": 366,
+      "proname": "close_ps",
+      "args": "point, lseg",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 158,
+      "ddl_md5": "15aeedbc2f8004291f0c8acc1dadbe73",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_ps(point, lseg)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_ps$function$\n",
+      "definition_chars_range": "1-158",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 478,
+      "oid": 368,
+      "proname": "close_sb",
+      "args": "lseg, box",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 156,
+      "ddl_md5": "158c562500fe4484a0db7f922522dc00",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.close_sb(lseg, box)\n RETURNS point\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$close_sb$function$\n",
+      "definition_chars_range": "1-156",
+      "review": {
+        "category": "geometry_ops",
+        "semantic": "Built-in geometric construction/comparison/distance or closest-point operation; no non-system circle/box/point column found",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 479,
+      "oid": 1216,
+      "proname": "col_description",
+      "args": "oid, integer",
+      "language": "sql",
+      "prokind": "f",
+      "chars": 337,
+      "ddl_md5": "2770ae5f86c8311815f632aa4564235c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.col_description(oid, integer)\n RETURNS text\n LANGUAGE sql\n STABLE PARALLEL SAFE STRICT\nBEGIN ATOMIC\n SELECT pg_description.description\n    FROM pg_description\n   WHERE ((pg_description.objoid = $1) AND (pg_description.classoid = ('pg_class'::regclass)::oid) AND (pg_description.objsubid = $2));\nEND\n",
+      "definition_chars_range": "1-337",
+      "review": {
+        "category": "sql_catalog_metadata",
+        "semantic": "Complete SQL body reads pg_description filtered by classoid, objoid and column sub-ID; metadata lookup only",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "FULL_ACCESSIBLE_SQL_BODY"
+      }
+    },
+    {
+      "rn": 480,
+      "oid": 3058,
+      "proname": "concat",
+      "args": "VARIADIC \"any\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 151,
+      "ddl_md5": "cdf215e2048f348dc4f0f48e8b96af59",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.concat(VARIADIC \"any\")\n RETURNS text\n LANGUAGE internal\n STABLE PARALLEL SAFE\nAS $function$text_concat$function$\n",
+      "definition_chars_range": "1-151",
+      "review": {
+        "category": "encoding_string_ops",
+        "semantic": "Built-in concat/encoding conversion functions; internal implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 481,
+      "oid": 3059,
+      "proname": "concat_ws",
+      "args": "text, VARIADIC \"any\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 163,
+      "ddl_md5": "394905c262b622ab477684ca26bf232f",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.concat_ws(text, VARIADIC \"any\")\n RETURNS text\n LANGUAGE internal\n STABLE PARALLEL SAFE\nAS $function$text_concat_ws$function$\n",
+      "definition_chars_range": "1-163",
+      "review": {
+        "category": "encoding_string_ops",
+        "semantic": "Built-in concat/encoding conversion functions; internal implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 482,
+      "oid": 1303,
+      "proname": "contjoinsel",
+      "args": "internal, oid, internal, smallint, internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 204,
+      "ddl_md5": "74938511d6072145961eebca0f15d561",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.contjoinsel(internal, oid, internal, smallint, internal)\n RETURNS double precision\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$contjoinsel$function$\n",
+      "definition_chars_range": "1-204",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 483,
+      "oid": 1302,
+      "proname": "contsel",
+      "args": "internal, oid, internal, integer",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 185,
+      "ddl_md5": "4c437e168dc657d5462e6a05fce504fb",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.contsel(internal, oid, internal, integer)\n RETURNS double precision\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$contsel$function$\n",
+      "definition_chars_range": "1-185",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 484,
+      "oid": 1813,
+      "proname": "convert",
+      "args": "bytea, name, name",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "2569faef00a7d7aa8ef01601c7e4605c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.convert(bytea, name, name)\n RETURNS bytea\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$pg_convert$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "encoding_string_ops",
+        "semantic": "Built-in concat/encoding conversion functions; internal implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 485,
+      "oid": 1714,
+      "proname": "convert_from",
+      "args": "bytea, name",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "d42df45720efc25d6b085cbb06413d0a",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.convert_from(bytea, name)\n RETURNS text\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$pg_convert_from$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "encoding_string_ops",
+        "semantic": "Built-in concat/encoding conversion functions; internal implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 486,
+      "oid": 1717,
+      "proname": "convert_to",
+      "args": "text, name",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 161,
+      "ddl_md5": "753f3cdc4ee02048406019bfe59951f5",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.convert_to(text, name)\n RETURNS bytea\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$pg_convert_to$function$\n",
+      "definition_chars_range": "1-161",
+      "review": {
+        "category": "encoding_string_ops",
+        "semantic": "Built-in concat/encoding conversion functions; internal implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 487,
+      "oid": 1605,
+      "proname": "cos",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "71ddc234bb96074093cd32b7541a02c8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cos(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcos$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 488,
+      "oid": 2736,
+      "proname": "cosd",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "e8aaeb36652903ff9d6e1691bccf18fb",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cosd(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcosd$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 489,
+      "oid": 2463,
+      "proname": "cosh",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "204e92514bca8b51632021ce04d91078",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cosh(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcosh$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 490,
+      "oid": 1607,
+      "proname": "cot",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 165,
+      "ddl_md5": "236e13e7d02ce553595761d0a4ba08b8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cot(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcot$function$\n",
+      "definition_chars_range": "1-165",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 491,
+      "oid": 2738,
+      "proname": "cotd",
+      "args": "double precision",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 167,
+      "ddl_md5": "b47f3bd01bbee3825ca1a6a0bd1e3ec8",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cotd(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dcotd$function$\n",
+      "definition_chars_range": "1-167",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 492,
+      "oid": 2292,
+      "proname": "cstring_in",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 160,
+      "ddl_md5": "49de14f7a1af0346c28eee9a55259f69",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cstring_in(cstring)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cstring_in$function$\n",
+      "definition_chars_range": "1-160",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 493,
+      "oid": 2293,
+      "proname": "cstring_out",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "d67ced2e6a583a1d8c1faa94b8412390",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cstring_out(cstring)\n RETURNS cstring\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cstring_out$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 494,
+      "oid": 2500,
+      "proname": "cstring_recv",
+      "args": "internal",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 162,
+      "ddl_md5": "d43caddaf1a5e494b83c35e1b53be83c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cstring_recv(internal)\n RETURNS cstring\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$cstring_recv$function$\n",
+      "definition_chars_range": "1-162",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 495,
+      "oid": 2501,
+      "proname": "cstring_send",
+      "args": "cstring",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "1b6dc3aae1ba16d2742e39dba816c341",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cstring_send(cstring)\n RETURNS bytea\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$cstring_send$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 496,
+      "oid": 3104,
+      "proname": "cume_dist",
+      "args": "",
+      "language": "internal",
+      "prokind": "w",
+      "chars": 200,
+      "ddl_md5": "12b8d4eadf7a06d53f97d1c8fae7314c",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cume_dist()\n RETURNS double precision\n LANGUAGE internal\n WINDOW IMMUTABLE PARALLEL SAFE SUPPORT window_cume_dist_support\nAS $function$window_cume_dist$function$\n",
+      "definition_chars_range": "1-200",
+      "review": {
+        "category": "window_aggregate_helpers",
+        "semantic": "PostgreSQL window or hypothetical-set finalizer; aggregate's own definition remains separate, compiled implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 497,
+      "oid": 3991,
+      "proname": "cume_dist_final",
+      "args": "internal, VARIADIC \"any\"",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 202,
+      "ddl_md5": "2caa5aa5070fe99c37a8bb0a118c3113",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.cume_dist_final(internal, VARIADIC \"any\")\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE\nAS $function$hypothetical_cume_dist_final$function$\n",
+      "definition_chars_range": "1-202",
+      "review": {
+        "category": "window_aggregate_helpers",
+        "semantic": "PostgreSQL window or hypothetical-set finalizer; aggregate's own definition remains separate, compiled implementation inaccessible",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 498,
+      "oid": 861,
+      "proname": "current_database",
+      "args": "",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 159,
+      "ddl_md5": "3bd686a62d15d2830fd18ac94a40e772",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.current_database()\n RETURNS name\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$current_database$function$\n",
+      "definition_chars_range": "1-159",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 499,
+      "oid": 817,
+      "proname": "current_query",
+      "args": "",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 145,
+      "ddl_md5": "441b0daf5ca91c24ca1ac92ee2afdf31",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.current_query()\n RETURNS text\n LANGUAGE internal\n PARALLEL RESTRICTED\nAS $function$current_query$function$\n",
+      "definition_chars_range": "1-145",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    },
+    {
+      "rn": 500,
+      "oid": 1402,
+      "proname": "current_schema",
+      "args": "",
+      "language": "internal",
+      "prokind": "f",
+      "chars": 143,
+      "ddl_md5": "63be19c37d1ba8f8db412ee29e14a145",
+      "ddl": "CREATE OR REPLACE FUNCTION pg_catalog.\"current_schema\"()\n RETURNS name\n LANGUAGE internal\n STABLE STRICT\nAS $function$current_schema$function$\n",
+      "definition_chars_range": "1-143",
+      "review": {
+        "category": "built_in_misc",
+        "semantic": "PostgreSQL built-in numeric, math, catalog, planner/selectivity, clock or type I/O function; no DIC-specific implementation evidence",
+        "verdict": "BUILTIN_DECLARATION_REVIEWED_NO_JUSTIFIED_REMOVAL",
+        "implementation_scope": "EXPOSED_DECLARATION_ONLY_COMPILED_IMPLEMENTATION_UNVERIFIED"
+      }
+    }
+  ]
+}

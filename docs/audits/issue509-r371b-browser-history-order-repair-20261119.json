@@ -1,0 +1,23 @@
+{
+  "run": "R371b",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "verified": true
+  },
+  "prior_head": "dc3142aa2d873e7839cf9c80a140e50dbe702cdd",
+  "prior_browser_workflow": 44622212777,
+  "failed_check": "tests/browser/visual_review.py:189",
+  "cause": "Unmerged R371 sorted full shot list, changed which source shot visual QA cloned for next-shot guidance",
+  "repair": "Stable ID ordering inside equal-instant groups ONLY; preserve position of all other timestamps and malformed legacy rows",
+  "source_paths": [
+    "site/cloud/mapping.js",
+    "tests/issue509-shot-order.test.mjs"
+  ],
+  "ci": "PENDING",
+  "release": "TESTING",
+  "provider_writes": 0,
+  "baseline": "IN_PROGRESS"
+}

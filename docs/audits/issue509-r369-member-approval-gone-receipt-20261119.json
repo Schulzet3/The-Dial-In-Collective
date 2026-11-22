@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R369",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "31972dfeb87624ea5a8b3192c4bc88255e061ccf",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "immutable_content_equals_blob": true
+  },
+  "branches": {
+    "main": "57adc419ed4b106e158435b465971f5986537b41",
+    "release_production": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "applied_migrations": 69,
+    "active_edge_functions": 5,
+    "production_writes": 0,
+    "member_delivery_events": 0,
+    "opted_in_push_subscriptions": 0
+  },
+  "full_sql_review": [
+    {
+      "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+      "chars": 1920,
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9"
+    },
+    {
+      "signature": "public.dic_member_approval_claim_poll()",
+      "chars": 335,
+      "md5": "b94ddc2223993aa7685faf482d3871e4"
+    },
+    {
+      "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+      "chars": 1003,
+      "md5": "e92ba8e17ab274bcab1a564475d16f28"
+    }
+  ],
+  "edge": {
+    "slug": "dic-member-approval-broker",
+    "version": 1,
+    "complete_core_chars": 11751,
+    "deployed_core_equals_development_core": true,
+    "source_git_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a"
+  },
+  "finding": {
+    "class": "DORMANT_REPRODUCIBLE_BEHAVIORAL_RECEIPT_MISMATCH",
+    "description": "Expired 404/410 push endpoint removed but promise fulfilled, event acknowledged as sent even when no push provider accepted; receipt should be skipped while successful alternate channel independent.",
+    "confirmed_member_incident": false,
+    "sql_finish_outcome_contract": [
+      "sent",
+      "skipped",
+      "retry"
+    ]
+  },
+  "fix": {
+    "source_path": "supabase/functions/dic-member-approval-broker/core.mjs",
+    "test_path": "tests/issue2258-member-approval-notices.test.mjs",
+    "no_sql_or_migration_change": true,
+    "behavior": "404/410 => gone/deleted; accepted 2xx => sent; all gone => skipped; any error => retry",
+    "test": "isolated synthetic 404 and 410; no physical provider calls",
+    "ci": "PENDING"
+  },
+  "ci_prior": {
+    "run": 44590982169,
+    "job": 135796596480,
+    "conclusion": "success",
+    "scope": "R368 PR3445 merged Node22 only"
+  },
+  "evidence": {
+    "new_first_time_provider_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "TESTING",
+    "hosted_console_and_genuine_handset_acceptance": "UNVERIFIED"
+  }
+}

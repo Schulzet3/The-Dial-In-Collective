@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R380",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "009fef2109432d799d0796e268a92e247ffbb0c5",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "preflight_git_blob_content_verified": true,
+  "first_preflight_before_provider": true,
+  "development_merge_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+  "pr": 3481,
+  "pr_head_sha": "13744267d3252048c0111ef5df8a812b6c0e7b64",
+  "pr_head_checks": {
+    "success": 7,
+    "skipped": 1,
+    "sql_workflow": 44677474159,
+    "sql_job": 136092631685,
+    "fixture_result": "PASS active style/Current; archived/hidden denied; historical shot remains (rollback)",
+    "node": 44677474078,
+    "approval": 44677474105,
+    "browser": 44677474097
+  },
+  "merged_ci": "NOT_OBSERVED_AT_RECEIPT",
+  "source_release": "TESTING_NOT_READY",
+  "production_writes": 0,
+  "provider_semantic_review": {
+    "object_count": 6,
+    "complete_accessible_definitions_chars": 3079,
+    "full_plpgsql_sql_chars": 2265,
+    "native_c_declaration_chars": 814,
+    "first_time_exposed_definition_characters": 3079,
+    "objects": [
+      {
+        "signature": "pgbouncer.get_auth(p_usename text)",
+        "definition_md5": "ea716a894cc6ade82e6754c47336a307",
+        "source_chars": 502,
+        "range": "characters 1-502 (complete exposed SQL DDL)",
+        "implementation_scope": "PLPGSQL_FULL_SOURCE",
+        "semantic_verdict": "Pooler authentication returns login-role password hash only for nonexpired roles. No API-role execution; database-native caller outside SQL dependencies. Provider-owned; do not drop.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      },
+      {
+        "signature": "vault._crypto_aead_det_decrypt(message bytea, additional bytea, key_id bigint, context bytea, nonce bytea)",
+        "definition_md5": "4c011d33059455a2046b6baaadf95134",
+        "source_chars": 316,
+        "range": "characters 1-316 (complete exposed SQL DDL)",
+        "implementation_scope": "C_DECLARATION_ONLY",
+        "semantic_verdict": "Native symbol decrypt-by-key-id, SQL signature/defaults visible; binary implementation inaccessible, do not credit internal C source.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      },
+      {
+        "signature": "vault._crypto_aead_det_encrypt(message bytea, additional bytea, key_id bigint, context bytea, nonce bytea)",
+        "definition_md5": "c09967f7ad587d50825d20c0669a22b4",
+        "source_chars": 316,
+        "range": "characters 1-316 (complete exposed SQL DDL)",
+        "implementation_scope": "C_DECLARATION_ONLY",
+        "semantic_verdict": "Native encryption symbol, SQL args/defaults visible only; provider engine internals unverified.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      },
+      {
+        "signature": "vault._crypto_aead_det_noncegen()",
+        "definition_md5": "847e31112efd29b794bca8ee8435cb12",
+        "source_chars": 182,
+        "range": "characters 1-182 (complete exposed SQL DDL)",
+        "implementation_scope": "C_DECLARATION_ONLY",
+        "semantic_verdict": "Native nonce-generation symbol declaration complete, C source inaccessible.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      },
+      {
+        "signature": "vault.create_secret(new_secret text, new_name text, new_description text, new_key_id uuid)",
+        "definition_md5": "3cd3211da1236685869a58787071c534",
+        "source_chars": 751,
+        "range": "characters 1-751 (complete exposed SQL DDL)",
+        "implementation_scope": "PLPGSQL_FULL_SOURCE",
+        "semantic_verdict": "Provider-owned two-step insert-and-encrypt with record UUID as associated data, key_id 0, default nonce; optional new_key_id is unused. No invocation; no verified deletion.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      },
+      {
+        "signature": "vault.update_secret(secret_id uuid, new_secret text, new_name text, new_description text, new_key_id uuid)",
+        "definition_md5": "dab0a8cc49e4b57f27bfa5dca12a705c",
+        "source_chars": 1012,
+        "range": "characters 1-1012 (complete exposed SQL DDL)",
+        "implementation_scope": "PLPGSQL_FULL_SOURCE",
+        "semantic_verdict": "Provider-owned encrypted secret update with unchanged secret when NULL, coalesced metadata and updated_at. Unused new_key_id and initialized but unused decrypted_secret variable; suspected unnecessary view lookup, no measured DIC bottleneck; do not change provider-owned function.",
+        "pg_depend_normal_dependents": 0,
+        "public_execute": false
+      }
+    ],
+    "dependencies": "No normal pg_depend function dependents found; platform external consumers cannot be ruled out. anon/authenticated execution denied for each; vault service_role may execute decrypt/create/update as provider-authored.",
+    "verdict": "PROVIDER_OWNED_NO_SAFE_DELETION; UNUSED_PARAMETER_AND_INITIALIZER_CLEANUP_CANDIDATE_NEEDS_UPSTREAM_OWNERSHIP_DEPENDENCY_AND_MEASURED_COST. No secrets or login rows inspected."
+  },
+  "baseline": "IN_PROGRESS",
+  "next_cursor": "Next genuinely unreviewed extensions SQL function declaration (90 extension functions) with compiled-native source UNVERIFIED; then other uncovered native/provider objects or fresh correctness/performance evidence. Recheck exact merged-push CI and #3347 isolation without repeating full suites."
+}
