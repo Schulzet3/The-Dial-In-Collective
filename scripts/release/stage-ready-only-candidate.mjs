@@ -1,5 +1,18 @@
 // Build a READY-only candidate locally; no Netlify/provider or production write.
 // --push publishes the candidate REF for CI only (not an app deployment).
+// Reuse only immutable Git SHA:path and ancestry proofs within ONE staging call.
+// Cache misses are exact absent blobs; failures remain failures, never cached.
+export function memoizeImmutableGitRead(reader){
+ if(typeof reader!=='function')throw Error('Immutable Git reader unavailable');
+ const values=new Map();
+ return (...args)=>{
+  const key=JSON.stringify(args);
+  if(values.has(key))return values.get(key);
+  const result=reader(...args); // Never memoize errors or transport failures.
+  values.set(key,result); // Includes a proved missing blob (null/false).
+  return result;
+ };
+}
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -27,19 +40,19 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  const queue=JSON.parse(queueRaw);
  const publishedSourceSha=queue.published_base?.tested_source_sha;
  if(!SHA.test(publishedSourceSha||''))throw Error('Invalid actual published source in queue');
- const ancestor=(a,b)=>{
+ const ancestor=memoizeImmutableGitRead((a,b)=>{
   try{execFileSync('git',['merge-base','--is-ancestor',a,b],{cwd:repoDir,stdio:'ignore',timeout:15000});return true;}
   catch(e){if(e.status===1)return false;throw Error('Missing Git ancestry evidence');}
- };
+ });
  const changed=(a,b)=>git(['diff','--name-only','--no-renames',a,b]).split(/\r?\n/).filter(Boolean);
- const sourceObjectAt=(ref,path)=>{
+ const sourceObjectAt=memoizeImmutableGitRead((ref,path)=>{
   const lines=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
   if(!lines.length)return null;
   if(lines.length!==1)throw Error('Ambiguous source entry: '+path);
   const m=/^(100644|100755) blob ([0-9a-f]{40})\t(.+)$/.exec(lines[0]);
   if(!m||m[3]!==path)throw Error('Unexpected source object or unsafe mode: '+path);
   return m[1]+':'+m[2];
- };
+ });
  const lastReviewedReadyObject=(owners,path)=>{
   if(!owners.length)throw Error('No selected READY owner for '+path);
   // A co-selected same-file dependency is valid ONLY with one exact
