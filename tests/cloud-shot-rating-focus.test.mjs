@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenAdmissionScopedSource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {SCALES,tasteLabel,tastesComplete,isDialed} from '../site/lib/constants.js';
@@ -85,10 +86,18 @@ test('missing taste score focuses the first incomplete group; no score is presel
  assert.equal(groups.body.attrs['aria-invalid'],undefined);
  assert.equal(focusShotValidationError({isConnected:false},['Rate all five taste scales.'],tastes),false);
 });
-test('Log Shot keeps semantic error announcement and re-enables fields before focusing validation',()=>{
+test('Log Shot keeps semantic error announcement and re-enables fields before focusing validation',(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.ok(main.includes('role=alert id=shot-validation-feedback'));
- assert.ok(main.includes("form.querySelectorAll('button').forEach(b=>b.disabled=false);if(id==='shot'&&shotValidation?.length)U.focusShotValidationError"));
+ assert.ok(main.includes("const controls=[...form.querySelectorAll(id==='shot'?'button,input,select,textarea':'button')]"));
+ assert.ok(main.includes("form.setAttribute?.('aria-busy','true')"));
+ assert.ok(main.includes("form.removeAttribute?.('aria-busy')"));
+ assert.ok(main.includes("controls.forEach(control=>control.disabled=initiallyDisabled.has(control))"));
+ assert.ok(main.includes("if(shotValidation?.length)U.focusShotValidationError"));
  assert.ok(main.includes('target.closest('));
  assert.ok(main.includes("U.acknowledgeShotRating(target.closest('[role=\"group\"]'),sheet.querySelector('#shot-validation-feedback'))"));
 });

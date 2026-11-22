@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BV",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BU-20261121.json",
+  "development_prewrite_sha": "1bdf78ba9fa7c8e5ef07e8738572dbbb04c38f5b",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-237-266-20261121-V13BV.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 237,
+          "last_line": 266,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C76-16-45-20261121-V13BV.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 76,
+          "path": "scripts/backups/capture-recovery-snapshot.sh",
+          "source_blob_sha": "535718d632946293341325adde49849f5c875ba8",
+          "first_line": 16,
+          "last_line": 45,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_2_SEPARATELY_FETCHED_FULL_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C76_EQUALS_PINNED_DEV",
+  "findings": [
+    {
+      "severity": "ARCHIVED_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "lines": [
+        250,
+        264
+      ],
+      "disposition": "HISTORIC_13_AND_4_TEST_SUITE_PASS_NOT_CURRENT"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/backups/capture-recovery-snapshot.sh",
+      "lines": [
+        16,
+        17,
+        18,
+        21,
+        22,
+        25,
+        26,
+        27,
+        36,
+        38,
+        42,
+        45
+      ],
+      "disposition": "READ_ONLY_PRIVATE_BACKUP_SQL_NO_HOSTED_RESTORE_TEST"
+    }
+  ],
+  "baselines": {
+    "frozen_files": 757,
+    "frozen_text_lines": 579961,
+    "pinned_files": 436,
+    "pinned_text_lines": 57913,
+    "provisional_R2": 5451,
+    "provisional_C2": 6462,
+    "older_strict_frozen": 7635,
+    "older_strict_pinned": 9318
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 267
+  },
+  "next_pinned": {
+    "index": 76,
+    "path": "scripts/backups/capture-recovery-snapshot.sh",
+    "line": 46
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE",
+  "limitation": "GitHub contents API returned empty body for CURRENT_STATUS and RELEASE_QUEUE; no current READY or queue assertion"
+}

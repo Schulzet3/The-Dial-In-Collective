@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BZ",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BY-20261122.json",
+  "development_prewrite_sha": "da3d9623642663f8ee0af9ff1752546ddc5417ce",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-357-386-20261122-V13BZ.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 357,
+          "last_line": 386,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C77-33-62-20261122-V13BZ.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 77,
+          "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+          "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+          "first_line": 33,
+          "last_line": 62,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "new_frozen": 30,
+    "new_pinned": 30,
+    "new_total": 60,
+    "previous_validated_without_recredit": 60
+  },
+  "source_blob_parity": "PASS_2_COMPLETE_IMMUTABLE_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "PINNED_EQUALS_LIVE_DEV_BLOB",
+  "findings": [
+    {
+      "track": "pinned",
+      "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+      "line": 35,
+      "severity": "LOW_HYPOTHESIS",
+      "status": "NOT_REPRODUCED",
+      "summary": "Mutable postgres:17-alpine tag and limited PGSSLMODE=require hostname guarantee; no reproduced exploit, #28 owns validation"
+    },
+    {
+      "track": "pinned",
+      "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+      "line": 43,
+      "severity": "INFORMATIONAL",
+      "status": "DOCUMENTED_BY_SOURCE",
+      "summary": "Inventory queried after snapshot can diverge under concurrent writes, not restore evidence"
+    }
+  ],
+  "baselines": {
+    "frozen": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "files": 757,
+      "text_lines": 579961
+    },
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "files": 436,
+      "text_lines": 57913
+    },
+    "provisional_old_frozen": 5451,
+    "provisional_old_pinned": 6462,
+    "strict_older_frozen": 7635,
+    "strict_older_pinned": 9318,
+    "avoid_double_credit": true
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 387
+  },
+  "next_pinned": {
+    "index": 77,
+    "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+    "line": 63
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE"
+}

@@ -8,6 +8,10 @@ from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[2]; SITE=ROOT/'site'
 OUT=Path(os.environ.get('DIC_SCREENSHOT_DIR',str(ROOT/'qa_artifacts/visual-review')));OUT.mkdir(parents=True,exist_ok=True)
 FONT_DIR=Path(os.environ.get('DIC_FONT_DIR','/mnt/data/dic-render-assets'))
+# Routine hosted CI performs every DOM/geometry/accessibility assertion, but
+# skips PNG captures that have no automated pixel-diff gate. Manual visual
+# review retains all screenshots by default (DIC_CAPTURE_VISUAL=1).
+CAPTURE_SCREENSHOTS=os.environ.get('DIC_CAPTURE_VISUAL','1')!='0'
 # Use the existing synthetic CloudApp adapter; its imports are bundled unchanged.
 base=(ROOT/'tests/browser/cloud_owner_qa.py').read_text().split('checks=[]')[0]
 ctx={'__file__':str(ROOT/'tests/browser/cloud_owner_qa.py')};exec(base,ctx)
@@ -43,7 +47,8 @@ def check(condition,label):
  assert condition,label
  checks.append(label)
 def fonts(page):
- page.evaluate('()=>document.fonts.ready');page.wait_for_timeout(60)
+ if CAPTURE_SCREENSHOTS:
+  page.evaluate('()=>document.fonts.ready');page.wait_for_timeout(60)
 def shot(page,name,selector=None):
  fonts(page)
  dest=OUT/(name+'.png')
@@ -52,9 +57,9 @@ def shot(page,name,selector=None):
   height=page.locator('.sheet-content').evaluate('(e)=>e.scrollHeight')+page.locator('.sheet-header').evaluate('(e)=>e.offsetHeight')+130
   page.set_viewport_size({'width':page.viewport_size['width'],'height':max(980,int(height*1.1))})
   page.locator('.sheet-content').evaluate('(e)=>e.scrollTop=0')
-  page.locator(selector).screenshot(path=str(dest),animations='disabled')
- else:page.screenshot(path=str(dest),full_page=True,animations='disabled')
- manifest.append({'name':name,'file':dest.name})
+  if CAPTURE_SCREENSHOTS:page.locator(selector).screenshot(path=str(dest),animations='disabled')
+ elif CAPTURE_SCREENSHOTS:page.screenshot(path=str(dest),full_page=True,animations='disabled')
+ if CAPTURE_SCREENSHOTS:manifest.append({'name':name,'file':dest.name})
 def boot(browser,mode,width=430,height=980,admin=False):
  page=browser.new_page(viewport={'width':width,'height':height},device_scale_factor=2,color_scheme=mode)
  page.set_default_timeout(7000);page.on('pageerror',lambda e:errors.append(str(e)))
@@ -76,9 +81,10 @@ with sync_playwright() as p:
   check(page.locator('.status-badge').first.evaluate('(e)=>getComputedStyle(e).borderTopWidth==="0px"'),mode+': status badge is flat and borderless like original')
   check(page.locator('.workspace-bar h2').evaluate('(e)=>getComputedStyle(e).fontVariantLigatures')=='none',mode+': display ligatures disabled')
   shot(page,'01-home-'+mode)
-  caption_path=OUT/('01b-recipe-metric-captions-'+mode+'.png')
-  page.locator('.coffee-card.is-open .recipe-grid').screenshot(path=str(caption_path),animations='disabled')
-  manifest.append({'name':'01b-recipe-metric-captions-'+mode,'file':caption_path.name})
+  if CAPTURE_SCREENSHOTS:
+   caption_path=OUT/('01b-recipe-metric-captions-'+mode+'.png')
+   page.locator('.coffee-card.is-open .recipe-grid').screenshot(path=str(caption_path),animations='disabled')
+   manifest.append({'name':'01b-recipe-metric-captions-'+mode,'file':caption_path.name})
   page.locator('[data-action=search-toggle]').click();check(page.locator('.search-tools').is_visible(),mode+': Search & Sort expands')
   shot(page,'02-search-'+mode)
   page.locator('[data-action=search-toggle]').click()
@@ -321,5 +327,5 @@ globalThis.supabase={createClient:()=>sdk};
   page.close()
  browser.close()
 check(not errors,'No JavaScript exceptions during visual review')
-report={'passed':len(checks),'checks':checks,'screenshots':manifest,'fonts_loaded_from_files':(FONT_DIR/'Fraunces.ttf').exists(),'scope':'Chromium renders actual edited app/admin code with mocked authentication and synthetic records. Not real nonadmin Auth verification. No production writes or Netlify deploy.'}
+report={'passed':len(checks),'checks':checks,'screenshot_mode':'CAPTURED' if CAPTURE_SCREENSHOTS else 'NOT_APPLICABLE_ROUTINE_CI','screenshots':manifest,'fonts_loaded_from_files':(FONT_DIR/'Fraunces.ttf').exists(),'scope':'Chromium renders actual edited app/admin code with mocked authentication and synthetic records. Not real nonadmin Auth verification. No production writes or Netlify deploy.'}
 (OUT/'review-results.json').write_text(json.dumps(report,indent=2));print(json.dumps({'passed':len(checks),'screenshots':len(manifest),'output':str(OUT)},indent=2))

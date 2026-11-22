@@ -1,0 +1,83 @@
+# Issue #3781 — returning-session background admission (2026-11-22)
+
+DIC_PREFLIGHT_VERIFIED development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Authority: owner explicitly approved showing previously admitted returning member's saved workspace before each fresh server access check, with background revocation; current development c70825e63c862e8388d0e5da6684426bfc35ca84, PREFLIGHT blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; Master Specification and Decision Ledger narrow Locked supersession in THIS commit.
+- Acceptance: same-owner unexpired session and prior server-admitted cached state paints before RPC; preview read-only; no Community/Admin/remote sync/writes; negative gate for first login/expired/no cache/pending/rejected/denied/password recovery; background explicit denial erases private UI/cache preserving owner-bound outbox; cross-account epoch fence, periodic retry, offline unchanged.
+- Changed paths: site/cloud/main.js, site/cloud/client.js, tests/cloud-background-admission.test.mjs, docs/MASTER_SPECIFICATION.md, docs/DECISION_LEDGER.json, this scoped journal.
+- Precommit check: full source fetched from exact SHA, single-anchor transforms, JSON.parse ledger PASS. CI status at commit creation: NOT YET RUN; report exact hosted statuses after PR and merge. This is a HIGH Auth/privacy change; no shortcut to source-bound CI.
+- Release/provider: NOT_APPLICABLE; development only, no Netlify/Supabase writes, production and release branch untouched. Queue status remains subject to strict #3347 frozen-source candidate certification; do NOT label READY before five exact SUCCESS checks.
+- Next action: run focused Node and applicable hosted CI; fix failures; nonforce integrate only after exact PASS, then reconcile issue, queue and current source evidence; NEW owner Publish required for production.
+
+## Nov 22 — PR #3782 initial CI and cheap intake repair
+DIC_PREFLIGHT_VERIFIED development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- First source d5e1eb5f: GitHub cloud-tests job 137259625780 and mobile-browser-qa job 137259626108 FAILED before heavy tests due to missing queue scope site/cloud/client.js; step reported DIC queue HOLD: Untracked app change. Not a test PASS; correct by adding 3781 TESTING item with both runtime paths.
+- Approval coverage also requires inventory of the new current_owner_background_admission_20261122 Locked ledger key. Add sorted key to the matrix in this commit; no authorization or test gate loosened.
+- PR final exact CI after correction PENDING; 3781 remains TESTING until source-bound CI and frozen READY candidate certificate. No production/provider change.
+
+## Nov 22 — HIGH validate shard test-fixture regression fix [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Second PR head `4168fcb264a211f98a4c6118b92b95465a40540a`: queue intake, coverage matrix, build/browser, SQL and security SUCCESS. Actual validate job `137260099463` FAILED 1/2224 due to an old static test requiring constructor text `localOfflineOwner:null,appliedRecommendationValues:{}})` adjacent, whose only disruption was newly inserted `localStartupOwner:null` between them. No legitimate Log Shot behavior regression.
+- Minimal source-only repair moves `this.localStartupOwner=null` to the next constructor line, preserving required initializer and previous exact attribution grouping; no user behavior changed. The failing existing assertion remains intact, not weakened or skipped. Rerun exact hosted checks on new SHA. Other runs on old head cannot be used as PASS on new SHA.
+- No production change or publication; queue remains TESTING.
+
+## November 22 — merge and exact hosted readback [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=088d72957392e07cb98562f3fa5932cd5bac85dd preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Head `cb9a4faf3a6d6a031ccd4ac59f90503b266d23d9` first-party PR validate 45039621942, cloud/mobile 45039621871, approval 45039621920, isolated SQL 45039621979 all completed SUCCESS; unrelated selected/coffee checks also SUCCESS. Frozen603 SKIPPED is not PASS. The earlier queue-intake and constructor-text failures were repaired and remain auditable.
+- GitHub PR #3782 nonforce two-parent [skip netlify] merged `088d72957392e07cb98562f3fa5932cd5bac85dd` with exact review head; ref read back. Exact merged-source validate 45039837781, cloud/mobile 45039837803, approval 45039837783, imported regressions 45039837798 SUCCESS. CI runner optimization changed independently on first parent; merged CI validates combination.
+- App Auth/read-only cached preview and preserved account revocation/offline outbox requirements checked in six new Node regressions and existing account tests. No real device/performance timing or production runtime claimed.
+- Queue updated to tested merged SHA and TESTING; independent #3347 frozen candidate/5 exact native jobs not completed. No new Publish, release ref or provider write; next action safely source-isolate and run candidate checks before READY.
+
+DIC_PREFLIGHT_VERIFIED development_sha=428fb01daaa5b29eb9eb984e4b038eab29432d8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — source freeze ancestry integration [skip netlify]
+- Owner-authorized #3781 background admission release scope; production currently unchanged. Fresh development first parent 428fb01daaa5b29eb9eb984e4b038eab29432d8f; immutable second parent source-freeze 354ddd99ef0ce8f03b2f74544782e4e977201a31 stores exact clean PR #3782 main.js/client.js against independently verified published app source 64d6f50de9562c0442a05e865e9ed33f0cd2925a.
+- Two-parent NONFORCE history integration retains first-parent app runtime/tests/workflows/queue/source tree byte for byte; this journal alone changes on first-parent diff. Older unready espresso/CI/SQL source preserved, no deletion. The freeze serves as a reviewed exact-source pin for later #3347 candidate; NOT a release, not tested frozen batch, not READY.
+- Verified original #3782 tests: PR validate 45039621942, cloud/mobile 45039621871, approval 45039621920, SQL 45039621979 SUCCESS; merged-source validate 45039837781, cloud/mobile 45039837803, approval 45039837783 SUCCESS. New frozen-source exact CI NOT YET RUN, never infer PASS.
+- Next: stage published-base-isolated #3781 candidate with all other unfinished executable/tests/workflows excluded, five exact native checks, strict READY certification, one approved release claim and provider readback. No production/provider writes here.
+
+DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — source-bound prospective #3781 READY selection (preparation branch ONLY) [skip netlify]
+- Owner Nov22 approves only returning-session instant cached read-only paint + background server admission and revocation, with production publishing only after release gates.
+- Preparation first-parent development 5d36f3e612a8bc756cb72eb4184c22fbac149ec4, reviewed clean source 354ddd99ef0ce8f03b2f74544782e4e977201a31; the actual development queue stays TESTING until five exact candidate-SHA native SUCCESS checks and a strict #3347 certificate.
+- This branch records ONE provisional selected READY row to create a read-only frozen candidate; no production/Netlify/Supabase writes, no one-use grant, no claim of ready or deployment.
+- Current production tested 64d6f50de9562c0442a05e865e9ed33f0cd2925a, release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, deploy 6b0284543511466fd75b4573. Unready same-file espresso changes must remain excluded.
+- Reproduce exact approved source/CI and restore all unselected runtime/tests/workflow bytes to last-published Git objects. Full Auth/privacy high-risk checks required.
+
+DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — independent nonpublishing candidate tree evidence runner [skip netlify]
+- Authority: owner #3781 new explicit Deploy after preserving exact #3347 certification. This temporary preparation-branch push workflow runs published main's reviewed stageReadyOnlyCandidate/precertifyReadySource purely in GitHub runner local Git memory, emits exact immutable expected-tree/manifest/journal delta artifact, and pushes NO refs.
+- Source preparation branch first parent 44e4f95573027c5f8b6a4bec69d1811a8e13a688, current live development preflight 5d36f3e612a8bc756cb72eb4184c22fbac149ec4/c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Workflow triggers ONLY on this scoped branch+file path, does NOT grant READY on development, perform provider writes, grant or release. Its result PENDING until actual official hosted run; failures need root-cause repair, not PASS.
+- Exact frozen candidate Git ref must later be created by authenticated connector with independent tree SHA match, five native exact candidate-SHA SUCCESS jobs, and a strict READY certificate before any main release controller. No full/duplicate build in this receipt job.
+
+DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — read-only CI receipt transport fix [skip netlify]
+- First hosted source receipt run 45047886375 official source-receipt job SUCCESS, artifact 14764371422 and expected candidate tree e9b722cc9487ebe4895d0d506cd8b8f04e6fee3d, frozen 47 unready app paths, 259 workflow paths, 173 new unready tests, 20 restored tests and 1 mixed source pin. No push or deploy.
+- GitHub connector artifact downloads are container-local, not directly passed as source to the GitHub tree action. This pure log transport exposes the SAME read-only candidate receipt in 2048-character escaped JSON chunks to the authenticated GitHub job logs for exact connector-side Git tree regeneration and byte SHA verification. No tests/CI weakened or source permission widened. Candidate must use this NEW preparation commit's exact parent/blob/source receipt; old artifact cannot be mislabeled PASS for new source.
+
+DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — source-bound incomplete-candidate QA drift repair [skip netlify]
+- Owner Nov22 explicitly approved one returning-session background admission release. First exact published-base candidate 95ea280fbd50ef83009683271035122ec38b43e4 passed approval 45048216027, cloud+mobile 45048216050, SQL 45048216055 but FAILED validate run 45048216149: full Node 5014, 4984 PASS, 24 FAIL, 6 SKIP. Never claim READY or publish that SHA.
+- Root cause: 8 newer CI optimization, 2 scope and 1 READY certification tests expect workflows explicitly restored to published source; 5 unready Log Shot UI tests expect later #455 code absent from exact selected #3781 main.js; 3 member push tests expect unready Edge broker code absent from candidate; 3 #33 original grower fixtures mistakenly assume current published narrative parser lacks already-published grower logic; source hygiene finds the R374 original603 audit script's hard import of separately excluded PageFly H3 helper.
+- Fix on NONPUBLISHING preparation branch only: each unready expectation emits an explicit NOT_APPLICABLE *test case* only after independent Git SHA-1 blob comparison against last-published restored workflows/Edge code or exact reviewed clean #3781 main.js+client.js; all admitted/cache/revocation/Auth coverage still executes. Published grower parser identity comparison is byte-pinned and the 3 current-behavior assertions remain active. R374 audit helper uses existence-guarded ESM loading; current development with helper present preserves original603 behavior; isolated candidate absent helper safely falls back, without adding unapproved runtime.
+- Changed only test source/helper, nonshipped original603 audit support, this preparation workflow trigger and same-commit journal. NO app/SQL/Auth/Netlify/prod change. New frozen stage and ALL five exact new SHA SUCCESS checks remain mandatory. Count skipped/NOT_APPLICABLE as NOT PASS; this narrower candidate must still PASS all applicable high-risk security and #3781 cases.
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — new immutable QA-repaired selection identity [skip netlify]
+- Original candidate 95ea280f FAILED validate. Its candidate ref remains IMMUTABLE; the reviewed staging tool derives a branch from READY selection, so a revised source with unchanged selection collides with that earlier frozen Git ref.
+- Provisional QUEUE test evidence now records source-bound QA test fixes, altering the new ready selection fingerprint/branch without deleting or overwriting old candidate. This is a nonpublishing source-freeze, not READY development or grant.
+- Previous receipt run 45049056359 SUCCESS for QA source e85780b67, but reported prior branch conflict; refreshed candidate receipt required for this new exact source. Five official GitHub CI jobs must all succeed at NEW immutable candidate SHA; no old successes or skips credited.
+
+DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — verify source-bound candidate staging V5 on official main (nonpublishing) [skip netlify]
+- Operations main nonforce merge 8df03a5b3b558f8704e07207990bcf1c797ebbfe corrected #3347 candidate names to include exact source SHA and V5 contract, preserving immutable previous failed 95ea280f.
+- This one-shot read-only scoped workflow now first executes the focused official main tests/precertify-ready-source.test.mjs in Node22 and stops/fails on any errors; ONLY THEN emits a new deterministic official source receipt from current preparation branch 8ce1decc6b574ef2b8d92981c1d60ccb1f084402. It never pushes source or production refs.
+- Live preflight 663b7857a9d8ab0f2ca797603d340032a9cdcb14/c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; current development READY queue remains unchanged TESTING for #3781. No grant or publication; one new source-bound frozen candidate must pass five native CI jobs before promoting.

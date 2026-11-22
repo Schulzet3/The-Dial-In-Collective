@@ -23,7 +23,7 @@ function fixture(t){
  const base=commit();
  const blob=git('rev-parse',base+':docs/ai/PREFLIGHT.md');
  const row='DIC_PREFLIGHT_VERIFIED development_sha='+base+' preflight_blob_sha='+blob;
- const audit=(sha,parent,paths)=>auditPreflightReceipt({sha,parent,paths,run:args=>git(...args)});
+ const audit=(sha,parent,paths,options={})=>auditPreflightReceipt({sha,parent,paths,run:args=>git(...args),...options});
  return {git,write,commit,before,base,blob,row,audit};
 }
 test('one fresh Git SHA/blob attestation validates a source-changing commit',t=>{
@@ -70,4 +70,38 @@ test('docs-only and historical pre-rollout commits are not retroactive',t=>{
  const f=fixture(t);f.write('docs/notes.md','doc\n');const docs=f.commit();
  assert.equal(f.audit(docs,f.base,['docs/notes.md']).status,'NOT_APPLICABLE_DOCS');
  assert.equal(f.audit(f.base,f.before,['scripts/audit/preflight-receipt.mjs']).status,'NOT_APPLICABLE_BEFORE_ROLLOUT');
+});
+
+test('PR rejects intermediate branch-only receipt before squash breaks merged CI',t=>{
+ const f=fixture(t);
+ f.git('update-ref','refs/remotes/origin/development/backend-foundation',f.base);
+ f.git('checkout','-qb','feature/preflight');
+ f.write('site/main.js','export const version=1;\n');
+ f.write(journal,f.row+'\n');
+ const first=f.commit();
+ assert.equal(f.audit(first,f.base,['site/main.js',journal],{requireDevelopmentAncestor:true}).status,'VERIFIED');
+ f.write('site/main.js','export const version=2;\n');
+ f.write(journal,f.row+'\nDIC_PREFLIGHT_VERIFIED development_sha='+first+
+  ' preflight_blob_sha='+f.blob+'\n');
+ const second=f.commit();
+ assert.equal(f.audit(second,first,['site/main.js',journal]).status,'VERIFIED',
+  'pre-change behavior accepted the branch-only receipt');
+ assert.match(f.audit(second,first,['site/main.js',journal],{requireDevelopmentAncestor:true}).errors.join(' '),
+  /squash merge/);
+});
+
+test('PR accepts independently verified newer live development preflight source',t=>{
+ const f=fixture(t);
+ f.git('checkout','-qb','feature/older-parent');
+ f.git('checkout','development/backend-foundation');
+ f.write('docs/new-development-note.md','concurrent development\n');
+ const newer=f.commit();
+ f.git('update-ref','refs/remotes/origin/development/backend-foundation',newer);
+ f.git('checkout','feature/older-parent');
+ f.write('site/main.js','export const source=2;\n');
+ f.write(journal,'DIC_PREFLIGHT_VERIFIED development_sha='+newer+
+  ' preflight_blob_sha='+f.blob+'\n');
+ const head=f.commit();
+ assert.deepEqual(f.audit(head,f.base,['site/main.js',journal],{requireDevelopmentAncestor:true}),
+  {status:'VERIFIED',validated:1,errors:[]});
 });

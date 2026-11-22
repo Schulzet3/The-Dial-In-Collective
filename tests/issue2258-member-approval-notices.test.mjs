@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {generateKeyPairSync,createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
@@ -29,14 +30,15 @@ function request(op,payload={},auth=true){
 }
 function fixture({status={authenticated:true,emailVerified:true,admitted:false,
  approvalState:'pending',admin:false},secrets={},claims=true,
- pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null}={}){
+ pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null,pushStatus=201,vaultStatus=200}={}){
  const calls=[],receipts=[],sentEmails=[],sentPush=[],rows=[];
  const env=name=>({...defaults,...secrets})[name]??null;
  const fetcher=async(url,opts={})=>{
   calls.push({url,method:opts.method,body:opts.body,headers:opts.headers});
   if(url===PROJECT+'/auth/v1/user')return Response.json({id:MEMBER});
   if(url===PROJECT+'/rest/v1/rpc/dic_session_status')return Response.json(status);
-  if(url.endsWith('/rpc/dic_admin_push_runtime_keys'))return Response.json(keys);
+  if(url.endsWith('/rpc/dic_admin_push_runtime_keys'))return Response.json(
+   vaultStatus===200?keys:{error:'vault_unavailable'},{status:vaultStatus});
   if(url.endsWith('/rpc/dic_member_approval_claim_poll'))return Response.json(claims);
   if(url.endsWith('/rpc/dic_member_approval_claim')){
    const channel=JSON.parse(opts.body).p_channel;
@@ -58,7 +60,7 @@ function fixture({status={authenticated:true,emailVerified:true,admitted:false,
    sentEmails.push({options:opts,body:JSON.parse(opts.body)});
    return Response.json({id:'email-provider-id-123456789'});
   }
-  if(url===ENDPOINT){sentPush.push(opts);return Response.json({}, {status:201});}
+  if(url===ENDPOINT){sentPush.push(opts);return Response.json({}, {status:pushStatus});}
   throw Error('Unexpected external test request: '+url);
  };
  return {broker:createMemberApprovalBroker({env,fetcher,now:()=>1794500000000}),
@@ -130,6 +132,36 @@ test('no subscribed device is skipped rather than generating fabricated push del
  assert.equal(f.sentPush.length,0);
  assert.ok(f.receipts.some(r=>r.p_channel==='push'&&r.p_outcome==='skipped'));
 });
+test('Vault key RPC failure retries only push while independent approval email is sent',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ const f=fixture({vaultStatus:503});
+ const response=await f.broker(request('poll',{},false));
+ assert.equal(response.status,503);
+ assert.equal(f.sentEmails.length,1);
+ assert.equal(f.sentPush.length,0);
+ assert.deepEqual(f.receipts.map(r=>[r.p_channel,r.p_outcome]).sort(),
+  [['email','sent'],['push','retry']]);
+ assert.equal(f.calls.filter(c=>c.url?.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
+});
+
+test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ const f=fixture({vaultStatus:503,pushItems:[]});
+ const response=await f.broker(request('poll',{},false));
+ assert.equal(response.status,200);
+ assert.deepEqual(await response.json(),{ok:true,handled:2});
+ assert.equal(f.calls.some(c=>c.url?.endsWith('/rpc/dic_admin_push_runtime_keys')),false);
+ assert.equal(f.sentEmails.length,1);
+ assert.deepEqual(f.receipts.map(r=>[r.p_channel,r.p_outcome]).sort(),
+  [['email','sent'],['push','skipped']]);
+});
+
 test('failed provider remains retryable and caller cannot select an email recipient/event',async()=>{
  const f=fixture({pushItems:[{hash:'not-a-hash',endpoint:ENDPOINT}]});
  assert.equal((await f.broker(request('poll',{recipient:'victim@fixture.invalid'},false))).status,400);
@@ -142,6 +174,24 @@ test('duplicate cron claim sends no email or push',async()=>{
  const res=await f.broker(request('poll',{},false));
  assert.deepEqual(await res.json(),{ok:true,handled:0});
  assert.equal(f.sentEmails.length+f.sentPush.length,0);
+});
+
+test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ for(const pushStatus of [404,410]){
+  const f=fixture({pushStatus});
+  const res=await f.broker(request('poll',{},false));
+  assert.equal(res.status,200);
+  assert.deepEqual(await res.json(),{ok:true,handled:2});
+  assert.equal(f.sentPush.length,1);
+  assert.equal(f.rows.filter(x=>x.method==='DELETE').length,1);
+  assert.equal(f.rows.some(x=>x.method==='PATCH'),false);
+  assert.deepEqual(f.receipts.map(x=>[x.p_channel,x.p_outcome]).sort(),
+   [['email','sent'],['push','skipped']]);
+ }
 });
 
 test('schema: member endpoints are service-only and only real verified Admin approval creates both receipts',()=>{

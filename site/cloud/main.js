@@ -73,7 +73,7 @@ function clearOfflineDenial(owner){
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null,appliedRecommendationValues:{}});
-  this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
+  this.localStartupOwner=null;this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.editCoffeeDifferences=[];
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -98,7 +98,7 @@ class CloudApp {
   if(owner!==this.identity?.id||epoch!==this.epoch)throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');
  }
  resetAccount(){
-  this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
+  this.epoch++;this.status=null;this.localOfflineOwner=null;this.localStartupOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
@@ -180,8 +180,29 @@ class CloudApp {
   reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
   this.client.onAuthChange((event,user)=>this.authChanged(event,user));
   const epoch=this.epoch;
-  try{const identity=globalThis.navigator?.onLine===false?await this.client.offlineIdentity?.():await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
-  if(this.identity)await this.connect();else this.render();
+  let localSession=null;
+  try{
+   localSession=globalThis.navigator?.onLine===false
+    ?await this.client.offlineIdentity?.():await this.client.sessionIdentity?.();
+   if(epoch===this.epoch&&localSession&&(!this.identity||this.identity.id===localSession.id))
+    this.identity=localSession;
+  }catch{/* Missing local session is a normal signed-out state. */}
+  if(this.identity){
+   // Previously admitted, same-owner local data can paint without a network roundtrip.
+   // Server admission is still checked in the background before ANY cloud operation.
+   if(localSession?.id===this.identity.id&&globalThis.navigator?.onLine!==false)
+    await this.openCachedWhileChecking(this.identity,this.epoch);
+   this.connect().catch(err=>this.error(err));
+  }else{
+   this.render();
+   // A session refresh may still be pending. Recover identity asynchronously,
+   // after displaying the public sign-in view; never block the initial paint.
+   if(globalThis.navigator?.onLine!==false)this.client.identity?.().then(identity=>{
+    if(epoch!==this.epoch||this.identity||!identity)return;
+    this.identity=identity;this.render();
+    this.connect().catch(err=>this.error(err));
+   }).catch(()=>{});
+  }
   // A returning connection must recheck beta admission before flushing locally queued shots.
    addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
    addEventListener('offline',()=>{if(!this.identity)return;this.syncState='offline';this.adminAttentionCount=null;if(this.view==='community')this.view='coffees';this.render();});
@@ -190,7 +211,34 @@ class CloudApp {
   // unnecessary 17-dataset reads and Community review requests during idle use.
   // Pending accounts recheck admission only; no private workspace reads.
   this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&!this.busy&&
-   (this.status?.admitted||this.status?.approvalState==='pending'))this.pollOnce().catch(()=>{});},30000);
+   (this.status?.admitted||this.status?.approvalState==='pending'||this.localStartupOwner===this.identity.id))
+   this.pollOnce().catch(()=>{});},30000);
+ }
+ // Owner-approved returning-session path: preview previously server-admitted,
+ // same-owner saved content while the NEW server admission check is in flight.
+ // No status/admin role is inferred, and editing/sync remain blocked until admitted.
+ async openCachedWhileChecking(user,epoch=this.epoch){
+  if(!user||epoch!==this.epoch||this.identity?.id!==user.id
+    ||this.status||this.recovery||globalThis.navigator?.onLine===false
+    ||this.deniedOfflineOwners.has(user.id)||previouslyDeniedOffline(user.id)
+    ||awaitingApproval(user.id))return false;
+  let cache,pending;
+  try{[cache,pending]=await this.inSession(()=>Promise.all([
+   this.store.readCache(user.id),this.store.list(user.id)
+  ]));}catch{return false;}
+  if(epoch!==this.epoch||this.identity?.id!==user.id||this.status||this.recovery
+    ||globalThis.navigator?.onLine===false||previouslyDeniedOffline(user.id)
+    ||this.deniedOfflineOwners.has(user.id)||awaitingApproval(user.id)
+    ||cache?.owner!==user.id||!cache.snapshot)return false;
+  const sameOwnerPending=Array.isArray(pending)?pending:[];
+  let state;
+  try{state=applyPending(hydrate(cache.snapshot),sameOwnerPending);}catch{return false;}
+  this.localStartupOwner=user.id;this.raw=cache.snapshot;
+  this.pending=sameOwnerPending;this.state=state;
+  this.state.communityEvidence=this.recommendationEvidence;
+  if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)
+   this.expanded.add(M.workspace(this.state).currentCoffeeId);
+  this.syncState='connecting';this.render();return true;
  }
  async pollOnce(){
   const user=this.identity,epoch=this.epoch;
@@ -202,7 +250,7 @@ class CloudApp {
     const status=await this.client.status();
     if(epoch!==this.epoch||user.id!==this.identity?.id)return;
     if(!status?.admitted){
-     if(this.status?.admitted)await this.denyAccess(user,epoch,status);
+     if(this.status?.admitted||this.localStartupOwner===user.id)await this.denyAccess(user,epoch,status);
      else if(this.status?.approvalState!==status?.approvalState||this.status?.emailVerified!==status?.emailVerified){this.status=status;this.render();}
      return;
     }
@@ -296,7 +344,10 @@ class CloudApp {
   const user=this.identity,epoch=this.epoch;if(!user)return;
   if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
   const wasPending=this.status?.approvalState==='pending'&&this.status?.admitted===false;
-  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;this.localOfflineOwner=null;
+  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   const previewCache=this.localStartupOwner===user.id&&this.raw
+    ?[{owner:user.id,snapshot:this.raw},this.pending]:null;
+   this.status=status;this.localStartupOwner=null;this.localOfflineOwner=null;
    if(!status.admitted){
     await this.denyAccess(user,epoch,status);return;
    }
@@ -307,9 +358,9 @@ class CloudApp {
    // This cache is never an authorization token or shared across accounts.
    // A damaged/unavailable local cache must not prevent an admitted
    // member from reaching the authoritative cloud read.
-   let startupCache=null;
+   let startupCache=previewCache;
    try{
-    startupCache=await this.inSession(()=>Promise.all([
+    if(!startupCache)startupCache=await this.inSession(()=>Promise.all([
      this.store.readCache(user.id),this.store.list(user.id)
     ]));
    }catch(err){
@@ -450,7 +501,8 @@ class CloudApp {
   const focusId=focused?.dataset?.id??null;
   const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
-  this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
+  this.theme();const previewing=this.identity&&this.localStartupOwner===this.identity.id&&!this.status&&globalThis.navigator?.onLine!==false;
+  const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false)||previewing)&&!this.recovery;
   const approvalBanner=connected&&this.accountApprovalNotice?
    `<section class="approval-confirmed" role="status" aria-live="polite" aria-label="Account approval confirmed"><div><h2>Account Approved</h2><p>Your account has been confirmed. Welcome to The Dial In Collective!</p></div>${button('Dismiss','dismiss-approval-confirmation','','ghost compact')}</section>`:'';
   root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20)+this.adminAttentionBadge(),'settings','aria-label="Settings'+(this.adminAttentionBadge()?', '+this.adminAttentionCount+' administrator items require attention':'')+'"','icon-button settings-attention-trigger'):''}</div></header><main class=shell>${approvalBanner}${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time. <span aria-hidden=true>·</span> <a class="privacy-link" href="/privacy/">Privacy</a></footer></main>`;
@@ -505,9 +557,10 @@ class CloudApp {
   // History offers it as a selectable Current recipe; one lookup per render.
   const familyLookup=new Set(s.families.map(f=>[f.id,f.coffeeId,f.style].join('\u0000')));
   const offlineNow=globalThis.navigator?.onLine===false;
-  const offlineOnly=offlineNow||(!this.status?.admitted&&this.localOfflineOwner===this.identity?.id);
-  const syncLabel=offlineNow?(this.pending.length?`Offline · ${this.pending.length} Pending`:'Offline'):this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
-  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${e(syncLabel)}`,'sync',`data-sync-state="${this.pending.length?'pending':offlineNow?'offline':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${offlineOnly?'<p class="helper" role="status">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
+  const previewing=this.localStartupOwner===this.identity?.id&&!this.status&&!offlineNow;
+  const offlineOnly=offlineNow||previewing||(!this.status?.admitted&&this.localOfflineOwner===this.identity?.id);
+  const syncLabel=previewing?'Checking access':offlineNow?(this.pending.length?`Offline · ${this.pending.length} Pending`:'Offline'):this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
+  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${e(syncLabel)}`,'sync',`data-sync-state="${this.pending.length?'pending':offlineNow?'offline':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${previewing?'<p class="helper" role="status">Your saved workspace is open. Account access is checking in the background; changes will be available when confirmed.</p>':offlineOnly?'<p class="helper" role="status">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=M.orderedShotHistory(s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden));const last=U.lastRecipeContextShot(shots,c.id,rec,v);const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
     // A logged shot (even a historically hidden one) ends the starting-style guidance.
     // No one-time local or server claim: reopen/reload keeps the guide until then.
@@ -887,6 +940,13 @@ class CloudApp {
   }
  }
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
+  // Online optimistic cache viewing is read-only until server admission returns.
+  // Local navigation, settings and sign-out remain available.
+  if(this.localStartupOwner===this.identity?.id&&!this.status?.admitted&&
+   !['home','expand','shot-expand','shot-toggle-all','search-toggle','settings','signout','close'].includes(a)){
+   this.notice='Checking account access in the background. Editing will be available after verification.';
+   this.render();return;
+  }
   try{
    if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
    if(a==='close'){sheet.close();return;}

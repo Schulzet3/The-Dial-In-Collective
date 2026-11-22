@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BX",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BW-20261122.json",
+  "development_prewrite_sha": "d8d9331f466efef269fea61c4aa01b6c363d2343",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-297-326-20261122-V13BX.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 297,
+          "last_line": 326,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C76-76-103-C77-1-2-20261122-V13BX.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 76,
+          "path": "scripts/backups/capture-recovery-snapshot.sh",
+          "source_blob_sha": "535718d632946293341325adde49849f5c875ba8",
+          "first_line": 76,
+          "last_line": 103,
+          "line_count": 28
+        },
+        {
+          "manifest_index_1_based": 77,
+          "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+          "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+          "first_line": 1,
+          "last_line": 2,
+          "line_count": 2
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_3_COMPLETE_IMMUTABLE_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "CHECK_AT_READBACK",
+  "findings": [
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "lines": [
+        306,
+        320
+      ],
+      "disposition": "ARCHIVED_NAMED_CASES_NOT_CURRENT_PASS"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/backups/capture-recovery-snapshot.sh",
+      "lines": [
+        76,
+        93,
+        99,
+        103
+      ],
+      "disposition": "GUARDED_SNAPSHOT_FAILURE_AND_COMPLETION_MARKER_NO_HOSTED_TEST"
+    }
+  ],
+  "baselines": {
+    "frozen_files": 757,
+    "frozen_text_lines": 579961,
+    "pinned_files": 436,
+    "pinned_text_lines": 57913,
+    "provisional_R2": 5451,
+    "provisional_C2": 6462,
+    "older_strict_frozen": 7635,
+    "older_strict_pinned": 9318
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 327
+  },
+  "next_pinned": {
+    "index": 77,
+    "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+    "line": 3
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE"
+}

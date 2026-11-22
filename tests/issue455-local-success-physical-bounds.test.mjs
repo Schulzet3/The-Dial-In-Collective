@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenAdmissionScopedSource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {hasLocalSuccess} from '../site/lib/model.js';
@@ -58,9 +59,16 @@ test('R119 stale flags, incomplete ratings and unrelated records still cannot ce
  assert.equal(hasLocalSuccess(unrelated,'coffee','Turbo'),true);
 });
 
-test('R119 the live Coffee overview uses the measured-success guard for status and feedback',()=>{
+test('R119 the live Coffee overview uses the measured-success guard for status and feedback',(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const htmlSource=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.match(htmlSource,/const success=M\.hasLocalSuccess\(s,c\.id,p\.style\)/);
- assert.match(htmlSource,/success\?'Your Dialed In Window':'Starting Recommendation'/);
+ assert.match(htmlSource,/success&&!rec\.basketCompatibilityNote\?'Your Dialed In Window':'Starting Recommendation'/,
+  'the existing measured-success guard must remain gated by current basket eligibility');
+ assert.match(htmlSource,/rec\.inapplicableFamilyWithCurrentFeedback\?\(rec\.diagnosticOnly\?'Shot Feedback':'Next Shot Recommendation'\)/,
+  'a current-basket measured adjustment must not be mislabeled as an established family');
  assert.match(htmlSource,/last&&\(!success\|\|this\.justSavedId===last\.id\)/);
 });

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders} from '../scripts/release/ready-evidence-gate.mjs';
+import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders,verifyCertifiedBatchEvidence} from '../scripts/release/ready-evidence-gate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const item={id:'DIC-Q-1938-test',issue:1938,title:'Toggle',owner_source:'Owner',state:'READY',
  merged_source_sha:A,scope_paths:['site/admin/push.js'],
@@ -96,4 +96,34 @@ test('GitHub CI HTTP 401/404 deny immediately, and even HTTP 200 failed evidence
  });
  const result=await verifyReadyItems({...deps,items:[{...item,ci_runs:[11]}],loadRun:readers.loadRun});
  assert.equal(result.ready,false,'a successful HTTP response is NOT a successful CI run');
+});
+
+test('#3347 immutable READY certificate is checked by full five-job source/push verifier, not old mixed-development PR comparison',async()=>{
+ const D='d'.repeat(40),branch='release-candidates/ready3347-12345678901234567890';
+ const {readySelectionFingerprint,READY_CERT_KIND}=await import('../scripts/release/ready-promotion-gate.mjs');
+ const certified={schema_version:1,kind:READY_CERT_KIND,candidate_branch:branch,candidate_sha:C,
+  run_ids:[11,12,13],ready_selection_sha256:readySelectionFingerprint(queue)};
+ const manifest={schema_version:1,kind:'DIC-READY-ONLY-SOURCE-1',
+  candidate_branch:branch,development_source_sha:A,published_source_sha:B,
+  selected_ready_item_ids:[item.id],publication_authorized:false,
+  risk_classification:{tier:'high',checks:names,builds:1}};
+ const proof={queue,certificate:certified,developmentSha:D,
+  loadCandidateRef:async()=>({ref:'refs/heads/'+branch,object:{sha:C}}),
+  loadCommit:async()=>({parents:[{sha:A}]}),
+  loadCandidateFile:async(_sha,p)=>p.endsWith('RELEASE_CANDIDATE.json')?manifest:queue,
+  loadRun:async id=>({id,head_sha:C,head_branch:branch,event:'push',status:'completed',conclusion:'success'}),
+  loadChecks:async()=>checks.map(x=>({...x,head_sha:C})),
+  isAncestor:()=>true};
+ const good=await verifyCertifiedBatchEvidence(proof);
+ assert.equal(good.status,'BATCH_RELEASE_READY',good.errors?.join(' | '));
+ for(const changed of [
+  {certificate:undefined},
+  {loadCandidateRef:async()=>({ref:'refs/heads/'+branch,object:{sha:A}})},
+  {loadRun:async id=>({id,head_sha:C,head_branch:branch,event:'push',status:'completed',conclusion:'failure'})},
+  {loadChecks:async()=>checks.map(x=>({...x,head_sha:C,conclusion:x.name==='sql'?'skipped':'success'}))},
+  {isAncestor:()=>false}
+ ]){
+  const result=await verifyCertifiedBatchEvidence({...proof,...changed});
+  assert.equal(result.ready,false,JSON.stringify(changed));
+ }
 });

@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R454",
+  "date_utc": "2026-11-22",
+  "preflight": {
+    "development_sha": "f54f4e72dd4e792792db378f638a679773421ee4",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider": "LIVE PostgreSQL 17.11.0.003",
+  "route": "pg_catalog.pg_sequence full canonical catalog fields with ownership metadata",
+  "count": 8,
+  "total_catalog_chars": 1208,
+  "limitations": "No sequence live value or member data accessed. This reviews pg_sequence settings only; pg_class metadata had separate prior coverage; ownership checked via pg_depend. DDL-migration source parity not verified here.",
+  "verdict": "8/8 sequences have valid table/column ownership, bigint increasing noncycling defaults, no orphan or proven dead sequence.",
+  "records": [
+    {
+      "rank": 1,
+      "identity": "auth.refresh_tokens_id_seq",
+      "oid": 16510,
+      "config_type": "bigint",
+      "owner": "auth.refresh_tokens.id",
+      "ownership_kind": "SERIAL_AUTO",
+      "source_md5": "405e4b7b072f4a5251330afd5d9bd5cd",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "16510",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 2,
+      "identity": "private.admin_access_events_id_seq",
+      "oid": 20063,
+      "config_type": "bigint",
+      "owner": "private.admin_access_events.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "323eb8044f15a7edca65c5dd821e48e8",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "20063",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 3,
+      "identity": "private.admin_content_edits_id_seq",
+      "oid": 20157,
+      "config_type": "bigint",
+      "owner": "private.admin_content_edits.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "02ededed108b8c79bf144eb057366682",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "20157",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 4,
+      "identity": "private.dic_admin_delete_receipts_id_seq",
+      "oid": 20248,
+      "config_type": "bigint",
+      "owner": "private.dic_admin_delete_receipts.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "8478b5cb07999ab14b741741172a44f1",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "20248",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 5,
+      "identity": "private.dic_coffee_audit_id_seq",
+      "oid": 19811,
+      "config_type": "bigint",
+      "owner": "private.dic_coffee_audit.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "b4dcd040921cff66dc392b2cfd32ddd8",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "19811",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 6,
+      "identity": "private.dic_signup_review_events_id_seq",
+      "oid": 20457,
+      "config_type": "bigint",
+      "owner": "private.dic_signup_review_events.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "d04f4b82f5a1c2f22ea4bfaf800dd99e",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "20457",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 7,
+      "identity": "private.shot_audit_id_seq",
+      "oid": 18454,
+      "config_type": "bigint",
+      "owner": "private.shot_audit.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "c0dd7ee4f023910c02fe5ead4c9720ab",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "18454",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    },
+    {
+      "rank": 8,
+      "identity": "realtime.subscription_id_seq",
+      "oid": 17526,
+      "config_type": "bigint",
+      "owner": "realtime.subscription.id",
+      "ownership_kind": "IDENTITY_INTERNAL",
+      "source_md5": "fee5cbd38a0fd8b224b29a26c5b0fda2",
+      "source_text_characters": 151,
+      "reviewed_range": "1-151",
+      "full_sequence_catalog": {
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqrelid": "17526",
+        "seqstart": 1,
+        "seqtypid": "20",
+        "seqincrement": 1
+      },
+      "semantic_verdict": "RETAIN_ACTIVE_IDENTITY_OR_SERIAL_SEQUENCE",
+      "reason": "Owned by non-dropped column; sequence values were not queried."
+    }
+  ]
+}

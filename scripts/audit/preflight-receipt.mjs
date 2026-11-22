@@ -7,7 +7,7 @@ const central='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 const scoped=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+(?:-N[1-9][0-9]*)?|release-[0-9]{8}|release-ready-batch|release-queue-prep-20261102)\.md$/;
 const source=/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/;
 const receipt=/^DIC_PREFLIGHT_VERIFIED development_sha=([a-f0-9]{40}) preflight_blob_sha=([a-f0-9]{40})$/;
-export function auditPreflightReceipt({sha,parent,paths,run}){
+export function auditPreflightReceipt({sha,parent,paths,run,requireDevelopmentAncestor=false}){
  const errors=[],changed=Array.isArray(paths)?paths:[];
  if(!changed.some(p=>source.test(p)))return {status:'NOT_APPLICABLE_DOCS',validated:0,errors};
  if(!parent)return {status:'NOT_APPLICABLE_ROOT',validated:0,errors};
@@ -54,13 +54,23 @@ export function auditPreflightReceipt({sha,parent,paths,run}){
      }
     }
    }catch(error){errors.push('preflight Git source/blob unavailable: '+String(error.message));continue;}
-   // Require cited development SHA in the first-parent source history or the
-   // live fetched development ref, never a fabricated/unrelated Git object.
+   // Pull requests are normally squash-merged. A PR-only intermediate SHA
+   // disappears from development ancestry after squash, breaking merged CI.
+   // Catch that at PR time: the receipt must cite the fetched development
+   // ref (which may advance beyond the feature branch parent).
+   const refs=requireDevelopmentAncestor
+    ? ['refs/remotes/origin/development/backend-foundation']
+    : [sha,'refs/remotes/origin/development/backend-foundation'];
    let connected=false;
-   for(const ref of [sha,'refs/remotes/origin/development/backend-foundation']){
+   for(const ref of refs){
     try{run(['merge-base','--is-ancestor',devSha,ref]);connected=true;break;}catch{}
    }
-   if(!connected){errors.push('cited preflight SHA is not in verified development/code ancestry');continue;}
+   if(!connected){
+    errors.push(requireDevelopmentAncestor
+     ? 'PR-only preflight SHA would be lost by squash merge; cite live development SHA'
+     : 'cited preflight SHA is not in verified development/code ancestry');
+    continue;
+   }
    validated++;
   }
  }

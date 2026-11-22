@@ -1,5 +1,8 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
+import {setImmediate} from 'node:timers';
+import {readFileSync} from 'node:fs';
 import {readySelectionFingerprint,verifyReadyPromotion,READY_CERT_KIND,
  gitReadyAncestry,githubReadyPromotionReaders} from '../scripts/release/ready-promotion-gate.mjs';
 
@@ -103,4 +106,52 @@ test('Git ancestry and candidate read transport failures deny; never infer pass'
  assert.throws(()=>gitReadyAncestry()(A,'invalid'),/Unverified/);
  const api=githubReadyPromotionReaders('test',{request:async()=>({ok:false,status:403})});
  await assert.rejects(()=>api.loadCandidateRef(branch),/HTTP 403/);
+});
+
+// #3667: collapse serial GitHub reads without suppressing any independent gate.
+test('frozen READY verification overlaps independent source and five-job evidence reads',async()=>{
+ const active={source:0,ci:0},peaks={source:0,ci:0};
+ const observed=(kind,reader)=>async (...args)=>{
+  active[kind]++;
+  peaks[kind]=Math.max(peaks[kind],active[kind]);
+  try{
+   await new Promise(resolve=>setImmediate(resolve));
+   return await reader(...args);
+  }finally{active[kind]--;}
+ };
+ const result=await verifyReadyPromotion({...fixtures,
+  loadCandidateRef:observed('source',fixtures.loadCandidateRef),
+  loadCommit:observed('source',fixtures.loadCommit),
+  loadCandidateFile:observed('source',fixtures.loadCandidateFile),
+  loadRun:observed('ci',fixtures.loadRun),
+  loadChecks:observed('ci',fixtures.loadChecks)
+ });
+ assert.equal(result.ready,true,JSON.stringify(result.errors));
+ assert.equal(peaks.source,4,'ref, commit, frozen queue and manifest must overlap');
+ assert.equal(peaks.ci,ids.length+1,'all cited runs and native checks must overlap');
+ const denied=await verifyReadyPromotion({...fixtures,
+  loadCandidateFile:async (...args)=>{
+   if(args[1]==='docs/RELEASE_QUEUE.json')throw Error('read-only source temporarily unavailable');
+   return fixtures.loadCandidateFile(...args);
+  }
+ });
+ assert.equal(denied.ready,false);
+ assert.match(denied.errors.join(' '),/source temporarily unavailable/);
+});
+
+test('approval workflow runs exactly one live immutable READY verifier with negative regression',(t)=>{
+ if(frozenExcludedReadySource(['.github/workflows/approval-continuity.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ const workflow=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ const evidence=readFileSync(new URL('../scripts/release/ready-evidence-gate.mjs',import.meta.url),'utf8');
+ assert.equal(workflow.split('node scripts/release/ready-evidence-gate.mjs').length-1,1,
+  'READY certification must be a single source-bound live read');
+ assert.equal(workflow.includes('node scripts/release/ready-promotion-gate.mjs'),false,
+  'second CLI duplicated identical source/run/status readback');
+ assert.equal(workflow.includes('node --test tests/ready-promotion-gate.test.mjs'),true,
+  'retain negative fail-closed unit acceptance');
+ assert.equal(evidence.includes('return verifyReadyPromotion(args)'),true,
+  'surviving live gate must delegate to full immutable five-job verifier');
 });

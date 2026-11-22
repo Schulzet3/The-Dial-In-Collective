@@ -1,0 +1,43 @@
+{
+  "schema": "dic.issue509.append-only-erratum.v1",
+  "date_utc": "2026-11-22",
+  "audit_run": "R448d",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "728f475747cc2a0822457081f37f0d790f88ae98",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "corrected_field": "provider.sort",
+  "original_mistyped_value": "classid,objid,objsubid,refclassid,refobj,refobjsubid,deptype",
+  "verified_actual_sql_order": "classid,objid,objsubid,refclassid,refobjid,refobjsubid,deptype",
+  "reason": "The `refobj` token was a documentation metadata typo. Executed SQL always used `refobjid`; all per-edge literal fields include refobjid and rank order is unchanged. Original append-only ledgers preserved.",
+  "affected": [
+    {
+      "path": "docs/audits/issue509-r448a-pg-depend-ranks4001-4500-20261122.json",
+      "blob_sha": "37540fe498762f1ea9b64f631af72620ae51a835"
+    },
+    {
+      "path": "docs/audits/issue509-r448b-pg-depend-ranks4501-5000-20261122.json",
+      "blob_sha": "0dcbc608de4ac9915b62fccdeb5a2e4c19aa6e05"
+    },
+    {
+      "path": "docs/audits/issue509-r448c-pg-depend-ranks5001-5414-20261122.json",
+      "blob_sha": "afb0ef89a713d1cfe6a430c693588837b3c3f839"
+    }
+  ],
+  "dependency_coverage": {
+    "reviewed": 5414,
+    "total": 5414,
+    "credibility": "Complete pg_depend edge-source metadata only, not entire Supabase provider baseline."
+  },
+  "next_independent_unreviewed_route": {
+    "catalog": "pg_shdepend",
+    "total_inventory": 1002,
+    "first_rank": 1,
+    "sort": "dbid,classid,objid,objsubid,refclassid,refobjid,deptype",
+    "first_edge": "pg_database OID 5 database postgres -> pg_authid OID 16388 role postgres; deptype o",
+    "source_char": 1
+  },
+  "production_changed": false,
+  "release_changed": false
+}

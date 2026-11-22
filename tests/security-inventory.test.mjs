@@ -48,6 +48,31 @@ test('records redacted paths and line numbers, not embedded secret values',()=>{
  assert.ok(!JSON.stringify(result.candidates).includes(secret));
  assert.equal(result.totals.files,1);
 });
+test('fast screening preserves all original rule detections and exact line positions',()=>{
+ const examples=[
+  ['private_key','-----BEGIN '+'RSA PRIVATE KEY-----'],
+  ['pgp_private_key','-----BEGIN '+'PGP PRIVATE KEY BLOCK-----'],
+  ['age_private_identity','AGE-SECRET-KEY-1'+'A'.repeat(35)],
+  ['github_token','gho_'+'B'.repeat(40)],
+  ['github_fine_grained_token','github_pat_'+'C'.repeat(65)],
+  ['supabase_secret','sb_secret_'+'D'.repeat(25)],
+  ['aws_access_key','ASIA'+'E'.repeat(16)],
+  ['resend_api_key','re_'+'F'.repeat(36)]
+ ];
+ const rows=['ordinary source without credentials'];
+ for(const [,value] of examples)rows.push('nonsecret line',value);
+ rows.push('ordinary trailing line');
+ const result=inspectTrackedSource({paths:['fixtures/input.txt'],
+  read:()=>Buffer.from(rows.join('\n')+'\n'),stat:()=>({isSymbolicLink:()=>false})});
+ assert.deepEqual(result.candidates,examples.map(([rule],i)=>({path:'fixtures/input.txt',line:i*2+3,rule})));
+ assert.equal(result.totals.text_lines,rows.length);
+ assert.equal(result.files[0].sha256,createHash('sha256').update(rows.join('\n')+'\n').digest('hex'));
+ const plain=inspectTrackedSource({paths:['fixtures/plain.txt'],
+  read:()=>Buffer.from('harmless document\n'.repeat(10000)),stat:()=>({isSymbolicLink:()=>false})});
+ assert.deepEqual(plain.candidates,[]);
+ assert.equal(plain.totals.text_lines,10000);
+});
+
 test('CLI screens tracked files and reports rule/line but never raw credential bytes',()=>{
  const temp=mkdtempSync(join(tmpdir(),'dic-secret-guard-'));
  try{

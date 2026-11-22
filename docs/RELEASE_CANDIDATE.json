@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "DIC-READY-ONLY-SOURCE-1",
-  "candidate_branch": "release-candidates/ready3347-ccbe415d12c818950ca3",
-  "development_source_sha": "ebf7512ef6c0fcf05386d652799aa66f89571a63",
-  "published_source_sha": "7a5b27d342c6c49bd75e8d1e4cb164a76bd2c174",
+  "candidate_branch": "release-candidates/ready3347-e464006d27b2fd691685",
+  "development_source_sha": "4b9e0d3a770a27fcf4b7fff15af7191d115ca8a0",
+  "published_source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
   "selected_ready_item_ids": [
-    "DIC-Q-455-startup-recovery-deferred-worker"
+    "DIC-Q-3781-returning-session-background-admission"
   ],
   "risk_classification": {
     "tier": "low",
@@ -36,6 +36,7 @@
     "src/server/coffee-fact-compatibility.mjs",
     "src/server/coffee-flavor-evidence.mjs",
     "src/server/coffee-identity-evidence.mjs",
+    "src/server/coffee-narrative-evidence.mjs",
     "src/server/coffee-page-metadata.mjs",
     "src/server/coffee-pagefly-selected-h3.mjs",
     "src/server/coffee-product-scope.mjs",
@@ -78,7 +79,7 @@
     ".github/workflows/approval-continuity.yml",
     ".github/workflows/cloud-beta-ci.yml",
     ".github/workflows/cloud-regression.yml",
-    ".github/workflows/dic-startup-ready-provisional-receipt.yml",
+    ".github/workflows/isolated-sql-regression.yml",
     ".github/workflows/issue33-huckleberry-shop-products.yml",
     ".github/workflows/issue33-r100-501-504.yml",
     ".github/workflows/issue33-r101-513-516-528.yml",
@@ -307,6 +308,9 @@
     ".github/workflows/issue33-r394-dakota-source.yml",
     ".github/workflows/issue33-r395-darkcanyon-source.yml",
     ".github/workflows/issue33-r396-daylily-source.yml",
+    ".github/workflows/issue33-r407-original119-123.yml",
+    ".github/workflows/issue33-r411-foster-original124-125.yml",
+    ".github/workflows/issue33-r412-original126-127.yml",
     ".github/workflows/issue33-r78-26-bleu.yml",
     ".github/workflows/issue33-r79-72-78.yml",
     ".github/workflows/issue33-r80-118-127.yml",
@@ -328,14 +332,15 @@
     ".github/workflows/issue33-r98-gallop-encanto.yml",
     ".github/workflows/issue33-r99-468-471.yml",
     ".github/workflows/issue33-shared-parser-regressions.yml",
+    ".github/workflows/issue3781-provisional-ready-source-receipt.yml",
     ".github/workflows/roaster-source-probe.yml",
     ".github/workflows/security-inspection.yml"
   ],
   "excluded_unpublished_workflow_test_paths": [
-    "tests/fast-pr-check.test.mjs",
-    "tests/issue455-browser-dependency-install-fallback.test.mjs"
+    "tests/fast-pr-check.test.mjs"
   ],
   "excluded_unready_test_paths": [
+    "scripts/audit/issue33-r374-original41-check.mjs",
     "scripts/audit/issue33-shopify-pagefly-h3.mjs",
     "supabase/tests/member_approval_finish_null_receipts.sql",
     "supabase/tests/workspace_inactive_selection_guards.sql",
@@ -486,9 +491,14 @@
     "tests/coffee-issue33-r389-original68.test.mjs",
     "tests/coffee-issue33-r394-dakota-source-decaf.test.mjs",
     "tests/coffee-issue33-r394-dakota.test.mjs",
+    "tests/coffee-issue33-r399-keller-tenure.test.mjs",
+    "tests/coffee-issue33-r403-selected-swiss-water-claim.test.mjs",
+    "tests/coffee-issue33-r406-original114-origin-dedup.test.mjs",
+    "tests/coffee-issue33-r408-producer-farm-caption.test.mjs",
     "tests/coffee-issue33-shared-ci-trigger.test.mjs",
     "tests/coffee-issue33-shopify-main-product-h2.test.mjs",
     "tests/coffee-producer-team-disagreement.test.mjs",
+    "tests/issue33-shared-dependency-ci-routing.test.mjs",
     "tests/issue455-browser-dependency-install-fallback.test.mjs",
     "tests/issue455-r381-recommendation-control-aria.test.mjs",
     "tests/issue455-r400-single-success-evidence-note.test.mjs",
@@ -498,11 +508,14 @@
     "tests/issue455-r417-measured-grind-precision.test.mjs",
     "tests/issue455-r419-successful-grind-provenance.test.mjs",
     "tests/issue455-r421-grind-reference-tenth-grid.test.mjs",
+    "tests/issue455-r443-validation-copy-button-disabled.test.mjs",
+    "tests/issue455-r444-save-shot-pending-lock.test.mjs",
     "tests/issue509-admin-push-lazy-vault.test.mjs",
     "tests/issue509-calibration-order.test.mjs",
     "tests/issue509-shot-order.test.mjs"
   ],
   "restored_to_published_unready_test_paths": [
+    "supabase/tests/admin_account_delete_completed_receipt.sql",
     "supabase/tests/admin_coffee_review.sql",
     "supabase/tests/admin_edit_normalized_identity_guard.sql",
     "supabase/tests/admin_shot_delete_family_refresh.sql",
@@ -515,16 +528,12 @@
     "supabase/tests/import_additional_credential_keys.sql",
     "supabase/tests/legacy_private_hide_shot_retirement.sql",
     "supabase/tests/pending_canonical_name_response.sql",
+    "supabase/tests/personal_family_refresh_single_pass_post.sql",
     "supabase/tests/recommendation_unique_controls.sql",
     "supabase/tests/source_worker_auth_and_admission.sql",
     "supabase/tests/universal_url_preview.sql",
     "tests/admin-records.test.mjs",
-    "tests/ci-optimization.test.mjs",
-    "tests/cloud-draft-recommendation-context.test.mjs",
     "tests/coffee-corpus-identity-regressions.test.mjs",
-    "tests/issue2258-member-approval-notices.test.mjs",
-    "tests/issue455-local-success-physical-bounds.test.mjs",
-    "tests/sql-runner-coverage.test.mjs",
     "tests/universal-coffee-preview.test.mjs"
   ],
   "publication_authorized": false

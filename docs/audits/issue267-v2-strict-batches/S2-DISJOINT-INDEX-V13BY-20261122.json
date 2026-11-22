@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BY",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BX-20261122.json",
+  "development_prewrite_sha": "a285f6b9764e49fd05853474b433e53cd3af6deb",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-327-356-20261122-V13BY.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 327,
+          "last_line": 356,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C77-3-32-20261122-V13BY.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 77,
+          "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+          "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+          "first_line": 3,
+          "last_line": 32,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "new_frozen": 30,
+    "new_pinned": 30,
+    "new_total": 60,
+    "previous_validated_without_recredit": 60
+  },
+  "source_blob_parity": "PASS_2_COMPLETE_IMMUTABLE_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "PINNED_EQUALS_INITIAL_LIVE_BLOB",
+  "findings": [
+    {
+      "track": "pinned",
+      "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+      "line": 13,
+      "severity": "POTENTIAL_LOW",
+      "status": "NOT_REPRODUCED_NO_CODE_EDIT",
+      "summary": "Backup DB URL project-ref substring is not canonical host validation; requires inert #28 fixture, no live data/credential touch."
+    },
+    {
+      "track": "frozen",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 334,
+      "status": "HISTORICAL_SUPERSEDED",
+      "summary": "Past allowlist URL autofill fixture must not be counted as current worldwide HTTPS or original603 approval."
+    }
+  ],
+  "baselines": {
+    "frozen": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "files": 757,
+      "text_lines": 579961
+    },
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "files": 436,
+      "text_lines": 57913
+    },
+    "provisional_old_frozen": 5451,
+    "provisional_old_pinned": 6462,
+    "strict_older_frozen": 7635,
+    "strict_older_pinned": 9318,
+    "avoid_double_credit": true
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 357
+  },
+  "next_pinned": {
+    "index": 77,
+    "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+    "line": 33
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE"
+}

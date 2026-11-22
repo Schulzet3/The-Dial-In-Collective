@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+
 const rules=[
  ['private_key',/-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----/],
  ['pgp_private_key',new RegExp('-----BEGIN PGP '+'PRIVATE KEY BLOCK-----')],
@@ -17,6 +18,10 @@ const rules=[
  ['aws_access_key',/\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/],
  ['resend_api_key',/\bre_[A-Za-z0-9]{30,}\b/]
 ];
+// Single derived predicate replaces eight per-line negative scans on ordinary files.
+// Derive from the rules themselves so a newly added signature cannot bypass screening.
+const anySecretRule=new RegExp(rules.map(([,pattern])=>'(?:'+pattern.source+')').join('|'));
+
 
 // Block accidentally tracked local credentials, not public .env.example templates.
 export function sensitiveTrackedPath(path){
@@ -47,8 +52,12 @@ export function inspectTrackedSource({paths,read=readFileSync,stat=lstatSync,rea
   files.push({path,sha256:sha256(bytes),bytes:bytes.length,lines:lines.length,binary,symlink,category,
    coverage:symlink?'tracked_link_target_bytes_only_not_dereferenced':binary?'byte_inventory_only':'every_text_line_pattern_screened_not_manual_certification'});
   if(sensitiveTrackedPath(path))candidates.push({path,line:0,rule:'sensitive_tracked_filename'});
-  for(let i=0;i<lines.length;i++)for(const rule of secretRulesOnLine(lines[i]))
-   candidates.push({path,line:i+1,rule});
+  // Most tracked source lines are not credentials. Avoid running every rule on
+  // every line while preserving all per-rule findings and original line numbers.
+  if(lines.length&&anySecretRule.test(text))for(let i=0;i<lines.length;i++){
+   if(!anySecretRule.test(lines[i]))continue;
+   for(const rule of secretRulesOnLine(lines[i]))candidates.push({path,line:i+1,rule});
+  }
  }
  return {files,candidates,totals:{files:files.length,bytes:files.reduce((n,f)=>n+f.bytes,0),
   text_lines:files.reduce((n,f)=>n+f.lines,0),binary_files:files.filter(f=>f.binary).length}};
