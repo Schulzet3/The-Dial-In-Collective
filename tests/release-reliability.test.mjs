@@ -56,3 +56,23 @@ test('#2169 release event readback distinguishes true failure, running and claim
  assert.equal(validateReleaseTriggerReceipt({...args,consumed:true}).status,'CLAIMED_NETLIFY_UNVERIFIED');
  assert.equal(validateReleaseTriggerReceipt({...args,workflowRuns:[{...run,event:'pull_request'}]}).status,'BLOCKED');
 });
+
+
+test('#3347 READY exact source parity accepts only matching deleted test bytes, never missing owned runtime',()=>{
+ const deleted='tests/unready-test-removed-by-merged-first-parent.test.mjs';
+ const blob='100644:'+'f'.repeat(40);
+ const exactChecks=checks.map(c=>({...c,sha:B}));
+ const common={mergedSha:S,ciSourceSha:B,changedPaths:item.scope_paths,checks:exactChecks,
+  testPaths:[deleted]};
+ const absentBoth={...common,sourceObjectAt:(_sha,path)=>path===deleted?null:blob};
+ assert.equal(assessReadyEvidence(item,absentBoth).ready,true,
+  'unchanged deletion of a test on the tested and merged refs is exact parity');
+ assert.equal(assessReadyEvidence(item,{...common,sourceObjectAt:(sha,path)=>
+  path===deleted?(sha===B?null:blob):blob}).ready,false,
+  'a test absent only on one ref is a source mismatch');
+ assert.equal(assessReadyEvidence(item,{...common,sourceObjectAt:()=>null}).ready,false,
+  'an owned application path must exist even when both sources omit it');
+ assert.equal(assessReadyEvidence(item,{...common,sourceObjectAt:(sha,path)=>
+  path===deleted?undefined:blob}).ready,false,
+  'unknown Git object readback is not deletion evidence');
+});
