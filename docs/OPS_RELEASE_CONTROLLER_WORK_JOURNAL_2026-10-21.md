@@ -1156,3 +1156,13 @@ DIC_PREFLIGHT_VERIFIED development_sha=f58adbd748481fa25c9e684a1f0a7d44531c6616 
 
 - Main ops PR #3715 exact head cfca5989 first controller acceptance 44991127332 FAILED one adversarial test #3347: proposed dual-absence predicate wrongly admitted missing OWNED runtime path. Root: test-only absent-file parity must be restricted to `tests/` and `supabase/tests/`, not any path. Preserve missing runtime HOLD, one-sided absence HOLD, unreadable Git object HOLD, changed SHA HOLD, five exact-source checks and source-bound grants.
 - Narrow correction in scripts/release/release-reliability.mjs restricts exact `(null,null)` parity to test roots. Existing main tests/release-reliability.test.mjs already explicitly covers both-side deleted test PASS, one-side absent FAIL, both missing owned runtime FAIL, undefined Git object FAIL; newer added adversarial variants also run. No tests deleted or waived. No provider/DB/member/Netlify/production write, no grant/release. Required exact PR-head main controller CI before merge; preserve source and one-use guard.
+
+## DIC-20261122-STARTUP-READY01 controller request [skip netlify]
+- Release ID: DIC-20261122-STARTUP-READY01
+- Tested source: 64d6f50de9562c0442a05e865e9ed33f0cd2925a
+- Mode: publish
+- Owner: November 21, 2026 explicit one-time Publish five startup changes and any genuinely READY (one READY at source freeze), source/IDs-bound in development docs/RELEASE_AUTHORIZATIONS.json.
+- Mandatory preflight: DIC_PREFLIGHT_VERIFIED development_sha=c56c407fd114c7b720094296b84ccc4e735f8ba1 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Source: exact immutable READY certificate with all five official jobs COMPLETED SUCCESS, candidate branch release-candidates/ready3347-ccbe415d12c818950ca3. Main controller QA 44991330829 SUCCESS. Grant DIC-20261122-STARTUP-READY01 one-use and nonforce only.
+- Recovery: Nov21 archived encrypted artifact14713443972 SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, GitHub courier 44920787722 SUCCESS, private Drive file 1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn verified same size/parent; no DB migration selected.
+- This main one-parent/two-file push ONLY requests publication. Real controller, release/production, Netlify READY/current and queue DEPLOYED remain to be independently read back; no deployed status from a request alone.
