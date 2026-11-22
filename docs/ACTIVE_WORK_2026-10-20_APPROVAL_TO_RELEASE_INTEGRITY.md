@@ -175,3 +175,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 - Owner authority: five startup enhancements READY certification and #3347; no Publish. Live dev ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f, main parent 7d7ebc318f55e35f75a4cf29154c9d039d63776b, preflight blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f retrieved before action.
 - Actual isolated source run 44989382451 FAILED at tests/fast-pr-check.test.mjs. Candidate planner already independently accepts two verified workflow-only absent-published test blobs (browser dependency install + fast-pr-check), but final validator still hardcoded only the first spec. Fixed final loop to resolve the EXACT two reviewed specs and each path's own source Git blob, its restored workflow, candidate absence and published absence. No unreviewed test can be skipped; provenance/first-parent and five candidate checks still strict.
 - Added focused positive two-spec test with negative unreviewed third, changed source test blob and nonexcluded test checks. No frontend, Auth, SQL, Netlify, provider, grant or production write. Requires main PR native controller CI, nonforce merge, new read-only candidate source proof, then exact five official candidate CI SUCCESS before live READY.
+
+## 2026-11-22 — exact PR acceptance assertion wording synchronized with two-spec allowlist [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- PR #3694 initial head 3c95e438 main CI 44989523962 failed one stale error-message regex after validator was intentionally updated to accept exactly two reviewed, separately SHA-pinned workflow test exclusions. 236/237 controller tests passed; the failure is obsolete assertion text, not absent feature code.
+- Replace two brittle negative assertion regex patterns with stable reviewed workflow-only test wording. Original negative inputs, exclusion constraints, source validator and release gates remain unchanged. New exact-head main acceptance required; no Publish/provider/app/SQL/Netlify write.

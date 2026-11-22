@@ -439,7 +439,7 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
  assert.equal(validateReadyOnlyCandidate(q,inputs).ready,true);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   sourceObjectAt:(ref,p)=>ref===B&&p===path?'100644:changed-unreviewed-test':objectAt(ref,p)}),
-  /Only one byte-pinned, reviewed workflow-only test/);
+  /reviewed workflow-only test/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   sourceObjectAt:(ref,p)=>ref===C&&p===path?testSha:objectAt(ref,p)}),
   /Workflow-only test exclusion source\/blob\/absence mismatch/);
@@ -451,7 +451,7 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
   /restore every changed GitHub Actions workflow/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   manifest:{...inputs.manifest,excluded_unpublished_workflow_test_paths:['tests/issue999-arbitrary.test.mjs']}}),
-  /Only one byte-pinned, reviewed workflow-only test/);
+  /reviewed workflow-only test/);
 });
 
 
