@@ -181,3 +181,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
 - Same strict #3347 source-only staging helper now receives independently computed restored runtime and workflow inventories when selecting exact published candidate test blobs. No changes to the READY selected feature source, manifest schema, Git provenance, Auth, published source, or GitHub/provider releases. No tests skipped by workflow. Phase 2 of nonpublishing source CI fix; exact main acceptance required.
+
+## November 22, 2026 UTC — exact source-bound frozen candidate adversarial regressions [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- New main controller unit cases verify exact new workflow test absent from published and hash-bound to restored workflow, plus restoration of three complete existing published CI/member/SQL test files only with restored dependencies, state READY selection and first-parent source metadata; unreviewed drift still HOLD. All previously tested startup tests retained. This is a main CI-only nonpublishing test change with no bypass, provider, deployment or release grant. Phase 3 completes previous source/stage patch; require exact PR CI before merge.

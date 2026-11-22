@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,assertExactCandidateStagedPaths,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
- assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,discoverReviewedRestoredStartupTests,REVIEWED_STARTUP_MIXED_TESTS,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
+ assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,discoverReviewedRestoredStartupTests,REVIEWED_STARTUP_MIXED_TESTS,REVIEWED_STARTUP_ADJACENT_TESTS,REVIEWED_FAST_PR_WORKFLOW_TEST,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -706,4 +706,45 @@ test('#3347 #509 new SQL regression excluded only with its own TESTING migration
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,queue:{items:[{...owner,state:'READY'}]}}),/lacks exact source\/migration provenance/);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,
   sourceObjectAt:(ref,path)=>ref===B&&path===spec.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Unreviewed current or published SQL test bytes/);
+});
+
+test('#3347 startup new workflow test exclusion requires exact published absence and verified bytes',()=>{
+ const spec=REVIEWED_FAST_PR_WORKFLOW_TEST;
+ const read=(r,p)=>r===B&&p===spec.path?'100644:'+spec.sourceBlob:null;
+ const a={publishedSourceSha:A,developmentSourceSha:B,
+  restoredWorkflows:[spec.restoredWorkflow],sourceObjectAt:read};
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions(a),[spec.path]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...a,restoredWorkflows:[]}),[]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...a,
+  sourceObjectAt:(r,p)=>r===B&&p===spec.path?'100644:'+'f'.repeat(40):null}),[]);
+});
+test('#3347 startup extra published regressions require exact dependency/restored source and fail on test drift',()=>{
+ const s=REVIEWED_STARTUP_MIXED_TESTS;
+ const item={...one,id:s.id,issue:455,state:'READY',merged_source_sha:s.merge,
+  scope_paths:[s.runtime]};
+ const foreign={...unfinished,id:'DIC-Q-455-unready',issue:455,state:'TESTING',
+  scope_paths:[s.runtime]};
+ const data=new Map([[s.merge+':'+s.runtime,'100644:'+s.cleanRuntime],
+   [B+':'+s.runtime,'100644:'+'f'.repeat(40)]]);
+ for(const spec of [...s.tests,...REVIEWED_STARTUP_ADJACENT_TESTS]){
+  data.set(A+':'+spec.path,'100644:'+spec.published);
+  data.set(B+':'+spec.path,'100644:'+(Array.isArray(spec.unready)?spec.unready[0]:spec.unready));
+  data.set(s.merge+':'+spec.path,'100644:'+spec.published);
+  data.set(s.merge+'^:'+spec.path,'100644:'+(Array.isArray(spec.unready)?spec.published:spec.unready));
+  if(spec.dependency){data.set(A+':'+spec.dependency,'100644:'+'c'.repeat(40));
+   data.set(B+':'+spec.dependency,'100644:'+'d'.repeat(40));}
+ }
+ const read=(r,p)=>data.get(r+':'+p)??null;
+ const args={queue:{...q,items:[item,foreign]},pinnedReadyPaths:[s.runtime],
+  restoredPaths:REVIEWED_STARTUP_ADJACENT_TESTS.filter(x=>!x.workflow).map(x=>x.dependency),
+  restoredWorkflows:REVIEWED_STARTUP_ADJACENT_TESTS.filter(x=>x.workflow).map(x=>x.dependency),
+  publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,
+  selectedReadyItems:[{id:s.id,issue:455,merged_source_sha:s.merge,scope_paths:item.scope_paths}]};
+ assert.deepEqual(discoverReviewedRestoredStartupTests(args),
+  [...s.tests.map(x=>x.path),...REVIEWED_STARTUP_ADJACENT_TESTS.map(x=>x.path)].sort());
+ assert.deepEqual(discoverReviewedRestoredStartupTests({...args,restoredPaths:[],restoredWorkflows:[]}),
+  s.tests.map(x=>x.path).sort());
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...args,
+  sourceObjectAt:(r,p)=>r===B&&p==='tests/ci-optimization.test.mjs'?'100644:'+'f'.repeat(40):read(r,p)}),
+  /provenance/);
 });
