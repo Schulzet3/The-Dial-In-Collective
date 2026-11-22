@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BU",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BT-20261121.json",
+  "development_prewrite_sha": "5012964b0c03b61ab34d8d34cdfcbe84eb75b06e",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-207-236-20261121-V13BU.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 207,
+          "last_line": 236,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C74-32-34-C75-1-12-C76-1-15-20261121-V13BU.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 74,
+          "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+          "source_blob_sha": "ee7f42bed7e06c8db723c633a94802d644be6acb",
+          "first_line": 32,
+          "last_line": 34,
+          "line_count": 3
+        },
+        {
+          "manifest_index_1_based": 75,
+          "path": "scripts/backups/assert-recovery-inventory.sh",
+          "source_blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
+          "first_line": 1,
+          "last_line": 12,
+          "line_count": 12
+        },
+        {
+          "manifest_index_1_based": 76,
+          "path": "scripts/backups/capture-recovery-snapshot.sh",
+          "source_blob_sha": "535718d632946293341325adde49849f5c875ba8",
+          "first_line": 1,
+          "last_line": 15,
+          "line_count": 15
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_4_COMPLETE_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C74_C75_C76_EQUAL_PINNED_AT_INITIAL_VERIFIED_DEV",
+  "findings": [
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "lines": [
+        208,
+        222,
+        236
+      ],
+      "disposition": "ARCHIVED_GREEN_TEST_STDOUT_NOT_CURRENT_PASS"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/backups/assert-recovery-inventory.sh",
+      "lines": [
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "disposition": "PRIVATE_BYTE_COMPARE_FAIL_CLOSED_NO_DATA_LEAK_OBSERVED_SOURCE_ONLY"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/backups/capture-recovery-snapshot.sh",
+      "lines": [
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "disposition": "PRIVATE_READ_ONLY_RECOVERY_METADATA_NO_HOSTED_RESTORE_TEST"
+    }
+  ],
+  "baselines": {
+    "frozen_files": 757,
+    "frozen_text_lines": 579961,
+    "pinned_files": 436,
+    "pinned_text_lines": 57913,
+    "provisional_R2": 5451,
+    "provisional_C2": 6462,
+    "old_strict_frozen": 7635,
+    "old_strict_pinned": 9318
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 237
+  },
+  "next_pinned": {
+    "index": 76,
+    "path": "scripts/backups/capture-recovery-snapshot.sh",
+    "line": 16
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE"
+}
