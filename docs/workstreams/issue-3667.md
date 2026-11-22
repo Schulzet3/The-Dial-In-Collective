@@ -226,3 +226,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=426792b245dd6a43c1e528a2e4a9297cc0819601 
 - TESTS: focused original and new exhaustive rule/line/sha/clean-large-fixture Node regressions; required HIGH exact PR and merged source CI before VERIFIED. Compare native postmerge inventory step to measured 3.64s baseline and document any variance, not a speculative time savings.
 - TRADEOFF: an additional combined regex test per file and flagged line, but vastly fewer rule regex tests for ordinary files; no reduction of mandatory screening or disclosure. #3667 queue remains TESTING; no frozen #3347 candidate, READY label or Publish.
 - NEXT ACTION: verify focused and exact five PR-head job SUCCESS, nonforce [skip netlify] merge, merged-source parity/CI and measured approval-inventory time; separately continue source-isolated READY certification with the existing dedicated automation.
+
+DIC_PREFLIGHT_VERIFIED development_sha=426792b245dd6a43c1e528a2e4a9297cc0819601 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-22 - initialization-order correction before hosted tests [skip netlify]
+- FIX: the first branch commit placed the derived combined-regex declaration before the source rules constant; reorder declarations to avoid JavaScript temporal-dead-zone startup failure. First commit is unverified, not test PASS; final PR source must pass focused and full applicable CI. No product behavior or test coverage reduction.
+- NEXT ACTION: open PR only on corrected source, check all five required exact-source job outcomes before nonforce merge. Queue remains TESTING.

@@ -7,9 +7,6 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
-// Single derived predicate replaces eight per-line negative scans on ordinary files.
-// Derive from the rules themselves so a newly added signature cannot bypass screening.
-const anySecretRule=new RegExp(rules.map(([,pattern])=>'(?:'+pattern.source+')').join('|'));
 
 const rules=[
  ['private_key',/-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----/],
@@ -21,6 +18,10 @@ const rules=[
  ['aws_access_key',/\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/],
  ['resend_api_key',/\bre_[A-Za-z0-9]{30,}\b/]
 ];
+// Single derived predicate replaces eight per-line negative scans on ordinary files.
+// Derive from the rules themselves so a newly added signature cannot bypass screening.
+const anySecretRule=new RegExp(rules.map(([,pattern])=>'(?:'+pattern.source+')').join('|'));
+
 
 // Block accidentally tracked local credentials, not public .env.example templates.
 export function sensitiveTrackedPath(path){
