@@ -1,3 +1,10 @@
+# Issue #509 R444a - SQL test portability correction [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=f9a24f91ad67e004dbe67f2741ef94f5bc4e6644 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Source/test-only follow-up after R444. Replaced three schema-qualified POSITION special-syntax calls in `supabase/tests/community_withdrawn_verification_guard.sql` with canonical `pg_catalog.strpos(text,text)` function calls, preserving the exact withdrawn-before-verification and early-return assertions. GitHub preflight reverified at this current development SHA and blob; source migration unchanged. Test is **NOT YET EXECUTED** on isolated PostgreSQL; hosted exact-source SQL and other applicable CI remain required. Source-only TESTING; no READY, publication or production/provider write. `pg_depend` next cursor unchanged rank 2001/5414. All owner policies unchanged.
+
+---
+
 # Issue #509 R444 - new Community withdrawal state bug and pg_depend ranks 1501-2000 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=c6a5571f37af614e5fc0e00343f61e2f7fadc0fc preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
