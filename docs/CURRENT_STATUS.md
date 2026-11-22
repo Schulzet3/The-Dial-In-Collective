@@ -1,3 +1,12 @@
+## November 22, 2026 UTC — #3667 focused QA-only CI real hosted proof and updated preflight MERGED/VERIFIED [skip netlify]
+
+- Owner speed-first route #3667 now has a six-path non-shipped CI QA-only lane, with five native CI job statuses unchanged and mixed/unknown/Auth/SQL/source/workflow changes conservatively HIGH. [PR #3681](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3681) nonforce merged 5012964b0c03b61ab34d8d34cdfcbe84eb75b06e: exact PR-head validate 44988286966, cloud/mobile 44988286960, approval 44988286947, SQL 44988286941 SUCCESS; merged push validate 44988489617, cloud/mobile 44988489650, approval 44988489607 SUCCESS.
+- Actual allowlisted QA-only [PR #3686](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3686) exact head 297a87e97ad035117c2694dd10be3f9d0cf88f6b: 5 required statuses SUCCESS (validate 44988639340, cloud+mobile 44988639363, approval 44988639469, SQL 44988639382). GitHub classified node_mode=qa, focused Node 24/24 PASS in ~0.404s; npm ci, high-risk full Node, lint, build, Chromium and SQL execution NOT_APPLICABLE/SKIPPED. Five-status PR CI took ~42s. Nonforce merge 0399620bf3f383de1fb4ee429bd4e5e27ea467f3 retains four exact reviewed blobs; merged validate 44988722829 and cloud/mobile 44988722823 SUCCESS, cancelled first approval retry was selectively rerun as 44988722819 attempt 2 SUCCESS. No duplicate full suite.
+- GitHub project instructions copy updated to 7,955 characters (blob 1a89434fe1bf9896e3b03880d8ce89dccfc02ef3), fixing obsolete #457 ban on prepublishing READY source checks; `docs/ai/PREFLIGHT.md` updated blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. ChatGPT Project Settings still owner-editable; repository cannot auto-paste it.
+- Prior HIGH full Node critical path 227s → 115s (~1.97x), syntax 30.27s → 0.50s (~60.6x on that one check), QA-only PR CI ~42s. **Under-15-minute end-to-end implementation-to-READY remains UNVERIFIED**, because queue item DIC-Q-3667-ci-parallel-full-suite has no #3347 exact frozen candidate/five source-bound statuses. Item stays TESTING; no READY/DEPLOYED claim or new owner Publish. Provider/Netlify/DB/member/backup writes NOT_APPLICABLE.
+
+---
+
 ## November 22, 2026 UTC — #3667 focused QA-only CI path tested, merged and timed [skip netlify]
 
 - Mandatory source preflight verified at development `1eb9f62abb89a395052e0dcde7fe19015cb190b1`, `docs/ai/PREFLIGHT.md` blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`. Owner speed-first authorization recorded in BOTH Locked Master and Ledger.
