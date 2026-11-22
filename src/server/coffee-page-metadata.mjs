@@ -2035,7 +2035,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   supplementary.facts,
   collectCoffeePageMetaSourceFacts(meta,{source_url}),
   collectCoffeePageGuidanceFacts(html,{source_url}),
-  collectCoffeeSourceFacts(product,{name:fields.name,source_url}),
+  // Never re-add unrelated identity cohorts just quarantined by
+  // canonicalIdentityScope above. Keep foreign captions in the explicit
+  // DIFFERENT-coffee review facts, not in current selected field rankings.
+  collectCoffeeSourceFacts(selectedProduct,{name:fields.name,source_url}),
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );

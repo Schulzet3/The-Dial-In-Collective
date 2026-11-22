@@ -18154,17 +18154,21 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "src/server/coffee-direct-product-prose.mjs"
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs"
       ],
       "owner_source": "Issue #33 R402 exact merged original603 #134 first-party evidence. DIC_PREFLIGHT_VERIFIED development_sha=d8d9331f466efef269fea61c4aa01b6c363d2343 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. R403 source-backed narrow omitted Water Process; development only.",
       "tests": [
         "Exact selected first-party R402 source run 45001038522 completed SUCCESS on d8d9331f466efef269fea61c4aa01b6c363d2343: chosen H1 and Swiss Water prose, current parser missing decaffeination_method while excluding unrelated Kenya AB.",
         "Six focused positive/hostile Node regressions and exact source PR-head CI pending, no false PASS.",
-        "Full original603 individual manual/semantic certification not completed."
+        "Full original603 individual manual/semantic certification not completed.",
+        "Synthetic exact-positive 45001788007 4500 PASS / 1 FAIL reveals unrelated Kenya AB cupping notes sourced from unscoped raw product in source_facts, despite already correctly quarantined producer/region/variety. R403 restrict collectCoffeeSourceFacts to canonical identity-scoped selectedProduct; retains explicit quarantined review facts. New exact-head CI pending."
       ],
       "ci_runs": [
         45001038522,
-        45001038536
+        45001038536,
+        45001788007,
+        45001685326
       ],
       "blockers": [
         "No #3347 source-isolated READY candidate with five independently successful native jobs/approval; leave TESTING.",

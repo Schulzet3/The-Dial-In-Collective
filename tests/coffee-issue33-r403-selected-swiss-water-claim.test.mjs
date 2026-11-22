@@ -23,6 +23,7 @@ test('selected decaf H1 corroborated by exact own product description yields Wat
  assert.equal(r.fields.variety,undefined);assert.equal(r.fields.elevation_m,undefined);
  assert.ok(r.source_facts?.some(f=>f.section==='Different coffee in the source'&&f.field==='producer'&&String(f.value).includes('Small Farm Holders')));
  assert.doesNotMatch(String(r.fields.tasting_notes||''),/currant|black tea|blackberry/iu);
+ assert.equal(r.source_facts.some(f=>f.field==='tasting_notes'&&f.section!=='Different coffee in the source'&&/currant|black tea|blackberry/iu.test(String(f.value||''))),false);
  assert.match(coffeeUrlPreviewMarkup(r),/Water Process/);
 });
 test('title alone or sitewide nav and FAQ do not authorize method',()=>{
@@ -46,4 +47,11 @@ test('negated, historical and contradictory selected method paragraphs stay blan
 test('mixed-caffeine coffee cannot obtain full-decaf method from another product',()=>{
  const r=parse('Half-Caff - Swiss Water Process - Medium Roast','<p>'+direct+'</p>');
  assert.equal(r.fields.decaffeination_method,undefined);
+});
+
+test('genuine selected own direct cupping notes survive unrelated-coffee source quarantine',()=>{
+ const r=parse(name,'<p>'+direct+'</p><p>Cupping Notes: almond, caramel, pear</p>');
+ assert.equal(r.ok,true);assert.equal(r.fields.decaffeination_method,'Water Process');
+ assert.equal(r.fields.tasting_notes,'almond, caramel, pear');
+ assert.equal(r.source_facts.some(f=>f.field==='tasting_notes'&&f.section==='Different coffee in the source'),false);
 });
