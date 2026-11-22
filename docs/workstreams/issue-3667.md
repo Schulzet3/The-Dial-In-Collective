@@ -169,3 +169,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=4c10b6831abadf4baedddee0458bb5a8921b867a 
 - CHANGE: approval runs focused fail-closed ready-promotion regression followed by exactly ONE ready-evidence-gate live invocation; it still executes the strict immutable candidate/ref/fingerprint/ancestry/five-job/latest-SUCCESS gate. The separate ready-promotion CLI remains usable for independent manual verification. Candidate GITHUB_REF skip semantics unchanged; NO READY item remains subject to queue-schema/intake checks.
 - NEGATIVE TEST: assert one exact workflow live verifier, focused negative test retained, same verifyReadyPromotion underlying implementation. Any missing, stale, failed or SKIPPED candidate job remains HOLD. No app, SQL, Auth, provider, backup, grant, Netlify or Publish write.
 - ACCEPTANCE: exact PR-head five native SUCCESS statuses, nonforce merge with [skip netlify], exact merged Git blob parity and merged applicable CI SUCCESS, queue #3667 TESTING until separate frozen #3347 candidate and under-15m elapsed proved.
+
+DIC_PREFLIGHT_VERIFIED development_sha=4c10b6831abadf4baedddee0458bb5a8921b867a preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22, 2026 — repair #3735 focused acceptance test syntax [skip netlify]
+- First PR head 6f5a565857d9ff52f40d919bc8108294d040bfc2 approval run 45003576602 FAILED before any READY certification because the new negative regression's generated regex literal had doubled slash escaping, triggering a Node SyntaxError. This is a TEST failure, not PASS; code gates not bypassed.
+- FIX: replace brittle escaped regex with direct exact string counting and includes assertions. Preserve one live READY verification, full native five-success proof, source/queue integrity and error-denial. Retest corrected exact PR head; no provider, Netlify, database, permission or publication writes.
