@@ -1,3 +1,19 @@
+# Issue #509 R436 — direct pg_attribute definitions 2081–2480 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-22 UTC. Mandatory PREFLIGHT read at immutable live development SHA, identical Git blob independently fetched, before any project/provider/issue or journal access. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11.0.003. Production strictly **READ ONLY**.
+
+Resumed exact R435 cursor `information_schema.routines.character_maximum_length` OID 13434 attnum 15 at rank 2081. Directly inspected and semantically assessed **400/400 new full accessible pg_attribute metadata tuple definitions**, ranks **2081–2480/4181**, **208037 complete tuple characters** across **48 relations**. Every field's full provider tuple, MD5, source length and exact covered 1–end character range, intended type/operation, dependencies and retain verdict in append-only [R436 ledger](../audits/issue509-r436-pg-attribute-ranks2081-2480-20261122.json). Scope: `information_schema` 378 fields covering routine/trigger/constraint/grant/FDW/view/type/sequence metadata; `pg_toast` 20 managed storage/index fields; `extensions` 2 pg_stat_statements_info metadata fields. Role-filtered grants vs general grants and FDW helper vs standard SQL views are intentionally different exposures, **not demonstrably dead duplicates**. Only catalog field definitions accessed; no user mappings/options contents, SQL text, passwords, Auth user identities, shots, notes or member data.
+
+Independent read-only provider checks: 400/400 types/len/pass-by-value/alignment agree with pg_type; zero dropped/default/identity/generated/special flags, **8 TOAST index fields on usable indexes, 12 TOAST table fields with valid parents**. Bounded **queryid-only** pg_stat_statements review since its Oct 9 reset: postgres-role 526,775 temp blocks written / 54,032 calls; top nonidentifying queryid had 53 calls, ~703 MB cumulative temp writes and 224ms mean runtime. This is historical diagnostic workload, **not attributable to DIC user SQL or a demonstrated bottleneck** without safe isolated query-plan provenance; no optimization/drop justified. First aggregate attempt used obsolete `blk_read_time` field and returned error; corrected to `shared_blk_read_time`. No raw SQL text retrieved.
+
+No newly reproduced DIC application defect, safe source deletion or measured bottleneck in these managed system fields; no app code/test/CI changes, new exact-source CI **NOT_APPLICABLE, not PASS**. All platform compiled/native implementation bodies and still-unreviewed provider objects **UNVERIFIED**; full baseline **IN_PROGRESS**. Queue READY/DEPLOYED **NOT_REVALIDATED**, zero #267 code-line credit. Production SQL/data/Edge/Auth/Storage/config, migrations, deployment, backups, billing, schedule, notification and publication unchanged.
+
+**Next exact unreviewed cursor:** `extensions.pg_stat_statements.userid`, OID **16424**, attnum **1**, rank **2481/4181**, first character. Continue actual provider semantic review and source-dependent bug investigation; no owner action needed.
+
+---
+
 # Issue #509 R435 — direct catalog field semantic review 1681–2080 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=c13d58e2513b626088ff7fc0c387eab6ffc7d704 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
