@@ -64,6 +64,12 @@ function selectedNamedWaterProcessed(name,line){
 }
 
 const CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER=/^decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
+// An exact selected full-decaf product may introduce "this roast" and then
+// say "The beans are processed using Swiss Water Process to remove the caffeine."
+// The standalone "Swiss Water Processed" tagline is insufficient. Require a
+// single selected product's own subsection and same-paragraph antecedent,
+// never related, FAQ, SEO, roaster-wide education or a different lot.
+const CURRENT_SELECTED_OWN_ROAST_BEANS_WATER_REMOVAL=/(?:^|[.!?]\s+)the\s+beans\s+(?:are|were)\s+processed\s+using\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\s+to\s+remove\s+(?:the\s+)?caffeine\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
 // Exact current chosen full-decaf direct prose: "This coffee from Mexico
 // underwent its decaffination process using the Swiss Water Process".
@@ -640,6 +646,23 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(countryClaim)){
     if(decafEvidence.size<4)decafEvidence.add(countryClaim);
     else decafEvidenceOverflow=true;
+  }
+  // One selected named full-decaf product paragraph explicitly introduces its
+  // own roast, then refers to "the beans" when naming caffeine removal.
+  // This is not green processing. A bare process badge, related product,
+  // FAQ heading or different selected coffee NEVER authorizes autofill.
+  const ownWaterRemoval=decafOnlyCoffee(name)&&b.tag==='p'&&
+   !b.educational&&fold(b.section)===selected&&line.length<=650&&
+   !NONCURRENT_DECAF_METHOD.test(line)
+   ?CURRENT_SELECTED_OWN_ROAST_BEANS_WATER_REMOVAL.exec(line):null;
+  const ownRoastAntecedent=ownWaterRemoval?
+   line.slice(0,ownWaterRemoval.index):'';
+  if(ownWaterRemoval&&/\b(?:this|our)\s+roast\b/iu.test(ownRoastAntecedent)&&
+     !/\b(?:not|never|without|rather\s+than|instead\s+of|unlike)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\b/iu.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:ownWaterRemoval[0]})==='Water Process'&&
+     !decafEvidence.has(ownWaterRemoval[0])){
+   if(decafEvidence.size<4)decafEvidence.add(ownWaterRemoval[0]);
+   else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
