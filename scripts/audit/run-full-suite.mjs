@@ -29,17 +29,23 @@ export function selectFullSuiteShard(plan,shard='all'){
  if(shard==='all')return plan;
  if(!/^(?:[01]\/2|[012]\/3)$/.test(shard))throw Error('Invalid full-suite shard selector');
  const [selected,lanes]=shard.split('/').map(Number);
- // Existing official HIGH runs showed 48s validate / 53s cloud / 85s approval
- // general corpus. Shift only half of approval's original files onto the two
- // faster required runners; keep every file exactly once and all jobs intact.
- // The four-slot round-robin prevents a single contiguous test-family takeover.
+ // Native HIGH source #3761: validate ran 340 files in 91.4s,
+ // cloud 339 in 55.0s, and approval 135 in 32.7s + isolated 14.7s.
+ // Rebalance file ownership WITHOUT removing, repeating or weakening tests:
+ // move one quarter of original validate files into the faster available
+ // lanes while retaining the prior third-lane transfers and protected serial.
  const parallel=plan.parallel.filter((_,i)=>{
   if(lanes===3){
    const original=i%3;
-   if(original!==2)return original===selected;
-   const slot=Math.floor(i/3)%4;
-   const balanced=slot===0?0:slot===1?1:2;
-   return balanced===selected;
+   const slot=Math.floor(i/3);
+   if(original===0){
+    if(slot%6===0)return selected===2;
+    if(slot%12===3)return selected===1;
+    return selected===0;
+   }
+   if(original===1)return selected===1;
+   const quarter=slot%4;
+   return (quarter===0?0:quarter===1?1:2)===selected;
   }
   return (i%2===0||i%12===1?0:1)===selected;
  });
