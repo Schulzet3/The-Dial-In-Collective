@@ -36,3 +36,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=428fb01daaa5b29eb9eb984e4b038eab29432d8f 
 - Two-parent NONFORCE history integration retains first-parent app runtime/tests/workflows/queue/source tree byte for byte; this journal alone changes on first-parent diff. Older unready espresso/CI/SQL source preserved, no deletion. The freeze serves as a reviewed exact-source pin for later #3347 candidate; NOT a release, not tested frozen batch, not READY.
 - Verified original #3782 tests: PR validate 45039621942, cloud/mobile 45039621871, approval 45039621920, SQL 45039621979 SUCCESS; merged-source validate 45039837781, cloud/mobile 45039837803, approval 45039837783 SUCCESS. New frozen-source exact CI NOT YET RUN, never infer PASS.
 - Next: stage published-base-isolated #3781 candidate with all other unfinished executable/tests/workflows excluded, five exact native checks, strict READY certification, one approved release claim and provider readback. No production/provider writes here.
+
+DIC_PREFLIGHT_VERIFIED development_sha=5d36f3e612a8bc756cb72eb4184c22fbac149ec4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — source-bound prospective #3781 READY selection (preparation branch ONLY) [skip netlify]
+- Owner Nov22 approves only returning-session instant cached read-only paint + background server admission and revocation, with production publishing only after release gates.
+- Preparation first-parent development 5d36f3e612a8bc756cb72eb4184c22fbac149ec4, reviewed clean source 354ddd99ef0ce8f03b2f74544782e4e977201a31; the actual development queue stays TESTING until five exact candidate-SHA native SUCCESS checks and a strict #3347 certificate.
+- This branch records ONE provisional selected READY row to create a read-only frozen candidate; no production/Netlify/Supabase writes, no one-use grant, no claim of ready or deployment.
+- Current production tested 64d6f50de9562c0442a05e865e9ed33f0cd2925a, release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, deploy 6b0284543511466fd75b4573. Unready same-file espresso changes must remain excluded.
+- Reproduce exact approved source/CI and restore all unselected runtime/tests/workflow bytes to last-published Git objects. Full Auth/privacy high-risk checks required.
