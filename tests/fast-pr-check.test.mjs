@@ -29,5 +29,5 @@ test('expensive CI runners reject cheap source/queue/receipt problems before ins
  assert.equal((cloud.match(/node scripts\/audit\/fast-pr-check.mjs/g)||[]).length,2);
  const approval=file('.github/workflows/approval-continuity.yml');
  assert.ok(approval.indexOf('node scripts/audit/verify-commit-checkpoint.mjs')<
-  approval.indexOf('node scripts/audit/ready-evidence-gate.mjs'));
+  approval.indexOf('node scripts/release/ready-evidence-gate.mjs'));
 });
