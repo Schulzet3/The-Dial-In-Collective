@@ -16,8 +16,9 @@ test('one build per scoped change and no routine duplicate browser/full suites',
  const sql=file('.github/workflows/isolated-sql-regression.yml');
  const visual=file('.github/workflows/visual-review.yml');
  const approval=file('.github/workflows/approval-continuity.yml');
- assert.match(beta,/Run all checked-in Node tests \(HIGH risk only\)[\s\S]*?run-full-suite\.mjs --shard=0\/2/);
- assert.match(cloud,/cloud-tests:[\s\S]*?run-full-suite\.mjs --shard=1\/2/);
+ assert.match(beta,/Run all checked-in Node tests \(HIGH risk only\)[\s\S]*?run-full-suite\.mjs --shard=0\/3/);
+ assert.match(cloud,/cloud-tests:[\s\S]*?run-full-suite\.mjs --shard=1\/3/);
+ assert.match(approval,/approval:[\s\S]*?run-full-suite\.mjs --shard=2\/3/);
  assert.match(beta,/node --test tests\/grind-/);
  assert.match(beta,/node --test tests\/coffee-/);
  assert.match(cloud,/cloud-tests:[\s\S]*?node --test tests\/cloud/);
@@ -69,18 +70,23 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.ok(plan.parallel.includes('tests/ci-optimization.test.mjs'));
  assert.ok(plan.parallel.some(path=>path.startsWith('tests/audit/')));
  assert.equal(new Set([...plan.parallel,...plan.serial]).size,plan.parallel.length+plan.serial.length);
- const shard0=selectFullSuiteShard(plan,'0/2'),shard1=selectFullSuiteShard(plan,'1/2');
- assert.deepEqual([...shard0.parallel,...shard1.parallel].sort(),plan.parallel);
- assert.deepEqual(shard0.parallel,plan.parallel.filter((_,i)=>i%2===0||i%12===1),'retains existing validate files and moves only every sixth cloud file');
- assert.deepEqual(shard1.parallel,plan.parallel.filter((_,i)=>i%2===1&&i%12!==1),'retains all other cloud files');
- assert.ok(shard0.parallel.length>shard1.parallel.length,'the imbalance is intentionally corrected');
- assert.deepEqual(shard0.serial,[]);
- assert.deepEqual(shard1.serial,plan.serial);
+ const shards=['0/3','1/3','2/3'].map(s=>selectFullSuiteShard(plan,s));
+ assert.deepEqual(shards.flatMap(s=>s.parallel).sort(),plan.parallel,'all full-suite files run once across required existing jobs');
+ for(let lane=0;lane<3;lane++){
+  assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>i%3===lane));
+  assert.deepEqual(shards[lane].serial,lane===2?plan.serial:[]);
+ }
+ assert.ok(Math.max(...shards.map(x=>x.parallel.length))-Math.min(...shards.map(x=>x.parallel.length))<=1,
+  'file-count-balanced thirds on existing required runners');
+ const legacy0=selectFullSuiteShard(plan,'0/2'),legacy1=selectFullSuiteShard(plan,'1/2');
+ assert.deepEqual([...legacy0.parallel,...legacy1.parallel].sort(),plan.parallel,
+  'legacy 2-way source still has exhaustive coverage');
+ assert.deepEqual(legacy1.serial,plan.serial);
  assert.match(file('scripts/audit/run-full-suite.mjs'),/if\(!files\.length\)/,
   'Empty serial shard must NOT invoke Node auto-discovery');
- assert.equal(new Set([...shard0.parallel,...shard1.parallel]).size,plan.parallel.length);
- assert.throws(()=>selectFullSuiteShard(plan,'0/3'),/Invalid full-suite shard/);
- assert.throws(()=>selectFullSuiteShard(plan,'2/2'),/Invalid full-suite shard/);
+ assert.equal(new Set(shards.flatMap(x=>x.parallel)).size,plan.parallel.length);
+ assert.throws(()=>selectFullSuiteShard(plan,'3/3'),/Invalid full-suite shard/);
+ assert.throws(()=>selectFullSuiteShard(plan,'1/4'),/Invalid full-suite shard/);
  const beta=file('.github/workflows/cloud-beta-ci.yml');
  const cloud=file('.github/workflows/cloud-regression.yml');
  const paths=src=>[...src.split('  push:\n')[1].split('  pull_request:')[0].matchAll(/^      - '([^']+)'$/gm)].map(m=>m[1]);
@@ -170,7 +176,7 @@ test('HIGH-risk lint runs on faster cloud-tests lane exactly once; medium-risk l
  assert.equal((beta.match(/npm run lint/g)||[]).length,1);
  assert.equal((cloud.match(/npm run lint/g)||[]).length,1);
  assert.ok(cloud.indexOf('name: Lint HIGH-risk source on cloud-tests')<cloud.indexOf('  mobile-browser-qa:'),'lint must remain in cloud-tests job');
- assert.ok(cloud.indexOf('name: Run second half of high-risk full Node corpus')<cloud.indexOf('name: Lint HIGH-risk source'),'finish protected security test before lint');
+ assert.ok(cloud.indexOf('name: Run second third of high-risk full Node corpus')<cloud.indexOf('name: Lint HIGH-risk source'),'finish protected security test before lint');
 });
 
 

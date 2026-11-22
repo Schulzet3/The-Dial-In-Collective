@@ -91,9 +91,9 @@ jobs:
       - name: Run affected cloud/offline/Admin/coffee UI tests
         if: steps.scope.outputs.cloud_mode == 'targeted'
         run: node --test tests/cloud*.test.mjs tests/admin-*.test.mjs tests/offline-*.test.mjs tests/pwa-shell.test.mjs tests/coffee-duplicate-first-client.test.mjs tests/coffee-source-status-ui.test.mjs tests/recipe-family-selection.test.mjs tests/shot-temperature-preservation.test.mjs
-      - name: Run second half of high-risk full Node corpus (same source, disjoint files)
+      - name: Run second third of high-risk full Node corpus (same source, disjoint files)
         if: steps.scope.outputs.node_mode == 'full'
-        run: node scripts/audit/run-full-suite.mjs --shard=1/2
+        run: node scripts/audit/run-full-suite.mjs --shard=1/3
       - name: Lint HIGH-risk source on cloud-tests runner (one lint total)
         if: steps.scope.outputs.node_mode == 'full' && steps.scope.outputs.lint == 'true'
         run: npm run lint

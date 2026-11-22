@@ -22,20 +22,23 @@ export function planFullSuite(root=ROOT){
  return {parallel,serial};
 }
 
-// Two disjoint shards run on existing validate/cloud-tests runners.
+// Three disjoint HIGH-risk shards run on existing validate/cloud-tests/approval runners.
+// Preserve the legacy 2-way selector for diagnostic comparisons and previous refs.
 // The unsharded npm test command still executes every file.
 export function selectFullSuiteShard(plan,shard='all'){
  if(shard==='all')return plan;
- if(!/^[01]\/2$/.test(shard))throw Error('Invalid full-suite shard selector');
- const index=Number(shard[0]);
- const parallel=plan.parallel.filter((_,i)=>(i%2===0||i%12===1?0:1)===index);
- // Keep the time-budgeted HTML corpus isolated on the cloud runner.
+ if(!/^(?:[01]\/2|[012]\/3)$/.test(shard))throw Error('Invalid full-suite shard selector');
+ const [selected,lanes]=shard.split('/').map(Number);
+ const parallel=plan.parallel.filter((_,i)=>lanes===3?i%3===selected:
+  (i%2===0||i%12===1?0:1)===selected);
+ // Keep the time-budgeted HTML corpus isolated on the final runner
+ // (cloud for legacy 2-way, approval for high-risk 3-way).
  // Four measured HIGH CI pairs show a recurring cloud Node tail: 89/90/89/89s
  // versus 65/96/66/65s validate. Keep the original even-index split and
  // move just every sixth odd-index file (i%12===1) to validate to balance
  // the critical path without duplicate tests or additional runners.
  // This balances the two required jobs without removing or duplicating files.
- const serial=index===1?plan.serial:[];
+ const serial=selected===lanes-1?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
  return {parallel,serial};
 }
@@ -61,7 +64,7 @@ function execute(files,concurrency,label){
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
  try{
   const shardArg=process.argv[2];
-  if(process.argv.length>3||(shardArg&&!/^--shard=[01]\/2$/.test(shardArg)))
+  if(process.argv.length>3||(shardArg&&!/^--shard=(?:[01]\/2|[012]\/3)$/.test(shardArg)))
    throw Error('Unexpected full-suite arguments');
   const plan=planFullSuite();
   const {parallel,serial}=selectFullSuiteShard(plan,shardArg?shardArg.slice('--shard='.length):'all');
