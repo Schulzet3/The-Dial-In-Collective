@@ -13,22 +13,33 @@
       "pr": 3810,
       "title": "Keep Log Shot dialog header Close unavailable during pending Save",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "375124af34d3eab396db5d94d37c1897f0dc8a0d",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 owner Option B SAFE Log Shot reliability. DIC_PREFLIGHT_VERIFIED development_sha=797f6b4badc418b6443133735d7159ff92413360 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob b5e7243fe6df2ca0e503348e41a656a7a550dd8b; same-commit journal e5961bcf99dde9d096aa9f1ba8ffb372a304fb42.",
       "tests": [
-        "Two new actual CloudApp synthetic deferred-save positive/negative regressions in tests/issue455-r444-save-shot-pending-lock.test.mjs; full suite/PR-head applicability PENDING, not PASS.",
-        "Original R444 two cases retained. Source test blob b2e86fa154cddd39c2c7907f13c16af8324aef97; app blob 5c24e203db233692589f064fadb819fe68302cf6."
+        "R451 two actual CloudApp synthetic deferred Save/Close tests PASS in PR-head approval job 137348188178 (1408 PASS/0 FAIL/0 SKIPPED); both named R451 cases PASS in merged-source approval job 137348940289 (1408 PASS/0 FAIL/0 SKIPPED). Existing R444 two tests retained.",
+        "Final PR-head 546b8ae5a408db081c9241b85a9569eae23edc40 exact CI: validate/cloud-tests/mobile-browser-qa/approval/SQL/imported-source/security-inventory and two exact-selected checks COMPLETED SUCCESS; frozen603 SKIPPED not PASS. Earlier e596 source commit checks CANCELLED on queue-only amendment, never counted PASS.",
+        "Nonforce squash PR #3810 merged development SHA 375124af34d3eab396db5d94d37c1897f0dc8a0d; four changed file Git blobs match exact PR head. Merged-source validate/cloud-tests/mobile-browser-qa/approval/imported-source-regressions/exact-selected all completed SUCCESS. Validate shard 1839 PASS/0 FAIL/6 SKIPPED; cloud shard 2931 PASS/0 FAIL/0 SKIPPED; approval shard 1408 PASS/0 FAIL."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45067927300,
+        45067927341,
+        45067927331,
+        45067927399,
+        45067927329,
+        45068175743,
+        45068175722,
+        45068175710,
+        45068175687,
+        45068175682
+      ],
       "blockers": [
-        "Verify exact PR-head relevant Node22, browser/mobile/offline, SQL/security, approval and relevant code checks; SKIPPED is not PASS.",
-        "Recheck concurrent Git and nonforce merge, verify exact merged source and source-bound CI.",
-        "Independent #3347 READY frozen candidate and exact-source certification required for any READY; no Publish without separate owner authority."
+        "Independent #3347 source-isolated READY candidate with the required exact-source CI certification not yet established; this app change remains TESTING and does not authorize Publish or any production writes.",
+        "Original S019 independent PDF and real-world same-coffee recommendation-effectiveness evidence remain unavailable/unverified; not a blocker to the narrow SAFE reliability fix, but prevent broader quality claim."
       ],
-      "notes": "Source-proven modal header Close remained outside R444 form-disable guard; async save could complete after dialog dismissal. Conservative bug fix locks current header and handler until save completion, restores on failure, preserves all five taste inputs, original shot, notes/history, privacy, styles/grinder/feed/temperature, no new science target or data capture. No production member data or deployed assertion.",
+      "notes": "Source-proven modal header Close remained outside R444 form-disable guard; async save could complete after dialog dismissal. Conservative bug fix locks current header and handler until save completion, restores on failure, preserves all five taste inputs, original shot, notes/history, privacy, styles/grinder/feed/temperature, no new science target or data capture. No production member data or deployed assertion. Exact merged readback: site/cloud/main.js Git blob 5c24e203db233692589f064fadb819fe68302cf6, synthetic test b2e86fa154cddd39c2c7907f13c16af8324aef97, same-commit preflight journal 1747cafb22e42136b6730576af15cc59688e56a1, queue intake 36d2e652c5762ba0e6bb3dd491fcb534794a2e69; squash merge source first parent 797f6b4badc418b6443133735d7159ff92413360. No deployment.",
       "production_deployed": false
     },
     {
