@@ -363,7 +363,7 @@ class CloudApp {
   this.syncState=outcome.state;const pending=await this.store.list(who.id);
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
-  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
+  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';let saved=null;try{saved=await this.store.readCache(who.id);}catch{/* Retain an already loaded same-owner snapshot. */}if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved?.owner===who.id&&saved.snapshot)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;
   // A known flagged shot cannot be deferred. A failed refresh cannot erase

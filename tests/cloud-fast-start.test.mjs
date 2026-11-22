@@ -89,3 +89,18 @@ test('cache lookup never begins before server admission finishes',async()=>{
  gate.resolve({admitted:true,admin:false});await task;
  assert.equal(reads,1);
 });
+
+test('cloud read outage preserves already loaded owner snapshot if IndexedDB also fails',async()=>{
+ const raw=rawFixture(),app=new CloudApp({
+  async read(){throw new TypeError('Failed to fetch');},
+  async listCommunityReviews(){return [];}
+ },{
+  async readCache(){throw new Error('IndexedDB unavailable');},
+  async list(){return [];}
+ });
+ app.identity={id:OWNER};app.status={admitted:true};app.raw=raw;
+ app.queue.flush=async()=>({state:'offline'});app.render=()=>{};
+ await app.doSync();
+ assert.equal(app.state.coffees.length,1);
+ assert.equal(app.syncState,'offline');
+});

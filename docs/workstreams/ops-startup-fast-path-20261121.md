@@ -16,3 +16,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef 
 ## Local-cache fault tolerance
 - IndexedDB cache read/list failures no longer prevent a freshly admitted account from attempting authoritative cloud sync. Server admission still precedes all cache reads.
 - Added explicit damaged-cache and admission-order regression tests. Updated-head CI required before merge/READY.
+
+## Dual-failure recovery
+- During cloud read outages, a second IndexedDB read failure no longer discards a previously loaded same-owner snapshot. New regression covers simultaneous network/storage outage without bypassing server admission.
+- Required CI on this exact commit still pending; do not mark READY.
