@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13CH",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CG-20261122.json",
+  "development_prewrite_sha": "04105c8e08b10a92b1d1f388f12535f0b7d9f5bf",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-597-626-20261122-V13CH.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 597,
+          "last_line": 626,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C78-177-206-20261122-V13CH.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 78,
+          "path": "scripts/backups/isolated-recovery-drill.sh",
+          "source_blob_sha": "d026f09e042c3ce7748101b10efe401b29cb026e",
+          "first_line": 177,
+          "last_line": 206,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "source_blob_parity": "PASS_BOTH",
+  "archived_json_parse": "PASS",
+  "live_pinned_blob_sha": "d026f09e042c3ce7748101b10efe401b29cb026e",
+  "source_remediation": "NO_CURRENT_REPRODUCED_DEFECT",
+  "not_tested": [
+    "Node22",
+    "lint",
+    "build",
+    "mobile",
+    "browser",
+    "offline",
+    "SQL",
+    "Auth",
+    "RLS",
+    "coffee603",
+    "performance",
+    "actual backup restore"
+  ],
+  "next": {
+    "frozen": {
+      "index_1_based": 221,
+      "line_1_based": 627
+    },
+    "pinned": {
+      "index_1_based": 78,
+      "line_1_based": 207
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY",
+  "post_pin_drift": "INCOMPLETE"
+}
