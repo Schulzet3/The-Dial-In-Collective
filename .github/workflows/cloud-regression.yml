@@ -65,6 +65,15 @@ jobs:
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
+      - name: Fast source/queue/commit preflight BEFORE expensive CI
+        env:
+          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
+          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node scripts/audit/fast-pr-check.mjs
+          node scripts/release/release-queue.mjs --enforce-intake
+          node scripts/audit/verify-commit-checkpoint.mjs
       - name: Explicit targeted cloud NOT_APPLICABLE
         if: steps.scope.outputs.cloud_mode == 'none'
         run: |
@@ -99,6 +108,15 @@ jobs:
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
+      - name: Fast source/queue/commit preflight BEFORE expensive CI
+        env:
+          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
+          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node scripts/audit/fast-pr-check.mjs
+          node scripts/release/release-queue.mjs --enforce-intake
+          node scripts/audit/verify-commit-checkpoint.mjs
       - name: Explicit browser NOT_APPLICABLE
         if: steps.scope.outputs.browser_mode == 'none'
         run: |

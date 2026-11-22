@@ -69,6 +69,7 @@
     "current_owner_single_instruction_development_and_publication_20261022",
     "current_owner_single_use_beta_invites_20261018",
     "current_owner_sitewide_low_friction_correction_20261021",
+    "current_owner_speed_first_ci_20261121",
     "current_owner_streamlined_release_20261022",
     "current_owner_universal_deployment_consent_20261021"
   ],
@@ -2392,5 +2393,20 @@
     "supersedes_only": "Nov 3 #457 ban on proactive nonproduction readiness candidate checks",
     "preserves": "Publish-only one-use grant, exact five CI, single Netlify release, source/test/workflow isolation, no provider writes",
     "evidence": "main #3349, source #3437 (merged b8a8ed2592820fb6421d533b9e2fecde08ee6d3f; five PR-head SUCCESS, postmerge approval/validate/cloud/mobile/rehearsal SUCCESS), previous READY42 published, queue 401 DEPLOYED/26 TESTING/6 IN_PROGRESS/0 READY; each new batch must re-certify before READY"
+  },
+  "current_owner_speed_first_ci_20261121": {
+    "status": "Locked owner speed-first CI supersession",
+    "issue": 3667,
+    "source": "Direct owner November 21, 2026",
+    "priority": "Speed 9–10/10; security-check duplication may be removed or replaced when proven unnecessary",
+    "preserves": "Five actual source-bound release-candidate checks and Publish-only production boundary; no false READY status",
+    "implementation": [
+      "scripts/audit/fast-pr-check.mjs",
+      "scripts/audit/syntax-batch.mjs",
+      ".github/workflows/cloud-beta-ci.yml",
+      ".github/workflows/cloud-regression.yml",
+      ".github/workflows/approval-continuity.yml"
+    ],
+    "acceptance": "Cheap source/queue/commit preflight catches startup errors before heavy tests; batch one-process parser covers original JS/MJS corpus; compare exact CI timing."
   }
 }
