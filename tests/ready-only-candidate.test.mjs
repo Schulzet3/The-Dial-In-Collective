@@ -65,6 +65,16 @@ test('#3347 startup coupled Log Shot suites use only proven published-source tes
  const props={queue,pinnedReadyPaths:[s.runtime],publishedSourceSha:A,
   developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[selected]};
  assert.deepEqual(discoverReviewedRestoredStartupTests(props),s.tests.map(x=>x.path).sort());
+ const audit=s.tests.find(x=>x.path==='scripts/audit/issue33-original603-focused-source-review.mjs');
+ const publishedAtSource=(ref,path)=>path===audit.path&&ref===B?
+  '100644:'+audit.published:
+  path===audit.path&&ref===s.merge?'100644:'+audit.unready:sourceObjectAt(ref,path);
+ const once=discoverReviewedRestoredStartupTests({...props,sourceObjectAt:publishedAtSource});
+ assert.deepEqual(once,s.tests.filter(x=>x.path!==audit.path).map(x=>x.path).sort(),
+  'already exact-published source must not be counted as a changed-path restoration');
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,sourceObjectAt:(ref,path)=>
+  path===audit.path&&ref===s.merge+'^'?'100644:'+'2'.repeat(40):publishedAtSource(ref,path)}),
+  /changed already-published audit\/test/);
  const compact={id:selected.id,issue:selected.issue,title:selected.title,
   merged_source_sha:selected.merged_source_sha,scope_paths:selected.scope_paths};
  assert.deepEqual(discoverReviewedRestoredStartupTests({...props,selectedReadyItems:[compact]}),

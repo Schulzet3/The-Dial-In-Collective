@@ -384,16 +384,23 @@ export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
  for(const spec of s.tests){
   const published=obj(publishedSourceSha,spec.path),current=obj(developmentSourceSha,spec.path);
   if(published===null&&current===null)continue;
-  if(published!=='100644:'+spec.published||current!=='100644:'+spec.unready)
+  // The source-only trial may already contain the exact last-published audit
+  // blob. It needs no replacement, but cannot be silently attributed to READY.
+  if(published!=='100644:'+spec.published||
+     (current!==published&&current!=='100644:'+spec.unready))
    throw Error('Startup test restoration unreviewed Git blob: '+spec.path);
   const merged=obj(s.merge,spec.path),firstParent=obj(s.merge+'^',spec.path);
-  if(!((merged===published&&firstParent===current)||(merged===current&&firstParent===current)))
+  if(current===published){
+   if(merged!==firstParent)
+    throw Error('Selected READY merge changed already-published audit/test: '+spec.path);
+  }else if(!((merged===published&&firstParent===current)||
+             (merged===current&&firstParent===current)))
    throw Error('Startup test restoration first-parent drift: '+spec.path);
   for(const ready of selectedReadyItems.filter(i=>i.id!==s.id))
    if(!SHA.test(ready.merged_source_sha||'')||
       obj(ready.merged_source_sha,spec.path)!==obj(ready.merged_source_sha+'^',spec.path))
     throw Error('Another selected READY merge modified startup-coupled test: '+spec.path);
-  restored.push(spec.path);
+  if(current!==published)restored.push(spec.path);
  }
  return restored.sort();
 }
