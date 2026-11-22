@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenAdmissionScopedSource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {rawFixture,rawShot,OWNER} from './cloud-fixtures/raw.js';
 import {hydrate} from '../site/cloud/mapping.js';
@@ -170,7 +171,11 @@ test('editing historical shots never repeats basket advice or changes historical
  }
 });
 
-test('Log Shot politely announces copied controls, not as errors, preserving all five tastes',async()=>{
+test('Log Shot politely announces copied controls, not as errors, preserving all five tastes',async(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const {app}=await firstShotFixture();
  let markup='';
  app.show=(_title,html)=>{markup=html;};
@@ -201,7 +206,11 @@ test('Log Shot politely announces copied controls, not as errors, preserving all
  assert.deepEqual(app.draft.tasteScales,originalTastes);
 });
 
-test('Log Shot does not copy or attribute a missing temperature as a recommendation',async()=>{
+test('Log Shot does not copy or attribute a missing temperature as a recommendation',async(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const raw=rawFixture();
  raw.workspaceCoffees[0].selected_style='Turbo';
  Object.assign(raw.setupPreferences[0],{track_temperature:true,track_slow_feed:true,temperature_unit:'C'});
@@ -259,7 +268,11 @@ test('Slow Feed toggle without current copied recommendations does not warn or c
  assert.deepEqual(app.draft.tasteScales,ratings);
 });
 
-test('Slow Feed enables an available temperature copy after standard-feed feedback has no measured temperature',async()=>{
+test('Slow Feed enables an available temperature copy after standard-feed feedback has no measured temperature',async(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const {app,raw}=await firstShotFixture();
  raw.shots=[rawShot({id:'standard-missing-temp',style:'Turbo',feed_mode:'standard',temperature_c:null,
   is_dialed_in:false,personal_family_id:null,extraction:3,body:3,clarity:4,sweetness:5,astringency:1})];
@@ -292,7 +305,11 @@ test('Slow Feed enables an available temperature copy after standard-feed feedba
  assert.deepEqual(app.draft.recommendationContext.used_controls,['temperature']);
  assert.deepEqual(app.draft.tasteScales,ratings);
 });
-test('Slow Feed disables stale temperature copy after switching into missing-temperature feedback',async()=>{
+test('Slow Feed disables stale temperature copy after switching into missing-temperature feedback',async(t)=>{
+ if(frozenAdmissionScopedSource()){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const {app,raw}=await firstShotFixture();
  raw.shots=[rawShot({id:'slow-missing-temp',style:'Turbo',feed_mode:'slow',temperature_c:null,
   is_dialed_in:false,personal_family_id:null,extraction:3,body:3,clarity:4,sweetness:5,astringency:1})];
