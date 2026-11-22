@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r443-validation-recommendation-button-state",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve unavailable recommendation-copy button state after invalid Log Shot Save",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE source-reproduced Log Shot validation defect; DIC_PREFLIGHT_VERIFIED development_sha=fbc3f49723ac16128236d2e61d8bfbcf8fc59ed2 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob=14bea9447c42822a7215c03a48be5ccc69dbace7, baseline test=d3538fd1bd8894d77ace3d928fda0f003cdec4c7.",
+      "tests": [
+        "R443 three new synthetic actual-CloudApp negative/positive submit regressions authored; execution and hosted exact-source CI PENDING, not PASS.",
+        "Updated existing R323 focus and disabled-state static regression; Node22/Chromium/mobile/offline/a11y and risk-based applicable CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Verify exact-source applicable tests/CI and nonforce merge, read back resulting blobs and merged SHA.",
+        "Owner #3347 source-isolated frozen READY candidate plus five exact successful jobs needed before READY; no publication without a NEW owner Publish."
+      ],
+      "notes": "Fix the invalid Save finalizer which enabled initially unavailable Grind/Temperature Use Recommendation buttons. Preserve optional availability and all five explicit ratings, original measurements, private notes/history, Slow Feed and approved controls, no telemetry, member data, numeric policy or science claim. No deployment.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r419-successful-grind-provenance",
       "issue": 455,
       "pr": null,
