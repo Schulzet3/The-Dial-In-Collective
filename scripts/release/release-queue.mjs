@@ -149,6 +149,22 @@ export function formatQueueReport(result){
   ...result.other_items.map(x=>'- '+x.id+' '+x.state+' ('+x.blockers.join('; ')+')'),
   'This is NOT an owner release approval or evidence of hosted publication.'].join('\n')+'\n';
 }
+// Intake validation needs the published-source diff and queue ownership, not the
+// full release-batch ancestry assessment. The latter spawns Git once for many
+// historical queue rows, even though --enforce-intake ignored its errors.
+// Keep strict release candidacy/ancestry in evaluateLocalQueue() unchanged.
+export function evaluateLocalIntake(queue,{git=execFileSync}={}){
+ const base=queue?.published_base?.tested_source_sha;
+ if(!SHA.test(base||''))throw Error('Invalid queue published baseline tested source');
+ const options={encoding:'utf8',timeout:15000,maxBuffer:2e6};
+ const raw=String(git('git',['diff','--name-only','--no-renames',base+'..HEAD'],options));
+ const changed=raw.split(/\r?\n/).filter(Boolean);
+ return assessIntakeCoverage(queue,changed,{currentBlobSha:path=>{
+  try{return String(git('git',['hash-object','--',path],options)).trim();}
+  catch{return null;}
+ }});
+}
+
 export function evaluateLocalQueue(){
  const git=args=>execFileSync('git',args,{encoding:'utf8',timeout:15000,maxBuffer:2e6}).trim();
  const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
@@ -174,10 +190,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   if(errors.length)throw Error(errors.join('; '));
   if(flag==='--validate')console.log('[DIC queue schema] PASS');
   else if(flag==='--enforce-intake'){
-   const result=evaluateLocalQueue(),tracked=assessIntakeCoverage(queue,result.deployable_paths,{
-    currentBlobSha:path=>{try{return execFileSync('git',['hash-object','--',path],{encoding:'utf8',timeout:15000}).trim();}
-      catch{return null;}}
-   });
+   const tracked=evaluateLocalIntake(queue);
    if(!tracked.tracked)throw Error(tracked.errors.join('; '));
    console.log('[DIC queue intake] PASS '+tracked.deployable_paths.length+' tracked deployable paths');
   }else{
