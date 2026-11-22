@@ -14,6 +14,7 @@ test('shared parser, product and UI dependencies rerun one representative select
  for(const group of groups)for(const file of [
   'src/server/coffee-page-metadata.mjs','src/server/coffee-product-scope.mjs',
   'src/server/coffee-url-guard.mjs','src/server/roast-level-evidence.mjs',
+  'src/server/agtron-roast.mjs',
   'site/cloud/coffee-url-autofill.js','site/lib/ui.js',
   'supabase/functions/_shared/html-scan.mjs',
   'supabase/functions/_shared/coffee-release-label.mjs',
@@ -34,4 +35,14 @@ test('one hard-gated two-coffee official source, parser and unsaved UI job remai
  assert.ok(yaml.includes("DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '126,127'"));
  assert.ok(yaml.includes('Strict own selected identities source HTML SHA'));
  assert.ok(yaml.includes('coffee-issue33-r408-producer-farm-caption.test.mjs'));
+});
+
+// This module is a direct current coffee parser import, but its path is neither
+// src/server/coffee-*.mjs nor src/server/roast-*.mjs; missing it leaves a hole.
+test('direct parser Agtron import is covered on PR and merged pushes without broad fanout',()=>{
+ const parser=readFileSync('src/server/coffee-page-metadata.mjs','utf8');
+ assert.match(parser,/from ['"]\.\/agtron-roast\.mjs['"]/);
+ assert.match(parser,/\binterpretAgtron\(/);
+ for(const group of groups)assert.ok(covered(group,'src/server/agtron-roast.mjs'));
+ for(const group of groups)assert.ok(!covered(group,'src/server/unrelated-roaster-sandbox.mjs'));
 });
