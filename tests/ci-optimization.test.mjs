@@ -85,8 +85,10 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  };
  for(let lane=0;lane<3;lane++){
   assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>shiftedOwner(i)===lane));
-  assert.deepEqual(shards[lane].serial,lane===2?plan.serial:[]);
+  assert.deepEqual(shards[lane].serial,lane===1?plan.serial:[]);
  }
+ assert.deepEqual(shards.flatMap(s=>s.serial),plan.serial,
+  'exactly one isolated security file across the three required HIGH runners');
  const counts=shards.map(s=>s.parallel.length);
  assert.ok(counts[0]<counts[1]&&counts[2]>plan.parallel.length/5,
   'relocate only measured excess validate work to the two idle existing lanes');
