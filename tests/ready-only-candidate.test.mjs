@@ -455,6 +455,34 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
 });
 
 
+test('#3347 both individually pinned workflow-only source tests validate and fail closed',()=>{
+ const specs=[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST];
+ const workflows=specs.map(s=>s.restoredWorkflow);
+ const paths=specs.map(s=>s.path);
+ const objectAt=(ref,path)=>{
+  const spec=specs.find(s=>s.path===path);
+  if(spec)return ref===A||ref===C?null:'100644:'+spec.sourceBlob;
+  if(workflows.includes(path))return ref===A||ref===C?'100644:published':'100644:unready';
+  return validate.sourceObjectAt(ref,path);
+ };
+ const input={...validate,sourceObjectAt:objectAt,
+  manifest:{...manifest,restored_unpublished_workflow_paths:workflows.slice().sort(),
+   excluded_unpublished_workflow_test_paths:paths.slice().sort()},
+  developmentChangedPaths:[...validate.developmentChangedPaths,...workflows],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,...workflows,...paths]};
+ assert.equal(validateReadyOnlyCandidate(q,input).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(ref,path)=>ref===B&&path===REVIEWED_CI_FAST_PR_TEST.path?
+   '100644:'+'0'.repeat(40):objectAt(ref,path)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch|Only one byte-pinned/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(ref,path)=>ref===C&&path===REVIEWED_CI_FAST_PR_TEST.path?
+   '100644:'+REVIEWED_CI_FAST_PR_TEST.sourceBlob:objectAt(ref,path)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  manifest:{...input.manifest,excluded_unpublished_workflow_test_paths:[paths[0]]}}),
+  /Only one byte-pinned/);
+});
 test('#2169 reviewed workflow-only test exclusion is pinned to actual source',()=>{
  const t=REVIEWED_WORKFLOW_TEST;
  assert.equal(t.sourceBlob,'32174be8c42ba9ae73085e0f6f1f42613b2b08db');
