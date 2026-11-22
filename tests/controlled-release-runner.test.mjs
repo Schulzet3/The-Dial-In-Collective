@@ -135,3 +135,11 @@ test('candidate verification is between source queue readback and the one-use re
  const claimed=src.indexOf('const planned=planSingleUseClaim');
  assert.ok(verify>0&&granted>verify&&claimed>granted);
 });
+
+test('#3781 controller binds certified exact candidate CI before legacy item evidence gate',()=>{
+ const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
+ assert.match(src,/certifiedFrozenCandidateRuns\(\{/);
+ assert.match(src,/candidateSha:sha,candidateBranch/);
+ assert.match(src,/frozenCandidateRunIds,frozenCandidateBranch:candidateBranch/);
+ assert.match(src,/if\(!evidence.ready\)throw Error/);
+});

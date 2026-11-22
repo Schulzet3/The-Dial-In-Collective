@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders} from '../scripts/release/ready-evidence-gate.mjs';
+import {createHash} from 'node:crypto';
+import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders,certifiedFrozenCandidateRuns} from '../scripts/release/ready-evidence-gate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const item={id:'DIC-Q-1938-test',issue:1938,title:'Toggle',owner_source:'Owner',state:'READY',
  merged_source_sha:A,scope_paths:['site/admin/push.js'],
@@ -126,4 +127,57 @@ test('#3424 missing live CI proof HOLDS without fabricated co-selected overlap e
  assert.equal(result.errors.some(x=>x.includes('unreviewed same-file READY overlap')),false);
  // The second synthetic owner intentionally has different CI receipts; its genuine
  // missing recorded checks remain HOLD, not source-conflict errors.
+});
+
+test('#3781 clean frozen candidate source uses only its own exact five successful push checks',async()=>{
+ const branch='release-candidates/ready3347-source-identity';
+ const frozenRuns=[21,22,23,24];
+ const cleanChecks=names.map((name,i)=>({...checks[i],id:700+i,head_sha:C,
+  details_url:'https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/'+
+  frozenRuns[i%4]+'/job/'+(700+i)}));
+ const actual={...deps,publishedSourceSha:B,candidateSha:C,candidateChangedPaths:['site/admin/push.js'],
+  frozenCandidateRunIds:frozenRuns,frozenCandidateBranch:branch,
+  loadChecks:async sha=>sha===C?cleanChecks:checks,
+  loadRun:async id=>({id,head_sha:id>=21?C:B,status:'completed',conclusion:'success',
+   event:id>=21?'push':'pull_request',head_branch:id>=21?branch:'development/backend-foundation'}),
+  sourceObjectAt:(sha,path)=>sha===B&&path==='site/admin/push.js'
+   ?'100644:unfinished-overlap':'100644:approved-clean-source'};
+ const verified=await verifyReadyItems(actual);
+ assert.equal(verified.ready,true,verified.errors.join(' | '));
+ assert.equal(verified.verified[0].ci_source_sha,C);
+ for(const override of [
+  {loadRun:async id=>({...await actual.loadRun(id),conclusion:id===22?'failure':'success'})},
+  {loadRun:async id=>({...await actual.loadRun(id),head_branch:id===22?'wrong-branch':branch})},
+  {loadChecks:async sha=>sha===C?cleanChecks.map(x=>x.name==='sql'?{...x,conclusion:'skipped'}:x):checks},
+  {sourceObjectAt:(sha,path)=>sha===C&&path==='site/admin/push.js'
+   ?'100644:unreviewed-clean-source':'100644:approved-clean-source'},
+  {frozenCandidateRunIds:[21,22,23,24,25]},
+  {frozenCandidateRunIds:[21,22,23,23]}
+ ]){
+  const denied=await verifyReadyItems({...actual,...override});
+  assert.equal(denied.ready,false,JSON.stringify(override));
+ }
+});
+test('#3781 frozen READY certificate binds exact selection, base, source, branch and run IDs',()=>{
+ const branch='release-candidates/ready3347-source-identity';
+ const certifiedQueue={...queue,items:[item]};
+ const canon=value=>Array.isArray(value)?'['+value.map(canon).join(',')+']':
+  value&&typeof value==='object'?'{'+Object.keys(value).sort().map(k=>
+   JSON.stringify(k)+':'+canon(value[k])).join(',')+'}':JSON.stringify(value);
+ const hash=createHash('sha256').update(canon({
+  published_base:queue.published_base,selected_ready_records:[item]
+ })).digest('hex');
+ const cert={schema_version:1,kind:'DIC-PREVALIDATED-READY-BATCH-1',
+  candidate_branch:branch,candidate_sha:C,ready_selection_sha256:hash,
+  run_ids:[21,22,23,24]};
+ const base={queue:certifiedQueue,certificate:cert,candidateSha:C,candidateBranch:branch};
+ assert.deepEqual(certifiedFrozenCandidateRuns(base),cert.run_ids);
+ for(const changed of [
+  {candidateSha:A},
+  {candidateBranch:'release-candidates/other-branch'},
+  {certificate:{...cert,ready_selection_sha256:'0'.repeat(64)}},
+  {certificate:{...cert,run_ids:[21,21]}},
+  {queue:{...certifiedQueue,published_base:{...queue.published_base,tested_source_sha:A}}},
+  {queue:{...certifiedQueue,items:[{...item,tests:['changed']}]}}
+ ])assert.throws(()=>certifiedFrozenCandidateRuns({...base,...changed}),/certificate|source-bound/);
 });

@@ -15,7 +15,7 @@ import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch,
  auditMissingUnreadyMergeEvidence} from './release-queue.mjs';
 import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
-import {verifyReadyItems,githubReleaseReaders} from './ready-evidence-gate.mjs';
+import {verifyReadyItems,githubReleaseReaders,certifiedFrozenCandidateRuns} from './ready-evidence-gate.mjs';
 import {liveControllerIndex} from './observe-chat-controller-event.mjs';
 import {validateReleaseTriggerReceipt} from './release-reliability.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
@@ -370,6 +370,12 @@ export async function executeSingleUseRelease(settings=process.env){
  // Live source-bound proof of EACH READY item before any one-use release claim.
  const selectedIds=new Set(queueGate.ready_items.map(x=>x.id));
  const readyItems=queuedSource.items.filter(x=>selectedIds.has(x.id));
+ const frozenCandidateRunIds=candidateBranch?certifiedFrozenCandidateRuns({
+  queue:queuedSource,
+  certificate:json(git(['show',developmentHead+':docs/READY_BATCH_CERTIFICATION.json']),
+   'live READY exact-source certification'),
+  candidateSha:sha,candidateBranch
+ }):[];
  const evidence=await verifyReadyItems({
   queue:queuedSource,items:readyItems,...(await githubReleaseReaders(token)),
   sourceObjectAt:objectAt,currentSourceSha:developmentHead,
@@ -378,6 +384,7 @@ export async function executeSingleUseRelease(settings=process.env){
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
   candidateChangedPaths:changedSourcePaths,
   allowedPinnedPaths:queueGate.pinned_ready_paths||[],
+  frozenCandidateRunIds,frozenCandidateBranch:candidateBranch,
   isAncestor:(a,b)=>verifiedGitAncestry(a,b)
  });
  if(!evidence.ready)throw Error('READY live evidence HOLD before claim: '+

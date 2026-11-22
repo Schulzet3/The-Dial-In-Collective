@@ -1214,3 +1214,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=37535cb5f39442a7e0cd1ff2f91dafb09dbe7378 
 - Release ID: DIC-20261122-ADMISSION-READY02
 - Tested source: d4af1c4e13d1babe6f10d277d5243582eb798c56
 - Mode: publish
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=37535cb5f39442a7e0cd1ff2f91dafb09dbe7378 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — #3781 exact candidate CI source provenance reconciliation (nonpublishing) [skip netlify]
+- Authority: owner-approved SINGLE #3781 publish scope; main parent ac77cfa1c31ed8d8b5a6d1aabda0d8ecf442d3b0; live dev 37535cb5f39442a7e0cd1ff2f91dafb09dbe7378; preflight c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Controller run 45050060516 FAILED **before claim** and did not advance release/production, consume grant, or initiate Netlify. Reason: historical item.ci_runs only contain mixed PR HEADs, whereas independently certified clean frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 has five exact push checks and clean main.js blob matches source-freeze merge 354ddd99.
+- Repair narrows only release evidence transport: source-bound dev READY certificate identity validated against current queue SHA-256 fingerprint, frozen ref and source; official frozen run IDs independently re-read, requiring exact candidate SHA, branch, push event, completed SUCCESS, five named GitHub Actions check-run objects and immutable Git blob parity to selected code/tests. All original item.ci_runs still independently checked for completion/success. No fallback to mismatched PR heads or omitted tests, and regular nonfrozen legacy evidence rules unchanged. Negative regression covers stale run, branch, SHA, CI SKIPPED, source drift, stale selection, duplicates and zero permission bypass.
+- No application source/queue/authorizations/production/migration or Netlify writes. New one-use recovery grant and distinct owner-scoped main request only AFTER source CI/approval tests PASS, with previous claim confirmed absent and live preflight refreshed. [skip netlify].

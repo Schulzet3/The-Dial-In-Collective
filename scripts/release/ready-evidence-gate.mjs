@@ -1,6 +1,7 @@
 // Live, read-only READY gate. Reuses recorded GitHub CI; never runs a build,
 // stages a candidate, grants publication or changes release/provider data.
 import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -10,6 +11,29 @@ const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const RUN_URL=/^https:\/\/github\.com\/Schulzet3\/The-Dial-In-Collective\/actions\/runs\/([1-9][0-9]*)\/job\/([1-9][0-9]*)$/;
 const sorted=xs=>[...new Set(xs)].sort();
+// A frozen READY certificate is source identity, not a waiver of any test.
+// Verify its exact queue selection before using its immutable candidate push CI.
+const canonical=value=>Array.isArray(value)?'['+value.map(canonical).join(',')+']':
+ value&&typeof value==='object'?'{'+Object.keys(value).sort().map(k=>
+ JSON.stringify(k)+':'+canonical(value[k])).join(',')+'}':JSON.stringify(value);
+export function certifiedFrozenCandidateRuns({queue,certificate,candidateSha,candidateBranch}={}){
+ const selected=queue?.items?.filter(x=>x.state==='READY').sort((a,b)=>a.id.localeCompare(b.id))||[];
+ if(queueSchemaErrors(queue).length||!selected.length||
+    !SHA.test(candidateSha||'')||
+    !/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/.test(candidateBranch||'')||
+    certificate?.schema_version!==1||certificate?.kind!=='DIC-PREVALIDATED-READY-BATCH-1'||
+    certificate.candidate_sha!==candidateSha||certificate.candidate_branch!==candidateBranch||
+    !Array.isArray(certificate.run_ids)||certificate.run_ids.length<1||certificate.run_ids.length>5||
+    new Set(certificate.run_ids).size!==certificate.run_ids.length||
+    certificate.run_ids.some(id=>!Number.isSafeInteger(id)||id<=0))
+  throw Error('Incomplete or stale frozen READY candidate source-bound certificate');
+ const selectionHash=createHash('sha256').update(canonical({
+  published_base:queue.published_base,selected_ready_records:selected
+ })).digest('hex');
+ if(certificate.ready_selection_sha256!==selectionHash)
+  throw Error('Frozen READY certificate selection or published baseline changed');
+ return [...certificate.run_ids];
+}
 export function checkRunReceiptId(url){
  const m=typeof url==='string'?RUN_URL.exec(url):null;
  return m?Number(m[1]):null;
@@ -75,7 +99,7 @@ export function reviewedSelectedReadyOverlaps(items,{
 
 export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObjectAt,
  mergeChangedPaths,currentSourceSha,publishedSourceSha,candidateSha,candidateChangedPaths,
- allowedPinnedPaths=[],isAncestor}={}){
+ allowedPinnedPaths=[],isAncestor,frozenCandidateRunIds=[],frozenCandidateBranch}={}){
  const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={},testPathsByItem={};
  if(!Array.isArray(items)||typeof loadRun!=='function'||typeof loadChecks!=='function'||
   typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
@@ -110,11 +134,34 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
      throw Error('cited GitHub Actions run '+id+' is missing, failed, skipped or not source-bound');
     return x;
    }));
-   const sources=sorted(runs.map(x=>x.head_sha));
-   sources.sort((a,b)=>a===item.merged_source_sha?-1:b===item.merged_source_sha?1:0);
+   // Frozen candidates are tested against their own exact five SUCCESS checks,
+   // not against prior PR heads containing independently unready same-file code.
+   // Preserve and verify every original cited item run as well.
+   if(!Array.isArray(frozenCandidateRunIds))throw Error('Malformed frozen candidate receipt');
+   let sources=sorted(runs.map(x=>x.head_sha)),receiptIds=item.ci_runs;
+   if(frozenCandidateRunIds.length){
+    if(!SHA.test(candidateSha||'')||
+       !/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/.test(frozenCandidateBranch||'')||
+       frozenCandidateRunIds.length>5||
+       new Set(frozenCandidateRunIds).size!==frozenCandidateRunIds.length||
+       frozenCandidateRunIds.some(id=>!Number.isSafeInteger(id)||id<=0))
+      throw Error('Invalid certified candidate CI receipt identity');
+    const frozenRuns=await Promise.all(frozenCandidateRunIds.map(async id=>{
+     const result=await run(id);
+     if(result?.id!==id||result.head_sha!==candidateSha||
+        result.head_branch!==frozenCandidateBranch||result.event!=='push'||
+        result.status!=='completed'||result.conclusion!=='success')
+      throw Error('Frozen candidate CI run is missing, stale, failed or not an exact push: '+id);
+     return result;
+    }));
+    if(frozenRuns.length!==frozenCandidateRunIds.length)
+     throw Error('Incomplete frozen candidate CI run list');
+    sources=[candidateSha]; // No fallback to a stale legacy PR head.
+    receiptIds=frozenCandidateRunIds;
+   }else sources.sort((a,b)=>a===item.merged_source_sha?-1:b===item.merged_source_sha?1:0);
    let chosen=null,failures=[];
    for(const sha of sources){
-    const recorded=exactRecordedChecks(await checks(sha),sha,item.ci_runs);
+    const recorded=exactRecordedChecks(await checks(sha),sha,receiptIds);
     const audit=assessReadyEvidence(item,{mergedSha:item.merged_source_sha,
       ciSourceSha:sha,checks:recorded,changedPaths:actualPaths,
       sourceObjectAt,testPaths:provenancePaths});
