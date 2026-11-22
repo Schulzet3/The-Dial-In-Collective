@@ -185,10 +185,15 @@ test('Log Shot politely announces copied controls, not as errors, preserving all
  assert.equal(copiedStatus.textContent,'','manual edits clear stale copy confirmation');
  await click(app,'use-grind');
  assert.match(copiedStatus.textContent,/Grind Setting copied/);
+ const copiedGrind=form.elements.grindSetting.value;
+ const copiedTemperature=form.elements.temperature.value;
  form.elements.slowFeed.checked=true;
  app.change({target:{name:'slowFeed',closest:()=>null}});
- assert.equal(copiedStatus.textContent,'','feed-mode context change clears stale status');
- assert.equal(app.draft.recommendationContext,null);
+ assert.match(copiedStatus.textContent,/Feed mode changed.*Previously copied recommendations remain/,
+  'a changed feed must not silently leave previously copied controls looking current');
+ assert.equal(form.elements.grindSetting.value,copiedGrind,'preserve the original form measurement');
+ assert.equal(form.elements.temperature.value,copiedTemperature,'do not erase a measured temperature');
+ assert.equal(app.draft.recommendationContext,null,'previous feed recommendation is no longer attributed');
  assert.deepEqual(app.draft.tasteScales,originalTastes);
 });
 
@@ -236,4 +241,16 @@ test('Log Shot keeps valid starting-temperature copy enabled',async()=>{
  await click(app,'use-temp');
  assert.equal(Number(form.elements.temperature.value),rec.tempC);
  assert.deepEqual(app.draft.recommendationContext.used_controls,['temperature']);
+});
+
+test('Slow Feed toggle without current copied recommendations does not warn or change five ratings',async()=>{
+ const {app}=await firstShotFixture();
+ const ratings=structuredClone(app.draft.tasteScales);
+ const grinder=form.elements.grindSetting.value;
+ form.elements.slowFeed.checked=true;
+ app.change({target:{name:'slowFeed',closest:()=>null}});
+ assert.equal(copiedStatus.textContent,'','no copied values means no stale-copy warning');
+ assert.equal(form.elements.grindSetting.value,grinder);
+ assert.equal(app.draft.recommendationContext,null);
+ assert.deepEqual(app.draft.tasteScales,ratings);
 });
