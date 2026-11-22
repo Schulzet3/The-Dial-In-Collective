@@ -74,3 +74,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 
 - Original candidate 95ea280f FAILED validate. Its candidate ref remains IMMUTABLE; the reviewed staging tool derives a branch from READY selection, so a revised source with unchanged selection collides with that earlier frozen Git ref.
 - Provisional QUEUE test evidence now records source-bound QA test fixes, altering the new ready selection fingerprint/branch without deleting or overwriting old candidate. This is a nonpublishing source-freeze, not READY development or grant.
 - Previous receipt run 45049056359 SUCCESS for QA source e85780b67, but reported prior branch conflict; refreshed candidate receipt required for this new exact source. Five official GitHub CI jobs must all succeed at NEW immutable candidate SHA; no old successes or skips credited.
+
+DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — verify source-bound candidate staging V5 on official main (nonpublishing) [skip netlify]
+- Operations main nonforce merge 8df03a5b3b558f8704e07207990bcf1c797ebbfe corrected #3347 candidate names to include exact source SHA and V5 contract, preserving immutable previous failed 95ea280f.
+- This one-shot read-only scoped workflow now first executes the focused official main tests/precertify-ready-source.test.mjs in Node22 and stops/fails on any errors; ONLY THEN emits a new deterministic official source receipt from current preparation branch 8ce1decc6b574ef2b8d92981c1d60ccb1f084402. It never pushes source or production refs.
+- Live preflight 663b7857a9d8ab0f2ca797603d340032a9cdcb14/c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; current development READY queue remains unchanged TESTING for #3781. No grant or publication; one new source-bound frozen candidate must pass five native CI jobs before promoting.

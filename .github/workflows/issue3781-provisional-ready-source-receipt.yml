@@ -30,6 +30,7 @@ jobs:
           git checkout --detach origin/main
           git cat-file -e "$FROZEN_PREPARATION_SHA^{commit}"
           mkdir -p qa_artifacts/issue3781
+          node --test tests/precertify-ready-source.test.mjs
           node scripts/release/precertify-ready-source.mjs "$FROZEN_PREPARATION_SHA" --receipt |
             sed -n 's/^\[DIC READY pre-certification\] //p' > qa_artifacts/issue3781/receipt.json
           node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/issue3781/receipt.json','utf8')); if(r.status!=='LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE'||r.development_source_sha!==process.env.FROZEN_PREPARATION_SHA||!r.expected_tree_sha||!r.candidate_branch) process.exit(2); console.log('DIC SOURCE RECEIPT PASS:',r.candidate_branch,r.expected_tree_sha,'restorations:',r.delta_entries.length)"
