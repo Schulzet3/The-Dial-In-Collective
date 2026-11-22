@@ -1205,3 +1205,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=663b7857a9d8ab0f2ca797603d340032a9cdcb14 
 - Root cause verified: official pre-cert staging used READY ID/merged source/path/check identity only for candidate ref names; repaired QA source SHA e85780b670f9d89328fdf46ba035b9d81205bb18 and 8ce1decc6b574ef2b8d92981c1d60ccb1f084402 collided with immutable FAILED candidate 95ea280fbd50ef83009683271035122ec38b43e4. Queue note changes cannot safely alter name and old candidate must not be moved.
 - Fix: frozenReadyBranch requires a valid 40-character exact staging development source SHA, includes it in SHA-256 branch identity, and uses new V5 contract; read-only source-only naming. Updated unit test asserts same-source deterministic identity, different sources cannot collide, and no source fails closed. No publisher, CI gate, Netlify, grant, Auth, SQL, queue or deployed source modified.
 - New preparation branch must regenerate official runner receipt against THIS main source, establish exact Git tree SHA, five complete exact candidate SHA SUCCESS jobs, development READY certificate, new one-use owner grant, request/controller and Netlify postflight. Historical failed candidate retained immutable. No READY/DEPLOYED claim at this step.
+
+DIC_PREFLIGHT_VERIFIED development_sha=37535cb5f39442a7e0cd1ff2f91dafb09dbe7378 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Owner November 22 explicitly approved the returning-session read-only cached paint with asynchronous server admission and revocation, exact frozen READY one-use #3781. Original rejected candidate 95ea280f remains preserved; candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 and ready cert independently verified, five exact native CI SUCCESS, live development source 37535cb5f39442a7e0cd1ff2f91dafb09dbe7378.
+- Risk NONE SQL migrations; encrypted owner-private backup run44920698063 artifact14713443972 and Drive file 1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn directly verified. No unrelated READY items, no credit/plan/permission changes. One Git-connected controller publication only. Pending actual release ref, controller run ID and Netlify provider postflight.
+
+## DIC-20261122-ADMISSION-READY02 controller request [skip netlify]
+- Release ID: DIC-20261122-ADMISSION-READY02
+- Tested source: d4af1c4e13d1babe6f10d277d5243582eb798c56
+- Mode: publish
