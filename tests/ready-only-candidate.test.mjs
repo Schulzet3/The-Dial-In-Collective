@@ -62,8 +62,11 @@ test('#3347 startup coupled Log Shot suites use only proven published-source tes
   objects.set(s.merge+'^:'+item.path,'100644:'+item.unready);
  }
  const sourceObjectAt=(ref,path)=>objects.get(ref+':'+path)??null;
+ // The real stage/validator pass compact plan.ready_items without state.
+ const compact={id:selected.id,issue:selected.issue,merged_source_sha:selected.merged_source_sha,
+  scope_paths:selected.scope_paths};
  const props={queue,pinnedReadyPaths:[s.runtime],publishedSourceSha:A,
-  developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[selected]};
+  developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[compact]};
  assert.deepEqual(discoverReviewedRestoredStartupTests(props),s.tests.map(x=>x.path).sort());
  assert.deepEqual(discoverReviewedRestoredStartupTests({...props,selectedReadyItems:[]}),[]);
  assert.throws(()=>discoverReviewedRestoredStartupTests({...props,pinnedReadyPaths:[]}),

@@ -344,7 +344,11 @@ export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
  const s=REVIEWED_STARTUP_MIXED_TESTS;
  const selected=selectedReadyItems.find(i=>i.id===s.id);
  if(!selected)return [];
- if(typeof sourceObjectAt!=='function'||selected.state!=='READY'||selected.issue!==455||
+ // Plan ready_items are deliberately compact and omit state. Bind to full queue.
+ const tracked=queue?.items?.find(i=>i.id===s.id);
+ if(typeof sourceObjectAt!=='function'||tracked?.state!=='READY'||tracked.issue!==455||
+    selected.issue!==tracked.issue||selected.merged_source_sha!==tracked.merged_source_sha||
+    !equal(selected.scope_paths||[],tracked.scope_paths||[])||
     selected.merged_source_sha!==s.merge||!selected.scope_paths?.includes(s.runtime)||
     !pinnedReadyPaths.includes(s.runtime)||!queue?.items?.some(i=>
       i.id!==s.id&&i.issue===455&&['TESTING','IN_PROGRESS'].includes(i.state)&&
