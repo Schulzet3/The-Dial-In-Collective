@@ -18315,22 +18315,36 @@
       "pr": 3782,
       "title": "Open previously admitted same-owner cached workspace while rechecking access in background",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "088d72957392e07cb98562f3fa5932cd5bac85dd",
       "scope_paths": [
         "site/cloud/client.js",
         "site/cloud/main.js"
       ],
       "owner_source": "Owner Nov22 direct approval; live preflight development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
       "tests": [
-        "Initial PR head d5e1eb5 failed cheap queue-intake guard before exercising Node/Chromium: missing TESTING scope entry. Corrected here with new approval-coverage inventory.",
-        "New 6 Node regressions for local session, provisional cache, cross-account, admission revocation, read-only and background retry; exact PR-head hosted checks PENDING; no PASS inferred."
+        "PR head cb9a4faf3a6d6a031ccd4ac59f90503b266d23d9 exact high-Auth CI PASS: validate 45039621942, cloud-tests/mobile-browser-qa 45039621871, approval 45039621920, isolated SQL 45039621979, imported regression 45039621946 and security 45039622026 all SUCCESS; intentionally skipped frozen603 is NOT_APPLICABLE, not PASS.",
+        "Original PR head d5e1eb5 failed queue intake; repaired TESTING queue and decision coverage. Intermediate head 4168fcb failed one brittle recommendation constructor text assertion; fixed without weakening that test. Prior failures remain recorded, not counted as PASS.",
+        "Nonforce [skip netlify] PR #3782 merged to development commit 088d72957392e07cb98562f3fa5932cd5bac85dd with first parent concurrent tested #3667 f11bc12fa6c9bf4c0a07a0fdb161d2b4b6486013 and second parent exact passing PR head; merged branch ref/parents/tree verified.",
+        "Exact merged-source push CI PASS: validate 45039837781, cloud-tests + mobile-browser-qa 45039837803, approval 45039837783, imported-source-regressions 45039837798, exact-selected 45039837805 all COMPLETED SUCCESS.",
+        "New returning-session regressions cover cached first-paint, read-only preadmission, background denied cleanup, saved outbox, session validity, cross-owner and recovery guards; no real production-device stopwatch or live member acceptance measured."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45039621942,
+        45039621871,
+        45039621920,
+        45039621979,
+        45039621946,
+        45039622026,
+        45039837781,
+        45039837803,
+        45039837783,
+        45039837798
+      ],
       "blockers": [
-        "Exact PR-head and postmerge Auth/privacy/browser/SQL/approval checks must finish SUCCESS; no early READY.",
-        "Frozen READY source isolation and five candidate CI SUCCESS certificate under #3347 not yet available."
+        "No separately frozen published-base-isolated #3347 READY candidate source and FIVE exact-candidate native SUCCESS jobs. Source-merged development Auth feature remains TESTING until that nonpublishing certification passes.",
+        "No fresh owner Publish; production remains previous release/production 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 and earlier Netlify receipt, not this change."
       ],
-      "notes": "Development-only read-only optimistic own-cache preview; every server cloud read/write still requires current admission. Retains owner-bound outbox, session isolation, preexisting offline/cache and history. No production, SQL, Auth, member data, Netlify or publisher write.",
+      "notes": "Owner-approved returning-session instant cached preview and background admission, read-only until server confirms. Existing per-RPC admission, Auth/RLS/role, offline/outbox and private history preserved; explicit revocation clears UI/cache. DEVELOPMENT VERIFIED; READY NOT CERTIFIED; NOT DEPLOYED.",
       "production_deployed": false
     }
   ],
