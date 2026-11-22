@@ -17920,25 +17920,39 @@
     {
       "id": "DIC-Q-455-r417-measured-grind-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3594,
       "title": "Preserve original fractional grinder settings in new, offline and edited shot measurements",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
       "scope_paths": [
         "site/lib/engine.js",
         "site/cloud/mapping.js"
       ],
       "owner_source": "Owner Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; source engine 12f036ff2286c3e041d5ebf2a81c56ead6928c5c, mapping acbed6bd0f02cb7e626374a22cbeba1ab187ec2a",
       "tests": [
-        "Four synthetic actual-module positive/negative R417 regressions authored; hosted Node22, browser/mobile/offline/a11y, SQL, security and governance pending (NOT PASS).",
-        "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in authored tests.",
-        "Recommendation 0.1 adjustment grid remains unchanged; no real member or espresso quality evidence."
+        "Four original actual-module synthetic R417 positive/negative cases confirmed in exact PR-head and merged-source Node22, including fraction 0.15/0.25, offline payload, editing and missing-fifth abstention; no member/cup outcomes.",
+        "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in scoped authored regressions.",
+        "Recommendation 0.1 adjustment grid unchanged; actual non-tenth grinder measurements are preserved, not inferred optima.",
+        "Exact PR-head 5121232800ea813e4c83385daad067d1e93eab17: Node22/lint/build 44901492974, mobile/browser/offline/a11y 44901493094, approval 44901493078, isolated SQL 44901492976, security 44901493051 all COMPLETED SUCCESS. Node 6,031 PASS/0 FAIL/6 intentional SKIP, all four R417 regressions PASS.",
+        "Nonforce [skip netlify] PR #3594 squash merged 763966530e9b7bdc7d99f36a977e57018dc97fbf. Original five changed app/test/queue/journal Git blobs equal tested head; no release or provider write.",
+        "Exact merged-source push Node22 44901977584, cloud/mobile 44901977647, approval 44901977590, selected shared 44901977565 all COMPLETED SUCCESS. SQL/security at final PR head, not asserted rerun on merge. Original frozen603 SKIPPED, NOT PASS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44901492974,
+        44901493094,
+        44901493078,
+        44901492976,
+        44901493051,
+        44901977584,
+        44901977647,
+        44901977590,
+        44901977565
+      ],
       "blockers": [
-        "Exact source PR-head and merged CI not yet PASS; independent #3347 release candidate isolation and five successful checks pending. TESTING, not READY."
+        "Independent #3347 nonpublishing source-isolated frozen release candidate plus all five exact candidate CI successes NOT YET CERTIFIED; remain TESTING, NOT READY or DEPLOYED.",
+        "No new explicit owner Publish grant. Source tests and recorded CI do not establish real-world recommendation efficacy."
       ],
-      "notes": "Actual entered non-tenth measured grind was rounded by shotPayload/saveShot/editShot despite precision-capable SQL. Narrow SAFE integrity correction; original measured shots preserved. No publish/provider writes.",
+      "notes": "R417 measured-data integrity SAFE fix is merged in development only: PR #3594 merge 763966530e9b7bdc7d99f36a977e57018dc97fbf, original fractional actual dial preserved by live cloud/offline/edited shot paths; one-tenth suggested grid unchanged. Tests/CI source-bound verified; #3347 candidate isolation remains pending. No production/member/provider changes.",
       "production_deployed": false
     },
     {
