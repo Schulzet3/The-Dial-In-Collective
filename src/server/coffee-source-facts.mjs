@@ -869,6 +869,11 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    /^(?:swiss|mountain)[ -]?water(?:[ -]?process)?$/iu.test(String(value).trim())&&
    /\bdecaf(?:feinated|feination)?\b/iu.test(String(section)))return undefined;
   const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
+  // An ordered harvest itinerary is source evidence of operations, not a
+  // standalone green-processing category. Preserve the literal for review;
+  // independently labeled Natural/Washed/Honey evidence remains typed.
+  if(field==='process'&&/^(?:process|processing|processing method)$/u.test(caption)&&
+   /^[1-9][0-9]{0,2}\s*[.)]\s+\S/u.test(String(value||'').trim()))return undefined;
   // Both rows were observed in exact #249 Onyx selected HTML: an animated
   // "F i n c a: S a n t a" and an educational "Harvest: Mexico".
   // Neither is a producer or release; retain the seller's literal row.

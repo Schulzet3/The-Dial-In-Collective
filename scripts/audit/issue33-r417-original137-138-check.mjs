@@ -63,6 +63,13 @@ for(const n of [137,138]){
    failures.push('selected_EA_decaf_variety_or_country_wrong_138');
   if(!/\bWilton\s+Ben[ií]tez\b/i.test(f.producer||''))
    failures.push('selected_named_person_grower_missing_138');
+  // Harvest step one is not the selected green-bean processing method.
+  const stage=(r.source_facts||[]).find(fact=>fact.label==='Processing Method'&&
+   fact.value==='1. Hand-harvested at peak ripeness');
+  if(!stage||stage.field||stage.source_type!=='html'||
+     stage.source_url!==e.url||stage.section!=='Red Bourbon DECAF / Processing Method')
+   failures.push('numbered_postharvest_stage_falsely_typed_as_process_138');
+  if(f.process!=='Natural')failures.push('independent_selected_natural_process_changed_138');
   if(/\b(?:Honey,\s*Raspberry|San Diego Mill|Costa Rica)\b/i.test([f.origin,f.producer,f.tasting_notes].join(' ')))
    failures.push('different_Gnosis_product_cross_contamination_138');
  }
