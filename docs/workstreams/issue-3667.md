@@ -105,3 +105,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=e99996abc26601691d344db4a936623f454a166c 
 - Exact PR #3700 head e99996abc26601691d344db4a936623f454a166c five-job CI: approval run 44989620800 SUCCESS, SQL 44989620796 SUCCESS, cloud-tests/mobile-browser-qa 44989620818 SUCCESS, validate 44989620805 FAIL. Failure was stale R190 code-only fixture tests/issue455-browser-dependency-install-fallback.test.mjs asserting Python script names must appear literally in workflow YAML. Actual hosted browser wrapper ran all scripts and passed; not an app/browser failure.
 - Repair: update R190 invariant to follow the new wrapper at exact development Git blob, and preserve published-workflow assertions at pinned published Git SHA in a READY-only candidate. Add mocked exit-code regression: all original Python scripts are invoked even when one fails; failed process MUST reject, no false PASS.
 - Earlier failing validate remains FAIL evidence, not ACCEPTED. Retest all five exact new PR SHA statuses before nonforce merge; no release, grant, provider or READY promotion.
+
+DIC_PREFLIGHT_VERIFIED development_sha=4e3df560045724580f77a072ca1815f3a8aa25d9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22, 2026 — correct browser test literal regex escape
+- Test-only R190 wrapper invariant used two extra backslashes in generated regex. Keep exact six browser path checks and strict workflow-mode/Promise.all checks; only fix regex string syntax. First-head validate FAIL remains recorded; exact new CI required. No provider or Publish.

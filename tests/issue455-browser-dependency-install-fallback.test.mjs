@@ -56,7 +56,7 @@ test('R190 leaves the full actual UI, visual, offline and accessibility suite re
  // workflow calls a fail-closed wrapper; inspect the pinned wrapper Git blob
  // rather than treating an unchanged full suite as missing.
  const verify=(source,sha,label)=>{
-  assert.match(source,/if: steps\\.scope\\.outputs\\.browser_mode != 'none'/);
+  assert.match(source,/if: steps\.scope\.outputs\.browser_mode != 'none'/);
   let script=source;
   if(source.includes('node scripts/audit/run-browser-qa.mjs')){
    const runnerPath='scripts/audit/run-browser-qa.mjs';
@@ -68,7 +68,7 @@ test('R190 leaves the full actual UI, visual, offline and accessibility suite re
    }else{
     script=readFileSync(new URL('../'+runnerPath,import.meta.url),'utf8');
    }
-   assert.match(script,/Promise\\.all/,'Concurrent visual checks must be awaited');
+   assert.match(script,/Promise\.all/,'Concurrent visual checks must be awaited');
    assert.match(script,/status!==0/,'Every Python failure must fail browser CI');
   }
   for(const name of required)assert.ok(script.includes(name),
