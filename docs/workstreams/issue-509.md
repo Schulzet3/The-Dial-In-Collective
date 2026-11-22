@@ -1,3 +1,17 @@
+# Issue #509 R441 — read-only pg_depend full edge semantics ranks 501–1000/5414 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=fd941409552dc28bc6f5df158ed7a548d08843c9 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory GitHub preflight at immutable development fd941409552dc28bc6f5df158ed7a548d08843c9, Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f independently matched before other documents/provider. Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY/PostgreSQL 17.11.0.003, PRODUCTION STRICTLY READ-ONLY. Development head rechecked fd941409552dc28bc6f5df158ed7a548d08843c9 before documentation-only atomic nonforce write.
+
+Resumed exact R440 dependency cursor rank 501, type shot_notes[] to shot_notes. Read and retained **500 newly unreviewed complete pg_depend catalog records, ranks 501–1000/5414**, **162487 literal source characters**, complete per-edge identities, object and reference descriptions, source MD5, exact 1–end character coverage, verdict and semantic rationale in immutable append-only [R441 ledger](../audits/issue509-r441-pg-depend-ranks501-1000-20261122.json). Cumulative this route **1000/5414**. Semantic classifications: RETAIN_AUTO_ARRAY_TYPE 31; RETAIN_COMPOSITE_ROW_TYPE 30; RETAIN_EXTENSION_TYPE_IO 2; RETAIN_TYPE_SCHEMA 1; RETAIN_EXTENSION_OWNED_TYPE 2; RETAIN_FUNCTION_SCHEMA 233; RETAIN_HELPER_FUNCTION_CALL 2; RETAIN_EXTENSION_FUNCTION 92; RETAIN_FUNCTION_LANGUAGE 96; RETAIN_FUNCTION_TYPE_SIGNATURE 11.
+
+Validated installed extension gtrgm type I/O, information_schema helper-call relationships, Realtime parameter/result-type references and private.dic_community_fingerprint(community_shots)'s real community table/row-type dependency. Independent read-only provider join confirms all referenced catalog types, relations, schemas, procedures, languages and extensions exist; zero source missing, missing references, array element mismatches or composite type/parent mismatches in 500 edge scope. Such structural dependencies prove neither app correctness nor unused objects. No confirmed new app/Edge defect, source drift, measurable bottleneck or safe dead-code removal in these edges; full SQL function bodies, native code, all other incomplete provider surfaces and inaccessible console settings remain UNVERIFIED. No #267 source-code-line credit; baseline IN_PROGRESS.
+
+No GitHub source/test/CI change: new exact-source CI NOT_APPLICABLE (not PASS). READY/DEPLOYED NOT_REVALIDATED. No production SQL/data/Auth/Storage/Edge/config or migration, publication, billing, backup, schedule or owner-alert-policy change. **Next cursor** pg_depend rank **1001/5414** first character under same seven-field sort. No action needed from owner.
+
+---
+
 # Issue #509 R440 — read-only pg_depend full edge semantics ranks 1–500/5414 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3741ba6a2876a3e11c85992fbe0c9009fbb8f58e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
