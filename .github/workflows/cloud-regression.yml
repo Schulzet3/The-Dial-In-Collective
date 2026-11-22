@@ -147,6 +147,15 @@ jobs:
         if: steps.scope.outputs.browser_mode != 'none'
         with:
           python-version: '3.12'
+      # Reuse only the Playwright 1.55.0 headless-shell download. The pinned
+      # installer still verifies OS dependencies and every browser test runs.
+      # Cold or evicted cache falls back to the normal Playwright installation.
+      - name: Reuse pinned Chromium headless-shell download
+        if: steps.scope.outputs.browser_mode != 'none'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: dic-pw-shell-v1.55.0-py312-${{ runner.os }}-${{ runner.arch }}
       - name: Install one isolated Chromium browser for all relevant acceptance
         if: steps.scope.outputs.browser_mode != 'none'
         run: |

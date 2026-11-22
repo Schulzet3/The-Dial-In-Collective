@@ -169,3 +169,22 @@ test('HIGH-risk lint runs on faster cloud-tests lane exactly once; medium-risk l
  assert.ok(cloud.indexOf('name: Lint HIGH-risk source on cloud-tests')<cloud.indexOf('  mobile-browser-qa:'),'lint must remain in cloud-tests job');
  assert.ok(cloud.indexOf('name: Run second half of high-risk full Node corpus')<cloud.indexOf('name: Lint HIGH-risk source'),'finish protected security test before lint');
 });
+
+
+test('pinned Chromium cache preserves dependency installation and all browser acceptances',()=>{
+ const cloud=file('.github/workflows/cloud-regression.yml');
+ const browser=cloud.split('  mobile-browser-qa:')[1];
+ assert.ok(browser,'browser job must exist');
+ const cache=browser.indexOf('name: Reuse pinned Chromium headless-shell download');
+ const install=browser.indexOf('name: Install one isolated Chromium browser');
+ const accept=browser.indexOf('name: Run all browser acceptances with parallel visual assertions');
+ assert.ok(cache>=0&&install>cache&&accept>install,'cache must not replace installation or acceptance');
+ assert.ok(browser.includes('uses: actions/cache@v4'));
+ assert.ok(browser.includes('path: ~/.cache/ms-playwright'));
+ assert.ok(browser.includes('key: dic-pw-shell-v1.55.0-py312-${{ runner.os }}-${{ runner.arch }}'));
+ assert.ok(browser.includes("name: Reuse pinned Chromium headless-shell download\\n        if: steps.scope.outputs.browser_mode != 'none'".replace('\\n','\n')));
+ assert.ok(browser.includes('python -m pip install playwright==1.55.0'));
+ assert.equal(browser.split('python -m playwright install --with-deps --only-shell chromium').length-1,2);
+ assert.ok(browser.includes("if ! grep -q 'azure.archive.ubuntu.com'"));
+ assert.ok(browser.includes('run: node scripts/audit/run-browser-qa.mjs'));
+});

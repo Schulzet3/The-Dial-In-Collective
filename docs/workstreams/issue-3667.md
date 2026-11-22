@@ -188,3 +188,13 @@ DIC_PREFLIGHT_VERIFIED development_sha=e536ad7b12cb55966e2e1e23ec396d82b1f30f91 
 - TRADEOFF: overlapping distinct push SHAs may consume more GitHub runner minutes in busy coding intervals; they eliminate wasted partial test runs/manual retries and preserve complete exact-source evidence, favoring 10/10 efficiency and 9/10 reliability. Existing canceled run attempts remain historical CANCELLED, never relabeled PASS. The code is nonpublishing GitHub-only.
 - ACCEPTANCE: focused test and five required exact PR-head SUCCESS jobs, nonforce [skip netlify] merge and exact merged-push validate/cloud/browser and approval SUCCESS; no READY without independent frozen candidate certificate. #3667 queue stays TESTING, <15-minute implementation-to-READY goal UNVERIFIED.
 - NEXT ACTION: verify latest PR CI and merged CI while preserving ongoing #3735 READY-verifier work; reconcile issue and queue; future source pre-certification should reuse only actual exact-SHA successful jobs.
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=a285f6b9764e49fd05853474b433e53cd3af6deb preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22, 2026 — cache exact pinned Chromium binary, not browser validation [skip netlify]
+- AUTHORITY: owner speed-first #3667 and strict prospective source-ready #3347; preflight verified at immutable a285f6b9764e49fd05853474b433e53cd3af6deb / c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. No Publish or production/provider writes.
+- BASELINE: native mobile-browser-qa install Playwright/Chromium 35s in 45004795834 and 30s in 45004509038, followed by actual 24s/23s browser acceptance; cloud Node shard sometimes dominates critical path. Cold vs warm browser caching needs official hosted measurement; no speedup asserted in advance.
+- CHANGE: exact Playwright 1.55.0 headless shell browser download cached on OS/arch/Python key, Playwright install --with-deps stays on every applicable run, existing fallback Ubuntu mirror and all browser tests remain. No credentials or private files cached, only ~/.cache/ms-playwright.
+- SCOPE: .github/workflows/cloud-regression.yml, tests/ci-optimization.test.mjs and same-commit journal. One build, five exact-source CI job statuses, offline/Auth/SQL paths unchanged.
+- ACCEPTANCE: focused cache/installer regression, five exact PR-head SUCCESS jobs, nonforce merge with [skip netlify] and verified merged blob/CI. Queue #3667 stays TESTING until separate frozen #3347 candidate passes all five exact SHA jobs and <15m full implementation-to-READY is actually measured.
