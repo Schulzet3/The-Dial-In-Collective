@@ -82,7 +82,7 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.deepEqual([...legacy0.parallel,...legacy1.parallel].sort(),plan.parallel,
   'legacy 2-way source still has exhaustive coverage');
  assert.deepEqual(legacy1.serial,plan.serial);
- assert.match(file('scripts/audit/run-full-suite.mjs'),/if\\(!files\\.length\\)/,
+ assert.match(file('scripts/audit/run-full-suite.mjs'),/if\(!files\.length\)/,
   'Empty serial shard must NOT invoke Node auto-discovery');
  assert.equal(new Set(shards.flatMap(x=>x.parallel)).size,plan.parallel.length);
  assert.throws(()=>selectFullSuiteShard(plan,'3/3'),/Invalid full-suite shard/);
