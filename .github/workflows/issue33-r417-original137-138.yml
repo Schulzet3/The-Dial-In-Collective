@@ -1,0 +1,53 @@
+name: DIC Issue33 R417 Gnosis original137 138 selected official source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r417-original137-138.yml'
+      - 'scripts/audit/issue33-r417-original137-138-check.mjs'
+      - 'docs/workstreams/ops-issue33-r417-original137-138-20261122.md'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r417-original137-138.yml'
+      - 'scripts/audit/issue33-r417-original137-138-check.mjs'
+permissions:
+  contents: read
+jobs:
+  selected-original137-138:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected flavor and named producer hostile regressions
+        run: node --test tests/coffee-issue33-r408-producer-farm-caption.test.mjs tests/coffee-issue33-r138-118.test.mjs
+      - name: Verify immutable checked-out source
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+      - name: Guarded first-party HTTPS selected originals 137 and 138
+        env:
+          DIC_R417_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '137,138'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r417
+        run: GITHUB_SHA="$DIC_R417_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict original source identity, raw SHA, parser and unsaved UI afterproof
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r417
+        run: node scripts/audit/issue33-r417-original137-138-check.mjs
+      - name: Preserve bounded public first-party evidence for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r417-gnosis-original137-138
+          path: /tmp/dic33-r417/
+          retention-days: 1
+          if-no-files-found: warn
