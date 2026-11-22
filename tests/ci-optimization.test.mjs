@@ -5,7 +5,8 @@ import {planFullSuite,selectFullSuiteShard,FULL_SUITE_CONCURRENCY} from '../scri
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {parseStageArgs,runMeasuredStage} from '../scripts/audit/measure-stage.mjs';
-import {browserQAPlan} from '../scripts/audit/run-browser-qa.mjs';
+import {browserQAPlan,runBrowserQA} from '../scripts/audit/run-browser-qa.mjs';
+import {EventEmitter} from 'node:events';
 const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
 
@@ -127,4 +128,16 @@ test('parallel browser wrapper retains every prior acceptance script at each ris
  assert.match(runner,/status!==0/,'any failed child process must fail CI');
  assert.match(file('tests/browser/visual_review.py'),/DIC_CAPTURE_VISUAL/);
  assert.match(file('.github/workflows/cloud-regression.yml'),/DIC_CAPTURE_VISUAL:/);
+});
+
+test('parallel browser orchestration runs all suites and rejects any failed fixture',async()=>{
+ const seen=[];
+ const runner=(_python,args)=>{
+  const child=new EventEmitter();
+  seen.push(args[0]);
+  queueMicrotask(()=>child.emit('close',args[0]==='tests/browser/pwa_offline_qa.py'?2:0,null));
+  return child;
+ };
+ await assert.rejects(runBrowserQA('high',{python:'mock',runner}),/Browser acceptance failed/);
+ assert.deepEqual(seen.sort(),['tests/browser/visual_review.py',...browserQAPlan('high')].sort());
 });
