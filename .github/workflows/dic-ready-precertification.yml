@@ -32,15 +32,44 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
+      - name: Fast skip stale or queue-unchanged approvals before checkout
+        id: event_gate
+        if: github.event_name == 'workflow_run'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_HEAD: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          decide() { echo "proceed=$1" >> "$GITHUB_OUTPUT"; }
+          # Any API/CLI/parse error falls back to the original full Git check.
+          live="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/development/backend-foundation" --jq '.object.sha' 2>/dev/null)" || { decide true; exit 0; }
+          if [ "$live" != "$EVENT_HEAD" ]; then
+            echo 'NOT_APPLICABLE: newer development SHA owns pre-certification'
+            decide false
+            exit 0
+          fi
+          # GitHub returns at most 300 changed files in this response: never
+          # skip when the list is truncated, missing, empty, or API unavailable.
+          kind="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${EVENT_HEAD}" --jq 'if (.files | type) != "array" or (.files | length) == 0 or (.files | length) >= 300 then "unknown" elif any(.files[]; .filename == "docs/RELEASE_QUEUE.json") then "queue" else "unrelated" end' 2>/dev/null)" || { decide true; exit 0; }
+          if [ "$kind" = 'unrelated' ]; then
+            echo 'NOT_APPLICABLE: exact source has no queue change'
+            decide false
+          else
+            decide true
+          fi
       - uses: actions/checkout@v7
+        if: steps.event_gate.outputs.proceed != 'false'
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-node@v7.1.0
+        if: steps.event_gate.outputs.proceed != 'false'
         with:
           node-version: '22'
       - name: Verify live development and source bound approved queue transition
+        if: steps.event_gate.outputs.proceed != 'false'
         id: source
         shell: bash
         env:
