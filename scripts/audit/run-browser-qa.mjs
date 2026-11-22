@@ -15,6 +15,19 @@ export function browserQAPlan(mode){
   'tests/browser/admin_records_qa.py');
  return scripts;
 }
+// All browser fixtures use independent Playwright contexts and isolated local
+// servers/artifact filenames. Limit subprocesses to visual + two serial lanes:
+// faster than six serial browser starts without uncontrolled Chromium fanout.
+const OFFLINE_ADMIN_LANE=new Set([
+ 'tests/browser/pwa_offline_qa.py',
+ 'tests/browser/issue26_accessibility_qa.py',
+ 'tests/browser/admin_records_qa.py'
+]);
+export function browserQALanes(mode){
+ const scripts=browserQAPlan(mode);
+ return [scripts.filter(p=>!OFFLINE_ADMIN_LANE.has(p)),
+  scripts.filter(p=>OFFLINE_ADMIN_LANE.has(p))].filter(lane=>lane.length>0);
+}
 function runOne(python,path,runner=spawn){
  return new Promise(resolve=>{
   const child=runner(python,[path],{cwd:ROOT,stdio:'inherit',env:process.env});
@@ -25,17 +38,18 @@ function runOne(python,path,runner=spawn){
  });
 }
 export async function runBrowserQA(mode,{python='python',runner=spawn}={}){
- const others=browserQAPlan(mode);
- // The visual fixture uses its own Chromium page and isolated output folder.
- // Run it beside the sequential other scripts: no shared accounts or provider.
- const visual=runOne(python,VISUAL,runner);
- const sequence=(async()=>{
+ const lanes=browserQALanes(mode);
+ // Preserve sequential execution within each lane; visual and the two
+ // bounded fixture lanes run concurrently, never against live providers.
+ const runLane=async(paths)=>{
   const records=[];
-  for(const path of others)records.push(await runOne(python,path,runner));
+  for(const path of paths)records.push(await runOne(python,path,runner));
   return records;
- })();
- const [visualResult,results]=await Promise.all([visual,sequence]);
- const all=[visualResult,...results];
+ };
+ const [visualResult,...laneResults]=await Promise.all([
+  runOne(python,VISUAL,runner),...lanes.map(runLane)
+ ]);
+ const all=[visualResult,...laneResults.flat()];
  for(const entry of all)console.log('[DIC browser QA] '+entry.path+' '+(entry.status===0?'PASS':'FAIL'));
  if(all.some(entry=>entry.status!==0))throw Error('Browser acceptance failed; no omitted script treated as PASS');
  return {executed:all.length,passed:all.length};
