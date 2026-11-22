@@ -28,9 +28,12 @@ export function selectFullSuiteShard(plan,shard='all'){
  if(shard==='all')return plan;
  if(!/^[01]\/2$/.test(shard))throw Error('Invalid full-suite shard selector');
  const index=Number(shard[0]);
- const parallel=plan.parallel.filter((_,i)=>i%2===index);
- // The historically faster cloud-tests shard can absorb the isolated
- // 4-second-budget corpus without contending with other tests on its runner.
+ const parallel=plan.parallel.filter((_,i)=>(i%2===0||i%12===1?0:1)===index);
+ // Keep the time-budgeted HTML corpus isolated on the cloud runner.
+ // Four measured HIGH CI pairs show a recurring cloud Node tail: 89/90/89/89s
+ // versus 65/96/66/65s validate. Keep the original even-index split and
+ // move just every sixth odd-index file (i%12===1) to validate to balance
+ // the critical path without duplicate tests or additional runners.
  // This balances the two required jobs without removing or duplicating files.
  const serial=index===1?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
