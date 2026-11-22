@@ -1,3 +1,11 @@
+## November 22, 2026 UTC — five startup improvements DEPLOYED and provider-verified [skip netlify]
+
+- DIC_PREFLIGHT_VERIFIED development_sha=c56c407fd114c7b720094296b84ccc4e735f8ba1 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Owner November 21 authorized five startup features plus any genuinely READY; exactly one startup queue row was READY and included in this one frozen release batch.
+- Owner Nov21 one-time five startup + all genuinely READY batch DIC-20261122-STARTUP-READY01. Only this row READY at source freeze. Frozen candidate 64d6f50de9562c0442a05e865e9ed33f0cd2925a five official native exact-SHA jobs SUCCESS validate 44990296556, cloud/mobile 44990296566, approval 44990296557, isolated SQL 44990296549; source proof 44990173164. One-parent main request 0cb6847c; exact push controller 44991562299 COMPLETED SUCCESS; one-use ledger consumed once at 2026-11-22T05:57:33.508Z. Nonforce release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, Netlify Git-connected production branch release/production commit_ref 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 deploy 6b0284543511466fd75b4573 READY/current, published 2026-11-22T05:57:53.984Z; five deployed functions and zero provider-reported secret matches in 6095 files. App source three critical Git blobs exactly equal frozen candidate; no unfinished code/test/workflow or SQL changes selected. Original dev remains unchanged.
+- Queue now 402 DEPLOYED / 51 TESTING / 6 IN_PROGRESS / 0 READY; other 458 records preserved unchanged. The source-bound READY certificate remains immutable historical evidence, not an active second publication. The successful live production readback supersedes prior startup READY/not-deployed headings below, which remain as history. No manual device/auth acceptance claimed. No release-repeat authority.
+
+---
+
 ## November 22, 2026 UTC — five startup improvements source-certified READY, NOT DEPLOYED [skip netlify]
 
 - DIC_PREFLIGHT_VERIFIED development_sha=916983d6e86e4f0213aa42798d76a5ca701e62f2 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Owner's one-time Nov 21 Publish includes five startup features and other genuinely READY at final freeze.

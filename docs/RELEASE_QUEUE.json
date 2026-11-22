@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "7a5b27d342c6c49bd75e8d1e4cb164a76bd2c174",
-    "release_sha": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5",
-    "netlify_deploy_id": "6aff0fa6e0d841054dea5dcd"
+    "tested_source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
+    "release_sha": "50e05054e7139d2e7a675b8e15ab71a7dd42ac81",
+    "netlify_deploy_id": "6b0284543511466fd75b4573"
   },
   "items": [
     {
@@ -18005,7 +18005,7 @@
       "issue": 455,
       "pr": 3666,
       "title": "Neutral stalled-startup recovery, deferred nonessential worker, and focused startup regression coverage",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "ffbf4656de2969326988d7b0ac0a21c3117575a6",
       "scope_paths": [
         "site/cloud/main.js",
@@ -18037,7 +18037,7 @@
       ],
       "blockers": [],
       "owner_source": "Owner explicitly approved startup items 3–5 on 2026-11-21",
-      "notes": "No publication authorization; source-isolated candidate certification still required.\n2026-11-22 verified: owner startup changes 1–5 were nonforce merged by PR #3658 (8868768e), #3660 (cef6e4a9), #3661 (e4190258) and final #3666 (c9d86f46). PR #3666 head f8c565532653fa0ba96986c40d1f2c0ce60835d8 has actual validate/cloud/mobile/approval/SQL/security jobs COMPLETED SUCCESS. Exact merged push c9d86f46 has validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 SUCCESS; SQL/security not triggered on merged push, reuse unchanged PR-head source only. Current development source/main, public recovery helper, build and focused tests match tested head Git blobs byte-for-byte. Source implementation VERIFIED; release READY candidate NOT VERIFIED. Do not confuse with original failed pre-fix heads or skipped original603.\n2026-11-22 publication-safe source isolation: PR #3675 exact final tested head f31a752c passed validate 44987142726, cloud+real Chromium 44987142712, approval 44987142710, SQL 44987142716, security 44987142714. Nonforce source anchor ffbf4656 has a published-baseline-plus-ONLY-startup main.js blob fe9124fa1deeb84d7a41659c066f517f6311039e; two existing unselected test files were restored to exact published bytes, three postpublished tests excluded only for this isolated source. Original mixed app/test source then restored to development in the next first-parent commit without destroying authored history. Require separate frozen exact five candidate checks before READY.\nINTERNAL ONLY: this READY flag exists solely on a nonpublishing source-trial ref to exercise #3347 candidate isolation. LIVE development queue remains TESTING until full exact candidate SHA CI SUCCESS. Never treat this temporary branch or its receipt as a Publish permission or READY until promoted and verified.\nProvisional nonpublishing source recheck: original candidate d505fb50 FAILED 14 source-bound unready-test assertions; new main #3692 strict test Git-blob restoration source 7d7ebc318f55e35f75a4cf29154c9d039d63776b, merged after main acceptance 44989265733 SUCCESS. Queue row CI ID 44988817244 is prior source-proof success, NOT one of five official new candidate jobs. This temp READY row is not live authority.\n2026-11-22 candidate-only repair: documented source-bound clean anchor ffbf4656 approval push 44987358080 COMPLETED SUCCESS, added to historical CI receipts to give a fresh deterministic candidate identity; this check is NOT five-job candidate PASS. Provisional-only row, live development remains TESTING. Correct two actual failed 44989788186 Node tests by restoring baseline audit script and excluding three published-absent unready audit/SQL files; preserve originals in live development. Full fresh five candidate SHA CI required."
+      "notes": "No publication authorization; source-isolated candidate certification still required.\n2026-11-22 verified: owner startup changes 1–5 were nonforce merged by PR #3658 (8868768e), #3660 (cef6e4a9), #3661 (e4190258) and final #3666 (c9d86f46). PR #3666 head f8c565532653fa0ba96986c40d1f2c0ce60835d8 has actual validate/cloud/mobile/approval/SQL/security jobs COMPLETED SUCCESS. Exact merged push c9d86f46 has validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 SUCCESS; SQL/security not triggered on merged push, reuse unchanged PR-head source only. Current development source/main, public recovery helper, build and focused tests match tested head Git blobs byte-for-byte. Source implementation VERIFIED; release READY candidate NOT VERIFIED. Do not confuse with original failed pre-fix heads or skipped original603.\n2026-11-22 publication-safe source isolation: PR #3675 exact final tested head f31a752c passed validate 44987142726, cloud+real Chromium 44987142712, approval 44987142710, SQL 44987142716, security 44987142714. Nonforce source anchor ffbf4656 has a published-baseline-plus-ONLY-startup main.js blob fe9124fa1deeb84d7a41659c066f517f6311039e; two existing unselected test files were restored to exact published bytes, three postpublished tests excluded only for this isolated source. Original mixed app/test source then restored to development in the next first-parent commit without destroying authored history. Require separate frozen exact five candidate checks before READY.\nINTERNAL ONLY: this READY flag exists solely on a nonpublishing source-trial ref to exercise #3347 candidate isolation. LIVE development queue remains TESTING until full exact candidate SHA CI SUCCESS. Never treat this temporary branch or its receipt as a Publish permission or READY until promoted and verified.\nProvisional nonpublishing source recheck: original candidate d505fb50 FAILED 14 source-bound unready-test assertions; new main #3692 strict test Git-blob restoration source 7d7ebc318f55e35f75a4cf29154c9d039d63776b, merged after main acceptance 44989265733 SUCCESS. Queue row CI ID 44988817244 is prior source-proof success, NOT one of five official new candidate jobs. This temp READY row is not live authority.\n2026-11-22 candidate-only repair: documented source-bound clean anchor ffbf4656 approval push 44987358080 COMPLETED SUCCESS, added to historical CI receipts to give a fresh deterministic candidate identity; this check is NOT five-job candidate PASS. Provisional-only row, live development remains TESTING. Correct two actual failed 44989788186 Node tests by restoring baseline audit script and excluding three published-absent unready audit/SQL files; preserve originals in live development. Full fresh five candidate SHA CI required.\n2026-11-22 FINAL LIVE DEPLOYED RECEIPT — supersedes all earlier provisional TESTING and 'No publication authorization' historical trial text. Owner Nov21 one-time five startup + all genuinely READY batch DIC-20261122-STARTUP-READY01. Only this row READY at source freeze. Frozen candidate 64d6f50de9562c0442a05e865e9ed33f0cd2925a five official native exact-SHA jobs SUCCESS validate 44990296556, cloud/mobile 44990296566, approval 44990296557, isolated SQL 44990296549; source proof 44990173164. One-parent main request 0cb6847c; exact push controller 44991562299 COMPLETED SUCCESS; one-use ledger consumed once at 2026-11-22T05:57:33.508Z. Nonforce release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, Netlify Git-connected production branch release/production commit_ref 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 deploy 6b0284543511466fd75b4573 READY/current, published 2026-11-22T05:57:53.984Z; five deployed functions and zero provider-reported secret matches in 6095 files. App source three critical Git blobs exactly equal frozen candidate; no unfinished code/test/workflow or SQL changes selected. Original dev remains unchanged."
     },
     {
       "id": "DIC-Q-3667-ci-parallel-full-suite",
@@ -21555,6 +21555,18 @@
       "source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
       "production_deployed": false,
       "evidence": "Integrity correction: previous READY label lacked #3347 frozen candidate certificate, and ci_runs included three historical FAILED Actions runs (44725776910, 44726121834, 44733333881). Preserve failed diagnostics in tests; restrict ci_runs to six exact merged-success source runs; no publication or parser source change. #267 PR3507 approval step8 blocked by 44725776910. Return to READY only after five exact certified nonpublishing candidate checks."
+    },
+    {
+      "date": "2026-11-22",
+      "issue": 455,
+      "item_id": "DIC-Q-455-startup-recovery-deferred-worker",
+      "state": "DEPLOYED",
+      "source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
+      "production_deployed": true,
+      "delivered_release_sha": "50e05054e7139d2e7a675b8e15ab71a7dd42ac81",
+      "delivered_netlify_deploy_id": "6b0284543511466fd75b4573",
+      "at": "2026-11-22T05:57:53.984Z",
+      "evidence": "Owner Nov21 one-time five startup + all genuinely READY batch DIC-20261122-STARTUP-READY01. Only this row READY at source freeze. Frozen candidate 64d6f50de9562c0442a05e865e9ed33f0cd2925a five official native exact-SHA jobs SUCCESS validate 44990296556, cloud/mobile 44990296566, approval 44990296557, isolated SQL 44990296549; source proof 44990173164. One-parent main request 0cb6847c; exact push controller 44991562299 COMPLETED SUCCESS; one-use ledger consumed once at 2026-11-22T05:57:33.508Z. Nonforce release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, Netlify Git-connected production branch release/production commit_ref 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 deploy 6b0284543511466fd75b4573 READY/current, published 2026-11-22T05:57:53.984Z; five deployed functions and zero provider-reported secret matches in 6095 files. App source three critical Git blobs exactly equal frozen candidate; no unfinished code/test/workflow or SQL changes selected. Original dev remains unchanged."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
