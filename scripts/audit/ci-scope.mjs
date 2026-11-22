@@ -42,6 +42,10 @@ const POST_PIN_AUDIT_TREE_POST_S2=/^docs\/audits\/issue267-v2-post-pin-(?:tree-d
 // #504's source-bound G1 receipts contain governance evidence, not app/test inputs.
 const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3,6}\.json$/;
 
+// #267 disjoint V2 semantic audit receipts are non-runtime evidence (two 30-line tracks + index).
+// Bind to the exact F/CURRENT-C/INDEX filename grammar, never to arbitrary audit JSON.
+const STRICT_DISJOINT_AUDIT_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-DISJOINT-(?:(?:F|CURRENT-C)[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|INDEX-V[0-9]{1,3}[A-Z]{1,3}-20[0-9]{6})\.json$/;
+
 export function deployableRiskPaths(paths){
  return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&
   (APP_PREFIX.some(pre=>p.startsWith(pre))||APP_FILES.has(p))):[];
@@ -58,7 +62,7 @@ function impactKind(path){
   AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
   POST_PIN_AUDIT_EVIDENCE_RECEIPT.test(path)||POST_PIN_PENDING_REVIEW_INDEX.test(path)||
    POST_PIN_AUDIT_TREE_INVENTORY.test(path)||POST_PIN_AUDIT_TREE_POST_S2.test(path)||
-  GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path))
+  GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path)||STRICT_DISJOINT_AUDIT_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';
  if(/^site\/lib\//.test(path))return 'shots';
