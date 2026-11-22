@@ -33,10 +33,10 @@ jobs:
         run: test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
       - name: Guarded first-party current selected 119 and 123 parser and unsaved UI
         env:
-          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R407_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '119,123'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r407
-        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+        run: GITHUB_SHA="$DIC_R407_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
       - name: Strict current selected identity and changed blend-component afterproof
         if: always()
         env:

@@ -48,8 +48,8 @@ for(const n of [119,123]){
     if(!String(facts.tasting_notes||'').toLowerCase().includes(note.toLowerCase()))
      failures.push('selected_direct_tasting_missing_119_'+note);
  }else{
-   if(!/Producer:\s*Miriam Monteiro de Aguiar/i.test(own)||
-      !/Process:\s*Natural/i.test(own)||!/We Taste:\s*Hazelnut/i.test(own))
+   if(!/Producer\s*:\s*Miriam Monteiro de Aguiar/i.test(own)||
+      !/Process\s*:\s*Natural/i.test(own)||!/We Taste\s*:\s*Hazelnut/i.test(own))
      failures.push('token_selected_direct_specs_missing_123');
    if(!/Miriam Monteiro de Aguiar/i.test(facts.producer||'')||
       facts.process!=='Natural')
