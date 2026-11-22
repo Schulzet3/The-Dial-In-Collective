@@ -49,14 +49,15 @@ export function selectFullSuiteShard(plan,shard='all'){
   }
   return (i%2===0||i%12===1?0:1)===selected;
  });
- // Keep the time-budgeted HTML corpus isolated on the final runner
- // (cloud for legacy 2-way, approval for high-risk 3-way).
+ // Keep the time-budgeted HTML corpus serial and isolated AFTER general tests.
+ // HIGH validate has the consistently shorter measured Node tail; legacy two-way
+ // retains protected security isolation on its original final cloud lane.
  // Four measured HIGH CI pairs show a recurring cloud Node tail: 89/90/89/89s
  // versus 65/96/66/65s validate. Keep the original even-index split and
  // move just every sixth odd-index file (i%12===1) to validate to balance
  // the critical path without duplicate tests or additional runners.
  // This balances the two required jobs without removing or duplicating files.
- const serial=selected===lanes-1?plan.serial:[];
+ const serial=selected===(lanes===3?0:lanes-1)?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
  return {parallel,serial};
 }
