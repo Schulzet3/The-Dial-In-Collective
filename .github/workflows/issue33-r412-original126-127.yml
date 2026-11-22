@@ -6,11 +6,45 @@ on:
       - '.github/workflows/issue33-r412-original126-127.yml'
       - 'scripts/audit/issue33-r412-original126-127-check.mjs'
       - 'docs/workstreams/ops-issue33-r412-original126-127-20261122.md'
+      - 'src/server/coffee-*.mjs'
+      - 'src/server/roast-*.mjs'
+      - 'supabase/functions/_shared/html-scan.mjs'
+      - 'supabase/functions/_shared/coffee-release-label.mjs'
+      - 'site/cloud/coffee-url-autofill.js'
+      - 'site/lib/ui.js'
+      - 'scripts/audit/issue33-original603-focused-source-review.mjs'
+      - 'scripts/audit/issue33-selected-public-alternate.mjs'
+      - 'scripts/audit/issue33-focused-source-acceptance.mjs'
+      - 'scripts/audit/issue33-shopify-current-visible-identity.mjs'
+      - 'scripts/audit/issue33-shopify-selected-product-h3.mjs'
+      - 'scripts/audit/issue33-shopify-pagefly-h3.mjs'
+      - 'scripts/audit/issue33-shopify-tracked-offer-h2.mjs'
+      - 'scripts/audit/issue33-shopify-main-product-h2.mjs'
+      - 'scripts/audit/issue33-selected-product-heading.mjs'
+      - 'scripts/audit/issue33-elementor-woocommerce-h2.mjs'
+      - 'tests/issue33-shared-dependency-ci-routing.test.mjs'
   push:
     branches: [development/backend-foundation]
     paths:
       - '.github/workflows/issue33-r412-original126-127.yml'
       - 'scripts/audit/issue33-r412-original126-127-check.mjs'
+      - 'src/server/coffee-*.mjs'
+      - 'src/server/roast-*.mjs'
+      - 'supabase/functions/_shared/html-scan.mjs'
+      - 'supabase/functions/_shared/coffee-release-label.mjs'
+      - 'site/cloud/coffee-url-autofill.js'
+      - 'site/lib/ui.js'
+      - 'scripts/audit/issue33-original603-focused-source-review.mjs'
+      - 'scripts/audit/issue33-selected-public-alternate.mjs'
+      - 'scripts/audit/issue33-focused-source-acceptance.mjs'
+      - 'scripts/audit/issue33-shopify-current-visible-identity.mjs'
+      - 'scripts/audit/issue33-shopify-selected-product-h3.mjs'
+      - 'scripts/audit/issue33-shopify-pagefly-h3.mjs'
+      - 'scripts/audit/issue33-shopify-tracked-offer-h2.mjs'
+      - 'scripts/audit/issue33-shopify-main-product-h2.mjs'
+      - 'scripts/audit/issue33-selected-product-heading.mjs'
+      - 'scripts/audit/issue33-elementor-woocommerce-h2.mjs'
+      - 'tests/issue33-shared-dependency-ci-routing.test.mjs'
 permissions:
   contents: read
 jobs:
@@ -26,7 +60,7 @@ jobs:
         with:
           node-version: '22'
       - name: Selected-product producer and other-coffee hostile regressions
-        run: node --test tests/coffee-issue33-r408-producer-farm-caption.test.mjs tests/coffee-issue33-r138-118.test.mjs
+        run: node --test tests/coffee-issue33-r408-producer-farm-caption.test.mjs tests/coffee-issue33-r138-118.test.mjs tests/issue33-shared-dependency-ci-routing.test.mjs
       - name: Verify exact checked-out commit
         env:
           DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
