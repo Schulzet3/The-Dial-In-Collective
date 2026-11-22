@@ -1,3 +1,19 @@
+# Issue #509 R435 — direct catalog field semantic review 1681–2080 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=c13d58e2513b626088ff7fc0c387eab6ffc7d704 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-22 UTC. Live development preflight resolved at immutable SHA and exact Git blob bytes verified before other documents/providers. Connected Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY, PostgreSQL 17.11.0.003. Production **STRICTLY READ-ONLY**.
+
+Continued exact R434 cursor `pg_catalog.pg_stat_progress_analyze.ext_stats_total` relation OID 12305, attnum 8, rank 1681. Read **400/400 new full live `pg_attribute` tuple texts**, **206947 literal characters**, across **41 relations**, ranks **1681–2080/4181**. Per-object complete text, MD5, range 1–end, SQL type, field-specific meaning, disposition and physical invariants recorded in [append-only R435 ledger](../audits/issue509-r435-pg-attribute-ranks1681-2080-20261122.json). Cumulative attribute route **2080/4181**.
+
+Semantic scope: PostgreSQL ANALYZE/VACUUM/CLUSTER/CREATE INDEX/BASEBACKUP/COPY progress diagnostics, privilege-masked FDW user mappings, replication/subscription status, wait-event descriptions and SQL-standard `information_schema` role/privilege/column/type/constraint/routine metadata. These system-managed field purposes differ by operation and metadata scope; no evidence establishes DIC-specific duplicate or dead logic. Independent read-only catalog validation: **400 fields; 0 physical alignment/type mismatches; 0 dropped/missing/default/identity/generated anomalies; 0 index fields in this interval**. No Auth identities, shots, notes, member records, credentials or sensitive log/query values accessed; only catalog definitions.
+
+No newly reproduced application bug, source/deployment drift attributable to DIC, validated bottleneck or safely removable object in this bounded segment. **No application code/test/CI change**, so new exact-source CI **NOT_APPLICABLE (not PASS)**. Queue READY/DEPLOYED **NOT_REVALIDATED**. #267 original/current code-line review credited zero. Native PostgreSQL function bodies and other unreviewed provider surfaces **UNVERIFIED**; full Supabase baseline **IN_PROGRESS**. No provider write, migration, deploy, publish, backup, billing, schedule or notification-policy change.
+
+**Next exact unreviewed cursor:** `information_schema.routines.character_maximum_length`, relation OID **13434**, attnum **15**, rank **2081/4181**, first character. Continue source-dependent bugs/cleanup when actual evidence justifies them. No new owner action needed.
+
+---
+
 # Issue #509 R434 — direct PostgreSQL attribute definitions 1281–1680 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8cc7a94ec92c456064c4d6391951be9611b28b06 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
