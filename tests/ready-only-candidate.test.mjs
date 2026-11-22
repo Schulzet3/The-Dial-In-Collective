@@ -65,6 +65,14 @@ test('#3347 startup coupled Log Shot suites use only proven published-source tes
  const props={queue,pinnedReadyPaths:[s.runtime],publishedSourceSha:A,
   developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[selected]};
  assert.deepEqual(discoverReviewedRestoredStartupTests(props),s.tests.map(x=>x.path).sort());
+ const compact={id:selected.id,issue:selected.issue,title:selected.title,
+  merged_source_sha:selected.merged_source_sha,scope_paths:selected.scope_paths};
+ assert.deepEqual(discoverReviewedRestoredStartupTests({...props,selectedReadyItems:[compact]}),
+  s.tests.map(x=>x.path).sort(),
+  'planner omits state; the actual queue is the READY authority');
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,
+  selectedReadyItems:[compact],queue:{...queue,items:[{...selected,state:'TESTING'},unready]}}),
+  /mixed-file provenance/,'TESTING queue fails closed despite matching source identity');
  assert.deepEqual(discoverReviewedRestoredStartupTests({...props,selectedReadyItems:[]}),[]);
  assert.throws(()=>discoverReviewedRestoredStartupTests({...props,pinnedReadyPaths:[]}),
   /mixed-file provenance/);

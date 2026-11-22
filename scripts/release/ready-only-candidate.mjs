@@ -344,7 +344,8 @@ export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
  const s=REVIEWED_STARTUP_MIXED_TESTS;
  const selected=selectedReadyItems.find(i=>i.id===s.id);
  if(!selected)return [];
- if(typeof sourceObjectAt!=='function'||selected.state!=='READY'||selected.issue!==455||
+ if(typeof sourceObjectAt!=='function'||
+    queue?.items?.find(i=>i.id===s.id)?.state!=='READY'||selected.issue!==455||
     selected.merged_source_sha!==s.merge||!selected.scope_paths?.includes(s.runtime)||
     !pinnedReadyPaths.includes(s.runtime)||!queue?.items?.some(i=>
       i.id!==s.id&&i.issue===455&&['TESTING','IN_PROGRESS'].includes(i.state)&&
