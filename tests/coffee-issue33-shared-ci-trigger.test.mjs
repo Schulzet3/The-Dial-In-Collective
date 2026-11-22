@@ -144,3 +144,14 @@ test('R381b #508 N508-075 partial ICONIK offline coverage without weakening stri
  assert.equal(yaml.split('node --test').length-1,1,'no duplicate or networked job');
  assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+test('R409: current #123 producer/farm role regression runs on shared-source edits without live HTTP',()=>{
+ const file='tests/coffee-issue33-r408-producer-farm-caption.test.mjs';
+ assert.equal(yaml.split("- '"+file+"'").length-1,2,'R408 targeted source test must trigger PR and push');
+ assert.ok(yaml.includes('            '+file),'R408 parser regression must execute in the shared job');
+ const body=readFileSync(new URL('../'+file,import.meta.url),'utf8');
+ assert.match(body,/selectedLabeledPersonFarmRoles/,'named human/farm split guarded');
+ assert.match(body,/extractPublicCoffeeFacts/,'actual parser, not an invented mock');
+ assert.doesNotMatch(body,/\bfetch\s*\(|\bhttps?\.request\s*\(|DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS/,'offline contract must not request merchant HTTPS');
+ assert.equal(yaml.split('node --test').length-1,1,'one bounded offline invocation');
+ assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/,'no 603 live fanout');
+});

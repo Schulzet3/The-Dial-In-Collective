@@ -14,6 +14,13 @@ const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
  'docs/APPROVAL_COVERAGE_MATRIX.json','docs/RELEASE_CANDIDATE.json']);
 // Issue #267 source-bound audit receipts are governance records, not executable inputs.
 // Keep explicit allowlist narrow: unknown JSON and all source/code paths remain HIGH.
+// Narrow source-not-shipped QA controls. These are exercised by targeted tests;
+// ANY workflow, classifier, release, application, or unknown change stays risk-scoped.
+const QA_ONLY_PATHS=new Set([
+ 'tests/ci-optimization.test.mjs','tests/ci-scope.test.mjs',
+ 'tests/fast-pr-check.test.mjs','scripts/audit/fast-pr-check.mjs',
+ 'scripts/audit/measure-stage.mjs','scripts/audit/syntax-batch.mjs'
+]);
 const AUDIT_EVIDENCE_META=new Set([
  'docs/audits/issue267-review-restart-v2-20261101.json',
  'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
@@ -35,6 +42,12 @@ const POST_PIN_AUDIT_TREE_POST_S2=/^docs\/audits\/issue267-v2-post-pin-(?:tree-d
 // #504's source-bound G1 receipts contain governance evidence, not app/test inputs.
 const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3,6}\.json$/;
 
+// #267 disjoint V2 semantic audit receipts are non-runtime evidence (two 30-line tracks + index).
+// Bind to the exact F/CURRENT-C/INDEX filename grammar, never to arbitrary audit JSON.
+// #267 disjoint audit can span exactly two adjacent frozen F or CURRENT-C files;
+// constrain both ranges, retain original single-F/C/INDEX and unknown-HIGH routes.
+const STRICT_DISJOINT_AUDIT_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-DISJOINT-(?:(?:F|CURRENT-C)[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|INDEX-V[0-9]{1,3}[A-Z]{1,3}-20[0-9]{6}|CURRENT-C[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-C[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|F[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-F[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3})\.json$/;
+
 export function deployableRiskPaths(paths){
  return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&
   (APP_PREFIX.some(pre=>p.startsWith(pre))||APP_FILES.has(p))):[];
@@ -46,11 +59,12 @@ export function docsOnlyPaths(paths){
 }
 function impactKind(path){
  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
+ if(QA_ONLY_PATHS.has(path))return 'qa';
  if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
   AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
   POST_PIN_AUDIT_EVIDENCE_RECEIPT.test(path)||POST_PIN_PENDING_REVIEW_INDEX.test(path)||
    POST_PIN_AUDIT_TREE_INVENTORY.test(path)||POST_PIN_AUDIT_TREE_POST_S2.test(path)||
-  GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path))
+  GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path)||STRICT_DISJOINT_AUDIT_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';
  if(/^site\/lib\//.test(path))return 'shots';
@@ -73,6 +87,7 @@ function impactKind(path){
 export function classifyImpactPaths(paths){
  if(!Array.isArray(paths)||!paths.length)paths=['[unknown]'];
  const kinds=new Set(paths.map(impactKind));
+ const qaOnly=kinds.has('qa')&&[...kinds].every(k=>k==='qa'||k==='docs');
  const tier=[...kinds].reduce((v,k)=>{
   const t=k==='docs'?'docs':k==='style'?'low':
    ['shots','coffee','ui'].includes(k)?'medium':'high';
@@ -81,14 +96,14 @@ export function classifyImpactPaths(paths){
  const ui=['style','ui','auth','unknown','infrastructure'].some(k=>kinds.has(k));
  const sql=['sql','auth','unknown','infrastructure'].some(k=>kinds.has(k));
  const mixedMedium=['shots','coffee','ui'].filter(k=>kinds.has(k)).length>1;
- const finalTier=mixedMedium?'high':tier;
+ const finalTier=qaOnly?'low':mixedMedium?'high':tier;
  return {
   tier:finalTier,docs_only:finalTier==='docs',
-  node_mode:finalTier==='high'?'full':kinds.has('shots')?'shots':kinds.has('coffee')?'coffee':'none',
+  node_mode:qaOnly?'qa':finalTier==='high'?'full':kinds.has('shots')?'shots':kinds.has('coffee')?'coffee':'none',
   cloud_mode:finalTier==='high'?'none':kinds.has('ui')?'targeted':'none',
   browser_mode:!ui?'none':finalTier==='low'?'visual':finalTier==='high'?'high':'ui',
-  sql:sql||mixedMedium,lint:LEVEL[finalTier]>=LEVEL.medium,
-  build_validate:finalTier!=='docs'&&!ui,build_browser:ui,
+  sql:sql||mixedMedium,lint:!qaOnly&&LEVEL[finalTier]>=LEVEL.medium,
+  build_validate:finalTier!=='docs'&&!ui&&!qaOnly,build_browser:ui,
   provider_guard:kinds.has('infrastructure')||kinds.has('unknown'),kinds:[...kinds].sort(),paths
  };
 }

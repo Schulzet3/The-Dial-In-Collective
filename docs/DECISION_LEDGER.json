@@ -5040,5 +5040,29 @@
     ],
     "enforcement": "PR #3437 merged b8a8ed2592820fb6421d533b9e2fecde08ee6d3f; exact five PR-head CI SUCCESS, merged approval/validate/cloud/mobile SUCCESS, rehearsal SUCCESS. 42 historical READY items separately deployed; currently 0 READY. Each future READY promotion needs its own frozen candidate proof and exact five SUCCESS; no universal privileged-write or provider-availability guarantee",
     "external_limits": "Cannot preguarantee provider availability, platform quotas or recovery freshness at future publication"
-  }
+  },
+  "current_owner_speed_first_ci_20261121": {
+    "decision_id": "OPS-SPEED-FIRST-TEST-ROUTING-20261121",
+    "status": "Locked owner supersession; development/pre-READY CI speed only; no Publish",
+    "date": "2026-11-21",
+    "issue": 3667,
+    "owner_source": "Owner November 21, 2026 explicit instruction: efficiency and speed 9–10/10, security testing 1/10; permits shortening, removing or replacing unnecessary and duplicative tests/checks; asks for routine implementation to READY under 15 minutes total.",
+    "approved": [
+      "Remove redundant/expensive tests, shorten scopes or replace implementations with faster equivalent proof; do not repeat already source-bound successful evidence.",
+      "Run dependency-free admission, shipped import graph, queue, browser fixture closure and per-commit journal guards first; fail before heavy tests or Chromium.",
+      "One coordinated implementation/queue/journal commit and one primary CI cycle where feasible; measure actual end-to-end READY latency rather than only Node execution.",
+      "Narrow allowlisted non-shipped CI diagnostics and dedicated test-only edits use four focused Node 22 regressions instead of unrelated full app/SQL/Chromium/build/lint; mixed and unknown source paths remain conservatively classified. Preserve five named CI job statuses and frozen READY source checks."
+    ],
+    "supersedes_only": [
+      "November 3 #457 testing default rigor for checks demonstrated to be duplicate/unnecessary, where the narrowed/alternative proof is documented and tested."
+    ],
+    "preserves": [
+      "READY label must still be backed by frozen correct source/test/workflow/dependency candidate and source-bound five successful status checks under #3347, absent a further specific owner decision.",
+      "Do not call a SKIPPED or NOT_APPLICABLE check PASS or hide known failures.",
+      "Only NEW explicit Publish authorizes one-use production release; no unapproved DB, member or provider writes.",
+      "Do not knowingly break admission, private data, offline history, Log Shot, Rate or Recommendation."
+    ],
+    "target": "Under 15 minutes end to end for ordinary changes; best-effort engineering objective, not a claim of universal GitHub/provider performance."
+  },
+  "current_owner_background_admission_20261122": {"decision_id":"UX-RETURNING-SESSION-BACKGROUND-ADMISSION-20261122","status":"Locked owner supersession; development only","date":"2026-11-22","issue":3781,"owner_source":"Direct owner November 22 2026 request to open returning member's app immediately, run access check in background and revoke if required","approved":["Valid unexpired persisted Supabase session and previous same-owner server-admitted workspace may render saved coffees/history immediately while new server admission executes asynchronously","Read-only local preview until fresh server admission; no mutating, flushing, Community, Admin or cloud private reads before confirmation","On server denial immediately remove private UI and local cache; retain owner-bound unsynced outbox/receipts and revocation marker; periodically retry temporary network check failures"],"supersedes_only":["Previously required await fresh dic_session_status before painting locally saved same-owner admitted workspace on online returning launch"],"preserves":["Initial sign-in, invalid/expired session, pending/rejected/previously denied owner, cross-account and password-recovery gate; offline cached-use rules","Server checks of current Auth/admission, RLS/roles on every protected endpoint; no cached status authorizes cloud operations","Private notes/history/shots, account switching, durable unsynced work, Community and Log Shot to Rate to Recommendation","No publication without NEW explicit owner Publish, source-bound tests, certified READY candidate and a one-use release"]}
 }

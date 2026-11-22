@@ -56,3 +56,23 @@ test('#2169 release event readback distinguishes true failure, running and claim
  assert.equal(validateReleaseTriggerReceipt({...args,consumed:true}).status,'CLAIMED_NETLIFY_UNVERIFIED');
  assert.equal(validateReleaseTriggerReceipt({...args,workflowRuns:[{...run,event:'pull_request'}]}).status,'BLOCKED');
 });
+
+
+test('#3347 startup clean merge accepts only exact first-parent proven test deletions',()=>{
+ const removed=['tests/issue455-r381-recommendation-control-aria.test.mjs',
+  'tests/issue455-r405-cross-basket-yield-eligibility.test.mjs',
+  'tests/issue455-r421-grind-reference-tenth-grid.test.mjs'];
+ const ready={...item,scope_paths:['site/cloud/main.js'],tests:removed,merged_source_sha:S};
+ const appPath='site/cloud/main.js';
+ const sourceObjectAt=(ref,path)=>path===appPath?'100644:'+'c'.repeat(40):null;
+ const args={mergedSha:S,ciSourceSha:B,changedPaths:ready.scope_paths,
+  checks:names.map(name=>({name,sha:B,status:'completed',conclusion:'success'})),
+  testPaths:removed,sourceObjectAt};
+ assert.equal(assessReadyEvidence(ready,args).ready,true);
+ assert.equal(assessReadyEvidence(ready,{...args,testPaths:undefined}).ready,false);
+ assert.equal(assessReadyEvidence(ready,{...args,sourceObjectAt:(ref,path)=>
+  path===appPath?null:sourceObjectAt(ref,path)}).ready,false);
+ assert.equal(assessReadyEvidence(ready,{...args,sourceObjectAt:(ref,path)=>
+  ref===B&&path===removed[0]?'100644:'+'d'.repeat(40):sourceObjectAt(ref,path)}).ready,false);
+ assert.equal(assessReadyEvidence(ready,{...args,testPaths:[...removed,'src/server/untracked.js']}).ready,false);
+});

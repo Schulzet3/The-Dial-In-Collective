@@ -1,3 +1,4 @@
+import {armStartupRecovery} from './startup-recovery.js';
 import * as C from '../lib/constants.js';
 import * as M from '../lib/model.js';
 import * as E from '../lib/engine.js';
@@ -72,7 +73,7 @@ function clearOfflineDenial(owner){
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null,appliedRecommendationValues:{}});
-  this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
+  this.localStartupOwner=null;this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.editCoffeeDifferences=[];
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -97,7 +98,7 @@ class CloudApp {
   if(owner!==this.identity?.id||epoch!==this.epoch)throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');
  }
  resetAccount(){
-  this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
+  this.epoch++;this.status=null;this.localOfflineOwner=null;this.localStartupOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
@@ -179,8 +180,29 @@ class CloudApp {
   reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
   this.client.onAuthChange((event,user)=>this.authChanged(event,user));
   const epoch=this.epoch;
-  try{const identity=globalThis.navigator?.onLine===false?await this.client.offlineIdentity?.():await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
-  if(this.identity)await this.connect();else this.render();
+  let localSession=null;
+  try{
+   localSession=globalThis.navigator?.onLine===false
+    ?await this.client.offlineIdentity?.():await this.client.sessionIdentity?.();
+   if(epoch===this.epoch&&localSession&&(!this.identity||this.identity.id===localSession.id))
+    this.identity=localSession;
+  }catch{/* Missing local session is a normal signed-out state. */}
+  if(this.identity){
+   // Previously admitted, same-owner local data can paint without a network roundtrip.
+   // Server admission is still checked in the background before ANY cloud operation.
+   if(localSession?.id===this.identity.id&&globalThis.navigator?.onLine!==false)
+    await this.openCachedWhileChecking(this.identity,this.epoch);
+   this.connect().catch(err=>this.error(err));
+  }else{
+   this.render();
+   // A session refresh may still be pending. Recover identity asynchronously,
+   // after displaying the public sign-in view; never block the initial paint.
+   if(globalThis.navigator?.onLine!==false)this.client.identity?.().then(identity=>{
+    if(epoch!==this.epoch||this.identity||!identity)return;
+    this.identity=identity;this.render();
+    this.connect().catch(err=>this.error(err));
+   }).catch(()=>{});
+  }
   // A returning connection must recheck beta admission before flushing locally queued shots.
    addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
    addEventListener('offline',()=>{if(!this.identity)return;this.syncState='offline';this.adminAttentionCount=null;if(this.view==='community')this.view='coffees';this.render();});
@@ -189,7 +211,34 @@ class CloudApp {
   // unnecessary 17-dataset reads and Community review requests during idle use.
   // Pending accounts recheck admission only; no private workspace reads.
   this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&!this.busy&&
-   (this.status?.admitted||this.status?.approvalState==='pending'))this.pollOnce().catch(()=>{});},30000);
+   (this.status?.admitted||this.status?.approvalState==='pending'||this.localStartupOwner===this.identity.id))
+   this.pollOnce().catch(()=>{});},30000);
+ }
+ // Owner-approved returning-session path: preview previously server-admitted,
+ // same-owner saved content while the NEW server admission check is in flight.
+ // No status/admin role is inferred, and editing/sync remain blocked until admitted.
+ async openCachedWhileChecking(user,epoch=this.epoch){
+  if(!user||epoch!==this.epoch||this.identity?.id!==user.id
+    ||this.status||this.recovery||globalThis.navigator?.onLine===false
+    ||this.deniedOfflineOwners.has(user.id)||previouslyDeniedOffline(user.id)
+    ||awaitingApproval(user.id))return false;
+  let cache,pending;
+  try{[cache,pending]=await this.inSession(()=>Promise.all([
+   this.store.readCache(user.id),this.store.list(user.id)
+  ]));}catch{return false;}
+  if(epoch!==this.epoch||this.identity?.id!==user.id||this.status||this.recovery
+    ||globalThis.navigator?.onLine===false||previouslyDeniedOffline(user.id)
+    ||this.deniedOfflineOwners.has(user.id)||awaitingApproval(user.id)
+    ||cache?.owner!==user.id||!cache.snapshot)return false;
+  const sameOwnerPending=Array.isArray(pending)?pending:[];
+  let state;
+  try{state=applyPending(hydrate(cache.snapshot),sameOwnerPending);}catch{return false;}
+  this.localStartupOwner=user.id;this.raw=cache.snapshot;
+  this.pending=sameOwnerPending;this.state=state;
+  this.state.communityEvidence=this.recommendationEvidence;
+  if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)
+   this.expanded.add(M.workspace(this.state).currentCoffeeId);
+  this.syncState='connecting';this.render();return true;
  }
  async pollOnce(){
   const user=this.identity,epoch=this.epoch;
@@ -201,7 +250,7 @@ class CloudApp {
     const status=await this.client.status();
     if(epoch!==this.epoch||user.id!==this.identity?.id)return;
     if(!status?.admitted){
-     if(this.status?.admitted)await this.denyAccess(user,epoch,status);
+     if(this.status?.admitted||this.localStartupOwner===user.id)await this.denyAccess(user,epoch,status);
      else if(this.status?.approvalState!==status?.approvalState||this.status?.emailVerified!==status?.emailVerified){this.status=status;this.render();}
      return;
     }
@@ -278,16 +327,57 @@ class CloudApp {
   }
  }
  async connect(){
+  const owner=this.identity?.id,epoch=this.epoch;
+  if(!owner)return;
+  // Auth callbacks, visibility and reconnect can arrive together. Share the
+  // admission request only within the same owner/session, never across users.
+  if(this.connecting&&this.connectingOwner===owner&&this.connectingEpoch===epoch)
+   return this.connecting;
+  this.connectingOwner=owner;this.connectingEpoch=epoch;
+  const task=this.performConnect();
+  const active=task.finally(()=>{
+   if(this.connecting===active){this.connecting=null;this.connectingOwner=null;this.connectingEpoch=null;}
+  });
+  this.connecting=active;return active;
+ }
+ async performConnect(){
   const user=this.identity,epoch=this.epoch;if(!user)return;
   if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
   const wasPending=this.status?.approvalState==='pending'&&this.status?.admitted===false;
-  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;this.localOfflineOwner=null;
+  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   const previewCache=this.localStartupOwner===user.id&&this.raw
+    ?[{owner:user.id,snapshot:this.raw},this.pending]:null;
+   this.status=status;this.localStartupOwner=null;this.localOfflineOwner=null;
    if(!status.admitted){
     await this.denyAccess(user,epoch,status);return;
    }
    this.deniedOfflineOwners.delete(user.id);
    clearOfflineDenial(user.id);
-   const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
+   // Once the server has admitted this owner, paint their saved workspace
+   // before queued writes, the full cloud read and Community review fetch.
+   // This cache is never an authorization token or shared across accounts.
+   // A damaged/unavailable local cache must not prevent an admitted
+   // member from reaching the authoritative cloud read.
+   let startupCache=previewCache;
+   try{
+    if(!startupCache)startupCache=await this.inSession(()=>Promise.all([
+     this.store.readCache(user.id),this.store.list(user.id)
+    ]));
+   }catch(err){
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(isAccessDenied(err))throw err;
+   }
+   if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   const [cache,pending]=startupCache||[];
+   if(cache?.owner===user.id&&cache.snapshot){
+    this.raw=cache.snapshot;this.pending=pending;
+    this.state=applyPending(hydrate(this.raw),this.pending);
+    this.state.communityEvidence=this.recommendationEvidence;
+    if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)
+     this.expanded.add(M.workspace(this.state).currentCoffeeId);
+    this.syncState='connecting';
+    this.render();
+   }
    await this.sync();
    if((wasPending||awaitingApproval(user.id))&&epoch===this.epoch&&user.id===this.identity?.id){
     clearApprovalAwaited(user.id);
@@ -325,7 +415,7 @@ class CloudApp {
   this.syncState=outcome.state;const pending=await this.store.list(who.id);
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
-  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
+  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';let saved=null;try{saved=await this.store.readCache(who.id);}catch{/* Retain an already loaded same-owner snapshot. */}if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved?.owner===who.id&&saved.snapshot)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;
   // A known flagged shot cannot be deferred. A failed refresh cannot erase
@@ -411,7 +501,8 @@ class CloudApp {
   const focusId=focused?.dataset?.id??null;
   const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
-  this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
+  this.theme();const previewing=this.identity&&this.localStartupOwner===this.identity.id&&!this.status&&globalThis.navigator?.onLine!==false;
+  const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false)||previewing)&&!this.recovery;
   const approvalBanner=connected&&this.accountApprovalNotice?
    `<section class="approval-confirmed" role="status" aria-live="polite" aria-label="Account approval confirmed"><div><h2>Account Approved</h2><p>Your account has been confirmed. Welcome to The Dial In Collective!</p></div>${button('Dismiss','dismiss-approval-confirmation','','ghost compact')}</section>`:'';
   root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20)+this.adminAttentionBadge(),'settings','aria-label="Settings'+(this.adminAttentionBadge()?', '+this.adminAttentionCount+' administrator items require attention':'')+'"','icon-button settings-attention-trigger'):''}</div></header><main class=shell>${approvalBanner}${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time. <span aria-hidden=true>·</span> <a class="privacy-link" href="/privacy/">Privacy</a></footer></main>`;
@@ -466,9 +557,10 @@ class CloudApp {
   // History offers it as a selectable Current recipe; one lookup per render.
   const familyLookup=new Set(s.families.map(f=>[f.id,f.coffeeId,f.style].join('\u0000')));
   const offlineNow=globalThis.navigator?.onLine===false;
-  const offlineOnly=offlineNow||(!this.status?.admitted&&this.localOfflineOwner===this.identity?.id);
-  const syncLabel=offlineNow?(this.pending.length?`Offline · ${this.pending.length} Pending`:'Offline'):this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
-  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${e(syncLabel)}`,'sync',`data-sync-state="${this.pending.length?'pending':offlineNow?'offline':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${offlineOnly?'<p class="helper" role="status">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
+  const previewing=this.localStartupOwner===this.identity?.id&&!this.status&&!offlineNow;
+  const offlineOnly=offlineNow||previewing||(!this.status?.admitted&&this.localOfflineOwner===this.identity?.id);
+  const syncLabel=previewing?'Checking access':offlineNow?(this.pending.length?`Offline · ${this.pending.length} Pending`:'Offline'):this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
+  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${e(syncLabel)}`,'sync',`data-sync-state="${this.pending.length?'pending':offlineNow?'offline':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${previewing?'<p class="helper" role="status">Your saved workspace is open. Account access is checking in the background; changes will be available when confirmed.</p>':offlineOnly?'<p class="helper" role="status">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=M.orderedShotHistory(s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden));const last=U.lastRecipeContextShot(shots,c.id,rec,v);const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
     // A logged shot (even a historically hidden one) ends the starting-style guidance.
     // No one-time local or server claim: reopen/reload keeps the guide until then.
@@ -808,7 +900,7 @@ class CloudApp {
    // Only actual F/C units may label an archived measurement. A malformed old
    // snapshot must not show a fictional scale or mislead an edited shot.
    this.logUnit=historicalUnit==='F'||historicalUnit==='C'?historicalUnit:(v.tempUnit==='C'?'C':'F');
-  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','aria-label="Use Recommendation for Grind Setting"','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1',help:!editing&&d.tempC!=null?d.tempSource:'',extra:`data-temperature-unit="${this.logUnit}"`})}${!editing?button('Use Recommendation','use-temp','aria-label="Use Recommendation for Temperature"','use-recommendation'):''}</div>`:''}</div>${!editing?'<p id="shot-recommendation-feedback" class="recommendation-status" role="status" aria-live="polite" aria-atomic="true"></p>':''}${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert id=shot-validation-feedback></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','aria-label="Use Recommendation for Grind Setting"'+(rec?.grind?.copyable===false||!Number.isFinite(rec?.grind?.value)?' disabled title="No selectable grinder recommendation"':''),'use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1',help:!editing&&d.tempC!=null?d.tempSource:'',extra:`data-temperature-unit="${this.logUnit}"`})}${!editing?button('Use Recommendation','use-temp','aria-label="Use Recommendation for Temperature"'+(!Number.isFinite(rec?.tempC)?' disabled title="No temperature recommendation available"':''),'use-recommendation'):''}</div>`:''}</div>${!editing?'<p id="shot-recommendation-feedback" class="recommendation-status" role="status" aria-live="polite" aria-atomic="true"></p>':''}${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert id=shot-validation-feedback></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
   this.updateDoseAdvisory();
  }
  updateDoseAdvisory(){
@@ -848,9 +940,21 @@ class CloudApp {
   }
  }
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
+  // Online optimistic cache viewing is read-only until server admission returns.
+  // Local navigation, settings and sign-out remain available.
+  if(this.localStartupOwner===this.identity?.id&&!this.status?.admitted&&
+   !['home','expand','shot-expand','shot-toggle-all','search-toggle','settings','signout','close'].includes(a)){
+   this.notice='Checking account access in the background. Editing will be available after verification.';
+   this.render();return;
+  }
   try{
    if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
-   if(a==='close'){sheet.close();return;}
+   if(a==='close'){
+    // Header Close is outside #shot and must not dismiss a pending Save.
+    // Its completion must not close a different unsaved draft.
+    if(this.busy&&sheet.querySelector?.('#shot'))return;
+    sheet.close();return;
+   }
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
    if(a==='watch-walkthrough'){this.showWalkthrough();return;}
@@ -1047,6 +1151,18 @@ class CloudApp {
     this.readDraft();
     const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
     const control=a==='use-grind'?'grind':'temperature';
+     // An unmeasured optional temperature must not be copied as a recommendation
+     // or recorded as an accepted temperature change.
+     if(control==='temperature'&&!Number.isFinite(r?.tempC)){
+      const status=sheet.querySelector('#shot-recommendation-feedback');
+      if(status)status.textContent='No temperature recommendation is available for this shot. Enter the actual measurement if known.';
+      return;
+     }
+    if(control==='grind'&&(r?.grind?.copyable===false||!Number.isFinite(r?.grind?.value))){
+     const status=sheet.querySelector('#shot-recommendation-feedback');
+     if(status)status.textContent='No selectable tenth-step grind recommendation fits this setup. Review Grinder Espresso Range or use your own measured setting.';
+     return;
+    }
     if(control==='grind'){
      const grindInput=sheet.querySelector('[name=grindSetting]');
      grindInput.value=r.grind.value;
@@ -1149,8 +1265,8 @@ class CloudApp {
    this.draft.tempSource='';
    ev.target.closest?.('.field')?.querySelector?.('small')?.remove?.();
   }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const [key] of autofillFields){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.dataset)delete el.dataset.coffeeConflictChoiceValue;if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'&&!ev.isComposing){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.closest?.('#edit-coffee')&&ev.target.dataset?.coffeeDifferenceSelection&&ev.target.value!==ev.target.dataset.coffeeDifferenceValue){delete ev.target.dataset.coffeeDifferenceSelection;delete ev.target.dataset.coffeeDifferenceValue;markCoffeeSubmittedDifferences(ev.target.form?.querySelector('.coffee-source-differences'),ev.target.form,this.editCoffeeDifferences);}if(ev.target.closest?.('#new-coffee')&&ev.target.dataset?.coffeeConflictChoiceValue&&ev.target.value!==ev.target.dataset.coffeeConflictChoiceValue){delete ev.target.dataset.coffeeConflictChoiceValue;markCoffeeConflictChoices(ev.target.form?.querySelector('#coffee-url-feedback'),ev.target.form,this.coffeeUrlActivePreview);}if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){const previousFeed=this.draft.feedMode;this.readDraft();if(!this.editing&&previousFeed!==this.draft.feedMode){this.draft.recommendationContext=null;this.appliedRecommendationValues={};const copyStatus=sheet.querySelector('#shot-recommendation-feedback');if(copyStatus)copyStatus.textContent='';}const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
- async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);let shotValidation=null;
+ change(ev){if(ev.target.closest?.('#edit-coffee')&&ev.target.dataset?.coffeeDifferenceSelection&&ev.target.value!==ev.target.dataset.coffeeDifferenceValue){delete ev.target.dataset.coffeeDifferenceSelection;delete ev.target.dataset.coffeeDifferenceValue;markCoffeeSubmittedDifferences(ev.target.form?.querySelector('.coffee-source-differences'),ev.target.form,this.editCoffeeDifferences);}if(ev.target.closest?.('#new-coffee')&&ev.target.dataset?.coffeeConflictChoiceValue&&ev.target.value!==ev.target.dataset.coffeeConflictChoiceValue){delete ev.target.dataset.coffeeConflictChoiceValue;markCoffeeConflictChoices(ev.target.form?.querySelector('#coffee-url-feedback'),ev.target.form,this.coffeeUrlActivePreview);}if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){const previousFeed=this.draft.feedMode;this.readDraft();if(!this.editing&&previousFeed!==this.draft.feedMode){const hadCopiedControls=!!this.draft.recommendationContext?.used_controls?.length;this.draft.recommendationContext=null;this.appliedRecommendationValues={};const copyStatus=sheet.querySelector('#shot-recommendation-feedback');if(copyStatus)copyStatus.textContent=hadCopiedControls?'Feed mode changed. Previously copied recommendations remain in the form; review the values against the refreshed recipe before saving.':'';}const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);const grindCopy=sheet.querySelector('[data-action="use-grind"]');if(grindCopy){const available=rec?.grind?.copyable!==false&&Number.isFinite(rec?.grind?.value);grindCopy.disabled=!available;grindCopy.title=available?'':'No selectable grinder recommendation';}const tempCopy=sheet.querySelector('[data-action="use-temp"]');if(tempCopy){const available=Number.isFinite(rec?.tempC);tempCopy.disabled=!available;tempCopy.title=available?'':'No temperature recommendation available';}}}
+ async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));const controls=[...form.querySelectorAll(id==='shot'?'button,input,select,textarea':'button')];const initiallyDisabled=new Set(controls.filter(control=>control.disabled));const modalClose=id==='shot'?sheet.querySelector?.('[data-action="close"]'):null;const modalCloseInitiallyDisabled=modalClose?.disabled===true;this.busy=true;controls.forEach(control=>control.disabled=true);if(modalClose)modalClose.disabled=true;if(id==='shot')form.setAttribute?.('aria-busy','true');let shotValidation=null;
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
     if(id==='auth-signin'){await this.client.signIn(d.email,d.password);const epoch=this.epoch;const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;await this.connect();}
@@ -1209,15 +1325,21 @@ class CloudApp {
     let payload;if(this.editing){payload={id:d.id,expected_revision:this.editing.revision,dose_g:Number(d.doseG),yield_g:Number(d.yieldG),time_s:Number(d.timeS),grind_setting:Number(d.grindSetting),temperature_c:C.num(d.tempC),taste:d.tasteScales,notes:d.notes};}else payload=shotPayload(this.state,this.logCoffee,d);
     await this.mutate('save_shot',payload);this.dismissedDoseAdvisories.delete(d.id);this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
    }
-  }catch(err){this.error(err);}finally{this.busy=false;form.querySelectorAll('button').forEach(b=>b.disabled=false);if(id==='shot'&&shotValidation?.length)U.focusShotValidationError(form,shotValidation,this.draft?.tasteScales);}
+  }catch(err){this.error(err);}finally{this.busy=false;controls.forEach(control=>control.disabled=initiallyDisabled.has(control));if(modalClose)modalClose.disabled=modalCloseInitiallyDisabled;if(id==='shot'){form.removeAttribute?.('aria-busy');if(shotValidation?.length)U.focusShotValidationError(form,shotValidation,this.draft?.tasteScales);}}
  }
 }
 export async function startCloudApp(){
+ // Paint a neutral, data-free shell before SDK/session initialization. Never
+ // display cached private workspace until server admission has completed.
+ root.innerHTML='<main class="shell welcome" role="status" aria-live="polite"><h1>The Dial In Collective</h1><p class="helper">Opening your workspace…</p></main>';
+ // If session setup stalls, offer a safe reload rather than leaving a permanent
+ // loading screen. Never paint private state or bypass admission on timeout.
+ const stopRecovery=armStartupRecovery(root);
  try{
   secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
   if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');
   // Shell worker stores only static public files; it never handles identity data.
-  if(globalThis.navigator?.serviceWorker)globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
+  if(globalThis.navigator?.serviceWorker)setTimeout(()=>globalThis.navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{
    // iOS Home Screen apps can stay resident across deploys without a navigation.
    // Check when returning to the app; the new worker activates for the next
    // navigation, never discarding an in-progress draft or offline shot queue.
@@ -1225,10 +1347,10 @@ export async function startCloudApp(){
    const check=()=>{if(globalThis.document?.visibilityState==='hidden'||Date.now()-lastCheck<60_000)return;
     lastCheck=Date.now();reg.update().catch(()=>{});};
    check();globalThis.document?.addEventListener?.('visibilitychange',check);
-  }).catch(()=>{});
+  }).catch(()=>{}),0);
   const sdk=globalThis.supabase.createClient(CLOUD_CONFIG.supabaseUrl,CLOUD_CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'dic_cloud_auth_v1'}});
   const client=createCloudClient(sdk,{redirectUrl:new URL(location.pathname,location.origin).href});const app=new CloudApp(client);await app.init();return app;
- }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}
+ }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}finally{stopRecovery();}
 }
 startCloudApp();
 export {CloudApp};

@@ -28,6 +28,34 @@ export function selectedProducerTeamNameDisagreement(selectedHtml,{producer,clea
  return null;
 }
 
+// A chosen current Producer caption can contain a human farmer and a distinct
+// named farm. Separate roles only with independently supported selected prose.
+// The complete published caption remains unchanged in the source-review facts.
+export function selectedLabeledPersonFarmRoles({publishedProducer,sourceFacts,selectedProse,existingFarm}={}){
+ const literal=String(publishedProducer||'').trim();
+ const match=/^(.{6,110}?):\s*((?:Fazenda|Finca|Hacienda)\s+[\p{Lu}][\p{L}\p{M}0-9'’.-]{1,45}(?:\s+[\p{L}\p{M}0-9'’.-]{1,45}){0,5})$/u.exec(literal);
+ if(!match)return null;
+ const person=match[1].trim(),farm=match[2].trim();
+ if(!/^[\p{Lu}][\p{L}\p{M}'’-]{1,39}(?:\s+(?:[\p{Lu}][\p{L}\p{M}'’-]{1,39}|de|da|do|dos|das|del|van|von)){1,5}$/u.test(person)||
+    /\b(?:coffee|company|export|trading|group|coop|cooperative|station|estate|farm|finca|fazenda|hacienda|roaster)\b/iu.test(person))return null;
+ const key=s=>String(s||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/\s+/gu,' ').trim();
+ if(existingFarm&&key(existingFarm)!==key(farm))return null;
+ const direct=Array.isArray(sourceFacts)&&sourceFacts.some(f=>f.field==='producer'&&
+   /^\s*producer\s*:?\s*$/iu.test(String(f.label||''))&&
+   f.source_type==='html'&&f.conflicting!==true&&
+   String(f.section||'')!=='Different coffee in the source'&&key(f.value)===key(literal));
+ if(!direct||!Array.isArray(selectedProse))return null;
+ const selectedGrowingCredit=selectedProse.some(b=>{
+  if(b.educational||typeof b.text!=='string'||b.text.length>2500||
+     /^\s*producer\s*[:：]/iu.test(b.text))return false;
+  const normalized=key(b.text),at=normalized.indexOf(key(person));
+  if(at<0)return false;
+  const near=normalized.slice(Math.max(0,at-120),at+key(person).length+210);
+  return /\b(?:coffee\s+from|coffee\s+farmers?|farmers?|family\s+farm|growers?|grows?|grown|cultivat\w*|harvest\w*)\b/iu.test(near);
+ });
+ return selectedGrowingCredit?{producer:person,farm,literal}:null;
+}
+
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
 import {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './roast-level-evidence.mjs';
@@ -2035,7 +2063,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   supplementary.facts,
   collectCoffeePageMetaSourceFacts(meta,{source_url}),
   collectCoffeePageGuidanceFacts(html,{source_url}),
-  collectCoffeeSourceFacts(product,{name:fields.name,source_url}),
+  // Never re-add unrelated identity cohorts just quarantined by
+  // canonicalIdentityScope above. Keep foreign captions in the explicit
+  // DIFFERENT-coffee review facts, not in current selected field rankings.
+  collectCoffeeSourceFacts(selectedProduct,{name:fields.name,source_url}),
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
@@ -3308,6 +3339,18 @@ if(fields.origin&&!conflicts.has('origin')){
     'Count-only selected Farm caption; named supplier not published');
    delete fields.producer;
   }
+ }
+ // Direct selected Producer: PERSON: FARM is two roles only if a separate
+ // selected own-coffee growing description corroborates the named person.
+ const personFarm=!conflicts.has('producer')&&fields.producer
+  ?selectedLabeledPersonFarmRoles({publishedProducer:fields.producer,
+    sourceFacts:source_facts,selectedProse:productCoffeeProse(canonicalProduct,clean),
+    existingFarm:roaster_details.farm}):null;
+ if(personFarm){
+  fields.producer=personFarm.producer;
+  if(!roaster_details.farm)roaster_details.farm=personFarm.farm;
+  if(keyOf(roaster_details.named_producer||'')===keyOf(personFarm.literal))
+   roaster_details.named_producer=personFarm.producer;
  }
  // Selected coffee's washing/processing station OWNER is not thereby the
  // producer/grower of the selected green coffee. Preserve that ownership as

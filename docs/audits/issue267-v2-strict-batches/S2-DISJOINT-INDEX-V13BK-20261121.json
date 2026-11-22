@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BK",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BJ-20261121.json",
+  "development_prewrite_sha": "ce9d61f93651f111896a8370cf88bc1d17c910d5",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_PER_PHYSICAL_LINE_LITERAL_SEMANTIC_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "first_line": 497,
+      "last_line": 526,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-497-526-20261121-V13BK.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 70,
+      "path": "scripts/audit/site-integrity.mjs",
+      "source_blob_sha": "da27e07d71cf34e5fcf790cf8a6f32dd16032436",
+      "first_line": 6,
+      "last_line": 35,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C70-6-35-20261121-V13BK.json"
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "original_blob_parity": "PASS_2_COMPLETE_GIT_BLOBS_PREVIOUS_3_SOURCE_BLOBS_REVALIDATED",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C70_LIVE_DIFFERENT",
+  "findings": [
+    {
+      "severity": "LOW_UNREPRODUCED",
+      "source": "scripts/audit/site-integrity.mjs",
+      "category": "STRUCTURAL_REGEX_FRAGILITY",
+      "details": "Pinned regex parses single quoted const files=[...]; live tests/build counterpart exist, no reproduced current defect."
+    },
+    {
+      "severity": "INVENTORY",
+      "source": "scripts/audit/site-integrity.mjs",
+      "pinned_blob": "da27e07d71cf34e5fcf790cf8a6f32dd16032436",
+      "live_blob": "ab52d84a6e75acdda9aee0fc508915e29d720334",
+      "disposition": "LIVE_DELTA_NOT_REVIEWED_NOT_CREDITED"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_2",
+    "archived_json_parse": "PASS",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "line": 527
+    },
+    "pinned": {
+      "manifest_index": 70,
+      "path": "scripts/audit/site-integrity.mjs",
+      "line": 36
+    }
+  }
+}

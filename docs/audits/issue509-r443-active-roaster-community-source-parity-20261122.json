@@ -1,0 +1,82 @@
+{
+  "schema": "dic.issue509.provider-function-semantic-parity.v1",
+  "audit_run": "R443",
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-22",
+  "preflight": {
+    "development_sha": "fd941409552dc28bc6f5df158ed7a548d08843c9",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "development_before_write": "bbaf4fc5b4c71c6b5b4372ee3f30969e31151d48",
+  "production_read_only": true,
+  "full_definition_count": 2,
+  "complete_source_characters": 2425,
+  "full_baseline_complete": false,
+  "source_deployment_drift": 0,
+  "functions": [
+    {
+      "name": "private.dic_community_fingerprint",
+      "arguments": "c community_shots",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_community_fingerprint(c community_shots)\n RETURNS text\n LANGUAGE sql\n IMMUTABLE\n SET search_path TO ''\nAS $function$\n select pg_catalog.md5(pg_catalog.jsonb_build_array(\n  c.coffee_id,c.style,c.dose_g,c.yield_g,c.time_s,c.temperature_c,\n  c.extraction,c.body,c.clarity,c.sweetness,c.astringency,c.grind_setting,\n  c.feed_mode,c.observed_on,c.machine_model,c.grinder_model,c.burr_set,\n  c.basket_model,c.basket_dose_g\n )::text);\n$function$\n",
+      "provider_md5": "06eaeadaef87a445b99d431ae67dd409",
+      "characters": {
+        "start": 1,
+        "end": 478,
+        "complete": true
+      },
+      "source_migration": "supabase/migrations/20261018054140_dic_community_quality_integrity.sql",
+      "source_blob": "7f6178347ee0452fb64a66981c6e3975650fd63c",
+      "migration_sql_body_exact_match": true,
+      "semantic_verdict": "RETAIN_ACTIVE_MATCHED",
+      "reason": "Stable fingerprint of 19 fields supports Community revision/outlier review; contains no member identifying fields"
+    },
+    {
+      "name": "private.dic_verified_roaster_page_proof",
+      "arguments": "roaster_name text",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_verified_roaster_page_proof(roaster_name text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare host_count integer; official_host text; canonical_name text;\nbegin\n with official_pages as (\n  select distinct c.roaster as source_roaster,\n   lower(regexp_replace(split_part(s.source_url,'/',3),'^www\\.','','i')) as source_host\n  from public.coffees c join public.coffee_sources s on s.coffee_id=c.id\n  where c.verification_state='verified' and c.merged_into_id is null\n   and s.source_kind='roaster_page' and s.checked_at>=now()-interval '120 days'\n   and s.source_url ~* '^https://(www\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+(/|$)'\n   and private.dic_canonical_roaster_key(c.roaster)=private.dic_canonical_roaster_key(roaster_name)\n )\n select count(distinct source_host),min(source_host),min(source_roaster)\n into host_count,official_host,canonical_name from official_pages;\n -- Conflicting verified product source domains must be reviewed, not guessed.\n if host_count>1 then return null; end if;\n if host_count=1 and official_host is not null then\n  if exists(select 1 from private.dic_official_source_attestations a\n    where a.canonical_key=private.dic_canonical_roaster_key(roaster_name)\n      and a.official_domain<>official_host) then return null; end if;\n  return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);\n end if;\n -- Preserve prior independently verified official BRAND evidence for the\n -- original source worker bootstrap. This NEVER gates a URL preview.\n select a.canonical_name,a.official_domain into canonical_name,official_host\n from private.dic_official_source_attestations a\n where a.canonical_key=private.dic_canonical_roaster_key(roaster_name);\n if official_host is null then return null; end if;\n return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);\nend $function$\n",
+      "provider_md5": "7ce32408a61728294ad667a9c985f5da",
+      "characters": {
+        "start": 1,
+        "end": 1947,
+        "complete": true
+      },
+      "source_migration": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+      "source_blob": "10775c86bf88e61160fdc66d35c65698638742d6",
+      "migration_sql_body_exact_match": true,
+      "semantic_verdict": "RETAIN_ACTIVE_MATCHED",
+      "reason": "Official verified-roaster proof only for trusted global verification and source-worker; no URL-preview allowlisting"
+    }
+  ],
+  "direct_live_sql_consumers": [
+    {
+      "id": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+      "consumer_of": "roaster_proof"
+    },
+    {
+      "id": "private.dic_review_community_shot(p_id uuid)",
+      "consumer_of": "community_fingerprint"
+    },
+    {
+      "id": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+      "consumer_of": "community_fingerprint"
+    },
+    {
+      "id": "public.dic_source_check_target(submission_id uuid)",
+      "consumer_of": "roaster_proof"
+    }
+  ],
+  "remaining_unverified": "Other full provider definitions, source-dependent runtime, Edge/external clients and inaccessible hosted settings. pg_depend cursor rank 1501/5414.",
+  "next_exact_cursor": {
+    "catalog": "pg_depend",
+    "rank": 1501,
+    "total": 5414,
+    "classid": "pg_class",
+    "objid": "13448",
+    "objsubid": 0,
+    "refclassid": "pg_namespace",
+    "refobjid": "13265",
+    "deptype": "n",
+    "source": "information_schema.sql_features",
+    "character": 1
+  }
+}

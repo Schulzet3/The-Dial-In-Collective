@@ -22,8 +22,11 @@ const gitWorkflow=sha=>{
 // against the sealed development source instead of the intentionally restored
 // published workflow. Malformed/missing ref or byte mismatch still FAILS.
 let requiredSourceWorkflow=workflow;
+let publishedSourceSha=null,developmentSourceSha=null;
 if(existsSync(candidateReceipt)){
  const receipt=JSON.parse(readFileSync(candidateReceipt,'utf8'));
+ publishedSourceSha=receipt.published_source_sha;
+ developmentSourceSha=receipt.development_source_sha;
  assert.equal(receipt.kind,'DIC-READY-ONLY-SOURCE-1');
  assert.ok(receipt.restored_unpublished_workflow_paths?.includes(workflowPath),
   'Release candidate must document the exact restored workflow');
@@ -33,10 +36,10 @@ if(existsSync(candidateReceipt)){
 }
 
 
-test('R190 retains strict original Chromium plus OS dependency install',()=>{
- assert.match(requiredSourceWorkflow,/if ! python -m playwright install --with-deps chromium; then/);
+test('R190 retains strict headless Chromium plus OS dependency install',()=>{
+ assert.match(requiredSourceWorkflow,/if ! python -m playwright install --with-deps --only-shell chromium; then/);
  assert.match(requiredSourceWorkflow,/sudo apt-get update -o Acquire::Retries=2/);
- assert.equal((requiredSourceWorkflow.match(/python -m playwright install --with-deps chromium/g)||[]).length,2);
+ assert.equal((requiredSourceWorkflow.match(/python -m playwright install --with-deps --only-shell chromium/g)||[]).length,2);
  assert.doesNotMatch(requiredSourceWorkflow,/continue-on-error:\s*true/);
  assert.doesNotMatch(workflow,/continue-on-error:\s*true/);
 });
@@ -47,10 +50,30 @@ test('R190 constrained mirror fallback fails closed if Azure mirror is absent',(
  assert.match(requiredSourceWorkflow,/exit 1/);
 });
 test('R190 leaves the full actual UI, visual, offline and accessibility suite required',()=>{
- for(const name of ['built_app_qa.py','visual_review.py','cloud_owner_qa.py','pwa_offline_qa.py','issue26_accessibility_qa.py','admin_records_qa.py']){
-  assert.ok(requiredSourceWorkflow.includes(name),name+' must remain required in development');
-  assert.ok(workflow.includes(name),name+' must remain required in published release');
- }
- assert.match(requiredSourceWorkflow,/if: steps\.scope\.outputs\.browser_mode != 'none'/);
- assert.match(workflow,/if: steps\.scope\.outputs\.browser_mode != 'none'/);
+ const required=['built_app_qa.py','visual_review.py','cloud_owner_qa.py',
+  'pwa_offline_qa.py','issue26_accessibility_qa.py','admin_records_qa.py'];
+ // Pre-optimization workflows contain direct Python commands. The faster
+ // workflow calls a fail-closed wrapper; inspect the pinned wrapper Git blob
+ // rather than treating an unchanged full suite as missing.
+ const verify=(source,sha,label)=>{
+  assert.match(source,/if: steps\.scope\.outputs\.browser_mode != 'none'/);
+  let script=source;
+  if(source.includes('node scripts/audit/run-browser-qa.mjs')){
+   const runnerPath='scripts/audit/run-browser-qa.mjs';
+   if(sha){
+    assert.match(sha,/^[a-f0-9]{40}$/);
+    script=execFileSync('git',['show',sha+':'+runnerPath],{
+     cwd:root,encoding:'utf8',timeout:15000,maxBuffer:120000
+    });
+   }else{
+    script=readFileSync(new URL('../'+runnerPath,import.meta.url),'utf8');
+   }
+   assert.match(script,/Promise\.all/,'Concurrent visual checks must be awaited');
+   assert.match(script,/status!==0/,'Every Python failure must fail browser CI');
+  }
+  for(const name of required)assert.ok(script.includes(name),
+   name+' must remain required in '+label);
+ };
+ verify(requiredSourceWorkflow,developmentSourceSha,'development');
+ verify(workflow,publishedSourceSha,'published release');
 });

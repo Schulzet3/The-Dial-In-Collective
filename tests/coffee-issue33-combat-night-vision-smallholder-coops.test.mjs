@@ -1,7 +1,7 @@
 // Issue #33 original603 #65. Synthetic fixtures, not a raw official HTML replay.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {isPublishedNarrativeRestored} from './helpers/release-published-restoration.mjs';
+import {isPublishedNarrativeRestored,currentPublishedGrowerEvidence} from './helpers/release-published-restoration.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const url='https://combatcoffeetea.com/products/night-vision-medium-roast-kenya';
 const intro="Mt. Kenya's southern slopes are home to thousands of small coffee shambas, or gardens. Shambas are nurtured by smallholder farmers, who deliver freshly picked, ripe cherries to their cooperative pulping factories.";
@@ -13,7 +13,7 @@ const parse=(name,paragraphs,extra)=>extractPublicCoffeeFacts(page(name,paragrap
 test('#65 selected Kenyan coffee credits literal co-op smallholder growers, not an invented cooperative name',()=>{
  const r=parse('NIGHT VISION - MEDIUM ROAST - KENYA',[intro,selected+' '+growers+' '+process]);
  assert.equal(r.ok,true,JSON.stringify(r));
- if(isPublishedNarrativeRestored()){
+ if(isPublishedNarrativeRestored()&&!currentPublishedGrowerEvidence()){
   assert.ok(!r.fields.producer,'exact published baseline must not invent selected co-op grower credit');
  }else assert.match(r.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(r.fields));
  assert.equal(r.fields.name,'NIGHT VISION - MEDIUM ROAST - KENYA');

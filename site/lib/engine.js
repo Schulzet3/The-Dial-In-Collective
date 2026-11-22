@@ -205,7 +205,15 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
    sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
- if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
+ if(basketHits.length){
+  const observed=basketHits.map(sh=>sh.grindSetting);
+  const value=round(quantile(observed,.5));
+  // Rounded/median references are estimates unless their displayed dial value
+  // was actually measured in a qualifying five-green same-basket shot.
+  const proven=observed.some(setting=>Math.abs(setting-value)<=1e-8);
+  return {value,source:proven?'Your successful setting':
+   'Estimated from your successful shots (rounded)',proven};
+ }
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
  // A matching grinder/burr set does not mean the stored dial number is on
@@ -677,15 +685,36 @@ export function recommendation(s,coffeeId,options={}) {
  const unchangedMeasuredGrind=last&&rec.grind&&finite(rec.grind.value)&&
   (rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly)&&
   Math.abs(rec.grind.value-last.grindSetting)<=1e-8;
- if(rec.grind&&finite(rec.grind.value)&&!unchangedMeasuredGrind)
-  rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
- if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
+ // Select only one-tenth settings INSIDE the actual calibrated espresso range.
+ // Fractional original measurements remain unchanged in private History and
+ // in an unchanged measured-grind adjustment; never suggest a new half-step.
+ const minTick=Math.ceil(v.grinderMin*10-1e-9),maxTick=Math.floor(v.grinderMax*10+1e-9);
+ const hasTenth=Number.isFinite(minTick)&&Number.isFinite(maxTick)&&minTick<=maxTick;
+ const gridMin=minTick/10,gridMax=maxTick/10;
+ if(rec.grind){
+  if(!hasTenth){
+   if(!unchangedMeasuredGrind)rec.grind.value=null;
+   rec.grind.source=unchangedMeasuredGrind?
+    'Last measured grind; no new tenth-step setting fits this espresso range':
+    'No tenth-step setting fits this espresso range. Review the setup range or enter your measured grind.';
+   rec.grind.proven=false;rec.grind.copyable=false;
+  }else if(finite(rec.grind.value)&&!unchangedMeasuredGrind){
+   const proposed=rec.grind.value,selectable=clamp(round(proposed),gridMin,gridMax);
+   rec.grind.value=selectable;
+   if(Math.abs(selectable-proposed)>1e-8){
+    rec.grind.proven=false;
+    if(rec.grind.source==='Your successful setting')
+     rec.grind.source='Estimated from your successful shots (rounded to a selectable setting)';
+   }
+  }
+ }
+ if(hasTenth&&!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
-  // A calibrated starting search band is NOT a statistical confidence interval.
-  // A pure espresso-scale heuristic is intentionally less precise than personal evidence.
+  // Starting search bands are NOT confidence intervals. Both endpoints must
+  // be selectable one-tenth values inside the actual grinder espresso range.
   const half=rec.grind.source==='Espresso range starting estimate'?step*2:step;
-  const lo=Math.min(v.grinderMin,v.grinderMax),hi=Math.max(v.grinderMin,v.grinderMax);
-  const low=round(clamp(rec.grind.value-half,lo,hi)),high=round(clamp(rec.grind.value+half,lo,hi));
+  const low=clamp(round(rec.grind.value-half),gridMin,gridMax);
+  const high=clamp(round(rec.grind.value+half),gridMin,gridMax);
   if(low<high)rec.grind.range={low,high};
  }
  return rec;

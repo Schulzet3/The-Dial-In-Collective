@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "project": "azviqqejypsefzilgonr",
+  "issue": 509,
+  "preflight_development_sha": "f1667e176c7ac9becf6cd5d4553daab76295a744",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider": "Supabase PostgreSQL 17.11.0.003",
+  "production_read_only": true,
+  "date_utc": "2026-11-21",
+  "new_source_CI": "NOT_APPLICABLE",
+  "complete_baseline": false,
+  "original_pg_bootstrap_source_reviewed": false,
+  "compiled_native_source_reviewed": false,
+  "github_267_line_credit": 0,
+  "round": "R425",
+  "route": "extensions.pg_class ranks 1-2/2",
+  "reviewed": 2,
+  "total": 2,
+  "view_characters": 1960,
+  "entries": [
+    {
+      "rank": 1,
+      "schema_rank": 1,
+      "oid": 16407,
+      "identity": "extensions.pg_stat_statements_info",
+      "provider_view_md5": "4535ca37bd2670cfc7d0f68a0d17048b",
+      "reviewed_char_range": "1-113",
+      "view_chars": 113,
+      "semantic_review": "stats reset/deallocation extension function view wrapper; native C source unavailable",
+      "verdict": "KEEP_UPSTREAM_INTROSPECTION_NO_SAFE_DELETION",
+      "definition": {
+        "owner": "postgres",
+        "kind": "v",
+        "acl": "{postgres=a*r*w*d*D*x*t*m*/postgres,=r/postgres,dashboard_user=arwdDxtm/postgres}",
+        "options": null,
+        "rls": false,
+        "complete_view_sql": " SELECT dealloc,\n    stats_reset\n   FROM pg_stat_statements_info() pg_stat_statements_info(dealloc, stats_reset);",
+        "columns": [
+          {
+            "name": "dealloc",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "stats_reset",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "constraints": null,
+        "index_sql": null
+      }
+    },
+    {
+      "rank": 2,
+      "schema_rank": 2,
+      "oid": 16424,
+      "identity": "extensions.pg_stat_statements",
+      "provider_view_md5": "b123763d3bfc8f8cb240c37c7d00dc7a",
+      "reviewed_char_range": "1-1847",
+      "view_chars": 1847,
+      "semantic_review": "pg_stat_statements(true) view wrapper for aggregate performance counters; no stored query text selected",
+      "verdict": "KEEP_UPSTREAM_INTROSPECTION_NO_SAFE_DELETION",
+      "definition": {
+        "owner": "postgres",
+        "kind": "v",
+        "acl": "{postgres=a*r*w*d*D*x*t*m*/postgres,=r/postgres,dashboard_user=arwdDxtm/postgres}",
+        "options": null,
+        "rls": false,
+        "complete_view_sql": " SELECT userid,\n    dbid,\n    toplevel,\n    queryid,\n    query,\n    plans,\n    total_plan_time,\n    min_plan_time,\n    max_plan_time,\n    mean_plan_time,\n    stddev_plan_time,\n    calls,\n    total_exec_time,\n    min_exec_time,\n    max_exec_time,\n    mean_exec_time,\n    stddev_exec_time,\n    rows,\n    shared_blks_hit,\n    shared_blks_read,\n    shared_blks_dirtied,\n    shared_blks_written,\n    local_blks_hit,\n    local_blks_read,\n    local_blks_dirtied,\n    local_blks_written,\n    temp_blks_read,\n    temp_blks_written,\n    shared_blk_read_time,\n    shared_blk_write_time,\n    local_blk_read_time,\n    local_blk_write_time,\n    temp_blk_read_time,\n    temp_blk_write_time,\n    wal_records,\n    wal_fpi,\n    wal_bytes,\n    jit_functions,\n    jit_generation_time,\n    jit_inlining_count,\n    jit_inlining_time,\n    jit_optimization_count,\n    jit_optimization_time,\n    jit_emission_count,\n    jit_emission_time,\n    jit_deform_count,\n    jit_deform_time,\n    stats_since,\n    minmax_stats_since\n   FROM pg_stat_statements(true) pg_stat_statements(userid, dbid, toplevel, queryid, query, plans, total_plan_time, min_plan_time, max_plan_time, mean_plan_time, stddev_plan_time, calls, total_exec_time, min_exec_time, max_exec_time, mean_exec_time, stddev_exec_time, rows, shared_blks_hit, shared_blks_read, shared_blks_dirtied, shared_blks_written, local_blks_hit, local_blks_read, local_blks_dirtied, local_blks_written, temp_blks_read, temp_blks_written, shared_blk_read_time, shared_blk_write_time, local_blk_read_time, local_blk_write_time, temp_blk_read_time, temp_blk_write_time, wal_records, wal_fpi, wal_bytes, jit_functions, jit_generation_time, jit_inlining_count, jit_inlining_time, jit_optimization_count, jit_optimization_time, jit_emission_count, jit_emission_time, jit_deform_count, jit_deform_time, stats_since, minmax_stats_since);",
+        "columns": [
+          {
+            "name": "userid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "dbid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "toplevel",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "queryid",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "query",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "plans",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "total_plan_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "min_plan_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "max_plan_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "mean_plan_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "stddev_plan_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "calls",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "total_exec_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "min_exec_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "max_exec_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "mean_exec_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "stddev_exec_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "rows",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blks_hit",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blks_read",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blks_dirtied",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blks_written",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blks_hit",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blks_read",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blks_dirtied",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blks_written",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "temp_blks_read",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "temp_blks_written",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blk_read_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "shared_blk_write_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blk_read_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "local_blk_write_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "temp_blk_read_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "temp_blk_write_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "wal_records",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "wal_fpi",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "wal_bytes",
+            "type": "numeric",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_functions",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_generation_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_inlining_count",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_inlining_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_optimization_count",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_optimization_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_emission_count",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_emission_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_deform_count",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "jit_deform_time",
+            "type": "double precision",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "stats_since",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "minmax_stats_since",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "constraints": null,
+        "index_sql": null
+      }
+    }
+  ],
+  "safe_performance_aggregate": {
+    "statement_count": 4896,
+    "call_count": 201725,
+    "total_exec_ms": 568512.14,
+    "max_mean_exec_ms": 2735.58,
+    "temp_blocks_written": 525151,
+    "stats_reset_utc": "2026-10-09T11:11:31.487298Z",
+    "source_classification": "all workloads mixed",
+    "finding": "No reproducible DIC-specific bottleneck from aggregated stats; no raw query text read"
+  },
+  "next_cursor": "information_schema.pg_class rank 1/69 OID 13285"
+}

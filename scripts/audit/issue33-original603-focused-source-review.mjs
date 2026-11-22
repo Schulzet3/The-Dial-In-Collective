@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Release20 blocked dependency #1044: independently verify current #431/#437/#440 source, Add Coffee and review output; no corpus certification.
 // Issue33: selected original603 public URLs; captures are NOT automatic certification.
-import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import {readFileSync,mkdirSync,writeFileSync,existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {fetchPublicCoffeeHtml,safeCoffeeUrl,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
@@ -15,8 +15,15 @@ import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './iss
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
 import {selectedShopifyPurchaseH3Identity} from './issue33-shopify-selected-product-h3.mjs';
-import {selectedShopifyPageFlyH3Identity} from './issue33-shopify-pagefly-h3.mjs';
+// R374 PageFly is separately unfinished. On a published-base-only #3781
+// candidate, the optional helper must NOT leave a dangling static import.
+// The original603 source review retains its full R374 behavior in development.
+const optionalPageFlyH3=new URL('./issue33-shopify-pagefly-h3.mjs',import.meta.url);
+let selectedShopifyPageFlyH3Identity=()=>null;
+if(existsSync(optionalPageFlyH3))
+ ({selectedShopifyPageFlyH3Identity}=await import(optionalPageFlyH3.href));
 import {selectedShopifyTrackedOfferH2Identity} from './issue33-shopify-tracked-offer-h2.mjs';
+import {selectedShopifyMainProductH2Identity} from './issue33-shopify-main-product-h2.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
@@ -114,6 +121,8 @@ for(const target of targets){
       selectedShopifyTrackedOfferH2Identity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
       selectedShopifyPageFlyH3Identity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
+      selectedShopifyMainProductH2Identity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name})) :null;
    r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
      ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))

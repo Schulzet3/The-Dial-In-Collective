@@ -1,0 +1,55 @@
+name: DIC Issue33 R407 original119 123 exact selected official public source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r407-original119-123.yml'
+      - 'scripts/audit/issue33-r407-original119-123-check.mjs'
+      - 'tests/coffee-issue33-r408-producer-farm-caption.test.mjs'
+      - 'docs/workstreams/ops-issue33-r407-epiphany-favor-original119-123-20261122.md'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r407-original119-123.yml'
+      - 'scripts/audit/issue33-r407-original119-123-check.mjs'
+      - 'tests/coffee-issue33-r408-producer-farm-caption.test.mjs'
+permissions:
+  contents: read
+jobs:
+  selected-original119-123:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Existing bounded blend and hostile selected-product regressions
+        run: node --test tests/coffee-issue33-r138-118.test.mjs tests/coffee-issue33-r142-120.test.mjs tests/coffee-issue33-r408-producer-farm-caption.test.mjs
+      - name: Exact checked out source SHA
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+      - name: Guarded first-party current selected 119 and 123 parser and unsaved UI
+        env:
+          DIC_R407_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '119,123'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r407
+        run: GITHUB_SHA="$DIC_R407_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected identity and changed blend-component afterproof
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r407
+        run: node scripts/audit/issue33-r407-original119-123-check.mjs
+      - name: Retain exact official raw HTML and failed or successful evidence one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r407-original119-123
+          path: /tmp/dic33-r407/
+          retention-days: 1
+          if-no-files-found: warn

@@ -46,11 +46,20 @@ for(const c of cases){
    'exact_selected_review_only_jasmine_lemon_277');
   check(!/jasmine|lemon/i.test(notes),'printed_cupping_notes_not_replaced_277');
   check(!f.process,'unpublished_process_blank_277');
- }else{
-  check(/\bPROCESSING:\s*Wet-Hulled\b/i.test(norm),'selected_wet_hulled_literal_'+c.n);
-  check(!/^Washed$/i.test(String(f.process||'')),'wet_hulled_not_washed_'+c.n);
-  if(c.n===278){check(!f.roast_level,'unpublished_roast_blank_278');check(!f.producer,'unpublished_grower_blank_278');}
-  if(c.n===279){check(/\bROAST:\s*Full City/i.test(norm),'full_city_selected_literal_279');check(!f.producer,'unpublished_grower_blank_279');}
+ }else if(c.n===278){
+  // Current selected H1 and direct product description explicitly say Washed.
+  // This exact same page still has older SEO meta saying Wet-Hulled; SEO
+  // cannot override selected visible product facts or become a required test
+  // fixture. A site update may remove the stale metadata without failure.
+  check(/\bPROCESSING:\s*Washed\b/i.test(norm),'direct_selected_washed_literal_278');
+  check(f.process==='Washed','direct_washed_over_stale_seo_278');
+  check(!f.roast_level,'unpublished_roast_blank_278');
+  check(!f.producer,'unpublished_grower_blank_278');
+ }else if(c.n===279){
+  check(/\bPROCESSING:\s*Wet-Hulled\b/i.test(norm),'selected_wet_hulled_literal_279');
+  check(f.process==='Other/Unknown','selected_wet_hulled_not_washed_279');
+  check(/\bROAST:\s*Full City/i.test(norm),'full_city_selected_literal_279');
+  check(!f.producer,'unpublished_grower_blank_279');
  }
  check(!f.espresso_recipe&&!f.decaffeination_method,'grind_not_recipe_or_decaf_'+c.n);
  result.push({number:c.n,status:rec.status,url:c.url,html_bytes:bytes.length,sha256:bytes.length?sha(bytes):null,h1,fields:f,conflicts:actual.conflicts||[]});

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {docsOnlyPaths,classifyChanges,classifyImpactPaths} from '../scripts/audit/ci-scope.mjs';
 const A='a'.repeat(40),B='b'.repeat(40);
@@ -89,4 +90,157 @@ test('Issue #267 post-S2 historical Git-tree inventory delta stays docs-only wit
   assert.equal(mixed.node_mode,bare.node_mode,runtime);
   assert.equal(mixed.sql,bare.sql,runtime);
  }
+});
+
+// #3667 owner speed-first: no full app/browser/SQL suite for narrowly proven CI-only paths.
+test('known non-shipped CI diagnostic changes take the focused QA-only route',()=>{
+ const paths=['tests/ci-optimization.test.mjs','tests/ci-scope.test.mjs',
+  'tests/fast-pr-check.test.mjs','scripts/audit/fast-pr-check.mjs',
+  'scripts/audit/measure-stage.mjs','scripts/audit/syntax-batch.mjs'];
+ for(const path of paths){
+  const scoped=classifyImpactPaths([path,'docs/workstreams/issue-3667.md']);
+  assert.equal(scoped.tier,'low',path);
+  assert.equal(scoped.node_mode,'qa',path);
+  assert.equal(scoped.sql,false,path);
+  assert.equal(scoped.cloud_mode,'none',path);
+  assert.equal(scoped.browser_mode,'none',path);
+  assert.equal(scoped.lint,false,path);
+  assert.equal(scoped.build_browser||scoped.build_validate,false,path);
+  assert.equal(scoped.provider_guard,false,path);
+ }
+});
+test('mixed changes, unknown paths and sensitive CI remain conservatively covered',()=>{
+ for(const source of ['site/cloud/main.js','supabase/migrations/new.sql',
+  '.github/workflows/cloud-beta-ci.yml','scripts/audit/ci-scope.mjs',
+  'scripts/release/ready-promotion-gate.mjs','tests/auth-new.test.mjs',
+  'scripts/audit/unknown-regression.mjs']){
+  const impact=classifyImpactPaths([source,'tests/ci-optimization.test.mjs']);
+  assert.equal(impact.tier,'high',source);
+  assert.equal(impact.node_mode,'full',source);
+  assert.equal(impact.browser_mode,source.endsWith('.sql')?'none':'high',source);
+  assert.equal(impact.sql,true,source);
+ }
+ assert.equal(classifyImpactPaths(['docs/CURRENT_STATUS.md']).tier,'docs');
+ assert.equal(classifyImpactPaths(['site/cloud/main.js']).tier,'high');
+});
+
+test('official PR and push QA-only path stays focused, frozen candidate remains conservative',()=>{
+ const paths=['docs/ai/PREFLIGHT.md','docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',
+  'docs/workstreams/issue-3667.md','tests/ci-scope.test.mjs'];
+ const git=()=>paths.join('\n')+'\n';
+ for(const event of ['pull_request','push']){
+  const impact=classifyChanges({base:A,head:B,event,git});
+  assert.equal(impact.node_mode,'qa',event);
+  assert.equal(impact.tier,'low',event);
+  assert.equal(impact.sql,false,event);
+  assert.equal(impact.browser_mode,'none',event);
+  assert.equal(impact.build_browser||impact.build_validate,false,event);
+ }
+ const candidate=classifyChanges({base:A,head:B,event:'candidate',git});
+ assert.equal(candidate.tier,'high');
+ assert.equal(candidate.node_mode,'full');
+});
+
+test('source-bound approval push jobs cannot be canceled by unrelated later push',(t)=>{
+ if(frozenExcludedReadySource(['package.json','.github/workflows/cloud-beta-ci.yml','.github/workflows/cloud-regression.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ const yaml=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ assert.ok(yaml.includes("group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"));
+ assert.ok(yaml.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
+ const group=(event,ref,head)=>ref+'-'+(event==='push'?head:'pr');
+ const ref='refs/heads/development/backend-foundation';
+ assert.notEqual(group('push',ref,A),group('push',ref,B),'independent SHA-bound pushes');
+ assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B),'superseded PR jobs still coalesce');
+ assert.equal(classifyImpactPaths(['.github/workflows/approval-continuity.yml']).tier,'high');
+});
+
+test('exact-SHA development cloud and browser push checks finish despite subsequent pushes',(t)=>{
+ if(frozenExcludedReadySource(['package.json','.github/workflows/cloud-beta-ci.yml','.github/workflows/cloud-regression.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
+ for(const [filename,prefix] of [
+  ['cloud-beta-ci.yml','dic-cloud-beta-ci'],
+  ['cloud-regression.yml','dic-cloud-regression']
+ ]){
+  const workflow=readFileSync(new URL('../.github/workflows/'+filename,import.meta.url),'utf8');
+  assert.ok(workflow.includes("group: "+prefix+"-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"),filename);
+  assert.ok(workflow.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"),filename);
+  assert.equal(classifyImpactPaths(['.github/workflows/'+filename]).tier,'high');
+ }
+ const group=(kind,ref,sha)=>ref+'-'+(kind==='push'?sha:'pr');
+ assert.notEqual(group('push','refs/heads/development/backend-foundation',A),group('push','refs/heads/development/backend-foundation',B));
+ assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B));
+});
+
+
+test('Issue #267 disjoint semantic evidence JSON does not waste HIGH CI on docs-only pushes',()=>{
+ const prefix='docs/audits/issue267-v2-strict-batches/';
+ const safe=[
+  'S2-DISJOINT-F221-477-506-20261122-V13CD.json',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.json',
+  'S2-DISJOINT-INDEX-V13CD-20261122.json',
+  'S2-DISJOINT-F221-507-536-20261123-V13CE.json',
+  'S2-DISJOINT-CURRENT-C78-87-116-20261123-V13CE.json',
+  'S2-DISJOINT-INDEX-V13CE-20261123.json',
+  'S2-DISJOINT-F221-657-673-F222-1-13-20261122-V13CJ.json',
+  'S2-DISJOINT-CURRENT-C79-24-53-20261122-V13CJ.json',
+  'S2-DISJOINT-INDEX-V13CJ-20261122.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-INDEX-V13CK-20261122.json'
+ ].map(name=>prefix+name);
+ const currentPair=[
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-INDEX-V13CK-20261122.json'
+ ].map(name=>prefix+name).concat('docs/workstreams/ops-issue267-v13ck-20261122.md');
+ for(const event of ['pull_request','push']){
+  const proof=classifyChanges({base:A,head:B,event,git:()=>currentPair.join('\n')+'\n'});
+  assert.equal(proof.tier,'docs',event+' exact V13CK pair');
+  assert.equal(proof.node_mode,'none',event);
+  assert.equal(proof.sql,false,event);
+  assert.equal(proof.lint,false,event);
+ }
+ const paths=[...safe,'docs/workstreams/issue-267.md','docs/workstreams/ops-issue267-v13cj-20261122.md'];
+ for(const event of ['pull_request','push']){
+  const proof=classifyChanges({base:A,head:B,event,git:()=>paths.join('\n')+'\n'});
+  assert.equal(proof.tier,'docs',event);
+  assert.equal(proof.reason,'NON_RUNTIME_ONLY',event);
+  assert.equal(proof.node_mode,'none',event);
+  assert.equal(proof.sql,false,event);
+  assert.equal(proof.browser_mode,'none',event);
+  assert.equal(proof.build_browser||proof.build_validate,false,event);
+ }
+ for(const invalid of [
+  'S2-DISJOINT-INDEX-V13CD-20261122.json.bak',
+  'S2-DISJOINT-INDEX-BAD-20261122.json',
+  'S2-DISJOINT-INDEX-V13CD-20261122.js',
+  'S2-DISJOINT-F221-477-506-20261122.json',
+  'S2-DISJOINT-F221-657-673-F0-1-13-20261122-V13CJ.json',
+  'S2-DISJOINT-F221-657-673-F222-1-13-F223-14-30-20261122-V13CJ.json',
+  'S2-DISJOINT-F221-657-673-C79-24-53-20261122-V13CJ.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C0-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-C81-1-4-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.sql',
+  'S2-DISJOINT-F221-657-673-F222-1-13-20261122-V13CJ.js',
+  'S2-DISJOINT-F0-477-506-20261122-V13CD.json',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.sql',
+  'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.json.bak',
+  'S2-DISJOINT-INDEX-V13CD-20261122/../app.js'
+ ])assert.equal(classifyImpactPaths([prefix+invalid]).tier,'high',invalid);
+ for(const changed of ['site/cloud/main.js','scripts/audit/ci-scope.mjs',
+  '.github/workflows/approval-continuity.yml','supabase/migrations/new.sql']){
+  const bare=classifyImpactPaths([changed]);
+  const mixed=classifyImpactPaths([...paths,changed]);
+  assert.equal(mixed.tier,bare.tier,changed);
+  assert.equal(mixed.node_mode,bare.node_mode,changed);
+  assert.equal(mixed.sql,bare.sql,changed);
+ }
+ const frozen=classifyChanges({base:A,head:B,event:'candidate',git:()=>paths.join('\n')+'\n'});
+ assert.equal(frozen.tier,'high','no candidate PASS from documentation-only evidence');
+ assert.equal(frozen.node_mode,'full');
 });

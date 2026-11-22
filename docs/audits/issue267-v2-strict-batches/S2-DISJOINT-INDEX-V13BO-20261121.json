@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BO",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BN-20261121.json",
+  "development_prewrite_sha": "5f1a56ad0edcf59991b91d4905867009f93097f7",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-27-56-20261121-V13BO.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 27,
+          "last_line": 56,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C71-26-55-20261121-V13BO.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 71,
+          "path": "scripts/audit/source-release-dossier.mjs",
+          "source_blob_sha": "0d5244e6cb1b00d7be17cf121231ff36f3c0f395",
+          "first_line": 26,
+          "last_line": 55,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_2_COMPLETE_ORIGINAL_GIT_BLOBS",
+  "archived_json_parse": "PASS_1",
+  "pinned_live_parity": "IDENTICAL_C71",
+  "findings": [
+    {
+      "severity": "HISTORICAL_TRIAGE",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 54,
+      "fact": "Archived pre-refresh invitation controls 7/9; two failures show isAccessDenied undefined",
+      "disposition": "CURRENT_DEFECT_NOT_REPRODUCED_SEPARATE_ISSUE96"
+    },
+    {
+      "severity": "RELEASE_SAFETY",
+      "path": "scripts/audit/source-release-dossier.mjs",
+      "line": 48,
+      "fact": "Read-only source dossier forces HOLD despite candidate grant; no live provider proof",
+      "disposition": "PRESERVE_LOCKED_NO_RELEASE"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_2",
+    "archived_json_parse": "PASS_1",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 221,
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 57
+    },
+    "pinned": {
+      "manifest_index": 71,
+      "path": "scripts/audit/source-release-dossier.mjs",
+      "line": 56
+    }
+  }
+}
