@@ -1227,3 +1227,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=37535cb5f39442a7e0cd1ff2f91dafb09dbe7378 
 
 ## November 22 — reject unused frozen CI run receipt (nonpublishing) [skip netlify]
 - Source-parent b99d3931ec08652823d6746015e5cad917964a4d official main acceptance run 45050446255 FAILED 248 PASS / 1 FAIL; negative test correctly identified that a fifth certificate run unrelated to any of the five named check statuses was not rejected. No release/production/provider claim. Root fix: every certified candidate run ID must appear in the independently verified exact five named jobs; no unused, stale or spoofed extra run can count as success. All existing source/branch/CI/immutable parity gates remain mandatory. Rerun exact main acceptance on this commit before any new one-use recovery release request.
+
+DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Recovery grant DIC-20261122-ADMISSION-READY03, **SAME** owner-selected READY source d4af1c4e13d1babe6f10d277d5243582eb798c56; first request -02 controller 45050060516 FAILED BEFORE claim, no provider/release effect. Superseded -02 in live dev fd17c5a46f01adbdfacec2095c88836b9dc8a565; main source-bound controller accept 45050550983 COMPLETED SUCCESS.
+- Five GitHub exact frozen candidate checks: approval45049518049; sql45049518047; cloud-tests and mobile-browser-qa45049518003; validate45049517997 all SUCCESS. Certificate 90d26895... and candidate ref immutable. No SQL migrations, private verified backup maintained; one release only, no new owner rights or future publication.
+
+## DIC-20261122-ADMISSION-READY03 controller request [skip netlify]
+- Release ID: DIC-20261122-ADMISSION-READY03
+- Tested source: d4af1c4e13d1babe6f10d277d5243582eb798c56
+- Mode: publish
