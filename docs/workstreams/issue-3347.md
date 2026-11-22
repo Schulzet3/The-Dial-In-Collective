@@ -179,3 +179,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 
 - Live main source now includes nonpublishing #3347 compatibility fix 7d7ebc318f55e35f75a4cf29154c9d039d63776b, exact PR-head acceptance 44989265733 SUCCESS. Five original startup improvements remain fully merged, clean runtime pinned to Git blob fe9124fa1deeb84d7a41659c066f517f6311039e; live dev queue still TESTING. Initial immutable candidate d505fb50 validate FAILED 14 unrelated source-bound assertions; never reuse it.
 - Add one ACTUAL prior successful source-proof run 44988817244 to the provisional selected row's evidence so frozen candidate identity changes; this branch is NOT live READY. Existing read-only source-proof workflow automatically reads new main operations tooling on push and checks exact published/test/workflow isolation, with no ref push, grant, Netlify or production action. Next: freeze new branch at exact receipt tree, run five official exact-SHA jobs; fix any actual failure, then promote live READY only with zero blockers and bytes isolated.
+
+## 2026-11-22 — exact newly corrected main source read-only candidate proof [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Owner approved five startup enhancements to READY. Live dev ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f, main 611ee43c0ed3f7e45e72c766070df0cb88678383; earlier provisional source-run 44989382451 FAILED source-only guard because final validator expected one workflow-only test while discovery knew two. Independently merged main fix 611ee43c0ed3f7e45e72c766070df0cb88678383 has controller SUCCESS 44989594073 and pre-certification SUCCESS 44989594086; do not duplicate that fix/CI.
+- Re-run only existing nonpublishing startup source receipt on this immutable provisional queue/branch. All selected app/runtime and already-verified clean source pins remain unchanged; no test suite, build, provider contact, grant, Publish or deployment. Maintain live TESTING state until separate frozen candidate five exact-SHA CI SUCCESS. This append-only journal ensures traceability.
