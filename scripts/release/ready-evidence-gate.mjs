@@ -117,6 +117,13 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
  }
  return {ready:errors.length===0,errors,verified};
 }
+// A fully certified immutable READY batch supersedes historical PR-head/merge
+// same-file tests. It must prove the WHOLE frozen Git source and all five CI jobs
+// via the independently read-only #3347 promotion verifier, never by queue text.
+export async function verifyCertifiedBatchEvidence(args={}){
+ const {verifyReadyPromotion}=await import('./ready-promotion-gate.mjs');
+ return verifyReadyPromotion(args);
+}
 const TRANSIENT_GITHUB_READ_HTTP=new Set([403,429,502,503,504]);
 export async function githubReleaseReaders(token,{request=globalThis.fetch,
  sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
@@ -173,6 +180,26 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   }
   const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
   const items=(queue.items||[]).filter(x=>x.state==='READY');
+  if(items.length){
+   // Prospective READY requires a source-frozen candidate certificate. A
+   // TESTING feature with shared-file drift must not be compared against the
+   // mixed current-development Git tree to overwrite its frozen evidence.
+   const certificate=JSON.parse(readFileSync(
+    new URL('../../docs/READY_BATCH_CERTIFICATION.json',import.meta.url),'utf8'));
+   const {githubReadyPromotionReaders,gitReadyAncestry}=await import('./ready-promotion-gate.mjs');
+   const git=localReadyGitReaders();
+   const result=await verifyCertifiedBatchEvidence({queue,certificate,
+    developmentSha:git.currentSourceSha(),
+    ...githubReadyPromotionReaders(process.env.GITHUB_TOKEN),
+    ...await githubReleaseReaders(process.env.GITHUB_TOKEN),
+    isAncestor:gitReadyAncestry()});
+   if(!result.ready)throw Error('Frozen READY batch not certified: '+result.errors.join(' | '));
+   console.log('[READY evidence] FROZEN_CANDIDATE_VERIFIED '+result.count+
+    ' READY items, exact candidate '+result.candidate_sha+
+    ', five native completed successful jobs. No Publish.');
+   return;
+  }
+
   const readers=await githubReleaseReaders(process.env.GITHUB_TOKEN);
   // Live, fail-closed GraphQL batches replace hundreds of GitHub Actions
   // REST GETs on every PR/push. Do not cache a PASS or relax check integrity.
