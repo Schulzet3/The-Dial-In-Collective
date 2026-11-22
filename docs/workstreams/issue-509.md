@@ -1,3 +1,14 @@
+# Issue #509 R462 — complete managed provider SQL description word review (read-only) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. First-verified immutable GitHub SHA 4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566, PREFLIGHT blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f already verified before reading any provider. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PG17.11.0.003, production READ ONLY. Directly inspected **35/35 complete managed-provider pg_description texts**, **2,161 literal characters**: 28 Auth, four extensions, two Storage and one Vault, with item OIDs/MD5, complete words/ranges, individual purpose and retention verdict in [R462 append-only ledger](../audits/issue509-r462-managed-provider-comments-35-20261122.json). Together with R461, **71/71 noncore public/private/Auth/Storage/extensions/Vault comment records and 7,179 characters** independently covered; other system pg_description records may remain and are NOT credited. Never queried Auth identities, provider credentials, Vault plaintext, Storage rows or member data.
+
+**Semantic distinction:** Supabase marks 3 live Auth helper RPCs (auth.email, auth.role, auth.uid) deprecated in favor of JWT claims and two live Storage owner columns deprecated in favor of owner_id. Deprecated **does not mean safe to drop**; existing managed provider dependencies and clients must be proven absent before changes. Extension GraphQL/cron/net and Vault metadata intentionally retained, no new DIC-specific reproducible bug or justified source fix. Existing development-only project_shot COMMENT repair from R461 remains TESTING pending source-bound PG17/CI, not READY/DEPLOYED. Earlier deployed dic-verify-coffee parser drift unchanged BLOCKED_OWNER_PUBLISH. No app/test/CI edits this documentation-only commit; CI NOT_APPLICABLE (not PASS), no #267 source-line credit, no production/provider/Netlify/billing/backups/release/schedule/alert-policy change.
+
+**Next source:** reconcile remaining core/system pg_description texts with already-credited complete catalog definitions, then resume the first genuinely unreviewed OID/comment literal without duplicated credit. Full Supabase baseline IN_PROGRESS.
+
+---
+
 # Issue #509 R461 — direct 36 live application comments and stale worker comment source repair [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
