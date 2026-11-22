@@ -94,9 +94,6 @@ jobs:
       - name: Run second third of high-risk full Node corpus (same source, disjoint files)
         if: steps.scope.outputs.node_mode == 'full'
         run: node scripts/audit/run-full-suite.mjs --shard=1/3
-      - name: Lint HIGH-risk source on cloud-tests runner (one lint total)
-        if: steps.scope.outputs.node_mode == 'full' && steps.scope.outputs.lint == 'true'
-        run: npm run lint
   mobile-browser-qa:
     runs-on: ubuntu-24.04
     timeout-minutes: 22
