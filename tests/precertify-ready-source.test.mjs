@@ -116,6 +116,8 @@ test('#3347 main workflow pushes to changed controller source trigger read-only 
 test('#3667 READY handoff persists a machine-readable exact Git-tree receipt without granting publication',()=>{
  const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
  assert.match(workflow,/sed -n 's\/\^/);
+ assert.ok(workflow.includes(String.raw`sed -n 's/^\[DIC READY pre-certification\] //p'`),
+  'Exact one-backslash sed literal must parse the official receipt');
  assert.match(workflow,/ready-source\/receipt\.json/);
  assert.match(workflow,/JSON\.parse\(require\('node:fs'\)\.readFileSync/);
  assert.match(workflow,/LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE/);
