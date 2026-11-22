@@ -17964,25 +17964,40 @@
     {
       "id": "DIC-Q-455-r433-slowfeed-copy-action-availability",
       "issue": 455,
-      "pr": null,
+      "pr": 3657,
       "title": "Refresh Log Shot Grind/Temperature copy-button availability after Slow Feed mode changes",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "d8f247aa63754adb52d9e8f9994f1821f46bcadc",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
         "Source negative: initial temperature copy disabled under missing Standard Feed feedback while Slow Feed has a finite start, toggle refreshes displayed recipe but does not re-enable the button; reverse leaves stale enabled state, though direct activation is guarded.",
-        "Two synthetic current CloudApp positive/negative regressions added: after Slow Feed toggle update both copy buttons' availability/title from current recipe; preserve form values, five tastes, no false accepted recommendation. Hosted Node22/UX/approval CI PENDING/NOT PASS."
+        "Two synthetic current CloudApp positive/negative regressions added: after Slow Feed toggle update both copy buttons' availability/title from current recipe; preserve form values, five tastes, no false accepted recommendation. Hosted Node22/UX/approval CI PENDING/NOT PASS.",
+        "Exact PR #3657 head fbb7312c8fdc49de5b6eae832f9c79b6f00506db Node22/lint 44977277484 SUCCESS with 6,103 PASS, 0 FAIL, 6 SKIPPED; mobile/browser/offline 44977277546 SUCCESS; approval/continuity 44977277528, isolated SQL 44977277538, security 44977277513 and applicable selected #33 44977277495/44977277518/44977277523 SUCCESS. Frozen original603 workflow 44977277592 SKIPPED, NOT PASS.",
+        "Nonforce squash merge [skip netlify] d8f247aa63754adb52d9e8f9994f1821f46bcadc; all four changed file blobs identical to tested PR head. Exact merged-push Node22 44977632477 (6,103 PASS/0 FAIL/6 SKIPPED), mobile/Chromium/offline 44977632441, approval 44977632471, selected #33 44977632459 and 44977632463 all COMPLETED SUCCESS. SQL/Auth/provider acceptance beyond PR-head scoped results NOT claimed."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44977277484,
+        44977277546,
+        44977277528,
+        44977277538,
+        44977277513,
+        44977277495,
+        44977277518,
+        44977277523,
+        44977632477,
+        44977632441,
+        44977632471,
+        44977632459,
+        44977632463
+      ],
       "blockers": [
-        "Exact source PR-head and merged applicable CI not yet run; TESTING not READY.",
         "Independent #3347 frozen source-isolated candidate and all five READY tests unverified. No NEW Publish authorization.",
         "Original S019 and observed same-coffee recommendation effectiveness still unavailable."
       ],
-      "notes": "SAFE display/action affordance only; no numeric, equipment-schema, historical notes/measurements, taste, Community, privacy/RLS, feed-science policy or deployment change.",
+      "notes": "SAFE display/action affordance only; no numeric, equipment-schema, historical notes/measurements, taste, Community, privacy/RLS, feed-science policy or deployment change.\nR433 PR #3657 exact source/head/merged checks verified, queue remains TESTING pending independent #3347 five-check frozen candidate. Documentation reconciliation did not rerun app tests or alter product. Original PR-head pending checks superseded by current evidence.",
       "production_deployed": false
     }
   ],
