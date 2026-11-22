@@ -39,3 +39,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=cef6e4a951509cb0b9ca4c26fd8529310543fe4b 
 
 - If initialization leaves the neutral startup shell unchanged for 12 seconds, replace it with a data-free recovery message and safe same-origin retry link. Timer is cleared after initialization resolves/rejects. Late auth initialization may still complete; the recovery link never grants admission or accesses private cache.
 - Preserve existing session/auth, offline queue, and Community review rules. Exact CI and integration required. No publication.
+
+## Complete startup recovery, deferred nonessential worker, regression coverage — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Owner-authorized items 3–5: isolate neutral 12-second stalled-startup recovery in independently testable module; verify no overwrite of completed/error views and no private data in fallback. Preserve identity/admission and cached fast path.
+- Defer nonessential service-worker registration to next event-loop turn instead of performing registration before auth SDK setup; registration still occurs while identity is pending, remains nonblocking, preserves offline worker and update behavior.
+- Focused startup regression cases cover timeout, late successful paint, failure paint, and timer cancellation; existing cloud-fast-start and offline/security CI suites remain required. No production publication.
+- Required: exact-head CI, nonforce merge, readback and queue reconciliation. NOT READY until proven.
