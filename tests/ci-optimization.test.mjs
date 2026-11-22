@@ -5,7 +5,7 @@ import {planFullSuite,selectFullSuiteShard,FULL_SUITE_CONCURRENCY} from '../scri
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {parseStageArgs,runMeasuredStage} from '../scripts/audit/measure-stage.mjs';
-import {browserQAPlan,runBrowserQA} from '../scripts/audit/run-browser-qa.mjs';
+import {browserQAPlan,browserQALanes,runBrowserQA} from '../scripts/audit/run-browser-qa.mjs';
 import {EventEmitter} from 'node:events';
 const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
@@ -130,14 +130,31 @@ test('parallel browser wrapper retains every prior acceptance script at each ris
  assert.match(file('.github/workflows/cloud-regression.yml'),/DIC_CAPTURE_VISUAL:/);
 });
 
+test('bounded browser lanes are disjoint, exhaustive and preserve serial fixture order',()=>{
+ for(const mode of ['visual','ui','high']){
+  const lanes=browserQALanes(mode);
+  assert.ok(lanes.length<=2&&lanes.every(l=>l.length>0));
+  assert.deepEqual(lanes.flat().sort(),browserQAPlan(mode).sort());
+  assert.equal(new Set(lanes.flat()).size,browserQAPlan(mode).length);
+ }
+ assert.deepEqual(browserQALanes('high')[1],[
+  'tests/browser/pwa_offline_qa.py',
+  'tests/browser/issue26_accessibility_qa.py',
+  'tests/browser/admin_records_qa.py'
+ ]);
+});
 test('parallel browser orchestration runs all suites and rejects any failed fixture',async()=>{
- const seen=[];
+ const seen=[];let active=0,maxActive=0;
  const runner=(_python,args)=>{
   const child=new EventEmitter();
-  seen.push(args[0]);
-  queueMicrotask(()=>child.emit('close',args[0]==='tests/browser/pwa_offline_qa.py'?2:0,null));
+  seen.push(args[0]);active++;maxActive=Math.max(maxActive,active);
+  queueMicrotask(()=>{
+   active--;
+   child.emit('close',args[0]==='tests/browser/pwa_offline_qa.py'?2:0,null);
+  });
   return child;
  };
  await assert.rejects(runBrowserQA('high',{python:'mock',runner}),/Browser acceptance failed/);
  assert.deepEqual(seen.sort(),['tests/browser/visual_review.py',...browserQAPlan('high')].sort());
+ assert.equal(maxActive,3,'visual plus two lanes only; no unbounded Chromium fanout');
 });
