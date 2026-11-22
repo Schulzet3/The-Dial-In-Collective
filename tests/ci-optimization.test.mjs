@@ -70,6 +70,8 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.deepEqual([...shard0.parallel,...shard1.parallel].sort(),plan.parallel);
  assert.deepEqual(shard0.serial,plan.serial);
  assert.deepEqual(shard1.serial,[]);
+ assert.match(file('scripts/audit/run-full-suite.mjs'),/if\(!files\.length\)/,
+  'Empty serial shard must NOT invoke Node auto-discovery');
  assert.equal(new Set([...shard0.parallel,...shard1.parallel]).size,plan.parallel.length);
  assert.throws(()=>selectFullSuiteShard(plan,'0/3'),/Invalid full-suite shard/);
  assert.throws(()=>selectFullSuiteShard(plan,'2/2'),/Invalid full-suite shard/);

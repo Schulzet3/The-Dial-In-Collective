@@ -35,6 +35,10 @@ export function selectFullSuiteShard(plan,shard='all'){
 }
 
 function execute(files,concurrency,label){
+ if(!files.length){
+  console.log('[DIC full suite] '+label+' NOT_APPLICABLE: this shard has no selected test files');
+  return 0; // Never invoke node --test with no file arguments (would discover all tests).
+ }
  const start=performance.now();
  console.log('[DIC full suite] '+label+': '+files.length+' files; concurrency '+concurrency);
  const child=spawnSync(process.execPath,
