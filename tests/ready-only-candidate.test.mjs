@@ -439,7 +439,7 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
  assert.equal(validateReadyOnlyCandidate(q,inputs).ready,true);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   sourceObjectAt:(ref,p)=>ref===B&&p===path?'100644:changed-unreviewed-test':objectAt(ref,p)}),
-  /Only one byte-pinned, reviewed workflow-only test/);
+  /Only exact byte-pinned, reviewed workflow-only tests/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   sourceObjectAt:(ref,p)=>ref===C&&p===path?testSha:objectAt(ref,p)}),
   /Workflow-only test exclusion source\/blob\/absence mismatch/);
@@ -451,7 +451,7 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
   /restore every changed GitHub Actions workflow/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
   manifest:{...inputs.manifest,excluded_unpublished_workflow_test_paths:['tests/issue999-arbitrary.test.mjs']}}),
-  /Only one byte-pinned, reviewed workflow-only test/);
+  /Only exact byte-pinned, reviewed workflow-only tests/);
 });
 
 
@@ -734,4 +734,36 @@ test('#3347 new unready coffee R324 test follows restored parser source, not onl
    changedPaths:[spec.path],sourceObjectAt:at};
  assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
  assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
+});
+
+
+test('#3347 exact two reviewed workflow-only tests coexist without false candidate HOLD',()=>{
+ const specs=[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST];
+ const workflows=specs.map(s=>s.restoredWorkflow);
+ const paths=specs.map(s=>s.path);
+ const lookup=(ref,path)=>{
+  const spec=specs.find(s=>s.path===path);
+  if(spec)return ref===A||ref===C?null:'100644:'+spec.sourceBlob;
+  if(workflows.includes(path))return ref===A||ref===C?'100644:published':'100644:development';
+  return validate.sourceObjectAt(ref,path);
+ };
+ const input={...validate,
+  manifest:{...manifest,restored_unpublished_workflow_paths:workflows,
+   excluded_unpublished_workflow_test_paths:paths},
+  sourceObjectAt:lookup,
+  developmentChangedPaths:[...validate.developmentChangedPaths,...workflows],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,...workflows,...paths]};
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({publishedSourceSha:A,
+  developmentSourceSha:B,restoredWorkflows:workflows,sourceObjectAt:lookup}),paths.sort());
+ assert.equal(validateReadyOnlyCandidate(q,input).ready,true,
+  'exact published workflow restorations permit both strictly pinned unready tests');
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===B&&p===REVIEWED_CI_FAST_PR_TEST.path?'100644:tampered':lookup(r,p)}),
+  /Only exact byte-pinned, reviewed workflow-only tests/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===C&&p===REVIEWED_CI_FAST_PR_TEST.path?'100644:leaked':lookup(r,p)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(r,p)=>r===D+'^'&&p===REVIEWED_CI_FAST_PR_TEST.path?null:lookup(r,p)}),
+  /Selected READY merge introduced or modified a workflow-only test/);
 });
