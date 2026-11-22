@@ -158,3 +158,14 @@ test('parallel browser orchestration runs all suites and rejects any failed fixt
  assert.deepEqual(seen.sort(),['tests/browser/visual_review.py',...browserQAPlan('high')].sort());
  assert.equal(maxActive,3,'visual plus two lanes only; no unbounded Chromium fanout');
 });
+
+test('HIGH-risk lint runs on faster cloud-tests lane exactly once; medium-risk lint remains validate',()=>{
+ const beta=file('.github/workflows/cloud-beta-ci.yml');
+ const cloud=file('.github/workflows/cloud-regression.yml');
+ assert.match(beta,/name: Lint affected JS or workflow source \(non-HIGH only\)\n        if: steps\.scope\.outputs\.lint == 'true' && steps\.scope\.outputs\.node_mode != 'full'/);
+ assert.match(cloud,/name: Lint HIGH-risk source on cloud-tests runner \(one lint total\)\n        if: steps\.scope\.outputs\.node_mode == 'full' && steps\.scope\.outputs\.lint == 'true'/);
+ assert.equal((beta.match(/npm run lint/g)||[]).length,1);
+ assert.equal((cloud.match(/npm run lint/g)||[]).length,1);
+ assert.ok(cloud.indexOf('name: Lint HIGH-risk source on cloud-tests')<cloud.indexOf('  mobile-browser-qa:'),'lint must remain in cloud-tests job');
+ assert.ok(cloud.indexOf('name: Run second half of high-risk full Node corpus')<cloud.indexOf('name: Lint HIGH-risk source'),'finish protected security test before lint');
+});

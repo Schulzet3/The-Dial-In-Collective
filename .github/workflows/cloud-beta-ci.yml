@@ -106,8 +106,8 @@ jobs:
       - name: Focused coffee source/identity and preview regressions
         if: steps.scope.outputs.node_mode == 'coffee'
         run: node --test tests/coffee-*.test.mjs tests/preview-request-bounds.test.mjs tests/universal-coffee-preview.test.mjs
-      - name: Lint affected JS or workflow source
-        if: steps.scope.outputs.lint == 'true'
+      - name: Lint affected JS or workflow source (non-HIGH only)
+        if: steps.scope.outputs.lint == 'true' && steps.scope.outputs.node_mode != 'full'
         run: node scripts/audit/measure-stage.mjs --name lint --out qa_artifacts/ci-metrics/validate.jsonl -- npm run lint
       - name: Build once for NON-UI changes
         if: steps.scope.outputs.build_validate == 'true'
