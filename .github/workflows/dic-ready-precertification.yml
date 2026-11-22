@@ -64,7 +64,23 @@ jobs:
             response="$(gh api "repos/${GITHUB_REPOSITORY}/contents/docs/RELEASE_QUEUE.json?ref=${EVENT_HEAD}" 2>/dev/null)" || { decide true; exit 0; }
             blob="$(printf '%s' "$response" | jq -er '.sha | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
             encoding="$(printf '%s' "$response" | jq -er '.encoding | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
-            if [[ ! "$blob" =~ ^[0-9a-f]{40}$ || "$encoding" != 'base64' ]]; then
+            if [[ ! "$blob" =~ ^[0-9a-f]{40}$ ]]; then
+              decide true
+              exit 0
+            fi
+            # GitHub Contents omits base64 bytes for 1–100 MiB files.
+            # The real >2 MiB release queue therefore requires Git Blobs API.
+            # Require the same exact immutable Git SHA before accepting bytes.
+            if [ "$encoding" = 'none' ]; then
+              response="$(gh api "repos/${GITHUB_REPOSITORY}/git/blobs/${blob}" 2>/dev/null)" || { decide true; exit 0; }
+              blob_back="$(printf '%s' "$response" | jq -er '.sha | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
+              if [ "$blob_back" != "$blob" ]; then
+                decide true
+                exit 0
+              fi
+              encoding="$(printf '%s' "$response" | jq -er '.encoding | select(type=="string")' 2>/dev/null)" || { decide true; exit 0; }
+            fi
+            if [ "$encoding" != 'base64' ]; then
               decide true
               exit 0
             fi
