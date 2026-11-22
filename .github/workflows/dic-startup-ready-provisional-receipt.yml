@@ -1,0 +1,31 @@
+name: DIC one-shot startup nonpublishing source proof
+on:
+  push:
+    branches:
+      - 'work/startup-ready-precert-20261122'
+permissions:
+  contents: read
+  actions: read
+  checks: read
+concurrency:
+  group: dic-startup-provisional-ready-source
+  cancel-in-progress: false
+jobs:
+  source-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Read-only exact source isolation receipt (NO publication)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = 'refs/heads/work/startup-ready-precert-20261122'
+          git fetch --no-tags origin main release/production development/backend-foundation
+          node scripts/release/precertify-ready-source.mjs "$GITHUB_SHA" --receipt
