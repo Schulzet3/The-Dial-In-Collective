@@ -53,3 +53,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d 
 
 - Exact PR head 52ff76a3be24f3dfd12ec37297edbec8183491df: approval FAILED because newly added production module lacked queue intake; mobile-browser-qa FAILED because build allowlist omitted the imported module. Neither failure is counted as PASS.
 - Fix: explicitly include startup-recovery.js in pinned public shell build asset inventory and track all three deployable paths in TESTING queue item DIC-Q-455-startup-recovery-deferred-worker. No test/build bypass. New exact-head CI required.
+
+## Browser QA fixture dependency repair — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Exact PR head 430c148df060ac9938b1b5d01e56ed12c5072126 browser QA FAILED waiting for .current-mark: browser's synthetic module bundle omitted newly imported startup-recovery.js, preventing CloudApp boot. Production build and approval fixed and passed. Add new module to existing synthetic browser fixture dependency inventory; no relaxed assertion, no new suite, no product behavior change. New exact-head CI required.
