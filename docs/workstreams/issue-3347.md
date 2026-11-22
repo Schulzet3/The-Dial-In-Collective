@@ -172,3 +172,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=1eb9f62abb89a395052e0dcde7fe19015cb190b1 
 
 - Corrected main release-control projection bug nonforce merged PR #3690 SHA 797a2bbbf82083c46ac1c56a066cdee4e8306add, exact main controller PR run 44988729989 release-controller-validate SUCCESS, owner #3347. One old read-only source trial held because real planner's selected READY projection omits state; main helper now checks the immutable queue record state, retains source/git provenance and TESTING rejection.
 - This is one source-only RETRY on existing temporary test branch, no application suite/duplicate build, no candidate remote write/Publish/Netlify/provider/database. Existing temporary branch queue remains provisional READY solely for source proof; live development row remains TESTING. Candidate requires reviewed exact manifest/tree and five official candidate-SHA successes to promote live READY.
+
+## 2026-11-22 — re-run strict startup-only source receipt after source/test ownership fix [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Live main source now includes nonpublishing #3347 compatibility fix 7d7ebc318f55e35f75a4cf29154c9d039d63776b, exact PR-head acceptance 44989265733 SUCCESS. Five original startup improvements remain fully merged, clean runtime pinned to Git blob fe9124fa1deeb84d7a41659c066f517f6311039e; live dev queue still TESTING. Initial immutable candidate d505fb50 validate FAILED 14 unrelated source-bound assertions; never reuse it.
+- Add one ACTUAL prior successful source-proof run 44988817244 to the provisional selected row's evidence so frozen candidate identity changes; this branch is NOT live READY. Existing read-only source-proof workflow automatically reads new main operations tooling on push and checks exact published/test/workflow isolation, with no ref push, grant, Netlify or production action. Next: freeze new branch at exact receipt tree, run five official exact-SHA jobs; fix any actual failure, then promote live READY only with zero blockers and bytes isolated.
