@@ -29,23 +29,23 @@ export function selectFullSuiteShard(plan,shard='all'){
  if(shard==='all')return plan;
  if(!/^(?:[01]\/2|[012]\/3)$/.test(shard))throw Error('Invalid full-suite shard selector');
  const [selected,lanes]=shard.split('/').map(Number);
- // Native HIGH source #3761: validate ran 340 files in 91.4s,
- // cloud 339 in 55.0s, and approval 135 in 32.7s + isolated 14.7s.
- // Rebalance file ownership WITHOUT removing, repeating or weakening tests:
- // move one quarter of original validate files into the faster available
- // lanes while retaining the prior third-lane transfers and protected serial.
+ // Native HIGH #3761: validate 340/91.4s, cloud 339/55s, approval 135/32.7s.
+ // After prior redistribution, actual 45036645973 remained validate 84s,
+ // cloud 59s and approval 48s plus protected serial.
+ // Shift 40 more of ~814 files (23 cloud, 17 approval); no omissions,
+ // extra runner/build, duplicate tests or protected serial changes.
  const parallel=plan.parallel.filter((_,i)=>{
   if(lanes===3){
    const original=i%3;
    const slot=Math.floor(i/3);
    if(original===0){
     if(slot%6===0)return selected===2;
-    if(slot%12===3)return selected===1;
+    if(slot%12===3||slot%8===4)return selected===1;
     return selected===0;
    }
    if(original===1)return selected===1;
    const quarter=slot%4;
-   return (quarter===0?0:quarter===1?1:2)===selected;
+   return (quarter===0?(slot%16===0?2:0):quarter===1?1:2)===selected;
   }
   return (i%2===0||i%12===1?0:1)===selected;
  });
