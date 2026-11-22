@@ -55,3 +55,18 @@ test('genuine selected own direct cupping notes survive unrelated-coffee source 
  assert.equal(r.fields.tasting_notes,'almond, caramel, pear');
  assert.equal(r.source_facts.some(f=>f.field==='tasting_notes'&&f.section==='Different coffee in the source'),false);
 });
+
+test('educational geographic labels remain review-only after selected source quarantine',()=>{
+ for(const label of ['Region','Regions']){
+  const lesson='<h2>Origins explained</h2><p>'+label+': Nyeri, Kenya</p>';
+  const r=parse(name,'<p>'+direct+'</p>'+lesson+'<h2>Current coffee</h2><p>Origin: Brazil</p>');
+  assert.equal(r.ok,true);assert.equal(r.fields.origin,'Brazil');assert.equal(r.fields.decaffeination_method,'Water Process');
+  assert.ok(!r.conflicts?.includes('origin'));
+  assert.ok(r.source_facts.some(f=>f.section==='Roaster general coffee guidance'&&
+    f.field===undefined&&String(f.value||'').includes('Nyeri, Kenya')),label);
+  assert.ok(!r.source_facts.some(f=>f.section==='Roaster general coffee guidance'&&f.field==='origin'));
+  const standalone=parse(name,'<p>'+direct+'</p>'+lesson);
+  assert.equal(standalone.fields.origin,undefined);
+  assert.ok(standalone.source_facts.some(f=>f.section==='Roaster general coffee guidance'&&String(f.value||'').includes('Nyeri, Kenya')));
+ }
+});
