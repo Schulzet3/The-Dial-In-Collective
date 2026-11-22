@@ -18030,7 +18030,7 @@
       "pr": 3668,
       "title": "Reduce CI full-suite runtime with bounded parallelism and isolated time-budget security regression",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
       "scope_paths": [
         "package.json"
       ],
@@ -18038,7 +18038,10 @@
       "tests": [
         "Same test file enumeration preserved (tests/*.test.mjs and tests/audit/*.test.mjs); time-budget HTML security tests isolated as serial subset.",
         "PR #3668 first head a9322514367770288d0259ab9d3e94a952bc2045: approval 44983557010 HOLD for package.json missing from intake; this queue TESTING record repairs tracking. Remaining exact CI/results pending.",
-        "Final first full sharded PR head 72bfa04224baaf253bb86100bacfab90374ef16b: validate shard 0/2 run 44984227423 115 seconds SUCCESS; cloud-tests shard 1/2 and mobile-browser-qa run 44984227361 102 seconds/SUCCESS; approval 44984227364 SUCCESS; SQL 44984227371 SUCCESS; source security 44984227329 SUCCESS. Four-thousand-plus checks executed with exact 2-way union and time-budget HTML isolated; no omitted files. Original frozen603 workflow SKIPPED, not PASS."
+        "Final first full sharded PR head 72bfa04224baaf253bb86100bacfab90374ef16b: validate shard 0/2 run 44984227423 115 seconds SUCCESS; cloud-tests shard 1/2 and mobile-browser-qa run 44984227361 102 seconds/SUCCESS; approval 44984227364 SUCCESS; SQL 44984227371 SUCCESS; source security 44984227329 SUCCESS. Four-thousand-plus checks executed with exact 2-way union and time-budget HTML isolated; no omitted files. Original frozen603 workflow SKIPPED, not PASS.",
+        "Verified nonforce squash merge PR #3668 at 8e89dfe942422789bae59338364139b274143e63: package, runner, two workflow and CI optimization test blobs identical to exact tested final PR head 6910f241fa312aa2f3f39828d05e619ec484f8c8.",
+        "Exact PR final five SUCCESS: validate 44984483650, cloud-tests/mobile-browser-qa 44984483653, approval 44984483687, SQL 44984483657. Merged push exact-SHA applicable four SUCCESS: validate 44984692927, cloud-tests/mobile 44984692870, approval 44984692878. Merged SQL workflow NOT_APPLICABLE, not PASS; PR SQL success retained.",
+        "Merged full Node corpus: 3,003 general+4 isolated HTML +3,114 other = 6,121 tests; 6,115 PASS, 0 FAIL, 6 intentional SKIP, every test file once; two separate required runners. Merged shard0 136s; shard1 67s. Single runner prior benchmark 227s. No production or member writes."
       ],
       "ci_runs": [
         44984227423,
@@ -18046,12 +18049,21 @@
         44984227364,
         44984227371,
         44984227329,
-        44984227409
+        44984227409,
+        44984483650,
+        44984483653,
+        44984483687,
+        44984483657,
+        44984692927,
+        44984692870,
+        44984692878,
+        44984692941
       ],
       "blockers": [
-        "Final merged-branch development head and new PR merge-reconciliation head exact five-job CI not yet verified. READY candidate frozen exact source and owner Publish grant absent."
+        "Independent #3347 frozen source-isolated READY candidate and five candidate-bound SUCCESS statuses are not established; remain TESTING, not READY.",
+        "No owner Publish authorization; no release/production or provider writes."
       ],
-      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings. Measured ~1.97x shorter full Node critical-path time: 115s vs 227s single runner. PR head all five SUCCESS; still TESTING pending nonforce merge, merged CI and READY candidate.",
+      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings. Measured ~1.97x shorter full Node critical-path time: 115s vs 227s single runner. PR head all five SUCCESS; still TESTING pending nonforce merge, merged CI and READY candidate. VERIFIED dev-only integration; future READY still requires separate source-bound frozen candidate. The 100x aspirational owner speed target is NOT demonstrated: best measured full Node critical-path improvement 227s/115s=1.97x.",
       "production_deployed": false
     }
   ],
