@@ -181,15 +181,15 @@ test('HIGH-risk lint runs once on earlier-free approval runner; medium lint stay
  const beta=file('.github/workflows/cloud-beta-ci.yml');
  const cloud=file('.github/workflows/cloud-regression.yml');
  const approval=file('.github/workflows/approval-continuity.yml');
- assert.match(beta,/name: Lint affected JS or workflow source \\(non-HIGH only\\)\\n        if: steps\\.scope\\.outputs\\.lint == 'true' && steps\\.scope\\.outputs\\.node_mode != 'full'/);
- assert.match(approval,/name: Lint HIGH-risk source on already-prepared approval runner \\(one lint total\\)\\n        if: steps\\.scope\\.outputs\\.node_mode == 'full' && steps\\.scope\\.outputs\\.lint == 'true'/);
+ assert.match(beta,/name: Lint affected JS or workflow source \(non-HIGH only\)\n        if: steps\.scope\.outputs\.lint == 'true' && steps\.scope\.outputs\.node_mode != 'full'/);
+ assert.match(approval,/name: Lint HIGH-risk source on already-prepared approval runner \(one lint total\)\n        if: steps\.scope\.outputs\.node_mode == 'full' && steps\.scope\.outputs\.lint == 'true'/);
  assert.equal((beta.match(/npm run lint/g)||[]).length,1);
  assert.equal((cloud.match(/npm run lint/g)||[]).length,0);
  assert.equal((approval.match(/npm run lint/g)||[]).length,1);
  assert.ok(approval.indexOf('name: Install locked test dependencies only for HIGH-risk third shard')<approval.indexOf('name: Lint HIGH-risk source on already-prepared approval runner'));
  assert.ok(approval.indexOf('name: Lint HIGH-risk source on already-prepared approval runner')<approval.indexOf('name: Run third disjoint HIGH-risk full Node corpus'),
   'reject lint errors before costly third shard, without losing any successful-path test');
- assert.match(cloud,/cloud-tests:[\\s\\S]*?run-full-suite\\.mjs --shard=1\\/3/);
+ assert.match(cloud,/cloud-tests:[\s\S]*?run-full-suite\.mjs --shard=1\/3/);
 });
 
 
