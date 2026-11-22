@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,cpSync,writeFileSync,readFileSync,rmSync,readdirSync,statSync} from 'node:fs';
+import {mkdtempSync,cpSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {fileURLToPath} from 'node:url';
@@ -55,16 +55,19 @@ test('packaged browser routes never point at retired entrypoints',()=>{
  assert.doesNotMatch(cloud,/(?:import-entry\.js|import\.css)/);
  for(const f of ['cloud/main.js','admin/main.js'])assert.ok(fileAllowlist(root).has(f),f);
 });
-test('all checked-in JS/MJS files parse under Node 22',()=>{
- const inspect=dir=>{
-  for(const name of readdirSync(dir)){
-   if(['node_modules','.git','dist','qa_artifacts'].includes(name))continue;
-   const file=path.join(dir,name),info=statSync(file);
-   if(info.isDirectory()){inspect(file);continue;}
-   if(!/\.(?:m?js)$/.test(name))continue;
-   const child=spawnSync(process.execPath,['--check',file],{encoding:'utf8',timeout:15000});
-   assert.equal(child.status,0,file+': '+child.stderr);
-  }
- };
- inspect(root);
+test('all checked-in JS/MJS files parse under Node 22 in ONE bounded process',()=>{
+ const result=spawnSync(process.execPath,['--no-warnings','--experimental-vm-modules',
+  'scripts/audit/syntax-batch.mjs'],{cwd:root,encoding:'utf8',timeout:45000});
+ assert.equal(result.status,0,result.stderr+'\n'+result.stdout);
+ assert.match(result.stdout,/batch syntax\] PASS [1-9]\d* JS\/MJS files/);
+});
+test('batch parser rejects malformed modules without executing source',()=>{
+ const temp=mkdtempSync(path.join(tmpdir(),'dic-batch-syntax-'));
+ try{
+  writeFileSync(path.join(temp,'broken.mjs'),'export const = ;');
+  const result=spawnSync(process.execPath,['--no-warnings','--experimental-vm-modules',
+   'scripts/audit/syntax-batch.mjs',temp],{cwd:root,encoding:'utf8',timeout:5000});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/broken.mjs/);
+ }finally{rmSync(temp,{recursive:true,force:true});}
 });

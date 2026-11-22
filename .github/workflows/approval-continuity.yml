@@ -27,6 +27,14 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
+        env:
+          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
+          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_EVENT_NAME: ${{ github.event_name }}
+        run: node scripts/audit/verify-commit-checkpoint.mjs
+      - name: Early source/build and browser fixture closure (no app build)
+        run: node scripts/audit/fast-pr-check.mjs
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
@@ -51,9 +59,3 @@ jobs:
         run: |
           node --test tests/ready-promotion-gate.test.mjs
           node scripts/release/ready-promotion-gate.mjs
-      - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
-        env:
-          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
-          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_EVENT_NAME: ${{ github.event_name }}
-        run: node scripts/audit/verify-commit-checkpoint.mjs
