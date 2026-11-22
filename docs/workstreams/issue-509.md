@@ -1,3 +1,20 @@
+# Issue #509 R437 — direct provider Auth, Vault, extension column definitions 2481–2880 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4d0a928b26e6124a7e4f25b764c62076d83fc2e0 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-22 UTC. Immutable development 4d0a928b26e6124a7e4f25b764c62076d83fc2e0 / PREFLIGHT blob 3742fed0176c809b115320c698a0e8b1675b2d3e bytes independently matched before other authority/provider access; production Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003 strictly READ ONLY. Rechecked development head 547bfd0bc56c3e0f569d5171408d88adae7177be before docs-only writes.
+
+Resumed R436 rank 2481 extensions.pg_stat_statements.userid, OID 16424. Captured and semantically classified **400/400 new full pg_attribute literal metadata tuples**, 204408 characters across 118 relations: {"extensions":49,"auth":248,"pg_toast":84,"vault":19}. Complete per-object bytes, md5, type, 1-end coverage, purpose and retention verdict in [R437A](../audits/issue509-r437a-pg-attribute-ranks2481-2680-20261122.json) and [R437B](../audits/issue509-r437b-pg-attribute-ranks2681-2880-20261122.json). Cumulative attribute metadata review 2880/4181; **not** full provider source/word completion.
+
+Independent SQL checks: zero active field physical type/alignment mismatch, invalid/unready index key or orphan TOAST parent; 107 index keys, 51 TOAST attributes, 24 legitimate active default/generated/missing-value flags, 2 historical dropped slots (auth.saml_relay_states attnum6; auth.oauth_clients attnum2). Both dropped slots are layout/migration history, not errors or safe deletions. Auth account/refresh/session/identity/MFA/SSO/OAuth, Vault encrypted/decrypted and pg_stat_statements monitoring purposes assessed; **no private member data, identities, passwords, secret/token values, statement text or logs read**.
+
+Substantive dependency/name check: live valid auth.factor_id_created_at_idx actually indexes auth.mfa_factors(user_id,created_at), despite its name; auth.sessions(user_id,created_at) is a **different table** so not duplicate physical index. The 0-scan unique auth.mfa_factors_last_challenged_at_key and provider-managed objects must not be removed without actual upstream callers or guaranteed absence of consumers. Checked full SQL/ACL definitions of vault.decrypted_secrets and extensions.pg_stat_statements without accessing data. No proved DIC application defect or justified dev-source fix/obsolete drop; no code/test/CI edits. Exact-source **new CI NOT_APPLICABLE, not PASS**, READY/DEPLOYED NOT_REVALIDATED, #267 source line credit zero.
+
+Provider internal binaries, owner-only Auth/provider configuration, actual runtime call graph and remaining provider surfaces UNVERIFIED. Full baseline IN_PROGRESS. No production SQL/Auth/Edge/Storage/config, migration, deployment, publication, backup, billing, schedule or alert-policy edits. No new owner-action blocker.
+
+Next exact cursor: pg_toast.pg_toast_16971_index.chunk_seq, relation OID 16980, attnum 2, pg_attribute rank **2881/4181**, character 1. Resume ordered provider semantic review and prioritize validated DIC bugs whenever proven.
+
+---
 # Issue #509 R436 — direct pg_attribute definitions 2081–2480 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
