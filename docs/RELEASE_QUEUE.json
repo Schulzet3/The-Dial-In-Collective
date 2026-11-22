@@ -17922,6 +17922,39 @@
       ],
       "notes": "Narrow safe UI and accepted-action attribution correctness only; machine adjustability owner choice R423 remains HOLD. Original measurements/notes/history, feed/style/calibration, taste scales, privacy, persistence and Locked priors unchanged. No member/provider write or deployment.\nR428 merged source fix 52a506aff7c59018b07be0ffa8e90758aa9d3376; PR-head all applicable runs completed SUCCESS, frozen corpus SKIPPED; no publication or provider writes. No novel machine temperature capability inference.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r432-slowfeed-copied-reference-feedback",
+      "issue": 455,
+      "pr": 3650,
+      "title": "Explain retained copied controls when changing Slow Feed before logging a shot",
+      "state": "TESTING",
+      "merged_source_sha": "d0d28c9dff4114651fd872f0da7cd0747d065fea",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE Log Shot copy-context UX; DIC_PREFLIGHT_VERIFIED development_sha=e822fcfd3ebc5a34688f0660165369aa0842708b preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Source-bound negative: copied Grind/Temperature recommendations remained in Log Shot after Slow Feed toggled and the reference card refreshed, while copy-status and accepted-action attribution were silently cleared.",
+        "Synthetic CloudApp positive: after copying a control, feed-mode switch now announces retained form values require comparison with refreshed recipe; measurements and all five sensory ratings remain intact, and prior copied-attribution clears. Negative: no false warning if no controls copied.",
+        "PR #3650 exact head e1e40ef3ba6adb973202b78afb8488656f91a161: Node22/lint/build 44972860275 SUCCESS, Chromium/mobile/offline/Cloud UX 44972860246 SUCCESS, approval/continuity 44972860343 SUCCESS, SQL 44972860230 SUCCESS, security 44972860328 SUCCESS, selected #33 44972860233 SUCCESS. Original frozen coffee corpus 44972860352 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] squash merge d0d28c9dff4114651fd872f0da7cd0747d065fea; all three changed source/test/journal file blobs match tested PR head; exact merged-push CI started 44973217131/44973217153/44973217156/44973217188, results PENDING at reconciliation authoring."
+      ],
+      "ci_runs": [
+        44972860275,
+        44972860246,
+        44972860343,
+        44972860230,
+        44972860328,
+        44972860233
+      ],
+      "blockers": [
+        "Exact merged-push source-bound Node22/UX/approval runs pending at this documentation checkpoint; SKIPPED original corpus not counted PASS.",
+        "Independent #3347 isolated combined READY candidate and five mandatory exact-source checks not established; keep TESTING, NOT READY.",
+        "No NEW owner Publish; S019 standalone original paper and observed same-coffee next-shot effectiveness unverified."
+      ],
+      "notes": "Narrow SAFE polite aria-live explanation only, no form clearing, equipment/autoswitch semantics, five taste threshold, recommendation numeric policy, new telemetry, member data or provider effects. Existing R423 fixed-temperature owner decision remains HOLD. Original measured shot/notes/history, Turbo/Fast-Flow, feed behavior and grinder calibration remain intact.",
+      "production_deployed": false
     }
   ],
   "history": [

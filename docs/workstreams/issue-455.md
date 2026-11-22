@@ -1,3 +1,15 @@
+## November 22, 2026 UTC — #455 R432 copied Slow Feed reference explanation, source merged [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d0d28c9dff4114651fd872f0da7cd0747d065fea preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Source SAFE fix: [PR #3650](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3650) head e1e40ef3ba6adb973202b78afb8488656f91a161, nonforce merge d0d28c9dff4114651fd872f0da7cd0747d065fea. All three touched source/test/scoped-journal Git blobs read back identical on PR-head and merged SHA; mandatory original preflight receipt in [same-commit scoped journal](ops-issue455-r432-slowfeed-copy-feedback-20261122.md) and no extra policy change.
+- Actual defect: after copying Grind/Temperature in Log Shot, Slow Feed mode change reselected the recipe but left copied field values without an announcement. New existing polite live status explicitly tells members these values remain in the form and should be reviewed. Clear original copy provenance; do not mutate original five ratings, dose/yield/time, notes/history or setup/coffee data. Negative synthetic case confirms no warning without copied values.
+- Exact PR-head SUCCESS: Node22/lint/build 44972860275, UX/mobile/Chromium/offline 44972860246, approval 44972860343, SQL 44972860230, security 44972860328, selected #33 44972860233. Original 603 frozen-corpus 44972860352 SKIPPED, not PASS. Merged-push 44973217131/44973217153/44973217156/44973217188 PENDING at documentation authoring, NOT PASS. No measured espresso benefit claimed.
+- Queue adds only one `DIC-Q-455-r432-slowfeed-copied-reference-feedback` row TESTING; preserves earlier 454 items and 252 history rows. CURRENT_STATUS prepended; approval matrix/source register/Decision Ledger unchanged (no new owner choice, research source or policy). R423 machine adjustability owner hold unchanged; #267/#33/#96 disjoint; #335 transfer still under #455.
+- Research: private owner ZIP 66,421 B SHA-256 7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d read from connected Drive, original standalone S019 unavailable. No ZIP bytes committed. No Netlify/publishing, SQL/Auth/Edge, production/member/provider write, source-visible secret, backup, main/release ref, forced Git, purchase or schedule change. Next verify exact merged-source CI and #3347 candidate before READY; continue claim and UX coverage, do not close #455.
+
+---
+
 ## November 21, 2026 UTC — #455 R428 optional temperature-copy source integrity; exact PR-head CI and merge verified [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=52a506aff7c59018b07be0ffa8e90758aa9d3376 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
