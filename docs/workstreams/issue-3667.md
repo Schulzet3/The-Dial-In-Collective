@@ -200,3 +200,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=4c10b6831abadf4baedddee0458bb5a8921b867a 
 ## November 22, 2026 — repair #3735 focused acceptance test syntax [skip netlify]
 - First PR head 6f5a565857d9ff52f40d919bc8108294d040bfc2 approval run 45003576602 FAILED before any READY certification because the new negative regression's generated regex literal had doubled slash escaping, triggering a Node SyntaxError. This is a TEST failure, not PASS; code gates not bypassed.
 - FIX: replace brittle escaped regex with direct exact string counting and includes assertions. Preserve one live READY verification, full native five-success proof, source/queue integrity and error-denial. Retest corrected exact PR head; no provider, Netlify, database, permission or publication writes.
+
+DIC_PREFLIGHT_VERIFIED development_sha=2ef1dd0281be97aa1b067278f52ddc7229cd5196 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — #3735 missing Node fs import repaired [skip netlify]
+- PR head ef518d13aab087ab614b88758d8583ea5e84ab88 approval run 45003728066 FAILED focused test 10 with ReferenceError readFileSync is not defined; other 9 READY verifier unit regressions PASS, not a complete acceptance. Fix imports readFileSync from node:fs without changing the one live gate, all source/fingerprint/job checks or other concurrent source. Retest five exact new-head PR jobs, merge nonforce if SUCCESS. #3667 remains TESTING.
