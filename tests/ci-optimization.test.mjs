@@ -84,11 +84,19 @@ test('full Node suite preserves the security corpus while parallelizing other fi
   return quarter===0?(slot%16===0?2:0):quarter===1?1:2;
  };
  for(let lane=0;lane<3;lane++){
-  assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>shiftedOwner(i)===lane));
+  const original=plan.parallel.filter((_,i)=>shiftedOwner(i)===lane);
+  const expected=lane===1?[...original.filter(p=>p==='tests/issue161-synthetic-load-concurrency.test.mjs'),
+   ...original.filter(p=>p!=='tests/issue161-synthetic-load-concurrency.test.mjs')]:original;
+  assert.deepEqual(shards[lane].parallel,expected,
+   'one unchanged 4-way test corpus per lane; only measured long cloud test starts first');
   assert.deepEqual(shards[lane].serial,lane===0?plan.serial:[]);
  }
  assert.deepEqual(shards.flatMap(s=>s.serial),plan.serial,
   'one unchanged protected serial file on HIGH validate; no duplicate or omission');
+ assert.equal(shards[1].parallel[0],'tests/issue161-synthetic-load-concurrency.test.mjs',
+  'measured 6000-shot integrity load must start early on cloud, not get skipped or moved');
+ assert.equal(shards[0].parallel.includes('tests/issue161-synthetic-load-concurrency.test.mjs'),false);
+ assert.equal(shards[2].parallel.includes('tests/issue161-synthetic-load-concurrency.test.mjs'),false);
  const counts=shards.map(s=>s.parallel.length);
  assert.ok(counts[0]<counts[1]&&counts[2]>plan.parallel.length/5,
   'relocate only measured excess validate work to the two idle existing lanes');

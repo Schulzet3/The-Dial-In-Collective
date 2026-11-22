@@ -6,6 +6,10 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const ROOT=fileURLToPath(new URL('../..',import.meta.url));
 const ISOLATED='tests/html-resource-security.test.mjs';
+// #3667 source-bound cloud CI: this intact 6000-shot history load fixture took
+// 13.7s near the tail of the 4-worker file queue. Start it early on the same
+// cloud lane so other tests run concurrently; no scope/owner/test count change.
+const MEASURED_LONG_CLOUD_TEST='tests/issue161-synthetic-load-concurrency.test.mjs';
 export const FULL_SUITE_CONCURRENCY=4;
 
 export function planFullSuite(root=ROOT){
@@ -57,6 +61,14 @@ export function selectFullSuiteShard(plan,shard='all'){
  // move just every sixth odd-index file (i%12===1) to validate to balance
  // the critical path without duplicate tests or additional runners.
  // This balances the two required jobs without removing or duplicating files.
+ if(lanes===3&&selected===1){
+  const index=parallel.indexOf(MEASURED_LONG_CLOUD_TEST);
+  if(index>0){
+   // Existing Node --test --test-concurrency=4 processes given file arguments.
+   // Overlap measured long work with other tests instead of creating a tail.
+   parallel.unshift(parallel.splice(index,1)[0]);
+  }
+ }
  const serial=selected===(lanes===3?0:lanes-1)?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
  return {parallel,serial};
