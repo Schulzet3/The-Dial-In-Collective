@@ -132,6 +132,30 @@ export function withoutRepeatedCoffeeOriginSuffix(value){
    !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(locality))
    return locality+', '+parts[2];
  }
+ // A printed named locality can contain its own terminal country while a
+ // second selected specification adds that SAME country after the region.
+ // Clean only the final display tuple, never the raw published source facts.
+ // Require two named locality words, a non-country middle region, and an
+ // exact terminal known country. Preserve differing countries and blends.
+ if(parts.length===3){
+  const country=coffeeOriginParts(parts[2]),region=coffeeOriginParts(parts[1]);
+  const suffix=' '+parts[2];
+  if(country.length===1&&knownCountries.has(country[0])&&
+   region.length===1&&!knownCountries.has(region[0])&&!broadCountries.has(region[0])&&
+   parts[0].toLowerCase().endsWith(suffix.toLowerCase())){
+   const locality=parts[0].slice(0,-suffix.length).trim();
+   if(/^[\p{L}\p{M}'’.-]+(?:\s+[\p{L}\p{M}'’.-]+){1,4}$/u.test(locality)&&
+    !/^(?:north|south|east|west|central|northeast|northwest|southeast|southwest)(?:ern)?\b/iu.test(locality)&&
+    !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(locality)&&
+    !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(parts[1])&&
+    !locality.split(/\s+/u).some(word=>{
+     const tokens=coffeeOriginParts(word);
+     return tokens.length===1&&knownCountries.has(tokens[0]);
+    })&&
+    !coffeeOriginParts(locality).some(p=>knownCountries.has(p)||broadCountries.has(p)))
+    return [locality,parts[1],parts[2]].join(', ');
+  }
+ }
  const countries=parts.map((p,i)=>knownCountries.has(coffeeOriginParts(p)[0])&&coffeeOriginParts(p).length===1?i:-1)
   .filter(i=>i>=0);
  if(countries.length!==1)return value;
