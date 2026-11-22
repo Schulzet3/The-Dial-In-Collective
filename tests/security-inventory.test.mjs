@@ -63,12 +63,12 @@ test('fast screening preserves all original rule detections and exact line posit
  for(const [,value] of examples)rows.push('nonsecret line',value);
  rows.push('ordinary trailing line');
  const result=inspectTrackedSource({paths:['fixtures/input.txt'],
-  read:()=>Buffer.from(rows.join('\\n')+'\\n'),stat:()=>({isSymbolicLink:()=>false})});
+  read:()=>Buffer.from(rows.join('\n')+'\n'),stat:()=>({isSymbolicLink:()=>false})});
  assert.deepEqual(result.candidates,examples.map(([rule],i)=>({path:'fixtures/input.txt',line:i*2+3,rule})));
  assert.equal(result.totals.text_lines,rows.length);
- assert.equal(result.files[0].sha256,createHash('sha256').update(rows.join('\\n')+'\\n').digest('hex'));
+ assert.equal(result.files[0].sha256,createHash('sha256').update(rows.join('\n')+'\n').digest('hex'));
  const plain=inspectTrackedSource({paths:['fixtures/plain.txt'],
-  read:()=>Buffer.from('harmless document\\n'.repeat(10000)),stat:()=>({isSymbolicLink:()=>false})});
+  read:()=>Buffer.from('harmless document\n'.repeat(10000)),stat:()=>({isSymbolicLink:()=>false})});
  assert.deepEqual(plain.candidates,[]);
  assert.equal(plain.totals.text_lines,10000);
 });

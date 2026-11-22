@@ -232,3 +232,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=426792b245dd6a43c1e528a2e4a9297cc0819601 
 ## 2026-11-22 - initialization-order correction before hosted tests [skip netlify]
 - FIX: the first branch commit placed the derived combined-regex declaration before the source rules constant; reorder declarations to avoid JavaScript temporal-dead-zone startup failure. First commit is unverified, not test PASS; final PR source must pass focused and full applicable CI. No product behavior or test coverage reduction.
 - NEXT ACTION: open PR only on corrected source, check all five required exact-source job outcomes before nonforce merge. Queue remains TESTING.
+
+DIC_PREFLIGHT_VERIFIED development_sha=426792b245dd6a43c1e528a2e4a9297cc0819601 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-22 - correct escaped fixture newlines before first PR CI [skip netlify]
+- FIX: test fixture must contain real newline separators; previous draft accidentally encoded literal backslash-n sequences. Final fixture now exercises eight original signature patterns, exact line numbers, SHA and 10,000 clean text lines. Source scanner unchanged from previous corrected branch commit; no test check removed.
+- NEXT ACTION: verify native hosted PR and merged-source five-job CI and benchmark actual approval step. Queue remains TESTING.
