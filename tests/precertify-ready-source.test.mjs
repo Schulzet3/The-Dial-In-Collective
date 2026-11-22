@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {createHash as cryptoCreateHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
  prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt} from '../scripts/release/precertify-ready-source.mjs';
@@ -178,4 +179,52 @@ test('#3667 READY pre-cert fast event gate skips only source-proven irrelevant a
  assert.match(workflow,/schedule:[\s\S]*cron: '17 \* \* \* \*'/,'scheduled recertification retained');
  assert.match(workflow,/workflow_dispatch:/,'manual guarded route retained');
  assert.match(workflow,/permissions:\n  contents: read\n  actions: read\n  checks: read/,'read-only token scope');
+});
+
+test('#3667 exact zero-READY queue blob short-circuits checkout; proof gaps fail open',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ const marker='      - name: Fast skip stale or queue-unchanged approvals before checkout\n';
+ const segment=workflow.split(marker)[1]?.split('      - uses: actions/checkout@v7')[0];
+ assert.ok(segment,'precheckout gate required');
+ const script=segment.split('        run: |\n')[1].split('\n').map(s=>s.startsWith('          ')?s.slice(10):s).join('\n');
+ assert.ok(script.includes('git hash-object'));
+ const dir=mkdtempSync(join(tmpdir(),'dic-ready-zero-queue-'));
+ const out=join(dir,'out'),source='b'.repeat(40);
+ const queue=(items)=>JSON.stringify({schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',items});
+ const body=(bytes,overrideSha)=>{
+  const sha=cryptoCreateHash('sha1').update('blob '+Buffer.byteLength(bytes)+'\0').update(bytes).digest('hex');
+  return JSON.stringify({sha:overrideSha||sha,encoding:'base64',content:Buffer.from(bytes).toString('base64')});
+ };
+ const mock=`gh() {
+  if [[ "$2" == *"/git/ref/heads/development/backend-foundation" ]]; then
+    printf '%s\\n' "$DIC_FAKE_LIVE"
+  elif [[ "$2" == *"/commits/"* ]]; then
+    printf '%s\\n' "queue"
+  elif [[ "$2" == *"/contents/docs/RELEASE_QUEUE.json?"* ]]; then
+    if [[ "$DIC_FAKE_API_FAIL" = "1" ]]; then return 1; fi
+    printf '%s\\n' "$DIC_FAKE_BODY"
+  else return 1
+  fi
+ }
+ `;
+ function check(json,expected,extra={}){
+  writeFileSync(out,'');
+  execFileSync('bash',['-c',mock+script],{encoding:'utf8',env:{
+   ...process.env,GITHUB_OUTPUT:out,GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective',
+   EVENT_HEAD:source,DIC_FAKE_LIVE:source,DIC_FAKE_BODY:json,DIC_FAKE_API_FAIL:'0',...extra
+  }});
+  assert.equal(readFileSync(out,'utf8').trim(),'proceed='+expected);
+ }
+ try{
+  check(body(queue([{state:'TESTING'},{state:'DEPLOYED'}])),'false');
+  check(body(queue([{state:'TESTING'},{state:'READY'}])),'true');
+  check(body(queue([{state:'BLOCKED'}])),'false');
+  check(body(queue([{state:'UNREVIEWED'}])),'true');
+  check(body(queue([]),'f'.repeat(40)),'true');
+  check('not-json','true');
+  check(body(queue([])),'true',{DIC_FAKE_API_FAIL:'1'});
+ }finally{rmSync(dir,{recursive:true,force:true});}
+ assert.ok(workflow.includes("cron: '17 * * * *'"));
+ assert.ok(workflow.includes('workflow_dispatch:'));
+ for(const phrase of ['contents: read','actions: read','checks: read'])assert.ok(workflow.includes(phrase));
 });
