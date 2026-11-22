@@ -1,0 +1,10 @@
+# Startup fast-path implementation — 2026-11-21
+
+DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Owner approved startup improvements 1–5; no publication authorization.
+- Acceptance: server admission precedes private cache paint; matching owner cached coffees render before slow sync; unadmitted and foreign-owner caches never render; outbox and Community review refresh remain intact.
+- Change: after verified admission, load owner cache and outbox concurrently, hydrate pending changes and render immediately; keep existing authoritative sync and review refresh.
+- Tests: added focused Node regression cases. CI and merge evidence pending. This is a first implementation slice, not a READY claim.
+- Remaining: auth callback deduplication, stalled startup recovery, resource-load optimization, cold/warm/offline tests, exact-source CI and queue certification.
+- Source authority: development f5db1d4035962af42299707e59c7aec53b8318ef; no provider or production writes.

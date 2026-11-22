@@ -287,7 +287,22 @@ class CloudApp {
    }
    this.deniedOfflineOwners.delete(user.id);
    clearOfflineDenial(user.id);
-   const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
+   // Once the server has admitted this owner, paint their saved workspace
+   // before queued writes, the full cloud read and Community review fetch.
+   // This cache is never an authorization token or shared across accounts.
+   const [cache,pending]=await this.inSession(()=>Promise.all([
+    this.store.readCache(user.id),this.store.list(user.id)
+   ]));
+   if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   if(cache?.owner===user.id&&cache.snapshot){
+    this.raw=cache.snapshot;this.pending=pending;
+    this.state=applyPending(hydrate(this.raw),this.pending);
+    this.state.communityEvidence=this.recommendationEvidence;
+    if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)
+     this.expanded.add(M.workspace(this.state).currentCoffeeId);
+    this.syncState='connecting';
+    this.render();
+   }
    await this.sync();
    if((wasPending||awaitingApproval(user.id))&&epoch===this.epoch&&user.id===this.identity?.id){
     clearApprovalAwaited(user.id);
