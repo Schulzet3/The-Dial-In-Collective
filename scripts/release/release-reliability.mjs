@@ -54,7 +54,12 @@ export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],change
    let a,b;
    try{a=sourceObjectAt(tested,path);b=sourceObjectAt(mergedSha,path);}
    catch{errors.push('unreadable tested head or merged blob: '+path);continue;}
-   if(typeof a!=='string'||!a||a!==b)
+   // A test removed by the verified merge must be ABSENT in both tested and
+   // merged Git trees. Missing runtime scope or unproven test deletion HOLD.
+   const exactDeletedTest=Array.isArray(testPaths)&&testPaths.includes(path)&&
+    /^(?:tests\/[A-Za-z0-9_.\/-]+\.test\.mjs|supabase\/tests\/[A-Za-z0-9_.\/-]+\.sql)$/.test(path)&&
+    !(item.scope_paths||[]).includes(path)&&a===null&&b===null;
+   if(!(typeof a==='string'&&a.length>0&&a===b)&&!exactDeletedTest)
     errors.push('tested head differs from merged code/test blob: '+path);
   }
  }

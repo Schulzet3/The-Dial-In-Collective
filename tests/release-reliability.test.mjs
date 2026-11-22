@@ -56,3 +56,28 @@ test('#2169 release event readback distinguishes true failure, running and claim
  assert.equal(validateReleaseTriggerReceipt({...args,consumed:true}).status,'CLAIMED_NETLIFY_UNVERIFIED');
  assert.equal(validateReleaseTriggerReceipt({...args,workflowRuns:[{...run,event:'pull_request'}]}).status,'BLOCKED');
 });
+
+
+test('#3347 exact PR head and merged clean startup share intentionally DELETED test objects',()=>{
+ const deleted='tests/issue455-r405-cross-basket-yield-eligibility.test.mjs';
+ const runtime='site/cloud/main.js', merged=S, tested=B;
+ const selected={...item,id:'DIC-Q-455-startup-recovery-deferred-worker',scope_paths:[runtime],
+  tests:[deleted+' deleted by clean source isolation']};
+ const request={mergedSha:merged,ciSourceSha:tested,changedPaths:[runtime],testPaths:[runtime,deleted],
+  checks:names.map(name=>({name,sha:tested,status:'completed',conclusion:'success'})),
+  sourceObjectAt:(sha,path)=>path===deleted?null:'100644:'+'f'.repeat(40)};
+ assert.equal(assessReadyEvidence(selected,request).ready,true,
+  'both Git trees lack the same exact test deleted by reviewed clean source merge');
+ assert.equal(assessReadyEvidence(selected,{...request,sourceObjectAt:(sha,path)=>
+  path===deleted&&sha===tested?'100644:'+'e'.repeat(40):request.sourceObjectAt(sha,path)}).ready,false,
+  'test present in only one SHA cannot be source-certified');
+ assert.equal(assessReadyEvidence(selected,{...request,sourceObjectAt:(sha,path)=>
+  path===runtime?null:request.sourceObjectAt(sha,path)}).ready,false,
+  'missing runtime blob is NEVER accepted');
+ assert.equal(assessReadyEvidence(selected,{...request,testPaths:undefined}).ready,false,
+  'unproven deleted test outside verified merge diff cannot silently pass');
+ const script='scripts/release/controlled-release-runner.mjs';
+ assert.equal(assessReadyEvidence(selected,{...request,testPaths:[runtime,script],sourceObjectAt:
+  (sha,path)=>path===script?null:request.sourceObjectAt(sha,path)}).ready,false,
+  'missing release-control script is not a permitted test deletion');
+});
