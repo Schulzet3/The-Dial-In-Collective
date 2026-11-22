@@ -73,18 +73,25 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  const shards=['0/3','1/3','2/3'].map(s=>selectFullSuiteShard(plan,s));
  assert.deepEqual(shards.flatMap(s=>s.parallel).sort(),plan.parallel,'all full-suite files run once across required existing jobs');
  const shiftedOwner=i=>{
-  if(i%3!==2)return i%3;
-  const slot=Math.floor(i/3)%4;
-  return slot===0?0:slot===1?1:2;
+  const original=i%3,slot=Math.floor(i/3);
+  if(original===0){
+   if(slot%6===0)return 2;
+   if(slot%12===3)return 1;
+   return 0;
+  }
+  if(original===1)return 1;
+  const quarter=slot%4;
+  return quarter===0?0:quarter===1?1:2;
  };
  for(let lane=0;lane<3;lane++){
   assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>shiftedOwner(i)===lane));
   assert.deepEqual(shards[lane].serial,lane===2?plan.serial:[]);
  }
  const counts=shards.map(s=>s.parallel.length);
- assert.ok(counts[0]>=counts[2]*2&&counts[1]>=counts[2]*2,
-  'measured slow approval lane gets roughly half as many general files');
- assert.ok(Math.abs(counts[0]-counts[1])<=1,'other existing runners receive balanced overflow');
+ assert.ok(counts[0]<counts[1]&&counts[2]>plan.parallel.length/5,
+  'relocate only measured excess validate work to the two idle existing lanes');
+ assert.ok(counts[0]>plan.parallel.length/4&&counts.every(x=>x>0),
+  'preserve meaningful work in all three HIGH lanes; never empty or auto-discover');
  for(let i=0;i<plan.parallel.length;i++)assert.equal([0,1,2].filter(lane=>shiftedOwner(i)===lane).length,1,
   'single exact owner for full-suite file '+i);
  const legacy0=selectFullSuiteShard(plan,'0/2'),legacy1=selectFullSuiteShard(plan,'1/2');
