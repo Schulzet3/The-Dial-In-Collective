@@ -51,10 +51,12 @@ export function requiredReadyPins(queue,ids,developmentChangedPaths,{
   return true; // actual mixed source, unknown proof or merged competitor: pin/HOLD
  });
 }
-export function frozenReadyBranch(queue,items){
+export function frozenReadyBranch(queue,items,developmentSourceSha){
+ if(!SHA.test(developmentSourceSha||''))throw Error('A frozen READY candidate needs its exact source commit to avoid name collisions');
  if(!items.length)throw Error('Cannot freeze an empty READY batch');
  const identity=JSON.stringify({
-  stage_contract:'READY3347-FROZEN-TEST-ISOLATION-V4',
+  stage_contract:'READY3347-FROZEN-TEST-ISOLATION-V5-SOURCE-BOUND-NAMES',
+   development_source_sha:developmentSourceSha,
   base:queue.published_base?.tested_source_sha,
   selected:items.map(i=>[i.id,i.merged_source_sha,sorted(i.scope_paths||[]),
    sorted(i.ci_runs||[])])
@@ -172,7 +174,7 @@ export function prevalidateReadySource({
  const queue=JSON.parse(raw);
  const items=selectedReadyItems(queue);
  if(!items.length)return {status:'NO_READY_ITEMS',count:0};
- const branch=frozenReadyBranch(queue,items);
+ const branch=frozenReadyBranch(queue,items,developmentSourceSha);
  const ids=items.map(i=>i.id);
  const published=queue.published_base.tested_source_sha;
  if(!SHA.test(published))throw Error('Missing published tested source');

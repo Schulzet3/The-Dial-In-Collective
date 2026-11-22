@@ -45,11 +45,13 @@ test('#3347 pre-certification skips only source-proven unmerged same-file labels
   'ambiguously ordered co-selected READY merges must fail closed');
 });
 test('#3347 candidate name is stable across unready changes, but changes with READY bytes',()=>{
- const b=frozenReadyBranch(q,[one]);
+ const b=frozenReadyBranch(q,[one],B);
  assert.match(b,/^release-candidates\/ready3347-[a-f0-9]{20}$/);
- assert.equal(frozenReadyBranch({...q,items:[one,{...notReady,scope_paths:['site/other.js']}]},[one]),b);
- assert.notEqual(frozenReadyBranch(q,[{...one,merged_source_sha:C}]),b);
- assert.notEqual(frozenReadyBranch({...q,published_base:{...q.published_base,tested_source_sha:C}},[one]),b);
+ assert.notEqual(frozenReadyBranch(q,[one],C),b,'a repaired exact source cannot reuse failed candidate branch');
+ assert.throws(()=>frozenReadyBranch(q,[one]),/exact source commit/);
+ assert.equal(frozenReadyBranch({...q,items:[one,{...notReady,scope_paths:['site/other.js']}]},[one],B),b);
+ assert.notEqual(frozenReadyBranch(q,[{...one,merged_source_sha:C}],B),b);
+ assert.notEqual(frozenReadyBranch({...q,published_base:{...q.published_base,tested_source_sha:C}},[one],B),b);
 });
 test('#3347 no candidate can be pushed without authenticated CI main context',()=>{
  assert.throws(()=>prevalidateReadySource({developmentSourceSha:'not-a-sha'}),/Exact development/);
