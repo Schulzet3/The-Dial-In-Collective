@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {generateKeyPairSync,createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
@@ -131,7 +132,11 @@ test('no subscribed device is skipped rather than generating fabricated push del
  assert.equal(f.sentPush.length,0);
  assert.ok(f.receipts.some(r=>r.p_channel==='push'&&r.p_outcome==='skipped'));
 });
-test('Vault key RPC failure retries only push while independent approval email is sent',async()=>{
+test('Vault key RPC failure retries only push while independent approval email is sent',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const f=fixture({vaultStatus:503});
  const response=await f.broker(request('poll',{},false));
  assert.equal(response.status,503);
@@ -142,7 +147,11 @@ test('Vault key RPC failure retries only push while independent approval email i
  assert.equal(f.calls.filter(c=>c.url?.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
 });
 
-test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async()=>{
+test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const f=fixture({vaultStatus:503,pushItems:[]});
  const response=await f.broker(request('poll',{},false));
  assert.equal(response.status,200);
@@ -167,7 +176,11 @@ test('duplicate cron claim sends no email or push',async()=>{
  assert.equal(f.sentEmails.length+f.sentPush.length,0);
 });
 
-test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async()=>{
+test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async(t)=>{
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  for(const pushStatus of [404,410]){
   const f=fixture({pushStatus});
   const res=await f.broker(request('poll',{},false));

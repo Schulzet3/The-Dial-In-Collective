@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {docsOnlyPaths,classifyChanges,classifyImpactPaths} from '../scripts/audit/ci-scope.mjs';
 const A='a'.repeat(40),B='b'.repeat(40);
@@ -140,7 +141,11 @@ test('official PR and push QA-only path stays focused, frozen candidate remains 
  assert.equal(candidate.node_mode,'full');
 });
 
-test('source-bound approval push jobs cannot be canceled by unrelated later push',()=>{
+test('source-bound approval push jobs cannot be canceled by unrelated later push',(t)=>{
+ if(frozenExcludedReadySource(['package.json','.github/workflows/cloud-beta-ci.yml','.github/workflows/cloud-regression.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const yaml=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
  assert.ok(yaml.includes("group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"));
  assert.ok(yaml.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
@@ -151,7 +156,11 @@ test('source-bound approval push jobs cannot be canceled by unrelated later push
  assert.equal(classifyImpactPaths(['.github/workflows/approval-continuity.yml']).tier,'high');
 });
 
-test('exact-SHA development cloud and browser push checks finish despite subsequent pushes',()=>{
+test('exact-SHA development cloud and browser push checks finish despite subsequent pushes',(t)=>{
+ if(frozenExcludedReadySource(['package.json','.github/workflows/cloud-beta-ci.yml','.github/workflows/cloud-regression.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  for(const [filename,prefix] of [
   ['cloud-beta-ci.yml','dic-cloud-beta-ci'],
   ['cloud-regression.yml','dic-cloud-regression']

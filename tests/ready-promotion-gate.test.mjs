@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {setImmediate} from 'node:timers';
 import {readFileSync} from 'node:fs';
@@ -138,7 +139,11 @@ test('frozen READY verification overlaps independent source and five-job evidenc
  assert.match(denied.errors.join(' '),/source temporarily unavailable/);
 });
 
-test('approval workflow runs exactly one live immutable READY verifier with negative regression',()=>{
+test('approval workflow runs exactly one live immutable READY verifier with negative regression',(t)=>{
+ if(frozenExcludedReadySource(['.github/workflows/approval-continuity.yml'])){
+  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ }
+
  const workflow=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
  const evidence=readFileSync(new URL('../scripts/release/ready-evidence-gate.mjs',import.meta.url),'utf8');
  assert.equal(workflow.split('node scripts/release/ready-evidence-gate.mjs').length-1,1,

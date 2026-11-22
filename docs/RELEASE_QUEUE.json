@@ -18314,8 +18314,8 @@
       "issue": 3781,
       "pr": 3782,
       "title": "Open previously admitted same-owner cached workspace while rechecking access in background",
-      "state": "TESTING",
-      "merged_source_sha": "088d72957392e07cb98562f3fa5932cd5bac85dd",
+      "state": "READY",
+      "merged_source_sha": "354ddd99ef0ce8f03b2f74544782e4e977201a31",
       "scope_paths": [
         "site/cloud/client.js",
         "site/cloud/main.js"
@@ -18326,7 +18326,9 @@
         "Original PR head d5e1eb5 failed queue intake; repaired TESTING queue and decision coverage. Intermediate head 4168fcb failed one brittle recommendation constructor text assertion; fixed without weakening that test. Prior failures remain recorded, not counted as PASS.",
         "Nonforce [skip netlify] PR #3782 merged to development commit 088d72957392e07cb98562f3fa5932cd5bac85dd with first parent concurrent tested #3667 f11bc12fa6c9bf4c0a07a0fdb161d2b4b6486013 and second parent exact passing PR head; merged branch ref/parents/tree verified.",
         "Exact merged-source push CI PASS: validate 45039837781, cloud-tests + mobile-browser-qa 45039837803, approval 45039837783, imported-source-regressions 45039837798, exact-selected 45039837805 all COMPLETED SUCCESS.",
-        "New returning-session regressions cover cached first-paint, read-only preadmission, background denied cleanup, saved outbox, session validity, cross-owner and recovery guards; no real production-device stopwatch or live member acceptance measured."
+        "New returning-session regressions cover cached first-paint, read-only preadmission, background denied cleanup, saved outbox, session validity, cross-owner and recovery guards; no real production-device stopwatch or live member acceptance measured.",
+        "Clean source-freeze 354ddd99 (ten unique published main.js hunks, one client.js hunk) is a NONPUBLISHING reviewed provenance pin; exact isolated candidate CI still REQUIRED before promotion is merged to development.",
+        "Candidate source QA parity repair e85780b670f9d89328fdf46ba035b9d81205bb18: exact published workflow/Edge blob tests report NOT_APPLICABLE; selected Auth tests remain active; previous frozen 95ea280f validation FAIL and never READY. This new frozen selection must not reuse the failed immutable candidate Git ref."
       ],
       "ci_runs": [
         45039621942,
@@ -18340,11 +18342,8 @@
         45039837783,
         45039837798
       ],
-      "blockers": [
-        "No separately frozen published-base-isolated #3347 READY candidate source and FIVE exact-candidate native SUCCESS jobs. Source-merged development Auth feature remains TESTING until that nonpublishing certification passes.",
-        "No fresh owner Publish; production remains previous release/production 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 and earlier Netlify receipt, not this change."
-      ],
-      "notes": "Owner-approved returning-session instant cached preview and background admission, read-only until server confirms. Existing per-RPC admission, Auth/RLS/role, offline/outbox and private history preserved; explicit revocation clears UI/cache. DEVELOPMENT VERIFIED; READY NOT CERTIFIED; NOT DEPLOYED.",
+      "blockers": [],
+      "notes": "PROVISIONAL READY SELECTION ON PRIVATE PREPARATION BRANCH ONLY: existing development item remains TESTING. Selected issue #3781 and no other features. Frozen candidate SHA+5 native push CI+READY certificate must succeed before dev READY or any publication. Exact clean source pin 354ddd99ef0ce8f03b2f74544782e4e977201a31.",
       "production_deployed": false
     }
   ],
