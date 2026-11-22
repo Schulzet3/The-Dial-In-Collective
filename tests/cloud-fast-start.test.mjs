@@ -39,3 +39,28 @@ test('foreign owner cache never renders even after server admission',async()=>{
  assert.equal(frames.includes(1),false);
  gate.resolve();await connecting;
 });
+
+test('simultaneous same-session startup triggers share one admission request',async()=>{
+ const gate=deferred();let checks=0;
+ const app=new CloudApp({async status(){checks++;return gate.promise;}},{
+  async readCache(){return null;},async list(){return [];}
+ });
+ app.identity={id:OWNER};app.render=()=>{};app.sync=async()=>{};
+ const a=app.connect(),b=app.connect();
+ assert.equal(checks,1);
+ gate.resolve({admitted:true,admin:false});
+ await Promise.all([a,b]);
+ assert.equal(checks,1);
+});
+test('a different owner never waits on the previous owner admission',async()=>{
+ const gate=deferred(),owners=[];
+ const app=new CloudApp({async status(){owners.push(app.identity.id);return owners.length===1?gate.promise:{admitted:true,admin:false};}},{
+  async readCache(){return null;},async list(){return [];}
+ });
+ app.render=()=>{};app.sync=async()=>{};
+ app.identity={id:OWNER};const old=app.connect();
+ app.resetAccount();app.identity={id:'new-owner'};await app.connect();
+ assert.deepEqual(owners,[OWNER,'new-owner']);
+ gate.resolve({admitted:true,admin:false});await old;
+ assert.equal(app.identity.id,'new-owner');
+});

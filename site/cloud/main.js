@@ -278,6 +278,20 @@ class CloudApp {
   }
  }
  async connect(){
+  const owner=this.identity?.id,epoch=this.epoch;
+  if(!owner)return;
+  // Auth callbacks, visibility and reconnect can arrive together. Share the
+  // admission request only within the same owner/session, never across users.
+  if(this.connecting&&this.connectingOwner===owner&&this.connectingEpoch===epoch)
+   return this.connecting;
+  this.connectingOwner=owner;this.connectingEpoch=epoch;
+  const task=this.performConnect();
+  const active=task.finally(()=>{
+   if(this.connecting===active){this.connecting=null;this.connectingOwner=null;this.connectingEpoch=null;}
+  });
+  this.connecting=active;return active;
+ }
+ async performConnect(){
   const user=this.identity,epoch=this.epoch;if(!user)return;
   if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
   const wasPending=this.status?.approvalState==='pending'&&this.status?.admitted===false;

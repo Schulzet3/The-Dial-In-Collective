@@ -8,3 +8,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef 
 - Tests: added focused Node regression cases. CI and merge evidence pending. This is a first implementation slice, not a READY claim.
 - Remaining: auth callback deduplication, stalled startup recovery, resource-load optimization, cold/warm/offline tests, exact-source CI and queue certification.
 - Source authority: development f5db1d4035962af42299707e59c7aec53b8318ef; no provider or production writes.
+
+## Concurrent startup deduplication
+- Same-session auth callbacks, visibility and online events now share one in-flight admission/connect operation. Different owner/epoch starts independently, avoiding stalled prior-user requests.
+- Added focused concurrency and account-switch regressions; exact updated-head CI pending. No release or publication.
