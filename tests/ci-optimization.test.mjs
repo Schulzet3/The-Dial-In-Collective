@@ -72,12 +72,21 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.equal(new Set([...plan.parallel,...plan.serial]).size,plan.parallel.length+plan.serial.length);
  const shards=['0/3','1/3','2/3'].map(s=>selectFullSuiteShard(plan,s));
  assert.deepEqual(shards.flatMap(s=>s.parallel).sort(),plan.parallel,'all full-suite files run once across required existing jobs');
+ const shiftedOwner=i=>{
+  if(i%3!==2)return i%3;
+  const slot=Math.floor(i/3)%4;
+  return slot===0?0:slot===1?1:2;
+ };
  for(let lane=0;lane<3;lane++){
-  assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>i%3===lane));
+  assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>shiftedOwner(i)===lane));
   assert.deepEqual(shards[lane].serial,lane===2?plan.serial:[]);
  }
- assert.ok(Math.max(...shards.map(x=>x.parallel.length))-Math.min(...shards.map(x=>x.parallel.length))<=1,
-  'file-count-balanced thirds on existing required runners');
+ const counts=shards.map(s=>s.parallel.length);
+ assert.ok(counts[0]>=counts[2]*2&&counts[1]>=counts[2]*2,
+  'measured slow approval lane gets roughly half as many general files');
+ assert.ok(Math.abs(counts[0]-counts[1])<=1,'other existing runners receive balanced overflow');
+ for(let i=0;i<plan.parallel.length;i++)assert.equal([0,1,2].filter(lane=>shiftedOwner(i)===lane).length,1,
+  'single exact owner for full-suite file '+i);
  const legacy0=selectFullSuiteShard(plan,'0/2'),legacy1=selectFullSuiteShard(plan,'1/2');
  assert.deepEqual([...legacy0.parallel,...legacy1.parallel].sort(),plan.parallel,
   'legacy 2-way source still has exhaustive coverage');
