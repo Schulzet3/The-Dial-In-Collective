@@ -147,6 +147,11 @@ export function withoutRepeatedCoffeeOriginSuffix(value){
    if(/^[\p{L}\p{M}'’.-]+(?:\s+[\p{L}\p{M}'’.-]+){1,4}$/u.test(locality)&&
     !/^(?:north|south|east|west|central|northeast|northwest|southeast|southwest)(?:ern)?\b/iu.test(locality)&&
     !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(locality)&&
+    !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(parts[1])&&
+    !locality.split(/\s+/u).some(word=>{
+     const tokens=coffeeOriginParts(word);
+     return tokens.length===1&&knownCountries.has(tokens[0]);
+    })&&
     !coffeeOriginParts(locality).some(p=>knownCountries.has(p)||broadCountries.has(p)))
     return [locality,parts[1],parts[2]].join(', ');
   }

@@ -10,6 +10,7 @@ test('R406 exact selected Elixr named locality has country once in display',()=>
  assert.equal(clean('Yirba Muda Ethiopia, Guji, Ethiopia'),'Yirba Muda, Guji, Ethiopia');
  assert.equal(clean('Santa Rosa Colombia, Huila, Colombia'),'Santa Rosa, Huila, Colombia');
  assert.equal(clean('North Eastern Brazil, Minas Gerais, Brazil'),'Minas Gerais, Brazil');
+ assert.equal(clean('North Eastern Ethiopia, Guji, Ethiopia'),'Guji, Ethiopia');
 });
 test('R406 current canonical parser formats selected explicit origin without rewriting source evidence',()=>{
  const literal='Yirba Muda Ethiopia, Guji, Ethiopia';
@@ -31,7 +32,7 @@ test('R406 no country or region invention, conflicting countries remain visible'
   'Yirba Muda, Guji, Ethiopia',
   'Yirba Muda Ethiopia, Guji',
   'Yirba Ethiopia, Guji, Ethiopia',
-  'North Eastern Ethiopia, Guji, Ethiopia',
+  'Yirba Muda Ethiopia, Coffee Growers, Ethiopia',
   'Coffee Blend Ethiopia, Guji, Ethiopia',
   'Yirba Muda Ethiopia, Natural Process, Ethiopia',
   'Yirba Kenya Ethiopia, Guji, Ethiopia'
