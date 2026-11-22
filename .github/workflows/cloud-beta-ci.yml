@@ -91,11 +91,8 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-      - name: Run focused CI-only regression tests (no app install, browser or build)
-        if: steps.scope.outputs.node_mode == 'qa'
-        run: node --test tests/ci-optimization.test.mjs tests/ci-scope.test.mjs tests/fast-pr-check.test.mjs tests/site-integrity.test.mjs
       - name: Install locked dependencies for affected Node/build tasks
-        if: (steps.scope.outputs.node_mode != 'none' && steps.scope.outputs.node_mode != 'qa') || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
+        if: (steps.scope.outputs.node_mode != 'none' && steps.scope.outputs.node_mode != 'ci-fast') || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests (HIGH risk only)
         if: steps.scope.outputs.node_mode == 'full'
@@ -106,6 +103,9 @@ jobs:
       - name: Focused coffee source/identity and preview regressions
         if: steps.scope.outputs.node_mode == 'coffee'
         run: node --test tests/coffee-*.test.mjs tests/preview-request-bounds.test.mjs tests/universal-coffee-preview.test.mjs
+      - name: Focused source-neutral CI helper and fixture regressions
+        if: steps.scope.outputs.node_mode == 'ci-fast'
+        run: node --test tests/ci-optimization.test.mjs tests/ci-scope.test.mjs tests/fast-pr-check.test.mjs tests/required-check-workflows.test.mjs tests/site-integrity.test.mjs
       - name: Lint affected JS or workflow source
         if: steps.scope.outputs.lint == 'true'
         run: node scripts/audit/measure-stage.mjs --name lint --out qa_artifacts/ci-metrics/validate.jsonl -- npm run lint

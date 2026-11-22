@@ -34,6 +34,8 @@ test('one build per scoped change and no routine duplicate browser/full suites',
  assert.equal((cloud.match(/npm run build:cloud/g)||[]).length,1);
  assert.equal((beta.match(/npm run build:cloud/g)||[]).length,1);
  assert.match(visual,/node scripts\/audit\/site-integrity\.mjs --dist/);
+ assert.match(beta,/Focused source-neutral CI helper and fixture regressions[\s\S]*?node --test tests\/ci-optimization\.test\.mjs tests\/ci-scope\.test\.mjs/);
+ assert.match(beta,/node_mode != 'ci-fast'\) \|\| steps\.scope\.outputs\.lint/);
 });
 test('CI stage receipts cannot escape artifact dir or inject shell',()=>{
  assert.deepEqual(parseStageArgs(['--name','lint','--out','qa_artifacts/ci-metrics/validate.jsonl','--','npm','run','lint']),{
@@ -96,16 +98,4 @@ test('full Node suite fails closed if the isolated resource-security test disapp
    serial:['tests/html-resource-security.test.mjs']
   });
  }finally{rmSync(root,{recursive:true,force:true});}
-});
-
-test('QA-only lane runs four scoped tests on Node 22 without dependency install or browser',()=>{
- const beta=file('.github/workflows/cloud-beta-ci.yml');
- const node=beta.indexOf("node-version: '22'");
- const qa=beta.indexOf("name: Run focused CI-only regression tests");
- const install=beta.indexOf("name: Install locked dependencies for affected Node/build tasks");
- assert.ok(node>=0&&qa>node&&install>qa);
- assert.match(beta,/if: steps\.scope\.outputs\.node_mode == 'qa'/);
- assert.match(beta,/run: node --test tests\/ci-optimization\.test\.mjs tests\/ci-scope\.test\.mjs tests\/fast-pr-check\.test\.mjs tests\/site-integrity\.test\.mjs/);
- assert.match(beta,/steps\.scope\.outputs\.node_mode != 'qa'/);
- assert.match(file('scripts/audit/ci-scope.mjs'),/const QA_ONLY_PATHS=new Set/);
 });
