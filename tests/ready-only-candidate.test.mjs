@@ -66,8 +66,9 @@ test('#3347 startup coupled Log Shot suites use only proven published-source tes
   developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[selected]};
  assert.deepEqual(discoverReviewedRestoredStartupTests(props),s.tests.map(x=>x.path).sort());
  const audit=s.tests.find(x=>x.path==='scripts/audit/issue33-original603-focused-source-review.mjs');
- const publishedAtSource=(ref,path)=>ref===B&&path===audit.path?
-  '100644:'+audit.published:sourceObjectAt(ref,path);
+ const publishedAtSource=(ref,path)=>path===audit.path&&ref===B?
+  '100644:'+audit.published:
+  path===audit.path&&ref===s.merge?'100644:'+audit.unready:sourceObjectAt(ref,path);
  const once=discoverReviewedRestoredStartupTests({...props,sourceObjectAt:publishedAtSource});
  assert.deepEqual(once,s.tests.filter(x=>x.path!==audit.path).map(x=>x.path).sort(),
   'already exact-published source must not be counted as a changed-path restoration');
