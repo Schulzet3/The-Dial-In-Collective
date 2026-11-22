@@ -6,6 +6,10 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const ROOT=fileURLToPath(new URL('../..',import.meta.url));
 const ISOLATED='tests/html-resource-security.test.mjs';
+// 2026-11-22 source-bound cloud Node log: one synthetic history test cost 13.7s.
+// Keep all test assertions; isolate this measured slow file on the spare existing
+// approval runner, without altering protected serial timing or legacy two-lane mode.
+const MEASURED_SLOW_CLOUD='tests/issue161-synthetic-load-concurrency.test.mjs';
 export const FULL_SUITE_CONCURRENCY=4;
 
 export function planFullSuite(root=ROOT){
@@ -36,6 +40,8 @@ export function selectFullSuiteShard(plan,shard='all'){
  // extra runner/build, duplicate tests or protected serial changes.
  const parallel=plan.parallel.filter((_,i)=>{
   if(lanes===3){
+   // Source-bound, single-file transfer only. Everything else keeps its owner.
+   if(plan.parallel[i]===MEASURED_SLOW_CLOUD)return selected===2;
    const original=i%3;
    const slot=Math.floor(i/3);
    if(original===0){

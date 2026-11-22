@@ -73,6 +73,7 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  const shards=['0/3','1/3','2/3'].map(s=>selectFullSuiteShard(plan,s));
  assert.deepEqual(shards.flatMap(s=>s.parallel).sort(),plan.parallel,'all full-suite files run once across required existing jobs');
  const shiftedOwner=i=>{
+  if(plan.parallel[i]==='tests/issue161-synthetic-load-concurrency.test.mjs')return 2;
   const original=i%3,slot=Math.floor(i/3);
   if(original===0){
    if(slot%6===0)return 2;
@@ -89,6 +90,13 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  }
  assert.deepEqual(shards.flatMap(s=>s.serial),plan.serial,
   'one unchanged protected serial file on HIGH validate; no duplicate or omission');
+ const heavy='tests/issue161-synthetic-load-concurrency.test.mjs';
+ assert.ok(plan.parallel.includes(heavy),'measured slow full-suite file must be retained');
+ assert.equal(plan.parallel.indexOf(heavy)%3,1,'measured file was cloud-owned before transfer');
+ assert.equal(shards[0].parallel.includes(heavy),false);
+ assert.equal(shards[1].parallel.includes(heavy),false);
+ assert.equal(shards[2].parallel.filter(path=>path===heavy).length,1,
+  'exactly one protected synthetic load regression runs on the existing approval lane');
  const counts=shards.map(s=>s.parallel.length);
  assert.ok(counts[0]<counts[1]&&counts[2]>plan.parallel.length/5,
   'relocate only measured excess validate work to the two idle existing lanes');
