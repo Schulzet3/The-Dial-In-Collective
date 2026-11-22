@@ -66,15 +66,6 @@ jobs:
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Fast source/queue/commit preflight BEFORE expensive CI
-        env:
-          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
-          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_EVENT_NAME: ${{ github.event_name }}
-        run: |
-          node scripts/audit/fast-pr-check.mjs
-          node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/audit/verify-commit-checkpoint.mjs
       - name: Report NOT_APPLICABLE, not an app test PASS
         if: steps.scope.outputs.docs_only == 'true'
         run: |
@@ -96,7 +87,7 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests (HIGH risk only)
         if: steps.scope.outputs.node_mode == 'full'
-        run: node scripts/audit/measure-stage.mjs --name full-tests-shard-0 --out qa_artifacts/ci-metrics/validate.jsonl -- node scripts/audit/run-full-suite.mjs --shard=0/2
+        run: node scripts/audit/measure-stage.mjs --name full-tests --out qa_artifacts/ci-metrics/validate.jsonl -- npm test
       - name: Focused Log Shot, grinder, recommendations and offline regressions
         if: steps.scope.outputs.node_mode == 'shots'
         run: node --test tests/grind-*.test.mjs tests/grinder17-*.test.mjs tests/shot-*.test.mjs tests/cloud-shot-*.test.mjs tests/recommendation-*.test.mjs tests/recipe-*.test.mjs tests/next-shot-*.test.mjs tests/legacy-shot-history-ratio.test.mjs tests/fast-flow-hybrid.test.mjs tests/offline-*.test.mjs

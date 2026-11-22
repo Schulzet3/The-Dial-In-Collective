@@ -3,7 +3,6 @@ import {selectedSchemaProductOfferH2} from './coffee-selected-offer-h2.mjs';
 // Direct exact-selected-product prose credits. No network access, no roaster-specific rules.
 // Exact official 77-page selected-source replay gate: never equate a parsed HTML page with a certified owner field.
 import {productCoffeeProse} from './coffee-product-prose.mjs';
-import {selectedShopifyPageFlyH3Identity} from './coffee-pagefly-selected-h3.mjs';
 import {normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {inferDecaffeinationMethod,decafOnlyCoffee} from './coffee-decaffeination-method.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
@@ -15,13 +14,6 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // process utilizing sugar cane and water." This is a DECAFFEINATION method,
 // never evidence of green Natural processing, EA solvent or Swiss Water.
 const CURRENT_SELECTED_OWN_CANE_WATER_DECAF=/^(?:this|our)\s+(?:naturally\s+)?decaf(?:feinated)?\s+coffee\s+(?:undergoes|uses)\s+(?:an?\s+)?(?:unique\s+|natural\s+)?decaffeination\s+(?:process|method)\s+(?:utilizing|using|with|via)\s+sugar[ -]?cane\s+and\s+water\b/iu;
-// Direct selected full-decaf caffeine-removal prose, NOT green Natural processing.
-// Do not infer EA solvent or transfer a general roaster page/sibling's treatment.
-const CURRENT_SELECTED_BEAN_CANE_REMOVAL=/^we['’]ve\s+stripped\s+this\s+bean\s+of\s+its\s+caffeine\s+content\s+through\s+a\s+natural\s+sugar[ -]?cane\s+process\b/iu;
-// Direct selected-decaf testimonial may state that THE caffeine-removal process
-// uses a sugar-cane derivative after naming THIS decaf in the same paragraph.
-// Never infer a specific solvent, green-processing method, or generic FAQ fact.
-const CURRENT_SELECTED_CANE_DERIVATIVE_DECAF=/(?:^|[.!?]\s+)(the\s+decaffeination\s+(?:process|method)\s+uses\s+(?:a|the)\s+derivative\s+of\s+sugar[ -]?cane\b)/iu;
 // A current decaf's actual product description sometimes states its method in
 // a prose sentence rather than a labeled spec (Leap Coffee's Swiss Water page).
 // Accept direct, selected-product usage or a narrow current decaf process
@@ -64,17 +56,7 @@ function selectedNamedWaterProcessed(name,line){
 }
 
 const CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER=/^decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
-// An exact selected full-decaf product may introduce "this roast" and then
-// say "The beans are processed using Swiss Water Process to remove the caffeine."
-// The standalone "Swiss Water Processed" tagline is insufficient. Require a
-// single selected product's own subsection and same-paragraph antecedent,
-// never related, FAQ, SEO, roaster-wide education or a different lot.
-const CURRENT_SELECTED_OWN_ROAST_BEANS_WATER_REMOVAL=/(?:^|[.!?]\s+)the\s+beans\s+(?:are|were)\s+processed\s+using\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\s+to\s+remove\s+(?:the\s+)?caffeine\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
-// Exact current chosen full-decaf direct prose: "This coffee from Mexico
-// underwent its decaffination process using the Swiss Water Process".
-// Bind named country to exact selected H1; never infer producing geography.
-const CURRENT_SELECTED_COUNTRY_WATER_DECAF=/^this\s+coffee\s+from\s+([\p{L}\p{M}][\p{L}\p{M}.'’ -]{1,55}?)\s+underwent\s+its\s+decaff(?:ein|in)ation\s+(?:process|method)\s+(?:using|with|via)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 // An exact chosen full-decaf SW title can be abbreviated while the own
@@ -277,13 +259,7 @@ function selectedCurrentContinuingCultivator(name,line){
 
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html,source_url=''}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
- // No H1: recognize ONLY an independently proven current PageFly product:
- // exact same-host/handle Shopify tracker, unique direct cart form and matching
- // product-ID bound H3, never SEO or related recommendation. Scope prose to
- // that ProductBox, not the other coffees on the page.
- const pageFly=selectedShopifyPageFlyH3Identity(optionHtml,{source_url,parsed_name:name});
- const selectedMarkup=pageFly?optionHtml.slice(pageFly.selected_scope_start,pageFly.selected_scope_end):html;
- const blocks=productCoffeeProse(selectedMarkup,clean);
+ const blocks=productCoffeeProse(html,clean);
  const headings=blocks.filter(x=>x.tag==='h1').map(x=>fold(selectedCoffeeNameWithoutPrice(x.text)));
  // Responsive storefronts can render the same selected product heading in
  // desktop and mobile shells. Accept repeats ONLY when every in-scope H1
@@ -296,7 +272,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  // roast to a nonexistent selected product.
  if(/^(?:(?:our|the)\s+)?(?:catalog(?:ue)?|collections?|all\s+(?:coffees?|products?)|shop\s+(?:all|coffees?)|coffees?|products?|store|home)$/u.test(selected))return {};
  const verifiedOfferH2=!headings.length?selectedSchemaProductOfferH2(optionHtml,{source_url}):[];
- if((!headings.length&&!(verifiedOfferH2.length===1&&fold(verifiedOfferH2[0])===selected)&&!pageFly)||
+ if((!headings.length&&!(verifiedOfferH2.length===1&&fold(verifiedOfferH2[0])===selected))||
     headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
@@ -431,37 +407,6 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(ownCane)){
    if(decafEvidence.size<4)decafEvidence.add(ownCane);
    else decafEvidenceOverflow=true;
-  }
-  // A chosen full-decaf's own "Why We Love It" description can first say
-  // "This ... decaf" and then "The decaffeination process uses a derivative
-  // of sugar cane". A prior/sibling/FAQ/SEO sentence is not this evidence.
-  const caneDerivative=line.match(CURRENT_SELECTED_CANE_DERIVATIVE_DECAF);
-  const caneDerivativeClaim=caneDerivative?.[1]||'';
-  const ownDecafAntecedent=caneDerivative?
-   line.slice(Math.max(0,caneDerivative.index-250),caneDerivative.index):'';
-  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
-     caneDerivativeClaim&&
-     /\b(?:this|our)\b[^.!?]{0,120}\bdecaf(?:feinated)?\b/iu.test(ownDecafAntecedent)&&
-     !/\b(?:not\s+(?:a\s+)?decaf(?:feinated)?|never\s+decaf(?:feinated)?)\b/iu.test(ownDecafAntecedent)&&
-     !NONCURRENT_DECAF_METHOD.test(line)&&
-     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
-     !/\b(?:not|never|without|instead of|rather than|unlike)\b/iu.test(caneDerivativeClaim)&&
-     inferDecaffeinationMethod({name,selectedMethod:caneDerivativeClaim})==='Sugar Process'&&
-     !decafEvidence.has(caneDerivativeClaim)){
-   if(decafEvidence.size<4)decafEvidence.add(caneDerivativeClaim);
-   else decafEvidenceOverflow=true;
-  }
-  // The selected current full-decaf product's own affirmative caffeine-removal
-  // paragraph, with hard source/identity and education/negation restrictions.
-  const caneRemoval=line.match(CURRENT_SELECTED_BEAN_CANE_REMOVAL)?.[0]||'';
-  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
-     caneRemoval&&!NONCURRENT_DECAF_METHOD.test(line)&&
-     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
-     !/\b(?:not|never|without|instead of|rather than|unlike)\b/iu.test(caneRemoval)&&
-     inferDecaffeinationMethod({name,selectedMethod:caneRemoval})==='Sugar Process'&&
-     !decafEvidence.has(caneRemoval)){
-    if(decafEvidence.size<4)decafEvidence.add(caneRemoval);
-    else decafEvidenceOverflow=true;
   }
   // Direct selected decaf evidence, never general educational background.
   if(selectedUnnamedDecafIdentity&&line.length<=240&&
@@ -629,39 +574,6 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      inferDecaffeinationMethod({name,selectedMethod:line})==='Water Process'&&
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
-   else decafEvidenceOverflow=true;
-  }
-  // Named exact-country selected full-decaf's OWN present water treatment;
-  // the source may misspell decaffeination, but must name this H1's country.
-  const ownCountryWater=line.match(CURRENT_SELECTED_COUNTRY_WATER_DECAF);
-  const countryClaim=ownCountryWater?.[0]||'';
-  const claimCountry=fold(ownCountryWater?.[1]||'');
-  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1000&&
-     countryClaim&&claimCountry.length>=3&&
-     (' '+selected+' ').includes(' '+claimCountry+' ')&&
-     !NONCURRENT_DECAF_METHOD.test(line)&&
-     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
-     !/\b(?:not|never|without|instead of|rather than|unlike|hypothetical)\b/iu.test(line)&&
-     inferDecaffeinationMethod({name,selectedMethod:line})==='Water Process'&&
-     !decafEvidence.has(countryClaim)){
-    if(decafEvidence.size<4)decafEvidence.add(countryClaim);
-    else decafEvidenceOverflow=true;
-  }
-  // One selected named full-decaf product paragraph explicitly introduces its
-  // own roast, then refers to "the beans" when naming caffeine removal.
-  // This is not green processing. A bare process badge, related product,
-  // FAQ heading or different selected coffee NEVER authorizes autofill.
-  const ownWaterRemoval=decafOnlyCoffee(name)&&b.tag==='p'&&
-   !b.educational&&fold(b.section)===selected&&line.length<=650&&
-   !NONCURRENT_DECAF_METHOD.test(line)
-   ?CURRENT_SELECTED_OWN_ROAST_BEANS_WATER_REMOVAL.exec(line):null;
-  const ownRoastAntecedent=ownWaterRemoval?
-   line.slice(0,ownWaterRemoval.index):'';
-  if(ownWaterRemoval&&/\b(?:this|our)\s+roast\b/iu.test(ownRoastAntecedent)&&
-     !/\b(?:not|never|without|rather\s+than|instead\s+of|unlike)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\b/iu.test(line)&&
-     inferDecaffeinationMethod({name,selectedMethod:ownWaterRemoval[0]})==='Water Process'&&
-     !decafEvidence.has(ownWaterRemoval[0])){
-   if(decafEvidence.size<4)decafEvidence.add(ownWaterRemoval[0]);
    else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
