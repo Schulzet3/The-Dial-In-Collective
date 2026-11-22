@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BT",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BS-20261121.json",
+  "development_prewrite_sha": "39ee15eb4cd2a2dbdc54bb26be910eee6b544ce6",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-177-206-20261121-V13BT.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 177,
+          "last_line": 206,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C74-2-31-20261121-V13BT.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 74,
+          "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+          "source_blob_sha": "ee7f42bed7e06c8db723c633a94802d644be6acb",
+          "first_line": 2,
+          "last_line": 31,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_2_COMPLETE_GIT_BLOBS_PREVIOUS_3_VERIFIED",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C74_EQUALS_PINNED",
+  "findings": [
+    {
+      "severity": "ARCHIVED_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "lines": [
+        180,
+        194
+      ],
+      "disposition": "NOT_CURRENT_PASS_NOT_CURRENT_DEFECT"
+    },
+    {
+      "severity": "READ_ONLY_SCOPE",
+      "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+      "lines": [
+        13,
+        14,
+        15,
+        23,
+        24
+      ],
+      "disposition": "NO_NETWORK_RUN_NO_CURRENT_DEFECT_ISSUE33_OWNED"
+    }
+  ],
+  "baselines": {
+    "frozen_files": 757,
+    "frozen_text_lines": 579961,
+    "pinned_files": 436,
+    "pinned_text_lines": 57913,
+    "provisional_R2": 5451,
+    "provisional_C2": 6462,
+    "old_strict_frozen": 7635,
+    "old_strict_pinned": 9318
+  },
+  "full_audit": "OPEN_IN_PROGRESS_NOT_READY",
+  "live_drift_new_renamed_nontext": "INCOMPLETE_UNCREDITED",
+  "next_frozen": {
+    "index": 221,
+    "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+    "line": 207
+  },
+  "next_pinned": {
+    "index": 74,
+    "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+    "line": 32
+  },
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE"
+}
