@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,assertExactCandidateStagedPaths,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,discoverReviewedRestoredStartupTests,REVIEWED_STARTUP_MIXED_TESTS,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
@@ -706,4 +706,32 @@ test('#3347 #509 new SQL regression excluded only with its own TESTING migration
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,queue:{items:[{...owner,state:'READY'}]}}),/lacks exact source\/migration provenance/);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,
   sourceObjectAt:(ref,path)=>ref===B&&path===spec.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Unreviewed current or published SQL test bytes/);
+});
+test('#3347 preserves five full published startup source-coupled suites',()=>{
+ const s=REVIEWED_STARTUP_MIXED_TESTS;
+ assert.equal(s.tests.length,5);
+ assert.ok(s.tests.every(x=>/^[a-f0-9]{40}$/.test(x.published)&&/^[a-f0-9]{40}$/.test(x.unready)));
+});
+test('#3347 new CI-only regression is excluded only with its exact restored original workflow',()=>{
+ const spec=REVIEWED_CI_FAST_PR_TEST;
+ const at=(r,p)=>r===B&&p===spec.path?'100644:'+spec.sourceBlob:null;
+ const args={publishedSourceSha:A,developmentSourceSha:B,
+  restoredWorkflows:[spec.restoredWorkflow],sourceObjectAt:at};
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions(args),[spec.path]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...args,restoredWorkflows:[]}),[]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...args,
+  sourceObjectAt:(r,p)=>r===B&&p===spec.path?'100644:'+'f'.repeat(40):at(r,p)}),[]);
+});
+test('#3347 new unready coffee R324 test follows restored parser source, not only pinned source',()=>{
+ const spec=REVIEWED_PINNED_COFFEE_TEST;
+ const at=(r,p)=>p===spec.path?(r===B||r===spec.merge?'100644:'+spec.blob:null):
+  p===spec.runtime?(r===B?'100644:'+'e'.repeat(40):
+   r===spec.merge?'100644:'+'f'.repeat(40):
+   r===spec.merge+'^'?'100644:'+'a'.repeat(40):null):null;
+ const args={queue:{items:[{id:'DIC-Q-33-unready-review',issue:33,state:'TESTING',
+   scope_paths:[spec.runtime]}]},selectedIds:[],restoredPaths:[spec.runtime],
+   pinnedReadyPaths:[],publishedSourceSha:A,developmentSourceSha:B,
+   changedPaths:[spec.path],sourceObjectAt:at};
+ assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
 });
