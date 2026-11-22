@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BR",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BQ-20261121.json",
+  "development_prewrite_sha": "66853d2f84d31048311c4885c948819229f8a2fd",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-117-146-20261121-V13BR.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 117,
+          "last_line": 146,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C72-48-68-C73-1-9-20261121-V13BR.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 72,
+          "path": "scripts/audit/verify-commit-checkpoint.mjs",
+          "source_blob_sha": "efa7a5041e4217a870fde6b69c155c48d54c0f8b",
+          "first_line": 48,
+          "last_line": 68,
+          "line_count": 21
+        },
+        {
+          "manifest_index_1_based": 73,
+          "path": "scripts/audit/verify-migration-baseline.mjs",
+          "source_blob_sha": "a944f4c45c75d429a60a07aad6411683f2536ccd",
+          "first_line": 1,
+          "last_line": 9,
+          "line_count": 9
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_3_COMPLETE_IMMUTABLE_GIT_BLOBS_PLUS_2_PRIOR",
+  "archived_json_parse": "PASS_1",
+  "pinned_live_parity": "C72_DRIFT_b830b83d34e336a663ccf785ae58547743246724_UNCREDITED_C73_EQUAL_a944f4c45c75d429a60a07aad6411683f2536ccd",
+  "findings": [
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 124,
+      "fact": "Archived 40 named cloud cases cover offline idempotence, owner isolation, slow-feed and advice but are not live provider/auth/privacy PASS",
+      "disposition": "NO_CURRENT_DEFECT_REPRODUCED_PRESERVE_DATA"
+    },
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 138,
+      "fact": "Archived Agtron/PERC eleven-case output covers explicit-roast precedence and product locality but not current original603 official site accuracy",
+      "disposition": "ISSUE33_OWNS_CURRENT_OFFICIAL_FACTS"
+    },
+    {
+      "severity": "PINNED_VS_LIVE_DRIFT",
+      "path": "scripts/audit/verify-commit-checkpoint.mjs",
+      "line": 57,
+      "fact": "Pinned only records commit subject; live includes whole message and pull-request common-ancestor source check",
+      "disposition": "DO_NOT_OVERWRITE_LIVE_FIX_LIVE_DRIFT_NOT_CREDITED"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/audit/verify-migration-baseline.mjs",
+      "line": 4,
+      "fact": "Pinned/local read-only migration guard instructs no edits to applied SQL; live same Git blob",
+      "disposition": "NO_SQL_MIGRATION_OR_PROVIDER_WRITE"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_5_TOTAL_NEW_AND_PRIOR",
+    "archived_json_parse": "PASS_1",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "current_status_readback": "UNAVAILABLE_EMPTY_FROM_CONNECTOR_NOT_USED_FOR_READY",
+  "release_queue_readback": "UNAVAILABLE_EMPTY_FROM_CONNECTOR_NOT_USED_FOR_READY",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 221,
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 147
+    },
+    "pinned": {
+      "manifest_index": 73,
+      "path": "scripts/audit/verify-migration-baseline.mjs",
+      "line": 10
+    }
+  }
+}
