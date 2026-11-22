@@ -1,3 +1,16 @@
+# Issue #509 R452 — pg_catalog function declarations 1921–2320/3162 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=0cdb1b109d5f13217727dba0528acd3ecc087ed8 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. First resolved live development 0cdb1b109d5f13217727dba0528acd3ecc087ed8, fetched immutable PREFLIGHT.md and independently matched Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f before other documents and connected provider tools. GitHub main cc237e457ab5674339506d3ffc327139ca559858; release/production 50e05054e7139d2e7a675b8e15ab71a7dd42ac81. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003. PRODUCTION READ ONLY.
+
+**NEW directly inspected provider declarations:** Complete exposed pg_get_functiondef() SQL DDL of **400** previously unreviewed pg_catalog functions ranks **1921–2320/3162**, **85918 total DDL characters**, each typed signature, exact OID, full text, MD5, 1–end character range, semantic family and conservative retained status recorded in append-only [R452a](../audits/issue509-r452a-pg-catalog-functions-ranks1921-2020-20261122.json), [R452b](../audits/issue509-r452b-pg-catalog-functions-ranks2021-2120-20261122.json), [R452c](../audits/issue509-r452c-pg-catalog-functions-ranks2121-2220-20261122.json), [R452d](../audits/issue509-r452d-pg-catalog-functions-ranks2221-2320-20261122.json). Languages {"internal":394,"sql":3,"c":3}. Evaluated exposed SQL-language wrappers for relation main-fork sizing, pg_sleep_for interval and pg_sleep_until timestamp conversions. Native C/internal compiled executable bodies are **UNVERIFIED**, not credited as full-source word-level inspection. Zero #267 code line credit.
+
+**Semantic dependency analysis:** 3 incoming language plpgsql links to plpgsql_call_handler, plpgsql_inline_handler and plpgsql_validator; three outgoing dependency links from those handlers to extension plpgsql. Typed core overloads, catalog definition reconstructors, replication origins/slots, WAL control, file interfaces, stat telemetry and resetters, advisory locks and session functions are not automatically obsolete just because they lack static dependency edges. No unsafe operational, file, WAL, replication, sleep or reset function executed. No reproduced DIC application defect, measured slowdown, drift proof or consumer-verified safe deletion in this range. Previously reviewed pg_depend and pg_shdepend coverage unchanged. No source/test/CI edits; new exact-source CI NOT_APPLICABLE (not PASS); READY/DEPLOYED not recertified, migration parity not applicable to native core routines. Full Supabase baseline **IN_PROGRESS**.
+
+**Exact next cursor:** pg_catalog function rank **2321/3162**, char 1; confirm identity/OID against live catalog. 157 separately tracked aggregates pending. No GitHub application/source/CI/queue changes, no production data/Auth/Storage/Edge/SQL or migrations, no deployment, backup, billing, schedule, notification or owner-decision change.
+
+---
+
 # Issue #509 R451 — full pg_catalog declarations 1521–1920/3162 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=fdb63255433ebe7c9684efa42447eb56e3dd2828 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
