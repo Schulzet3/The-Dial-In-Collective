@@ -79,7 +79,7 @@ test('full Node suite preserves the security corpus while parallelizing other fi
    if(slot%12===3||slot%8===4)return 1;
    return 0;
   }
-  if(original===1)return 1;
+  if(original===1)return slot%6===0?2:1;
   const quarter=slot%4;
   return quarter===0?(slot%16===0?2:0):quarter===1?1:2;
  };
@@ -94,18 +94,14 @@ test('full Node suite preserves the security corpus while parallelizing other fi
   'relocate only measured excess validate work to the two idle existing lanes');
  assert.ok(counts[0]>plan.parallel.length/4&&counts.every(x=>x>0),
   'preserve meaningful work in all three HIGH lanes; never empty or auto-discover');
- const previousOwner=i=>{
-  const original=i%3,slot=Math.floor(i/3);
-  if(original===0)return slot%6===0?2:slot%12===3?1:0;
-  if(original===1)return 1;
-  return slot%4===0?0:slot%4===1?1:2;
- };
- const previous=[0,1,2].map(lane=>plan.parallel.filter((_,i)=>previousOwner(i)===lane).length);
- const moved=plan.parallel.filter((_,i)=>previousOwner(i)===0&&shiftedOwner(i)!==0).length;
- assert.ok(moved>=30&&moved<=50,'bounded critical-tail transfer across existing lanes');
- assert.equal(previous[0]-counts[0],moved,'no unexpected validate removals');
- assert.ok(counts[1]>previous[1]&&counts[2]>previous[2],
-  'idle existing lanes absorb work without omissions');
+ const beforeCloudRebalanceOwner=i=>i%3===1?1:shiftedOwner(i);
+ const before=[0,1,2].map(lane=>plan.parallel.filter((_,i)=>beforeCloudRebalanceOwner(i)===lane).length);
+ const moved=plan.parallel.filter((_,i)=>beforeCloudRebalanceOwner(i)===1&&shiftedOwner(i)===2).length;
+ assert.ok(moved>=40&&moved<=50,'bounded measured cloud-to-approval transfer only');
+ assert.equal(before[1]-counts[1],moved,'all removed cloud files belong to approval');
+ assert.equal(counts[0],before[0],'do not transfer cloud tests to validate (measured slower)');
+ assert.equal(counts[2]-before[2],moved,'existing approval lane absorbs all moved files');
+ assert.equal(counts.reduce((a,b)=>a+b,0),plan.parallel.length);
  for(let i=0;i<plan.parallel.length;i++)assert.equal([0,1,2].filter(lane=>shiftedOwner(i)===lane).length,1,
   'single exact owner for full-suite file '+i);
  const legacy0=selectFullSuiteShard(plan,'0/2'),legacy1=selectFullSuiteShard(plan,'1/2');
