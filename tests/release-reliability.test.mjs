@@ -56,3 +56,23 @@ test('#2169 release event readback distinguishes true failure, running and claim
  assert.equal(validateReleaseTriggerReceipt({...args,consumed:true}).status,'CLAIMED_NETLIFY_UNVERIFIED');
  assert.equal(validateReleaseTriggerReceipt({...args,workflowRuns:[{...run,event:'pull_request'}]}).status,'BLOCKED');
 });
+
+
+test('#3347 isolated source accepts only exact dual-absence test-blob parity',()=>{
+ const head=B,merged=S,path='tests/unpublished-recommendation-feature.test.mjs';
+ const selected={...item,tests:[path+': scoped proof']};
+ const cases={mergedSha:merged,ciSourceSha:head,changedPaths:item.scope_paths,
+  checks:names.map(name=>({name,sha:head,conclusion:'success',status:'completed'})),
+  testPaths:[path]};
+ const sourcePresent='100644:'+'f'.repeat(40);
+ const bothAbsent=(sha,p)=>p===path?null:sourcePresent;
+ assert.equal(assessReadyEvidence(selected,{...cases,sourceObjectAt:bothAbsent}).ready,true,
+  'truly published-absent test paths have exact source parity, not a bypass');
+ for(const objectAt of [
+  (sha,p)=>p!==path?sourcePresent:sha===head?null:sourcePresent,
+  (sha,p)=>p!==path?sourcePresent:sha===merged?null:sourcePresent,
+  (sha,p)=>p!==path?sourcePresent:undefined,
+  (sha,p)=>p!==path?sourcePresent:sha===head?'100644:'+'a'.repeat(40):sourcePresent
+ ])assert.equal(assessReadyEvidence(selected,{...cases,sourceObjectAt:objectAt}).ready,false,
+  'any one-sided missing/unavailable/changed source must HOLD');
+});
