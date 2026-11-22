@@ -167,3 +167,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=07ee71084cfac00152600ba6bb17aff209880e4e 
 - Root cause: planReadyOnlyCandidate returns compact ready_items without state after checking queue state, but discoverReviewedRestoredStartupTests read selected.state and incorrectly rejected every real READY selection. Synthetic test passed an unprojected full queue row, masking this integration bug.
 - Exact fix: use the original immutable queue row state instead of compact planner field. Keep all selected source/issue/merge, pinned overlap, published and first-parent test blob proofs, other exact Git checks, five native candidate CI checks and Publish-only gate. Add unit regression for compact READY selected object and a TESTING queue that MUST HOLD.
 - Requires exact main controller CI and nonforce merge; then verify source receipt again. Do not label READY before frozen five exact candidate checks. No feature code, Auth, SQL, Netlify, member or secret changes.
+
+## November 22, 2026 — #3347 dual reviewed workflow-only candidate source guard [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Exact read-only startup source-proof run 44989382451 FAILED CLOSED: discoverReviewedWorkflowTestExclusions returns two reviewed tests (browser-install and #3667 fast-pr) when their changed workflows are restored to published bytes. The independent immutable validator still assumed exactly one test, causing a false HOLD for tests/fast-pr-check.test.mjs. Owner startup 1–5/#3347 nonpublishing authority only, no new Publish.
+- Fix: per-path compare against one of the TWO exact reviewed specs; require exact source blob, published absence, candidate absence and selected READY merge provenance for EACH. No unreviewed/extra test excluded, no waiver of five exact candidate-SHA checks, app/source privacy/offline/Auth/backup/test flow intact. Focused positive two-workflow test and altered byte / unowned third test negatives added.
+- Paths: scripts/release/ready-only-candidate.mjs, tests/ready-only-candidate.test.mjs, same-commit ops journal. Main PR/controller CI and nonforce merge required before retrying one read-only source receipt. Live application READY queue remains TESTING, no provider/Netlify/SQL/member mutation or release grant.
