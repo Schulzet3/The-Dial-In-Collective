@@ -54,6 +54,9 @@ export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],change
    let a,b;
    try{a=sourceObjectAt(tested,path);b=sourceObjectAt(mergedSha,path);}
    catch{errors.push('unreadable tested head or merged blob: '+path);continue;}
+   // A first-parent-deleted test is exactly absent from BOTH immutable refs.
+   // This is parity only for changed test provenance, never an owned runtime path.
+   if(a===null&&b===null&&!(item?.scope_paths||[]).includes(path))continue;
    if(typeof a!=='string'||!a||a!==b)
     errors.push('tested head differs from merged code/test blob: '+path);
   }
