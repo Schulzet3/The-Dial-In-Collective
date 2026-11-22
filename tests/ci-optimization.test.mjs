@@ -191,3 +191,18 @@ test('pinned Chromium cache preserves dependency installation and all browser ac
  assert.ok(browser.includes("if ! grep -q 'azure.archive.ubuntu.com'"));
  assert.ok(browser.includes('run: node scripts/audit/run-browser-qa.mjs'));
 });
+
+test('SQL release regression retains immutable source push CI and superseded-PR coalescing',()=>{
+ const sql=file('.github/workflows/isolated-sql-regression.yml');
+ const suffix="${{ github.event_name == 'push' && github.sha || 'pr' }}";
+ assert.ok(sql.includes('group: dic-isolated-sql-regression-${{ github.ref }}-'+suffix));
+ assert.ok(sql.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
+ for(const workflow of ['.github/workflows/cloud-beta-ci.yml','.github/workflows/cloud-regression.yml','.github/workflows/approval-continuity.yml']){
+  const current=file(workflow);
+  assert.ok(current.includes(suffix),'exact-source push check must not be canceled: '+workflow);
+  assert.ok(current.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
+ }
+ assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-sql-regression\.sh/);
+ assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-signed-http-regression\.sh/);
+ assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-backup-snapshot-regression\.sh/);
+});
