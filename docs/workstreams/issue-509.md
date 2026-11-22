@@ -1,3 +1,14 @@
+# Issue #509 R444b - duplicate source fix retracted; previous issue receipt takes precedence [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=b590b343db0a80dd15eeeebd89eaecc786e35beb preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Full preflight checked at immutable development b590b343db0a80dd15eeeebd89eaecc786e35beb, Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f independently fetched and matched. **CORRECTION of R444/R444a:** the withdrawn/unverified Community SQL defect is a *PREVIOUSLY KNOWN* production condition, not a new defect. #509 R366 explicitly says the same behavior was already addressed by `supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql` (existing Git blob `d629d2f0cbd6c9f291a8b4538340c1de549f04a1`), tracked by existing TESTING queue item `DIC-Q-509-community-withdrawn-recheck-guard`, and separately passed isolated PG17/JWT SQL CI 44632533924 on exact existing source, integrated commit a788b3e3. Its existing rollback-only regression is `supabase/tests/community_quality_integrity.sql`. Original production is **not patched**, and owner-only Publish remains required.
+
+This run mistakenly added an unnecessary duplicate forward migration `supabase/migrations/20261122084500_dic_community_withdrawn_recheck_guard.sql` and redundant SQL test `supabase/tests/community_withdrawn_verification_guard.sql`, which immediately caused genuine source-bound CI failures: SQL job 45004619631 correctly rejected `duplicate local migration name dic_community_withdrawn_recheck_guard`, and approval/validate 45004619713/45004619675 correctly held a missing release-queue intake. **Safe repair:** remove ONLY those newly added duplicate source files from CURRENT development tree, retain older correct migration/test/queue and all Git history unchanged; no new queue entry. Preserve R444 ledger of 500 newly reviewed `pg_depend` edges / 175,780 literal characters as VALID; the novel-bug/fix portion of that ledger and R444 journal is explicitly SUPERSEDED by this correction, with [append-only retraction receipt](../audits/issue509-r444b-duplicate-migration-retraction-20261122.json). Do not count the old bug as new; there is no new material owner risk or action.
+
+**Status:** full baseline IN_PROGRESS, cumulative `pg_depend` 2000/5414; next exact rank 2001 `pg_toast.pg_toast_17001_index` -> chunk_id, first character. Existing issue-509 Community guard remains TESTING, not READY/DEPLOYED; source-bound corrected commit CI must be checked. No live Supabase SQL/data/Auth/Storage/Edge, production, main/release, backup, billing, schedule or notification changes. Zero #267 code-line audit credit.
+
+---
+
 # Issue #509 R444a - SQL test portability correction [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=f9a24f91ad67e004dbe67f2741ef94f5bc4e6644 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 

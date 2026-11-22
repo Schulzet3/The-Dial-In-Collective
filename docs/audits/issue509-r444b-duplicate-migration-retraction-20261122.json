@@ -1,0 +1,47 @@
+{
+  "schema": "dic.issue509.audit-correction.v1",
+  "date_utc": "2026-11-22",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "b590b343db0a80dd15eeeebd89eaecc786e35beb",
+    "blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "superseded_claims": [
+    "R444 new Community SQL bug discovery",
+    "R444 newly required Community withdrawal migration",
+    "R444a new SQL regression needed"
+  ],
+  "verified_prior_ownership": {
+    "original_dev_migration": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+    "original_git_blob": "d629d2f0cbd6c9f291a8b4538340c1de549f04a1",
+    "queue_item": "DIC-Q-509-community-withdrawn-recheck-guard",
+    "current_queue_status": "TESTING",
+    "previous_issue_journal": "Issue #509 R366 confirmed the identical production behavior defect already fixed in development",
+    "prior_rollback_test": "supabase/tests/community_quality_integrity.sql",
+    "prior_test_blob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "prior_verified_sql_action_run": 44632533924,
+    "prior_verified_integrated_dev_commit": "a788b3e31c2e1f0d7921a52f67a9035d3eda5a6a",
+    "no_deploy": "Existing guard is production unapplied; independent READY source-isolation remains incomplete"
+  },
+  "accidental_duplicate": {
+    "migration": "supabase/migrations/20261122084500_dic_community_withdrawn_recheck_guard.sql",
+    "duplicate_source_blob": "e28f810a8e733c5f4be66d4df2ce3a9e0b7a47c6",
+    "regression": "supabase/tests/community_withdrawn_verification_guard.sql",
+    "regression_blob": "3aece2bfcc4ab3119937c9f8396e61e999fd8faa",
+    "commit_added": "f9a24f91ad67e004dbe67f2741ef94f5bc4e6644",
+    "followup_commit": "b590b343db0a80dd15eeeebd89eaecc786e35beb",
+    "evidence": "Existing same-named migration predates this run. GitHub CI SQL fails duplicate local migration name; approval and validate hold untracked migration in queue."
+  },
+  "resolution": "Remove only newly introduced redundant development migration and regression source from active tree in one nonforce correction commit. Preserve historical Git commits and append-only R444 dependency ledger. No new queue item because existing TESTING queue scope already correct. Do not attribute previously known bug as new. No production writes.",
+  "still_valid": {
+    "pg_depend_first": 1501,
+    "pg_depend_last": 2000,
+    "cumulative": 2000,
+    "total": 5414,
+    "reviewed_500_new_edges": true,
+    "next_rank": 2001
+  },
+  "source_bound_ci": "Await exact corrected commit checks; initial failed actions 45004619631, 45004619675, 45004619713 preserved as failures.",
+  "owner_notification": "No new owner action; previously known defect remains in pre-existing TESTING source."
+}
