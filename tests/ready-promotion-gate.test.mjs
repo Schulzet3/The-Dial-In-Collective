@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {setImmediate} from 'node:timers';
 import {readySelectionFingerprint,verifyReadyPromotion,READY_CERT_KIND,
  gitReadyAncestry,githubReadyPromotionReaders} from '../scripts/release/ready-promotion-gate.mjs';
 
