@@ -25,7 +25,7 @@ test('exact selected first-party, green processing separate from Swiss Water, no
  assert.deepEqual(dakotaSelectedSourceFailures(good(),html),[]);
 });
 for(const [label,mutate,htmlPatch] of [
- ['related product masquerades as H1',s=>{}, {88:'<main><h1>Other Blend</h1><section>701 Blend Medium Roast nutty cocoa lemongrass</section></main>'}],
+ ['related product masquerades as H1',()=>{}, {88:'<main><h1>Other Blend</h1><section>701 Blend Medium Roast nutty cocoa lemongrass</section></main>'}],
  ['recycled selected product title',s=>{s.records[0].current_fields.name='Another Blend'},{}],
  ['misclassified regular blend decaf',s=>{s.records[0].current_fields.decaffeination_method='Water Process'},{}],
  ['unsupported inferred origin is not evidence',s=>{s.records[1].current_fields.decaffeination_method='Sugar Process'},{}],
