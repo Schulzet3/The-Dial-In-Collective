@@ -7,6 +7,8 @@ on:
     paths:
       - 'scripts/audit/issue33-r394-dakota-check.mjs'
       - 'tests/coffee-issue33-r394-dakota.test.mjs'
+      - 'tests/coffee-issue33-r394-dakota-source-decaf.test.mjs'
+      - 'src/server/coffee-direct-product-prose.mjs'
       - '.github/workflows/issue33-r394-dakota-source.yml'
   push:
     branches:
@@ -29,7 +31,7 @@ jobs:
         with:
           node-version: '22'
       - name: Focused synthetic positive and adversarial guards
-        run: node --test tests/coffee-issue33-r394-dakota.test.mjs
+        run: node --test tests/coffee-issue33-r394-dakota.test.mjs tests/coffee-issue33-r394-dakota-source-decaf.test.mjs
       - name: Guarded HTTPS exact selected current first-party fetch and existing parser/UI
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '88,90'
