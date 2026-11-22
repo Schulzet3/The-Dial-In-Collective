@@ -1,3 +1,10 @@
+# Issue #509 R448d — append-only sort-field erratum and next provider route [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=728f475747cc2a0822457081f37f0d790f88ae98 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Preflight verified first at immutable development 728f475747cc2a0822457081f37f0d790f88ae98 / blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; scoped head rechecked 7d2002029606213338365dce86e188db0c9930d4. R448a/b/c JSON field `provider.sort` mistakenly says `refobj`; **the executed SQL, complete per-edge literals, source hashes and actual sort all use `refobjid`**, not `refobj`. Preserved all original append-only records and published [precise R448d metadata correction](../audits/issue509-r448d-pg-depend-sort-field-erratum-20261122.json); pg_depend 5414/5414 edge-route completeness remains valid, full provider baseline IN_PROGRESS. New read-only independent catalog inventory reveals unreviewed `pg_shdepend` **1,002 edges**. Next exact cursor: numeric ordered `(dbid,classid,objid,objsubid,refclassid,refobjid,deptype)`, rank **1/1002**, pg_database OID 5 `postgres` -> pg_authid OID 16388 role `postgres`, deptype `o`, char 1. Do not access Auth user identities. No application/provider/release writes or new READY assertion.
+
+---
+
 # Issue #509 R448 — completed complete catalog pg_depend dependency-edge route, ranks 4001–5414 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=728f475747cc2a0822457081f37f0d790f88ae98 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
