@@ -47,3 +47,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d 
 - Defer nonessential service-worker registration to next event-loop turn instead of performing registration before auth SDK setup; registration still occurs while identity is pending, remains nonblocking, preserves offline worker and update behavior.
 - Focused startup regression cases cover timeout, late successful paint, failure paint, and timer cancellation; existing cloud-fast-start and offline/security CI suites remain required. No production publication.
 - Required: exact-head CI, nonforce merge, readback and queue reconciliation. NOT READY until proven.
+
+## CI repair: asset graph and queue intake — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Exact PR head 52ff76a3be24f3dfd12ec37297edbec8183491df: approval FAILED because newly added production module lacked queue intake; mobile-browser-qa FAILED because build allowlist omitted the imported module. Neither failure is counted as PASS.
+- Fix: explicitly include startup-recovery.js in pinned public shell build asset inventory and track all three deployable paths in TESTING queue item DIC-Q-455-startup-recovery-deferred-worker. No test/build bypass. New exact-head CI required.

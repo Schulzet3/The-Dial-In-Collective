@@ -17999,6 +17999,30 @@
       ],
       "notes": "SAFE display/action affordance only; no numeric, equipment-schema, historical notes/measurements, taste, Community, privacy/RLS, feed-science policy or deployment change.\nR433 PR #3657 exact source/head/merged checks verified, queue remains TESTING pending independent #3347 five-check frozen candidate. Documentation reconciliation did not rerun app tests or alter product. Original PR-head pending checks superseded by current evidence.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-startup-recovery-deferred-worker",
+      "issue": 455,
+      "pr": 3666,
+      "title": "Neutral stalled-startup recovery, deferred nonessential worker, and focused startup regression coverage",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/startup-recovery.js",
+        "build_cloud.mjs"
+      ],
+      "tests": [
+        "tests/cloud-startup-recovery.test.mjs",
+        "tests/cloud-fast-start.test.mjs",
+        "tests/cloud-auth-startup-verification.test.mjs"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head CI and development merge pending"
+      ],
+      "owner_source": "Owner explicitly approved startup items 3–5 on 2026-11-21",
+      "notes": "No publication authorization; source-isolated candidate certification still required."
     }
   ],
   "history": [
