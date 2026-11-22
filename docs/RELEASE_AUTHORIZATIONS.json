@@ -1554,7 +1554,7 @@
       "id": "DIC-20261122-ADMISSION-READY02",
       "tested_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
       "owner_approved": true,
-      "status": "APPROVED",
+      "status": "SUPERSEDED",
       "production_branch": "release/production",
       "max_publications": 1,
       "approved_at_utc": "2026-11-22T17:31:18.563Z",
@@ -1569,6 +1569,30 @@
         "Candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 official native GitHub push checks: approval run45049518049 SUCCESS; isolated SQL run45049518047 SUCCESS; cloud-tests AND mobile-browser-qa run45049518003 SUCCESS; validate run45049517997 SUCCESS. All exact source and branch release-candidates/ready3347-e464006d27b2fd691685, five named completed success, no PR/other-SHA run reused.",
         "Verified one frozen source tree b982d3a042b0e37f7252b8a25ef2a64471d63d7d; QA repair source-bound exclusion asserts exact published bytes. The admitted owner/session, cross-owner, local outbox and revocation tests remain active. No app data schema/migration/Edge functions changed versus production; only approved site/cloud/main.js and site/cloud/client.js.",
         "Verified non-destructive rollback baseline GitHub encrypted backup run44920698063 SUCCESS, artifact14713443972 ZIP 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, matched private Drive 1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn with only private folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf and unshared owner metadata; snapshot started 2026-11-21T15:44:05Z, archive 15:44:25Z and owner-private delivered/verified 15:44:46Z. Most recent read-only data write observed Nov15 not claimed as fresh live DB read. Zero SQL changes."
+      ],
+      "superseded_reason": "Nov22 original main controller request ac77cfa1/Actions45050060516 failed before claim due legacy mixed-source CI parity; release ref and ledger unchanged. Same owner-approved item/source transferred to independent fresh ID; old authorization permanently disabled, never retrigger.",
+      "superseded_by": "DIC-20261122-ADMISSION-READY03"
+    },
+    {
+      "id": "DIC-20261122-ADMISSION-READY03",
+      "tested_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-22T17:39:21.797Z",
+      "expires_at_utc": "2026-11-23T03:39:21.797Z",
+      "approval_source": "Owner Nov22, 2026 current chat explicit 'Build it, check it, implement it, deploy it. You have my approval.' Single feature/one release only. Recovery from original failed-before-claim request DIC-20261122-ADMISSION-READY02 with no production claim, same frozen source; not a new product/release authorization.",
+      "scope": "ONE recovery publication of the SAME immutable certified #3781 READY source d4af1c4e13d1babe6f10d277d5243582eb798c56 and EXACT selected queue ID DIC-Q-3781-returning-session-background-admission after FIRST controller request DIC-20261122-ADMISSION-READY02 failed-before-claim. Original grant SUPERSEDED in this same-commit source, do not replay. No other items, SQL, account records, provider writes, subscriptions or future publications. Official frozen native five-check SUCCESS, main acceptance 45050550983 SUCCESS, new main one-command controller request, Git-connected Netlify one build, actual postflight.",
+      "approved_ready_item_ids": [
+        "DIC-Q-3781-returning-session-background-admission"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "Candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 official native GitHub push checks: approval run45049518049 SUCCESS; isolated SQL run45049518047 SUCCESS; cloud-tests AND mobile-browser-qa run45049518003 SUCCESS; validate run45049517997 SUCCESS. All exact source and branch release-candidates/ready3347-e464006d27b2fd691685, five named completed success, no PR/other-SHA run reused.",
+        "Verified one frozen source tree b982d3a042b0e37f7252b8a25ef2a64471d63d7d; QA repair source-bound exclusion asserts exact published bytes. The admitted owner/session, cross-owner, local outbox and revocation tests remain active. No app data schema/migration/Edge functions changed versus production; only approved site/cloud/main.js and site/cloud/client.js.",
+        "Verified non-destructive rollback baseline GitHub encrypted backup run44920698063 SUCCESS, artifact14713443972 ZIP 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, matched private Drive 1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn with only private folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf and unshared owner metadata; snapshot started 2026-11-21T15:44:05Z, archive 15:44:25Z and owner-private delivered/verified 15:44:46Z. Most recent read-only data write observed Nov15 not claimed as fresh live DB read. Zero SQL changes.",
+        "Original chat controller run45050060516 FAILED before claim on legacy READY-item provenance; private grant -02 unused and SUPERSEDED, release/production still 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, consumption ledger unclaimed. Main evidence provenance reconciliation validated by official Actions 45050550983 ALL SUCCESS. Frozen candidate d4 five exact native CI success unchanged, same backup/no DB migrations."
       ]
     }
   ],
