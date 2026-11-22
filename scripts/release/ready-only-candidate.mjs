@@ -130,7 +130,7 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  return sorted([...new Set(restored)]);
 }
 
-// Only these exact 13 reviewed post-published SQL test objects may be
+// Only these exact reviewed post-published SQL test objects may be
 // restored/removed with their separately TESTING migration. No READY-owned
 // SQL test is eligible; hash or provenance drift remains a HOLD.
 export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
@@ -224,6 +224,20 @@ export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
     "unpublishedBlob": "9ae348244ea6545b208e8ad1fbb76dff652b7da4",
     "sourceMerge": "8b4e4e3edc42c821aa9f6858e62b20fdd4300ef8",
     "migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+  },
+  {
+    "path": "supabase/tests/admin_account_delete_completed_receipt.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "5a9fc2b8d1c61d8b7c885d8bfec6f128160c35c2",
+    "sourceMerge": "c0980ab013e6d9193a7a6c8fd0feeca3a5cb6aba",
+    "migration": "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
+  },
+  {
+    "path": "supabase/tests/personal_family_refresh_single_pass_post.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "a04c6e40693577caec79d2678d155786bcfd26da",
+    "sourceMerge": "c0e0963ce348e4ad0f499acf67f081efefe1e977",
+    "migration": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
   },
   {
     "path": "supabase/tests/admin_shot_delete_family_refresh.sql",
@@ -331,6 +345,9 @@ export const REVIEWED_STARTUP_MIXED_TESTS=Object.freeze({
  runtime:'site/cloud/main.js',
  cleanRuntime:'fe9124fa1deeb84d7a41659c066f517f6311039e',
  tests:Object.freeze([
+  Object.freeze({path:'scripts/audit/issue33-original603-focused-source-review.mjs',
+   published:'49b50fa3c1a1a07e61943ad98bbb2cc31c119fac',
+   unready:'74d78a80b72305d67a9d346e60fc5fe977de2031'}),
   Object.freeze({path:'tests/cloud-draft-recommendation-context.test.mjs',
    published:'a2218f85796f67d298b0ef5d06a980eaa92860ed',
    unready:'256646aa00684386e2af1efdc3b5d036c7d5fca3'}),
@@ -470,6 +487,11 @@ const REVIEWED_UNREADY_SUPPORT=Object.freeze({
  'supabase/tests/member_approval_finish_null_receipts.sql':{
    itemId:'DIC-Q-509-member-approval-null-receipt-guard',
    issue:509, requiredRuntime:'supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql'
+ },
+ 'scripts/audit/issue33-r374-original41-check.mjs':{
+  itemId:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',issue:33,
+  requiredRuntime:'src/server/coffee-pagefly-selected-h3.mjs',
+  sourceBlob:'6b47cfa4736189d91df71ed6867f9455065ce4b3'
  },
  'scripts/audit/issue33-shopify-pagefly-h3.mjs':{
   itemId:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',issue:33,
