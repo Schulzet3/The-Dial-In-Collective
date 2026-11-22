@@ -51,7 +51,7 @@ for(const n of [119,123]){
    if(!/Producer\s*:\s*Miriam Monteiro de Aguiar/i.test(own)||
       !/Process\s*:\s*Natural/i.test(own)||!/We Taste\s*:\s*Hazelnut/i.test(own))
      failures.push('token_selected_direct_specs_missing_123');
-   if(!/Miriam Monteiro de Aguiar/i.test(facts.producer||'')||
+   if(facts.producer!=='Miriam Monteiro de Aguiar'||
       facts.process!=='Natural')
      failures.push('token_direct_producer_or_process_not_retained_123');
    if(!/Hazelnut/i.test(facts.tasting_notes||''))

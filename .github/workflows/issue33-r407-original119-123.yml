@@ -5,12 +5,14 @@ on:
     paths:
       - '.github/workflows/issue33-r407-original119-123.yml'
       - 'scripts/audit/issue33-r407-original119-123-check.mjs'
+      - 'tests/coffee-issue33-r408-producer-farm-caption.test.mjs'
       - 'docs/workstreams/ops-issue33-r407-epiphany-favor-original119-123-20261122.md'
   push:
     branches: [development/backend-foundation]
     paths:
       - '.github/workflows/issue33-r407-original119-123.yml'
       - 'scripts/audit/issue33-r407-original119-123-check.mjs'
+      - 'tests/coffee-issue33-r408-producer-farm-caption.test.mjs'
 permissions:
   contents: read
 jobs:
@@ -26,7 +28,7 @@ jobs:
         with:
           node-version: '22'
       - name: Existing bounded blend and hostile selected-product regressions
-        run: node --test tests/coffee-issue33-r138-118.test.mjs tests/coffee-issue33-r142-120.test.mjs
+        run: node --test tests/coffee-issue33-r138-118.test.mjs tests/coffee-issue33-r142-120.test.mjs tests/coffee-issue33-r408-producer-farm-caption.test.mjs
       - name: Exact checked out source SHA
         env:
           DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
