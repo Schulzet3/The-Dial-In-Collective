@@ -12,3 +12,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef 
 ## Concurrent startup deduplication
 - Same-session auth callbacks, visibility and online events now share one in-flight admission/connect operation. Different owner/epoch starts independently, avoiding stalled prior-user requests.
 - Added focused concurrency and account-switch regressions; exact updated-head CI pending. No release or publication.
+
+## Local-cache fault tolerance
+- IndexedDB cache read/list failures no longer prevent a freshly admitted account from attempting authoritative cloud sync. Server admission still precedes all cache reads.
+- Added explicit damaged-cache and admission-order regression tests. Updated-head CI required before merge/READY.

@@ -64,3 +64,28 @@ test('a different owner never waits on the previous owner admission',async()=>{
  gate.resolve({admitted:true,admin:false});await old;
  assert.equal(app.identity.id,'new-owner');
 });
+
+test('local cache failure does not prevent authoritative sync after admission',async()=>{
+ let syncs=0;
+ const app=new CloudApp({async status(){return {admitted:true,admin:false};}},{
+  async readCache(){throw new Error('IndexedDB temporarily unavailable');},
+  async list(){return [];}
+ });
+ app.identity={id:OWNER};app.render=()=>{};
+ app.sync=async()=>{syncs++;};
+ await app.connect();
+ assert.equal(syncs,1);
+ assert.equal(app.status.admitted,true);
+});
+test('cache lookup never begins before server admission finishes',async()=>{
+ const gate=deferred();let reads=0;
+ const app=new CloudApp({async status(){return gate.promise;}},{
+  async readCache(){reads++;return null;},async list(){return [];}
+ });
+ app.identity={id:OWNER};app.render=()=>{};app.sync=async()=>{};
+ const task=app.connect();
+ await Promise.resolve();
+ assert.equal(reads,0);
+ gate.resolve({admitted:true,admin:false});await task;
+ assert.equal(reads,1);
+});

@@ -304,10 +304,19 @@ class CloudApp {
    // Once the server has admitted this owner, paint their saved workspace
    // before queued writes, the full cloud read and Community review fetch.
    // This cache is never an authorization token or shared across accounts.
-   const [cache,pending]=await this.inSession(()=>Promise.all([
-    this.store.readCache(user.id),this.store.list(user.id)
-   ]));
+   // A damaged/unavailable local cache must not prevent an admitted
+   // member from reaching the authoritative cloud read.
+   let startupCache=null;
+   try{
+    startupCache=await this.inSession(()=>Promise.all([
+     this.store.readCache(user.id),this.store.list(user.id)
+    ]));
+   }catch(err){
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(isAccessDenied(err))throw err;
+   }
    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+   const [cache,pending]=startupCache||[];
    if(cache?.owner===user.id&&cache.snapshot){
     this.raw=cache.snapshot;this.pending=pending;
     this.state=applyPending(hydrate(this.raw),this.pending);
