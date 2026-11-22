@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,assertExactCandidateStagedPaths,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
- assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
+ assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,discoverReviewedRestoredStartupTests,REVIEWED_STARTUP_MIXED_TESTS,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -43,6 +43,39 @@ test('#3347 overlapping workflow-only and unfinished-test path is counted once, 
   /staging commit changes unrelated paths/,'untracked source must still fail closed');
  assert.throws(()=>assertExactCandidateStagedPaths([...actual,duplicate],...groups),
   /staging commit changes unrelated paths/,'duplicate actual diff must be rejected');
+});
+test('#3347 startup coupled Log Shot suites use only proven published-source test blobs',()=>{
+ const s=REVIEWED_STARTUP_MIXED_TESTS;
+ const selected={...one,id:s.id,issue:455,state:'READY',merged_source_sha:s.merge,
+  scope_paths:[s.runtime,'build_cloud.mjs','site/cloud/startup-recovery.js']};
+ const unready={...unfinished,id:'DIC-Q-455-r381-copy-control',issue:455,
+  state:'TESTING',scope_paths:[s.runtime]};
+ const queue={...q,items:[selected,unready]};
+ const objects=new Map([
+  [s.merge+':'+s.runtime,'100644:'+s.cleanRuntime],
+  [B+':'+s.runtime,'100644:'+'f'.repeat(40)]
+ ]);
+ for(const item of s.tests){
+  objects.set(A+':'+item.path,'100644:'+item.published);
+  objects.set(B+':'+item.path,'100644:'+item.unready);
+  objects.set(s.merge+':'+item.path,'100644:'+item.published);
+  objects.set(s.merge+'^:'+item.path,'100644:'+item.unready);
+ }
+ const sourceObjectAt=(ref,path)=>objects.get(ref+':'+path)??null;
+ const props={queue,pinnedReadyPaths:[s.runtime],publishedSourceSha:A,
+  developmentSourceSha:B,sourceObjectAt,selectedReadyItems:[selected]};
+ assert.deepEqual(discoverReviewedRestoredStartupTests(props),s.tests.map(x=>x.path).sort());
+ assert.deepEqual(discoverReviewedRestoredStartupTests({...props,selectedReadyItems:[]}),[]);
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,pinnedReadyPaths:[]}),
+  /mixed-file provenance/);
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,queue:{...queue,items:[selected]}}),
+  /mixed-file provenance/);
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,sourceObjectAt:(ref,path)=>
+  ref===B&&path===s.tests[0].path?'100644:'+'0'.repeat(40):sourceObjectAt(ref,path)}),
+  /unreviewed Git blob/);
+ assert.throws(()=>discoverReviewedRestoredStartupTests({...props,sourceObjectAt:(ref,path)=>
+  ref===s.merge+'^'&&path===s.tests[1].path?'100644:'+'1'.repeat(40):sourceObjectAt(ref,path)}),
+  /first-parent drift/);
 });
 test('stage only selected READY source and restore unfinished paths to published bytes',()=>{
  const plan=planReadyOnlyCandidate(q,opts);
