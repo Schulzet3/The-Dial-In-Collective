@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13CK",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CJ-20261122.json",
+  "development_prewrite_sha": "e6c092bc71653d3014c93e2da0d4123029cff322",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "review_method": "DIRECT_PER_LINE_AI_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-14-43-20261122-V13CK.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 14,
+          "last_line": 43,
+          "line_count": 30,
+          "whole_git_blob_parity": "PASS"
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 79,
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "source_blob_sha": "22b4cd101006130513b45c6c5e932b5543ca8141",
+          "first_line": 54,
+          "last_line": 65,
+          "line_count": 12,
+          "whole_git_blob_parity": "PASS"
+        },
+        {
+          "manifest_index_1_based": 80,
+          "path": "scripts/pwa/service-worker.template.txt",
+          "source_blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+          "first_line": 1,
+          "last_line": 18,
+          "line_count": 18,
+          "whole_git_blob_parity": "PASS"
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "source_blob_parity": "PASS_THREE_COMPLETE_GIT_BLOBS",
+  "archived_json_parse": "PASS_F222",
+  "source_remediation": "NONE_CURRENT_DEFECT_REPRODUCED",
+  "not_tested": [
+    "Node22",
+    "lint",
+    "build",
+    "browser",
+    "mobile",
+    "offline",
+    "SQL",
+    "Auth",
+    "RLS",
+    "original603",
+    "performance",
+    "Netlify provider"
+  ],
+  "next": {
+    "frozen": {
+      "index_1_based": 222,
+      "line_1_based": 44
+    },
+    "pinned": {
+      "index_1_based": 80,
+      "line_1_based": 19
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED"
+}
