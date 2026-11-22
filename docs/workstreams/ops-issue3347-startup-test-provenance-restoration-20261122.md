@@ -26,3 +26,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 
 - Provisional source proof 44989382451 FAILED CLOSED: staging identified two reviewed workflow-only test exclusions but candidate validator hardcoded its prior sole test. It rejected the second fast-pr-check test independently of startup code. No candidate READY/deployment.
 - Correct validator to explicitly select either of two reviewed immutable Git test path/blob/original workflow tuples, independently require old workflow restoration, absence from candidate and last-published, exact development blob and no selected merge touching test. New adversarial tuple coverage. Preserve five official candidate jobs, Auth, offline, private members and owner-only Publish. No provider/Netlify/DB/member writes.
+
+## 2026-11-22 — update two text-only reject-message expectations without changing guard [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Actual #3695 source-only PR-head controller validate run 44989527594 FAILED ONE regression because an existing adversarial fixture asserted previous message text for the strict byte-pinned workflow-only test exclusion. New source validator correctly rejected both stale/unknown Git blobs with renamed, clearer error message. Update ONLY the two regex expected message strings, not the tested rejection/feature behavior. All original failures still held, five candidate jobs still required. No production/provider/SQL/Auth/member writes.
