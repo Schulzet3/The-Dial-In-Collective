@@ -175,3 +175,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f 
 - Owner-approved startup 1–5 and #3347 nonpublishing READY repair. Main base 797a2bbbf82083c46ac1c56a066cdee4e8306add; dev ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f. Existing candidate d505fb50 validate 44988381095 FAILED fourteen unrelated postpublished/unready tests; source-only receipt 44988817244 PASS does not make candidate READY. No deployment/grant.
 - New exact reviewed test provenance: selected startup main.js pinned to clean PR3675; preserve original published whole-file tests when their exact newer CI, member approval broker and unfinished SQL dependencies are restored. Exclude only byte-verified new tests of excluded workflow or unfinished coffee parser, both absent from published. Every selected READY merge, exact test Git blob and restored dependency is verified before inclusion/exclusion; all other tests unchanged. Full five candidate checks and publication grant unchanged.
 - This source-contract commit is not final until stage caller, focused adversarial tests and controller CI pass. No provider, production, member or DB changes.
+
+## November 22, 2026 UTC — exact READY stage restore wiring [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ec8e4b57d8a7d76bef072cc0bba1cb2cdce62e8f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Same strict #3347 source-only staging helper now receives independently computed restored runtime and workflow inventories when selecting exact published candidate test blobs. No changes to the READY selected feature source, manifest schema, Git provenance, Auth, published source, or GitHub/provider releases. No tests skipped by workflow. Phase 2 of nonpublishing source CI fix; exact main acceptance required.

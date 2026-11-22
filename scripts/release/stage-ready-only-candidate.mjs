@@ -79,7 +79,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   developmentSourceSha,sourceObjectAt,selectedReadyItems:plan.ready_items
  });
  const restoredStartupTests=discoverReviewedRestoredStartupTests({queue,
-   pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
+   pinnedReadyPaths:plan.pinned_ready_paths,restoredPaths:plan.restored_paths,
+   restoredWorkflows:unpublishedWorkflows,publishedSourceSha,
    developmentSourceSha,sourceObjectAt,selectedReadyItems:plan.ready_items});
   const restoredTests=[...restoredSqlTests,...restoredR232Tests,...restoredAdminTests,
    ...restoredStartupTests].sort();
