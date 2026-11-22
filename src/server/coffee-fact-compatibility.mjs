@@ -114,24 +114,6 @@ export function withoutRepeatedCoffeeOriginSuffix(value){
  if(typeof value!=='string'||value.length>220)return value;
  const parts=value.split(/\s*,\s*/u).map(p=>p.trim());
  if(parts.length<3||parts.length>7||parts.some(p=>!p))return value;
- // A current product may print the same country in a broad compass
- // region and again after an exact named locality ("North Eastern Brazil,
- // Minas Gerais, Brazil"). Avoid a contradictory joined display while
- // retaining the verbatim original seller claim in source_facts. Only remove
- // the duplicate directional country for an exact three-part identity and
- // one country explicitly repeated on both ends.
- if(parts.length===3){
-  const prefix=/^(?:(?:north|south)\s*(?:east|west)(?:ern)?|(?:north|south)(?:ern)?|(?:east|west)(?:ern)?)\s+(.+)$/iu.exec(parts[0]);
-  const country=coffeeOriginParts(parts[2]);
-  const head=prefix?coffeeOriginParts(prefix[1]):[];
-  const locality=parts[1];
-  if(prefix&&country.length===1&&knownCountries.has(country[0])&&
-   head.length===1&&head[0]===country[0]&&
-   /^[\p{L}\p{M}][\p{L}\p{M}\s'’.-]{2,65}$/u.test(locality)&&
-   !coffeeOriginParts(locality).some(p=>knownCountries.has(p)||broadCountries.has(p))&&
-   !/\b(?:blend|mixture|coffee|roast|origin|process|washed|natural)\b/iu.test(locality))
-   return locality+', '+parts[2];
- }
  const countries=parts.map((p,i)=>knownCountries.has(coffeeOriginParts(p)[0])&&coffeeOriginParts(p).length===1?i:-1)
   .filter(i=>i>=0);
  if(countries.length!==1)return value;
