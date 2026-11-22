@@ -1,3 +1,19 @@
+# Issue #509 R440 — read-only pg_depend full edge semantics ranks 1–500/5414 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3741ba6a2876a3e11c85992fbe0c9009fbb8f58e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory preflight fetched at immutable GitHub development 3741ba6a2876a3e11c85992fbe0c9009fbb8f58e; GitHub file blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f independently re-fetched byte-for-byte before other documents/provider reads. Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY / PostgreSQL 17.11.0.003; **strict production read-only**.
+
+**Substantive new route:** directly inspected all 500 literal pg_depend dependency edges in numeric catalog ordering (classid,objid,objsubid,refclassid,refobjid,refobjsubid,deptype), **ranks 1–500 of 5,414**, 148,210 full catalog literal characters. Complete per-edge source text, GitHub-retained MD5, precise 1–end character range, object and reference identities, semantic purpose and verdict recorded in append-only [R440 ledger](../audits/issue509-r440-pg-depend-ranks1-500-20261122.json), source development SHA 3741ba6a2876a3e11c85992fbe0c9009fbb8f58e. Verdict counts: {"RETAIN_MANAGED_DEFAULT_ACL":24,"RETAIN_AUTO_ARRAY_TYPE":234,"RETAIN_COMPOSITE_ROW_TYPE":214,"RETAIN_SCHEMA_TYPE":20,"RETAIN_EXTENSION_OWNED_TYPE":8}.
+
+**Independent reference checks:** 500/500 existing type/default-ACL sources, zero broken composite-table links, zero unexpected generated-array element references; 8 extension-owned dependencies retained. These 500 are structural PostgreSQL type and default privilege dependencies, not removable DIC dead code. public.shots and other application row types have actual table/type owners; no deletion or rename supported. No reproduced source/Edge defect, provider drift or measured query bottleneck in this scope. Database native bodies, remaining catalog/Edge/provider definitions and provider-only controls **UNVERIFIED**. #267 code-line credit zero.
+
+No GitHub source/test/CI edits; new exact-source CI **NOT_APPLICABLE, not PASS**. No production SQL/data/Auth/Storage/Edge/config writes, migration, publication, backup or release change; READY/DEPLOYED not newly asserted. Overall Supabase baseline **IN_PROGRESS**.
+
+**Exact next cursor:** pg_depend rank **501/5414**, object pg_type OID **18376** type shot_notes[] (objsubid=0) -> pg_type OID **18377** type shot_notes (refobjsubid=0), deptype **i**, character 1. Resume provider semantic review at next unreviewed edge; existing hourly schedule and owner-action-only alerts unchanged. No owner decision required.
+
+---
+
 # Issue #509 R439 — completed positive pg_attribute definitions 3281–4181/4181 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=ff7de4890beab26785ee1d3ce934d401d1b348bf preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
