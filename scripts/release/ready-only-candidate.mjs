@@ -8,6 +8,17 @@ const SHA=/^[a-f0-9]{40}$/;
 const ITEM=/^DIC-Q-[1-9][0-9]*(?:-[a-z0-9-]+)?$/;
 const sorted=items=>[...items].sort();
 const equal=(a,b)=>JSON.stringify(sorted(a))===JSON.stringify(sorted(b));
+// One file can be both a reviewed workflow-only and an issue-scoped unready
+// test. Both proofs stay mandatory, but Git's changed-path inventory is a SET.
+export function assertExactCandidateStagedPaths(actual,...provenanceGroups){
+ if(!Array.isArray(actual)||provenanceGroups.some(g=>!Array.isArray(g)))
+  throw Error('Isolated READY candidate HOLD: candidate changed-path provenance unavailable');
+ const expected=sorted([...new Set(provenanceGroups.flat())]);
+ if(!equal(actual,expected))
+  throw Error('Isolated READY candidate HOLD: Candidate staging commit changes unrelated paths or lacks same-commit journal');
+ return true;
+}
+
 export const CANDIDATE_RECEIPT_PATH='docs/RELEASE_CANDIDATE.json';
 export const CANDIDATE_JOURNAL_PATH='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 export const CANDIDATE_KIND='DIC-READY-ONLY-SOURCE-1';
@@ -879,9 +890,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...restoredTests,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
- if(!equal(stagedCommitChangedPaths||[],allowed))
-  reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
+ // Preserve every provenance check above; count a doubly qualified path once.
+ assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
+  plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
+  excludedTests,workflowOnlyTests,frozenWorkflows,
+  [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('Unready file was not exactly restored to published bytes: '+path);

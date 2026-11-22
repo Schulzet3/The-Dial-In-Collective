@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
+import {planReadyOnlyCandidate,validateReadyOnlyCandidate,assertExactCandidateStagedPaths,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
@@ -29,6 +29,21 @@ const validate={manifest,publishedSourceSha:A,developmentHead:B,candidateSha:C,
  developmentDriftPaths:[],queueContentMatches:true,candidateBranch:manifest.candidate_branch,
  isAncestor:ancestor,sourceObjectAt:(sha,path)=>path==='site/card.js'?(sha===A?'old':'new'):
   (sha===B?'unfinished':'published')};
+test('#3347 overlapping workflow-only and unfinished-test path is counted once, never waived',()=>{
+ const duplicate=REVIEWED_WORKFLOW_TEST.path;
+ const groups=[
+  ['site/unfinished.js'],[duplicate],[duplicate],
+  [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]
+ ];
+ const actual=[...new Set(groups.flat())];
+ assert.equal(assertExactCandidateStagedPaths(actual,...groups),true);
+ assert.throws(()=>assertExactCandidateStagedPaths(actual.filter(p=>p!==duplicate),...groups),
+  /staging commit changes unrelated paths/,'missing test must still fail closed');
+ assert.throws(()=>assertExactCandidateStagedPaths([...actual,'site/unrelated.js'],...groups),
+  /staging commit changes unrelated paths/,'untracked source must still fail closed');
+ assert.throws(()=>assertExactCandidateStagedPaths([...actual,duplicate],...groups),
+  /staging commit changes unrelated paths/,'duplicate actual diff must be rejected');
+});
 test('stage only selected READY source and restore unfinished paths to published bytes',()=>{
  const plan=planReadyOnlyCandidate(q,opts);
  assert.equal(plan.ready,true,plan.errors.join('; '));
