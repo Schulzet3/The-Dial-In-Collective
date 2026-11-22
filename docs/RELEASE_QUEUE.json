@@ -18005,7 +18005,7 @@
       "issue": 455,
       "pr": 3666,
       "title": "Neutral stalled-startup recovery, deferred nonessential worker, and focused startup regression coverage",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "ffbf4656de2969326988d7b0ac0a21c3117575a6",
       "scope_paths": [
         "site/cloud/main.js",
@@ -18031,14 +18031,13 @@
         44987142712,
         44987142710,
         44987142716,
-        44987142714
+        44987142714,
+        44988817244,
+        44987358080
       ],
-      "blockers": [
-        "#3347 independently frozen startup-only publishable candidate, full source/test/workflow isolation and five exact candidate-SHA successful jobs have not been certified. TESTING, not READY.",
-        "The current working site/cloud/main.js contains seven separate unfinished #455 modifications; the standalone clean ancestor ffbf4656 must be pinned, not current development main.js. Preserve all other unready source/tests in development."
-      ],
+      "blockers": [],
       "owner_source": "Owner explicitly approved startup items 3–5 on 2026-11-21",
-      "notes": "No publication authorization; source-isolated candidate certification still required.\n2026-11-22 verified: owner startup changes 1–5 were nonforce merged by PR #3658 (8868768e), #3660 (cef6e4a9), #3661 (e4190258) and final #3666 (c9d86f46). PR #3666 head f8c565532653fa0ba96986c40d1f2c0ce60835d8 has actual validate/cloud/mobile/approval/SQL/security jobs COMPLETED SUCCESS. Exact merged push c9d86f46 has validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 SUCCESS; SQL/security not triggered on merged push, reuse unchanged PR-head source only. Current development source/main, public recovery helper, build and focused tests match tested head Git blobs byte-for-byte. Source implementation VERIFIED; release READY candidate NOT VERIFIED. Do not confuse with original failed pre-fix heads or skipped original603.\n2026-11-22 publication-safe source isolation: PR #3675 exact final tested head f31a752c passed validate 44987142726, cloud+real Chromium 44987142712, approval 44987142710, SQL 44987142716, security 44987142714. Nonforce source anchor ffbf4656 has a published-baseline-plus-ONLY-startup main.js blob fe9124fa1deeb84d7a41659c066f517f6311039e; two existing unselected test files were restored to exact published bytes, three postpublished tests excluded only for this isolated source. Original mixed app/test source then restored to development in the next first-parent commit without destroying authored history. Require separate frozen exact five candidate checks before READY."
+      "notes": "No publication authorization; source-isolated candidate certification still required.\n2026-11-22 verified: owner startup changes 1–5 were nonforce merged by PR #3658 (8868768e), #3660 (cef6e4a9), #3661 (e4190258) and final #3666 (c9d86f46). PR #3666 head f8c565532653fa0ba96986c40d1f2c0ce60835d8 has actual validate/cloud/mobile/approval/SQL/security jobs COMPLETED SUCCESS. Exact merged push c9d86f46 has validate 44984255308, cloud/mobile 44984255272 and approval 44984255262 SUCCESS; SQL/security not triggered on merged push, reuse unchanged PR-head source only. Current development source/main, public recovery helper, build and focused tests match tested head Git blobs byte-for-byte. Source implementation VERIFIED; release READY candidate NOT VERIFIED. Do not confuse with original failed pre-fix heads or skipped original603.\n2026-11-22 publication-safe source isolation: PR #3675 exact final tested head f31a752c passed validate 44987142726, cloud+real Chromium 44987142712, approval 44987142710, SQL 44987142716, security 44987142714. Nonforce source anchor ffbf4656 has a published-baseline-plus-ONLY-startup main.js blob fe9124fa1deeb84d7a41659c066f517f6311039e; two existing unselected test files were restored to exact published bytes, three postpublished tests excluded only for this isolated source. Original mixed app/test source then restored to development in the next first-parent commit without destroying authored history. Require separate frozen exact five candidate checks before READY.\nINTERNAL ONLY: this READY flag exists solely on a nonpublishing source-trial ref to exercise #3347 candidate isolation. LIVE development queue remains TESTING until full exact candidate SHA CI SUCCESS. Never treat this temporary branch or its receipt as a Publish permission or READY until promoted and verified.\nProvisional nonpublishing source recheck: original candidate d505fb50 FAILED 14 source-bound unready-test assertions; new main #3692 strict test Git-blob restoration source 7d7ebc318f55e35f75a4cf29154c9d039d63776b, merged after main acceptance 44989265733 SUCCESS. Queue row CI ID 44988817244 is prior source-proof success, NOT one of five official new candidate jobs. This temp READY row is not live authority.\n2026-11-22 candidate-only repair: documented source-bound clean anchor ffbf4656 approval push 44987358080 COMPLETED SUCCESS, added to historical CI receipts to give a fresh deterministic candidate identity; this check is NOT five-job candidate PASS. Provisional-only row, live development remains TESTING. Correct two actual failed 44989788186 Node tests by restoring baseline audit script and excluding three published-absent unready audit/SQL files; preserve originals in live development. Full fresh five candidate SHA CI required."
     },
     {
       "id": "DIC-Q-3667-ci-parallel-full-suite",

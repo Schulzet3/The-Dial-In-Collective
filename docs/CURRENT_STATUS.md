@@ -1,3 +1,11 @@
+## November 22, 2026 UTC — five startup improvements source-certified READY, NOT DEPLOYED [skip netlify]
+
+- DIC_PREFLIGHT_VERIFIED development_sha=916983d6e86e4f0213aa42798d76a5ca701e62f2 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Owner's one-time Nov 21 Publish includes five startup features and other genuinely READY at final freeze.
+- Frozen startup-only candidate `64d6f50de9562c0442a05e865e9ed33f0cd2925a` passed five native exact push-SHA jobs: validate `44990296556`, cloud/mobile `44990296566`, approval `44990296557`, isolated SQL `44990296549`; failed predecessor excluded. Selected `DIC-Q-455-startup-recovery-deferred-worker` promoted to READY with zero blockers and immutable `docs/READY_BATCH_CERTIFICATION.json`; all other current queue items preserved. Historical test-only source parent attached nonforce while newest development runtime and tests remain unchanged.
+- Not yet published: needs verified promotion, one-use release grant, main push-controller and Netlify READY/current readback; DEPLOYED not claimed.
+
+---
+
 ## November 22, 2026 UTC — #3667 focused QA-only CI real hosted proof and updated preflight MERGED/VERIFIED [skip netlify]
 
 - Owner speed-first route #3667 now has a six-path non-shipped CI QA-only lane, with five native CI job statuses unchanged and mixed/unknown/Auth/SQL/source/workflow changes conservatively HIGH. [PR #3681](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3681) nonforce merged 5012964b0c03b61ab34d8d34cdfcbe84eb75b06e: exact PR-head validate 44988286966, cloud/mobile 44988286960, approval 44988286947, SQL 44988286941 SUCCESS; merged push validate 44988489617, cloud/mobile 44988489650, approval 44988489607 SUCCESS.
