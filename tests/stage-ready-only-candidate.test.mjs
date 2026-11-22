@@ -4,11 +4,40 @@ import {execFileSync} from 'node:child_process';
 import {mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {stageReadyOnlyCandidate} from '../scripts/release/stage-ready-only-candidate.mjs';
+import {stageReadyOnlyCandidate,memoizeImmutableGitRead} from '../scripts/release/stage-ready-only-candidate.mjs';
 import {discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT} from '../scripts/release/ready-only-candidate.mjs';
 const qBase={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
  published_base:{tested_source_sha:'a'.repeat(40),release_sha:'b'.repeat(40),netlify_deploy_id:'fixture'},
  items:[],history:[]};
+
+test('#3667 immutable Git source/ancestry proof cache avoids duplicate subprocesses without skipping errors',()=>{
+ const calls=[];
+ const inspect=memoizeImmutableGitRead((ref,path)=>{
+  calls.push([ref,path]);
+  if(path==='transport-failure')throw Error('Git source unavailable');
+  if(path==='missing')return null;
+  return '100644:'+('d'.repeat(40));
+ });
+ const source='a'.repeat(40),other='b'.repeat(40);
+ assert.equal(inspect(source,'site/card.js'),'100644:'+('d'.repeat(40)));
+ assert.equal(inspect(source,'site/card.js'),'100644:'+('d'.repeat(40)));
+ assert.equal(inspect(source,'missing'),null);
+ assert.equal(inspect(source,'missing'),null);
+ inspect(other,'site/card.js');
+ assert.equal(calls.length,3,'frozen SHA/path duplicate reads must share exact proof');
+ assert.throws(()=>inspect(source,'transport-failure'),/Git source unavailable/);
+ assert.throws(()=>inspect(source,'transport-failure'),/Git source unavailable/);
+ assert.equal(calls.length,5,'errors are never cached as positive source evidence');
+ let ancestryCalls=0;
+ const ancestor=memoizeImmutableGitRead((a,b)=>{ancestryCalls++;return a===b;});
+ assert.equal(ancestor(source,source),true);
+ assert.equal(ancestor(source,source),true);
+ assert.equal(ancestor(source,other),false);
+ assert.equal(ancestor(source,other),false);
+ assert.equal(ancestryCalls,2,'positive and negative immutable ancestry proofs are memoized');
+ assert.throws(()=>memoizeImmutableGitRead(null),/reader unavailable/);
+});
+
 function fixture(){
  const root=mkdtempSync(join(tmpdir(),'dic-candidate-integration-'));
  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim();
