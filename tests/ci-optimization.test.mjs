@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,mkdtempSync,rmSync} from 'node:fs';
+import {readFileSync,mkdtempSync,rmSync,mkdirSync,writeFileSync} from 'node:fs';
+import {planFullSuite,FULL_SUITE_CONCURRENCY} from '../scripts/audit/run-full-suite.mjs';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {parseStageArgs,runMeasuredStage} from '../scripts/audit/measure-stage.mjs';
@@ -53,10 +54,30 @@ test('CI timing appends success and failure receipts without arguments or enviro
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
 
-// Issue #33 R23: keep the same full security regression corpus and 4s
-// malicious HTML child budget while preventing GitHub runner worker contention.
-test('full Node suite limits concurrent files without dropping security tests',()=>{
+// #3667: run every full-suite test file exactly once, isolate the 4s attack budget.
+test('full Node suite preserves the security corpus while parallelizing other files',()=>{
  const pkg=JSON.parse(file('package.json'));
- assert.equal(pkg.scripts.test,'node --test --test-concurrency=2 tests/*.test.mjs tests/audit/*.test.mjs');
+ assert.equal(pkg.scripts.test,'node scripts/audit/run-full-suite.mjs');
+ assert.equal(FULL_SUITE_CONCURRENCY,4);
+ const plan=planFullSuite();
+ assert.deepEqual(plan.serial,['tests/html-resource-security.test.mjs']);
+ assert.ok(plan.parallel.length>100);
+ assert.ok(plan.parallel.includes('tests/ci-optimization.test.mjs'));
+ assert.ok(plan.parallel.some(path=>path.startsWith('tests/audit/')));
+ assert.equal(new Set([...plan.parallel,...plan.serial]).size,plan.parallel.length+plan.serial.length);
  assert.match(file('tests/html-resource-security.test.mjs'),/timeout:4000/);
+});
+test('full Node suite fails closed if the isolated resource-security test disappears',()=>{
+ const root=mkdtempSync(join(tmpdir(),'dic-suite-plan-'));
+ try{
+  mkdirSync(join(root,'tests','audit'),{recursive:true});
+  writeFileSync(join(root,'tests','toy.test.mjs'),'// safe toy');
+  writeFileSync(join(root,'tests','audit','audit.test.mjs'),'// safe audit');
+  assert.throws(()=>planFullSuite(root),/resource-security/);
+  writeFileSync(join(root,'tests','html-resource-security.test.mjs'),'// protected');
+  assert.deepEqual(planFullSuite(root),{
+   parallel:['tests/audit/audit.test.mjs','tests/toy.test.mjs'],
+   serial:['tests/html-resource-security.test.mjs']
+  });
+ }finally{rmSync(root,{recursive:true,force:true});}
 });
