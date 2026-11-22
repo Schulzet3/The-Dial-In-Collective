@@ -12,22 +12,30 @@
       "issue": 509,
       "title": "Correct outdated project_shot worker-status comment",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
       "scope_paths": [
         "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
       ],
       "owner_source": "Issue #509 R461, preflight development 4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 / blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
       "tests": [
-        "PASS live catalog 36 complete comments and implemented routine OIDs crosscheck",
-        "PENDING isolated PG17 COMMENT migration and exact-source SQL CI"
+        "PASS live provider: 36 full application SQL descriptions and implemented reviewer/outlier/family functions verified",
+        "PASS additive COMMENT-only migration source, historical migrations unchanged",
+        "PASS exact-source isolated PostgreSQL 17.11 job 45074554874 at source 5b5159823908f3ae660f45b3ad93c096be586aec",
+        "PASS exact-source approval/continuity 45074554907, cloud app 45074554914, cloud UX 45074554975",
+        "PASS independent selected #33 job 45074555022; not credited as app migration behavior test"
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45074554907,
+        45074554874,
+        45074554914,
+        45074554975,
+        45074555022
+      ],
       "blockers": [
-        "Isolated PostgreSQL and exact-source CI not yet PASS",
-        "#3347 frozen READY certification outstanding",
-        "New owner Publish required for production"
+        "#3347 nonpublishing isolated READY candidate certification, exact five named candidate statuses and release queue source isolation not yet independently complete",
+        "Separate NEW owner Publish required for production COMMENT migration; production remains read-only"
       ],
-      "notes": "Comment text only. Immutable migrations and runtime behavior preserved. Provider production read-only.",
+      "notes": "R463 source-bound CI confirmed 4 applicable source-SHA success runs; embedded migration blob 84cecbe69143b2170aa97a851198cc35b9926303 unchanged at development head. State TESTING pending frozen candidate certification, not READY/DEPLOYED.",
       "production_deployed": false
     },
     {
