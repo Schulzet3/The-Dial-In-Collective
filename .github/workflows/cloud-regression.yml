@@ -158,26 +158,16 @@ jobs:
             sudo apt-get update -o Acquire::Retries=2
             python -m playwright install --with-deps chromium
           fi
-      - name: Test actual compiled app assets in browser
+      - name: Run all browser acceptances with parallel visual assertions
         if: steps.scope.outputs.browser_mode != 'none'
-        run: python tests/browser/built_app_qa.py
-      - name: Focused visual/contrast and responsive regression
-        if: steps.scope.outputs.browser_mode != 'none'
-        run: python tests/browser/visual_review.py
-      - name: Run 390px Log Shot -> Rate -> Recommendation and New Setup
-        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
-        run: python tests/browser/cloud_owner_qa.py
-      - name: Test owner-only invitation browser permissions
-        if: steps.scope.outputs.browser_mode == 'high'
-        run: python tests/browser/admin_invitation_qa.py
-      - name: Test real service-worker cached offline reopening
-        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
-        run: python tests/browser/pwa_offline_qa.py
-      - name: High-risk accessibility and admin records browser acceptance
-        if: steps.scope.outputs.browser_mode == 'high'
-        run: |
-          python tests/browser/issue26_accessibility_qa.py
-          python tests/browser/admin_records_qa.py
+        env:
+          DIC_BROWSER_MODE: ${{ steps.scope.outputs.browser_mode }}
+          # PNG-only screenshots cost seconds but are not automatically compared.
+          # workflow_dispatch retains on-demand screenshot artifacts; all actual
+          # DOM, geometry, Auth, offline and workflow checks still run on every
+          # applicable PR/push with each subprocess exit checked.
+          DIC_CAPTURE_VISUAL: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+        run: node scripts/audit/run-browser-qa.mjs
       - uses: actions/upload-artifact@v7
         if: always()
         with:

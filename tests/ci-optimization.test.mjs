@@ -5,6 +5,8 @@ import {planFullSuite,selectFullSuiteShard,FULL_SUITE_CONCURRENCY} from '../scri
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {parseStageArgs,runMeasuredStage} from '../scripts/audit/measure-stage.mjs';
+import {browserQAPlan,runBrowserQA} from '../scripts/audit/run-browser-qa.mjs';
+import {EventEmitter} from 'node:events';
 const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
 
@@ -19,8 +21,9 @@ test('one build per scoped change and no routine duplicate browser/full suites',
  assert.match(beta,/node --test tests\/grind-/);
  assert.match(beta,/node --test tests\/coffee-/);
  assert.match(cloud,/cloud-tests:[\s\S]*?node --test tests\/cloud/);
- assert.match(cloud,/mobile-browser-qa:[\s\S]*?python tests\/browser\/cloud_owner_qa\.py/);
- assert.match(cloud,/python tests\/browser\/visual_review\.py/);
+ assert.match(cloud,/mobile-browser-qa:[\s\S]*?node scripts\/audit\/run-browser-qa\.mjs/);
+ assert.match(file('scripts/audit/run-browser-qa.mjs'),/tests\/browser\/cloud_owner_qa\.py/);
+ assert.match(file('scripts/audit/run-browser-qa.mjs'),/tests\/browser\/visual_review\.py/);
  assert.match(sql,/if: steps\.scope\.outputs\.sql == 'true'[\s\S]*?isolated-sql-regression\.sh/);
  assert.match(approval,/scripts\/audit\/approval-coverage\.mjs/);
  assert.match(file('netlify.toml'),/command\s*=\s*"npm run build:cloud"/);
@@ -68,8 +71,8 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  assert.equal(new Set([...plan.parallel,...plan.serial]).size,plan.parallel.length+plan.serial.length);
  const shard0=selectFullSuiteShard(plan,'0/2'),shard1=selectFullSuiteShard(plan,'1/2');
  assert.deepEqual([...shard0.parallel,...shard1.parallel].sort(),plan.parallel);
- assert.deepEqual(shard0.serial,plan.serial);
- assert.deepEqual(shard1.serial,[]);
+ assert.deepEqual(shard0.serial,[]);
+ assert.deepEqual(shard1.serial,plan.serial);
  assert.match(file('scripts/audit/run-full-suite.mjs'),/if\(!files\.length\)/,
   'Empty serial shard must NOT invoke Node auto-discovery');
  assert.equal(new Set([...shard0.parallel,...shard1.parallel]).size,plan.parallel.length);
@@ -108,4 +111,33 @@ test('QA-only lane runs four scoped tests on Node 22 without dependency install 
  assert.match(beta,/run: node --test tests\/ci-optimization\.test\.mjs tests\/ci-scope\.test\.mjs tests\/fast-pr-check\.test\.mjs tests\/site-integrity\.test\.mjs/);
  assert.match(beta,/steps\.scope\.outputs\.node_mode != 'qa'/);
  assert.match(file('scripts/audit/ci-scope.mjs'),/const QA_ONLY_PATHS=new Set/);
+});
+
+test('parallel browser wrapper retains every prior acceptance script at each risk level',()=>{
+ const built='tests/browser/built_app_qa.py';
+ assert.deepEqual(browserQAPlan('visual'),[built]);
+ assert.deepEqual(browserQAPlan('ui'),[built,'tests/browser/cloud_owner_qa.py','tests/browser/pwa_offline_qa.py']);
+ assert.deepEqual(browserQAPlan('high'),[
+  built,'tests/browser/cloud_owner_qa.py','tests/browser/admin_invitation_qa.py',
+  'tests/browser/pwa_offline_qa.py','tests/browser/issue26_accessibility_qa.py',
+  'tests/browser/admin_records_qa.py'
+ ]);
+ assert.throws(()=>browserQAPlan('none'),/Unexpected browser QA mode/);
+ const runner=file('scripts/audit/run-browser-qa.mjs');
+ assert.match(runner,/Promise\.all/,'visual assertions and other tests must execute concurrently');
+ assert.match(runner,/status!==0/,'any failed child process must fail CI');
+ assert.match(file('tests/browser/visual_review.py'),/DIC_CAPTURE_VISUAL/);
+ assert.match(file('.github/workflows/cloud-regression.yml'),/DIC_CAPTURE_VISUAL:/);
+});
+
+test('parallel browser orchestration runs all suites and rejects any failed fixture',async()=>{
+ const seen=[];
+ const runner=(_python,args)=>{
+  const child=new EventEmitter();
+  seen.push(args[0]);
+  queueMicrotask(()=>child.emit('close',args[0]==='tests/browser/pwa_offline_qa.py'?2:0,null));
+  return child;
+ };
+ await assert.rejects(runBrowserQA('high',{python:'mock',runner}),/Browser acceptance failed/);
+ assert.deepEqual(seen.sort(),['tests/browser/visual_review.py',...browserQAPlan('high')].sort());
 });
