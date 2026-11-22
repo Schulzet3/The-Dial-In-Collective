@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
-    "release_sha": "50e05054e7139d2e7a675b8e15ab71a7dd42ac81",
-    "netlify_deploy_id": "6b0284543511466fd75b4573"
+    "tested_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+    "release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+    "netlify_deploy_id": "6b0344fd039acce2c0364f2b"
   },
   "items": [
     {
@@ -18314,7 +18314,7 @@
       "issue": 3781,
       "pr": 3782,
       "title": "Open previously admitted same-owner cached workspace while rechecking access in background",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "354ddd99ef0ce8f03b2f74544782e4e977201a31",
       "scope_paths": [
         "site/cloud/client.js",
@@ -18328,7 +18328,8 @@
         "Exact merged-source push CI PASS: validate 45039837781, cloud-tests + mobile-browser-qa 45039837803, approval 45039837783, imported-source-regressions 45039837798, exact-selected 45039837805 all COMPLETED SUCCESS.",
         "New returning-session regressions cover cached first-paint, read-only preadmission, background denied cleanup, saved outbox, session validity, cross-owner and recovery guards; no real production-device stopwatch or live member acceptance measured.",
         "Clean source-freeze 354ddd99 (ten unique published main.js hunks, one client.js hunk) is a NONPUBLISHING reviewed provenance pin; exact isolated candidate CI still REQUIRED before promotion is merged to development.",
-        "Candidate source QA parity repair e85780b670f9d89328fdf46ba035b9d81205bb18: exact published workflow/Edge blob tests report NOT_APPLICABLE; selected Auth tests remain active; previous frozen 95ea280f validation FAIL and never READY. This new frozen selection must not reuse the failed immutable candidate Git ref."
+        "Candidate source QA parity repair e85780b670f9d89328fdf46ba035b9d81205bb18: exact published workflow/Edge blob tests report NOT_APPLICABLE; selected Auth tests remain active; previous frozen 95ea280f validation FAIL and never READY. This new frozen selection must not reuse the failed immutable candidate Git ref.",
+        "FINAL production source-bound CI and Netlify: frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 five official exact push jobs SUCCESS, controller 45061967031 SUCCESS, one-use ledger DIC-20261122-ADMISSION-READY04 once, Netlify 6b0344fd039acce2c0364f2b READY/current Git commit 5ef0e190237a0fa8e391b086c5baeaaa962ae264, current source app blob parity main.js/client.js independently verified."
       ],
       "ci_runs": [
         45039621942,
@@ -18340,11 +18341,20 @@
         45039837781,
         45039837803,
         45039837783,
-        45039837798
+        45039837798,
+        45049518049,
+        45049518047,
+        45049518003,
+        45049517997
       ],
       "blockers": [],
-      "notes": "PROVISIONAL READY SELECTION ON PRIVATE PREPARATION BRANCH ONLY: existing development item remains TESTING. Selected issue #3781 and no other features. Frozen candidate SHA+5 native push CI+READY certificate must succeed before dev READY or any publication. Exact clean source pin 354ddd99ef0ce8f03b2f74544782e4e977201a31.",
-      "production_deployed": false
+      "notes": "PROVISIONAL READY SELECTION ON PRIVATE PREPARATION BRANCH ONLY: existing development item remains TESTING. Selected issue #3781 and no other features. Frozen candidate SHA+5 native push CI+READY certificate must succeed before dev READY or any publication. Exact clean source pin 354ddd99ef0ce8f03b2f74544782e4e977201a31.\nFINAL PRODUCTION DEPLOYED — supersedes earlier provisional/readiness-only history. Owner November 22 one #3781 returning-session background access release DIC-20261122-ADMISSION-READY04, frozen source d4af1c4e13d1babe6f10d277d5243582eb798c56 (five exact candidate CI SUCCESS 45049518049 approval, 45049518047 SQL, 45049518003 cloud/mobile, 45049517997 validate); one-parent main request 7b42166e; controller 45061967031 completed SUCCESS; one-use ledger consumed once 2026-11-22T19:39:36.251Z; nonforce release 5ef0e190237a0fa8e391b086c5baeaaa962ae264; Netlify site 6b0344fd039acce2c0364f2b READY/current, commit_ref exactly release, published 2026-11-22T19:39:57.862Z, five unchanged functions, zero provider secret-scan matches among 6207 scanned files. New Auth source app blobs main.js 55191f2d and client.js e2097f59 match frozen candidate exactly; Admin and unselected runtime unchanged. NO SQL/Edge changes or additional features. Device stopwatch remains NOT_APPLICABLE/UNVERIFIED; private previously admitted saved history read-only until background server check, denial revokes and retains outbox.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261122-ADMISSION-READY04",
+      "delivered_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+      "delivered_release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+      "delivered_netlify_deploy_id": "6b0344fd039acce2c0364f2b",
+      "delivered_at_utc": "2026-11-22T19:39:57.862Z"
     }
   ],
   "history": [
@@ -21767,6 +21777,18 @@
       "delivered_netlify_deploy_id": "6b0284543511466fd75b4573",
       "at": "2026-11-22T05:57:53.984Z",
       "evidence": "Owner Nov21 one-time five startup + all genuinely READY batch DIC-20261122-STARTUP-READY01. Only this row READY at source freeze. Frozen candidate 64d6f50de9562c0442a05e865e9ed33f0cd2925a five official native exact-SHA jobs SUCCESS validate 44990296556, cloud/mobile 44990296566, approval 44990296557, isolated SQL 44990296549; source proof 44990173164. One-parent main request 0cb6847c; exact push controller 44991562299 COMPLETED SUCCESS; one-use ledger consumed once at 2026-11-22T05:57:33.508Z. Nonforce release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, Netlify Git-connected production branch release/production commit_ref 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 deploy 6b0284543511466fd75b4573 READY/current, published 2026-11-22T05:57:53.984Z; five deployed functions and zero provider-reported secret matches in 6095 files. App source three critical Git blobs exactly equal frozen candidate; no unfinished code/test/workflow or SQL changes selected. Original dev remains unchanged."
+    },
+    {
+      "date": "2026-11-22",
+      "issue": 3781,
+      "item_id": "DIC-Q-3781-returning-session-background-admission",
+      "state": "DEPLOYED",
+      "source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+      "production_deployed": true,
+      "delivered_release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+      "delivered_netlify_deploy_id": "6b0344fd039acce2c0364f2b",
+      "at": "2026-11-22T19:39:57.862Z",
+      "evidence": "Owner-approved one #3781 same-owner returning-session read-only cached first paint with background admission/revocation. Frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 five exact native GitHub jobs SUCCESS; main request 7b42166e, controller 45061967031 SUCCESS, one-use grant DIC-20261122-ADMISSION-READY04 consumed once. Nonforce production Git 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify 6b0344fd039acce2c0364f2b READY/current matching commit_ref, 5 functions, no secret-scan matches. No SQL/Edge/other unready features. Earlier failed -02/-03 controllers made no release claims and not replayed."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
