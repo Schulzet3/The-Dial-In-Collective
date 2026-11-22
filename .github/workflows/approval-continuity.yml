@@ -16,8 +16,10 @@ permissions:
   actions: read
   checks: read
 concurrency:
-  group: dic-approval-continuity-${{ github.ref }}
-  cancel-in-progress: true
+  # PR retries cancel superseded revisions; push source SHAs stay independently auditable.
+  # Later audit/docs pushes cannot cancel an exact merged-source approval receipt.
+  group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
 jobs:
   approval:
     runs-on: ubuntu-24.04
@@ -50,9 +52,8 @@ jobs:
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
       - name: Verify immutable five-job READY batch in one live check (owner #3347)
-        # ready-evidence-gate delegates to the SAME verifyReadyPromotion function;
-        # the former second CLI fetched the identical ref, four source objects,
-        # five runs and native check statuses a second time. No gate removed.
+        # ready-evidence-gate delegates to verifyReadyPromotion; do not fetch
+        # the identical immutable Git and latest native CI checks twice.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
