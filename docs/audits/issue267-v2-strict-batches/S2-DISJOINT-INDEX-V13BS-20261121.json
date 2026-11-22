@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BS",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BR-20261121.json",
+  "development_prewrite_sha": "e419025863e3cd5b854968caedb3cb7ea07e6816",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-147-176-20261121-V13BS.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 147,
+          "last_line": 176,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C73-10-38-C74-1-20261121-V13BS.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 73,
+          "path": "scripts/audit/verify-migration-baseline.mjs",
+          "source_blob_sha": "a944f4c45c75d429a60a07aad6411683f2536ccd",
+          "first_line": 10,
+          "last_line": 38,
+          "line_count": 29
+        },
+        {
+          "manifest_index_1_based": 74,
+          "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+          "source_blob_sha": "ee7f42bed7e06c8db723c633a94802d644be6acb",
+          "first_line": 1,
+          "last_line": 1,
+          "line_count": 1
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_3_IMMUTABLE_GIT_BLOBS_PRIOR_3_REVALIDATED",
+  "archived_json_parse": "PASS_1",
+  "pinned_live_parity": "C73_EQUAL_PINNED; C74_NOT_CREDITED_AS_LIVE",
+  "findings": [
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 152,
+      "fact": "19 archived delimited spec cases are names of then-run tests; no current official-source guarantee",
+      "disposition": "NO_CURRENT_DEFECT_REPRODUCED_ISSUE33_SCOPE"
+    },
+    {
+      "severity": "HISTORICAL_ONLY",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 166,
+      "fact": "2 historical deterministic-only cases do not prove current credential or preview invariants",
+      "disposition": "DO_NOT_USE_AS_CURRENT_AUTH_OR_PRODUCT_CERTIFICATION"
+    },
+    {
+      "severity": "PRESERVATION",
+      "path": "scripts/audit/verify-migration-baseline.mjs",
+      "line": 29,
+      "fact": "Correct canonical Git blob SHA1 byte-hashing guard for applied SQL; read-only",
+      "disposition": "NO_APPLIED_MIGRATION_EDIT_OR_PROVIDER_SQL_WRITE"
+    },
+    {
+      "severity": "LOW_UNREPRODUCED",
+      "path": "scripts/audit/verify-migration-baseline.mjs",
+      "line": 32,
+      "fact": "Checks tail marker but not independent sorting of all historical applied-version records; baseline is preverified historical input",
+      "disposition": "NO_CURRENT_DEFECT_REPRODUCED_NO_SPECULATIVE_CHANGE"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_3_NEW_PLUS_3_PRIOR",
+    "archived_json_parse": "PASS_1",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "current_status_readback": "UNAVAILABLE_EMPTY_FROM_CONNECTOR_NO_READY_ASSERTION",
+  "release_queue_readback": "UNAVAILABLE_EMPTY_FROM_CONNECTOR_NO_READY_ASSERTION",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 221,
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 177
+    },
+    "pinned": {
+      "manifest_index": 74,
+      "path": "scripts/audit/wuri-official-verifier-live-probe.mjs",
+      "line": 2
+    }
+  }
+}
