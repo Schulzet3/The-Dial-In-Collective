@@ -10,3 +10,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef 
 - At authoring, focused Node22, mobile/browser/offline/a11y, approval and SQL/Auth CI are **NOT RUN / NOT PASS**. Exact-source PR-head and merge checks must be fetched and verified before advancement. The 48/48 archive examples are research-only, not app CI. Retain TESTING until independent #3347 source-isolated five-check READY certification.
 - Research/provider provenance: owner-only Drive archive `1Q56coFAyeGIj-45pLnFNRsegu-AeBdZh` fetched directly during this run, 66,421 B; archive SHA-256 `7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d` already independently checksum-verified in this run, not put in Git. S019 standalone research and any observed real espresso benefit remain unverified.
 - Exclusions: no new SQL/Auth/Edge/member/provider read/write, Netlify, publish, grants, release/production/main ref updates, private ZIP exposure, Git force, backup changes, visibility changes, purchases, Locked changes or owner-schedule/notification change. #33/#267/#96 separate owners; #335 research transfer remains in #455. Next: exact hosted tests, nonforce integration and merged CI, reconcile issue/status/TESTING queue; continue distinct claim/effectiveness review. Keep #455 open.
+
+---
+## R433 follow-up: positive/negative test selector precision (same commit) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Prior R433 feature commit `5e33e4298b5e650651911c81b03ace61f6016ab8`; immutable development and PREFLIGHT reverified before this test edit. Refined BOTH positive/negative markup assertions to extract the actual `Use Recommendation for Temperature` button and check its disabled attribute; prevents a vacuous regular-expression match that could conceal an absent action. No production or application behavior change. Changed only `tests/cloud-draft-recommendation-context.test.mjs` and this scoped journal. Focused/hosted tests remain pending. Next: PR, risk-scoped CI and readback before nonforce merge.

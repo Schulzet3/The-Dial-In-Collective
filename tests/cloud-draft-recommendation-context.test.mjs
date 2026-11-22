@@ -271,7 +271,9 @@ test('Slow Feed enables an available temperature copy after standard-feed feedba
  let markup='';
  app.show=(_title,html)=>{markup=html;};
  app.showLog('coffee',null,'Turbo');
- assert.match(markup,/data-action="use-temp"[^>]*disabled/,'initial unavailable temperature is disabled');
+ const initialButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(initialButton,'temperature copy control exists');
+ assert.match(initialButton,/\bdisabled\b/,'initial unavailable temperature is disabled');
  bindForm(app.draft);
  copyActions.temperature={disabled:true,title:'No temperature recommendation available'};
  copyActions.grind={disabled:false,title:''};
@@ -302,7 +304,9 @@ test('Slow Feed disables stale temperature copy after switching into missing-tem
  let markup='';
  app.show=(_title,html)=>{markup=html;};
  app.showLog('coffee',null,'Turbo');
- assert.doesNotMatch(markup.match(/<button\\b[^>]*data-action="use-temp"[^>]*>/)?.[0]||'',/\\bdisabled\\b/);
+ const initialButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(initialButton,'temperature copy control exists');
+ assert.doesNotMatch(initialButton,/\bdisabled\b/,'initial standard-feed copy is enabled');
  bindForm(app.draft);
  copyActions.temperature={disabled:false,title:''};
  copyActions.grind={disabled:false,title:''};
