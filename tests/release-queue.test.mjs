@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch,evaluateLocalIntake}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -114,4 +114,41 @@ test('only the exact Edge auth config path participates in release queue isolati
  ]),['supabase/config.toml']);
  assert.deepEqual(queueSchemaErrors({...q,items:[{...queued,state:'BLOCKED',
   scope_paths:['supabase/config.toml'],blockers:['Sender not configured']}]}),[]);
+});
+
+test('fast queue intake uses one published-source diff, not hundreds of discarded ancestry checks',()=>{
+ const deployed=Array.from({length:401},(_,i)=>({...queued,id:'DIC-Q-'+(i+1000),
+  issue:i+1000,state:'DEPLOYED',scope_paths:['site/cloud/old.js']}));
+ const calls=[];
+ const git=(cmd,args)=>{
+  assert.equal(cmd,'git');calls.push(args);
+  if(args[0]==='diff')return 'site/cloud/shot_card.js\n';
+  throw Error('Unneeded Git operation: '+args[0]);
+ };
+ const result=evaluateLocalIntake({...q,items:[queued,...deployed]},{git});
+ assert.equal(result.tracked,true);
+ assert.deepEqual(result.deployable_paths,['site/cloud/shot_card.js']);
+ assert.deepEqual(calls,[['diff','--name-only','--no-renames',A+'..HEAD']]);
+});
+
+test('fast intake fails on unavailable source or untracked code and validates SQL blob receipts',()=>{
+ assert.throws(()=>evaluateLocalIntake({...q,published_base:{...q.published_base,tested_source_sha:'bad'}},
+  {git:()=>''}),/Invalid queue published baseline/);
+ assert.throws(()=>evaluateLocalIntake(q,{git:()=>{throw Error('git diff unavailable');}}),/git diff unavailable/);
+ assert.equal(evaluateLocalIntake(q,{git:(cmd,args)=>args[0]==='diff'?
+  'site/cloud/shot_card.js\nsite/cloud/unknown.js\n':''}).tracked,false);
+ const sql='supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql';
+ const deployed={...queued,id:'DIC-Q-5',issue:5,state:'DEPLOYED',scope_paths:[sql],
+  delivered_provider:'Supabase production only',delivered_release_id:'DIC-20261024-ISSUE5-SQL-ONLY-07',
+  delivered_sql_migration_version:'20261024052303',delivered_sql_source_blob_sha:C};
+ const queue={...q,items:[queued,deployed]};
+ let hashes=0;
+ const git=(value)=>(cmd,args)=>{
+  if(args[0]==='diff')return sql+'\n';
+  if(args[0]==='hash-object'){hashes++;assert.equal(args[2],sql);return value+'\n';}
+  throw Error('Unexpected Git operation');
+ };
+ assert.equal(evaluateLocalIntake(queue,{git:git(C)}).tracked,true);
+ assert.equal(hashes,1,'only the changed deployed SQL migration needs blob verification');
+ assert.equal(evaluateLocalIntake(queue,{git:git(B)}).tracked,false);
 });
