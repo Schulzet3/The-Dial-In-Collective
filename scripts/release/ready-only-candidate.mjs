@@ -321,6 +321,53 @@ export function discoverReviewedRestoredUnreadyAdminTests({queue,restoredPaths,
  return [s.path];
 }
 
+
+ // Exact previous PR #3675 source-only test isolation proof: the selected
+ // startup merge restored two COMPLETE published tests before reintroducing
+ // separately unfinished Log Shot work into development. Preserve all checks.
+export const REVIEWED_STARTUP_MIXED_TESTS=Object.freeze({
+ id:'DIC-Q-455-startup-recovery-deferred-worker',
+ merge:'ffbf4656de2969326988d7b0ac0a21c3117575a6',
+ runtime:'site/cloud/main.js',
+ cleanRuntime:'fe9124fa1deeb84d7a41659c066f517f6311039e',
+ tests:Object.freeze([
+  Object.freeze({path:'tests/cloud-draft-recommendation-context.test.mjs',
+   published:'a2218f85796f67d298b0ef5d06a980eaa92860ed',
+   unready:'256646aa00684386e2af1efdc3b5d036c7d5fca3'}),
+  Object.freeze({path:'tests/issue455-local-success-physical-bounds.test.mjs',
+   published:'132486d9435888f9ddbb84a4e8bae8d9d6509abb',
+   unready:'c7357cd031bab6b8bb9ae031a5aa1e477c651f6d'})
+ ])
+});
+export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
+ const s=REVIEWED_STARTUP_MIXED_TESTS;
+ const selected=selectedReadyItems.find(i=>i.id===s.id);
+ if(!selected)return [];
+ if(typeof sourceObjectAt!=='function'||selected.state!=='READY'||selected.issue!==455||
+    selected.merged_source_sha!==s.merge||!selected.scope_paths?.includes(s.runtime)||
+    !pinnedReadyPaths.includes(s.runtime)||!queue?.items?.some(i=>
+      i.id!==s.id&&i.issue===455&&['TESTING','IN_PROGRESS'].includes(i.state)&&
+      i.scope_paths?.includes(s.runtime)))
+  throw Error('Startup test restoration lacks selected owner and mixed-file provenance');
+ const obj=(ref,path)=>sourceObjectAt(ref,path);
+ if(obj(s.merge,s.runtime)!=='100644:'+s.cleanRuntime||
+    obj(developmentSourceSha,s.runtime)===obj(s.merge,s.runtime))
+  throw Error('Startup clean runtime is not the reviewed pinned source blob');
+ for(const spec of s.tests){
+  if(obj(publishedSourceSha,spec.path)!=='100644:'+spec.published||
+     obj(developmentSourceSha,spec.path)!=='100644:'+spec.unready||
+     obj(s.merge,spec.path)!=='100644:'+spec.published||
+     obj(s.merge+'^',spec.path)!=='100644:'+spec.unready)
+   throw Error('Startup test restoration unreviewed Git blob or first-parent drift: '+spec.path);
+  for(const ready of selectedReadyItems.filter(i=>i.id!==s.id))
+   if(!SHA.test(ready.merged_source_sha||'')||
+      obj(ready.merged_source_sha,spec.path)!==obj(ready.merged_source_sha+'^',spec.path))
+    throw Error('Another selected READY merge modified startup-coupled test: '+spec.path);
+ }
+ return s.tests.map(x=>x.path).sort();
+}
+
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
  path:'tests/dic-owner-drive-connect.test.mjs',
  runtime:'netlify/functions/dic-owner-drive-connect.mjs',
@@ -821,7 +868,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   restoredPaths:plan.restored_paths,publishedSourceSha,
   developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
- const approvedTests=[...sqlTests,...coffeeTests,...adminTests].sort();
+ const startupTests=discoverReviewedRestoredStartupTests({queue,
+  pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
+  developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+  selectedReadyItems:plan.ready_items});
+ const approvedTests=[...sqlTests,...coffeeTests,...adminTests,...startupTests].sort();
  if(!Array.isArray(restoredTests)||!equal(restoredTests,approvedTests))
   reject('Restored existing unfinished tests differ from exact reviewed source/ownership');
  for(const path of restoredTests){
