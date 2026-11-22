@@ -10,3 +10,6 @@ DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d 
 - Preserve EXACT former full-suite enumeration (tests/*.test.mjs plus tests/audit/*.test.mjs); run each file once. General tests bounded at four concurrent Node files; malicious HTML resource budget tests separately run at one after general completes. Security subset runs even after general failure. Missing resource test, empty or duplicate suite plan fails closed; no skipped file declared passing.
 - New direct test proves exact collection, protected security isolation, absent-resource fail-close, and 4s child budget. Existing approval/security/SQL/browser checks unchanged.
 - Required: focused tests, complete exact PR CI, nonforce integration with [skip netlify], exact merged Git SHA/CI and actual measured timing against baseline before claiming speed gain. Status: IN_PROGRESS; no READY or release published.
+
+## PR first-head approval HOLD, safely repaired
+- Exact PR #3668 run 44983557010 job 137089092114 failed intake: `package.json` had no TESTING queue owner, while all affected runtime/product code remains unchanged. Added `DIC-Q-3667-ci-parallel-full-suite` TESTING scoped to package.json in the same documentation reconciliation. Do NOT claim earlier failure passed; rerun current exact PR five checks.

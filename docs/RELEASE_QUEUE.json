@@ -17999,6 +17999,29 @@
       ],
       "notes": "SAFE display/action affordance only; no numeric, equipment-schema, historical notes/measurements, taste, Community, privacy/RLS, feed-science policy or deployment change.\nR433 PR #3657 exact source/head/merged checks verified, queue remains TESTING pending independent #3347 five-check frozen candidate. Documentation reconciliation did not rerun app tests or alter product. Original PR-head pending checks superseded by current evidence.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-3667-ci-parallel-full-suite",
+      "issue": 3667,
+      "pr": 3668,
+      "title": "Reduce CI full-suite runtime with bounded parallelism and isolated time-budget security regression",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "package.json"
+      ],
+      "owner_source": "Owner Nov 21, 2026 implementation-to-READY acceleration; existing #457 risk-based testing and #3347 source-bound READY must be preserved. DIC_PREFLIGHT_VERIFIED development_sha=049cda39aa4c17e6cae7978b7adc2f675deb820d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Same test file enumeration preserved (tests/*.test.mjs and tests/audit/*.test.mjs); time-budget HTML security tests isolated as serial subset.",
+        "PR #3668 first head a9322514367770288d0259ab9d3e94a952bc2045: approval 44983557010 HOLD for package.json missing from intake; this queue TESTING record repairs tracking. Remaining exact CI/results pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "New PR-head exact five mandatory checks and end-to-end timing need completion; development/READY certification unverified.",
+        "No published candidate or owner Publish authority."
+      ],
+      "notes": "Nonpublishing CI-only performance change. No Auth/SQL/RLS, history, private data, offline, application UX or provider changes. Full Node suite still runs every test; meaningful speedup must be proven by hosted GitHub timings.",
+      "production_deployed": false
     }
   ],
   "history": [
