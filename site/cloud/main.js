@@ -1263,6 +1263,9 @@ class CloudApp {
  }
 }
 export async function startCloudApp(){
+ // Paint a neutral, data-free shell before SDK/session initialization. Never
+ // display cached private workspace until server admission has completed.
+ root.innerHTML='<main class="shell welcome" role="status" aria-live="polite"><h1>The Dial In Collective</h1><p class="helper">Opening your workspace…</p></main>';
  try{
   secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
   if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');

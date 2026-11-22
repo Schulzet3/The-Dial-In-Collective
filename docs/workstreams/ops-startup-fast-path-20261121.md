@@ -26,3 +26,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=f5db1d4035962af42299707e59c7aec53b8318ef 
 
 - Root cause: earlier incremental commits lacked a NEW preflight receipt on each code-changing commit; approval CI correctly rejected them. Rebuilt the identical source as one new commit directly from live development base, with this same-commit receipt. Supersedes earlier unmergeable PR history without force-pushing or bypassing approval checks.
 - Required: exact new-head five CI jobs, regression results, merge and READY evidence. No publication.
+
+## Immediate neutral startup shell — 2026-11-21
+DIC_PREFLIGHT_VERIFIED development_sha=8868768e23de37c7cbeaeae3737f927adcf63f57 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Acceptance: show a neutral, accessible loading shell before SDK/session setup; never expose private cache or member identity before authoritative admission. Existing error fallback and owner-specific cached fast path remain intact.
+- Change: synchronous data-free shell paint at startCloudApp entry; no auth, storage, schema, Community or offline semantics changed.
+- Tests: reuse exact prior PR #3658 cloud/approval/security/SQL/imported-source checks for unchanged paths; new exact-head CI required. No deployment or publication.
