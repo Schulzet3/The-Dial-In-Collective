@@ -205,3 +205,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=2ef1dd0281be97aa1b067278f52ddc7229cd5196 
 
 ## November 22 — #3735 missing Node fs import repaired [skip netlify]
 - PR head ef518d13aab087ab614b88758d8583ea5e84ab88 approval run 45003728066 FAILED focused test 10 with ReferenceError readFileSync is not defined; other 9 READY verifier unit regressions PASS, not a complete acceptance. Fix imports readFileSync from node:fs without changing the one live gate, all source/fingerprint/job checks or other concurrent source. Retest five exact new-head PR jobs, merge nonforce if SUCCESS. #3667 remains TESTING.
+
+DIC_PREFLIGHT_VERIFIED development_sha=e536ad7b12cb55966e2e1e23ec396d82b1f30f91 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22 — restore literal operational READY audit contract [skip netlify]
+- Corrected PR-head 30cc32c7305a38d0486e1acf87cd13f9ff7d3f09 five-check CI has approval 45003793887, SQL 45003793893, cloud+mobile 45003793870 SUCCESS but validate 45003793916 FAILED 1 of 3008 checks: tests/required-check-workflows.test.mjs:63 demands the operational exact source guard contains `run: node scripts/release/ready-evidence-gate.mjs` (single-line), and the earlier single stage embedded this command in a multiline block. This is a real required source contract, not a failed product behavior.
+- FIX: keep the existing literal single-line live gate unchanged; move the same focused READY negative tests to a neighboring separate Node test step. ONE live GitHub source/five-job verifier is still executed, while all prior negative acceptance and source-bound check rules remain. No ignored test, disabled check, Netlify or production provider write. Require fresh five-SHA tests and merge.
