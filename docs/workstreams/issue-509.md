@@ -1,3 +1,18 @@
+# Issue #509 R447 — direct application and historical constraint review, pg_depend ranks 3501–4000 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=728f475747cc2a0822457081f37f0d790f88ae98 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory immutable PREFLIGHT retrieval at development 728f475747cc2a0822457081f37f0d790f88ae98 / verified Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f preceded all other authority and provider reads; branch 557635cb23bce33bfb61a83daf67171e5bafd7ca and journal rechecked before nonforce write. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003, **PRODUCTION STRICTLY READ-ONLY**.
+
+**NEW full-semantic provider increment:** Directly read **500/500 complete `pg_depend` edges ranks 3501–4000/5414**, **233,648 literal catalog characters**, and all **184 unique complete source SQL constraint definitions** represented by them. [R447 append-only per-edge original literal, MD5, exact character range, constraint SQL, verdict and rationale](../audits/issue509-r447-pg-depend-ranks3501-4000-app-invariants-20261122.json). Categories {"RETAIN_RELATIONAL_FOREIGN_KEY":235,"RETAIN_VALIDATED_CHECK_INVARIANT":148,"RETAIN_PRIMARY_KEY_IDENTITY":39,"RETAIN_UNIQUE_CONSUMER_KEY":16,"RETAIN_COMMUNITY_ELIGIBILITY_INVARIANT":26,"RETAIN_IMPORT_RECOVERY_GUARD":18,"RETAIN_ARCHIVED_PROVENANCE_CONSTRAINT":18}; all 500 catalog targets exist and 184 represented constraints are validated, **0 unresolved**.
+
+**Semantics/consumer boundaries:** Retained actual owner-scoped composite FKs and deferrable favorite-shot reference; Community shots fixed perfect-taste projection and style/dose/time/ratio guards; private import_control recovery/exception validity check; source-preserving legacy_import grind-setting exception; member notification states and delivery attempts; archived roaster provenance constraints as **HISTORICAL/ARCHIVED**, with active aliases separate. No dependency record proves a function/index unused; no justified SQL deletion, new reproducible app defect, provider drift or measured bottleneck in this scope. Full function bodies, Edge source, unrelated native/provider-console definitions still UNVERIFIED; full baseline **IN_PROGRESS**, pg_depend **4000/5414**. No #267 source-code line credit.
+
+No application source/migration/test/CI changes, so new exact-source CI **NOT_APPLICABLE (not PASS)**; queue's existing Community withdrawn-recheck guard remains TESTING, no READY/DEPLOYED claim. No production SQL/data/Auth/Storage/Edge/config/migrations, publish, main/release, backup, billing, paid branch, schedule or notification policy change.
+
+**Next exact cursor**: `pg_depend` rank **4001/5414**, character 1 in seven-field stable numeric order; recheck live first identity. No owner action.
+
+---
+
 # Issue #509 R446 — direct constraint dependency semantics ranks 3001–3500 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=728f475747cc2a0822457081f37f0d790f88ae98 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
