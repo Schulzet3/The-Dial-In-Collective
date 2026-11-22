@@ -45,7 +45,8 @@ function sentences(value){return value.split(/(?<=[.!?])\s+/u).map(x=>x.trim()).
 const producerSentences=value=>value.split(/(?<!\b(?:Mr|Mrs|Ms|Dr|Jr|Sr)\.)(?<=[.!?])\s+/u).map(x=>x.trim()).filter(Boolean);
 function collectiveCredit(raw){
  // A source credit ends before cultivation, location or purchasing prose.
- // Keep the literal group/name instead of adding its altitude, method or tenure.\n // A closed duration after a named grower is contextual, never part of identity.
+ // Keep the literal group/name instead of adding its altitude, method or tenure.
+ // A closed duration after a named grower is contextual, never part of identity.
  let value=raw.trim().replace(/^(?:the|an?)\s+/i,'')
   .split(/,\s+(?!\d)|\s+for\s+(?:(?:over|more\s+than|nearly|almost|around|about|at\s+least)\s+)?(?:\d{1,4}|one|two|three|four|five|a|an|several)\s+(?:years?|decades?|centur(?:y|ies))\b|\s+(?:at\s+(?:altitudes?|elevations?)|rooted|located|nestled\s+(?:in|near|by)|using|through|throughout|within|near|on the slopes|in the|that|which|who|where)\b/i)[0];
  const unnamed=value.match(/^((?:(?:approximately|around|over|nearly)\s+)?(?:[\d,]+\s+)?(?:(?:small[ -]?holder|small|local|individual|independent|family[- ]owned|family)\s+){1,3}(?:farmers?|growers?|producers?|farms?|farm holders))\b/i);
