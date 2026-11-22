@@ -33,20 +33,20 @@ export const REVIEWED_WORKFLOW_TEST=Object.freeze({
  sourceBlob:'32174be8c42ba9ae73085e0f6f1f42613b2b08db',
  restoredWorkflow:'.github/workflows/cloud-regression.yml'
 });
-export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
- if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows)||
-    !restoredWorkflows.includes(REVIEWED_WORKFLOW_TEST.restoredWorkflow))return [];
- const path=REVIEWED_WORKFLOW_TEST.path;
- // This reviewed three-test R190 workflow check preserves strict candidate provenance;
- // it reads the development workflow while candidate workflows are restored.
- // above; it is not an app feature test. Never match by filename alone.
- return sourceObjectAt(publishedSourceSha,path)===null&&
-  sourceObjectAt(developmentSourceSha,path)==='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob?
-  [path]:[];
+export const REVIEWED_CI_FAST_PR_TEST=Object.freeze({
+ path:'tests/fast-pr-check.test.mjs',sourceBlob:'d11a0f702d35032e3442bfc8ee8671216f3496f8',
+ restoredWorkflow:'.github/workflows/cloud-beta-ci.yml'
+});
+// Full published workflow bytes never execute newer workflow-only tests.
+export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,
+ developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows))return [];
+ return sorted([REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST]
+  .filter(spec=>restoredWorkflows.includes(spec.restoredWorkflow)&&
+   sourceObjectAt(publishedSourceSha,spec.path)===null&&
+   sourceObjectAt(developmentSourceSha,spec.path)==='100644:'+spec.sourceBlob)
+  .map(spec=>spec.path));
 }
-
-
-
 
 export const REVIEWED_SOURCE_PATH_CASE_SQL_TEST=Object.freeze({
  path:'supabase/tests/coffee_identity_matching.sql',
@@ -336,7 +336,13 @@ export const REVIEWED_STARTUP_MIXED_TESTS=Object.freeze({
    unready:'256646aa00684386e2af1efdc3b5d036c7d5fca3'}),
   Object.freeze({path:'tests/issue455-local-success-physical-bounds.test.mjs',
    published:'132486d9435888f9ddbb84a4e8bae8d9d6509abb',
-   unready:'c7357cd031bab6b8bb9ae031a5aa1e477c651f6d'})
+   unready:'c7357cd031bab6b8bb9ae031a5aa1e477c651f6d'}),
+  Object.freeze({path:'tests/ci-optimization.test.mjs',
+   published:'91aadb1eccb64764253dc1344d6524ef42621fcc',unready:'4702f245499fde64922af965ceb23d73cf7a9a88'}),
+  Object.freeze({path:'tests/issue2258-member-approval-notices.test.mjs',
+   published:'179dc171aa7ab11b182b8832c3fd3f733dbc6824',unready:'48ac09eaf2a000200b444cc9104ffba50893e246'}),
+  Object.freeze({path:'tests/sql-runner-coverage.test.mjs',
+   published:'587d36c5931b1c14220914bd32460af5690984e9',unready:'9550fd21ff0edc93adbeed716e657a504a41d2e9'})
  ])
 });
 export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
@@ -355,18 +361,22 @@ export function discoverReviewedRestoredStartupTests({queue,pinnedReadyPaths=[],
  if(obj(s.merge,s.runtime)!=='100644:'+s.cleanRuntime||
     obj(developmentSourceSha,s.runtime)===obj(s.merge,s.runtime))
   throw Error('Startup clean runtime is not the reviewed pinned source blob');
+ const restored=[];
  for(const spec of s.tests){
-  if(obj(publishedSourceSha,spec.path)!=='100644:'+spec.published||
-     obj(developmentSourceSha,spec.path)!=='100644:'+spec.unready||
-     obj(s.merge,spec.path)!=='100644:'+spec.published||
-     obj(s.merge+'^',spec.path)!=='100644:'+spec.unready)
-   throw Error('Startup test restoration unreviewed Git blob or first-parent drift: '+spec.path);
+  const published=obj(publishedSourceSha,spec.path),current=obj(developmentSourceSha,spec.path);
+  if(published===null&&current===null)continue;
+  if(published!=='100644:'+spec.published||current!=='100644:'+spec.unready)
+   throw Error('Startup test restoration unreviewed Git blob: '+spec.path);
+  const merged=obj(s.merge,spec.path),firstParent=obj(s.merge+'^',spec.path);
+  if(!((merged===published&&firstParent===current)||(merged===current&&firstParent===current)))
+   throw Error('Startup test restoration first-parent drift: '+spec.path);
   for(const ready of selectedReadyItems.filter(i=>i.id!==s.id))
    if(!SHA.test(ready.merged_source_sha||'')||
       obj(ready.merged_source_sha,spec.path)!==obj(ready.merged_source_sha+'^',spec.path))
     throw Error('Another selected READY merge modified startup-coupled test: '+spec.path);
+  restored.push(spec.path);
  }
- return s.tests.map(x=>x.path).sort();
+ return restored.sort();
 }
 
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
@@ -396,10 +406,10 @@ export const REVIEWED_PINNED_COFFEE_TEST=Object.freeze({
  merge:'c9b1bf2a1cecce9a67c84983eb1fd8d379f2d5f2',
  blob:'9a1263d7022311a5d313db64f1604e91504fce23'
 });
-function reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
+function reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,restoredPaths=[],
  publishedSourceSha,developmentSourceSha,sourceObjectAt}){
  const s=REVIEWED_PINNED_COFFEE_TEST;
- if(path!==s.path||!pinnedReadyPaths.includes(s.runtime))return false;
+ if(path!==s.path||(!pinnedReadyPaths.includes(s.runtime)&&!restoredPaths.includes(s.runtime)))return false;
  const obj=(ref,p)=>sourceObjectAt(ref,p);
  if(!(queue?.items||[]).some(i=>i.issue===33&&
     ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
@@ -428,8 +438,8 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pi
     developmentSourceSha,sourceObjectAt});
   const support=reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths,
    publishedSourceSha,developmentSourceSha,sourceObjectAt});
-  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
-   publishedSourceSha,developmentSourceSha,sourceObjectAt});
+  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,restoredPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt});
   if(!m&&!ownerDrive&&!support&&!pinnedCoffee)continue;
   const issue=pinnedCoffee?33:ownerDrive?28:support?.issue??Number(m[1]);
   // A named support helper may have an unfinished owner spanning exact published
@@ -460,6 +470,16 @@ const REVIEWED_UNREADY_SUPPORT=Object.freeze({
  'supabase/tests/member_approval_finish_null_receipts.sql':{
    itemId:'DIC-Q-509-member-approval-null-receipt-guard',
    issue:509, requiredRuntime:'supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql'
+ },
+ 'scripts/audit/issue33-shopify-pagefly-h3.mjs':{
+  itemId:'DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method',issue:33,
+  requiredRuntime:'src/server/coffee-pagefly-selected-h3.mjs',
+  sourceBlob:'825edd6c8ff2ff73ff65bebbee029924518eca82'
+ },
+ 'supabase/tests/workspace_inactive_selection_guards.sql':{
+  itemId:'DIC-Q-509-workspace-inactive-selection-guards',issue:509,
+  requiredRuntime:'supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql',
+  sourceBlob:'12bb65b7f4e1ea2c52a1b1704dcefa75cee931b7'
  }
 });
 function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
@@ -467,6 +487,7 @@ function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
  const spec=REVIEWED_UNREADY_SUPPORT[path];
  if(!spec||!Array.isArray(restoredPaths)||!Array.isArray(pinnedReadyPaths))return null;
  const owner=queue?.items?.find(i=>i.id===spec.itemId);
+ if(spec.sourceBlob&&sourceObjectAt(developmentSourceSha,path)!=='100644:'+spec.sourceBlob)return null;
  if(owner?.issue!==spec.issue||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
     !owner.scope_paths?.includes(spec.requiredRuntime)||
     !restoredPaths.includes(spec.requiredRuntime)||
@@ -897,7 +918,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
   const eligibleSupport=Boolean(support)&&sourceObjectAt(candidateSha,path)===null;
   const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths:plan.pinned_ready_paths,
-   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+ restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
   if(!m&&!ownerDrive&&!eligibleSupport&&!pinnedCoffee)
    reject('Only proven issue-scoped, pinned coffee, owner Drive, or exact unready support tests can be excluded');
   const issue=pinnedCoffee?33:ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
