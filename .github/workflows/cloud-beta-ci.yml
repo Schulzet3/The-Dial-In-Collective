@@ -45,8 +45,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: dic-cloud-beta-ci-${{ github.ref }}
-  cancel-in-progress: true
+  # Push: complete each immutable source's CI; later unrelated pushes must not cancel it.
+  # PR: cancel superseded revisions so iterative development remains fast.
+  group: dic-cloud-beta-ci-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
 
 
 jobs:
