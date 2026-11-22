@@ -160,3 +160,21 @@ DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 
 ## November 22, 2026 — fix exact PR #3731 HIGH lint fail [skip netlify]
 - Exact first PR SHA bc15e2765ea19e95fe1b6aacad3915582dc71107: approval 45002874041 and SQL 45002874058 SUCCESS; cloud-tests job 137148015025 FAILED at ESLint `no-undef` on regression test's Node global `setImmediate`. The timing behavior under Node 22 was valid but check is mandatory, so no PASS claimed for this source. The full Node shard ran before lint and passed; no broad functional failure.
 - FIX: explicitly import `setImmediate` from `node:timers` in the test, preserving deterministic asynchronous concurrency assertions and fail-closed negative case. Retest exact changed source with five named statuses and nonforce integration; do not reuse the old failed cloud-tests as a PASS.
+
+DIC_PREFLIGHT_VERIFIED development_sha=dd4423f4a5bfe9af0a380acd348f9955c678fed6 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 22, 2026 — retain exact merged-source approval receipts [skip netlify]
+- AUTHORITY: owner #3667 speed-first (10/10 speed; 9/10 reliability) and #3347 frozen five-job release candidate. Live development dd4423f4a5bfe9af0a380acd348f9955c678fed6; preflight blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. GitHub-only CI orchestration; no Auth/privacy/offline/SQL/runtime, queue state, provider, release or production changes.
+- MEASURED BOTTLENECK: approval push run 44995038079 for dd64c9a... started 06:43:51 UTC and was CANCELLED at 06:44:03 UTC during bursty audit/dev pushes; separate #3686 merged approval run 44988722819 required selective retry after cancellation. Approval currently takes ~30 seconds (run 45001900651 08:14:52 to 08:15:22 UTC), so losing even a correct exact-source receipt causes avoidable recheck/blocked merge evidence.
+- CHANGE: include exact github.sha in approval-concurrency group for push and never cancel in-progress push approvals; keep PR group coalescing/cancel-on-new-head to avoid wasted superseded PR checks. The existing approval jobs, owner gates, test scope, exact-SHA check semantics, READY and publication controls are unchanged. A focused regression checks the literal workflow contract, SHA separation, retained PR coalescing and HIGH scope.
+- PERFORMANCE EXPECTATION: eliminate 12-second interrupted approval and manual rerun for each overlapping push; no hosted timing improvement claimed before exact CI. Tradeoff: short overlapping approval runs may consume additional GitHub Actions runner seconds during unusually rapid pushes; favors immutable reliable per-commit evidence over lost results.
+- ACCEPTANCE: focused Node regression PASS; five exact PR-head jobs SUCCESS; nonforce [skip netlify] merge; exact merged-push approval SUCCESS and source/test blob parity. SKIPPED is not PASS. Queue #3667 remains TESTING; no frozen-candidate certification or Publish.
+- NEXT ACTION: inspect exact hosted PR/push jobs, measure cancellation avoidance and reconcile issue #3667; independent under-15-min frozen-source to READY remains UNVERIFIED.
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=4c10b6831abadf4baedddee0458bb5a8921b867a preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## Concurrent #3731 source-preserving reconciliation [skip netlify]
+- Source-only READY read parallelism PR #3731 independently merged first as 4c10b6831abadf4baedddee0458bb5a8921b867a. Its tests, code, approved journal entries and immutable source-read safeguards are retained byte-for-byte in this PR's reconciled tree. This branch's own approval push SHA-bound workflow/test bytes are unchanged from the original e9dd83d1281cd4f1a68bc17857d54b862a2fddb7 head.
+- Nonforce two-parent feature-branch merge (parents original #3732 head then live #3731 merged development); no force/rewrite, no duplicated full test/build, no provider/release changes. Exact PR source CI must rerun on the reconciled head; no stale check is accepted for READY or a merged result.
+- NEXT ACTION: verify five required exact reconciled PR jobs and postmerge approval, then record #3667 issue readback; queue remains TESTING.

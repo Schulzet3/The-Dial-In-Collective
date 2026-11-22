@@ -139,3 +139,14 @@ test('official PR and push QA-only path stays focused, frozen candidate remains 
  assert.equal(candidate.tier,'high');
  assert.equal(candidate.node_mode,'full');
 });
+
+test('source-bound approval push jobs cannot be canceled by unrelated later push',()=>{
+ const yaml=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ assert.ok(yaml.includes("group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"));
+ assert.ok(yaml.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
+ const group=(event,ref,head)=>ref+'-'+(event==='push'?head:'pr');
+ const ref='refs/heads/development/backend-foundation';
+ assert.notEqual(group('push',ref,A),group('push',ref,B),'independent SHA-bound pushes');
+ assert.equal(group('pull_request','refs/pull/123/merge',A),group('pull_request','refs/pull/123/merge',B),'superseded PR jobs still coalesce');
+ assert.equal(classifyImpactPaths(['.github/workflows/approval-continuity.yml']).tier,'high');
+});

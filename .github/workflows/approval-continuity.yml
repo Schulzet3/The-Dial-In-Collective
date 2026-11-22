@@ -16,8 +16,10 @@ permissions:
   actions: read
   checks: read
 concurrency:
-  group: dic-approval-continuity-${{ github.ref }}
-  cancel-in-progress: true
+  # PR retries cancel superseded revisions; push source SHAs stay independently auditable.
+  # Later audit/docs pushes cannot cancel an exact merged-source approval receipt.
+  group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
 jobs:
   approval:
     runs-on: ubuntu-24.04
