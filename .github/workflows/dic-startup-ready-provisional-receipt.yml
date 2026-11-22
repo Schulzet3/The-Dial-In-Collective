@@ -29,4 +29,14 @@ jobs:
           test "$GITHUB_REF" = 'refs/heads/work/startup-ready-precert-20261122'
           git fetch --no-tags origin '+refs/heads/main:refs/remotes/origin/main' '+refs/heads/release/production:refs/remotes/origin/release/production' '+refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation'
           git worktree add --detach "$RUNNER_TEMP/dic-ready-main-tools" refs/remotes/origin/main
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          path=Path(os.environ['RUNNER_TEMP'])/'dic-ready-main-tools/scripts/release/ready-only-candidate.mjs'
+          source=path.read_text()
+          old="reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');"
+          new="reject('Candidate staging commit changes unrelated paths or lacks same-commit journal; missing='+JSON.stringify(allowed.filter(x=>!(stagedCommitChangedPaths||[]).includes(x)))+' unexpected='+JSON.stringify((stagedCommitChangedPaths||[]).filter(x=>!allowed.includes(x))));"
+          assert source.count(old)==1, 'Strict source guard changed'
+          path.write_text(source.replace(old,new))
+          PY
           node "$RUNNER_TEMP/dic-ready-main-tools/scripts/release/precertify-ready-source.mjs" "$GITHUB_SHA" --receipt

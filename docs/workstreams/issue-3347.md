@@ -143,3 +143,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=636bf35eda034579caae5ace5c4aa8772fe8de2b 
 
 - First provisional branch workflow 44987610894 FAILED before any stage or candidate source evaluation: scripts/release/precertify-ready-source.mjs is intentionally main operations-only and absent on development app checkout; Node MODULE_NOT_FOUND. No source/candidate/CI success claimed, no GitHub write from Actions, no provider/deploy side effect.
 - Repair only the isolated temporary branch workflow: separately checkout main to a clean temporary Git worktree READ ONLY while keeping process.cwd() at the exact provisional development source tree, run main's actual supported pre-certification receipt script and its own main dependencies, with all three refs explicitly fetched. No duplicated app suite, production, queue promotion or release. This is not a main/development workflow change.
+
+## 2026-11-22 — exact-path diagnostic for isolated source receipt [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=b73860d698e31fae566b832a84cfc57a80d58029 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- One-off read-only P2 job 44987713650 FAILED CLOSED at strict candidate staged-path equality; no remote candidate source ref or READY. Temporary isolated-branch workflow instrumented only inside a detached main-tools worktree to log precise missing/unexpected Git file paths in the original fail-closed error. No assertion bypass, no repeated test suites, no production/SQL/Netlify/grant/source changes.
