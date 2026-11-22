@@ -1,3 +1,8 @@
+## 2026-11-22 — #28 recurring verified live-release backup-source alignment [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=c4751be52a412ad264f153672107163743d446d2 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Owner approved one-line 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 -> 5ef0e190237a0fa8e391b086c5baeaaa962ae264 app-source checkout pin and standing identical future verified-deployment auto-sync via existing enabled hourly watchdog 6ad2807d3f408191a1aa9d5affe092a3; backup/restore/Netlify/Drive/Auth/credentials/schedules unchanged.
+- Netlify published READY/current 6b0344fd039acce2c0364f2b = live release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264; workflow old blob 03632d5dcd033da92c4343f6f7b75e9ee7891c54; change exactly one YAML ref plus same-commit ops scoped journal and this checkpoint. Focused source prerequisite/roundtrip PASS. Target main PR/merge exact controller CI PENDING until hosted run completes; no new backup or publication triggered. Issue #28 remains OPEN for unrelated historical gap/retention observations.
+
 ## 2026-11-22 — #28 backup published-source pin correction (owner approved) [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=c70825e63c862e8388d0e5da6684426bfc35ca84 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 - VERIFIED before change: live Netlify READY/current production and release/production both 50e05054e7139d2e7a675b8e15ab71a7dd42ac81; old main backup source pin 07f054f6470b2ae36b36faef8fb9a8161dd3bfb5 was one release behind.
