@@ -1,3 +1,17 @@
+# Issue #509 R434 — direct PostgreSQL attribute definitions 1281–1680 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8cc7a94ec92c456064c4d6391951be9611b28b06 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-22 UTC. Mandatory immutable preflight read and Git blob content matched before scope/provider access. Production Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11.0.003, strictly **READ-ONLY**. Resumed live ordered `pg_attribute` cursor rank 1281 `pg_catalog.pg_stat_sys_tables.last_seq_scan`, relation OID 12152 attnum 5. Directly reviewed **400/400 newly unreviewed complete accessible PostgreSQL catalog attribute tuples**, ranks **1281–1680/4181**, **204,055 full tuple characters**, across **36 pg_catalog diagnostic view relations**. Every provider tuple literal, MD5, exact 1–end character range, SQL type and individually assessed field purpose/retention are in [append-only R434 ledger](../audits/issue509-r434-pg-attribute-ranks1281-1680-20261122.json). Cumulative attribute route **1680/4181**; other provider surfaces and compiled/native SQL remain unverified.
+
+Behavior review: cumulative vs transaction-local `pg_stat_*` table/function and index metrics, all/sys/user visibility, IO/cache hit counters, activity and replication/WAL/SSL diagnostics, archiver/checkpointer stats and ANALYZE progress fields are distinct PostgreSQL contracts, not established duplicate/dead DIC definitions. Only metadata/column names queried for connection address, credentials, query, transport and statement fields; no member/Auth/user/shot/note/secret contents. Independent live read-only integrity query for these **400/400** fields showed **0** physical type/alignment conflicts, dropped/missing/default/identity/generated flags, invalid index fields or orphan TOAST attributes. Separate public/private table-statistics read: `shots` estimated 27 live/53 dead rows and 208kB, `mutation_receipts` 71 live/52 dead and 144kB; reset-sensitive estimates and tiny storage do **not** establish a DIC latency bottleneck, safe deletion or vacuum fix.
+
+No reproducible application defect, attributable bottleneck, obsolete object with proven zero consumers or justified source cleanup in this scope. **No application code/tests/CI changes**, new exact-source CI **NOT_APPLICABLE** (not PASS), queue READY/DEPLOYED **NOT_REVALIDATED**. No GitHub code-review credit claimed for #267. Production SQL/data/Edge/Auth/Storage/config, migrations, releases, backups, billing, schedules and owner-alert policy untouched. Full provider baseline **IN_PROGRESS**.
+
+**Next exact unreviewed cursor:** `pg_catalog.pg_stat_progress_analyze.ext_stats_total`, OID **12305**, attnum **8**, `pg_attribute` rank **1681/4181**, character **1**. Continue direct field/source semantic review and source-dependent application bug investigation. No new owner action needed.
+
+---
+
 # Issue #509 R433 — direct semantic inspection of PostgreSQL attributes 881–1280 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=9cb4c18e1632d4f2317f1726597ea75ba760fc42 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
