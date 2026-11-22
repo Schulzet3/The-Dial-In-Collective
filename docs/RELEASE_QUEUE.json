@@ -18269,6 +18269,29 @@
       ],
       "production_deployed": false,
       "notes": "No invented grower, preserve original exact seller literal, user-entry, explicit Add Coffee, frozen603 and member data."
+    },
+    {
+      "id": "DIC-Q-455-r444-pending-shot-form-lock",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep all Log Shot fields and five rating controls immutable during pending Save",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Owner #455 Option B SAFE bounded UX correction. DIC_PREFLIGHT_VERIFIED development_sha=fdb63255433ebe7c9684efa42447eb56e3dd2828 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob 7a1c84eff7a6a8b825e0688a73114001e73f3390; R443 verified continuation.",
+      "tests": [
+        "R444 synthetic actual CloudApp delayed Save success/error: pending rating/measurement/feed/notes controls freeze and aria-busy; restore original disabled state and draft on both outcomes. CI pending at authoring.",
+        "R443 existing three unavailable-copy negative/positive tests and focus/accessibility static assertions updated for expanded control locking; Node22/UX/approval exact-source pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable CI must complete successfully; pending or skipped is NOT PASS.",
+        "Separate #3347 frozen nonpublishing READY candidate plus five exact candidate-success jobs required before READY; owner Publish required for deployment."
+      ],
+      "notes": "No new recipe/taste/temperature/science rule or member/telemetry change. Existing five ratings and original measurements/notes/history are preserved. No Netlify, production, provider, SQL/Auth/Edge, release, backup, purchase, forced Git or visibility changes.",
+      "production_deployed": false
     }
   ],
   "history": [

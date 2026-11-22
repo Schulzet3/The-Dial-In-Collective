@@ -31,7 +31,7 @@ async function invalidSave(initialDisabled){
   {name:'Five taste buttons remain selectable',disabled:false}
  ];
  const form={id:'shot',isConnected:false,querySelectorAll(selector){
-  assert.equal(selector,'button');return buttons;
+  assert.equal(selector,'button,input,select,textarea');return buttons;
  }};
  const OriginalFormData=globalThis.FormData;
  globalThis.FormData=class {*[Symbol.iterator](){}};
