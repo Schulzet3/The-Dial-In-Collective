@@ -38,6 +38,33 @@ test('stage only selected READY source and restore unfinished paths to published
  assert.equal(good.ready,true);
  assert.deepEqual(good.ready_items.map(x=>x.id),[one.id]);
 });
+test('#3347 published frozen candidate may be a detached one-parent sibling of active development',()=>{
+ const P='e'.repeat(40),F='f'.repeat(40);
+ const queue={...q,published_base:{...q.published_base,tested_source_sha:P}};
+ const detachedAncestor=(a,b)=>a===P&&b===B?false:
+  a===P+'^'&&b===B?true:ancestor(a,b);
+ const sourceObjectAt=(sha,path)=>path===CANDIDATE_RECEIPT_PATH?
+  (sha===P?'100644:'+F:null):validate.sourceObjectAt(sha,path);
+ const input={...opts,publishedSourceSha:P,isAncestor:detachedAncestor,sourceObjectAt};
+ const accepted=planReadyOnlyCandidate(queue,input);
+ assert.equal(accepted.ready,true,accepted.errors.join('; '));
+ assert.deepEqual(accepted.included_paths,['site/card.js']);
+ const candidate={...validate,publishedSourceSha:P,sourceObjectAt,
+  manifest:{...manifest,published_source_sha:P},isAncestor:detachedAncestor};
+ assert.equal(validateReadyOnlyCandidate(queue,candidate).ready,true,
+  'the same detached frozen source must pass the release validator');
+ for(const denied of [
+  {...input,sourceObjectAt:(sha,path)=>path===CANDIDATE_RECEIPT_PATH?null:sourceObjectAt(sha,path)},
+  {...input,isAncestor:(a,b)=>a===P+'^'&&b===B?false:detachedAncestor(a,b)},
+  {...input,sourceObjectAt:undefined}
+ ])assert.equal(planReadyOnlyCandidate(queue,denied).ready,false,
+  'missing frozen candidate manifest, parent lineage, or exact object reader must HOLD');
+ assert.equal(planReadyOnlyCandidate({...queue,published_base:{...queue.published_base,release_sha:null}},input).ready,false,
+  'unverified published release pointer must HOLD');
+ assert.equal(planReadyOnlyCandidate({...queue,published_base:{...queue.published_base,netlify_deploy_id:''}},input).ready,false,
+  'missing actual Netlify delivery receipt must HOLD');
+});
+
 test('post-staging unready development drift is excluded without weakening exact READY proof',()=>{
  const E='e'.repeat(40);
  const newer={...unfinished,id:'DIC-Q-102',issue:102,

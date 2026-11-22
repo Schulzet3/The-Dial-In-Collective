@@ -552,9 +552,24 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
  if(selected.length!==wanted.size)errors.push('Unknown selected READY item ID');
  if(selected.some(i=>i.state!=='READY'))errors.push('Selected item is not READY');
  if(typeof isAncestor==='function'&&SHA.test(publishedSourceSha||'')&&SHA.test(developmentSourceSha||'')){
-  try{if(isAncestor(publishedSourceSha,developmentSourceSha)!==true)
-    errors.push('Development does not descend from published source');}
-  catch{errors.push('Cannot verify published-to-development ancestry');}
+  try{
+   // Published production bytes may be an immutable READY-only candidate
+   // created as a ONE-parent sibling of continued development (#3347).
+   // Do not require that detached frozen source commit to be an ancestor:
+   // verify its exact candidate manifest object, published release receipt,
+   // and that its first parent is in current development ancestry instead.
+   const direct=isAncestor(publishedSourceSha,developmentSourceSha)===true;
+   if(!direct){
+    const sourceReceipt=typeof sourceObjectAt==='function'?
+     sourceObjectAt(publishedSourceSha,CANDIDATE_RECEIPT_PATH):null;
+    const detached=/^100644:[a-f0-9]{40}$/.test(sourceReceipt||'')&&
+     SHA.test(queue?.published_base?.release_sha||'')&&
+     typeof queue?.published_base?.netlify_deploy_id==='string'&&
+     queue.published_base.netlify_deploy_id.length>0&&
+     isAncestor(publishedSourceSha+'^',developmentSourceSha)===true;
+    if(!detached)errors.push('Published baseline lacks direct or frozen-candidate development provenance');
+   }
+  }catch{errors.push('Cannot verify published-to-development source provenance');}
  }
  for(const item of selected){
   try{
