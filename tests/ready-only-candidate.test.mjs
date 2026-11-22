@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
+import {planReadyOnlyCandidate,validateReadyOnlyCandidate,matchesCandidateChangedPaths,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
@@ -650,4 +650,23 @@ test('#3347 #509 new SQL regression excluded only with its own TESTING migration
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,queue:{items:[{...owner,state:'READY'}]}}),/lacks exact source\/migration provenance/);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,
   sourceObjectAt:(ref,path)=>ref===B&&path===spec.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Unreviewed current or published SQL test bytes/);
+});
+
+
+test('#3347 path-receipt equality ignores repeated proven expected ownership, never extra, missing, or duplicate actual paths',()=>{
+ const published='site/cloud/main.js';
+ const journal=CANDIDATE_JOURNAL_PATH;
+ const receipt=CANDIDATE_RECEIPT_PATH;
+ const expected=[published,receipt,journal,published];
+ assert.equal(matchesCandidateChangedPaths([published,receipt,journal],expected),true,
+  'two independently proven restore categories can own the same exact changed file');
+ for(const unexpected of [
+  [published,journal],
+  [published,receipt,journal,'site/private.js'],
+  [published,published,receipt,journal],
+  [published,receipt,journal,receipt]
+ ])assert.equal(matchesCandidateChangedPaths(unexpected,expected),false,
+  'missing, unexpected, and duplicate actual Git paths still HOLD');
+ assert.equal(matchesCandidateChangedPaths(null,expected),false);
+ assert.equal(matchesCandidateChangedPaths([],expected),false);
 });

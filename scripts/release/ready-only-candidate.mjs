@@ -645,6 +645,13 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
   other_items:(queue?.items||[]).filter(i=>i.state!=='READY'&&i.state!=='DEPLOYED')
    .map(i=>({id:i.id,state:i.state,merged_source_sha:i.merged_source_sha,blockers:i.blockers}))};
 }
+export function matchesCandidateChangedPaths(actual,permitted){
+ if(!Array.isArray(actual)||!Array.isArray(permitted)||new Set(actual).size!==actual.length)
+  return false;
+ // Git diffs are sets; multiple proven restoration categories may name one path.
+ // Only deduplicate the expected paths, never an actual duplicated diff entry.
+ return equal(actual,[...new Set(permitted)]);
+}
 export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,developmentHead,
  candidateSha,actualParents,developmentChangedPaths,candidateChangedPaths,
  stagedCommitChangedPaths,developmentDriftPaths,queueContentMatches,liveQueue,sourceObjectAt,
@@ -880,7 +887,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   }
  }
  const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...restoredTests,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
- if(!equal(stagedCommitChangedPaths||[],allowed))
+ if(!matchesCandidateChangedPaths(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
