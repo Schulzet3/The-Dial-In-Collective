@@ -20,7 +20,8 @@
     "original_title_words": 82,
     "original_body_words": 815,
     "original_total_words": 897,
-    "remaining_words_in_selected_title_body_fields": 0
+    "remaining_words_in_selected_title_body_fields": 0,
+    "original_title_body_utf8_bytes": 7785
   },
   "records": [
     {
@@ -43,7 +44,7 @@
         "first": 1,
         "last": 1
       },
-      "original_utf8_bytes": 1098,
+      "original_utf8_bytes": 1110,
       "state": "closed",
       "draft": false,
       "merged": true,
@@ -77,7 +78,7 @@
         "first": 1,
         "last": 1
       },
-      "original_utf8_bytes": 863,
+      "original_utf8_bytes": 867,
       "state": "open",
       "draft": true,
       "merged": false,
@@ -145,7 +146,7 @@
         "first": 1,
         "last": 1
       },
-      "original_utf8_bytes": 960,
+      "original_utf8_bytes": 962,
       "state": "closed",
       "draft": false,
       "merged": true,
@@ -179,7 +180,7 @@
         "first": 1,
         "last": 1
       },
-      "original_utf8_bytes": 733,
+      "original_utf8_bytes": 735,
       "state": "closed",
       "draft": false,
       "merged": true,
@@ -213,7 +214,7 @@
         "first": 1,
         "last": 1
       },
-      "original_utf8_bytes": 980,
+      "original_utf8_bytes": 984,
       "state": "closed",
       "draft": false,
       "merged": true,
@@ -296,5 +297,11 @@
       "cleanup": "ARCHIVE_TITLE_PREFIX_AFTER_SOURCE_SEAL_AND_VERIFY"
     }
   ],
-  "scope_limits": "Complete original native TITLE/BODY fields only; no coverage of comments/reviews/threads/patches, Actions, historic source files, provider, changed metadata, or delegated #267 global work"
+  "scope_limits": "Complete original native TITLE/BODY fields only; no coverage of comments/reviews/threads/patches, Actions, historic source files, provider, changed metadata, or delegated #267 global work",
+  "byte_count_correction": {
+    "prior_immutable_seal_git_blob": "a9cbfbbbfedf995fd2614a914d7ad71a482aea93",
+    "reason": "Original byte counter used JS UTF-16 string length rather than UTF-8 length; exact original source strings, word counts, native IDs, field boundaries and semantic findings unchanged",
+    "corrected_utc_date": "2026-11-22",
+    "delta_bytes": 24
+  }
 }
