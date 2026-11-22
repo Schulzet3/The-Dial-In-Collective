@@ -162,6 +162,14 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
    let chosen=null,failures=[];
    for(const sha of sources){
     const recorded=exactRecordedChecks(await checks(sha),sha,receiptIds);
+    // All certificate run IDs must be consumed by the five independently
+    // observed named check jobs; an extra unused SUCCESS run is NOT evidence.
+    if(frozenCandidateRunIds.length){
+     const used=new Set(recorded.filter(x=>x.recorded===true).map(x=>x.recorded_run_id));
+     if(used.size!==frozenCandidateRunIds.length||
+        frozenCandidateRunIds.some(id=>!used.has(id)))
+      throw Error('Frozen candidate CI certificate references a run unused by five exact checks');
+    }
     const audit=assessReadyEvidence(item,{mergedSha:item.merged_source_sha,
       ciSourceSha:sha,checks:recorded,changedPaths:actualPaths,
       sourceObjectAt,testPaths:provenancePaths});
