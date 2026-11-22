@@ -127,3 +127,55 @@ test('#3667 READY handoff persists a machine-readable exact Git-tree receipt wit
  assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
  assert.doesNotMatch(workflow,/git push|POST.*publish|deploy to netlify/i);
 });
+
+test('#3667 READY pre-cert fast event gate skips only source-proven irrelevant approvals',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ const marker='      - name: Fast skip stale or queue-unchanged approvals before checkout\n';
+ const segment=workflow.split(marker)[1]?.split('      - uses: actions/checkout@v7')[0];
+ assert.ok(segment,'precheckout gate required');
+ const source=segment.split('        run: |\n')[1];
+ assert.ok(source,'executable shell script required');
+ const script=source.split('\n').map(s=>s.startsWith('          ')?s.slice(10):s).join('\n');
+ assert.match(script,/\.files \| length\) >= 300/,'truncated changed-file response must fail open');
+ assert.match(script,/docs\/RELEASE_QUEUE\.json/);
+ assert.match(script,/\|\| \{ decide true; exit 0; \}/,'unavailable API must retain the Git guard');
+ for(const step of ['actions/checkout@v7','actions/setup-node@v7.1.0','Verify live development and source bound approved queue transition']){
+  const index=workflow.indexOf(step,workflow.indexOf(marker));
+  assert.ok(index>0,'step must exist: '+step);
+  const tail=workflow.slice(index,index+240);
+  assert.match(tail,/if: steps\.event_gate\.outputs\.proceed != 'false'/,'no-op must bypass '+step);
+ }
+ const dir=mkdtempSync(join(tmpdir(),'dic-ready-fast-event-'));
+ const output=join(dir,'out');
+ const S='b'.repeat(40);
+ const mock=`gh() {
+   if [[ "$2" == *"/git/ref/heads/development/backend-foundation" ]]; then
+     if [ "$DIC_FAKE_REF_FAIL" = "1" ]; then return 1; fi
+     printf '%s\\n' "$DIC_FAKE_LIVE"
+   else
+     if [ "$DIC_FAKE_COMMIT_FAIL" = "1" ]; then return 1; fi
+     printf '%s\\n' "$DIC_FAKE_KIND"
+   fi
+ }
+ `;
+ function check(opts,expected){
+  writeFileSync(output,'');
+  execFileSync('bash',['-c',mock+script],{encoding:'utf8',env:{
+   ...process.env,GITHUB_OUTPUT:output,GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective',
+   EVENT_HEAD:S,DIC_FAKE_LIVE:S,DIC_FAKE_KIND:'queue',
+   DIC_FAKE_REF_FAIL:'0',DIC_FAKE_COMMIT_FAIL:'0',...opts
+  }});
+  assert.equal(readFileSync(output,'utf8').trim(),'proceed='+expected);
+ }
+ try{
+  check({DIC_FAKE_KIND:'queue'},'true');
+  check({DIC_FAKE_KIND:'unknown'},'true');
+  check({DIC_FAKE_KIND:'unrelated'},'false');
+  check({DIC_FAKE_LIVE:'a'.repeat(40)},'false');
+  check({DIC_FAKE_REF_FAIL:'1'},'true');
+  check({DIC_FAKE_COMMIT_FAIL:'1'},'true');
+ }finally{rmSync(dir,{force:true,recursive:true});}
+ assert.match(workflow,/schedule:[\s\S]*cron: '17 \* \* \* \*'/,'scheduled recertification retained');
+ assert.match(workflow,/workflow_dispatch:/,'manual guarded route retained');
+ assert.match(workflow,/permissions:\n  contents: read\n  actions: read\n  checks: read/,'read-only token scope');
+});
