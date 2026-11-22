@@ -1,0 +1,49 @@
+# #33 R394: bounded 2 exact selected Dakota product sources; never full603 fanout or deployment.
+name: DIC 33 R394 Dakota selected HTML and parser
+on:
+  pull_request:
+    branches:
+      - development/backend-foundation
+    paths:
+      - 'scripts/audit/issue33-r394-dakota-check.mjs'
+      - 'tests/coffee-issue33-r394-dakota.test.mjs'
+      - '.github/workflows/issue33-r394-dakota-source.yml'
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - 'scripts/audit/issue33-r394-dakota-check.mjs'
+      - 'tests/coffee-issue33-r394-dakota.test.mjs'
+      - '.github/workflows/issue33-r394-dakota-source.yml'
+permissions:
+  contents: read
+jobs:
+  exact-original88-and-90:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused synthetic positive and adversarial guards
+        run: node --test tests/coffee-issue33-r394-dakota.test.mjs
+      - name: Guarded HTTPS exact selected current first-party fetch and existing parser/UI
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '88,90'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r394
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Hard-gated HTML SHA identity direct selected facts and no-save afterproof
+        env:
+          DIC_ISSUE33_R394_DIR: /tmp/dic33-r394
+        run: node scripts/audit/issue33-r394-dakota-check.mjs
+      - name: Retain source-bound public-only current evidence for 1 day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r394-dakota-selected
+          path: /tmp/dic33-r394/
+          if-no-files-found: warn
+          retention-days: 1
