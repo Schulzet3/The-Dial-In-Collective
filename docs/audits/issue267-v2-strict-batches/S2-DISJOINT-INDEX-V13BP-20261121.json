@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BP",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BO-20261121.json",
+  "development_prewrite_sha": "396de8b291a7604f7cbdf0df262b7e7ca8fe8e2c",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_NUMBERED_SOURCE_LITERAL_PER_LINE_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F221-57-86-20261121-V13BP.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 221,
+          "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+          "source_blob_sha": "a462ee619951af03820b714fb6d8958bb0afabbd",
+          "first_line": 57,
+          "last_line": 86,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "track": "pinned_executable_v2",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C71-56-68-C72-1-17-20261121-V13BP.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 71,
+          "path": "scripts/audit/source-release-dossier.mjs",
+          "source_blob_sha": "0d5244e6cb1b00d7be17cf121231ff36f3c0f395",
+          "first_line": 56,
+          "last_line": 68,
+          "line_count": 13
+        },
+        {
+          "manifest_index_1_based": 72,
+          "path": "scripts/audit/verify-commit-checkpoint.mjs",
+          "source_blob_sha": "efa7a5041e4217a870fde6b69c155c48d54c0f8b",
+          "first_line": 1,
+          "last_line": 17,
+          "line_count": 17
+        }
+      ]
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "source_blob_parity": "PASS_3_COMPLETE_ORIGINAL_GIT_BLOBS",
+  "archived_json_parse": "PASS_1",
+  "pinned_live_parity": "IDENTICAL_C71_DRIFTED_C72_LIVE_DELTA_NOT_CREDITED",
+  "findings": [
+    {
+      "severity": "HISTORICAL_TRIAGE",
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 68,
+      "fact": "Archived admin-read-only test had 7/8 pass; copy expected older message but current checked test expects rendered updated text.",
+      "disposition": "HISTORIC_ONLY_CURRENT_TEST_ALREADY_UPDATED_NO_NEW_DEFECT"
+    },
+    {
+      "severity": "LIVE_DRIFT_PENDING",
+      "path": "scripts/audit/verify-commit-checkpoint.mjs",
+      "line": 15,
+      "fact": "Pinned commit-checkpoint argument checks only subject but current source accepts commit message; changed live bytes require independent future drift review.",
+      "disposition": "NO_PINNED_CREDIT_FOR_LIVE_DELTA_NO_SOURCE_CHANGE"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_3",
+    "archived_json_parse": "PASS_1",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 221,
+      "path": "docs/audits/application_pass3_before_admin_fixture_refresh.json",
+      "line": 87
+    },
+    "pinned": {
+      "manifest_index": 72,
+      "path": "scripts/audit/verify-commit-checkpoint.mjs",
+      "line": 18
+    }
+  }
+}
