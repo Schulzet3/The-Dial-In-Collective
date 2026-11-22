@@ -735,3 +735,10 @@ test('#3347 new unready coffee R324 test follows restored parser source, not onl
  assert.deepEqual(discoverExcludedUnreadyTests(args),[spec.path]);
  assert.deepEqual(discoverExcludedUnreadyTests({...args,restoredPaths:[]}),[]);
 });
+test('#3347 reviewed workflow-only tests each retain independently checked exact Git blobs and original workflow',()=>{
+ assert.notEqual(REVIEWED_WORKFLOW_TEST.path,REVIEWED_CI_FAST_PR_TEST.path);
+ for(const spec of [REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST]){
+  assert.match(spec.sourceBlob,/^[a-f0-9]{40}$/);
+  assert.ok(spec.restoredWorkflow.startsWith('.github/workflows/'));
+ }
+});
