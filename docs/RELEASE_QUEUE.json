@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-stale-project-shot-comment-20261122",
+      "issue": 509,
+      "title": "Correct outdated project_shot worker-status comment",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
+      ],
+      "owner_source": "Issue #509 R461, preflight development 4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 / blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+      "tests": [
+        "PASS live catalog 36 complete comments and implemented routine OIDs crosscheck",
+        "PENDING isolated PG17 COMMENT migration and exact-source SQL CI"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Isolated PostgreSQL and exact-source CI not yet PASS",
+        "#3347 frozen READY certification outstanding",
+        "New owner Publish required for production"
+      ],
+      "notes": "Comment text only. Immutable migrations and runtime behavior preserved. Provider production read-only.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
       "issue": 455,
       "pr": 3810,

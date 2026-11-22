@@ -1,3 +1,14 @@
+# Issue #509 R461 — direct 36 live application comments and stale worker comment source repair [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-22 UTC. Mandatory FIRST GitHub development SHA 4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 and immutable PREFLIGHT blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f independently verified before any other sources or provider reads. Live Supabase azviqqejypsefzilgonr PostgreSQL 17.11.0.003 ACTIVE_HEALTHY, strictly READ ONLY. Read all **36/36 complete public/private pg_description comments**, 5,018 literal characters and per-comment OIDs, MD5 and range 1-end in [R461 ledger](../audits/issue509-r461-live-public-private-comments-36-20261122.json). No duplicate credit for completed R460 AST route.
+
+**Reproducible stale source documentation:** Live `private.project_shot()` OID 18516 asserts Community reviewer/outlier/family workers have yet to be built, contradicted by live full routine implementations `private.dic_review_community_shot(uuid)` OID 20021, `private.refresh_personal_family(uuid)` OID 18560 and `public.dic_confirm_community_outlier(uuid,bigint)` OID 20030. No executable defect inferred from comment alone. Additive development-only `supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql` replaces obsolete COMMENT; original migrations preserved and function behavior, user data, Community and offline unchanged. **No live production COMMENT/migration applied.** 35 other comments retained without proven inconsistency.
+
+New `docs/RELEASE_QUEUE.json` item `DIC-Q-509-stale-project-shot-comment-20261122` TESTING, **NOT READY/DEPLOYED**. Isolated PG17 execution / source-bound SQL CI PENDING (not PASS), and #3347 READY certification outstanding. Migration source/queue/ledger and this same-commit journal carry exact verified preflight receipt. Existing deployed verifier HTML parser drift unchanged BLOCKED_OWNER_PUBLISH, no repeat owner alert. Full Supabase baseline IN_PROGRESS. **Next exact new cursor:** 1/35 managed pg_description `auth.email()`, OID 16544, 46 characters. No production SQL/data/Auth/Storage/Edge/config, deployment, main/release, backup, billing, scheduler or alert-policy changes. No #267 code-line credit.
+
+---
+
 # Issue #509 R460 — complete remaining native pg_rewrite AST ranks 81–148 (read-only) [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
