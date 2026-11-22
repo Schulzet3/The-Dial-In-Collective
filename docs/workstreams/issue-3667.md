@@ -71,3 +71,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=b73860d698e31fae566b832a84cfc57a80d58029 
 ## November 22, 2026 — correct PR #3681 first-head CI intake HOLD
 DIC_PREFLIGHT_VERIFIED development_sha=513f98ac06cdd0fe569390354420158458342859 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Exact PR-head 0b3122f2: cloud-tests job 137103371646 failed in cheap preflight because deployable-only queue scope_paths was incorrectly expanded to non-runtime scripts, tests and workflow. This is a schema/intake failure, not evidence of an application defect. Preserve original exact package.json deployable scope; explicitly record CI-only paths in journal and tests notes. Earlier failed run 44988218759 is FAIL and must never be counted as PASS. Retest on corrected exact head, no suite bypass or production write.
+
+## November 22, 2026 — actual hosted QA-only path benchmark
+DIC_PREFLIGHT_VERIFIED development_sha=07ee71084cfac00152600ba6bb17aff209880e4e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- Owner #3667 explicit speed-first scope, six allowlisted nonshipped QA paths and five required job names preserved by merged PR #3681 (development 5012964b).
+- Add a real adversarial multi-file QA-only classification assertion in tests/ci-scope.test.mjs. This intentionally triggers native PR CI with only QA test + journal changed, directly proving that the newly implemented focused Node four-file path executes instead of the high-risk full corpus, browser, SQL regression and application build; NOT_APPLICABLE remains distinct from job SUCCESS.
+- Acceptance: observe actual five exact PR-head GitHub jobs, validate log for focused Node tests + skipped unrelated stages, compare official seconds against PR #3681 140s validate/110s mobile (HIGH); nonforce integration, exact merged-source checks, queue TESTING until independent #3347 frozen candidate. No production, no Publish, no provider or private data writes.

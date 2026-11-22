@@ -122,3 +122,20 @@ test('mixed changes, unknown paths and sensitive CI remain conservatively covere
  assert.equal(classifyImpactPaths(['docs/CURRENT_STATUS.md']).tier,'docs');
  assert.equal(classifyImpactPaths(['site/cloud/main.js']).tier,'high');
 });
+
+test('multiple QA-only diagnostics share the same focused hosted route',()=>{
+ const result=classifyImpactPaths([
+  'tests/ci-scope.test.mjs',
+  'tests/ci-optimization.test.mjs',
+  'scripts/audit/fast-pr-check.mjs',
+  'docs/workstreams/issue-3667.md'
+ ]);
+ assert.equal(result.tier,'low');
+ assert.equal(result.node_mode,'qa');
+ assert.equal(result.cloud_mode,'none');
+ assert.equal(result.browser_mode,'none');
+ assert.equal(result.sql,false);
+ assert.equal(result.lint,false);
+ assert.equal(result.build_browser||result.build_validate,false);
+ assert.equal(result.provider_guard,false);
+});
