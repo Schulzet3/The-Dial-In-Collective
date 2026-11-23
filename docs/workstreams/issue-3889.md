@@ -104,3 +104,19 @@ DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e 
 
 ## November 23 — Exact hosted test wiring for prospective preview [skip netlify]
 - Run new adversarial prospective READY suite from existing required main controller tests/precertify-ready-source.test.mjs so approval is NOT falsely inferred from an unexecuted standalone test. All source/file changes on same commit; no app/provider/release write. NEXT: observe PR exact native required controller SUCCESS before merge; stage actual prevalidated candidate before any live READY change.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — Automatic nonpublishing #3889 prospective source receipt in existing main pre-certification [skip netlify]
+- Extend main existing read-only #3347 script with opt-in one-item prospective queue only when development has zero READY; no live queue edit. Use exact same source, pinned-path, candidate-tree/journal verification and GitHub main workflow receipt artifact. Normal READY path remains preferred and unchanged; no extra build, PR or certification job. The main precert workflow on a main push or hourly schedule produces either ordinary READY source receipt or, only for verified original #509 TESTING SQL-comment ID, a distinct not-yet-certified immutable prospect3889 source recipe. All candidates have publication_authorized:false and require subsequent authenticated connector frozen ref and five exact-PUSH native SUCCESS checks before ANY queue READY update.
+- NEXT: review hosted source receipt and repair strictly traced QA6 source/restore incompatibility if present; do not treat an approximate receipt or PR checks as certification. Current development original 63 remain TESTING and production frozen.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — Correct literal shell/regex escaping before first hosted prospective source run [skip netlify]
+- Repair main receipt producer to print a real newline rather than trailing literal backslash-n and ensure focused workflow permission assertion tests actual YAML whitespace. This is strictly source/QA preflight before PR CI, not candidate CI or READY evidence; no provider or development queue effect.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — #3908 exact native CI failure triage/repair [skip netlify]
+- PR native controller workflow 45282552062 / job 138070490597 completed FAILURE: 273/274 PASS, one NEW assertion erroneously matched an existing harmless YAML explanatory comment `Netlify build`. Correct test to examine noncomment workflow lines, preserving prohibition on actual publish/push commands. No workflow relaxation, skipped checks or simulated success; require new exact-head native CI PASS before merge.

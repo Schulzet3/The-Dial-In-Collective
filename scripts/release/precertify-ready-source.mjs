@@ -179,7 +179,8 @@ export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha
 }
 
 export function prevalidateReadySource({
- repoDir=process.cwd(),developmentSourceSha,push=false,receipt=false,expectedHostedEnv=process.env
+ repoDir=process.cwd(),developmentSourceSha,push=false,receipt=false,
+ prospectiveReadyItemId=null,expectedHostedEnv=process.env
 }={}){
  if(!SHA.test(developmentSourceSha||''))throw Error('Exact development source SHA required');
  if(push)throw Error('Actions ref push prohibited; use --receipt then trusted GitHub connector');
@@ -189,14 +190,27 @@ export function prevalidateReadySource({
   return trim?value.trim():value;
  };
  const raw=git(['show',developmentSourceSha+':docs/RELEASE_QUEUE.json']);
- const queue=JSON.parse(raw);
- const items=selectedReadyItems(queue);
+ let queue=JSON.parse(raw);
+ let items=selectedReadyItems(queue);
+ if(!items.length&&prospectiveReadyItemId!==null){
+  // PREVIEW ONLY: source-staged queue, not a live READY promotion. The strict
+  // 63-ID ancestry and blob proof is rechecked by stageReadyOnlyCandidate.
+  const original=queue.items.find(i=>i.id===prospectiveReadyItemId);
+  if(!original||original.state!=='TESTING')
+   throw Error('Prospective preview requires an exact currently TESTING source');
+  queue=structuredClone(queue);
+  const selected=queue.items.find(i=>i.id===prospectiveReadyItemId);
+  selected.state='READY';selected.blockers=[];
+  items=selectedReadyItems(queue);
+ }
  if(!items.length)return {status:'NO_READY_ITEMS',count:0};
  // Fail before candidate tree recreation and expensive hosted jobs when the
  // cited merged source is merely a QA/documentation commit (#3851 evidence).
  assertReadyFirstParentDeployable(items,sha=>git(['diff','--name-only',
   '--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean));
- const branch=frozenReadyBranch(queue,items,developmentSourceSha);
+ const branch=prospectiveReadyItemId!==null?
+  frozenReadyBranch(queue,items,developmentSourceSha).replace('ready3347-','prospect3889-'):
+  frozenReadyBranch(queue,items,developmentSourceSha);
  const ids=items.map(i=>i.id);
  const published=queue.published_base.tested_source_sha;
  if(!SHA.test(published))throw Error('Missing published tested source');
@@ -235,7 +249,8 @@ export function prevalidateReadySource({
    throw Error('Development moved since pre-certification; no candidate push');
  }
  const staged=stageReadyOnlyCandidate({repoDir,developmentSourceSha,
-  selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false});
+  selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false,
+  prospectiveReadyItemId});
  if(receipt)return candidateTreeReceipt({repoDir,developmentSourceSha,staged});
  const transport=push?neutralWorkflowTransportCommit({repoDir,developmentSourceSha,
   candidateSha:staged.candidate_sha,
@@ -265,11 +280,13 @@ export function prevalidateReadySource({
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
-  const [source,mode]=process.argv.slice(2);
+  const [source,mode,prospective]=process.argv.slice(2);
   if(!SHA.test(source||'')||!['--dry-run','--receipt'].includes(mode)||
-     process.argv.length!==4)
-   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--receipt');
-  const outcome=prevalidateReadySource({developmentSourceSha:source,receipt:mode==='--receipt'});
+     process.argv.length>5||
+     (prospective!==undefined&&!/^--prospective=DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(prospective)))
+   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--receipt [--prospective=<63 baseline TESTING ID>]');
+  const outcome=prevalidateReadySource({developmentSourceSha:source,receipt:mode==='--receipt',
+   prospectiveReadyItemId:prospective?.slice('--prospective='.length)||null});
   console.log('[DIC READY pre-certification] '+JSON.stringify(outcome));
  }catch(e){console.error('[DIC READY pre-certification] HOLD: '+e.message);process.exitCode=2;}
 }
