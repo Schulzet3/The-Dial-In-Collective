@@ -1641,6 +1641,27 @@
       ],
       "superseded_by": "DIC-20261123-INSTANT-3851-R2",
       "superseded_reason": "First chat controller Actions 45129045714 failed BEFORE any Git/Netlify claim; cited ed2afb54 QA-only first-parent diff contained no deployable change. Release ref still 5ef0e190 and consumption ledger has no DIC-20261123-INSTANT-3851. New source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 includes all tested app+QA bytes in one first-parent diff. Old request is permanently invalid and must not be replayed; only fresh source+five CI and unique one-use grant eligible."
+    },
+    {
+      "id": "DIC-20261123-INSTANT-3851-R2",
+      "tested_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-23T07:25:33Z",
+      "expires_at_utc": "2026-11-23T14:30:00Z",
+      "approval_source": "Owner November 22, 2026 23:29 America/Denver in this chat: 'Build it, test it, implement it, and deploy it. You have my approval.' EXACTLY ONE #3851 instant-opening release; no unrelated READY, future release or provider bypass. Recovery of previous failed-before-claim controller, not permission for a second publication.",
+      "scope": "Only READY DIC-Q-3851-cache-before-admission source frozen 2d22d448160d428a977f06482323646b92818fcf from published d4af1c4e baseline. Single deployable first-parent source pin a9303f97 has BOTH site/cloud/main.js + site/cloud.html and exact QA blob parity to tested frozen candidate; no other unfinished runtime/tests/workflows, SQL/Edge/Auth/private records. Unique one-use guarded main two-file single-parent chat controller, ONE nonforce release Git-connected Netlify build, independently verify READY/current exact Git commit. Prior DIC-20261123-INSTANT-3851 failed before claim and SUPERSEDED, never replay.",
+      "approved_ready_item_ids": [
+        "DIC-Q-3851-cache-before-admission"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "R2 immutable frozen candidate 2d22d448160d428a977f06482323646b92818fcf has all 5 exact-SHA native COMPLETED SUCCESS jobs: approval run45129746102; isolated SQL run45129745970; cloud-tests and mobile-browser-qa run45129745953; validate full Node/lint run45129745980. NOT_APPLICABLE and older failed candidate not counted PASS.",
+        "Independent source-only receipt GitHub Actions45129596076 SUCCESS: 522 restored/excluded unready paths; frozen tree f1df69d0a98f278c541a2687237bd0b155ce76e6; single READY item and approved source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 direct first-parent d4af1c4e published base, changed deployed main.js and HTML plus three proven tests, all exact tested blobs match candidate 6ee5bbeb. Development approval run45130200066 SUCCESS; queue canonical selection 5e8f1ccb7b5d32903c96569d4b44cb02f1f0c44a599952c3f1e24634d659fe9c.",
+        "Existing verified private encrypted backup Github run44920698063 artifact14713443972 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, exact owner-private Google Drive file1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn and folder1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf verified November 21 15:44Z. No SQL/Edge/schema/provider changes or production data writes."
+      ]
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
