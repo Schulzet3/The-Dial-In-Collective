@@ -3,17 +3,19 @@ import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {auditPreflightContract,CONTRACT_PATHS} from '../scripts/audit/preflight-contract.mjs';
-const receiptPath=new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
+const testingReceipt=new URL('../docs/TESTING_3889_CANDIDATE.json',import.meta.url);
+const receiptPath=existsSync(testingReceipt)?testingReceipt:new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
 const candidateReceipt=existsSync(receiptPath)?JSON.parse(readFileSync(receiptPath,'utf8')):null;
 const read=path=>{
  const local=readFileSync(new URL('../'+path,import.meta.url),'utf8');
  if(!candidateReceipt||path!=='.github/workflows/approval-continuity.yml')return local;
  // The verified source under test is the candidate's immutable development
  // parent. The publication candidate MUST preserve published workflow bytes.
- assert.equal(candidateReceipt.kind,'DIC-READY-ONLY-SOURCE-1');
+ assert.ok(['DIC-READY-ONLY-SOURCE-1','DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1'].includes(candidateReceipt.kind));
+  assert.equal(candidateReceipt.publication_authorized,false);
  assert.match(candidateReceipt.development_source_sha,/^[a-f0-9]{40}$/);
  assert.match(candidateReceipt.published_source_sha,/^[a-f0-9]{40}$/);
- assert.ok(candidateReceipt.restored_unpublished_workflow_paths.includes(path));
+ assert.ok((candidateReceipt.restored_unpublished_workflow_paths||candidateReceipt.restored_to_published_paths||[]).includes(path));
  const at=sha=>execFileSync('git',['show',sha+':'+path],{encoding:'utf8',timeout:10000});
  assert.equal(local,at(candidateReceipt.published_source_sha),
   'candidate approval workflow must match published Git bytes');
