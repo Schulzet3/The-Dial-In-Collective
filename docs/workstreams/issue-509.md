@@ -1,3 +1,16 @@
+# Issue #509 R467 — 300 new catalog descriptions (read-only) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=3901c2584cc1a5ec2385e3d824bd4d7cb57c207e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Mandatory first resolved live development 3901c2584cc1a5ec2385e3d824bd4d7cb57c207e and fetched the full immutable PREFLIGHT.md at that commit, compared with separately fetched Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f byte-for-byte BEFORE AGENTS, issue journal and Supabase. Live main 1c7f77844e899776d2f866f9c824a4a0cba58d56, release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264; Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PG17.11 read-only.
+
+**New semantic source coverage:** Precisely 300 distinct complete pg_catalog pg_description texts, global ordered ranks 1701–2000/5344; 8721 literal characters, complete OID, typed signature, exact full words, PG md5, 1-end character range and per-item semantic interpretation and retention verdict in [R467 append-only ledger](../audits/issue509-r467-core-comments-1701-2000-20261123.json). PostgreSQL GiST/GIN, typed variance/regression, XML/XML export, transaction/WAL, role/column ACL, time zone, native I/O, metadata and statistics descriptions inspected individually. Privileged backup/file/config/NOTIFY/locking operations were **NOT EXECUTED**. All are core provider functions; duplicate descriptions across typed overloads do not prove duplicate implementations or dead app code. Native compiled bodies UNVERIFIED. Earlier lexical captures and #267 original/current GitHub code review receive no duplicate credit.
+
+**Disposition:** No newly reproduced DIC app bug or consumer-verified removable built-in. No SQL migration/Edge/app/test/CI changes justified. New source-bound CI NOT_APPLICABLE (docs-only, never PASS). Prior R461 project_shot COMMENT-only migration remains TESTING pending independently source-isolated #3347 candidate; previously alerted deployed dic-verify-coffee parser drift still unchanged, separately owner-Publish gated, no duplicate alert. Reconciled #2389 live CLOSED/DEPLOYED; protected legacy-active matching objects must not be dropped on naming alone.
+
+No live SQL, Auth, Storage, Edge, member data/config, GitHub main/release, backups, billing, Publish, schedules or alerts changed. Full Supabase baseline **IN_PROGRESS**. **Next exact unreviewed cursor: pg_description rank 2001/5344, char 1**, while prioritizing material new DIC drift/bugs over repetitive security checks.
+
+---
+
 # Issue #509 R466 — new native catalog word coverage and personal-state performance triage [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e4344b85ba5380a2e32122b3e24063d6d37f74e3 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
