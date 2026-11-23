@@ -1,0 +1,57 @@
+name: DIC Issue33 R424 Kati original173 174 selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r424-kati173-174.yml'
+      - 'scripts/audit/issue33-r424-kati173-174-check.mjs'
+      - 'tests/issue33-r424-kati173-174.test.mjs'
+      - 'docs/workstreams/ops-issue33-r424-kati173-174-20261123.md'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r424-kati173-174.yml'
+      - 'scripts/audit/issue33-r424-kati173-174-check.mjs'
+      - 'tests/issue33-r424-kati173-174.test.mjs'
+permissions:
+  contents: read
+jobs:
+  selected-original173-174:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Exact checked out source and focused positive negative regressions
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+          node --check scripts/audit/issue33-r424-kati173-174-check.mjs
+          node --test tests/issue33-r424-kati173-174.test.mjs
+      - name: Required guarded public seller HTTPS selected parser Source Review and unsaved Add Coffee
+        env:
+          DIC_R424_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '173,174'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r424
+        run: GITHUB_SHA="$DIC_R424_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independently rehash selected first-party source and reject stale roast review leaks
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_KATI_R424_RUN: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r424
+        run: node scripts/audit/issue33-r424-kati173-174-check.mjs
+      - name: Retain source evidence privately for 1 day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r424-kati-current-selected
+          path: /tmp/dic33-r424/
+          retention-days: 1
+          if-no-files-found: warn
