@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13CV",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CU-20261123.json",
+  "development_prewrite_sha": "e2262003bb9125cc219c9ac40d776cb27a21cbab",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "tracks": [
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-344-373-20261123-V13CV.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 344,
+          "last_line": 373,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C82-84-110-C83-1-3-20261123-V13CV.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 82,
+          "path": "scripts/qa/read-only-account-acceptance.mjs",
+          "source_blob_sha": "cbdccc48e9fd1f09bd6b2d3092c1b95727575671",
+          "first_line": 84,
+          "last_line": 110,
+          "line_count": 27
+        },
+        {
+          "manifest_index_1_based": 83,
+          "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+          "source_blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+          "first_line": 1,
+          "last_line": 3,
+          "line_count": 3
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "full_original_git_blob_parity": "PASS_3_OF_3",
+  "archive_json_parse": "PASS",
+  "runtime": "NOT_RUN_DOCS_ONLY",
+  "provider": "NOT_APPLICABLE",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED",
+  "finding": "C82:86 synthetic admin-dashboard null-count false PASS, low QA reliability, #96; no real Auth bypass",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 374
+    },
+    "pinned": {
+      "index": 83,
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "line": 4
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE"
+}
