@@ -18567,21 +18567,29 @@
       "id": "DIC-Q-3851-cache-before-admission",
       "issue": 3851,
       "title": "Paint returning member's same-owner cached coffee before admission request; defer blocking vendor parse",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "39c28f4e8fbb01451b6d2f819908ca6996fa89e7",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud.html"
       ],
       "tests": [
-        "tests/cloud-fast-start.test.mjs"
+        "Same-owner cached first paint precedes network admission under INITIAL_SESSION promise race; valid session only, read-only prior to admission",
+        "Sign-out during pending cache read does not repaint stale owner or issue remote admission RPC",
+        "Exact PR-head Auth HIGH CI SUCCESS validate 45125569707, cloud/mobile 45125569717, approval 45125569668, isolated SQL 45125569670, security 45125569758; frozen603 SKIPPED (not PASS)",
+        "Nonforce PR #3852 merged 4b7b3f85 with all five changed-file Git blobs identical to tested source c42a270a; clean #3851 source pin 39c28f4e includes 4 exact published-main hunks, vendor defer and same test",
+        "Development first-parent source a90df231 nonforce integrated reviewed clean source history as second parent; unready same-file changed bytes remain on development only; frozen candidate CI REQUIRED"
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact branch CI, nonforce development merge, isolated frozen candidate and five candidate-SHA checks pending"
+      "ci_runs": [
+        45125569707,
+        45125569717,
+        45125569668,
+        45125569670,
+        45125569758
       ],
+      "blockers": [],
       "owner_source": "Owner direct November 22 2026 23:29 MST: build, test, implement and deploy faster cold start",
-      "notes": "INITIAL_SESSION callback/access RPC race corrected; server status could previously defeat cached preview. SDK-valid session/owner guards, read-only preview, offline outbox and server revocation preserved. New one-time publication approval ONLY this feature; unrelated TESTING items excluded. No READY/DEPLOYED assertion prior to CI and production."
+      "notes": "INTERNAL PROVISIONAL PREP BRANCH ONLY. Live development queue remains TESTING. One-time owner #3851 deployment approved for AFTER five source-isolated exact candidate jobs; no other item or source authorized. No READY claim outside this temporary source staging until actual immutable candidate five official jobs SUCCESS and dev certification. PIN site/cloud/main.js to clean source 39c28f4e; site/cloud.html already byte-identical to clean reviewed pin."
     }
   ],
   "history": [
