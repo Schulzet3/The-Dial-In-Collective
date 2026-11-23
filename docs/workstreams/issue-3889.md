@@ -130,3 +130,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e 
 
 ## November 23 — avoid regex literal ambiguity in strict prospect branch guard [skip netlify]
 - Express `release-candidates/prospect3889-<20hex>` check via exact two-component path and anchored hex suffix, without a regex slash-escaping ambiguity. Both injected or alternate branch names remain HOLD. Same-commit no-release security test repair, no weakening.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — #3909 test-fixture object-spread precedence correction [skip netlify]
+- Native PR exact HEAD 45283276424 failed only new test #148: `manifest:{}` was mistakenly followed by `...opts`, restoring an actual preview. Correct synthetic negative fixture to spread `...opts` FIRST, then override `manifest:{}`; production source guard remains strict and unchanged. All other 273 original test statements remained passing; require next exact-head native SUCCESS before merge.

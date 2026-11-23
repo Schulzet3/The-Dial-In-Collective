@@ -834,7 +834,7 @@ test('#3889 prospective READY path requires exact reviewed source, 63-ID origina
  const queue={items:[{id,state:'READY'}]};
  const opts={manifest,queue,developmentSourceSha:A,candidateSha:B,candidateBranch:branch,
   sourceObjectAt:(sha,path)=>path==='docs/RELEASE_QUEUE.json'?sha===A?'100644:'+C:'100644:'+B:null};
- assert.deepEqual(reviewedProspectiveReadyQueuePath({manifest:{},...opts}),[]);
+ assert.deepEqual(reviewedProspectiveReadyQueuePath({...opts,manifest:{}}),[]);
  assert.deepEqual(reviewedProspectiveReadyQueuePath(opts),['docs/RELEASE_QUEUE.json']);
  const edits=[
   x=>{x.manifest.publication_authorized=true},
