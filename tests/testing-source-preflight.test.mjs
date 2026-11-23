@@ -47,3 +47,12 @@ test('invalid baseline structure and altered 63/42/21 immutable cohort fail clos
  assert.throws(()=>analyzeTestingBaseline({baselineQueue:{},liveQueue:baseline,developmentSha:DEV,...git}),/BLOCKED/);
  assert.throws(()=>analyzeTestingBaseline({baselineQueue:{...baseline,items:baseline.items.slice(1)},liveQueue:baseline,developmentSha:DEV,...git}),/63\/42\/21/);
 });
+
+test('merged untracked deployable importer is a HOLD even when owned leaf changed',()=>{
+ const missing='src/server/untracked-runtime-importer.mjs';
+ const r=inspect(baseline,{firstParentChangedPaths:()=>['src/server/1.mjs',missing]});
+ assert.equal(r.items[0].status,'HOLD');
+ assert.equal(r.items[0].reason,'MERGED_DEPLOYABLE_SCOPE_UNDECLARED');
+ assert.deepEqual(r.items[0].untracked_merged_paths,[missing]);
+ assert.equal(r.certified_ready_count,0);
+});

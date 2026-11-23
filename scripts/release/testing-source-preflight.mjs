@@ -38,7 +38,7 @@ export function analyzeTestingBaseline({baselineQueue,liveQueue,developmentSha,
   const paths=sorted(frozen.scope_paths||[]);
   let status='HOLD',reason='';
   const sha=item?.merged_source_sha;
-  let selectedObjects=[];
+  let selectedObjects=[],untrackedMergedPaths=[];
   if(!item)reason='MISSING_LIVE_ID';
   else if(!['TESTING','READY','DEPLOYED'].includes(item.state))
    reason='LIVE_STATE_REQUIRES_RECONCILIATION';
@@ -54,6 +54,8 @@ export function analyzeTestingBaseline({baselineQueue,liveQueue,developmentSha,
      if(!Array.isArray(first)||first.some(p=>typeof p!=='string'))
       reason='FIRST_PARENT_DIFF_UNAVAILABLE';
      else if(!paths.some(p=>first.includes(p)))reason='NO_OWNED_FIRST_PARENT_DEPLOYABLE_CHANGE';
+     else if((untrackedMergedPaths=sorted(first.filter(p=>DEPLOYABLE.test(p)&&!paths.includes(p)))).length)
+      reason='MERGED_DEPLOYABLE_SCOPE_UNDECLARED';
      else {
       selectedObjects=paths.map(p=>({path:p,merged:sourceObjectAt(sha,p),
        live:sourceObjectAt(developmentSha,p),published:sourceObjectAt(published,p)}));
@@ -71,7 +73,7 @@ export function analyzeTestingBaseline({baselineQueue,liveQueue,developmentSha,
   }
   results.push({id:frozen.id,issue:frozen.issue,live_state:item?.state||'MISSING',
    merged_source_sha:SHA.test(sha||'')?sha:null,baseline_recorded_merge:Boolean(SHA.test(frozen.merged_source_sha||'')),
-   scope_paths:paths,source_objects:selectedObjects,status,reason});
+   scope_paths:paths,untracked_merged_paths:untrackedMergedPaths,source_objects:selectedObjects,status,reason});
  }
  const counts=results.reduce((m,x)=>(m[x.reason]=(m[x.reason]||0)+1,m),{});
  const fingerprint=createHash('sha256').update(JSON.stringify({baseline_dev_sha:BASELINE_DEV_SHA,
