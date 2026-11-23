@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectedKingsPeakDirectFailures as problems} from '../scripts/audit/issue33-r425-kingspeak176-177-check.mjs';
+import {selectedKingsPeakDirectFailures as problems,decodeSelectedSellerTextEntities} from '../scripts/audit/issue33-r425-kingspeak176-177-check.mjs';
 
 const mexico='Mexico Finca Santa Cruz Geisha Single Origin: Chiapas Region Producer: José Argüello Tasting Notes: Sweet berries, Honey & Fig This coffee was allowed to ferment in cherry for up to 200 hours before being washed';
 const mx={name:'Mexico Finca Santa Cruz Geisha',origin:'Chiapas, Mexico',process:'Washed',
@@ -42,4 +42,21 @@ test('individual grower is not manufactured from La Bastilla farm',()=>{
 test('unpublished espresso recipe is not in selected field acceptance',()=>{
  assert.ok(problems(177,nicaragua,{...ni,release_label:'2026 crop'})
   .includes('unpublished_elevation_decaf_or_lot_inferred'));
+});
+
+test('current source HTML &amp; in named seller notes retains required literal ampersand',()=>{
+ const published='Tasting Notes: Sweet berries, Honey &amp; Fig';
+ const decoded=decodeSelectedSellerTextEntities(published);
+ assert.equal(decoded,'Tasting Notes: Sweet berries, Honey & Fig');
+ assert.deepEqual(problems(176,decodeSelectedSellerTextEntities(mexico.replace('Honey & Fig','Honey &amp; Fig')),mx),[]);
+});
+test('current HTML ampersand numeric entities and nonbreaking spaces are decoded once',()=>{
+ assert.equal(decodeSelectedSellerTextEntities('Catuai&#38;Caturra | A&#x26;B | roast&nbsp;light | E&#160;F'),
+  'Catuai&Caturra | A&B | roast light | E F');
+ assert.equal(decodeSelectedSellerTextEntities('sweet berries &lt;h1&gt;'),
+  'sweet berries &lt;h1&gt;');
+});
+test('real selected-source labeled prose remains required, not unrelated SEO notes',()=>{
+ const stale=nicaragua.replace('Tasting Notes: Strawberries & Honey','SEO: Strawberries & Honey');
+ assert.ok(problems(177,stale,ni).includes('direct_nicaragua_specs_missing'));
 });

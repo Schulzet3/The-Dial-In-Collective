@@ -8,8 +8,11 @@ import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mj
 
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const norm=value=>String(value??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/\s+/gu,' ').trim();
-const selectedText=html=>productMarkup(html).replace(/<[^>]*>/gu,' ')
- .replace(/&(?:nbsp|amp);|&#160;/giu,' ').replace(/\s+/gu,' ').trim();
+export const decodeSelectedSellerTextEntities=value=>String(value??'')
+ .replace(/&(?:amp|#0*38|#x0*26);/giu,'&')
+ .replace(/&(?:nbsp|#0*160|#x0*a0);/giu,' ');
+const selectedText=html=>decodeSelectedSellerTextEntities(productMarkup(html).replace(/<[^>]*>/gu,' '))
+ .replace(/\s+/gu,' ').trim();
 const cases={
  176:{name:'Mexico Finca Santa Cruz Geisha',
   url:'https://kingspeakcoffee.com/products/mexico-nayarit-anaerobic-process',
