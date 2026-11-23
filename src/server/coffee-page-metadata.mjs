@@ -1,3 +1,4 @@
+import {selectedShopifyMainRichTextCoffee} from './coffee-selected-shopify-variant-richtext.mjs';
 import {selectedLiteralBroadBlendRegions} from './coffee-selected-broad-blend-regions.mjs';
 import {selectedCurrentTwoRegionSingleCountryBlend} from './coffee-selected-two-region-blend.mjs';
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
@@ -1477,6 +1478,9 @@ function selectedNonGrowingInitiativeRole(selectedHtml,{producer,decode}={}){
 
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
+ // Verified exact Shopify selected purchase variant with no H1, two current H3 labels.
+ const currentShopify=selectedShopifyMainRichTextCoffee(html,{source_url});
+ if(currentShopify)return currentShopify;
  // A selected, exact-route Next.js Product is not an HTML heading: read only
  // its bounded public conversion state, never nearby recommendations.
  const nextProduct=extractSelectedNextCoffeeProduct(html,{source_url});

@@ -24,6 +24,7 @@ if(existsSync(optionalPageFlyH3))
  ({selectedShopifyPageFlyH3Identity}=await import(optionalPageFlyH3.href));
 import {selectedShopifyTrackedOfferH2Identity} from './issue33-shopify-tracked-offer-h2.mjs';
 import {selectedShopifyMainProductH2Identity} from './issue33-shopify-main-product-h2.mjs';
+import {selectedShopifyMainRichTextCoffee} from '../../src/server/coffee-selected-shopify-variant-richtext.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
@@ -114,7 +115,8 @@ for(const target of targets){
    r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
      !r.selected_form_h2.length&&!r.selected_page_h2.length&&
      !r.selected_elementor_h2.length)
-     ? (selectedShopifyCurrentVisibleIdentity(res.html,{
+     ? (selectedShopifyMainRichTextCoffee(res.html,{source_url:r.final_url,expected_name:target.Coffee})?.selected_product_identity ||
+       selectedShopifyCurrentVisibleIdentity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
       selectedShopifyPurchaseH3Identity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
