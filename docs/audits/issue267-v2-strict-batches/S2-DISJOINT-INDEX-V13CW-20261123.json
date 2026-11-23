@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13CW",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CV-20261123.json",
+  "development_prewrite_sha": "6eb6c22c0bed44ddb07aafa77b97b936727eafb6",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "tracks": [
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-374-403-20261123-V13CW.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 374,
+          "last_line": 403,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C83-4-33-20261123-V13CW.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 83,
+          "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+          "source_blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+          "first_line": 4,
+          "last_line": 33,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "first_original_file_line_one_rechecked_without_credit": ".github/workflows/approval-continuity.yml:1",
+  "full_original_git_blob_parity": "PASS_2_OF_2",
+  "live_pinned_blob_parity": "PASS",
+  "archive_json_parse": "PASS",
+  "risk_tests": "NOT_RUN_DOCS_ONLY",
+  "runtime": "NOT_RUN_DOCS_ONLY",
+  "provider": "NOT_APPLICABLE",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED",
+  "finding": "No current runtime defect reproduced. Recovery SQL name-only existence test/redundant schema predicates and SECURITY DEFINER require #96 isolated assessment if recovery ever authorized; no current Auth bypass or RLS failure established.",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 404
+    },
+    "pinned": {
+      "index": 83,
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "line": 34
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE"
+}
