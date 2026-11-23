@@ -53,3 +53,17 @@ test('No generic release/roaster recipe extrapolation',()=>{
  assert.ok(problems(194,decaf,{...df,release_label:'2026 lot'})
   .includes('unpublished_decaf_green_process_roast_origin_or_lot_invented'));
 });
+
+test('194 exact matching current selected Shopify Product inline Medium tag is allowed',()=>{
+  const proof={value:'Medium',source:'exact_selected_shopify_inline_product_roast_taxonomy'};
+  assert.deepEqual(problems(194,decaf,{...df,roast_level:'Medium'},proof),[]);
+});
+test('194 a Medium roast without current product-bound inline tag remains unverified',()=>{
+  assert.ok(problems(194,decaf,{...df,roast_level:'Medium'})
+    .includes('unpublished_decaf_green_process_roast_origin_or_lot_invented'));
+});
+test('194 a different roast may not substitute the identity-matched Medium tag',()=>{
+  const proof={value:'Medium',source:'exact_selected_shopify_inline_product_roast_taxonomy'};
+  assert.ok(problems(194,decaf,{...df,roast_level:'Dark'},proof)
+    .includes('unpublished_decaf_green_process_roast_origin_or_lot_invented'));
+});

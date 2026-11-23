@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {selectedCurrentInlineShopifyRoastTag} from '../../src/server/coffee-current-inline-shopify-product.mjs';
 
 const hash=v=>createHash('sha256').update(v).digest('hex');
 const norm=v=>String(v??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/\s+/gu,' ').trim();
@@ -15,7 +16,7 @@ const products={
   180:{name:'Lū‘au',url:'https://konacoffee.nyc/products/lu-au'},
   194:{name:'Decaf Coffee',url:'https://leapcoffeeroasters.com/products/decaf-coffee'}
 };
-export function selectedCurrentOriginalR426Failures(number,selected,fields={}){
+export function selectedCurrentOriginalR426Failures(number,selected,fields={},selectedRoastTag=null){
   const p=products[number];if(!p)return ['out_of_original180_194_scope'];
   const s=norm(selected),f=norm(fields.tasting_notes),fail=[];
   if(norm(fields.name)!==norm(p.name)||!s.includes(norm(p.name)))
@@ -47,7 +48,9 @@ export function selectedCurrentOriginalR426Failures(number,selected,fields={}){
       fail.push('selected_decaf_direct_notes_omitted');
     if(fields.decaffeination_method!=='Water Process')
       fail.push('selected_named_swiss_water_method_omitted');
-    if(fields.process||fields.roast_level||fields.origin||fields.producer||fields.variety||
+    const directMedium=fields.roast_level==='Medium'&&selectedRoastTag?.value==='Medium'&&
+      selectedRoastTag?.source==='exact_selected_shopify_inline_product_roast_taxonomy';
+    if(fields.process||(fields.roast_level&&!directMedium)||fields.origin||fields.producer||fields.variety||
        fields.elevation_m||fields.release_label)
       fail.push('unpublished_decaf_green_process_roast_origin_or_lot_invented');
   }
@@ -90,12 +93,24 @@ if(process.env.DIC_ISSUE33_R426_RUN==='1'){
         'tasting_notes','roast_level','elevation_m','decaffeination_method','release_label'])
       need(String(p?.fields?.[field]??'')===String(r.current_fields?.[field]??''),
         'raw_HTML_parser_report_mismatch_'+number+'_'+field);
-    for(const issue of selectedCurrentOriginalR426Failures(number,selectedText(html),r.current_fields||{}))
+    const inlineRoast=selectedCurrentInlineShopifyRoastTag(html,{
+      name:r.current_fields?.name||'',roaster:r.current_fields?.roaster||'',
+      source_url:r.final_url||target.url
+    });
+    // Independently prove the roast is the chosen product's inline Shopify
+    // tag and its current parser recorded the same source-bound fact.
+    const directTagVerified=number===194&&inlineRoast?.value==='Medium'&&
+      (p?.source_facts||[]).some(f=>f.field==='roast_level'&&f.value==='Medium'&&
+        f.section==='Exact current selected Shopify inline Product roast tag'&&
+        f.source_type==='product_json'&&f.conflicting!==true);
+    for(const issue of selectedCurrentOriginalR426Failures(number,selectedText(html),
+      r.current_fields||{},directTagVerified?inlineRoast:null))
       failures.push(number+'_'+issue);
     need(!p?.roaster_recipe?.dose_g&&!p?.roaster_recipe?.yield_g,
       'unpublished_espresso_recipe_'+number);
     out.push({number,source_url:target.url,raw_html_sha256:digest,bytes:Buffer.byteLength(html),
       chosen_headings:r.selected_h1,current_fields:r.current_fields,
+      selected_inline_roast_tag:directTagVerified?inlineRoast:null,
       conflicts:r.conflicts||[],add_coffee_unsaved:r.add_coffee_ui_rendered,
       source_review:r.source_review_rendered});
   }
