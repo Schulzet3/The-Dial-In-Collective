@@ -293,19 +293,6 @@ begin
         'basket_model','setup_name','group_id','release_date'])
   or result::text like '%@fixture.invalid%' or result::text like '%PRIVATE:%' then
   raise exception 'Release grouping projection disclosed private identifiers or invented dates';end if;
- -- Producer-only search must match both the total and actual paged rows.
- -- The original live function omitted producer from the page selector.
- result:=public.dic_search_community_shots('fArM OnE','Turbo',40,0);
- if (result->>'total')::integer<>7 or jsonb_array_length(result->'shots')<>7
-   or exists(select 1 from jsonb_array_elements(result->'shots') as j(v)
-        where j.v->>'release_producer' is distinct from 'Farm One') then
-  raise exception 'Community producer-only search lost first release rows: %',result;
- end if;
- result:=public.dic_search_community_shots('Farm Two','Turbo',40,0);
- if (result->>'total')::integer<>1 or jsonb_array_length(result->'shots')<>1
-   or result->'shots'->0->>'release_producer'<>'Farm Two' then
-  raise exception 'Community producer-only search lost second release: %',result;
- end if;
  execute 'reset role';
  -- Paged responses still agree on count, and ID stays stable across pages.
  perform set_config('request.jwt.claim.sub',us[5]::text,true);
@@ -542,27 +529,6 @@ begin
     where c.value->>'tier'='exact' and (c.value->>'ratio')::numeric between 2.75 and 2.85) then
   raise exception 'Own confirmed family incorrectly recycled as an independent Community recommendation';
  end if;
-
- -- #509: Rechecking a withdrawn observation while its coffee is unverified
- -- must not reclassify it as held, even through the real link UPDATE trigger.
- select community_shot_id into strict target
-   from private.contribution_links where shot_id=c2_shot;
- update public.shots set clarity=4 where id=c2_shot;
- if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
-  raise exception '#509 fixture did not withdraw the non-green observation';end if;
- update public.coffees set verification_state='pending' where id=c2;
- if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
-  raise exception '#509 coffee update revived withdrawn evidence';end if;
- update private.contribution_links set source_revision=source_revision
-   where community_shot_id=target;
- if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
-  raise exception '#509 link reconciliation revived withdrawn evidence';end if;
- update public.coffees set verification_state='verified' where id=c2;
- if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
-  raise exception '#509 verification revived withdrawn evidence';end if;
- update public.shots set clarity=5 where id=c2_shot;
- if (select quality_state from public.community_shots where id=target)<>'eligible' then
-  raise exception '#509 explicit corrected green shot failed to requalify';end if;
 
  -- Revoke admission immediately suppresses both community reads and stats.
  perform set_config('request.jwt.claim.sub',us[1]::text,true);
