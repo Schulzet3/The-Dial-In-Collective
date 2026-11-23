@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13CT",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CS-20261123.json",
+  "development_prewrite_sha": "8ef4bb46a7b639fbf5cfa8ac614e94b3d0d3ebbf",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "tracks": [
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-284-313-20261123-V13CT.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 284,
+          "last_line": 313,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C82-24-53-20261123-V13CT.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 82,
+          "path": "scripts/qa/read-only-account-acceptance.mjs",
+          "source_blob_sha": "cbdccc48e9fd1f09bd6b2d3092c1b95727575671",
+          "first_line": 24,
+          "last_line": 53,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "full_original_git_blob_parity": "PASS_2_OF_2",
+  "archive_json_parse": "PASS",
+  "runtime": "NOT_RUN_DOCS_ONLY",
+  "provider": "NOT_APPLICABLE",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED",
+  "finding": "No new current app defect reproduced; owner-run C82 test still depends on live server RLS. Previous expiry NaN gap remains #96 scope.",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 314
+    },
+    "pinned": {
+      "index": 82,
+      "path": "scripts/qa/read-only-account-acceptance.mjs",
+      "line": 54
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE"
+}
