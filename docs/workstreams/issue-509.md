@@ -1,3 +1,8 @@
+# Issue #509 R468a — per-OID interpretation precision corrections [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=7978912d73d06171c6bf06737f274e6475874319 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Subsequent readback of the R468 500-item source-correct catalog-comment receipt identified **13 remaining interpretation/category refinements**: server file metadata was mislabeled as statistics, nonblocking advisory lock helpers as statistics/generic metadata, JSON array serializers as bit operators, plus notification and extension dump mutators were insufficiently explicit. [Append-only 13-item R468a correction](../audits/issue509-r468a-catalog-description-precision-corrections-20261123.json) supersedes only those R468 semantic/category fields; all full descriptions, 500 distinct provider OIDs/MD5s, correction of R467 misassigned labels and rank 2200 coverage stand. Side-effecting APIs never invoked. Provider production read-only; no application/SQL/tests/CI or publish edits. Full audit IN_PROGRESS; next description rank 2201/5344. No new owner action; alerts/schedule unchanged.
+
 # Issue #509 R468 — Repair inaccurate R467 semantic receipts + 200 new provider descriptions [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=7978912d73d06171c6bf06737f274e6475874319 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
