@@ -952,3 +952,49 @@ test('#3889 exact seven excluded QA paths must match published Git blobs and two
  }
  assert.throws(()=>prove({...args,candidateSha:development}),/HOLD/);
 });
+
+
+test('#3889 historical scoped workstream journal is exact-parent, exact candidate and NONPUBLISHING only',async()=>{
+ const {reviewedProspectiveScopedJournalPath:review}=await import('../scripts/release/ready-only-candidate.mjs');
+ const parent='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',
+  candidate='16bc481b2c66c5229c70e513c76141b086b8e535',
+  published='2d22d448160d428a977f06482323646b92818fcf',
+  id='DIC-Q-509-stale-project-shot-comment-20261122',
+  path='docs/workstreams/issue-3889.md';
+ const objects=new Map([
+  [parent+':'+path,'100644:26f10fff12e31e2c70215af9adb3d5832892b62b'],
+  [candidate+':'+path,'100644:3e90ae0193c1fbb4dbaa3b00005df07143b337b1']
+ ]);
+ const reader=(ref,p)=>objects.get(ref+':'+p)||null;
+ const manifest={candidate_branch:'release-candidates/prospect3889-544b06558ab9ab6df4ee',
+  selected_ready_item_ids:[id],publication_authorized:false,
+  prospective_ready_preview:{selected_id:id,baseline_queue_blob:
+   '46304f47eb0e78fac8c7845155af86080900b3c4',
+   status:'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'}};
+ const opts={manifest,queue:{items:[{id,state:'READY'}]},candidateSha:candidate,
+  developmentSourceSha:parent,publishedSourceSha:published,sourceObjectAt:reader};
+ assert.deepEqual(review(opts),[path]);
+ assert.deepEqual(review({...opts,manifest:{}}),[]);
+ const edits=[
+  x=>{x.manifest.publication_authorized=true},
+  x=>{x.manifest.selected_ready_item_ids.push('DIC-Q-509-unreviewed')},
+  x=>{x.manifest.prospective_ready_preview.status='READY'},
+  x=>{x.manifest.prospective_ready_preview.baseline_queue_blob='a'.repeat(40)},
+  x=>{x.queue.items[0].state='TESTING'},
+  x=>{x.candidateSha=parent},
+  x=>{x.developmentSourceSha=candidate},
+  x=>{x.publishedSourceSha=parent}
+ ];
+ for(const edit of edits){
+  const obj=structuredClone({...opts,sourceObjectAt:null});obj.sourceObjectAt=reader;
+  edit(obj);assert.throws(()=>review(obj),/HOLD/);
+ }
+ for(const [ref,sha] of [
+  [parent,'100644:'+'b'.repeat(40)],
+  [candidate,'100644:'+'b'.repeat(40)],
+  [published,'100644:'+'b'.repeat(40)]
+ ])assert.throws(()=>review({...opts,sourceObjectAt:(r,p)=>
+  r===ref&&p===path?sha:reader(r,p)}),/HOLD/);
+ assert.throws(()=>assertExactCandidateStagedPaths(
+  [path,'docs/RELEASE_QUEUE.json'],[path]),/staging commit changes unrelated paths/);
+});

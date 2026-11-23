@@ -152,6 +152,37 @@ export function reviewedProspectiveQaRestorationPaths({manifest,queue,developmen
  return [...restored.map(y=>y[0]),...excluded];
 }
 
+
+// #3889 last journal-only staging delta: the prospective frozen source predates
+// two nonshipped scoped journal entries. This narrow byte-pinned historical
+// prefix is not a selected deployable change or generalized journal exemption.
+export function reviewedProspectiveScopedJournalPath({manifest,queue,developmentSourceSha,
+ publishedSourceSha,candidateSha,sourceObjectAt}={}){
+ const x=manifest?.prospective_ready_preview;
+ if(x===undefined)return [];
+ const hold=why=>{throw Error('Prospective scoped journal HOLD: '+why);};
+ const id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const parent='544b06558ab9ab6df4eea0410277b1a3c19f2fe4';
+ const child='16bc481b2c66c5229c70e513c76141b086b8e535';
+ const path='docs/workstreams/issue-3889.md';
+ if(developmentSourceSha!==parent||candidateSha!==child||
+    publishedSourceSha!=='2d22d448160d428a977f06482323646b92818fcf'||
+    manifest?.candidate_branch!=='release-candidates/prospect3889-544b06558ab9ab6df4ee'||
+    manifest?.publication_authorized!==false||
+    !Array.isArray(manifest?.selected_ready_item_ids)||
+    manifest.selected_ready_item_ids.length!==1||manifest.selected_ready_item_ids[0]!==id||
+    x.status!=='PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'||
+    x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+    x.selected_id!==id||queue?.items?.find(i=>i.id===id)?.state!=='READY'||
+    typeof sourceObjectAt!=='function')
+  hold('immutable parent, candidate, selected READY scope or nonpublisher guard mismatch');
+ if(sourceObjectAt(publishedSourceSha,path)!==null||
+    sourceObjectAt(developmentSourceSha,path)!=='100644:26f10fff12e31e2c70215af9adb3d5832892b62b'||
+    sourceObjectAt(candidateSha,path)!=='100644:3e90ae0193c1fbb4dbaa3b00005df07143b337b1')
+  hold('historical source prefix and exact staged Git journal blobs differ');
+ return [path];
+}
+
 // Production publication must never edit/create GitHub Actions workflows.
 // The Actions GITHUB_TOKEN publisher has no workflows scope. Keep all CI
 // workflow evolution on main/development and restore exact published bytes
@@ -1132,9 +1163,13 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const reviewedQaPaths=reviewedProspectiveQaRestorationPaths({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
+ const reviewedScopedJournalPaths=reviewedProspectiveScopedJournalPath({manifest,queue,
+  developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
+  candidateSha,sourceObjectAt});
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
   excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,reviewedQaPaths,
+  reviewedScopedJournalPaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
