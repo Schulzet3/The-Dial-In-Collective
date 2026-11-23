@@ -139,3 +139,103 @@ test('phase-two refuses unsafe paths, duplicate diff or inaccessible Git objects
  developmentChangedPaths:['src/server/another.mjs','src/server/another.mjs']}),/exact queue/);
  assert.throws(()=>planProvisionalTestingCandidate({...pexec,sourceObjectAt:()=>{throw Error('unavailable');}}),/missing source blob/);
 });
+
+
+// Phase 2b: use a disposable, real Git repository to prove exact candidate
+// tree isolation without creating any ref, PR, deployment or provider write.
+import {mkdtempSync as testMkdtemp,rmSync as testRm,mkdirSync as testMkdir,writeFileSync as testWrite} from 'node:fs';
+import {tmpdir as testTmp} from 'node:os';
+import {join as testJoin,dirname as testDirname} from 'node:path';
+import {execFileSync as testExec} from 'node:child_process';
+import {createHash as testHash} from 'node:crypto';
+import {freezeProvisionalTestingPlan,FROZEN_TESTING_KIND,FROZEN_TESTING_MANIFEST} from '../scripts/release/stage-testing-provisional-candidate.mjs';
+function gitFixture(){
+ const dir=testMkdtemp(testJoin(testTmp(),'dic-3889-real-git-'));
+ const git=(...args)=>testExec('git',args,{cwd:dir,encoding:'utf8'}).trim();
+ const put=(path,body)=>{testMkdir(testDirname(testJoin(dir,path)),{recursive:true});
+  testWrite(testJoin(dir,path),body);};
+ git('init','-q');git('config','user.email','dic-fixture@example.invalid');
+ git('config','user.name','DIC fixture');
+ put('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\nFixture source\n');
+ put('docs/RELEASE_QUEUE.json','{"state":"TESTING","source":"unchanged"}\n');
+ put('src/server/selected.mjs','export const selected=0;\n');
+ put('tests/selected.test.mjs','import {selected} from "../src/server/selected.mjs";\n');
+ put('site/unready.js','export const unready=false;\n');
+ git('add','.');git('commit','-qm','published baseline');
+ const published=git('rev-parse','HEAD');
+ put('src/server/selected.mjs','export const selected=1;\n');
+ put('tests/selected.test.mjs','import {selected} from "../src/server/selected.mjs";\nif(selected!==1)throw Error("bad");\n');
+ put('site/unready.js','export const unready=true;\n');
+ git('add','.');git('commit','-qm','unpublished work');
+ const development=git('rev-parse','HEAD');
+ const shaPath=path=>'100644:'+git('rev-parse',development+':'+path);
+ const identity={kind:PROVISIONAL_KIND,baseline_sha:BASELINE_DEV_SHA,
+  baseline_blob:BASELINE_QUEUE_BLOB,development_sha:development,
+  published_sha:published,selected_testing_item_id:'DIC-Q-509-local-fixture',
+  merged_source_sha:development,selected_blobs:[
+   {path:'src/server/selected.mjs',source_sha:shaPath('src/server/selected.mjs')},
+   {path:'tests/selected.test.mjs',source_sha:shaPath('tests/selected.test.mjs')}],
+  restored_to_published_paths:['site/unready.js']};
+ const fingerprint=testHash('sha256').update(JSON.stringify(identity)).digest('hex');
+ const plan={...identity,fingerprint,
+  candidate_branch:'release-candidates/testing3889-'+fingerprint.slice(0,20),
+  status:'PROVISIONAL_SOURCE_PLAN_ONLY',candidate_sha:null,
+  selected_ready_item_ids:[],applicable_candidate_ci:[],
+  certified_ready_count:0,publication_authorized:false};
+ return {dir,git,plan,published,development,
+  preflight:git('rev-parse',development+':docs/ai/PREFLIGHT.md'),
+  cleanup:()=>testRm(dir,{recursive:true,force:true})};
+}
+test('phase 2b freezes exact one-item Git tree, restores unrelated source, and creates NO refs',()=>{
+ const f=gitFixture();
+ try{
+  const r=freezeProvisionalTestingPlan({repoDir:f.dir,plan:f.plan,preflightBlobSha:f.preflight});
+  assert.equal(r.status,'FROZEN_LOCAL_SOURCE_ONLY_NO_REF_OR_CI');
+  assert.equal(r.kind,FROZEN_TESTING_KIND);assert.equal(r.publication_authorized,false);
+  assert.equal(r.certified_ready_count,0);
+  assert.equal(f.git('rev-parse',r.candidate_sha+'^'),f.development);
+  assert.equal(f.git('rev-parse',r.candidate_sha+'^{tree}'),r.tree_sha);
+  assert.equal(f.git('rev-parse',r.candidate_sha+':site/unready.js'),
+   f.git('rev-parse',f.published+':site/unready.js'));
+  for(const x of f.plan.selected_blobs)
+   assert.equal('100644:'+f.git('rev-parse',r.candidate_sha+':'+x.path),x.source_sha);
+  assert.equal(f.git('rev-parse',r.candidate_sha+':docs/RELEASE_QUEUE.json'),
+   f.git('rev-parse',f.development+':docs/RELEASE_QUEUE.json'));
+  const manifest=JSON.parse(f.git('show',r.candidate_sha+':'+FROZEN_TESTING_MANIFEST));
+  assert.equal(manifest.selected_testing_item_id,f.plan.selected_testing_item_id);
+  assert.deepEqual(manifest.selected_ready_item_ids,[]);
+  assert.equal(manifest.status,'FROZEN_SOURCE_ONLY_CI_NOT_RUN');
+  assert.match(f.git('show',r.candidate_sha+':docs/workstreams/issue-3889.md'),
+   /DIC_PREFLIGHT_VERIFIED development_sha=/);
+  assert.equal(f.git('branch','--list','release-candidates/*'),'');
+  assert.equal(f.git('branch','--list').split('\n').length,1);
+  assert.throws(()=>f.git('rev-parse',r.candidate_sha+':docs/RELEASE_CANDIDATE.json'));
+ }finally{f.cleanup();}
+});
+test('phase 2b rejects source-plan fingerprint forgery and absent preflight proof',()=>{
+ const f=gitFixture();
+ try{
+  assert.throws(()=>freezeProvisionalTestingPlan({repoDir:f.dir,
+   plan:{...f.plan,restored_to_published_paths:[]},preflightBlobSha:f.preflight}),/fingerprint/);
+  assert.throws(()=>freezeProvisionalTestingPlan({repoDir:f.dir,
+   plan:f.plan,preflightBlobSha:'0'.repeat(40)}),/preflight/);
+  assert.throws(()=>freezeProvisionalTestingPlan({repoDir:f.dir,
+   plan:{...f.plan,selected_ready_item_ids:['DIC-Q-509-illegal']},
+   preflightBlobSha:f.preflight}),/not a single immutable/);
+ }finally{f.cleanup();}
+});
+test('phase 2b rejects unaccounted unfinished executable changes, even if plan hash was recomputed',()=>{
+ const f=gitFixture();
+ try{
+  const forged={...f.plan,restored_to_published_paths:[]};
+  const identity={kind:forged.kind,baseline_sha:forged.baseline_sha,
+   baseline_blob:forged.baseline_blob,development_sha:forged.development_sha,
+   published_sha:forged.published_sha,selected_testing_item_id:forged.selected_testing_item_id,
+   merged_source_sha:forged.merged_source_sha,selected_blobs:forged.selected_blobs,
+   restored_to_published_paths:forged.restored_to_published_paths};
+  const fingerprint=testHash('sha256').update(JSON.stringify(identity)).digest('hex');
+  forged.fingerprint=fingerprint;forged.candidate_branch='release-candidates/testing3889-'+fingerprint.slice(0,20);
+  assert.throws(()=>freezeProvisionalTestingPlan({repoDir:f.dir,plan:forged,
+   preflightBlobSha:f.preflight}),/account for all changed executable source/);
+ }finally{f.cleanup();}
+});
