@@ -1241,3 +1241,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 
 - Release ID: DIC-20261122-ADMISSION-READY04
 - Tested source: d4af1c4e13d1babe6f10d277d5243582eb798c56
 - Mode: publish
+
+## DIC-20261123-INSTANT-3851 controller request [skip netlify]
+- Release ID: DIC-20261123-INSTANT-3851
+- Tested source: 6ee5bbeb2be9cc4c03b49d2bc3a1eb4388718df6
+- Mode: publish
+- Owner source: Owner November 22, 2026 at 23:29 America/Denver, this chat: 'Build it, test it, implement it, and deploy it. You have my approval.' Exactly ONE return-member #3851 instant coffee first-paint release, not unrelated queue items or future grants.
+- Main parent: 1c7f77844e899776d2f866f9c824a4a0cba58d56
+- Development grant/cert head: 1b033474d47e2957f324a1e8113b21810875fb3d
+- Tested immutable candidate: release-candidates/ready3347-46b08c73d86cc4574552; four exact successful native push workflows, five named jobs; previous candidate failed and excluded. No SQL/Edge DB writes. One-use controller and one Netlify build only, no direct provider edits.
