@@ -1,0 +1,1573 @@
+{
+  "issue": 509,
+  "round": "R479",
+  "date_utc": "2026-11-23",
+  "authority": {
+    "initial_development_sha": "46d9a929cdb045083ba9c5b0642343d52cb420c5",
+    "preflight_git_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+    "prewrite_development_sha": "11ab1295e5623e139eca946731f087115b7bc944",
+    "main_sha": "f296149723492bca2936b3b223fba7c6cca6f06f",
+    "release_production_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685"
+  },
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "access": "catalog SELECT only"
+  },
+  "counts": {
+    "pg_default_acl": 24,
+    "pg_parameter_acl": 1,
+    "pg_db_role_setting": 10,
+    "pg_auth_members": 24
+  },
+  "literal_character_counts": {
+    "pg_default_acl": 4544,
+    "pg_parameter_acl": 133,
+    "pg_db_role_setting": 990,
+    "pg_auth_members": 2985
+  },
+  "records": [
+    {
+      "route": "pg_default_acl",
+      "identity": "16492",
+      "rank": 1,
+      "full_catalog_text": "{\"oid\":\"16492\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/postgres\",\"anon=arwdDxtm/postgres\",\"authenticated=arwdDxtm/postgres\",\"service_role=arwdDxtm/postgres\"]}",
+      "provider_md5": "19c80e5d337cc929eba77944683875c4",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 216
+      },
+      "parsed_fields": {
+        "oid": "16492",
+        "defaclrole": "16388",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role postgres in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "public",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16493",
+      "rank": 2,
+      "full_catalog_text": "{\"oid\":\"16493\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/postgres\",\"service_role=X/postgres\"]}",
+      "provider_md5": "0dcea6a5c435a4be3a648d56d75a979b",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 143
+      },
+      "parsed_fields": {
+        "oid": "16493",
+        "defaclrole": "16388",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role postgres in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "public",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16494",
+      "rank": 3,
+      "full_catalog_text": "{\"oid\":\"16494\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/postgres\",\"anon=rwU/postgres\",\"authenticated=rwU/postgres\",\"service_role=rwU/postgres\"]}",
+      "provider_md5": "e81bd5c0cd40edff79d7fc8e7659a563",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 196
+      },
+      "parsed_fields": {
+        "oid": "16494",
+        "defaclrole": "16388",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role postgres in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "public",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16495",
+      "rank": 4,
+      "full_catalog_text": "{\"oid\":\"16495\",\"defaclrole\":\"10\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/supabase_admin\",\"anon=rwU/supabase_admin\",\"authenticated=rwU/supabase_admin\",\"service_role=rwU/supabase_admin\"]}",
+      "provider_md5": "91dee703e9e60b0ba5401eedd9cbcaeb",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 217
+      },
+      "parsed_fields": {
+        "oid": "16495",
+        "defaclrole": "10",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_admin in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "public",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16496",
+      "rank": 5,
+      "full_catalog_text": "{\"oid\":\"16496\",\"defaclrole\":\"10\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/supabase_admin\",\"anon=arwdDxtm/supabase_admin\",\"authenticated=arwdDxtm/supabase_admin\",\"service_role=arwdDxtm/supabase_admin\"]}",
+      "provider_md5": "d219b5eb33afc3080d38ed2e5a1d9dff",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 237
+      },
+      "parsed_fields": {
+        "oid": "16496",
+        "defaclrole": "10",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_admin in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "public",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16497",
+      "rank": 6,
+      "full_catalog_text": "{\"oid\":\"16497\",\"defaclrole\":\"10\",\"defaclnamespace\":\"2200\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/supabase_admin\",\"anon=X/supabase_admin\",\"authenticated=X/supabase_admin\",\"service_role=X/supabase_admin\"]}",
+      "provider_md5": "28e897552ff3bb7d05e9115e62220ca1",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 209
+      },
+      "parsed_fields": {
+        "oid": "16497",
+        "defaclrole": "10",
+        "defaclnamespace": "2200",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_admin in schema public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "public",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16548",
+      "rank": 7,
+      "full_catalog_text": "{\"oid\":\"16548\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"16546\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/postgres\",\"anon=arwdDxtm/postgres\",\"authenticated=arwdDxtm/postgres\",\"service_role=arwdDxtm/postgres\"]}",
+      "provider_md5": "ba999d1e8ea486d5ab5205ea4325f97a",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 217
+      },
+      "parsed_fields": {
+        "oid": "16548",
+        "defaclrole": "16388",
+        "defaclnamespace": "16546",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role postgres in schema storage. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "storage",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16549",
+      "rank": 8,
+      "full_catalog_text": "{\"oid\":\"16549\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"16546\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/postgres\",\"anon=X/postgres\",\"authenticated=X/postgres\",\"service_role=X/postgres\"]}",
+      "provider_md5": "0a558b5ca208b19e5afa60f27e86a16f",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 189
+      },
+      "parsed_fields": {
+        "oid": "16549",
+        "defaclrole": "16388",
+        "defaclnamespace": "16546",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role postgres in schema storage. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "storage",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16550",
+      "rank": 9,
+      "full_catalog_text": "{\"oid\":\"16550\",\"defaclrole\":\"16388\",\"defaclnamespace\":\"16546\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/postgres\",\"anon=rwU/postgres\",\"authenticated=rwU/postgres\",\"service_role=rwU/postgres\"]}",
+      "provider_md5": "fee68dc580f66effb07a12048e504f64",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 197
+      },
+      "parsed_fields": {
+        "oid": "16550",
+        "defaclrole": "16388",
+        "defaclnamespace": "16546",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/postgres",
+          "anon=rwU/postgres",
+          "authenticated=rwU/postgres",
+          "service_role=rwU/postgres"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role postgres in schema storage. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "postgres",
+      "resolved_schema": "storage",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16556",
+      "rank": 10,
+      "full_catalog_text": "{\"oid\":\"16556\",\"defaclrole\":\"16545\",\"defaclnamespace\":\"16498\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/supabase_auth_admin\",\"dashboard_user=arwdDxtm/supabase_auth_admin\"]}",
+      "provider_md5": "165443bf5bf5748ce9c64361a73f45dd",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 182
+      },
+      "parsed_fields": {
+        "oid": "16556",
+        "defaclrole": "16545",
+        "defaclnamespace": "16498",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_auth_admin",
+          "dashboard_user=arwdDxtm/supabase_auth_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_auth_admin in schema auth. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_auth_admin",
+      "resolved_schema": "auth",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16557",
+      "rank": 11,
+      "full_catalog_text": "{\"oid\":\"16557\",\"defaclrole\":\"16545\",\"defaclnamespace\":\"16498\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/supabase_auth_admin\",\"dashboard_user=rwU/supabase_auth_admin\"]}",
+      "provider_md5": "c0ebdc25bb50ac0b8b4fe1c5ec17a292",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 172
+      },
+      "parsed_fields": {
+        "oid": "16557",
+        "defaclrole": "16545",
+        "defaclnamespace": "16498",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/supabase_auth_admin",
+          "dashboard_user=rwU/supabase_auth_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_auth_admin in schema auth. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_auth_admin",
+      "resolved_schema": "auth",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16558",
+      "rank": 12,
+      "full_catalog_text": "{\"oid\":\"16558\",\"defaclrole\":\"16545\",\"defaclnamespace\":\"16498\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/supabase_auth_admin\",\"dashboard_user=X/supabase_auth_admin\"]}",
+      "provider_md5": "6c86847f53ec609a62e85a96763b13ec",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 168
+      },
+      "parsed_fields": {
+        "oid": "16558",
+        "defaclrole": "16545",
+        "defaclnamespace": "16498",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_auth_admin in schema auth. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_auth_admin",
+      "resolved_schema": "auth",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16560",
+      "rank": 13,
+      "full_catalog_text": "{\"oid\":\"16560\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16559\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=a*r*wdDxtm/supabase_admin\",\"dashboard_user=arwdDxtm/supabase_admin\"]}",
+      "provider_md5": "d0a9fd9ba8aba6f79b0dcdb85d20c80e",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 171
+      },
+      "parsed_fields": {
+        "oid": "16560",
+        "defaclrole": "10",
+        "defaclnamespace": "16559",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=a*r*wdDxtm/supabase_admin",
+          "dashboard_user=arwdDxtm/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_admin in schema realtime. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "realtime",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16561",
+      "rank": 14,
+      "full_catalog_text": "{\"oid\":\"16561\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16559\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/supabase_admin\",\"dashboard_user=rwU/supabase_admin\"]}",
+      "provider_md5": "c2e1e9ef844fbb6c65b443f04b63a109",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 159
+      },
+      "parsed_fields": {
+        "oid": "16561",
+        "defaclrole": "10",
+        "defaclnamespace": "16559",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "dashboard_user=rwU/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_admin in schema realtime. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "realtime",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16562",
+      "rank": 15,
+      "full_catalog_text": "{\"oid\":\"16562\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16559\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/supabase_admin\",\"dashboard_user=X/supabase_admin\"]}",
+      "provider_md5": "03dba7aeab0ffd349d6ab093a3d4c4d1",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 155
+      },
+      "parsed_fields": {
+        "oid": "16562",
+        "defaclrole": "10",
+        "defaclnamespace": "16559",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "dashboard_user=X/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_admin in schema realtime. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "realtime",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16569",
+      "rank": 16,
+      "full_catalog_text": "{\"oid\":\"16569\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16567\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/supabase_admin\",\"anon=arwdDxtm/supabase_admin\",\"authenticated=arwdDxtm/supabase_admin\",\"service_role=arwdDxtm/supabase_admin\"]}",
+      "provider_md5": "2302f11debc1f5c997ceb509a412a8c4",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 238
+      },
+      "parsed_fields": {
+        "oid": "16569",
+        "defaclrole": "10",
+        "defaclnamespace": "16567",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_admin in schema graphql_public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql_public",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16570",
+      "rank": 17,
+      "full_catalog_text": "{\"oid\":\"16570\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16567\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/supabase_admin\",\"anon=X/supabase_admin\",\"authenticated=X/supabase_admin\",\"service_role=X/supabase_admin\"]}",
+      "provider_md5": "e66701e0532ac12aabe69f021a719e5d",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 210
+      },
+      "parsed_fields": {
+        "oid": "16570",
+        "defaclrole": "10",
+        "defaclnamespace": "16567",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_admin in schema graphql_public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql_public",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16571",
+      "rank": 18,
+      "full_catalog_text": "{\"oid\":\"16571\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16567\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/supabase_admin\",\"anon=rwU/supabase_admin\",\"authenticated=rwU/supabase_admin\",\"service_role=rwU/supabase_admin\"]}",
+      "provider_md5": "751989f89b283a46de2725808db4cd94",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 218
+      },
+      "parsed_fields": {
+        "oid": "16571",
+        "defaclrole": "10",
+        "defaclnamespace": "16567",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_admin in schema graphql_public. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql_public",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16589",
+      "rank": 19,
+      "full_catalog_text": "{\"oid\":\"16589\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16578\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=arwdDxtm/supabase_admin\",\"anon=arwdDxtm/supabase_admin\",\"authenticated=arwdDxtm/supabase_admin\",\"service_role=arwdDxtm/supabase_admin\"]}",
+      "provider_md5": "5c20ab9fc30bbf4e5a60002e893c71a5",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 238
+      },
+      "parsed_fields": {
+        "oid": "16589",
+        "defaclrole": "10",
+        "defaclnamespace": "16578",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=arwdDxtm/supabase_admin",
+          "anon=arwdDxtm/supabase_admin",
+          "authenticated=arwdDxtm/supabase_admin",
+          "service_role=arwdDxtm/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_admin in schema graphql. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16590",
+      "rank": 20,
+      "full_catalog_text": "{\"oid\":\"16590\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16578\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X/supabase_admin\",\"anon=X/supabase_admin\",\"authenticated=X/supabase_admin\",\"service_role=X/supabase_admin\"]}",
+      "provider_md5": "d379031ec8eff46dd23c98655e663bd5",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 210
+      },
+      "parsed_fields": {
+        "oid": "16590",
+        "defaclrole": "10",
+        "defaclnamespace": "16578",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X/supabase_admin",
+          "anon=X/supabase_admin",
+          "authenticated=X/supabase_admin",
+          "service_role=X/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_admin in schema graphql. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16591",
+      "rank": 21,
+      "full_catalog_text": "{\"oid\":\"16591\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16578\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=rwU/supabase_admin\",\"anon=rwU/supabase_admin\",\"authenticated=rwU/supabase_admin\",\"service_role=rwU/supabase_admin\"]}",
+      "provider_md5": "3581d20096acf497c567cc53f52456ab",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 218
+      },
+      "parsed_fields": {
+        "oid": "16591",
+        "defaclrole": "10",
+        "defaclnamespace": "16578",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=rwU/supabase_admin",
+          "anon=rwU/supabase_admin",
+          "authenticated=rwU/supabase_admin",
+          "service_role=rwU/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_admin in schema graphql. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "graphql",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16634",
+      "rank": 22,
+      "full_catalog_text": "{\"oid\":\"16634\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16392\",\"defaclobjtype\":\"r\",\"defaclacl\":[\"postgres=a*r*w*d*D*x*t*m*/supabase_admin\"]}",
+      "provider_md5": "41052f7ea4242dc7623aaa4760549ffa",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 136
+      },
+      "parsed_fields": {
+        "oid": "16634",
+        "defaclrole": "10",
+        "defaclnamespace": "16392",
+        "defaclobjtype": "r",
+        "defaclacl": [
+          "postgres=a*r*w*d*D*x*t*m*/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future relation objects created by role supabase_admin in schema extensions. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "extensions",
+      "default_object_kind": "r"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16635",
+      "rank": 23,
+      "full_catalog_text": "{\"oid\":\"16635\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16392\",\"defaclobjtype\":\"f\",\"defaclacl\":[\"postgres=X*/supabase_admin\"]}",
+      "provider_md5": "45e152ccabf30b6f1cecf46e47bd3320",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 122
+      },
+      "parsed_fields": {
+        "oid": "16635",
+        "defaclrole": "10",
+        "defaclnamespace": "16392",
+        "defaclobjtype": "f",
+        "defaclacl": [
+          "postgres=X*/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future routine objects created by role supabase_admin in schema extensions. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "extensions",
+      "default_object_kind": "f"
+    },
+    {
+      "route": "pg_default_acl",
+      "identity": "16636",
+      "rank": 24,
+      "full_catalog_text": "{\"oid\":\"16636\",\"defaclrole\":\"10\",\"defaclnamespace\":\"16392\",\"defaclobjtype\":\"S\",\"defaclacl\":[\"postgres=r*w*U*/supabase_admin\"]}",
+      "provider_md5": "8c49b2642296a1d2882f3154d5b357dd",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "16636",
+        "defaclrole": "10",
+        "defaclnamespace": "16392",
+        "defaclobjtype": "S",
+        "defaclacl": [
+          "postgres=r*w*U*/supabase_admin"
+        ]
+      },
+      "meaning": "Applies to future sequence objects created by role supabase_admin in schema extensions. ACL entries are grants for future objects, not proof of access to existing objects; public API privileges remain subject to actual objects, RLS and policy checks.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_owner": "supabase_admin",
+      "resolved_schema": "extensions",
+      "default_object_kind": "S"
+    },
+    {
+      "route": "pg_parameter_acl",
+      "identity": "17415",
+      "rank": 1,
+      "full_catalog_text": "{\"oid\":\"17415\",\"parname\":\"log_min_messages\",\"paracl\":[\"supabase_admin=sA/supabase_admin\",\"supabase_realtime_admin=s/supabase_admin\"]}",
+      "provider_md5": "77a693c01a17544524b1712ee6e4cd07",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 133
+      },
+      "parsed_fields": {
+        "oid": "17415",
+        "parname": "log_min_messages",
+        "paracl": [
+          "supabase_admin=sA/supabase_admin",
+          "supabase_realtime_admin=s/supabase_admin"
+        ]
+      },
+      "meaning": "Named server setting log_min_messages has explicit SET/ALTER SYSTEM delegation to Supabase administrative/runtime roles; does not contain member data or prove unsafe runtime values.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "setting": "log_min_messages"
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:10",
+      "rank": 1,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"10\",\"setconfig\":[\"search_path=\\\"$user\\\", public, auth, extensions\",\"log_statement=none\"]}",
+      "provider_md5": "59588ebfe8cd99295f50fc63fca86bce",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 119
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "10",
+        "setconfig": [
+          "search_path=\"$user\", public, auth, extensions",
+          "log_statement=none"
+        ]
+      },
+      "meaning": "Default session configuration for supabase_admin on <all databases>: search_path, log_statement. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "supabase_admin",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16388",
+      "rank": 2,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16388\",\"setconfig\":[\"search_path=\\\"\\\\$user\\\", public, extensions\"]}",
+      "provider_md5": "838fcfd64b4fa3c4bf766220dab24f5b",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 97
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16388",
+        "setconfig": [
+          "search_path=\"\\$user\", public, extensions"
+        ]
+      },
+      "meaning": "Default session configuration for postgres on <all databases>: search_path. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "postgres",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16434",
+      "rank": 3,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16434\",\"setconfig\":[\"default_transaction_read_only=on\"]}",
+      "provider_md5": "de87d1f8856a34bde6a15170ed2b3def",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 86
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16434",
+        "setconfig": [
+          "default_transaction_read_only=on"
+        ]
+      },
+      "meaning": "Default session configuration for supabase_read_only_user on <all databases>: default_transaction_read_only. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "supabase_read_only_user",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16484",
+      "rank": 4,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16484\",\"setconfig\":[\"statement_timeout=3s\"]}",
+      "provider_md5": "dfdf8d357d088545e7bd28e7cee40a1d",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 74
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16484",
+        "setconfig": [
+          "statement_timeout=3s"
+        ]
+      },
+      "meaning": "Default session configuration for anon on <all databases>: statement_timeout. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "anon",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16485",
+      "rank": 5,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16485\",\"setconfig\":[\"statement_timeout=8s\"]}",
+      "provider_md5": "37212d1c0008b7259ecbf22e5257682c",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 74
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16485",
+        "setconfig": [
+          "statement_timeout=8s"
+        ]
+      },
+      "meaning": "Default session configuration for authenticated on <all databases>: statement_timeout. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "authenticated",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16487",
+      "rank": 6,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16487\",\"setconfig\":[\"session_preload_libraries=supautils, safeupdate\",\"statement_timeout=8s\",\"lock_timeout=8s\"]}",
+      "provider_md5": "ae12ee28a0ea20c4a547ab74be515704",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 142
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16487",
+        "setconfig": [
+          "session_preload_libraries=supautils, safeupdate",
+          "statement_timeout=8s",
+          "lock_timeout=8s"
+        ]
+      },
+      "meaning": "Default session configuration for authenticator on <all databases>: session_preload_libraries, statement_timeout, lock_timeout. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "authenticator",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16545",
+      "rank": 7,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16545\",\"setconfig\":[\"search_path=auth\",\"idle_in_transaction_session_timeout=60000\",\"log_statement=none\"]}",
+      "provider_md5": "a295c405258c66f1b4a16c97bf7dd106",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 135
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16545",
+        "setconfig": [
+          "search_path=auth",
+          "idle_in_transaction_session_timeout=60000",
+          "log_statement=none"
+        ]
+      },
+      "meaning": "Default session configuration for supabase_auth_admin on <all databases>: search_path, idle_in_transaction_session_timeout, log_statement. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "supabase_auth_admin",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:16547",
+      "rank": 8,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"16547\",\"setconfig\":[\"search_path=storage\",\"log_statement=none\"]}",
+      "provider_md5": "88be80bf7a9c52b09234b2b11a054f11",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 94
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "16547",
+        "setconfig": [
+          "search_path=storage",
+          "log_statement=none"
+        ]
+      },
+      "meaning": "Default session configuration for supabase_storage_admin on <all databases>: search_path, log_statement. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "supabase_storage_admin",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "0:17401",
+      "rank": 9,
+      "full_catalog_text": "{\"setdatabase\":\"0\",\"setrole\":\"17401\",\"setconfig\":[\"search_path=public, extensions, realtime\"]}",
+      "provider_md5": "212e7d9e666f8c01fa725b5a65661725",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 94
+      },
+      "parsed_fields": {
+        "setdatabase": "0",
+        "setrole": "17401",
+        "setconfig": [
+          "search_path=public, extensions, realtime"
+        ]
+      },
+      "meaning": "Default session configuration for supabase_realtime_admin on <all databases>: search_path. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": "supabase_realtime_admin",
+      "resolved_database": null
+    },
+    {
+      "route": "pg_db_role_setting",
+      "identity": "5:0",
+      "rank": 10,
+      "full_catalog_text": "{\"setdatabase\":\"5\",\"setrole\":\"0\",\"setconfig\":[\"app.settings.jwt_exp=3600\"]}",
+      "provider_md5": "f224efb14ac511a5b1a8809c37ff7bd1",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 75
+      },
+      "parsed_fields": {
+        "setdatabase": "5",
+        "setrole": "0",
+        "setconfig": [
+          "app.settings.jwt_exp=3600"
+        ]
+      },
+      "meaning": "Default session configuration for <all roles> on postgres: app.settings.jwt_exp. These are configuration overrides, not persisted user data; preserve hosted role isolation and application behavior.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_role": null,
+      "resolved_database": "postgres"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "10226",
+      "rank": 1,
+      "full_catalog_text": "{\"oid\":\"10226\",\"roleid\":\"3374\",\"member\":\"3373\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "94a43bd33144b29a169d046298ee5177",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "10226",
+        "roleid": "3374",
+        "member": "3373",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: pg_monitor may inherit pg_read_all_settings privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "pg_monitor",
+      "resolved_parent_role": "pg_read_all_settings",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "10227",
+      "rank": 2,
+      "full_catalog_text": "{\"oid\":\"10227\",\"roleid\":\"3375\",\"member\":\"3373\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "ad758832f967882802cc3dcf4ee9bb25",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "10227",
+        "roleid": "3375",
+        "member": "3373",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: pg_monitor may inherit pg_read_all_stats privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "pg_monitor",
+      "resolved_parent_role": "pg_read_all_stats",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "10228",
+      "rank": 3,
+      "full_catalog_text": "{\"oid\":\"10228\",\"roleid\":\"3377\",\"member\":\"3373\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "c8b3d9c0a283601a0a9e34258e1d2899",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "10228",
+        "roleid": "3377",
+        "member": "3373",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: pg_monitor may inherit pg_stat_scan_tables privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "pg_monitor",
+      "resolved_parent_role": "pg_stat_scan_tables",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16433",
+      "rank": 4,
+      "full_catalog_text": "{\"oid\":\"16433\",\"roleid\":\"6181\",\"member\":\"16432\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "25f09af8bed8991fd951145ea1c78412",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16433",
+        "roleid": "6181",
+        "member": "16432",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_etl_admin may inherit pg_read_all_data privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_etl_admin",
+      "resolved_parent_role": "pg_read_all_data",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16435",
+      "rank": 5,
+      "full_catalog_text": "{\"oid\":\"16435\",\"roleid\":\"6181\",\"member\":\"16434\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "3dd087f7eca9ac788c65966b18f6d675",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16435",
+        "roleid": "6181",
+        "member": "16434",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_read_only_user may inherit pg_read_all_data privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_read_only_user",
+      "resolved_parent_role": "pg_read_all_data",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16488",
+      "rank": 6,
+      "full_catalog_text": "{\"oid\":\"16488\",\"roleid\":\"16484\",\"member\":\"16487\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "70617c717ad156e8a3f8985ad99b5d17",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "16488",
+        "roleid": "16484",
+        "member": "16487",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: authenticator may not inherit anon privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "authenticator",
+      "resolved_parent_role": "anon",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16489",
+      "rank": 7,
+      "full_catalog_text": "{\"oid\":\"16489\",\"roleid\":\"16485\",\"member\":\"16487\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "5134c87a1caeedc3a4566b8cfcbc9965",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "16489",
+        "roleid": "16485",
+        "member": "16487",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: authenticator may not inherit authenticated privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "authenticator",
+      "resolved_parent_role": "authenticated",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16490",
+      "rank": 8,
+      "full_catalog_text": "{\"oid\":\"16490\",\"roleid\":\"16486\",\"member\":\"16487\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "08632bc790fabbad4c33ba9cc20f7d99",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "16490",
+        "roleid": "16486",
+        "member": "16487",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: authenticator may not inherit service_role privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "authenticator",
+      "resolved_parent_role": "service_role",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16631",
+      "rank": 9,
+      "full_catalog_text": "{\"oid\":\"16631\",\"roleid\":\"16484\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "5f9a586e73c1ee8ce6a995631eeab4ea",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16631",
+        "roleid": "16484",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit anon privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "anon",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16632",
+      "rank": 10,
+      "full_catalog_text": "{\"oid\":\"16632\",\"roleid\":\"16485\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "f5a828f702e573317ec17424bf487993",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16632",
+        "roleid": "16485",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit authenticated privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "authenticated",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16633",
+      "rank": 11,
+      "full_catalog_text": "{\"oid\":\"16633\",\"roleid\":\"16486\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "8693f95587bddf7a03aff99316099a33",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16633",
+        "roleid": "16486",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit service_role privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "service_role",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16637",
+      "rank": 12,
+      "full_catalog_text": "{\"oid\":\"16637\",\"roleid\":\"3373\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "270031e224b15d205e17dc521f31530e",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "16637",
+        "roleid": "3373",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit pg_monitor privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "pg_monitor",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16641",
+      "rank": 13,
+      "full_catalog_text": "{\"oid\":\"16641\",\"roleid\":\"16487\",\"member\":\"16547\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "308e2bc32f1b945dc8577b37a78a08a9",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "16641",
+        "roleid": "16487",
+        "member": "16547",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_storage_admin may not inherit authenticator privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_storage_admin",
+      "resolved_parent_role": "authenticator",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16655",
+      "rank": 14,
+      "full_catalog_text": "{\"oid\":\"16655\",\"roleid\":\"6181\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "0f4a6b474128a25370f99233f3315cae",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "16655",
+        "roleid": "6181",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit pg_read_all_data privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "pg_read_all_data",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16656",
+      "rank": 15,
+      "full_catalog_text": "{\"oid\":\"16656\",\"roleid\":\"4200\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "b6d15b214e6fd50b6c2f0a190c8a20fd",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "16656",
+        "roleid": "4200",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit pg_signal_backend privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "pg_signal_backend",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16658",
+      "rank": 16,
+      "full_catalog_text": "{\"oid\":\"16658\",\"roleid\":\"6304\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "32279980903997dbcee2908c59534185",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 123
+      },
+      "parsed_fields": {
+        "oid": "16658",
+        "roleid": "6304",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit pg_create_subscription privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "pg_create_subscription",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16659",
+      "rank": 17,
+      "full_catalog_text": "{\"oid\":\"16659\",\"roleid\":\"16487\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":true,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "3845c6b605d1d0e99d80b1c1df7bf035",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16659",
+        "roleid": "16487",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit authenticator privileges, may SET ROLE, may administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "authenticator",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16660",
+      "rank": 18,
+      "full_catalog_text": "{\"oid\":\"16660\",\"roleid\":\"3373\",\"member\":\"16432\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "222031a31b3e31407bbe939369c6a02c",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16660",
+        "roleid": "3373",
+        "member": "16432",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_etl_admin may inherit pg_monitor privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_etl_admin",
+      "resolved_parent_role": "pg_monitor",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16661",
+      "rank": 19,
+      "full_catalog_text": "{\"oid\":\"16661\",\"roleid\":\"3373\",\"member\":\"16434\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "e5148aeb687b2eb1dd11af7731678cc9",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 124
+      },
+      "parsed_fields": {
+        "oid": "16661",
+        "roleid": "3373",
+        "member": "16434",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_read_only_user may inherit pg_monitor privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_read_only_user",
+      "resolved_parent_role": "pg_monitor",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16663",
+      "rank": 20,
+      "full_catalog_text": "{\"oid\":\"16663\",\"roleid\":\"16662\",\"member\":\"16388\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "ccaa3252302e8f92bb68b7f9ea850e62",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 125
+      },
+      "parsed_fields": {
+        "oid": "16663",
+        "roleid": "16662",
+        "member": "16388",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: postgres may inherit supabase_privileged_role privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "postgres",
+      "resolved_parent_role": "supabase_privileged_role",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "16664",
+      "rank": 21,
+      "full_catalog_text": "{\"oid\":\"16664\",\"roleid\":\"16662\",\"member\":\"16432\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":true,\"set_option\":true}",
+      "provider_md5": "c87e79670b3613816a01a1bafcf2f73d",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 125
+      },
+      "parsed_fields": {
+        "oid": "16664",
+        "roleid": "16662",
+        "member": "16432",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_etl_admin may inherit supabase_privileged_role privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_etl_admin",
+      "resolved_parent_role": "supabase_privileged_role",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "17403",
+      "rank": 22,
+      "full_catalog_text": "{\"oid\":\"17403\",\"roleid\":\"16484\",\"member\":\"17401\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "54ca085a48cd828eb6334c8bb3c121b5",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "17403",
+        "roleid": "16484",
+        "member": "17401",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_realtime_admin may not inherit anon privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_realtime_admin",
+      "resolved_parent_role": "anon",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "17413",
+      "rank": 23,
+      "full_catalog_text": "{\"oid\":\"17413\",\"roleid\":\"16485\",\"member\":\"17401\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "2ddd1ae84e48334d5a2023a1ab0f132d",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "17413",
+        "roleid": "16485",
+        "member": "17401",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_realtime_admin may not inherit authenticated privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_realtime_admin",
+      "resolved_parent_role": "authenticated",
+      "resolved_grantor_role": "supabase_admin"
+    },
+    {
+      "route": "pg_auth_members",
+      "identity": "17414",
+      "rank": 24,
+      "full_catalog_text": "{\"oid\":\"17414\",\"roleid\":\"16486\",\"member\":\"17401\",\"grantor\":\"10\",\"admin_option\":false,\"inherit_option\":false,\"set_option\":true}",
+      "provider_md5": "657c3447c36cc4b3e59b935a93f7d852",
+      "reviewed_characters": {
+        "first": 1,
+        "last": 126
+      },
+      "parsed_fields": {
+        "oid": "17414",
+        "roleid": "16486",
+        "member": "17401",
+        "grantor": "10",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true
+      },
+      "meaning": "PostgreSQL SERVER-ROLE membership: supabase_realtime_admin may not inherit service_role privileges, may SET ROLE, may not administer membership. Managed provider/administrative delegation, not a Supabase Auth member identity.",
+      "disposition": "RETAIN — managed/core configuration, no verified DIC-specific defect or consumer-proven safe removal",
+      "resolved_member_role": "supabase_realtime_admin",
+      "resolved_parent_role": "service_role",
+      "resolved_grantor_role": "supabase_admin"
+    }
+  ],
+  "independent_checks": {
+    "default_acl_keys_unique": 24,
+    "default_acl_unresolved_roles": 0,
+    "default_acl_unresolved_namespaces": 0,
+    "pg_auth_members_role_edges": 24,
+    "private_auth_users_accessed": false,
+    "source_test_ci_changed": false,
+    "production_modified": false
+  },
+  "performance": {
+    "pg_stat_user_tables_app_related_tables": 53,
+    "top_seq_read_counts": [
+      {
+        "table": "public.shot_notes",
+        "seq_scan": 5175,
+        "seq_tup_read": 88661,
+        "estimated_live": 27
+      },
+      {
+        "table": "public.coffee_submissions",
+        "seq_scan": 10404,
+        "seq_tup_read": 73025,
+        "estimated_live": 9
+      },
+      {
+        "table": "private.beta_members",
+        "seq_scan": 20006,
+        "seq_tup_read": 70524,
+        "estimated_live": 5
+      }
+    ],
+    "existing_app_rpc_pg_stat": {
+      "name": "public.dic_read_personal_state",
+      "queryid": "1725044562985116050",
+      "calls": 4802,
+      "total_exec_time_ms": 74223.6,
+      "mean_exec_time_ms": 15.457,
+      "shared_blks_read": 0,
+      "conclusion": "Previously audited RPC; no proven bottleneck from aggregates"
+    }
+  },
+  "conclusion": "No new reproducible bug or safe removal; preserve managed ACL/role settings; only complete catalog metadata inspected, not C/server internals",
+  "baseline": "IN_PROGRESS",
+  "next": "Reconcile prior receipts and resume next actual unreviewed provider-positive definition route; no duplicate coverage credit."
+}
