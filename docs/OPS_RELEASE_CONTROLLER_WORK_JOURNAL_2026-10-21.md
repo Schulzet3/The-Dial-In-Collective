@@ -1262,3 +1262,13 @@ DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 
 - R2 immutable source branch native five exact completed SUCCESS: approval 45129746102; sql 45129745970; cloud-tests plus mobile-browser-qa 45129745953; validate 45129745980. READY source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 first-parent published d4af1c4e, changed app HTML and main.js; 522 other unfinished paths isolated by source receipt 45129596076. Independent READY approval latest 45130200066 and scoped grant a43a201a9ed92e804b14d96a3e69530200a8c612.
 - Last request DIC-20261123-INSTANT-3851 controller 45129045714 FAILED BEFORE CLAIM and grant was marked SUPERSEDED. Readback showed unchanged release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify deploy 6b0344fd039acce2c0364f2b READY/current and no #3851 consumption. This is a single recovery route, not a second publication.
 - One Git-connected Netlify production build only if guarded main push controller permits; no manual/direct provider publisher, SQL/Edge/private data writes, force, unrelated items or grant replay. Verify exact Git/Netlify postflight before DEPLOYED.
+
+## DIC-20261123-INSTANT-3851-R3 controller request [skip netlify]
+- Release ID: DIC-20261123-INSTANT-3851-R3
+- Tested source: 2d22d448160d428a977f06482323646b92818fcf
+- Mode: publish
+- Owner source: Owner November 22, 2026 23:29 America/Denver in this chat: 'Build it, test it, implement it, and deploy it. You have my approval.' EXACTLY ONE #3851 instant-opening release; no unrelated READY, future release or provider bypass. Recovery of previous failed-before-claim controller, not permission for a second publication.
+- Main parent: 80db73ca90cbdd8cff2d32a7187c3f72600b6951
+- Development grant/cert head: e2262003bb9125cc219c9ac40d776cb27a21cbab
+- Live preflight sha c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; five exact R2 candidate SUCCESS runs approval45129746102,sql45129745970,cloud/mobile45129745953,validate45129745980; release baseline 5ef0e190237a0fa8e391b086c5baeaaa962ae264.
+- Previous R2 45131648831 FAILED BEFORE CLAIM because owner approval provenance string differed, now repaired with EXACT UTF-8 text copied from authoritative DIC-20261123-INSTANT-3851-R3 grant, not paraphrased. R2 superseded, no grant consumed, no earlier Netlify new deploy. Strict one-source one-owner-approved release; no SQL/private data/provider direct writes or force; verify real controller + Netlify READY/current.
