@@ -848,3 +848,107 @@ test('#3889 prospective READY path requires exact reviewed source, 63-ID origina
  ];
  for(const edit of edits){const x=structuredClone({manifest,queue,developmentSourceSha:A,candidateSha:B,candidateBranch:branch});x.sourceObjectAt=opts.sourceObjectAt;edit(x);assert.throws(()=>reviewedProspectiveReadyQueuePath(x),/HOLD/);}
 });
+
+
+test('#3889 prospective promotion requires actual byte-identical live READY queue and only the original selected row changes',async()=>{
+ const {reviewedProspectivePromotionQueueParity:parity}=await import('../scripts/release/ready-only-candidate.mjs');
+ const id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const item={id,issue:509,title:'Scoped source',state:'TESTING',
+  owner_source:'https://github.com/Schulzet3/The-Dial-In-Collective/issues/509',
+  merged_source_sha:'a'.repeat(40),
+  scope_paths:['supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql'],
+  tests:['PASS'],ci_runs:[1],blockers:['candidate pending']};
+ const source={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
+  published_base:{tested_source_sha:'2d22d448160d428a977f06482323646b92818fcf',
+   release_sha:'5b256f1fc0717d3635f7148b934a1f91f8991685',netlify_deploy_id:'deployment'},
+  items:[item],history:[]};
+ const proposed=structuredClone(source);proposed.items[0].state='READY';proposed.items[0].blockers=[];
+ const raw=JSON.stringify(source),ready=JSON.stringify(proposed);
+ const manifest={kind:'DIC-READY-ONLY-SOURCE-1',publication_authorized:false,
+  published_source_sha:source.published_base.tested_source_sha,
+  development_source_sha:'544b06558ab9ab6df4eea0410277b1a3c19f2fe4',
+  candidate_branch:'release-candidates/prospect3889-544b06558ab9ab6df4ee',
+  selected_ready_item_ids:[id],prospective_ready_preview:{
+   status:'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING',
+   selected_id:id,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4'}};
+ const args={manifest,originalQueue:raw,candidateQueue:ready,liveQueue:ready};
+ assert.equal(parity(args),true);
+ assert.equal(parity({...args,liveQueue:raw}),false,'unpromoted TESTING is never publisher eligible');
+ assert.equal(parity({...args,liveQueue:ready+' '}),false,'not even whitespace drift is allowed');
+ assert.equal(parity({...args,manifest:{...manifest,publication_authorized:true}}),false);
+ assert.equal(parity({...args,manifest:{...manifest,prospective_ready_preview:{
+  ...manifest.prospective_ready_preview,baseline_queue_blob:'0'.repeat(40)}}}),false);
+ assert.equal(parity({...args,manifest:{...manifest,selected_ready_item_ids:[]}}),false);
+ const injected=structuredClone(proposed);injected.items[0].title='Unreviewed changed title';
+ assert.equal(parity({...args,candidateQueue:JSON.stringify(injected),liveQueue:JSON.stringify(injected)}),false);
+ const second={...item,id:'DIC-Q-509-other',state:'TESTING'};const mutated=structuredClone(proposed);
+ mutated.items.push(second);
+ assert.equal(parity({...args,candidateQueue:JSON.stringify(mutated),liveQueue:JSON.stringify(mutated)}),false);
+ assert.equal(parity({...args,originalQueue:ready,candidateQueue:ready}),true,
+  'ordinary same-queue contract remains unchanged');
+});
+
+test('#3889 exact seven excluded QA paths must match published Git blobs and two merged QA fixes',async()=>{
+ const {reviewedProspectiveQaRestorationPaths:prove}=await import('../scripts/release/ready-only-candidate.mjs');
+ const published='2d22d448160d428a977f06482323646b92818fcf',
+  development='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',
+  candidate='16bc481b2c66c5229c70e513c76141b086b8e535',
+  id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const restored=[
+  ['scripts/audit/run-full-suite.mjs','4c76dc5721eec24b002bcd62055b116911ae6c4e'],
+  ['tests/ci-optimization.test.mjs','21dc97fee802315487cb95e07678f02023989d21']
+ ];
+ const excluded=[
+  'scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs',
+  'scripts/audit/issue33-r430-disciples-original100-check.mjs',
+  'scripts/audit/issue33-r431-staccato-original354-check.mjs',
+  'scripts/audit/issue33-r433-duesouth-selected-check.mjs',
+  'scripts/audit/issue33-r434-south17-selected-check.mjs'
+ ];
+ const qa=[
+  {path:'tests/helpers/release-published-restoration.mjs',source_sha:'fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'},
+  {path:'tests/preflight-contract.test.mjs',source_sha:'f893c068e20c2445bc5596eda6b36c832974f195'}
+ ];
+ const x={reviewed_source_reference_sha:'b1cbddd2fcbabcd5bf5ef00f48ca9d2e9475cb77',
+  reviewed_source_reference_tree_sha:'ac379329eb318e49d1f71df1c5217f750953981b',
+  restored_to_published_nonshipped_paths:restored.map(y=>y[0]),
+  excluded_unready_nonshipped_paths:excluded,
+  changed_executable_paths_exactly_seven:true,certified_ready:false,publication_authorized:false,
+  merged_qa_candidate_fix_sha:development,reviewed_merged_qa_test_blobs:qa};
+ const manifest={publication_authorized:false,development_source_sha:development,
+  candidate_branch:'release-candidates/prospect3889-544b06558ab9ab6df4ee',
+  selected_ready_item_ids:[id],prospective_ready_preview:{selected_id:id,
+   status:'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING',
+   baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4'},
+  nonpublishing_qa_restoration:x};
+ const map=new Map(),at=(ref,path)=>map.get(ref+':'+path)??null;
+ for(const [p,sha] of restored){
+  map.set(published+':'+p,'100644:'+sha);map.set(candidate+':'+p,'100644:'+sha);
+  map.set(development+':'+p,'100644:'+'a'.repeat(40));
+ }
+ for(const p of excluded)map.set(development+':'+p,'100644:'+'a'.repeat(40));
+ for(const {path,source_sha} of qa){
+  map.set(development+':'+path,'100644:'+source_sha);
+  map.set(candidate+':'+path,'100644:'+source_sha);
+ }
+ const args={manifest,queue:{items:[{id,state:'READY'}]},developmentSourceSha:development,
+  publishedSourceSha:published,candidateSha:candidate,sourceObjectAt:at};
+ assert.deepEqual(prove(args),[...restored.map(y=>y[0]),...excluded]);
+ assert.deepEqual(prove({...args,manifest:{...manifest,nonpublishing_qa_restoration:undefined}}),[]);
+ for(const edit of [
+  m=>{m.nonpublishing_qa_restoration.restored_to_published_nonshipped_paths=[]},
+  m=>{m.nonpublishing_qa_restoration.excluded_unready_nonshipped_paths.push('scripts/audit/foreign.mjs')},
+  m=>{m.nonpublishing_qa_restoration.certified_ready=true},
+  m=>{m.nonpublishing_qa_restoration.reviewed_source_reference_sha='a'.repeat(40)},
+  m=>{m.prospective_ready_preview.status='VERIFIED'},
+  m=>{m.publication_authorized=true}
+ ]){
+  const m=structuredClone(manifest);edit(m);
+  assert.throws(()=>prove({...args,manifest:m}),/HOLD/);
+ }
+ for(const path of [...restored.map(y=>y[0]),...excluded,...qa.map(y=>y.path)]){
+  assert.throws(()=>prove({...args,sourceObjectAt:(ref,p)=>
+   ref===candidate&&p===path?'100644:'+'f'.repeat(40):at(ref,p)}),/HOLD/,path);
+ }
+ assert.throws(()=>prove({...args,candidateSha:development}),/HOLD/);
+});

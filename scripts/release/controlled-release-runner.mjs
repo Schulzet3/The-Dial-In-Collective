@@ -13,7 +13,7 @@ import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEn
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch,
  auditMissingUnreadyMergeEvidence} from './release-queue.mjs';
-import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
+import {validateReadyOnlyCandidate,reviewedProspectivePromotionQueueParity,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {verifyReadyItems,githubReleaseReaders,certifiedFrozenCandidateRuns} from './ready-evidence-gate.mjs';
 import {liveControllerIndex} from './observe-chat-controller-event.mjs';
@@ -334,7 +334,8 @@ export async function executeSingleUseRelease(settings=process.env){
    candidateChangedPaths:changedSourcePaths,
    stagedCommitChangedPaths:listDiff(sourceAnchor,sha),
    developmentDriftPaths:listDiff(sourceAnchor,developmentHead),
-   queueContentMatches:originalQueue===candidateQueue,
+   queueContentMatches:reviewedProspectivePromotionQueueParity({manifest,
+    originalQueue,candidateQueue,liveQueue}),
    liveQueue:json(liveQueue,'current development release queue'),
    sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
   });
