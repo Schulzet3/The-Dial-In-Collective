@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
-    "release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
-    "netlify_deploy_id": "6b0344fd039acce2c0364f2b"
+    "tested_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+    "release_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+    "netlify_deploy_id": "6b03ecb6209659fc760da00e"
   },
   "items": [
     {
@@ -18607,7 +18607,7 @@
       "id": "DIC-Q-3851-cache-before-admission",
       "issue": 3851,
       "title": "Paint returning member's same-owner cached coffee before admission request; defer blocking vendor parse",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "a9303f97d4aa0ae4e6ead4fe64283537821c8fc9",
       "scope_paths": [
         "site/cloud/main.js",
@@ -18617,17 +18617,28 @@
         "tests/cloud-fast-start.test.mjs",
         "tests/helpers/release-published-restoration.mjs",
         "tests/source-hygiene.test.mjs",
-        "PR #3852 exact Auth/SQL/cloud/mobile CI successful; #3851 frozen QA repair pending new exact source CI"
+        "PR #3852 exact Auth/SQL/cloud/mobile CI successful; #3851 frozen QA repair pending new exact source CI",
+        "FINAL R2 immutable frozen source 2d22d448160d428a977f06482323646b92818fcf exact native SUCCESS all five jobs: approval45129746102, SQL45129745970, cloud-tests+mobile-browser-qa45129745953, validate45129745980; source-isolation receipt45129596076 SUCCESS; independent merged app/HTML/source QA blob parity and Netlify READY/current verified."
       ],
       "ci_runs": [
         45127983275,
         45127983224,
         45127983238,
-        45127983251
+        45127983251,
+        45129746102,
+        45129745970,
+        45129745953,
+        45129745980
       ],
       "blockers": [],
       "owner_source": "Owner direct November 22 2026 23:29 MST: build, test, implement and deploy faster cold start",
-      "notes": "PROVISIONAL SOURCE STAGING ONLY for #3851 proven merged app/QA first-parent pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9. LIVE development remains TESTING until fresh five exact candidate checks pass, then formal readiness certification. Historic same code/test candidate 6ee5bbeb exact five SUCCESS runs documented, but first controller 45129045714 preclaim failed due wrong prior merge pin and its grant superseded. No new release without one-use DIC-20261123-INSTANT-3851-R2. Unready source fully isolated."
+      "notes": "PROVISIONAL SOURCE STAGING ONLY for #3851 proven merged app/QA first-parent pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9. LIVE development remains TESTING until fresh five exact candidate checks pass, then formal readiness certification. Historic same code/test candidate 6ee5bbeb exact five SUCCESS runs documented, but first controller 45129045714 preclaim failed due wrong prior merge pin and its grant superseded. No new release without one-use DIC-20261123-INSTANT-3851-R2. Unready source fully isolated.\nFINAL PRODUCTION VERIFIED DEPLOYED 2026-11-23 07:35:33.230Z — supersedes all earlier PROVISIONAL/TESTING pending notes. Only #3851 READY selected; original and R2 controller failed BEFORE claim, both superseded. R3 new one-use consumed exactly once, main two-file single-parent request 3588c95ce0f87eae4f146a940e92f92ed558977d; controller45132118097 SUCCESS, main acceptance45132118096 SUCCESS, nonforce production release5b256f1fc0717d3635f7148b934a1f91f8991685; Netlify6b03ecb6209659fc760da00e READY/current matching exact Git commit and site app.dialincollective.com. Five matched candidate/production app+QA blobs; only two site runtime files changed, no SQL/Edge/workflows/member record modifications. Unshipped audit/CI fixtures differ from prior production Git and are included in already-tested frozen source; no other unready app runtime selected. Five unchanged functions; zero provider secret scan matches across 6317. Actual member/device stopwatch not independently exercised.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261123-INSTANT-3851-R3",
+      "delivered_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "delivered_release_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+      "delivered_netlify_deploy_id": "6b03ecb6209659fc760da00e",
+      "delivered_at_utc": "2026-11-23T07:35:33.230Z"
     }
   ],
   "history": [
@@ -22062,6 +22073,18 @@
       "delivered_netlify_deploy_id": "6b0344fd039acce2c0364f2b",
       "at": "2026-11-22T19:39:57.862Z",
       "evidence": "Owner-approved one #3781 same-owner returning-session read-only cached first paint with background admission/revocation. Frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 five exact native GitHub jobs SUCCESS; main request 7b42166e, controller 45061967031 SUCCESS, one-use grant DIC-20261122-ADMISSION-READY04 consumed once. Nonforce production Git 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify 6b0344fd039acce2c0364f2b READY/current matching commit_ref, 5 functions, no secret-scan matches. No SQL/Edge/other unready features. Earlier failed -02/-03 controllers made no release claims and not replayed."
+    },
+    {
+      "date": "2026-11-23",
+      "issue": 3851,
+      "item_id": "DIC-Q-3851-cache-before-admission",
+      "state": "DEPLOYED",
+      "source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "production_deployed": true,
+      "delivered_release_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+      "delivered_netlify_deploy_id": "6b03ecb6209659fc760da00e",
+      "at": "2026-11-23T07:35:33.230Z",
+      "evidence": "Exactly one owner-approved #3851 feature, frozen candidate2d22d448 all five native SUCCESS; 522-path isolation receipt45129596076. R3 grant consumed exactly once; main commit3588c95c controller45132118097 SUCCESS. Nonforce release5b256f1f and Netlify deploy6b03ecb6 READY/current matching commit_ref 2026-11-23T07:35:33.230Z. Two changed app runtime paths only, no DB/Edge/workflow, five functions and zero secret matches; extra unshipped QA/audit metadata in tested Git source. No real device stopwatch."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
