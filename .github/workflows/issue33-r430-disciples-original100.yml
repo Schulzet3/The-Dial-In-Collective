@@ -1,0 +1,56 @@
+name: DIC Issue33 R430 selected original100 official product
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r430-disciples-original100.yml'
+      - 'scripts/audit/issue33-r430-disciples-original100-check.mjs'
+      - 'tests/issue33-r430-disciples-original100.test.mjs'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r430-disciples-original100.yml'
+      - 'scripts/audit/issue33-r430-disciples-original100-check.mjs'
+      - 'tests/issue33-r430-disciples-original100.test.mjs'
+permissions:
+  contents: read
+jobs:
+  selected-original100:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Pin exact SHA and local positive/hostile regression
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+          node --check scripts/audit/issue33-r430-disciples-original100-check.mjs
+          node --test tests/issue33-r430-disciples-original100.test.mjs
+      - name: Required bounded guarded first-party current HTTPS with actual parser and unsaved UI
+        env:
+          DIC_R430_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '100'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r430
+        run: GITHUB_SHA="$DIC_R430_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict real seller HTML rehash and direct-field afterproof, fail closed
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_R430_RUN: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r430
+        run: node scripts/audit/issue33-r430-disciples-original100-check.mjs
+      - name: Keep bounded private source evidence one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r430-original100-official
+          path: /tmp/dic33-r430/
+          retention-days: 1
+          if-no-files-found: warn
