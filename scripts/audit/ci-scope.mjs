@@ -44,7 +44,9 @@ const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3
 
 // #267 disjoint V2 semantic audit receipts are non-runtime evidence (two 30-line tracks + index).
 // Bind to the exact F/CURRENT-C/INDEX filename grammar, never to arbitrary audit JSON.
-const STRICT_DISJOINT_AUDIT_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-DISJOINT-(?:(?:F|CURRENT-C)[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|INDEX-V[0-9]{1,3}[A-Z]{1,3}-20[0-9]{6})\.json$/;
+// #267 disjoint audit can span exactly two adjacent frozen F or CURRENT-C files;
+// constrain both ranges, retain original single-F/C/INDEX and unknown-HIGH routes.
+const STRICT_DISJOINT_AUDIT_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-DISJOINT-(?:(?:F|CURRENT-C)[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|INDEX-V[0-9]{1,3}[A-Z]{1,3}-20[0-9]{6}|CURRENT-C[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-C[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3}|F[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-F[1-9][0-9]{0,5}-[1-9][0-9]{0,6}-[1-9][0-9]{0,6}-20[0-9]{6}-V[0-9]{1,3}[A-Z]{1,3})\.json$/;
 
 export function deployableRiskPaths(paths){
  return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&

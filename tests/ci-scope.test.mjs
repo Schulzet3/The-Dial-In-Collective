@@ -184,9 +184,27 @@ test('Issue #267 disjoint semantic evidence JSON does not waste HIGH CI on docs-
   'S2-DISJOINT-INDEX-V13CD-20261122.json',
   'S2-DISJOINT-F221-507-536-20261123-V13CE.json',
   'S2-DISJOINT-CURRENT-C78-87-116-20261123-V13CE.json',
-  'S2-DISJOINT-INDEX-V13CE-20261123.json'
+  'S2-DISJOINT-INDEX-V13CE-20261123.json',
+  'S2-DISJOINT-F221-657-673-F222-1-13-20261122-V13CJ.json',
+  'S2-DISJOINT-CURRENT-C79-24-53-20261122-V13CJ.json',
+  'S2-DISJOINT-INDEX-V13CJ-20261122.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-INDEX-V13CK-20261122.json'
  ].map(name=>prefix+name);
- const paths=[...safe,'docs/workstreams/issue-267.md'];
+ const currentPair=[
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-INDEX-V13CK-20261122.json'
+ ].map(name=>prefix+name).concat('docs/workstreams/ops-issue267-v13ck-20261122.md');
+ for(const event of ['pull_request','push']){
+  const proof=classifyChanges({base:A,head:B,event,git:()=>currentPair.join('\n')+'\n'});
+  assert.equal(proof.tier,'docs',event+' exact V13CK pair');
+  assert.equal(proof.node_mode,'none',event);
+  assert.equal(proof.sql,false,event);
+  assert.equal(proof.lint,false,event);
+ }
+ const paths=[...safe,'docs/workstreams/issue-267.md','docs/workstreams/ops-issue267-v13cj-20261122.md'];
  for(const event of ['pull_request','push']){
   const proof=classifyChanges({base:A,head:B,event,git:()=>paths.join('\n')+'\n'});
   assert.equal(proof.tier,'docs',event);
@@ -201,6 +219,14 @@ test('Issue #267 disjoint semantic evidence JSON does not waste HIGH CI on docs-
   'S2-DISJOINT-INDEX-BAD-20261122.json',
   'S2-DISJOINT-INDEX-V13CD-20261122.js',
   'S2-DISJOINT-F221-477-506-20261122.json',
+  'S2-DISJOINT-F221-657-673-F0-1-13-20261122-V13CJ.json',
+  'S2-DISJOINT-F221-657-673-F222-1-13-F223-14-30-20261122-V13CJ.json',
+  'S2-DISJOINT-F221-657-673-C79-24-53-20261122-V13CJ.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C0-1-18-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-C81-1-4-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-F222-14-43-20261122-V13CK.json',
+  'S2-DISJOINT-CURRENT-C79-54-65-C80-1-18-20261122-V13CK.sql',
+  'S2-DISJOINT-F221-657-673-F222-1-13-20261122-V13CJ.js',
   'S2-DISJOINT-F0-477-506-20261122-V13CD.json',
   'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.sql',
   'S2-DISJOINT-CURRENT-C78-57-86-20261122-V13CD.json.bak',

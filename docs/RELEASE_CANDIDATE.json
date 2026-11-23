@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "kind": "DIC-READY-ONLY-SOURCE-1",
-  "candidate_branch": "release-candidates/ready3347-e464006d27b2fd691685",
-  "development_source_sha": "4b9e0d3a770a27fcf4b7fff15af7191d115ca8a0",
-  "published_source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
+  "candidate_branch": "release-candidates/ready3347-682baef17a9526366653",
+  "development_source_sha": "eff1b82d0c80407b232ec01a7c58ad4f53bd6b77",
+  "published_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
   "selected_ready_item_ids": [
-    "DIC-Q-3781-returning-session-background-admission"
+    "DIC-Q-3851-cache-before-admission"
   ],
   "risk_classification": {
     "tier": "low",
@@ -42,6 +42,7 @@
     "src/server/coffee-product-scope.mjs",
     "src/server/coffee-selected-icon-specs.mjs",
     "src/server/coffee-selected-published-sourcing-region.mjs",
+    "src/server/coffee-selected-shopify-variant-richtext.mjs",
     "src/server/coffee-selected-woo-short-origin-conflict.mjs",
     "src/server/coffee-source-facts.mjs",
     "supabase/functions/dic-admin-push-broker/core.mjs",
@@ -69,7 +70,8 @@
     "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql",
     "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
     "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql",
-    "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
+    "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql",
+    "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
   ],
   "pinned_to_ready_paths": [
     "site/cloud/main.js"
@@ -311,6 +313,15 @@
     ".github/workflows/issue33-r407-original119-123.yml",
     ".github/workflows/issue33-r411-foster-original124-125.yml",
     ".github/workflows/issue33-r412-original126-127.yml",
+    ".github/workflows/issue33-r416-original128-129.yml",
+    ".github/workflows/issue33-r417-original137-138.yml",
+    ".github/workflows/issue33-r419-original139-140.yml",
+    ".github/workflows/issue33-r420-original146-155.yml",
+    ".github/workflows/issue33-r423-original149-150.yml",
+    ".github/workflows/issue33-r424-kati173-174.yml",
+    ".github/workflows/issue33-r425-kingspeak176-177.yml",
+    ".github/workflows/issue33-r426-kona180-leap194.yml",
+    ".github/workflows/issue33-r427-westrock322-323.yml",
     ".github/workflows/issue33-r78-26-bleu.yml",
     ".github/workflows/issue33-r79-72-78.yml",
     ".github/workflows/issue33-r80-118-127.yml",
@@ -332,7 +343,7 @@
     ".github/workflows/issue33-r98-gallop-encanto.yml",
     ".github/workflows/issue33-r99-468-471.yml",
     ".github/workflows/issue33-shared-parser-regressions.yml",
-    ".github/workflows/issue3781-provisional-ready-source-receipt.yml",
+    ".github/workflows/issue3851-r2-provisional-ready-source-receipt.yml",
     ".github/workflows/roaster-source-probe.yml",
     ".github/workflows/security-inspection.yml"
   ],
@@ -495,9 +506,14 @@
     "tests/coffee-issue33-r403-selected-swiss-water-claim.test.mjs",
     "tests/coffee-issue33-r406-original114-origin-dedup.test.mjs",
     "tests/coffee-issue33-r408-producer-farm-caption.test.mjs",
+    "tests/coffee-issue33-r418-processing-steps.test.mjs",
     "tests/coffee-issue33-shared-ci-trigger.test.mjs",
     "tests/coffee-issue33-shopify-main-product-h2.test.mjs",
     "tests/coffee-producer-team-disagreement.test.mjs",
+    "tests/issue33-r424-kati173-174.test.mjs",
+    "tests/issue33-r425-kingspeak176-177.test.mjs",
+    "tests/issue33-r426-kona180-leap194.test.mjs",
+    "tests/issue33-r427-westrock322-323.test.mjs",
     "tests/issue33-shared-dependency-ci-routing.test.mjs",
     "tests/issue455-browser-dependency-install-fallback.test.mjs",
     "tests/issue455-r381-recommendation-control-aria.test.mjs",
@@ -510,6 +526,9 @@
     "tests/issue455-r421-grind-reference-tenth-grid.test.mjs",
     "tests/issue455-r443-validation-copy-button-disabled.test.mjs",
     "tests/issue455-r444-save-shot-pending-lock.test.mjs",
+    "tests/issue455-r456-measured-grind-step-any.test.mjs",
+    "tests/issue455-r458-optional-temperature-metric.test.mjs",
+    "tests/issue455-r461-measured-shot-step-any.test.mjs",
     "tests/issue509-admin-push-lazy-vault.test.mjs",
     "tests/issue509-calibration-order.test.mjs",
     "tests/issue509-shot-order.test.mjs"

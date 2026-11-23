@@ -2,11 +2,166 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "64d6f50de9562c0442a05e865e9ed33f0cd2925a",
-    "release_sha": "50e05054e7139d2e7a675b8e15ab71a7dd42ac81",
-    "netlify_deploy_id": "6b0284543511466fd75b4573"
+    "tested_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+    "release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+    "netlify_deploy_id": "6b0344fd039acce2c0364f2b"
   },
   "items": [
+    {
+      "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
+      "issue": 455,
+      "pr": 3854,
+      "title": "Match Log/Edit Shot measured dose, yield and time HTML inputs to permitted fractions",
+      "state": "TESTING",
+      "merged_source_sha": "43306c3d8ea38aaf01491e16ca9930fcbcce6c47",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 R460 owner Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; prior source blob 0270a6cbb7dcaf7df39946f19164712a2e2eace5",
+      "tests": [
+        "Actual source fix only three measured Log/Edit Shot dose/yield/time step='.1' → 'any'; model continues finite validated decimal bounds and full five taste scales. Cloud input blob bfa0ddf1a80f8d33560aac092e8f2453c2d54ba3; revised R456 test blob c7466a875eb958ede6f5a5b15f2c3a60a2102c17; three new R461 test blob 32b29bf48e178ccc7814fc30a17f9f375751c669.",
+        "PR #3854 exact head 32adfb79dbd574a3f14d09d53cdd6a416b7c6b8e: R461 three named actual CloudApp/model negative/positive cases PASS, modified R456 PASS (cloud-tests job 137530242116), cloud shard 2947 PASS/0 FAIL/0 SKIPPED; Node22 validate 1785 PASS/0 FAIL/6 intentionally SKIPPED; governance approval 1497 PASS/0 FAIL.",
+        "PR-head CI: validate/build 45125965287, Cloud/browser/mobile/offline 45125965272, governance 45125965292, SQL 45125965305, security 45125965359, imported regressions 45125965438, exact-selected 45125965432 and 45125965270 all completed SUCCESS. Original603 45125965418 SKIPPED, explicitly NOT PASS.",
+        "Nonforce squash [skip netlify] PR #3854 merged 43306c3d8ea38aaf01491e16ca9930fcbcce6c47 with one parent a90df231dc5213408fa2fb05fde4a3113e2a5e0a. Exact six merged blob SHAs equal tested PR head; no overlapping concurrent changes. Merged-source validate 45126206309, Cloud/browser/mobile/offline 45126206379, approval 45126206347, imported regressions 45126206518, exact-selected 45126206367 ALL COMPLETED SUCCESS.",
+        "No observed member-device stepMismatch or blocked Save; actual browser suite successful but no human device or espresso taste effectiveness study. Remain TESTING until #3347 isolated candidate five successful checks and owner publication authorization."
+      ],
+      "ci_runs": [
+        45125965287,
+        45125965272,
+        45125965292,
+        45125965305,
+        45125965359,
+        45125965438,
+        45125965432,
+        45125965270,
+        45126206309,
+        45126206379,
+        45126206347,
+        45126206518,
+        45126206367
+      ],
+      "blockers": [
+        "Independent #3347 frozen source-isolated READY candidate and five exact successful source-bound statuses not certified. TESTING is not READY.",
+        "New explicit owner Publish needed to release; no live environment changes authorized."
+      ],
+      "notes": "R461 safely merged development via #3854 43306c3d8ea38aaf01491e16ca9930fcbcce6c47 with original measured 3-digit+ inputs enabled by HTML step=any; all five tastes, original shot/notes/history, numerical targets, RLS/private/outbox unchanged. PR-head and merged-source exact-app CI SUCCESS, frozen603 SKIPPED; no empirical user/cup study. Original S019 verification and real next-shot efficacy remain separate research gaps.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+      "issue": 33,
+      "pr": 3839,
+      "title": "Exact selected Shopify main variant H1-free direct seller rich-text source and guarded comparative roast (original603 #173/#174)",
+      "state": "TESTING",
+      "merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+      "scope_paths": [
+        "src/server/coffee-selected-shopify-variant-richtext.mjs"
+      ],
+      "owner_source": "Issue #33 development-only R424; immutable first live preflight development=7f9f00aba51cbb4016509180add98df58d3e2027 Git blob=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; original current guarded #173/#174 SHA-bound seller evidence and chosen product identity; PR #3839 [skip netlify]",
+      "tests": [
+        "Red first selected current runner 45109602676 FAILED because official #173/#174 lacked H1 and parser returned ambiguous_or_missing_product. Initial raw SHA256 #173 1964f4081f53e0968ba7b264d98d468d2087788ad7f3976864bf0f9d3ba40f35 / #174 5e15a73e4acd1f9a76089dc6a0da1031aaefe1ba5240f4306cbe7482fdde0084.",
+        "Corrected exact PR-head 5129fed0f6f245e72598e5543d93ebf5725e2dbc one-off source run 45110055151 COMPLETED SUCCESS, nine positive/hostile focused Node tests PASS, no normalized comparative roast. Current exact raw #173 782247 B SHA256 163c7e537896729b5d655dcf1dc75894541f0bf8e024223cb1c016abc3063ece and #174 721677 B SHA256 753d2477cff178e4c45e1ded21c7b325b8ea94f0af165be1e47c27d38f6c6dc6; independent artifact 14789610288 SHA256 rehash matches, parser and unsaved Add Coffee/Source Review PASS on both.",
+        "Pre-intake exact PR head approval 45110055354 and cloud validate 45110054913 FAILED only missing source helper queue entry; this item fixes the strict hold, not overridden.",
+        "Other parallel case workflows encountered changed/recycled or inaccessible unrelated seller sources #312 and #347; they are not #173/#174 acceptance and are not to be turned into fake PASS.",
+        "Whole 603 individual manual certification incomplete; full original frozen603 workflow SKIPPED, never claimed PASS.",
+        "Final tested PR-head 2bee14861d9d189dd33fab52e1a710b122a1e5d0: 45110475898 COMPLETED SUCCESS, 10/10 adversarial tests, 2/2 current official first-party selected HTML, exact URL/Shopify current title+product ID, parser, unsaved Add Coffee/Source Review; raw #173 782247B sha256 f95ff092b4727732f2853cef158a82f726f515d4254ed3ae02e351de10862a17 and #174 721677B sha256 9e4df3ecd9858033317dd19121419e1abbef250983cde3af117743762b5b8495 independently rehashed. Original-only recycled product title rejection regression passes.",
+        "Exact PR-head governance/Node/cloud/SQL/Python/shared source: approval 45110474032, all checked-in Node tests and scoped preflight 45110474037, cloud/browser 45110475566, SQL 45110474027, Python 45110473895, shared offline 45110474001 all COMPLETED SUCCESS; original frozen603 SKIPPED, 6 different current source cases fail-closed without acceptance.",
+        "Safe nonforce PR #3839 squash MERGED development e2e11042c190d6640829f5b6a2a758f5e7645ab0; 9 tested PR-head source/test/workflow/journal/queue/frozenCSV Git blobs byte-identical to merged. Merged original #173/#174 current raw 782247B/721677B SHA256 dd5906a11a8f154a6994330686e0d4a8d1a987932a0040f1aa1bdc63689f2dd8 and f4e38c1f059a02a8463bc84cbf1759ad6ac8aaa64900d0084542c45812d43b30; merged 45110857171 COMPLETED SUCCESS, 10/10 focused, raw rehash and unsaved UI. ZIP 14788564718 SHA256 2fb53a281673186b9c2141b3ab92bb22ccc678060d38b5d350df564200ff9db0 independently verified.",
+        "Merged-source 45110856925 approval, 45110855352 Node, 45110855547 cloud/mobile, 45110855483 Python and 45110856834 shared offline COMPLETED SUCCESS. 97 push workflows: 86 success, 8 unrelated selected official source/identity failures (including #594/#566/#567), 3 SKIPPED. Failed separate seller cases UNAVAILABLE or repurposed and remain reviewable; no generalized 603 claim."
+      ],
+      "ci_runs": [
+        45109602676,
+        45110055151,
+        45110055354,
+        45110054913,
+        45110475898,
+        45110474032,
+        45110474037,
+        45110475566,
+        45110474027,
+        45110473895,
+        45110474001,
+        45110857171,
+        45110856925,
+        45110855352,
+        45110855547,
+        45110855483,
+        45110856834
+      ],
+      "blockers": [
+        "Parent Issue #33 original 603 selected-product individual semantic certification remains incomplete, independent V2 #267 audit owns separate lines; no blanket READY/DEPLOYED acceptance.",
+        "Other original selected sources remain separately UNAVAILABLE or mismatched (#241 Novo intermittent challenge, #260, #272, #312, #347, #595 and #594/#566/#567), retain review exceptions without filling fields.",
+        "Separate #3347 nonpublishing READY candidate and explicit owner release gate not approved; production unchanged."
+      ],
+      "notes": "Only new runtime source path intake. Existing src/server/coffee-page-metadata.mjs is already governed. No new publication/provider/member writes; no promotion of prior READY or DEPLOYED items. Exact safe merged SHA and readback recorded at source 58f0d762dbe8b088301b21a2be7def208d029d28 after immutable docs/ai/PREFLIGHT.md blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. R424 current #173/#174 independently verified but parent #33 and whole 603 remain TESTING.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-stale-project-shot-comment-20261122",
+      "issue": 509,
+      "title": "Correct outdated project_shot worker-status comment",
+      "state": "TESTING",
+      "merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
+      "scope_paths": [
+        "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
+      ],
+      "owner_source": "Issue #509 R461, preflight development 4ee5360c76d0a1934d7ff10cfa3e8c05d52f3566 / blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+      "tests": [
+        "PASS live provider: 36 full application SQL descriptions and implemented reviewer/outlier/family functions verified",
+        "PASS additive COMMENT-only migration source, historical migrations unchanged",
+        "PASS exact-source isolated PostgreSQL 17.11 job 45074554874 at source 5b5159823908f3ae660f45b3ad93c096be586aec",
+        "PASS exact-source approval/continuity 45074554907, cloud app 45074554914, cloud UX 45074554975",
+        "PASS independent selected #33 job 45074555022; not credited as app migration behavior test"
+      ],
+      "ci_runs": [
+        45074554907,
+        45074554874,
+        45074554914,
+        45074554975,
+        45074555022
+      ],
+      "blockers": [
+        "#3347 nonpublishing isolated READY candidate certification, exact five named candidate statuses and release queue source isolation not yet independently complete",
+        "Separate NEW owner Publish required for production COMMENT migration; production remains read-only"
+      ],
+      "notes": "R463 source-bound CI confirmed 4 applicable source-SHA success runs; embedded migration blob 84cecbe69143b2170aa97a851198cc35b9926303 unchanged at development head. State TESTING pending frozen candidate certification, not READY/DEPLOYED.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
+      "issue": 455,
+      "pr": 3810,
+      "title": "Keep Log Shot dialog header Close unavailable during pending Save",
+      "state": "TESTING",
+      "merged_source_sha": "375124af34d3eab396db5d94d37c1897f0dc8a0d",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE Log Shot reliability. DIC_PREFLIGHT_VERIFIED development_sha=797f6b4badc418b6443133735d7159ff92413360 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; source main.js blob b5e7243fe6df2ca0e503348e41a656a7a550dd8b; same-commit journal e5961bcf99dde9d096aa9f1ba8ffb372a304fb42.",
+      "tests": [
+        "R451 two actual CloudApp synthetic deferred Save/Close tests PASS in PR-head approval job 137348188178 (1408 PASS/0 FAIL/0 SKIPPED); both named R451 cases PASS in merged-source approval job 137348940289 (1408 PASS/0 FAIL/0 SKIPPED). Existing R444 two tests retained.",
+        "Final PR-head 546b8ae5a408db081c9241b85a9569eae23edc40 exact CI: validate/cloud-tests/mobile-browser-qa/approval/SQL/imported-source/security-inventory and two exact-selected checks COMPLETED SUCCESS; frozen603 SKIPPED not PASS. Earlier e596 source commit checks CANCELLED on queue-only amendment, never counted PASS.",
+        "Nonforce squash PR #3810 merged development SHA 375124af34d3eab396db5d94d37c1897f0dc8a0d; four changed file Git blobs match exact PR head. Merged-source validate/cloud-tests/mobile-browser-qa/approval/imported-source-regressions/exact-selected all completed SUCCESS. Validate shard 1839 PASS/0 FAIL/6 SKIPPED; cloud shard 2931 PASS/0 FAIL/0 SKIPPED; approval shard 1408 PASS/0 FAIL."
+      ],
+      "ci_runs": [
+        45067927300,
+        45067927341,
+        45067927331,
+        45067927399,
+        45067927329,
+        45068175743,
+        45068175722,
+        45068175710,
+        45068175687,
+        45068175682
+      ],
+      "blockers": [
+        "Independent #3347 source-isolated READY candidate with the required exact-source CI certification not yet established; this app change remains TESTING and does not authorize Publish or any production writes.",
+        "Original S019 independent PDF and real-world same-coffee recommendation-effectiveness evidence remain unavailable/unverified; not a blocker to the narrow SAFE reliability fix, but prevent broader quality claim."
+      ],
+      "notes": "Source-proven modal header Close remained outside R444 form-disable guard; async save could complete after dialog dismissal. Conservative bug fix locks current header and handler until save completion, restores on failure, preserves all five taste inputs, original shot, notes/history, privacy, styles/grinder/feed/temperature, no new science target or data capture. No production member data or deployed assertion. Exact merged readback: site/cloud/main.js Git blob 5c24e203db233692589f064fadb819fe68302cf6, synthetic test b2e86fa154cddd39c2c7907f13c16af8324aef97, same-commit preflight journal 1747cafb22e42136b6730576af15cc59688e56a1, queue intake 36d2e652c5762ba0e6bb3dd491fcb534794a2e69; squash merge source first parent 797f6b4badc418b6443133735d7159ff92413360. No deployment.",
+      "production_deployed": false
+    },
     {
       "id": "DIC-Q-455-r443-validation-recommendation-button-state",
       "issue": 455,
@@ -17854,25 +18009,39 @@
     {
       "id": "DIC-Q-455-r417-measured-grind-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3594,
       "title": "Preserve original fractional grinder settings in new, offline and edited shot measurements",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
       "scope_paths": [
         "site/lib/engine.js",
         "site/cloud/mapping.js"
       ],
       "owner_source": "Owner Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; source engine 12f036ff2286c3e041d5ebf2a81c56ead6928c5c, mapping acbed6bd0f02cb7e626374a22cbeba1ab187ec2a",
       "tests": [
-        "Four synthetic actual-module positive/negative R417 regressions authored; hosted Node22, browser/mobile/offline/a11y, SQL, security and governance pending (NOT PASS).",
-        "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in authored tests.",
-        "Recommendation 0.1 adjustment grid remains unchanged; no real member or espresso quality evidence."
+        "Four original actual-module synthetic R417 positive/negative cases confirmed in exact PR-head and merged-source Node22, including fraction 0.15/0.25, offline payload, editing and missing-fifth abstention; no member/cup outcomes.",
+        "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in scoped authored regressions.",
+        "Recommendation 0.1 adjustment grid unchanged; actual non-tenth grinder measurements are preserved, not inferred optima.",
+        "Exact PR-head 5121232800ea813e4c83385daad067d1e93eab17: Node22/lint/build 44901492974, mobile/browser/offline/a11y 44901493094, approval 44901493078, isolated SQL 44901492976, security 44901493051 all COMPLETED SUCCESS. Node 6,031 PASS/0 FAIL/6 intentional SKIP, all four R417 regressions PASS.",
+        "Nonforce [skip netlify] PR #3594 squash merged 763966530e9b7bdc7d99f36a977e57018dc97fbf. Original five changed app/test/queue/journal Git blobs equal tested head; no release or provider write.",
+        "Exact merged-source push Node22 44901977584, cloud/mobile 44901977647, approval 44901977590, selected shared 44901977565 all COMPLETED SUCCESS. SQL/security at final PR head, not asserted rerun on merge. Original frozen603 SKIPPED, NOT PASS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44901492974,
+        44901493094,
+        44901493078,
+        44901492976,
+        44901493051,
+        44901977584,
+        44901977647,
+        44901977590,
+        44901977565
+      ],
       "blockers": [
-        "Exact source PR-head and merged CI not yet PASS; independent #3347 release candidate isolation and five successful checks pending. TESTING, not READY."
+        "Independent #3347 nonpublishing source-isolated frozen release candidate plus all five exact candidate CI successes NOT YET CERTIFIED; remain TESTING, NOT READY or DEPLOYED.",
+        "No new explicit owner Publish grant. Source tests and recorded CI do not establish real-world recommendation efficacy."
       ],
-      "notes": "Actual entered non-tenth measured grind was rounded by shotPayload/saveShot/editShot despite precision-capable SQL. Narrow SAFE integrity correction; original measured shots preserved. No publish/provider writes.",
+      "notes": "R417 measured-data integrity SAFE fix is merged in development only: PR #3594 merge 763966530e9b7bdc7d99f36a977e57018dc97fbf, original fractional actual dial preserved by live cloud/offline/edited shot paths; one-tenth suggested grid unchanged. Tests/CI source-bound verified; #3347 candidate isolation remains pending. No production/member/provider changes.",
       "production_deployed": false
     },
     {
@@ -18314,7 +18483,7 @@
       "issue": 3781,
       "pr": 3782,
       "title": "Open previously admitted same-owner cached workspace while rechecking access in background",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "354ddd99ef0ce8f03b2f74544782e4e977201a31",
       "scope_paths": [
         "site/cloud/client.js",
@@ -18328,7 +18497,8 @@
         "Exact merged-source push CI PASS: validate 45039837781, cloud-tests + mobile-browser-qa 45039837803, approval 45039837783, imported-source-regressions 45039837798, exact-selected 45039837805 all COMPLETED SUCCESS.",
         "New returning-session regressions cover cached first-paint, read-only preadmission, background denied cleanup, saved outbox, session validity, cross-owner and recovery guards; no real production-device stopwatch or live member acceptance measured.",
         "Clean source-freeze 354ddd99 (ten unique published main.js hunks, one client.js hunk) is a NONPUBLISHING reviewed provenance pin; exact isolated candidate CI still REQUIRED before promotion is merged to development.",
-        "Candidate source QA parity repair e85780b670f9d89328fdf46ba035b9d81205bb18: exact published workflow/Edge blob tests report NOT_APPLICABLE; selected Auth tests remain active; previous frozen 95ea280f validation FAIL and never READY. This new frozen selection must not reuse the failed immutable candidate Git ref."
+        "Candidate source QA parity repair e85780b670f9d89328fdf46ba035b9d81205bb18: exact published workflow/Edge blob tests report NOT_APPLICABLE; selected Auth tests remain active; previous frozen 95ea280f validation FAIL and never READY. This new frozen selection must not reuse the failed immutable candidate Git ref.",
+        "FINAL production source-bound CI and Netlify: frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 five official exact push jobs SUCCESS, controller 45061967031 SUCCESS, one-use ledger DIC-20261122-ADMISSION-READY04 once, Netlify 6b0344fd039acce2c0364f2b READY/current Git commit 5ef0e190237a0fa8e391b086c5baeaaa962ae264, current source app blob parity main.js/client.js independently verified."
       ],
       "ci_runs": [
         45039621942,
@@ -18340,11 +18510,124 @@
         45039837781,
         45039837803,
         45039837783,
-        45039837798
+        45039837798,
+        45049518049,
+        45049518047,
+        45049518003,
+        45049517997
       ],
       "blockers": [],
-      "notes": "PROVISIONAL READY SELECTION ON PRIVATE PREPARATION BRANCH ONLY: existing development item remains TESTING. Selected issue #3781 and no other features. Frozen candidate SHA+5 native push CI+READY certificate must succeed before dev READY or any publication. Exact clean source pin 354ddd99ef0ce8f03b2f74544782e4e977201a31.",
+      "notes": "PROVISIONAL READY SELECTION ON PRIVATE PREPARATION BRANCH ONLY: existing development item remains TESTING. Selected issue #3781 and no other features. Frozen candidate SHA+5 native push CI+READY certificate must succeed before dev READY or any publication. Exact clean source pin 354ddd99ef0ce8f03b2f74544782e4e977201a31.\nFINAL PRODUCTION DEPLOYED — supersedes earlier provisional/readiness-only history. Owner November 22 one #3781 returning-session background access release DIC-20261122-ADMISSION-READY04, frozen source d4af1c4e13d1babe6f10d277d5243582eb798c56 (five exact candidate CI SUCCESS 45049518049 approval, 45049518047 SQL, 45049518003 cloud/mobile, 45049517997 validate); one-parent main request 7b42166e; controller 45061967031 completed SUCCESS; one-use ledger consumed once 2026-11-22T19:39:36.251Z; nonforce release 5ef0e190237a0fa8e391b086c5baeaaa962ae264; Netlify site 6b0344fd039acce2c0364f2b READY/current, commit_ref exactly release, published 2026-11-22T19:39:57.862Z, five unchanged functions, zero provider secret-scan matches among 6207 scanned files. New Auth source app blobs main.js 55191f2d and client.js e2097f59 match frozen candidate exactly; Admin and unselected runtime unchanged. NO SQL/Edge changes or additional features. Device stopwatch remains NOT_APPLICABLE/UNVERIFIED; private previously admitted saved history read-only until background server check, denial revokes and retains outbox.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261122-ADMISSION-READY04",
+      "delivered_source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+      "delivered_release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+      "delivered_netlify_deploy_id": "6b0344fd039acce2c0364f2b",
+      "delivered_at_utc": "2026-11-22T19:39:57.862Z"
+    },
+    {
+      "id": "DIC-Q-455-r456-measured-grind-step-any",
+      "issue": 455,
+      "pr": 3829,
+      "title": "Keep Log/Edit Shot measured grinder input fraction-compatible with stored originals",
+      "state": "TESTING",
+      "merged_source_sha": "b6468c6c7bf4fbc59da1f91222eff9c27d222585",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; pre-fix main.js Git blob 5c24e203db233692589f064fadb819fe68302cf6 and journal 69050d0c3b788b956967d148ddf0aca6de7d6135.",
+      "tests": [
+        "Source/HTML negative at R455: measured Log/Edit Shot grinder input declared step=.1 for valid original measured fractional 2.45/0.155; native input stepMismatch is possible, but form novalidate and blocked Save NOT observed. Fixed only measured step=any; approved suggested grinder grid remains tenths.",
+        "PR #3829 exact final head 24d687256520816644fbc680b2710bcc4f5c7784: all three actual CloudApp/field R456 negative/positive Node22 tests PASS in governance/approval job 137437282095 (1442 PASS/0 FAIL/0 SKIPPED in its shard). New/Edit form, five tastes, notes and other measurement steps retained; first draft had overly strict HTML whitespace regex; corrected in a second nonforce same-commit-journal commit before final CI.",
+        "PR-head exact-source: Node22/build 45096456212 SUCCESS; Cloud UX/mobile/browser/offline/a11y 45096456290 SUCCESS (cloud 2949 PASS/0 FAIL/0 SKIP, Chromium subjob SUCCESS); approval 45096456176 SUCCESS; isolated SQL 45096456231 SUCCESS; security 45096456251 SUCCESS; selected #33 45096456254/45096456245/45096456223 SUCCESS; frozen coffee corpus 45096456270 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] squash PR #3829 merged b6468c6c7bf4fbc59da1f91222eff9c27d222585; one parent 310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115; exact four source/test/queue/journal Git blobs match reviewed PR head. Merged-push full source CI Node22 45096769796, cloud UX/mobile/offline/browser 45096769752, governance 45096769755 and selected #33 45096769757/45096769850 all COMPLETED SUCCESS. Original603 not run as PASS.",
+        "No actual user device/member study, production provider or empiric espresso benefit claimed. #3347 isolated frozen candidate/five-success READY certification not established; state TESTING."
+      ],
+      "ci_runs": [
+        45096456212,
+        45096456290,
+        45096456176,
+        45096456231,
+        45096456251,
+        45096456254,
+        45096456245,
+        45096456223,
+        45096769796,
+        45096769752,
+        45096769755,
+        45096769757,
+        45096769850
+      ],
+      "blockers": [
+        "Independent #3347 nonpublishing source-isolated frozen release-candidate verification with five exact successful CI checks not established. Development source is merged and applicable CI passes, but remain TESTING, NOT READY/DEPLOYED.",
+        "Original S019 independent source and observed real same-coffee next-shot effectiveness remain unverified; neither is evidence of this narrow UI fix's improved espresso quality."
+      ],
+      "notes": "R456 SAFE measured-only input step semantics FIXED on development via PR #3829 nonforce squash merge b6468c6c7bf4fbc59da1f91222eff9c27d222585, app/test/queue/journal Git blob parity with passing PR head. New/Edit Log Shot accepts native arbitrary measured fractions while recommendation target tenth-grid remains Locked. All five tastes, original measured shots and notes/history, privacy/offline/outbox, styles/Slow Feed/temp/calibration unchanged. Source-only HTML validity change: Log Shot novalidate, no assertion Save was blocked or real device UX measured. No new telemetry, live SQL/Auth/Edge/member/provider writes, Netlify, publication, force or empirical cup-quality trial.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r458-optional-temperature-metric",
+      "issue": 455,
+      "title": "Show Not available for tracked recipe temperature without a recorded value",
+      "state": "TESTING",
+      "merged_source_sha": "d772b433be4e5d01ed734699ecc2a89685cf4c12",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "#455 Option B SAFE source-proven missing tracked-temperature metric, immutable preflight development_sha=31fd9571ddd74413d3c2aa97b301332f4510c528 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; original site/lib/ui.js ce910a1762f8367e009203c0cdb4127fa2e5151c",
+      "tests": [
+        "PASS source-level four R458 negative/positive synthetic real-module Node22 regressions at exact final PR head f547523e4e7b682cabc3b0c2a0dbfe91b58ba7a9, validate job 137472956400; no member data",
+        "PASS PR-head Node22/build 45107791763, Cloud UX/mobile/browser/offline 45107791948, governance/continuity 45107791797, SQL 45107791899, security 45107791806, shared #33 45107791801/45107791810/45107791777/45107791765; original603 45107791830 SKIPPED, NOT PASS",
+        "PASS exact merged development SHA d772b433be4e5d01ed734699ecc2a89685cf4c12: Node22/build 45107979266, Cloud UX/mobile/browser/offline 45107979195, governance 45107979235, shared #33 45107979230/45107979307/45107979200; all completed SUCCESS, no fabricated real-world espresso efficacy"
+      ],
+      "ci_runs": [
+        45107791763,
+        45107791948,
+        45107791797,
+        45107791899,
+        45107791806,
+        45107791801,
+        45107791810,
+        45107791777,
+        45107791765,
+        45107979266,
+        45107979195,
+        45107979235,
+        45107979230,
+        45107979307,
+        45107979200
+      ],
+      "blockers": [
+        "#3347 independent source-isolated frozen READY candidate with five required exact-source successful statuses not yet certified; keep TESTING, not READY",
+        "Separate NEW owner Publish is required for production; owner #455 authorizes development only"
+      ],
+      "notes": "Verified nonforce PR #3837 [skip netlify] merge d772b433be4e5d01ed734699ecc2a89685cf4c12; all four exact merged Git blob SHAs equal PR source. Empty tracked temperature renders Not available rather than unit-only. Four new synthetic regressions pass, source-bound CI passes; no Locked numerical policy/data/production changes. Independent S019 PDF and observed next-shot effectiveness still unavailable."
+    },
+    {
+      "id": "DIC-Q-3851-cache-before-admission",
+      "issue": 3851,
+      "title": "Paint returning member's same-owner cached coffee before admission request; defer blocking vendor parse",
+      "state": "READY",
+      "merged_source_sha": "a9303f97d4aa0ae4e6ead4fe64283537821c8fc9",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud.html"
+      ],
+      "tests": [
+        "tests/cloud-fast-start.test.mjs",
+        "tests/helpers/release-published-restoration.mjs",
+        "tests/source-hygiene.test.mjs",
+        "PR #3852 exact Auth/SQL/cloud/mobile CI successful; #3851 frozen QA repair pending new exact source CI"
+      ],
+      "ci_runs": [
+        45127983275,
+        45127983224,
+        45127983238,
+        45127983251
+      ],
+      "blockers": [],
+      "owner_source": "Owner direct November 22 2026 23:29 MST: build, test, implement and deploy faster cold start",
+      "notes": "PROVISIONAL SOURCE STAGING ONLY for #3851 proven merged app/QA first-parent pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9. LIVE development remains TESTING until fresh five exact candidate checks pass, then formal readiness certification. Historic same code/test candidate 6ee5bbeb exact five SUCCESS runs documented, but first controller 45129045714 preclaim failed due wrong prior merge pin and its grant superseded. No new release without one-use DIC-20261123-INSTANT-3851-R2. Unready source fully isolated."
     }
   ],
   "history": [
@@ -21767,6 +22050,18 @@
       "delivered_netlify_deploy_id": "6b0284543511466fd75b4573",
       "at": "2026-11-22T05:57:53.984Z",
       "evidence": "Owner Nov21 one-time five startup + all genuinely READY batch DIC-20261122-STARTUP-READY01. Only this row READY at source freeze. Frozen candidate 64d6f50de9562c0442a05e865e9ed33f0cd2925a five official native exact-SHA jobs SUCCESS validate 44990296556, cloud/mobile 44990296566, approval 44990296557, isolated SQL 44990296549; source proof 44990173164. One-parent main request 0cb6847c; exact push controller 44991562299 COMPLETED SUCCESS; one-use ledger consumed once at 2026-11-22T05:57:33.508Z. Nonforce release 50e05054e7139d2e7a675b8e15ab71a7dd42ac81, Netlify Git-connected production branch release/production commit_ref 50e05054e7139d2e7a675b8e15ab71a7dd42ac81 deploy 6b0284543511466fd75b4573 READY/current, published 2026-11-22T05:57:53.984Z; five deployed functions and zero provider-reported secret matches in 6095 files. App source three critical Git blobs exactly equal frozen candidate; no unfinished code/test/workflow or SQL changes selected. Original dev remains unchanged."
+    },
+    {
+      "date": "2026-11-22",
+      "issue": 3781,
+      "item_id": "DIC-Q-3781-returning-session-background-admission",
+      "state": "DEPLOYED",
+      "source_sha": "d4af1c4e13d1babe6f10d277d5243582eb798c56",
+      "production_deployed": true,
+      "delivered_release_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
+      "delivered_netlify_deploy_id": "6b0344fd039acce2c0364f2b",
+      "at": "2026-11-22T19:39:57.862Z",
+      "evidence": "Owner-approved one #3781 same-owner returning-session read-only cached first paint with background admission/revocation. Frozen candidate d4af1c4e13d1babe6f10d277d5243582eb798c56 five exact native GitHub jobs SUCCESS; main request 7b42166e, controller 45061967031 SUCCESS, one-use grant DIC-20261122-ADMISSION-READY04 consumed once. Nonforce production Git 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify 6b0344fd039acce2c0364f2b READY/current matching commit_ref, 5 functions, no secret-scan matches. No SQL/Edge/other unready features. Earlier failed -02/-03 controllers made no release claims and not replayed."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
