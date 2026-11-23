@@ -7,7 +7,7 @@ const good={name:'Rosé & Roots',roaster:'South 17 Roasters',origin:'Tres Pinos,
 const fails=(delta={},source=direct)=>check(source,{...good,...delta});
 test('original 345 accepts only exact chosen primary description, not generic metadata',()=>assert.deepEqual(fails(),[]));
 test('wrong product title is rejected even if some fields seem compatible',()=>assert.ok(fails({name:'Ambition'}).includes('wrong_or_recycled_selected_product')));
-test('selected H1 and direct literal both required',()=>assert.ok(fails({},direct.replace(/Rosé & Roots/g,'Ambition')).includes('wrong_or_recycled_selected_product')));
+test('selected H1 and direct literal both required',()=>assert.ok(fails({},direct.replace(/Rosé & Roots|Rose & Roots/g,'Ambition')).includes('wrong_or_recycled_selected_product')));
 test('current direct South 17 source has explicit fermentation, not unique harvest',()=>assert.ok(fails({},direct.replace('72-hour natural process','washed process')).includes('selected_product_direct_literal_missing_72_hour_natural_process')));
 test('invented coffee origin fails',()=>assert.ok(fails({origin:'Brazil'}).includes('selected_honduras_tres_pinos_origin_missing')));
 test('neighboring same-roaster Sumatra/Dark Raine flavors do not transfer',()=>assert.ok(fails({tasting_notes:'strawberry jam and chocolate, sweet tobacco'}).some(x=>x.startsWith('neighbor_product_flavor_leak'))));

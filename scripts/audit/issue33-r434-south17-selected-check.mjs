@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Issue #33 R434: EXACT original603 #345 South 17 Rosé & Roots, current official source only.
 // Diagnostic afterproof is strict; synthetic fixtures alone do not certify a product.
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 const official='https://south17roasters.com/products/rose-roots';
@@ -33,6 +33,7 @@ export function selectedR434Failures(selected,fields={}){
 if(process.env.DIC_ISSUE33_R434_RUN==='1'){
  const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR,expected=process.env.DIC_EXPECTED_SHA;
  if(!dir||!/^[a-f0-9]{40}$/u.test(expected||''))throw Error('source_sha_and_artifact_dir_required');
+ mkdirSync(dir,{recursive:true});
  const errors=[],proof=[];let report={};
  try{report=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'))}
  catch{errors.push('hard_required_first_party_report_missing')}
