@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r462-optional-measured-temperature-step-any",
+      "issue": 455,
+      "pr": null,
+      "title": "Allow measured fractional optional brew temperature in Log/Edit Shot HTML",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=adc45e555c46cff49f01f4c2ee41dee7ce28df38 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; original CloudApp Git blob bfa0ddf1a80f8d33560aac092e8f2453c2d54ba3; Locked Master §14.7 and current model validateShot allow optional actual temperature.",
+      "tests": [
+        "Source negative: measured optional temperature uses step='1' despite model accepting 70–100 C fractional actual readings; native stepMismatch possible for 93.25 C / 200.5 F; form novalidate, so blocked Save or member impact NOT established.",
+        "R462 four actual-module synthetic new/edit/hidden/valid-negative regression cases authored, EXECUTION and exact-source CI PENDING, NOT PASS.",
+        "Change only actual optional temperature field step to any; already copied recommendation format/bounds and all five taste scales, measured originals/notes, setup/feed/style/privacy untouched."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Run applicable exact-source Node22, Cloud/browser/mobile/offline/accessibility, approval and source security CI; repair failures and nonforce merge with readback before any integrated-success claim.",
+        "Independent #3347 frozen source-isolated five-success READY certification pending. Publish requires a separate NEW owner instruction."
+      ],
+      "notes": "Development-only; no new numeric targets, measured quality outcomes, telemetry, member data, production provider effects, or S019 scientific verification.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
       "issue": 455,
       "pr": 3854,
