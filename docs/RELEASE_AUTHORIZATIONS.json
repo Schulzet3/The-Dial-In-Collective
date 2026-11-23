@@ -1646,7 +1646,7 @@
       "id": "DIC-20261123-INSTANT-3851-R2",
       "tested_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
       "owner_approved": true,
-      "status": "APPROVED",
+      "status": "SUPERSEDED",
       "production_branch": "release/production",
       "max_publications": 1,
       "approved_at_utc": "2026-11-23T07:25:33Z",
@@ -1661,6 +1661,30 @@
         "R2 immutable frozen candidate 2d22d448160d428a977f06482323646b92818fcf has all 5 exact-SHA native COMPLETED SUCCESS jobs: approval run45129746102; isolated SQL run45129745970; cloud-tests and mobile-browser-qa run45129745953; validate full Node/lint run45129745980. NOT_APPLICABLE and older failed candidate not counted PASS.",
         "Independent source-only receipt GitHub Actions45129596076 SUCCESS: 522 restored/excluded unready paths; frozen tree f1df69d0a98f278c541a2687237bd0b155ce76e6; single READY item and approved source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 direct first-parent d4af1c4e published base, changed deployed main.js and HTML plus three proven tests, all exact tested blobs match candidate 6ee5bbeb. Development approval run45130200066 SUCCESS; queue canonical selection 5e8f1ccb7b5d32903c96569d4b44cb02f1f0c44a599952c3f1e24634d659fe9c.",
         "Existing verified private encrypted backup Github run44920698063 artifact14713443972 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, exact owner-private Google Drive file1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn and folder1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf verified November 21 15:44Z. No SQL/Edge/schema/provider changes or production data writes."
+      ],
+      "superseded_by": "DIC-20261123-INSTANT-3851-R3",
+      "superseded_reason": "Controller Actions 45131648831 FAILED BEFORE CLAIM at 2026-11-23T07:31:13Z: main request owner_approval_source string differed from stored R2 grant approval_source. Independent readback Git release still 5ef0e190, Netlify 6b0344fd current, no #3851 one-use consumption. This failed request is never replayed; new R3 grant and exact-equal approval provenance required."
+    },
+    {
+      "id": "DIC-20261123-INSTANT-3851-R3",
+      "tested_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-23T07:33:00Z",
+      "expires_at_utc": "2026-11-23T14:30:00Z",
+      "approval_source": "Owner November 22, 2026 23:29 America/Denver in this chat: 'Build it, test it, implement it, and deploy it. You have my approval.' EXACTLY ONE #3851 instant-opening release; no unrelated READY, future release or provider bypass. Recovery of previous failed-before-claim controller, not permission for a second publication.",
+      "scope": "ONE recovery of previously unclaimed #3851 release, EXACT approved single READY DIC-Q-3851-cache-before-admission immutable R2 certified source 2d22d448160d428a977f06482323646b92818fcf. Controller 45131648831 denied BEFORE claim due request/grant approval_source string mismatch; fix transport by making main request provenance byte-identical to this stored grant. R2 grant SUPERSEDED, no parallel/replay. Only owner-approved cached-coffee first-paint app and HTML, published d4af1c4e base, exact five source CI successes, no other unfinished runtime/tests/workflows, SQL/Edge/private data. ONE nonforce protected controller and Git-connected Netlify build only.",
+      "approved_ready_item_ids": [
+        "DIC-Q-3851-cache-before-admission"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "R2 immutable frozen candidate 2d22d448160d428a977f06482323646b92818fcf has all 5 exact-SHA native COMPLETED SUCCESS jobs: approval run45129746102; isolated SQL run45129745970; cloud-tests and mobile-browser-qa run45129745953; validate full Node/lint run45129745980. NOT_APPLICABLE and older failed candidate not counted PASS.",
+        "Independent source-only receipt GitHub Actions45129596076 SUCCESS: 522 restored/excluded unready paths; frozen tree f1df69d0a98f278c541a2687237bd0b155ce76e6; single READY item and approved source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 direct first-parent d4af1c4e published base, changed deployed main.js and HTML plus three proven tests, all exact tested blobs match candidate 6ee5bbeb. Development approval run45130200066 SUCCESS; queue canonical selection 5e8f1ccb7b5d32903c96569d4b44cb02f1f0c44a599952c3f1e24634d659fe9c.",
+        "Existing verified private encrypted backup Github run44920698063 artifact14713443972 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, exact owner-private Google Drive file1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn and folder1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf verified November 21 15:44Z. No SQL/Edge/schema/provider changes or production data writes.",
+        "Denied-before-claim Actions45131648831 verified mismatch between request.owner_approval_source and grant.approval_source (not source or Auth test failure); live release stayed 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify6b0344fd039acce2c0364f2b READY/current, and consumption ledger excludes both #3851 IDs. R3 new request must copy exact grant.approval_source byte-for-byte; zero new app/CI source changes."
       ]
     }
   ],
