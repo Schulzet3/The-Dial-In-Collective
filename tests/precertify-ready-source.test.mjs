@@ -296,3 +296,15 @@ test('#3667 real >1 MiB queue Git blob falls back to immutable Git Blobs API',()
  assert.ok(workflow.includes('contents: read'));
  assert.ok(workflow.includes('checks: read'));
 });
+
+
+test('#3889 two-phase workflow preview does not pre-promote development READY or publish',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ const script=readFileSync(new URL('../scripts/release/precertify-ready-source.mjs',import.meta.url),'utf8');
+ assert.match(workflow,/NO_READY_ITEMS/);
+ assert.match(workflow,/--prospective=DIC-Q-509-stale-project-shot-comment-20261122/);
+ assert.match(script,/prospectiveReadyItemId/);
+ assert.match(script,/candidateTreeReceipt/);
+ assert.match(workflow,/permissions:\\s*\\n  contents: read\\s*\\n  actions: read\\s*\\n  checks: read/);
+ assert.doesNotMatch(workflow,/POST.*publish|git push|netlify build/i);
+});

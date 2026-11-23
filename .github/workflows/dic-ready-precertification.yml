@@ -147,7 +147,12 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p qa_artifacts/ready-source
-          node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt |
+          receipt_stdout="$(node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt)"
+          if printf '%s\\n' "$receipt_stdout" | grep -Fq '"status":"NO_READY_ITEMS"'; then
+            # #3889 preview: candidate ONLY, not a live queue transition.
+            receipt_stdout="$(node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt --prospective=DIC-Q-509-stale-project-shot-comment-20261122)"
+          fi
+          printf '%s\\n' "$receipt_stdout" |
             sed -n 's/^\[DIC READY pre-certification\] //p' > qa_artifacts/ready-source/receipt.json
           node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/ready-source/receipt.json','utf8')); if(!['NO_READY_ITEMS','LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE'].includes(r.status)) process.exit(2); if(r.status==='LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE' && (!/^[0-9a-f]{40}$/.test(r.development_source_sha) || !/^[0-9a-f]{40}$/.test(r.expected_tree_sha) || r.manifest?.candidate_branch!==r.candidate_branch)) process.exit(2)"
       - uses: actions/upload-artifact@v7
