@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13DB",
+  "date_utc": "20261123",
+  "method": "AI-direct line-specific semantic inspection, not human sign-off",
+  "preflight": {
+    "development_sha": "7778c2d0313889e21c902760318720be9dc7b72b",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+    "immutable_file_and_separately_fetched_blob_match": true
+  },
+  "immutable_source_parity": [
+    {
+      "path": "docs/audits/application_pass3_tests.json",
+      "index": 222,
+      "blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+      "range": [
+        524,
+        553
+      ],
+      "source_total_lines": 676,
+      "full_raw_git_match": true,
+      "live_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a"
+    },
+    {
+      "path": "scripts/release/chat-release-request.mjs",
+      "index": 84,
+      "blob_sha": "47e32f0d852391ffec94a4ffcede5dbb8f64129b",
+      "range": [
+        84,
+        113
+      ],
+      "source_total_lines": 136,
+      "full_raw_git_match": true,
+      "live_blob_sha": "47e32f0d852391ffec94a4ffcede5dbb8f64129b"
+    }
+  ],
+  "previous_V13DA_60_line_receipts_source_number_literal_revalidated_without_credit": true,
+  "scope": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE",
+  "live_drift_new_renamed_nontext": "INCOMPLETE",
+  "state": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE",
+  "receipts": [
+    "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-524-553-20261123-V13DB.json",
+    "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C84-84-113-20261123-V13DB.json"
+  ],
+  "new_direct_lines": {
+    "frozen": 30,
+    "pinned": 30,
+    "total": 60,
+    "overlaps": 0
+  },
+  "frozen_original_denominator": 579961,
+  "pinned_executable_denominator": 57913,
+  "historical_provisional_R2_C2": {
+    "frozen": 5451,
+    "pinned": 6462,
+    "no_blind_credit": true
+  },
+  "old_strict_S2": {
+    "frozen": 7635,
+    "pinned": 9318,
+    "no_blind_credit": true
+  },
+  "tests": {
+    "source_blob": "PASS_2_OF_2",
+    "individual_literal": "PASS_60_OF_60",
+    "previous_60": "PASS_60_OF_60",
+    "archive_json": "PASS",
+    "pr_head": "PENDING",
+    "merged_push": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "findings": "No reproduced current defect; old 10 and 12 PASS test totals archived only. Release gate inert without owner Publish.",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 554
+    },
+    "pinned": {
+      "index": 84,
+      "path": "scripts/release/chat-release-request.mjs",
+      "line": 114
+    }
+  }
+}
