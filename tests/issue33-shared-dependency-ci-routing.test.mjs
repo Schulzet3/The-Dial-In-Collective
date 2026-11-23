@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
+import {resolve,dirname,relative,sep} from 'node:path';
 const yaml=readFileSync('.github/workflows/issue33-r412-original126-127.yml','utf8');
 const pr=yaml.split('  pull_request:')[1].split('  push:')[0];
 const push=yaml.split('  push:')[1].split('permissions:')[0];
@@ -56,4 +57,41 @@ test('transitive selected Add Coffee UI constants dependency triggers guarded so
   assert.ok(covered(group,'site/lib/constants.js'),'missing transitive UI constants');
   assert.ok(!covered(group,'site/lib/noncoffee-demo.js'),'unrelated UI library must not fan out');
  }
+});
+
+test('central official-source path closure includes current recursively imported source modules',()=>{
+ const entries=[
+  'scripts/audit/issue33-original603-focused-source-review.mjs',
+  'scripts/audit/issue33-r412-original126-127-check.mjs',
+  'scripts/audit/issue33-shopify-pagefly-h3.mjs',
+  'src/server/coffee-page-metadata.mjs',
+  'site/cloud/coffee-url-autofill.js'
+ ];
+ const root=resolve('.'),todo=[...entries],seen=new Set();
+ while(todo.length){
+  const file=todo.pop();
+  if(seen.has(file))continue;
+  assert.ok(file.match(/\.(?:js|mjs)$/),'unexpected source module '+file);
+  assert.ok(existsSync(file),'missing imported source '+file);
+  assert.ok(groups.every(group=>covered(group,file)),
+   'unrouted exact selected source dependency '+file);
+  seen.add(file);
+  const source=readFileSync(file,'utf8');
+  for(const match of source.matchAll(/\b(?:from\s+|import\s*\(\s*)['"](\.[^'"]+\.(?:js|mjs))['"]/g)){
+   const absolute=resolve(dirname(file),match[1]);
+   const next=relative(root,absolute).split(sep).join('/');
+   assert.ok(next&&!next.startsWith('../')&&!next.startsWith('/'),
+    'selected-source import escapes repository: '+file);
+   if(!seen.has(next))todo.push(next);
+  }
+  assert.ok(seen.size<=250,'unexpected selected-source closure growth');
+ }
+ assert.ok(seen.size>=35,'selected-source closure unexpectedly narrowed');
+});
+test('metadata-only Issue33 journal edits do not trigger first-party HTTPS on PR or push',()=>{
+ for(const group of groups)for(const file of [
+  'docs/workstreams/ops-issue33-r412-original126-127-20261122.md',
+  'docs/workstreams/ops-issue33-r428-source-closure-20261123.md',
+  'docs/CURRENT_STATUS.md','docs/RELEASE_QUEUE.json'
+ ])assert.ok(!covered(group,file),'docs-only live merchant HTTP fanout: '+file);
 });
