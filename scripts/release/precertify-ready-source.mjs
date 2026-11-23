@@ -20,6 +20,24 @@ export function selectedReadyItems(queue){
  if(failures.length)throw Error('READY queue schema HOLD: '+failures.slice(0,5).join('; '));
  return (queue.items||[]).filter(x=>x.state==='READY').sort((a,b)=>a.id.localeCompare(b.id));
 }
+// Cheap source-provenance gate BEFORE frozen candidate assembly or five CI jobs.
+// A QA-only first-parent merge is not the merged application source for READY.
+export function assertReadyFirstParentDeployable(items,mergeChangedPaths){
+ if(!Array.isArray(items)||typeof mergeChangedPaths!=='function')
+  throw Error('READY first-parent source proof unavailable');
+ for(const item of items){
+  if(!SHA.test(item?.merged_source_sha||'')||
+     !Array.isArray(item.scope_paths)||!item.scope_paths.length)
+   throw Error('READY first-parent source identity missing: '+(item?.id||'unknown'));
+  const changed=mergeChangedPaths(item.merged_source_sha);
+  if(!Array.isArray(changed)||changed.some(p=>typeof p!=='string'))
+   throw Error('READY first-parent Git diff unavailable: '+item.id);
+  const owned=new Set(item.scope_paths);
+  if(!deployableChangedPaths(changed).some(path=>owned.has(path)))
+   throw Error('READY item has no first-parent changed owned deployable path: '+item.id);
+ }
+ return true;
+}
 export function requiredReadyPins(queue,ids,developmentChangedPaths,{
  developmentSourceSha,sourceObjectAt,isAncestor}={}){
  if(!Array.isArray(developmentChangedPaths)||!Array.isArray(ids)||
@@ -174,6 +192,10 @@ export function prevalidateReadySource({
  const queue=JSON.parse(raw);
  const items=selectedReadyItems(queue);
  if(!items.length)return {status:'NO_READY_ITEMS',count:0};
+ // Fail before candidate tree recreation and expensive hosted jobs when the
+ // cited merged source is merely a QA/documentation commit (#3851 evidence).
+ assertReadyFirstParentDeployable(items,sha=>git(['diff','--name-only',
+  '--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean));
  const branch=frozenReadyBranch(queue,items,developmentSourceSha);
  const ids=items.map(i=>i.id);
  const published=queue.published_base.tested_source_sha;
