@@ -1,0 +1,53 @@
+name: DIC Issue33 R423 original149 150 exact selected official
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r423-original149-150.yml'
+      - 'scripts/audit/issue33-r423-original149-150-check.mjs'
+      - 'docs/workstreams/ops-issue33-r423-original149-150-20261122.md'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r423-original149-150.yml'
+      - 'scripts/audit/issue33-r423-original149-150-check.mjs'
+permissions:
+  contents: read
+jobs:
+  official-selected-original149-150:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Bind exact selected-source checkout
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+          node --check scripts/audit/issue33-r423-original149-150-check.mjs
+      - name: Required guarded official HTTPS and actual extractor/unsaved UI
+        env:
+          DIC_R423_EXACT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '149,150'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r423
+        run: GITHUB_SHA="$DIC_R423_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent current selected raw HTML and hostile field afterproof
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r423
+        run: node scripts/audit/issue33-r423-original149-150-check.mjs
+      - name: Retain bounded official source evidence for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r423-original149-150-current
+          path: /tmp/dic33-r423/
+          retention-days: 1
+          if-no-files-found: warn
