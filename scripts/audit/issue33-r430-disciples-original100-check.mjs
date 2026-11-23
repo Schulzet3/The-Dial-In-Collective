@@ -6,6 +6,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {selectedCurrentInlineShopifyRoastTag} from '../../src/server/coffee-current-inline-shopify-product.mjs';
 
 const name='Guatemala Honey Process - Organic Coffee Beans';
 const url='https://disciplescoffee.com/products/guatemala';
@@ -19,7 +20,7 @@ const normalize=x=>String(x??'')
 const digits=x=>String(x??'').replace(/[^0-9]/gu,'');
 const selectedText=html=>productMarkup(html).replace(/<[^>]*>/gu,' ');
 
-export function selectedR430Failures(n,selectedSource,fields={}){
+export function selectedR430Failures(n,selectedSource,fields={},evidence={}){
  if(n!==100)return ['not_selected_original603_case'];
  const text=normalize(selectedSource),errors=[],fact=key=>normalize(fields[key]);
  const has=x=>text.includes(normalize(x)),taste=x=>fact('tasting_notes').includes(normalize(x));
@@ -30,12 +31,21 @@ export function selectedR430Failures(n,selectedSource,fields={}){
  if(!fact('origin').includes('joyabaj')||!fact('origin').includes('quiche')||
     !fact('origin').includes('guatemala'))
   errors.push('direct_selected_precise_origin_omitted');
+ if(fact('origin').includes('mexico'))
+  errors.push('shopify_product_tag_geography_not_chosen_bean_origin');
  if(fact('process')!=='honey')
   errors.push('selected_honey_method_misread_as_educational_washed_or_natural');
- if(fact('roast_level')!=='light')
-  errors.push('selected_explicit_light_roast_missing_or_wrong');
+ // The current SAME SELECTED PRODUCT makes two incompatible direct roast claims:
+ // visible Light roast prose and exact title/handle/vendor-bound Shopify Medium tag.
+ // Neither may silently override the other: leave canonical roast blank for review.
+ if(evidence.inlineRoast!=='Medium'||!evidence.conflicts?.includes('roast_level'))
+  errors.push('selected_same_product_roast_disagreement_not_proven_and_reviewable');
+ if(fields.roast_level)
+  errors.push('contradictory_selected_light_medium_roast_must_stay_blank');
  for(const word of ['cherry','malt','anise','cinnamon'])
   if(!taste(word))errors.push('selected_direct_taste_omitted_'+word);
+ if(['caramel','apricot','milk chocolate','lemon'].some(word=>taste(word)))
+  errors.push('shopify_taxonomy_flavor_from_different_or_unresolved_roast_tag_leak');
  if(!digits(fields.elevation_m).includes('1300')||!digits(fields.elevation_m).includes('2000'))
   errors.push('selected_altitude_range_omitted_or_wrong');
  if(fields.producer||fields.variety||fields.decaffeination_method||fields.release_label)
@@ -73,11 +83,20 @@ if(process.env.DIC_ISSUE33_R430_RUN==='1'){
    'tasting_notes','elevation_m','decaffeination_method','release_label'])
    require(String(p?.fields?.[key]??'')===String(r?.current_fields?.[key]??''),
     'raw_parser_report_field_parity_'+key);
-  for(const reason of selectedR430Failures(100,selectedText(html),r?.current_fields||{}))
-   failures.push(reason);
+  const tagged=selectedCurrentInlineShopifyRoastTag(html,{
+   name:p?.fields?.name,roaster:p?.fields?.roaster,source_url:r?.final_url||url});
+  require(tagged?.value==='Medium',
+   'actual_selected_title_handle_vendor_bound_product_medium_roast_tag_missing');
+  require((p?.source_facts||[]).some(f=>f.field==='roast_level'&&
+   f.value==='Medium'&&f.source_type==='product_json'&&f.conflicting===true&&
+   f.section==='Exact current selected Shopify inline Product roast tag'),
+   'source_review_selected_product_roast_contradiction_not_retained');
+  for(const reason of selectedR430Failures(100,selectedText(html),r?.current_fields||{},
+   {inlineRoast:tagged?.value,conflicts:r?.conflicts||[]}))failures.push(reason);
   require(!p?.roaster_recipe?.dose_g&&!p?.roaster_recipe?.yield_g,
    'other_roaster_espresso_recipe_or_select_grind_leak');
-  require((r?.conflicts||[]).length===0,'educational_washed_or_natural_method_conflict');
+  require(JSON.stringify(r?.conflicts||[])==='["roast_level"]',
+   'selected_roast_disagreement_must_be_only_current_conflict');
   proof.push({original:100,official_url:url,sha256:rawSha,bytes:Buffer.byteLength(html),
    selected_headings:r?.selected_h1,current_fields:r?.current_fields,
    conflicts:r?.conflicts||[],add_coffee_unsaved:r?.add_coffee_ui_rendered===true,
