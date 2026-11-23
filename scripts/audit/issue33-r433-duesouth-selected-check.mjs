@@ -33,7 +33,7 @@ export function selectedR433Failures(num,selected,fields={}){
   fail.push('selected_direct_literal_missing_'+norm(literal).replace(/ /gu,'_'));
  for(const part of s.origin)if(!f('origin').includes(part))
   fail.push('wrong_or_missing_selected_origin_'+part);
- if(f('producer')!==norm(s.producer))fail.push('producer_collective_or_family_misattributed');
+ if(num!==103&&f('producer')!==norm(s.producer))fail.push('producer_collective_or_family_misattributed');
  if(f('process')!==norm(s.process))fail.push('wrong_green_processing_or_water_saving_conflation');
  if(f('variety')!==norm(s.variety))fail.push('wrong_selected_variety');
  if(!String(fields.elevation_m??'').replace(/[^0-9]/gu,'').includes(String(s.elevation)))
@@ -45,7 +45,7 @@ export function selectedR433Failures(num,selected,fields={}){
  if(f('release_label'))fail.push('historical_year_or_year_round_as_release');
  if(fields.decaffeination_method)fail.push('water_saving_or_unpublished_decaf_invented');
  if(fields.roast_level)fail.push('unpublished_roast_assigned_without_current_direct_source');
- if(num===103&&f('producer')!=='various producers')fail.push('fabricated_single_brazil_grower');
+ if(num===103&&fields.producer)fail.push('fabricated_single_brazil_grower');
  if(num===104&&f('producer')!=='inga reserve')fail.push('fabricated_individual_aponte_grower');
  if(num===105&&f('process')!=='washed')fail.push('farm_water_conservation_misread_as_process');
  return [...new Set(fail)];
