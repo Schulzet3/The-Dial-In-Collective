@@ -8,3 +8,14 @@ DIC_PREFLIGHT_VERIFIED development_sha=d9fc859d81a23e10ee2cd0e1a37013b93a4980e5 
 - TESTING-only QA manifest bridge: require exact Git object parity for selected migration and every unselected runtime/test/workflow source. Never use publisher READY manifest for TESTING. Test existing PR-only and candidate push refs distinctly without weakening exact published Git object checks. Preserve all existing feature test cases and provenance; 26 out-of-scope tests may individually report NOT_APPLICABLE only with Git isolation proof; required jobs still must SUCCESS.
 - Measurement: initial frozen candidate e032c31560b73d22f99fd67f187da53993dfc2c8 had validate 4,985 PASS/25 FAIL/6 SKIP; compatibility experiment fa800537... had 4,989 PASS/1 FAIL/26 SKIP; exact PR candidate 0c9314189d60c4969c03a144bcdd4046786dda90 validated 4,990 PASS/0 FAIL/26 SKIP, 5,016 total, with native PR approval/cloud/browser/SQL successful (PR-only is NOT frozen five-PUSH-check certification). Source code SHA and CI must be verified at merge.
 - Next: merge exact six-path test support nonforce to development, check exact merged CI; invoke separately merged OPS main freezer with qaSourceSha equal this merge SHA, reassemble new immutable one-item TESTING source, and run five actual exact-candidate-SHA native SUCCESS checks. Preserve baseline 63 as TESTING until certified, no publication or provider writes.
+
+DIC_PREFLIGHT_VERIFIED development_sha=4c42b2338f68d621325ffd6a34a78a485d48bf90 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## Nonpublishing frozen TESTING source (DIC-Q-509-stale-project-shot-comment-20261122) [skip netlify]
+- Exact development parent: 4c42b2338f68d621325ffd6a34a78a485d48bf90
+- Published tested base: 2d22d448160d428a977f06482323646b92818fcf
+- Selected merge source: 5b5159823908f3ae660f45b3ad93c096be586aec
+- Plan fingerprint: 09c819308a0c1a37b00ccd7083161d0add7ffb8e10c5ec47fa22da753c9d6f15
+- Restored unrelated executable paths: 536
+- Independently reviewed nonshipped QA support: 6 from 4c42b2338f68d621325ffd6a34a78a485d48bf90
+- Local Git tree only; candidate five native checks NOT RUN, NOT READY, NOT publishable.

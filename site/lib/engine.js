@@ -205,15 +205,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
    sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
- if(basketHits.length){
-  const observed=basketHits.map(sh=>sh.grindSetting);
-  const value=round(quantile(observed,.5));
-  // Rounded/median references are estimates unless their displayed dial value
-  // was actually measured in a qualifying five-green same-basket shot.
-  const proven=observed.some(setting=>Math.abs(setting-value)<=1e-8);
-  return {value,source:proven?'Your successful setting':
-   'Estimated from your successful shots (rounded)',proven};
- }
+ if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
  // A matching grinder/burr set does not mean the stored dial number is on
@@ -522,31 +514,6 @@ export function recommendation(s,coffeeId,options={}) {
    sh.style!=='Custom'&&RATIOS[sh.style]&&crossStyleControlsUsable(s,sh,v));
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
- // Personal families, similar-coffee and Community references may project an
- // unloggable starting yield onto another valid basket. Reuse Log Shot entry
- // bounds, never invent a numeric ratio optimum or rewrite original evidence.
- if(style!=='Custom'){
-  const wasChosenFamily=!!chosen;
-  const projectedYield=round(rec.ratio.center*rec.doseG);
-  const [minYield,maxYield]=CONFIG.bounds.yieldG;
-  if(!finite(projectedYield)||projectedYield<minYield||projectedYield>maxYield){
-   const start=baseline(c,style,basket.doseG,s.preferences);
-   rec.ratio=start.ratio;
-   rec.time=start.time;
-   rec.source='Starting recommendation';
-   rec.familyId=null;
-   rec.observations=0;
-   rec.established=false;
-   delete rec.familySelection;
-   delete rec.communityEvidence;
-   delete rec.turboFallback;
-   rec.reasons=start.reasons;
-   if(wasChosenFamily)
-    rec.basketCompatibilityNote='Your saved successful recipe cannot be used at this basket dose within the Log Shot yield range. Showing a starting estimate; your saved shot is unchanged.';
-   else
-    rec.startingCompatibilityNote='This tentative starting reference exceeds the Log Shot yield range at this basket dose. Showing the roast/style starting estimate instead.';
-  }
- }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
  rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
@@ -638,13 +605,6 @@ export function recommendation(s,coffeeId,options={}) {
   const missingActionCache=!!cached&&!cached.next&&cached.kind!=='diagnostic';
   const a=(oldNoOp||oldSmallYield||unsafeCachedNext||missingActionCache)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
-   // Actual current-basket rated feedback supersedes a starting fallback.
-   // Do not describe a measured next-shot adjustment as a starting estimate.
-   if(rec.basketCompatibilityNote||rec.startingCompatibilityNote){
-    delete rec.basketCompatibilityNote;
-    delete rec.startingCompatibilityNote;
-    rec.inapplicableFamilyWithCurrentFeedback=true;
-   }
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
    // The owner-Locked Dose caption remains unchanged; the initial starting
@@ -685,36 +645,15 @@ export function recommendation(s,coffeeId,options={}) {
  const unchangedMeasuredGrind=last&&rec.grind&&finite(rec.grind.value)&&
   (rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly)&&
   Math.abs(rec.grind.value-last.grindSetting)<=1e-8;
- // Select only one-tenth settings INSIDE the actual calibrated espresso range.
- // Fractional original measurements remain unchanged in private History and
- // in an unchanged measured-grind adjustment; never suggest a new half-step.
- const minTick=Math.ceil(v.grinderMin*10-1e-9),maxTick=Math.floor(v.grinderMax*10+1e-9);
- const hasTenth=Number.isFinite(minTick)&&Number.isFinite(maxTick)&&minTick<=maxTick;
- const gridMin=minTick/10,gridMax=maxTick/10;
- if(rec.grind){
-  if(!hasTenth){
-   if(!unchangedMeasuredGrind)rec.grind.value=null;
-   rec.grind.source=unchangedMeasuredGrind?
-    'Last measured grind; no new tenth-step setting fits this espresso range':
-    'No tenth-step setting fits this espresso range. Review the setup range or enter your measured grind.';
-   rec.grind.proven=false;rec.grind.copyable=false;
-  }else if(finite(rec.grind.value)&&!unchangedMeasuredGrind){
-   const proposed=rec.grind.value,selectable=clamp(round(proposed),gridMin,gridMax);
-   rec.grind.value=selectable;
-   if(Math.abs(selectable-proposed)>1e-8){
-    rec.grind.proven=false;
-    if(rec.grind.source==='Your successful setting')
-     rec.grind.source='Estimated from your successful shots (rounded to a selectable setting)';
-   }
-  }
- }
- if(hasTenth&&!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
+ if(rec.grind&&finite(rec.grind.value)&&!unchangedMeasuredGrind)
+  rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
+ if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
-  // Starting search bands are NOT confidence intervals. Both endpoints must
-  // be selectable one-tenth values inside the actual grinder espresso range.
+  // A calibrated starting search band is NOT a statistical confidence interval.
+  // A pure espresso-scale heuristic is intentionally less precise than personal evidence.
   const half=rec.grind.source==='Espresso range starting estimate'?step*2:step;
-  const low=clamp(round(rec.grind.value-half),gridMin,gridMax);
-  const high=clamp(round(rec.grind.value+half),gridMin,gridMax);
+  const lo=Math.min(v.grinderMin,v.grinderMax),hi=Math.max(v.grinderMin,v.grinderMax);
+  const low=round(clamp(rec.grind.value-half,lo,hi)),high=round(clamp(rec.grind.value+half,lo,hi));
   if(low<high)rec.grind.range={low,high};
  }
  return rec;
@@ -880,10 +819,6 @@ function nextAdviceRaw(s,shot,rec) {
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
  if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',kind:'diagnostic',next:null};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
-  // Preserve historical out-of-range guidance before the tenth-step fallback.
-  // Original calibrated measurements are never silently changed.
-  if(finite(shot.grindSetting)&&(shot.grindSetting<v.grinderMin||shot.grindSetting>v.grinderMax))
-   return {title:'Review your grinder espresso range',text:'This recorded grind falls outside the current setup espresso range. Keep your measured shot and confirm the range before trying a single next-shot change.',next:null};
   // The response of another bean is not a calibrated response for this coffee.
   // Roast/processing/PSD and puck permeability can differ even on one grinder.
   // Use the existing bounded fixed step when this exact coffee has too few
@@ -893,12 +828,8 @@ function nextAdviceRaw(s,shot,rec) {
    x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
   const sens=learnSensitivity(exact,v);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
-  // A NEW grind target must be a genuine tenth-precision movement inside
-  // the owner's espresso range; clamping to a fractional endpoint can make
-  // the advice a no-op or recommend an unenterable grinder setting.
-  const val=round(shot.grindSetting+(direction==='finer'?-move:move));
-  const moves=direction==='finer'?val<shot.grindSetting:val>shot.grindSetting;
-  if(moves&&val>=v.grinderMin&&val<=v.grinderMax)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
+  const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
+  if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
  }
  if(t.extraction!==3){
   const center=yieldTarget(shot,t.extraction<3?1:-1);
@@ -995,8 +926,7 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
   throw new Error('Select an active basket before saving this shot.');
  const p=ensureCoffeeState(s,coffeeId);
- // Preserve the validated original dial value even when finer than the advice grid.
- const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:num(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
+ const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
  sh.suggestion=nextAdvice(s,sh,recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode}));
@@ -1013,9 +943,7 @@ export function editShot(s,id,input) {
  const merged={...old,...input};const errors=validateShot(merged,{allowLegacyCustom:old.style==='Custom'});if(errors.length)throw new Error(errors.join(' '));
  logAudit(s,'shot.edited',{shotId:id,before:{doseG:old.doseG,yieldG:old.yieldG,timeS:old.timeS,grindSetting:old.grindSetting,tempC:old.tempC,tasteScales:{...old.tasteScales},familyId:old.familyId},previousRevision:old.revision});
  const previousFamily=old.familyId;
- for(const k of ['doseG','yieldG','timeS'])old[k]=round(merged[k]);
- // Preserve measured grinder precision; 0.1 is the recommendation step, not a data limit.
- old.grindSetting=num(merged.grindSetting);
+ for(const k of ['doseG','yieldG','timeS','grindSetting'])old[k]=round(merged[k]);
  old.tempC=num(merged.tempC);old.notes=String(merged.notes||'');old.tasteScales={...merged.tasteScales};old.dialedIn=isDialed(old.tasteScales);old.editedAt=now();old.revision++;old.familyId=null;
  if(old.dialedIn)old.familyId=assignFamily(s,old);
  old.outlierReview=isExtreme(s,old)?'pending':'not_needed';
