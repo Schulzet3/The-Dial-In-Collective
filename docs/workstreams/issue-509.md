@@ -1,3 +1,20 @@
+# Issue #509 R478 — corrected duplicate baseline cursors; new 233/233 initial-privilege catalog review [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=17fe342c809d093190427e1b5c1ee5b14ae20b99 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Mandatory FIRST immutable PREFLIGHT verified at development `17fe342c809d093190427e1b5c1ee5b14ae20b99`, Git blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`, before all other documents/providers. Main `f296149723492bca2936b3b223fba7c6cca6c06f`; release `5b256f1fc0717d3635f7148b934a1f91f8991685`. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11, production read-only.
+
+**Audit-accounting correction:** Prior R412/R412a ALREADY fully reviewed 861/861 `pg_collation` tuples; R477's next collation cursor was stale, so **NO repeat collation review or credit**. Exact archived ledger comparison confirms R413's 128 `pg_conversion` OIDs and canonical fields match R477's 128; **0 newly unique conversions** despite differing JSON serialization. R414 had 615 text-search definitions; 64 shared parser/template/dictionary/config tuples were byte-equivalent after JSON parsing, while R477 added only `unaccent` template OID 19149 + dictionary OID 19150 among those families. All 551 mapping slots were already inventoried; individual cross-run slot changes remain **UNVERIFIED**. R408's 229 casts and R415's seven event triggers precede their R476 repeat receipts; do not add them blindly. Operator/opclass/family prior-overlap accounting remains pending; preserve all immutable historical ledgers.
+
+**NEW directly reviewed provider route:** `pg_catalog.pg_init_privs` **233/233** current complete exposed tuples, **30,013/30,013 characters**, rank 1–233 and all ACL words, OIDs and resolved object identities; 223 native initdb and 10 extension ACL baselines. Per-object literal/source MD5, 1–end coverage, intended semantics and conservative retention verdict in [R478 append-only ledger](../audits/issue509-r478-initial-privileges-coverage-reconciliation-20261123.json). All 233 distinct; zero unresolved objects; zero public EXECUTE baseline grants on selected function class; zero public SELECT baseline grants on selected protected system relations. Restriction of `pg_subscription` credential field through table/column initial ACL separation was observed as **initial provenance only**, NOT current effective privilege proof. Native/managed ACL baselines are not DIC dead code. No member/Auth/private data or credentials read.
+
+**App performance guardrail:** Read-only 18 safe `pg_settings` knobs; max_connections=60, jit=off, work_mem=2184kB. One aggregate `pg_stat_activity` snapshot: 15 backend sessions (7 client, 1 active, 0 idle-in-transaction, 0 lock waiters); no persistence/performance conclusion or configuration change warranted. No newly reproduced DIC app defect or source fix justified by this route.
+
+**Write/approval boundary:** GitHub docs-only append-only ledger and same scoped journal follow-up commits; no app SQL, Edge, source/test/CI changes (exact-source CI NOT_APPLICABLE, not PASS), no RELEASE_QUEUE READY promotion, no provider SQL/data/Auth/Storage/Edge/config changes, no Publish/release/backup/billing/schedule change. Native compiled implementations and provider-console-only settings UNVERIFIED. Overall Supabase baseline **IN_PROGRESS**; #267 source-line credit ZERO.
+
+**Exact next true unreviewed cursor:** `pg_catalog.pg_default_acl` rank **1/24**, first complete catalog tuple char 1, after checking prior receipts; then `pg_parameter_acl` rank 1/1, and DIC-focused changed source/performance investigation. Preserve owner-action-only alerts; no new owner decision.
+
+---
+
 # Issue #509 R477 — 128 conversions + 617 complete text-search catalog metadata records [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=90cc91e258f40fb9d0f4ff1e4e1b1d9b1a0fb473 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
