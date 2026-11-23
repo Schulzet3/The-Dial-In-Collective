@@ -25,12 +25,12 @@ const input=(html,name)=>{
  assert.ok(tag,'Missing actual input '+name);
  return tag;
 };
-test('R456 new Log Shot allows fractional measured grinder settings without altering other steps',()=>{
+test('R456 new Log Shot allows fractional measured grinder and other measurements',()=>{
  const {html,app}=render();
  assert.match(input(html,'grindSetting'),/type="number"/);
  assert.match(input(html,'grindSetting'),/step="any" inputmode="decimal"/);
  assert.doesNotMatch(input(html,'grindSetting'),/step="\.1"/);
- for(const name of ['doseG','yieldG','timeS'])assert.match(input(html,name),/step="\.1"/);
+ for(const name of ['doseG','yieldG','timeS'])assert.match(input(html,name),/step="any" inputmode="decimal"/);
  for(const name of Object.keys(green))assert.match(html,new RegExp('data-scale="'+name+'"'));
  assert.match(html,/name=notes/);
  assert.match(html,/data-action="use-grind"/);

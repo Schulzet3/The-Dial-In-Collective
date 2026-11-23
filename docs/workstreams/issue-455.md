@@ -1,3 +1,15 @@
+## November 23, 2026 UTC — #455 R461 SAFE measured dose/yield/time decimal input corrections; CI PENDING [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- **Owner authority:** #455 Option B SAFE and R460 pinned discrepancy https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-7092679745. Exact prior source SHA 4b7b3f85ea2992486c37bfb908a734bcdb22780d; Cloud Git blob 0270a6cbb7dcaf7df39946f19164712a2e2eace5, R456 regression Git blob c69e5b501489c0338d4a313a5e1673ce88567724, journal blob 7474e917fbb008434c425349b2b1d4c74536a0e6. Verified actual preflight bytes/blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f before source reads; concurrent development rechecked before writes.
+- **Negative before:** actual new/Edit CloudApp Log Shot physical dose/yield/time step .1 conflicts with existing model's arbitrary valid fractional values (18.25g, 36.125g, 25.22s). HTML native stepMismatch possible; because form is `novalidate`, no Save blocking, member-device harm, or data loss established.
+- **Change:** only measured doseG/yieldG/timeS HTML `step='any'`; grinder already any. R456 old assertion corrected and new actual-module synthetic new/edit/model positive/negative regressions added. Model numerical bounds and five tastes, recorded originals/private notes/history, temperature, Turbo/Fast-Flow, Slow Feed and single-controllable-change recommendations untouched. No changes to Locked policies, privacy, RLS, member data collection or telemetry.
+- **SAME-COMMIT files:** site/cloud/main.js; tests/issue455-r456-measured-grind-step-any.test.mjs; tests/issue455-r461-measured-shot-step-any.test.mjs; docs/workstreams/issue-455.md; docs/RELEASE_QUEUE.json; docs/CURRENT_STATUS.md. Focused local source contract checked, but actual Node22/browser/mobile/offline/CI checks **PENDING, NOT PASS**. Queue DIC-Q-455-r461-measured-dose-yield-time-step-any is TESTING; independent #3347 isolated READY/five exact-source checks still mandatory. No deploy, Publish, SQL/Auth/Edge/Netlify/member/provider writes, backup, force or empirical cup claims.
+- **Next:** inspect exact PR-head CI and source tests, repair with another fresh same-commit preflight receipt if needed, merge nonforce with merge-level [skip netlify] only on passing applicable checks, read back merged CI and update TESTING queue. Standalone original S019 and real same-coffee optional-consented five-taste next-shot effectiveness remain UNVERIFIED.
+
+---
+
 ## November 23, 2026 UTC — #455 R456 verified PR #3829 merge and exact-source CI; TESTING [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=b6468c6c7bf4fbc59da1f91222eff9c27d222585 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f

@@ -1,3 +1,10 @@
+## November 23, 2026 UTC — #455 R461 fractional measured Log/Edit Shot inputs, SAFE development proposal; CI PENDING [skip netlify]
+
+- DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Owner #455 Option B R460 source-backed discrepancy: three measured dose/yield/time form inputs changed from step .1 to any, preserving real model bounds, existing grinder, five ratings, original measurements/notes and private history. Correct prior R456 test and add focused R461 three-case real CloudApp/model synthetic regressions.
+- Queue DIC-Q-455-r461-measured-dose-yield-time-step-any TESTING; hosted app/continuity/mobile/browser/offline checks and merger pending, no READY/DEPLOYED claim, empirical improvement or validated affected member. No Locked policy, product recommendation, user-data capture, provider/production writes or Publish.
+
+---
+
 ## November 23, 2026 UTC — #455 R458 optional tracked-temperature empty metric SAFE merge; TESTING [skip netlify]
 
 - [PR #3837](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3837) nonforce [skip netlify] squash merged at [d772b433be4e5d01ed734699ecc2a89685cf4c12](https://github.com/Schulzet3/The-Dial-In-Collective/commit/d772b433be4e5d01ed734699ecc2a89685cf4c12). In `site/lib/ui.js::recipeGrid`, optional tracked missing/invalid/nonfinite temperature now visibly says **Not available**, with no orphan °F/°C; valid F/C and temperature-tracking-off behavior unchanged. Same-commit issue #455 R458 journal, four new actual-module synthetic negative/positive Node22 regressions and TESTING queue; no science policy, measurements or member data change.
