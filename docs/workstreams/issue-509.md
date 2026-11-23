@@ -1,3 +1,14 @@
+# Issue #509 R470 — 400 new core catalog description meanings [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=3642a98f6ef7cddc833666ba3c5028b9be80e345 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC / November 22 Denver. Immutable preflight independently verified before AGENTS and provider. Development source snapshot 3642a98f6ef7cddc833666ba3c5028b9be80e345, main 1c7f77844e899776d2f866f9c824a4a0cba58d56, release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264. Production Supabase azviqqejypsefzilgonr read-only, PostgreSQL 17.11.
+
+Directly semantically inspected **400 new complete live pg_description comments**, ranks **2601–3000/5344**, **10704 original characters**, full OIDs/typed signatures/complete text/MD5/1-end range and per-item grounded meaning in [append-only R470 ledger](../audits/issue509-r470-core-comments-2601-3000-20261123.json). This slice covers text search, live/legacy index callbacks, JSON/JSONB, range and multirange, ordered-set aggregates, replication/WAL administrative routines. Two SQL-language wrappers pg_sleep_for/pg_sleep_until were additionally reviewed by their complete exposed full DDL and MD5, never executed; all native compiled implementations UNVERIFIED. Privileged file reads, replication slot modification, BRIN maintenance, statistics reset, upgrade callbacks and sleep were **not invoked**; no member or Auth user/shot/note data read. Provider builtin json_array_elements comment appears inconsistent with its declared array-element signature, not a DIC behavior defect and not editable in production.
+
+No reproduced DIC app/Edge bug, consumer-proven safe removal or measurable new bottleneck in the new slice. No source/test/CI edit; exact-source CI NOT_APPLICABLE to docs-only semantic receipt, never PASS. Prior owner-alerted verifier deployment drift and project_shot COMMENT-only TESTING release candidate unchanged, no new Publish. No production SQL/data/Auth/Storage/Edge/config writes, main/release, backups, billing or schedule changes; #267 review untouched. Full provider baseline **IN_PROGRESS**, next precisely unreviewed description **rank 3001/5344, character 1** (tsmultirange, OID 4287). Existing hourly cadence and owner-action-only notification policy preserved.
+
+---
+
 # Issue #509 R469 — 400 new native catalog comment meanings [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=d772b433be4e5d01ed734699ecc2a89685cf4c12 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
