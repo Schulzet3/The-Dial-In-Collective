@@ -305,6 +305,6 @@ test('#3889 two-phase workflow preview does not pre-promote development READY or
  assert.match(workflow,/--prospective=DIC-Q-509-stale-project-shot-comment-20261122/);
  assert.match(script,/prospectiveReadyItemId/);
  assert.match(script,/candidateTreeReceipt/);
- assert.match(workflow,/permissions:\\s*\\n  contents: read\\s*\\n  actions: read\\s*\\n  checks: read/);
+ assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
  assert.doesNotMatch(workflow,/POST.*publish|git push|netlify build/i);
 });
