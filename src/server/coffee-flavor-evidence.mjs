@@ -944,35 +944,11 @@ export function selectedFruityCoffeeNarrative(html,{clean}={}){
  return found.size===1?[...found.values()][0]:'';
 }
 
-// Two adjacent literal tasting assertions in the exact selected product's
-// own paragraph can be a complete description even without a Notes label.
-// Never promote an SEO card, related product, different lot, hypothetical,
-// brewing suggestion or disconnected sensory keywords.
-function selectedSequentialFlavorAssertions(page,clean){
- const blocks=productCoffeeProse(page,clean);
- const heading=blocks.filter(b=>b.tag==='h1'&&!b.educational);
- if(heading.length!==1||heading[0].text.length<4||heading[0].text.length>180)return '';
- const findings=new Map();
- for(const b of blocks){
-  if(b.tag!=='p'||b.educational||b.text.length<100||b.text.length>1000||
-     /\b(?:related|recommended|other coffees?|another coffee|previous(?:ly)?|former(?:ly)?|historical(?:ly)?|hypothetical|might|could|would|if|unless|when|brewed|prepared|added|milk|syrup)\b/iu.test(b.text+' '+b.section))continue;
-  const first=b.text.match(/\bthe\s+flavou?r\s+starts?\s+off\s+with\s+(?:an?\s+)?(?:[a-z-]+\s+){0,3}?(?:bite|taste|note|aroma)\s+similar\s+to\s+([a-z][a-z -]{2,40}?)\s*(?:;|[.!?])/iu);
-  const second=b.text.match(/\bLingering\s+([a-z][a-z -]{2,45}?)\s+notes?\s*,\s*(?:[^.!?]{0,90}\s+and\s+)?(?:lovely\s+)?(?:slightly\s+)?(tart\s+[a-z][a-z -]{2,35}?)\s+flavou?r\s+round\s+out\s+this\s+cup\b/iu);
-  if(!first||!second||second.index<=first.index)continue;
-  const flavors=[first[1],second[1],second[2]].map(value=>value.trim());
-  if(flavors.some(value=>!normalizeExplicitCoffeeTastingNotes(value)||
-    /\b(?:body|acidity|process|roast|farm|origin|coffee|decaf|method|with|from|in)\b/iu.test(value)))continue;
-  const literal=normalizeExplicitCoffeeTastingNotes(flavors.join(', '));
-  if(literal)findings.set(noteKey(literal),literal);
- }
- return findings.size===1?[...findings.values()][0]:'';
-}
-
 export function extractProductFlavorEvidence(html,{clean,origin='',originConflict=false}={}){
  if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
  const profiles=extractProductFlavorProfiles(html,{clean});
  if(profiles.length===1)return profiles[0];
  if(profiles.length>1)return '';
  clean=flavorCleaner(clean);const page=flavorPage(html);
- return sipComparisonNotes(page,clean)||flavorProse(page,clean,{origin,originConflict}).narrative||selectedSequentialFlavorAssertions(page,clean)||selectedFruityCoffeeNarrative(page,{clean})||frenchProductSensoryNotes(page,clean)||'';
+ return sipComparisonNotes(page,clean)||flavorProse(page,clean,{origin,originConflict}).narrative||selectedFruityCoffeeNarrative(page,{clean})||frenchProductSensoryNotes(page,clean)||'';
 }

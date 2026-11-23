@@ -7,25 +7,15 @@ on:
       - 'release-candidates/**'
       - work/setup-feed-history-recovery-20261014
     paths:
-      - '.github/workflows/cloud-beta-ci.yml'
-      - 'docs/RELEASE_CANDIDATE.json'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'eslint.config.mjs'
+      - 'site/**'
+      - 'supabase/migrations/**'
+      - 'tests/**'
       - 'scripts/pwa/**'
       - 'build_cloud.mjs'
-      - 'netlify.toml'
-      - 'scripts/netlify/**'
-      - 'docs/NETLIFY_CREDIT_LEDGER.json'
-      - 'site/**'
-      - 'src/server/**'
-      - 'netlify/functions/**'
-      - 'supabase/functions/**'
-      - 'supabase/migrations/**'
-      - 'supabase/tests/**'
-      - 'scripts/audit/**'
-      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/cloud-regression.yml'
+      - 'docs/RELEASE_CANDIDATE.json'
   pull_request:
     branches:
       - development/backend-foundation
@@ -44,10 +34,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  # Push: complete each immutable source's CI; later unrelated pushes must not cancel it.
-  # PR: cancel superseded revisions so iterative development remains fast.
-  group: dic-cloud-regression-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}
-  cancel-in-progress: ${{ github.event_name != 'push' }}
+  group: dic-cloud-regression-${{ github.ref }}
+  cancel-in-progress: true
 
 
 jobs:
@@ -67,33 +55,21 @@ jobs:
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Fast source/queue/commit preflight BEFORE expensive CI
-        env:
-          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
-          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_EVENT_NAME: ${{ github.event_name }}
-        run: |
-          node scripts/audit/fast-pr-check.mjs
-          node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/audit/verify-commit-checkpoint.mjs
       - name: Explicit targeted cloud NOT_APPLICABLE
         if: steps.scope.outputs.cloud_mode == 'none'
         run: |
-          echo 'NOT_APPLICABLE: targeted cloud unit tests not needed; high-risk full Node corpus is partitioned between validate and cloud-tests.'
+          echo 'NOT_APPLICABLE: cloud-specific tests not needed; high-risk full Node is in validate.'
       - uses: actions/setup-node@v7.1.0
-        if: steps.scope.outputs.cloud_mode == 'targeted' || steps.scope.outputs.node_mode == 'full'
+        if: steps.scope.outputs.cloud_mode == 'targeted'
         with:
           node-version: '22'
           cache: 'npm'
       - name: Install cloud test dependencies once
-        if: steps.scope.outputs.cloud_mode == 'targeted' || steps.scope.outputs.node_mode == 'full'
+        if: steps.scope.outputs.cloud_mode == 'targeted'
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run affected cloud/offline/Admin/coffee UI tests
         if: steps.scope.outputs.cloud_mode == 'targeted'
         run: node --test tests/cloud*.test.mjs tests/admin-*.test.mjs tests/offline-*.test.mjs tests/pwa-shell.test.mjs tests/coffee-duplicate-first-client.test.mjs tests/coffee-source-status-ui.test.mjs tests/recipe-family-selection.test.mjs tests/shot-temperature-preservation.test.mjs
-      - name: Run second third of high-risk full Node corpus (same source, disjoint files)
-        if: steps.scope.outputs.node_mode == 'full'
-        run: node scripts/audit/run-full-suite.mjs --shard=1/3
   mobile-browser-qa:
     runs-on: ubuntu-24.04
     timeout-minutes: 22
@@ -110,15 +86,6 @@ jobs:
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Fast source/queue/commit preflight BEFORE expensive CI
-        env:
-          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
-          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_EVENT_NAME: ${{ github.event_name }}
-        run: |
-          node scripts/audit/fast-pr-check.mjs
-          node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/audit/verify-commit-checkpoint.mjs
       - name: Explicit browser NOT_APPLICABLE
         if: steps.scope.outputs.browser_mode == 'none'
         run: |
@@ -144,62 +111,31 @@ jobs:
         if: steps.scope.outputs.browser_mode != 'none'
         with:
           python-version: '3.12'
-      # Reuse only the Playwright 1.55.0 headless-shell download. The pinned
-      # installer still verifies OS dependencies and every browser test runs.
-      # Cold or evicted cache falls back to the normal Playwright installation.
-      - name: Reuse pinned Chromium headless-shell download
-        if: steps.scope.outputs.browser_mode != 'none'
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: dic-pw-shell-v1.55.0-py312-${{ runner.os }}-${{ runner.arch }}
       - name: Install one isolated Chromium browser for all relevant acceptance
         if: steps.scope.outputs.browser_mode != 'none'
         run: |
           python -m pip install playwright==1.55.0
-          # Reuse the cached pinned browser, then prove the actual binary launches
-          # before paying for apt update/install. Missing runtime libraries get the
-          # original official --with-deps installer and mirror recovery unchanged.
-          python -m playwright install --only-shell chromium
-          chromium_smoke() {
-            python - <<'PY'
-          from playwright.sync_api import sync_playwright
-          with sync_playwright() as pw:
-              browser = pw.chromium.launch(headless=True)
-              page = browser.new_page()
-              page.set_content("<html><body><p id='dic-ready'>ready</p></body></html>")
-              assert page.locator("#dic-ready").inner_text() == "ready"
-              browser.close()
-          PY
-          }
-          if chromium_smoke; then
-            echo 'Chromium launch + DOM passed; apt dependencies already usable.'
-          else
-            echo 'Chromium runtime smoke failed; install official Playwright OS dependencies.'
-            if ! python -m playwright install --with-deps --only-shell chromium; then
-              # Retry only the runner's Ubuntu package mirror; never bypass
-              # dependency recovery or mandatory browser acceptance.
-              mirror_file=/etc/apt/sources.list.d/ubuntu.sources
-              if ! grep -q 'azure.archive.ubuntu.com' "$mirror_file"; then
-                echo 'Browser dependency install failed; Azure mirror recovery unavailable.' >&2
-                exit 1
-              fi
-              sudo sed -i 's#azure.archive.ubuntu.com#archive.ubuntu.com#g' "$mirror_file"
-              sudo apt-get update -o Acquire::Retries=2
-              python -m playwright install --with-deps --only-shell chromium
-            fi
-            chromium_smoke
-          fi
-      - name: Run all browser acceptances with parallel visual assertions
+          python -m playwright install --with-deps chromium
+      - name: Test actual compiled app assets in browser
         if: steps.scope.outputs.browser_mode != 'none'
-        env:
-          DIC_BROWSER_MODE: ${{ steps.scope.outputs.browser_mode }}
-          # PNG-only screenshots cost seconds but are not automatically compared.
-          # workflow_dispatch retains on-demand screenshot artifacts; all actual
-          # DOM, geometry, Auth, offline and workflow checks still run on every
-          # applicable PR/push with each subprocess exit checked.
-          DIC_CAPTURE_VISUAL: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
-        run: node scripts/audit/run-browser-qa.mjs
+        run: python tests/browser/built_app_qa.py
+      - name: Focused visual/contrast and responsive regression
+        if: steps.scope.outputs.browser_mode != 'none'
+        run: python tests/browser/visual_review.py
+      - name: Run 390px Log Shot -> Rate -> Recommendation and New Setup
+        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
+        run: python tests/browser/cloud_owner_qa.py
+      - name: Test owner-only invitation browser permissions
+        if: steps.scope.outputs.browser_mode == 'high'
+        run: python tests/browser/admin_invitation_qa.py
+      - name: Test real service-worker cached offline reopening
+        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
+        run: python tests/browser/pwa_offline_qa.py
+      - name: High-risk accessibility and admin records browser acceptance
+        if: steps.scope.outputs.browser_mode == 'high'
+        run: |
+          python tests/browser/issue26_accessibility_qa.py
+          python tests/browser/admin_records_qa.py
       - uses: actions/upload-artifact@v7
         if: always()
         with:

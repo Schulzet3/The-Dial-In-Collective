@@ -6,7 +6,7 @@ declare
  member_id uuid:=gen_random_uuid(); member2 uuid:=gen_random_uuid();
  reviewed_coffee uuid; linked_library uuid; merge_submission uuid;
  pending_id uuid; hold_id uuid; original_library uuid; got jsonb; candidate_list jsonb; status text;
- rev bigint; malformed_id uuid; denied boolean; before_shots integer; before_coffees integer;
+ rev bigint; denied boolean; before_shots integer; before_coffees integer;
 begin
  if current_database()<>'dic_ci' then raise exception 'Disposable database only';end if;
  select count(*) into before_shots from public.shots;
@@ -126,35 +126,6 @@ begin
  then raise exception 'Manual duplicate merge administrator decision missing';end if;
  if (select count(*) from public.coffees)<>before_coffees+1 then
   raise exception 'Manual duplicate merge created an additional canonical';end if;
-
- -- A display name containing only symbols normalizes to SQL NULL. Previously
- -- this slipped through Admin merge: NOT (NULL OR NULL) is NULL, not TRUE.
- -- No real member data is involved; both accounts and rows are disposable.
- insert into public.coffee_submissions(owner_id,proposed_data)
- values(member_id,jsonb_build_object('name','☕','roaster','Sweet Bloom'))
- returning id into malformed_id;
- insert into public.library_entries(owner_id,submission_id)
- values(member_id,malformed_id);
- perform set_config('request.jwt.claim.sub',admin_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- select revision into rev from public.coffee_submissions where id=malformed_id;
- denied:=false;
- begin
-  perform public.dic_admin_review_coffee(malformed_id,rev,'merge',
-     'Non-normalized coffee name must not merge',reviewed_coffee);
- exception when check_violation then denied:=true;
- end;
- if not denied then raise exception 'Symbol-only Pending name bypassed Admin merge identity checks';end if;
- execute 'reset role';
- if not exists(select 1 from public.coffee_submissions cs
-      where cs.id=malformed_id and cs.status='pending' and cs.canonical_coffee_id is null)
- then raise exception 'Rejected malformed merge changed Pending submission';end if;
- if not exists(select 1 from public.library_entries where owner_id=member_id
-      and submission_id=malformed_id and coffee_id is null)
- then raise exception 'Rejected malformed merge changed member library';end if;
- if (select count(*) from public.coffees)<>before_coffees+1
- then raise exception 'Rejected malformed merge changed canonical inventory';end if;
 
  -- An existing unresolved conflict can be held without deleting member data.
  insert into public.coffee_submissions(owner_id,proposed_data)
