@@ -1,3 +1,16 @@
+# Issue #509 R474 — 594 distinct PostgreSQL access-method and operator-family definitions reviewed [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=3ab9c2ed7eebc086ae34ce315f288e964c757b5f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Mandatory first live development Git SHA 3ab9c2ed7eebc086ae34ce315f288e964c757b5f, PREFLIGHT.md Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f retrieved at immutable SHA and cross-checked with independent Git blob before other GitHub/provider reads. Main 1399ae9266a8ba734a56c3dc1510db786f88c79e; release/production 5b256f1fc0717d3635f7148b934a1f91f8991685. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003, SELECT-only; no member records, Auth identities, logs or private shots read.
+
+**New provider definition review:** 7/7 pg_am handlers (including heap), 179/179 pg_opclass, 148/148 pg_opfamily, first 130/964 pg_amop typed strategy bindings and first 130/710 pg_amproc support callbacks: **594 distinct metadata objects** with complete live pg_catalog row text, MD5, exact 1-end character range, resolved typed references, index consumer counts/semantics and per-object retention decision. Literal raw metadata characters: AM 533; classes 33313; families 15341; strategies 24052; callbacks 17526. Evidence: [classes/families/handlers](../audits/issue509-r474-access-method-class-family-20261123.json), [strategy/procedure first 130 each](../audits/issue509-r474-amop-amproc-ranks-1-130-20261123.json). Previously inspected pg_operator 809/809 is **not counted again**; this is catalog metadata, NOT native compiled implementation source.
+
+**Semantic reconciliation:** Typed support operator/function OIDs present; family/method consistency, typed operator signatures, and uniqueness of strategy/purpose/type and support slot/type triplets show zero anomalies. Seven actual provider access methods are live; PostgreSQL B-tree/builtin index families support existing app indexing. 59 nondefault classes currently lack indexes, including both pg_trgm GIN/GiST classes, but no proof of zero dynamic consumers; no removal. 0 existing GiST/GIN/BRIN/SP-GiST index relations is not a defect by itself. No newly reproduced app bug, missing source dependency or performance fix justified by these metadata checks.
+
+No source/test/CI edits; exact-source CI NOT_APPLICABLE (not PASS). GitHub development-only append-only evidence/journal, no main/release/backups or production SQL/data/Auth/Storage/Edge/config/billing/Publish writes. Full provider baseline IN_PROGRESS, compiled native bodies UNVERIFIED. **Next precise cursor:** pg_amop ordered OID rank **131/964 (OID 10130)**, then pg_amproc rank **131/710 (OID 10130)**; continue typed strategy/callback semantic review and compare app runtime only with reproducible evidence. Prior owner-notified verifier drift unchanged; preserve no-repeat alert policy and hourly schedule. #267 original/current GitHub code-line credit zero.
+
+---
+
 # Issue #509 R473 — all 809 operator metadata definitions directly reviewed [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=2f9228ed1fe07654896147472597c917a821a8d7 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
