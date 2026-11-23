@@ -158,7 +158,7 @@ test('sign-out during pending cache read cannot reveal former owner',async()=>{
   await boot;
   assert.equal(app.identity,null);
   assert.equal(app.raw,null);
-  assert.equal(frames.includes(1),false,'former owner's cache must never repaint');
+  assert.equal(frames.includes(1),false,"former owner's cache must never repaint");
   assert.equal(checks,0,'sign-out cannot start an admission RPC');
  }finally{
   session.resolve(user);cache.resolve({owner:OWNER,snapshot:raw});
