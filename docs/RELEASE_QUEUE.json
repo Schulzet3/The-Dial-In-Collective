@@ -18439,23 +18439,41 @@
     {
       "id": "DIC-Q-455-r456-measured-grind-step-any",
       "issue": 455,
-      "pr": null,
+      "pr": 3829,
       "title": "Keep Log/Edit Shot measured grinder input fraction-compatible with stored originals",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "b6468c6c7bf4fbc59da1f91222eff9c27d222585",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 owner Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; pre-fix main.js Git blob 5c24e203db233692589f064fadb819fe68302cf6 and journal 69050d0c3b788b956967d148ddf0aca6de7d6135.",
       "tests": [
-        "R456 three synthetic actual CloudApp/field positive-negative cases authored (new/edit measured non-tenth input, five tastes, notes and unchanged dose/yield/time). PR-head Node22/Cloud/mobile/offline/a11y/approval/SQL/security PENDING, NOT PASS."
+        "Source/HTML negative at R455: measured Log/Edit Shot grinder input declared step=.1 for valid original measured fractional 2.45/0.155; native input stepMismatch is possible, but form novalidate and blocked Save NOT observed. Fixed only measured step=any; approved suggested grinder grid remains tenths.",
+        "PR #3829 exact final head 24d687256520816644fbc680b2710bcc4f5c7784: all three actual CloudApp/field R456 negative/positive Node22 tests PASS in governance/approval job 137437282095 (1442 PASS/0 FAIL/0 SKIPPED in its shard). New/Edit form, five tastes, notes and other measurement steps retained; first draft had overly strict HTML whitespace regex; corrected in a second nonforce same-commit-journal commit before final CI.",
+        "PR-head exact-source: Node22/build 45096456212 SUCCESS; Cloud UX/mobile/browser/offline/a11y 45096456290 SUCCESS (cloud 2949 PASS/0 FAIL/0 SKIP, Chromium subjob SUCCESS); approval 45096456176 SUCCESS; isolated SQL 45096456231 SUCCESS; security 45096456251 SUCCESS; selected #33 45096456254/45096456245/45096456223 SUCCESS; frozen coffee corpus 45096456270 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] squash PR #3829 merged b6468c6c7bf4fbc59da1f91222eff9c27d222585; one parent 310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115; exact four source/test/queue/journal Git blobs match reviewed PR head. Merged-push full source CI Node22 45096769796, cloud UX/mobile/offline/browser 45096769752, governance 45096769755 and selected #33 45096769757/45096769850 all COMPLETED SUCCESS. Original603 not run as PASS.",
+        "No actual user device/member study, production provider or empiric espresso benefit claimed. #3347 isolated frozen candidate/five-success READY certification not established; state TESTING."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45096456212,
+        45096456290,
+        45096456176,
+        45096456231,
+        45096456251,
+        45096456254,
+        45096456245,
+        45096456223,
+        45096769796,
+        45096769752,
+        45096769755,
+        45096769757,
+        45096769850
+      ],
       "blockers": [
-        "Exact-source risk-appropriate PR-head/merged CI and nonforce source integration remain pending.",
-        "Owner #3347 source-isolated nonpublishing frozen READY candidate and five exact-source checks not certified; TESTING only."
+        "Independent #3347 nonpublishing source-isolated frozen release-candidate verification with five exact successful CI checks not established. Development source is merged and applicable CI passes, but remain TESTING, NOT READY/DEPLOYED.",
+        "Original S019 independent source and observed real same-coffee next-shot effectiveness remain unverified; neither is evidence of this narrow UI fix's improved espresso quality."
       ],
-      "notes": "R455 HTML step mismatch: measured grinder accepts legitimate non-tenth settings but Cloud Log/Edit declared native tenth step; restrict change to measured input step=any, not approved recommendation grid. Form novalidate means Save blocking not proven. Preserve original history, all five tastes, notes, styles, private data; no real cup-quality evidence or production write.",
+      "notes": "R456 SAFE measured-only input step semantics FIXED on development via PR #3829 nonforce squash merge b6468c6c7bf4fbc59da1f91222eff9c27d222585, app/test/queue/journal Git blob parity with passing PR head. New/Edit Log Shot accepts native arbitrary measured fractions while recommendation target tenth-grid remains Locked. All five tastes, original measured shots and notes/history, privacy/offline/outbox, styles/Slow Feed/temp/calibration unchanged. Source-only HTML validity change: Log Shot novalidate, no assertion Save was blocked or real device UX measured. No new telemetry, live SQL/Auth/Edge/member/provider writes, Netlify, publication, force or empirical cup-quality trial.",
       "production_deployed": false
     }
   ],
