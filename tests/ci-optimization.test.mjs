@@ -88,16 +88,16 @@ test('full Node suite preserves the security corpus while parallelizing other fi
    if(slot%12===3||slot%8===4)return 1;
    return 0;
   }
-  if(original===1)return slot%4===0?0:slot%4===2?2:1;
+  if(original===1)return slot%8===0?0:slot%4===2?2:1;
   const quarter=slot%4;
   return quarter===0?(slot%16===0?2:0):quarter===1?1:2;
  };
  for(let lane=0;lane<3;lane++){
   assert.deepEqual(shards[lane].parallel,plan.parallel.filter((_,i)=>shiftedOwner(i)===lane));
-  assert.deepEqual(shards[lane].serial,lane===0?plan.serial:[]);
+  assert.deepEqual(shards[lane].serial,lane===1?plan.serial:[]);
  }
  assert.deepEqual(shards.flatMap(s=>s.serial),plan.serial,
-  'one unchanged protected serial file on HIGH validate; no duplicate or omission');
+  'one unchanged protected serial file on HIGH cloud; no duplicate or omission');
  const counts=shards.map(s=>s.parallel.length);
  assert.ok(counts.every(x=>x>plan.parallel.length/4),
   'all three existing HIGH lanes own meaningful work');
@@ -117,9 +117,10 @@ test('full Node suite preserves the security corpus while parallelizing other fi
  const baseline=[0,1,2].map(lane=>plan.parallel.filter((_,i)=>baselineOwner(i)===lane).length);
  const movedToValidate=plan.parallel.filter((_,i)=>baselineOwner(i)===1&&shiftedOwner(i)===0).length;
  const movedToApproval=plan.parallel.filter((_,i)=>baselineOwner(i)===1&&shiftedOwner(i)===2).length;
- for(const moved of [movedToValidate,movedToApproval])
-  assert.ok(moved>=Math.floor(plan.parallel.length/14)&&moved<=Math.ceil(plan.parallel.length/10),
-   'bounded original-cloud-only transfer to a spare existing lane');
+ assert.ok(movedToValidate>=Math.floor(plan.parallel.length/40)&&movedToValidate<=Math.ceil(plan.parallel.length/18),
+  'bounded original-cloud-only transfer to validate');
+ assert.ok(movedToApproval>=Math.floor(plan.parallel.length/14)&&movedToApproval<=Math.ceil(plan.parallel.length/10),
+  'bounded original-cloud-only transfer to approval');
  assert.equal(counts[0]-baseline[0],movedToValidate);
  assert.equal(counts[2]-baseline[2],movedToApproval);
  assert.equal(baseline[1]-counts[1],movedToValidate+movedToApproval);
