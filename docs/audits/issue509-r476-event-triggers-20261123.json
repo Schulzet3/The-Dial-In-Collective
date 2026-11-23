@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R476",
+  "date": "2026-11-23",
+  "scope": "Provider event triggers and full PostgreSQL SQL handler definitions",
+  "preflight": {
+    "development_sha": "2bb5408dab9decd2edc50b0067d033d9a4839805",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "read_only": true
+  },
+  "coverage": {
+    "inspected": 7,
+    "total": 7,
+    "classification": "CURRENT REVALIDATION; previous provider coverage not double-credited"
+  },
+  "notes": [
+    "All 7 event triggers enabled in origin catalog. No event was triggered because queries were read-only.",
+    "ensure_rls event trigger covers CREATE TABLE/CREATE TABLE AS/SELECT INTO in public schema; it logs failures rather than raising them; app migrations must continue explicit RLS/permission acceptance.",
+    "Managed extension and PostgREST watchers must not be removed as alleged dead code based on no current DDL."
+  ],
+  "objects": [
+    {
+      "oid": "16575",
+      "evtname": "issue_graphql_placeholder",
+      "evtevent": "sql_drop",
+      "evtenabled": "O",
+      "evttags": [
+        "DROP EXTENSION"
+      ],
+      "handler_identity": "set_graphql_placeholder()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16575\",\"evtname\":\"issue_graphql_placeholder\",\"evtevent\":\"sql_drop\",\"evtowner\":\"10\",\"evtfoid\":\"16574\",\"evtenabled\":\"O\",\"evttags\":[\"DROP EXTENSION\"]}",
+      "catalog_provider_md5": "b72ee7fc9241316921ae0504dd014b2b",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.set_graphql_placeholder()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\n    DECLARE\n    graphql_is_dropped bool;\n    BEGIN\n    graphql_is_dropped = (\n        SELECT ev.schema_name = 'graphql_public'\n        FROM pg_event_trigger_dropped_objects() AS ev\n        WHERE ev.schema_name = 'graphql_public'\n    );\n\n    IF graphql_is_dropped\n    THEN\n        create or replace function graphql_public.graphql(\n            \"operationName\" text default null,\n            query text default null,\n            variables jsonb default null,\n            extensions jsonb default null\n        )\n            returns jsonb\n            language plpgsql\n            set search_path to ''\n        as $$\n            DECLARE\n                server_version float;\n            BEGIN\n                server_version = (SELECT (SPLIT_PART((select version()), ' ', 2))::float);\n\n                IF server_version >= 14 THEN\n                    RETURN jsonb_build_object(\n                        'errors', jsonb_build_array(\n                            jsonb_build_object(\n                                'message', 'pg_graphql extension is not enabled.'\n                            )\n                        )\n                    );\n                ELSE\n                    RETURN jsonb_build_object(\n                        'errors', jsonb_build_array(\n                            jsonb_build_object(\n                                'message', 'pg_graphql is only available on projects running Postgres 14 onwards.'\n                            )\n                        )\n                    );\n                END IF;\n            END;\n        $$;\n    END IF;\n\n    END;\n$function$\n",
+      "handler_provider_md5": "8da9dff6b2ae47498209d341acaeb60b",
+      "rank": 1,
+      "reviewed_catalog_character_range": [
+        1,
+        155
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        1725
+      ],
+      "semantic_role": "MANAGED_GRAPHQL_EXTENSION_LIFECYCLE",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "16576",
+      "evtname": "pgrst_ddl_watch",
+      "evtevent": "ddl_command_end",
+      "evtenabled": "O",
+      "evttags": null,
+      "handler_identity": "pgrst_ddl_watch()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16576\",\"evtname\":\"pgrst_ddl_watch\",\"evtevent\":\"ddl_command_end\",\"evtowner\":\"10\",\"evtfoid\":\"16563\",\"evtenabled\":\"O\",\"evttags\":null}",
+      "catalog_provider_md5": "1ccdcae44211afe0a7ad0b77c9be3b28",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.pgrst_ddl_watch()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nDECLARE\n  cmd record;\nBEGIN\n  FOR cmd IN SELECT * FROM pg_event_trigger_ddl_commands()\n  LOOP\n    IF cmd.command_tag IN (\n      'CREATE SCHEMA', 'ALTER SCHEMA'\n    , 'CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO', 'ALTER TABLE'\n    , 'CREATE FOREIGN TABLE', 'ALTER FOREIGN TABLE'\n    , 'CREATE VIEW', 'ALTER VIEW'\n    , 'CREATE MATERIALIZED VIEW', 'ALTER MATERIALIZED VIEW'\n    , 'CREATE FUNCTION', 'ALTER FUNCTION'\n    , 'CREATE TRIGGER'\n    , 'CREATE TYPE', 'ALTER TYPE'\n    , 'CREATE RULE'\n    , 'COMMENT'\n    )\n    -- don't notify in case of CREATE TEMP table or other objects created on pg_temp\n    AND cmd.schema_name is distinct from 'pg_temp'\n    THEN\n      NOTIFY pgrst, 'reload schema';\n    END IF;\n  END LOOP;\nEND; $function$\n",
+      "handler_provider_md5": "afaad7193dcf8f81e728d2bedb85e43e",
+      "rank": 2,
+      "reviewed_catalog_character_range": [
+        1,
+        138
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        873
+      ],
+      "semantic_role": "POSTGREST_SCHEMA_CACHE_INVALIDATION",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "16577",
+      "evtname": "pgrst_drop_watch",
+      "evtevent": "sql_drop",
+      "evtenabled": "O",
+      "evttags": null,
+      "handler_identity": "pgrst_drop_watch()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16577\",\"evtname\":\"pgrst_drop_watch\",\"evtevent\":\"sql_drop\",\"evtowner\":\"10\",\"evtfoid\":\"16564\",\"evtenabled\":\"O\",\"evttags\":null}",
+      "catalog_provider_md5": "1f3df2edd72a9f7f02edacc2158e4325",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.pgrst_drop_watch()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nDECLARE\n  obj record;\nBEGIN\n  FOR obj IN SELECT * FROM pg_event_trigger_dropped_objects()\n  LOOP\n    IF obj.object_type IN (\n      'schema'\n    , 'table'\n    , 'foreign table'\n    , 'view'\n    , 'materialized view'\n    , 'function'\n    , 'trigger'\n    , 'type'\n    , 'rule'\n    )\n    AND obj.is_temporary IS false -- no pg_temp objects\n    THEN\n      NOTIFY pgrst, 'reload schema';\n    END IF;\n  END LOOP;\nEND; $function$\n",
+      "handler_provider_md5": "4357772baf5cfcd5c6d7049585b3a537",
+      "rank": 3,
+      "reviewed_catalog_character_range": [
+        1,
+        132
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        557
+      ],
+      "semantic_role": "POSTGREST_SCHEMA_CACHE_INVALIDATION",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "16654",
+      "evtname": "issue_pg_cron_access",
+      "evtevent": "ddl_command_end",
+      "evtenabled": "O",
+      "evttags": [
+        "CREATE EXTENSION"
+      ],
+      "handler_identity": "grant_pg_cron_access()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16654\",\"evtname\":\"issue_pg_cron_access\",\"evtevent\":\"ddl_command_end\",\"evtowner\":\"10\",\"evtfoid\":\"16551\",\"evtenabled\":\"O\",\"evttags\":[\"CREATE EXTENSION\"]}",
+      "catalog_provider_md5": "205ad4d206ceaf4992780465153adcda",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.grant_pg_cron_access()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nBEGIN\n  IF EXISTS (\n    SELECT\n    FROM pg_event_trigger_ddl_commands() AS ev\n    JOIN pg_extension AS ext\n    ON ev.objid = ext.oid\n    WHERE ext.extname = 'pg_cron'\n  )\n  THEN\n    grant usage on schema cron to postgres with grant option;\n\n    alter default privileges in schema cron grant all on tables to postgres with grant option;\n    alter default privileges in schema cron grant all on functions to postgres with grant option;\n    alter default privileges in schema cron grant all on sequences to postgres with grant option;\n\n    alter default privileges for user supabase_admin in schema cron grant all\n        on sequences to postgres with grant option;\n    alter default privileges for user supabase_admin in schema cron grant all\n        on tables to postgres with grant option;\n    alter default privileges for user supabase_admin in schema cron grant all\n        on functions to postgres with grant option;\n\n    grant all privileges on all tables in schema cron to postgres with grant option;\n    revoke all on table cron.job from postgres;\n    grant select on table cron.job to postgres with grant option;\n    revoke trigger on cron.job_run_details from postgres;\n  END IF;\nEND;\n$function$\n",
+      "handler_provider_md5": "53a44336da0ac1dd62d89dbd988e6d1d",
+      "rank": 4,
+      "reviewed_catalog_character_range": [
+        1,
+        159
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        1343
+      ],
+      "semantic_role": "MANAGED_CRON_EXTENSION_GRANTS",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "16657",
+      "evtname": "issue_pg_net_access",
+      "evtevent": "ddl_command_end",
+      "evtenabled": "O",
+      "evttags": [
+        "CREATE EXTENSION"
+      ],
+      "handler_identity": "grant_pg_net_access()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16657\",\"evtname\":\"issue_pg_net_access\",\"evtevent\":\"ddl_command_end\",\"evtowner\":\"10\",\"evtfoid\":\"16553\",\"evtenabled\":\"O\",\"evttags\":[\"CREATE EXTENSION\"]}",
+      "catalog_provider_md5": "c296d729414b99a5b0502507ca1af85e",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.grant_pg_net_access()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nBEGIN\n  IF EXISTS (\n    SELECT 1\n    FROM pg_event_trigger_ddl_commands() AS ev\n    JOIN pg_extension AS ext\n    ON ev.objid = ext.oid\n    WHERE ext.extname = 'pg_net'\n  )\n  THEN\n    IF NOT EXISTS (\n      SELECT 1\n      FROM pg_roles\n      WHERE rolname = 'supabase_functions_admin'\n    )\n    THEN\n      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;\n    END IF;\n\n    GRANT USAGE ON SCHEMA net TO supabase_functions_admin, postgres, anon, authenticated, service_role;\n\n    IF EXISTS (\n      SELECT FROM pg_extension\n      WHERE extname = 'pg_net'\n      -- all versions in use on existing projects as of 2025-02-20\n      -- version 0.12.0 onwards don't need these applied\n      AND extversion IN ('0.2', '0.6', '0.7', '0.7.1', '0.8.0', '0.10.0', '0.11.0')\n    ) THEN\n      ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;\n      ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;\n\n      ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;\n      ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;\n\n      REVOKE ALL ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;\n      REVOKE ALL ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;\n\n      GRANT EXECUTE ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;\n      GRANT EXECUTE ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;\n    END IF;\n  END IF;\nEND;\n$function$\n",
+      "handler_provider_md5": "1d06ef4fb47bb0ab6e6f8818a62013bb",
+      "rank": 5,
+      "reviewed_catalog_character_range": [
+        1,
+        158
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        2147
+      ],
+      "semantic_role": "MANAGED_PG_NET_EXTENSION_GRANTS",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "16666",
+      "evtname": "issue_pg_graphql_access",
+      "evtevent": "ddl_command_end",
+      "evtenabled": "O",
+      "evttags": [
+        "CREATE EXTENSION"
+      ],
+      "handler_identity": "grant_pg_graphql_access()",
+      "handler_schema": "extensions",
+      "prosecdef": false,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "complete_catalog_text": "{\"oid\":\"16666\",\"evtname\":\"issue_pg_graphql_access\",\"evtevent\":\"ddl_command_end\",\"evtowner\":\"10\",\"evtfoid\":\"16572\",\"evtenabled\":\"O\",\"evttags\":[\"CREATE EXTENSION\"]}",
+      "catalog_provider_md5": "792dd3d95b26df1f6ea3f455356e1e58",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION extensions.grant_pg_graphql_access()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n    if not exists (\n        select 1\n        from pg_catalog.pg_event_trigger_ddl_commands() ev\n        join pg_catalog.pg_extension e on ev.objid = e.oid\n        where e.extname = 'pg_graphql'\n    ) then\n        return;\n    end if;\n\n    drop function if exists graphql_public.graphql;\n    create or replace function graphql_public.graphql(\n        \"operationName\" text default null,\n        query text default null,\n        variables jsonb default null,\n        extensions jsonb default null\n    )\n        returns jsonb\n        language sql\n    as $$\n        select graphql.resolve(\n            query := query,\n            variables := coalesce(variables, '{}'),\n            \"operationName\" := \"operationName\",\n            extensions := extensions\n        );\n    $$;\n\n    -- Attach the wrapper to the extension so DROP EXTENSION cascades to it,\n    -- which in turn triggers set_graphql_placeholder to reinstall the \"not enabled\" stub.\n    alter extension pg_graphql add function graphql_public.graphql(text, text, jsonb, jsonb);\n\n    grant usage on schema graphql to postgres, anon, authenticated, service_role;\n    grant execute on function graphql.resolve to postgres, anon, authenticated, service_role;\n    grant usage on schema graphql to postgres with grant option;\n    grant usage on schema graphql_public to postgres with grant option;\nend;\n$function$\n",
+      "handler_provider_md5": "4e6d7efe4aed1b3b92063b648aa7a0cf",
+      "rank": 6,
+      "reviewed_catalog_character_range": [
+        1,
+        162
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        1509
+      ],
+      "semantic_role": "MANAGED_GRAPHQL_EXTENSION_LIFECYCLE",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    },
+    {
+      "oid": "17604",
+      "evtname": "ensure_rls",
+      "evtevent": "ddl_command_end",
+      "evtenabled": "O",
+      "evttags": [
+        "CREATE TABLE",
+        "CREATE TABLE AS",
+        "SELECT INTO"
+      ],
+      "handler_identity": "rls_auto_enable()",
+      "handler_schema": "public",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=pg_catalog"
+      ],
+      "complete_catalog_text": "{\"oid\":\"17604\",\"evtname\":\"ensure_rls\",\"evtevent\":\"ddl_command_end\",\"evtowner\":\"16388\",\"evtfoid\":\"17603\",\"evtenabled\":\"O\",\"evttags\":[\"CREATE TABLE\",\"CREATE TABLE AS\",\"SELECT INTO\"]}",
+      "catalog_provider_md5": "55f92733ffc2c41dda4bc79d7ebca4cb",
+      "complete_handler_source": "CREATE OR REPLACE FUNCTION public.rls_auto_enable()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  cmd record;\n  tbl name;\nBEGIN\n  FOR cmd IN\n    SELECT *\n    FROM pg_event_trigger_ddl_commands()\n    WHERE command_tag IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')\n      AND object_type IN ('table','partitioned table')\n  LOOP\n     IF cmd.schema_name IS NOT NULL AND cmd.schema_name IN ('public') AND cmd.schema_name NOT IN ('pg_catalog','information_schema') AND cmd.schema_name NOT LIKE 'pg_toast%' AND cmd.schema_name NOT LIKE 'pg_temp%' THEN\n      BEGIN\n        SELECT c.relname INTO tbl FROM pg_catalog.pg_class c WHERE c.oid = cmd.objid;\n        EXECUTE format('alter table if exists %I.%I enable row level security', cmd.schema_name, tbl);\n        RAISE LOG 'rls_auto_enable: enabled RLS on %', cmd.object_identity;\n      EXCEPTION\n        WHEN OTHERS THEN\n          RAISE LOG 'rls_auto_enable: failed to enable RLS on %', cmd.object_identity;\n      END;\n     ELSE\n        RAISE LOG 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)', cmd.object_identity, cmd.schema_name;\n     END IF;\n  END LOOP;\nEND;\n$function$\n",
+      "handler_provider_md5": "846ec2fbff751d24b890656d63c3a9bf",
+      "rank": 7,
+      "reviewed_catalog_character_range": [
+        1,
+        180
+      ],
+      "reviewed_handler_character_range": [
+        1,
+        1223
+      ],
+      "semantic_role": "PUBLIC_DDL_RLS_AUTO_ENABLE_GUARDRAIL",
+      "verdict": "RETAIN_NO_SAFE_APP_SOURCE_CHANGE",
+      "note": "Complete SQL handler read; event fires only for configured DDL event/tags; no production DDL invoked"
+    }
+  ]
+}

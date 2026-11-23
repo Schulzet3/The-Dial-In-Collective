@@ -1,3 +1,16 @@
+# Issue #509 R476 — 229/229 PostgreSQL casts and DDL-event handler semantic review [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2bb5408dab9decd2edc50b0067d033d9a4839805 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Mandatory first immutable GitHub preflight at development 2bb5408dab9decd2edc50b0067d033d9a4839805, PREFLIGHT Git blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f byte-matched against independent Git blob before other documents/providers. Read-only connected Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003.
+
+**New catalog review:** entire 229/229 pg_catalog.pg_cast records ordered OID 10000–10228, all six raw catalog fields, typed source/target, cast method, assignment/implicit/explicit context and implementation function identities. Complete native row text, provider MD5, exact 1-end reviewed range, typed semantic class, per-object RETAIN verdict saved in [R476 cast ledger](../audits/issue509-r476-pg-cast-20261123.json). 160 function-based, 64 binary and 5 input/output conversions; 117 implicit, 77 assignment and 35 explicit casts. Zero malformed method/function combination, unknown cast contexts, custom/non-core types, missing cast functions, or duplicate directed source-target pairs. Both conversion directions and same-type precision/typmod adjustments are intentional PostgreSQL features. No proven DIC application bug, removable cast or measured bottleneck. Native compiled cast implementations remain UNVERIFIED; no #267 source review credit.
+
+**Additional live behavior review:** directly read all 7 current event-trigger catalog definitions AND all seven complete SQL handler bodies (PostgREST schema reload, extension lifecycle/grants, public-create RLS auto-enable), with independent catalog/source MD5 and event/tag semantics in [R476 event-trigger ledger](../audits/issue509-r476-event-triggers-20261123.json). These are DDL-only managed/guardrail hooks, NOT license to modify production. The public ensure_rls hook catches and logs errors, so it must NOT substitute for migration-defined RLS tests; existing explicit acceptance remains. Revalidation receives **zero duplicate baseline credit** pending earlier receipts check.
+
+**Guardrails:** Production SQL/data/Auth/Storage/Edge/config and billing unchanged; no migrations, no publish, no repository application code/test/CI edits. CI NOT_APPLICABLE (docs-only, not PASS), no queue promotion. Prior verifier deployment drift and Admin-push TESTING state not claimed fixed/redeployed. Full baseline **IN_PROGRESS**, provider-native compiled bodies and console-only configuration **UNVERIFIED**. **Next unreviewed route:** pg_catalog.pg_conversion ascending OID rank **1/128**, followed by pg_ts parser/template/dictionary/config metadata and app migration/Edge drift as relevant, validate prior evidence before counting. Preserve hourly schedule and existing owner-alert policy.
+
+---
+
 # Issue #509 R475 — remaining 1,414 operator/support mappings reviewed [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=c26cd02724be477eeb7f30b989f586716fff2c56 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
