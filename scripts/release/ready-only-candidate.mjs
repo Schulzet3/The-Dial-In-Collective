@@ -52,6 +52,106 @@ export function reviewedProspectiveReadyQueuePath({manifest,queue,developmentSou
  return ['docs/RELEASE_QUEUE.json'];
 }
 
+
+// #3889: a prospective READY-shaped queue is validated on its own exact native
+// candidate SHA, then adopted only if development later records identical bytes.
+// This is a comparison gate, NEVER a READY certification or publication grant.
+export function reviewedProspectivePromotionQueueParity({manifest,originalQueue,
+ candidateQueue,liveQueue}={}){
+ if(typeof originalQueue!=='string'||typeof candidateQueue!=='string')return false;
+ if(originalQueue===candidateQueue)return true; // Existing ordinary READY-only contract.
+ const x=manifest?.prospective_ready_preview;
+ if(x?.status!=='PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'||
+  x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+  manifest?.kind!==CANDIDATE_KIND||manifest?.publication_authorized!==false||
+  manifest?.published_source_sha!=='2d22d448160d428a977f06482323646b92818fcf'||
+  manifest?.development_source_sha!=='544b06558ab9ab6df4eea0410277b1a3c19f2fe4'||
+  !Array.isArray(manifest?.selected_ready_item_ids)||
+  manifest.selected_ready_item_ids.length!==1||
+  manifest.selected_ready_item_ids[0]!==x.selected_id||
+  manifest?.candidate_branch!=='release-candidates/prospect3889-544b06558ab9ab6df4ee'||
+  liveQueue!==candidateQueue)return false;
+ try{
+  const original=JSON.parse(originalQueue),proposed=JSON.parse(candidateQueue);
+  if(queueSchemaErrors(original).length||queueSchemaErrors(proposed).length||
+     JSON.stringify(original.published_base)!==JSON.stringify(proposed.published_base)||
+     original.items.length!==proposed.items.length)return false;
+  const before=original.items.find(i=>i.id===x.selected_id);
+  if(!before||before.state!=='TESTING'||!SHA.test(before.merged_source_sha||'')||
+     !Array.isArray(before.blockers))return false;
+  const expected=JSON.parse(JSON.stringify(original));
+  const row=expected.items.find(i=>i.id===x.selected_id);
+  row.state='READY';row.blockers=[];
+  return JSON.stringify(expected)===JSON.stringify(proposed);
+ }catch{return false;}
+}
+
+// Seven independently reviewed nonshipped QA/restoration paths in the exact
+// 2026-11-23 #3889 prospective Git tree. Do not permit arbitrary extra paths
+// or transfer this narrow review to another candidate/feature.
+export function reviewedProspectiveQaRestorationPaths({manifest,queue,developmentSourceSha,
+ publishedSourceSha,candidateSha,sourceObjectAt}={}){
+ const x=manifest?.nonpublishing_qa_restoration;
+ if(x===undefined)return [];
+ const hold=why=>{throw Error('Prospective QA source restoration HOLD: '+why);};
+ const id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const baseline='2d22d448160d428a977f06482323646b92818fcf';
+ const development='544b06558ab9ab6df4eea0410277b1a3c19f2fe4';
+ const candidate='16bc481b2c66c5229c70e513c76141b086b8e535';
+ const restored=[
+  ['scripts/audit/run-full-suite.mjs','4c76dc5721eec24b002bcd62055b116911ae6c4e'],
+  ['tests/ci-optimization.test.mjs','21dc97fee802315487cb95e07678f02023989d21']
+ ];
+ const excluded=[
+  'scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs',
+  'scripts/audit/issue33-r430-disciples-original100-check.mjs',
+  'scripts/audit/issue33-r431-staccato-original354-check.mjs',
+  'scripts/audit/issue33-r433-duesouth-selected-check.mjs',
+  'scripts/audit/issue33-r434-south17-selected-check.mjs'
+ ];
+ const qa=[
+  {path:'tests/helpers/release-published-restoration.mjs',source_sha:'fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'},
+  {path:'tests/preflight-contract.test.mjs',source_sha:'f893c068e20c2445bc5596eda6b36c832974f195'}
+ ];
+ const p=manifest?.prospective_ready_preview;
+ if(p?.status!=='PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'||
+  p.selected_id!==id||
+  p.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+  manifest?.publication_authorized!==false||
+  manifest?.candidate_branch!=='release-candidates/prospect3889-544b06558ab9ab6df4ee'||
+  !Array.isArray(manifest?.selected_ready_item_ids)||
+  manifest.selected_ready_item_ids.length!==1||manifest.selected_ready_item_ids[0]!==id||
+  queue?.items?.find(i=>i.id===id)?.state!=='READY'||
+  developmentSourceSha!==development||publishedSourceSha!==baseline||
+  candidateSha!==candidate||typeof sourceObjectAt!=='function'||
+  x.reviewed_source_reference_sha!=='b1cbddd2fcbabcd5bf5ef00f48ca9d2e9475cb77'||
+  x.reviewed_source_reference_tree_sha!=='ac379329eb318e49d1f71df1c5217f750953981b'||
+  x.merged_qa_candidate_fix_sha!==development||
+  x.changed_executable_paths_exactly_seven!==true||
+  x.certified_ready!==false||x.publication_authorized!==false||
+  !Array.isArray(x.restored_to_published_nonshipped_paths)||
+  !Array.isArray(x.excluded_unready_nonshipped_paths)||
+  !equal(x.restored_to_published_nonshipped_paths,restored.map(y=>y[0]))||
+  !equal(x.excluded_unready_nonshipped_paths,excluded)||
+  JSON.stringify(x.reviewed_merged_qa_test_blobs)!==JSON.stringify(qa))
+  hold('frozen source identity, seven-path allowlist or exact merged QA evidence mismatch');
+ for(const [path,blob] of restored)
+  if(sourceObjectAt(publishedSourceSha,path)!=='100644:'+blob||
+     sourceObjectAt(candidateSha,path)!=='100644:'+blob||
+     sourceObjectAt(developmentSourceSha,path)==='100644:'+blob)
+   hold('restored published Git blob mismatch: '+path);
+ for(const path of excluded)
+  if(sourceObjectAt(publishedSourceSha,path)!==null||
+     sourceObjectAt(candidateSha,path)!==null||
+     !/^100644:[a-f0-9]{40}$/.test(sourceObjectAt(developmentSourceSha,path)||''))
+   hold('excluded unready QA source was not independently absent: '+path);
+ for(const {path,source_sha} of qa)
+  if(sourceObjectAt(developmentSourceSha,path)!=='100644:'+source_sha||
+     sourceObjectAt(candidateSha,path)!=='100644:'+source_sha)
+   hold('merged compatibility QA source blob mismatch: '+path);
+ return [...restored.map(y=>y[0]),...excluded];
+}
+
 // Production publication must never edit/create GitHub Actions workflows.
 // The Actions GITHUB_TOKEN publisher has no workflows scope. Keep all CI
 // workflow evolution on main/development and restore exact published bytes
@@ -1029,9 +1129,12 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const prospectiveQueuePaths=reviewedProspectiveReadyQueuePath({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,candidateSha,
   candidateBranch,sourceObjectAt});
+ const reviewedQaPaths=reviewedProspectiveQaRestorationPaths({manifest,queue,
+  developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
+  candidateSha,sourceObjectAt});
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
-  excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,
+  excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,reviewedQaPaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
