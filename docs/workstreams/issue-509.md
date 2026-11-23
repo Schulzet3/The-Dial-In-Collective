@@ -1,3 +1,16 @@
+# Issue #509 R466 — new native catalog word coverage and personal-state performance triage [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=e4344b85ba5380a2e32122b3e24063d6d37f74e3 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC / November 22 Denver. Live development SHA and immutable PREFLIGHT Git blob fetched first and byte-for-byte cross-verified against GitHub's separate blob API before other documents/provider. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11, read-only. Main 1c7f77844e899776d2f866f9c824a4a0cba58d56; production release 5ef0e190237a0fa8e391b086c5baeaaa962ae264.
+
+**New direct semantic coverage:** 300 complete live pg_description records at ranks 1401–1700/5344, 8273 characters; complete literal words/OID/signatures, provider MD5, 1-end range, category and independent interpretation for each in [R466 append-only ledger](../audits/issue509-r466-core-comments-1401-1700-and-personal-state-performance-20261123.json). Includes catalog visibility, typed AVG/SUM/MAX/MIN/COUNT, historical variance/stddev aliases (LIVE SQL compatibility, NOT retired DIC code), ACL overloads, date/time cross-type comparison, binary type I/O and stat/backup functions (descriptions only, never executed). Native compiled implementations UNVERIFIED. Do not duplicate Run67 lexical capture or #267 GitHub code-line credit.
+
+**New DIC performance triage:** Safe pg_stat_statements aggregate fingerprint for public.dic_read_personal_state/private.read_personal_state: 4,799 calls, 74,066.7ms cumulative, 15.43ms mean, 1,566.38ms maximum, 8,427,638 shared-buffer hits, zero reads. Directly read full live source: 16 owner-scoped arrays, one MVCC snapshot. Inspected all 16 referenced relation index DDL and bounded row/size estimates (48–208kB); no missing index/reproducible bottleneck established by these stats. Other matching fingerprints: Admin push poll 3,155 calls, 11.85ms mean; approval poll 2,961, 11.90ms mean. Next safe analysis: isolated plan/client latency before any code/index modification. No private Auth/member/shot/note data or query text read/dumped.
+
+No reproduced new application bug or consumer-proven safe removal; no app, SQL migration, tests or CI modifications. Documentation-only CI NOT_APPLICABLE (not PASS). R461 project_shot COMMENT migration remains TESTING pending source-isolated #3347 candidate gates; previously flagged deployed Edge verifier parser drift unchanged and owner Publish gated, no repeated alert. Production DB/data/Auth/Storage/Edge/config unchanged, no deployment/billing/backup/schedule change. Full baseline IN_PROGRESS. **Next exact unreviewed semantic cursor: pg_description rank 1701/5344, character 1.** Preserve owner-action-only notifications.
+
+---
+
 # Issue #509 R465 — 300 new native catalog comments and bounded performance interpretation [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=38649a5e0c0571ca0b0746f53ead0bc989239539 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
