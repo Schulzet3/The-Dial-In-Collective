@@ -125,3 +125,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e 
 
 ## November 23 — exact hosted #3889 prospective staging delta repair [skip netlify]
 - Automatic main pre-certification [45282838852](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45282838852) FAIL observed after source + first-parent checks: `Isolated READY candidate HOLD: Candidate staging commit changes unrelated paths or lacks same-commit journal`. The new two-phase preview correctly adds `docs/RELEASE_QUEUE.json` only INSIDE candidate tree; existing READY-only staged-path guard rejected the extra path. Narrow repair allows exactly that one path iff immutable #3889 63-baseline SHA, sole selected READY ID, prospect branch, nonpublisher marker, and genuinely different Git source/candidate queue blobs all match. Every other path remains blocked. New adversarial positive/negative direct guard tests. Retain 63 live TESTING until exact candidate native CI and final certificate.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — avoid regex literal ambiguity in strict prospect branch guard [skip netlify]
+- Express `release-candidates/prospect3889-<20hex>` check via exact two-component path and anchored hex suffix, without a regex slash-escaping ambiguity. Both injected or alternate branch names remain HOLD. Same-commit no-release security test repair, no weakening.

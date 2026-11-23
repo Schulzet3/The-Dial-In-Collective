@@ -34,7 +34,8 @@ export function reviewedProspectiveReadyQueuePath({manifest,queue,developmentSou
    x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
    !/^[a-f0-9]{64}$/.test(x.identity_sha256||'')||
    !/^DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(x.selected_id||'')||
-   !/^release-candidates\\/prospect3889-[a-f0-9]{20}$/.test(candidateBranch||'')||
+   !(candidateBranch?.split('/').length===2&&candidateBranch.split('/')[0]==='release-candidates'&&
+     /^prospect3889-[a-f0-9]{20}$/.test(candidateBranch.split('/')[1]))||
    manifest.candidate_branch!==candidateBranch||manifest.publication_authorized!==false||
    !Array.isArray(manifest.selected_ready_item_ids)||
    manifest.selected_ready_item_ids.length!==1||
