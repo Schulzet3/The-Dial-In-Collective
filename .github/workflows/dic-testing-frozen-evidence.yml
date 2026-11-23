@@ -9,6 +9,8 @@ on:
       - 'scripts/release/verify-testing-frozen-evidence.mjs'
       - 'tests/verify-testing-frozen-evidence.test.mjs'
       - 'docs/TESTING_3889_ACTIVE_CANDIDATE.json'
+      - 'scripts/release/verify-testing-three-sql-source.mjs'
+      - 'tests/verify-testing-three-sql-source.test.mjs'
   push:
     branches: [main]
     paths:
@@ -16,6 +18,8 @@ on:
       - 'scripts/release/verify-testing-frozen-evidence.mjs'
       - 'tests/verify-testing-frozen-evidence.test.mjs'
       - 'docs/TESTING_3889_ACTIVE_CANDIDATE.json'
+      - 'scripts/release/verify-testing-three-sql-source.mjs'
+      - 'tests/verify-testing-three-sql-source.test.mjs'
   workflow_run:
     workflows:
       - DIC approval, implementation and continuity contract
@@ -39,6 +43,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
@@ -51,3 +56,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DIC_COMPLETED_SOURCE_SHA: ${{ github.event.workflow_run.head_sha || '' }}
         run: node scripts/release/verify-testing-frozen-evidence.mjs docs/TESTING_3889_ACTIVE_CANDIDATE.json
+      - name: Read three remaining SQL merge-introduction sources without provider data
+        if: github.event_name != 'workflow_run'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test tests/verify-testing-three-sql-source.test.mjs
+          git fetch --no-tags origin +refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation
+          source_sha="$(git rev-parse refs/remotes/origin/development/backend-foundation)"
+          node scripts/release/verify-testing-three-sql-source.mjs "$source_sha"
+          live_sha="$(git ls-remote --heads origin refs/heads/development/backend-foundation | cut -f1)"
+          test "$source_sha" = "$live_sha"
