@@ -73,7 +73,7 @@ function clearOfflineDenial(owner){
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null,appliedRecommendationValues:{}});
-  this.localStartupOwner=null;this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
+  this.localStartupOwner=null;this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;this.startupPreviewPending=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.editCoffeeDifferences=[];
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -116,8 +116,13 @@ class CloudApp {
   if(event==='PASSWORD_RECOVERY')this.recovery=true;
   this.identity=user;
   // Remove the former account's rendered records before the next network read.
-  if(changed||event==='SIGNED_OUT'||event==='PASSWORD_RECOVERY')this.render();
-  if(user&&event!=='TOKEN_REFRESHED')this.connect().catch(err=>this.error(err));
+  // INITIAL_SESSION/SIGNED_IN can arrive before the local-cache first paint.
+  // Do not let its admission RPC win the race and suppress cached coffees.
+  // Sign-out and password recovery must still invalidate immediately.
+  const previewFirst=this.startupPreviewPending&&user&&!this.recovery&&
+   (event==='INITIAL_SESSION'||event==='SIGNED_IN');
+  if((changed||event==='SIGNED_OUT'||event==='PASSWORD_RECOVERY')&&!previewFirst)this.render();
+  if(user&&event!=='TOKEN_REFRESHED'&&!previewFirst)this.connect().catch(err=>this.error(err));
  }
  // Only verified server-backed aggregates; never cache an Admin session or member records.
  adminAttentionBadge(){
@@ -178,6 +183,7 @@ class CloudApp {
   sheet.addEventListener('cancel',ev=>ev.preventDefault());
   sheet.addEventListener('close',()=>this.syncReviewDialog());
   reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
+  this.startupPreviewPending=true;
   this.client.onAuthChange((event,user)=>this.authChanged(event,user));
   const epoch=this.epoch;
   let localSession=null;
@@ -188,12 +194,16 @@ class CloudApp {
     this.identity=localSession;
   }catch{/* Missing local session is a normal signed-out state. */}
   if(this.identity){
-   // Previously admitted, same-owner local data can paint without a network roundtrip.
-   // Server admission is still checked in the background before ANY cloud operation.
+   // SDK-valid same-owner cached coffees paint BEFORE the access RPC.
+   // This local preview remains read-only until server admission succeeds.
+   let painted=false;
    if(localSession?.id===this.identity.id&&globalThis.navigator?.onLine!==false)
-    await this.openCachedWhileChecking(this.identity,this.epoch);
+    painted=await this.openCachedWhileChecking(this.identity,this.epoch);
+   this.startupPreviewPending=false;
+   if(!painted&&!this.status)this.render();
    this.connect().catch(err=>this.error(err));
   }else{
+   this.startupPreviewPending=false;
    this.render();
    // A session refresh may still be pending. Recover identity asynchronously,
    // after displaying the public sign-in view; never block the initial paint.
