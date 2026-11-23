@@ -1,3 +1,11 @@
+## November 23, 2026 UTC — #455 R458 optional tracked-temperature empty metric SAFE merge; TESTING [skip netlify]
+
+- [PR #3837](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3837) nonforce [skip netlify] squash merged at [d772b433be4e5d01ed734699ecc2a89685cf4c12](https://github.com/Schulzet3/The-Dial-In-Collective/commit/d772b433be4e5d01ed734699ecc2a89685cf4c12). In `site/lib/ui.js::recipeGrid`, optional tracked missing/invalid/nonfinite temperature now visibly says **Not available**, with no orphan °F/°C; valid F/C and temperature-tracking-off behavior unchanged. Same-commit issue #455 R458 journal, four new actual-module synthetic negative/positive Node22 regressions and TESTING queue; no science policy, measurements or member data change.
+- Final PR head four R458 cases PASS (Node22 45107791763). Nine applicable final-head workflows SUCCESS: 45107791763/45107791948/45107791797/45107791899/45107791806/45107791801/45107791810/45107791777/45107791765. Original603 45107791830 **SKIPPED, NOT PASS**. Exact merged-source Node22 45107979266, cloud UX/browser/mobile/offline 45107979195, governance 45107979235 and shared #33 45107979230/45107979307/45107979200 all **COMPLETED SUCCESS**. Four merged Git blobs equal reviewed PR head.
+- Queue `DIC-Q-455-r458-optional-temperature-metric` remains **TESTING**, requires independent #3347 five-check isolated frozen READY certification; no separate owner Publish, provider action or deployment. Original S019 and measured same-coffee next-shot five-taste effectiveness remain unverified; #455 OPEN.
+
+---
+
 ## November 23, 2026 UTC — #455 R456 Log/Edit measured grinder fractions SAFE development merge; TESTING [skip netlify]
 
 - [PR #3829](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3829) nonforce squash merged [source `b6468c6c7bf4fbc59da1f91222eff9c27d222585`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/b6468c6c7bf4fbc59da1f91222eff9c27d222585) with explicit merge-level `[skip netlify]`, four exact app/test/journal/queue blobs matched passing PR head. Only measured Log/Edit Shot grinder input's native `step` changed from `.1` to `any`; all five tastes, historical measured fractions, notes, offline/private records, style/feed, validation and Locked suggested tenth grid unchanged. Form is `novalidate`; no proof of blocked Save or better espresso outcome.
