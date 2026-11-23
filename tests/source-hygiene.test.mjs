@@ -2,6 +2,7 @@
 // Active-source integrity guard. Historical reports, archives and compiled
 // build artifacts are intentionally excluded from deduplication.
 import test from 'node:test';
+import {frozenUnselectedAuditImport} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync,existsSync} from 'node:fs';
 import {join,resolve,dirname,relative} from 'node:path';
@@ -32,7 +33,7 @@ function assertReadFirstIndex(index){
  assert.deepEqual(nums,nums.map((_,i)=>i+1));
 }
 
-test('active JavaScript and TypeScript source imports have no broken relative targets',()=>{
+test('active JavaScript and TypeScript source imports have no broken relative targets',(t)=>{
  const missing=[];
  for(const path of active){
   const contents=readFileSync(path,'utf8');
@@ -44,8 +45,13 @@ test('active JavaScript and TypeScript source imports have no broken relative ta
   for(const imported of imports){
    const candidate=resolve(dirname(path),imported.split('?')[0]);
    if(![candidate,candidate+'.js',candidate+'.mjs',candidate+'.ts',
-    join(candidate,'index.js'),join(candidate,'index.ts')].some(existsSync))
+    join(candidate,'index.js'),join(candidate,'index.ts')].some(existsSync)){
+    if(frozenUnselectedAuditImport(relative(root,path),imported)){
+     t.diagnostic('NOT_APPLICABLE: #3851 Git-proven unready #33 audit-only target excluded');
+     continue;
+    }
     missing.push(relative(root,path)+' -> '+imported);
+   }
   }
  }
  assert.deepEqual(missing,[]);

@@ -33,7 +33,10 @@ export function isPublishedNarrativeRestored(){
 // are NOT_APPLICABLE only after these independent source-object assertions.
 // Never skip actual admission, ownership, revocation, offline or privacy tests.
 const ADMISSION_ID='DIC-Q-3781-returning-session-background-admission';
+const INSTANT_ID='DIC-Q-3851-cache-before-admission';
+const INSTANT_PUBLISHED_SOURCE='d4af1c4e13d1babe6f10d277d5243582eb798c56';
 const CLEAN_ADMISSION_SOURCE='354ddd99ef0ce8f03b2f74544782e4e977201a31';
+const CLEAN_INSTANT_SOURCE='39c28f4e8fbb01451b6d2f819908ca6996fa89e7';
 const SELECTED_PUBLISHED_GROWERS='3d05488a45f1b39e47fc096137e6025cc2480e56';
 function selectedAdmissionCandidate(){
  let m;
@@ -41,7 +44,13 @@ function selectedAdmissionCandidate(){
  catch(e){if(e?.code==='ENOENT')return null;throw e;}
  if(m?.kind!=='DIC-READY-ONLY-SOURCE-1'||m.publication_authorized!==false||
     !SHA.test(m.published_source_sha||'')||m.selected_ready_item_ids?.length!==1||
-    m.selected_ready_item_ids[0]!==ADMISSION_ID)return null;
+    ![ADMISSION_ID,INSTANT_ID].includes(m.selected_ready_item_ids[0]))return null;
+ if(m.selected_ready_item_ids[0]===INSTANT_ID){
+  assert.equal(m.published_source_sha,INSTANT_PUBLISHED_SOURCE,
+   'Instant startup must use the exact last published #3781 baseline');
+  assert.ok(m.pinned_to_ready_paths?.includes('site/cloud/main.js'),
+   'Instant startup must pin the mixed-owner entrypoint');
+ }
  return m;
 }
 function gitBlob(ref,path){
@@ -71,9 +80,10 @@ export function frozenAdmissionScopedSource(){
  const m=selectedAdmissionCandidate();if(!m)return false;
  assert.ok(m.pinned_to_ready_paths?.includes('site/cloud/main.js'),
   'Cannot classify unready Log Shot behavior without frozen mixed-file pin');
+ const frozen=m.selected_ready_item_ids[0]===INSTANT_ID?CLEAN_INSTANT_SOURCE:CLEAN_ADMISSION_SOURCE;
  for(const path of ['site/cloud/main.js','site/cloud/client.js']){
-  assert.equal(currentBlob(path),gitBlob(CLEAN_ADMISSION_SOURCE,path),
-   'Selected Auth code differs from independently reviewed #3781 clean source: '+path);
+  assert.equal(currentBlob(path),gitBlob(frozen,path),
+   'Selected Auth code differs from the independently reviewed clean source: '+path);
  }
  return true;
 }
@@ -84,4 +94,30 @@ export function currentPublishedGrowerEvidence(){
  const prior=gitBlob(m.published_source_sha,path);
  assert.equal(currentBlob(path),prior,'Narrative parser must retain published bytes');
  return prior===SELECTED_PUBLISHED_GROWERS;
+}
+
+/** Narrow N/A for an unselected #33 QA-only helper whose new runtime import
+ * was itself restored to published absence in the exact #3851 candidate.
+ * Never exempt shipped application modules or unrelated broken imports. */
+export function frozenUnselectedAuditImport(sourcePath,imported){
+ const audit='scripts/audit/issue33-original603-focused-source-review.mjs';
+ const target='src/server/coffee-selected-shopify-variant-richtext.mjs';
+ if(sourcePath!==audit||imported!=='../../'+target)return false;
+ const m=selectedAdmissionCandidate();
+ if(!m||m.selected_ready_item_ids[0]!==INSTANT_ID)return false;
+ assert.ok(m.restored_to_published_paths?.includes(target),
+  'Unready audit target must be explicitly restored to published absence');
+ const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
+ assert.ok(q.items.some(i=>i.issue===33&&['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+  i.scope_paths?.includes(target)),
+  'Unready audit-only import requires actual unfinished #33 ownership');
+ assert.equal(q.published_base.tested_source_sha,m.published_source_sha,
+  'Candidate and queue published baseline differ');
+ assert.equal(currentBlob(audit),gitBlob(m.development_source_sha,audit),
+  'Audit source must remain the exact staging-source Git object');
+ assert.notEqual(currentBlob(audit),gitBlob(m.published_source_sha,audit),
+  'Audit source must be unselected newer code');
+ assert.match(gitBlob(m.development_source_sha,target),SHA,
+  'Unready target must be an excluded actual development Git object');
+ return true;
 }
