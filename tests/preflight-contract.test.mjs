@@ -55,3 +55,31 @@ test('removing Git-object receipt audit from continuity is rejected',()=>{
  assert.match(change('scripts/audit/verify-commit-checkpoint.mjs',s=>s.replace('auditPreflightReceipt(','bypassReceipt(')).join(' '),/preflight Git receipt gate missing/);
  assert.match(change('docs/ai/PREFLIGHT.md',s=>s.replace('DIC_PREFLIGHT_VERIFIED','MISSING_EVIDENCE')).join(' '),/missing mandatory contract/);
 });
+
+import {verifyProspectiveReadyTestScope} from './helpers/release-published-restoration.mjs';
+test('#3889 prospective published-source QA excludes only exact proven unselected work',()=>{
+ const id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const migration='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
+ const dev='a'.repeat(40),pub='2d22d448160d428a977f06482323646b92818fcf';
+ const merge='5b5159823908f3ae660f45b3ad93c096be586aec';
+ const m={schema_version:1,kind:'DIC-READY-ONLY-SOURCE-1',publication_authorized:false,
+  candidate_branch:'release-candidates/prospect3889-'+'a'.repeat(20),
+  development_source_sha:dev,published_source_sha:pub,selected_ready_item_ids:[id],
+  restored_to_published_paths:['site/cloud/main.js'],restored_unpublished_workflow_paths:[],
+  prospective_ready_preview:{status:'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING',
+   selected_id:id,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+   identity_sha256:'b'.repeat(64)}};
+ const q={published_base:{tested_source_sha:pub},items:[{id,issue:509,state:'READY',
+  merged_source_sha:merge,scope_paths:[migration],tests:['existing native CI'],
+  ci_runs:[45252457892],blockers:[]}]};
+ const opts={manifest:m,queue:q,branch:'refs/heads/'+m.candidate_branch,
+  commitParent:dev,sourceObjectAt:()=> '84cecbe69143b2170aa97a851198cc35b9926303'};
+ assert.equal(verifyProspectiveReadyTestScope(opts),true);
+ assert.equal(verifyProspectiveReadyTestScope({...opts,manifest:{}}),false);
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,manifest:{...m,publication_authorized:true}}));
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,manifest:{...m,candidate_branch:'release-candidates/unreviewed'}}));
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,commitParent:'c'.repeat(40)}));
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,queue:{...q,items:[{...q.items[0],state:'TESTING'}]}}));
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,queue:{...q,items:[...q.items,{id:'unready',state:'READY'}]}}));
+ assert.throws(()=>verifyProspectiveReadyTestScope({...opts,sourceObjectAt:()=> 'f'.repeat(40)}));
+});

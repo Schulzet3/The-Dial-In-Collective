@@ -65,6 +65,7 @@ function currentBlob(path){
  return createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
 }
 export function frozenExcludedReadySource(paths){
+ if(frozenExcludedProspectiveSource(paths))return true;
  if(frozenExcludedTestingSource(paths))return true;
  const m=selectedAdmissionCandidate();if(!m)return false;
  assert.ok(Array.isArray(paths)&&paths.length>0);
@@ -79,6 +80,7 @@ export function frozenExcludedReadySource(paths){
 }
 export function frozenAdmissionScopedSource(){
  if(frozenExcludedTestingSource(['site/cloud/main.js','site/cloud/client.js']))return true;
+ if(frozenExcludedProspectiveSource(['site/cloud/main.js','site/cloud/client.js']))return true;
  const m=selectedAdmissionCandidate();if(!m)return false;
  assert.ok(m.pinned_to_ready_paths?.includes('site/cloud/main.js'),
   'Cannot classify unready Log Shot behavior without frozen mixed-file pin');
@@ -90,7 +92,7 @@ export function frozenAdmissionScopedSource(){
  return true;
 }
 export function currentPublishedGrowerEvidence(){
- const m=selectedAdmissionCandidate();if(!m)return false;
+ const m=selectedAdmissionCandidate()||prospectiveCandidate();if(!m)return false;
  const path='src/server/coffee-narrative-evidence.mjs';
  if(!m.restored_to_published_paths?.includes(path))return false;
  const prior=gitBlob(m.published_source_sha,path);
@@ -121,6 +123,82 @@ export function frozenUnselectedAuditImport(sourcePath,imported){
   'Audit source must be unselected newer code');
  assert.match(gitBlob(m.development_source_sha,target),SHA,
   'Unready target must be an excluded actual development Git object');
+ return true;
+}
+
+
+const PROSPECTIVE_ID='DIC-Q-509-stale-project-shot-comment-20261122';
+const PROSPECTIVE_MERGE='5b5159823908f3ae660f45b3ad93c096be586aec';
+const PROSPECTIVE_MIGRATION='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
+const PROSPECTIVE_MIGRATION_BLOB='84cecbe69143b2170aa97a851198cc35b9926303';
+const PROSPECTIVE_BASELINE='46304f47eb0e78fac8c7845155af86080900b3c4';
+const PROSPECTIVE_PUBLISHED='2d22d448160d428a977f06482323646b92818fcf';
+// Only allow NOT_APPLICABLE test branches when the one unchanged selected
+// migration and every excluded source are independently Git-object proven.
+// This is a QA helper; it cannot certify READY or grant publication.
+export function verifyProspectiveReadyTestScope({manifest,queue,branch,commitParent,sourceObjectAt}={}){
+ const p=manifest?.prospective_ready_preview;
+ if(p===undefined)return false;
+ assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
+ assert.equal(manifest.schema_version,1);
+ assert.equal(manifest.publication_authorized,false);
+ assert.equal(p.status,'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING');
+ assert.equal(p.selected_id,PROSPECTIVE_ID);
+ assert.equal(p.baseline_queue_blob,PROSPECTIVE_BASELINE);
+ assert.match(p.identity_sha256||'',/^[a-f0-9]{64}$/);
+ assert.match(manifest.candidate_branch||'',/^release-candidates\/prospect3889-[a-f0-9]{20}$/);
+ assert.deepEqual(manifest.selected_ready_item_ids,[PROSPECTIVE_ID]);
+ assert.match(manifest.development_source_sha||'',SHA);
+ assert.equal(manifest.published_source_sha,PROSPECTIVE_PUBLISHED);
+ assert.equal(commitParent,manifest.development_source_sha);
+ if((branch||'').startsWith('refs/heads/release-candidates/'))
+  assert.equal(branch,'refs/heads/'+manifest.candidate_branch);
+ assert.equal(queue?.published_base?.tested_source_sha,PROSPECTIVE_PUBLISHED);
+ assert.ok(Array.isArray(queue.items));
+ const ready=queue.items.filter(x=>x.state==='READY');
+ assert.deepEqual(ready.map(x=>x.id),[PROSPECTIVE_ID]);
+ const item=ready[0];
+ assert.equal(item.issue,509);
+ assert.equal(item.merged_source_sha,PROSPECTIVE_MERGE);
+ assert.deepEqual(item.scope_paths,[PROSPECTIVE_MIGRATION]);
+ assert.ok(Array.isArray(item.tests)&&item.tests.length>0);
+ assert.ok(Array.isArray(item.ci_runs)&&item.ci_runs.length>0);
+ assert.deepEqual(item.blockers,[]);
+ assert.equal(typeof sourceObjectAt,'function');
+ for(const ref of ['HEAD',PROSPECTIVE_MERGE,manifest.development_source_sha])
+  assert.equal(sourceObjectAt(ref,PROSPECTIVE_MIGRATION),PROSPECTIVE_MIGRATION_BLOB,
+   'prospective candidate cannot alter the sole selected SQL migration');
+ assert.ok(Array.isArray(manifest.restored_to_published_paths));
+ assert.ok(Array.isArray(manifest.restored_unpublished_workflow_paths));
+ return true;
+}
+let prospectiveCache;
+function prospectiveCandidate(){
+ if(prospectiveCache!==undefined)return prospectiveCache;
+ let m;
+ try{m=JSON.parse(readFileSync(new URL('../../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}
+ catch(e){if(e?.code==='ENOENT')return prospectiveCache=null;throw e;}
+ if(m?.prospective_ready_preview===undefined)return prospectiveCache=null;
+ const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
+ const parent=execFileSync('git',['rev-parse','HEAD^'],{encoding:'utf8',timeout:15000}).trim();
+ verifyProspectiveReadyTestScope({manifest:m,queue:q,branch:process.env.GITHUB_REF||'',
+  commitParent:parent,sourceObjectAt:gitBlob});
+ return prospectiveCache=m;
+}
+function frozenExcludedProspectiveSource(paths){
+ const m=prospectiveCandidate();if(!m)return false;
+ assert.ok(Array.isArray(paths)&&paths.length>0);
+ for(const path of paths){
+  assert.notEqual(path,PROSPECTIVE_MIGRATION,
+   'selected prospective migration tests must NEVER be excluded');
+  const published=gitBlob(m.published_source_sha,path);
+  const developed=gitBlob(m.development_source_sha,path);
+  assert.ok(m.restored_to_published_paths.includes(path)||
+    m.restored_unpublished_workflow_paths.includes(path)||developed===published,
+    'only independently restored or already published unselected code may be N/A: '+path);
+  assert.equal(currentBlob(path),published,
+   'prospective source must exactly match published Git object: '+path);
+ }
  return true;
 }
 
