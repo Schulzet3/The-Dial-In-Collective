@@ -18607,8 +18607,8 @@
       "id": "DIC-Q-3851-cache-before-admission",
       "issue": 3851,
       "title": "Paint returning member's same-owner cached coffee before admission request; defer blocking vendor parse",
-      "state": "READY",
-      "merged_source_sha": "ed2afb54bd16e4e68c960f53dc71dc418e04a35a",
+      "state": "TESTING",
+      "merged_source_sha": "a9303f97d4aa0ae4e6ead4fe64283537821c8fc9",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud.html"
@@ -18620,15 +18620,16 @@
         "PR #3852 exact Auth/SQL/cloud/mobile CI successful; #3851 frozen QA repair pending new exact source CI"
       ],
       "ci_runs": [
-        45125569707,
-        45125569717,
-        45125569668,
-        45125569670,
-        45125569758
+        45127983275,
+        45127983224,
+        45127983238,
+        45127983251
       ],
-      "blockers": [],
+      "blockers": [
+        "First publisher #3851 request 45129045714 FAILED before claim due QA-only cited merge SHA; new single first-parent app+QA pin a9303f97 verified, requires frozen source receipt, five new exact candidate push CI jobs, fresh certificate and distinct grant."
+      ],
       "owner_source": "Owner direct November 22 2026 23:29 MST: build, test, implement and deploy faster cold start",
-      "notes": "PROVISIONAL NONPUBLISHING BRANCH ONLY; live development queue remains TESTING. Root-cause previous candidate 22df8844 validation FAILED due #3781-only N/A proof and one excluded #33 audit helper. New reviewed clean source ed2afb54 contains only startup app diff + source-bound QA fixtures; requires NEW isolated candidate five SUCCESS at exact SHA. This is not a READY release or owner future publication authority."
+      "notes": "Fix #3851 remains tested, unpublishing while recertifying NEW exact source provenance. GitHub old controller run45129045714 failed-before-claim; GitHub release ref and Netlify old ready/current unchanged, consumed ledger does not claim previous grant. Clean one-commit merged source a9303f97 directly from published baseline, exact 5 previously tested code/test Git blobs; status TESTING until new immutable candidate five jobs pass."
     }
   ],
   "history": [

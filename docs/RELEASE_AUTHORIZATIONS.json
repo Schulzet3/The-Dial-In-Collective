@@ -1623,7 +1623,7 @@
       "id": "DIC-20261123-INSTANT-3851",
       "tested_source_sha": "6ee5bbeb2be9cc4c03b49d2bc3a1eb4388718df6",
       "owner_approved": true,
-      "status": "APPROVED",
+      "status": "SUPERSEDED",
       "production_branch": "release/production",
       "max_publications": 1,
       "approved_at_utc": "2026-11-23T07:07:45Z",
@@ -1638,7 +1638,9 @@
         "GitHub branch release-candidates/ready3347-46b08c73d86cc4574552 immutable candidate 6ee5bbeb2be9cc4c03b49d2bc3a1eb4388718df6: approval native run45127983275 SUCCESS, isolated SQL45127983224 SUCCESS, cloud-tests and mobile-browser-qa run45127983238 SUCCESS, validate full Node/lint run45127983251 SUCCESS; 5 exact SHA push job-check objects, N/A tests not PASS.",
         "Official read-only source receipt45127811707 verified candidate Git tree98c2f3598710025ef9ecc7b70d912bc75d729eab, one parent prep54f9f1d42, 520 isolation entries restoring unpublished app/CI/tests; only #3851 selected, prior failed candidate22df8844 refused. Development READY exact queue fingerprint 848bfd8324435eae4bcb154716973d5f7fd6df92284a015de9dd5164088657e4; independent approval push run45128729813 verified READY gate.",
         "Non-destructive no database schema or Edge changes. Existing verified encrypted GitHub backup run44920698063 SUCCESS, artifact14713443972 36,493,363 bytes SHA256 6df7ed3f5588e6339c8c61c1cbd2ad565d41d656e2613d0825a761f6735d1574, Drive file1LO01ZdKReJEqqoxRoCKtgB96Ik-9NbRn matched exact bytes owner-private folder1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf November 21 15:44Z; no fresh DB contents asserted."
-      ]
+      ],
+      "superseded_by": "DIC-20261123-INSTANT-3851-R2",
+      "superseded_reason": "First chat controller Actions 45129045714 failed BEFORE any Git/Netlify claim; cited ed2afb54 QA-only first-parent diff contained no deployable change. Release ref still 5ef0e190 and consumption ledger has no DIC-20261123-INSTANT-3851. New source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 includes all tested app+QA bytes in one first-parent diff. Old request is permanently invalid and must not be replayed; only fresh source+five CI and unique one-use grant eligible."
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
