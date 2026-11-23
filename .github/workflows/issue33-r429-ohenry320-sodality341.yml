@@ -1,0 +1,56 @@
+name: DIC Issue33 R429 original320 341 selected official evidence
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r429-ohenry320-sodality341.yml'
+      - 'scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs'
+      - 'tests/issue33-r429-ohenry320-sodality341.test.mjs'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r429-ohenry320-sodality341.yml'
+      - 'scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs'
+      - 'tests/issue33-r429-ohenry320-sodality341.test.mjs'
+permissions:
+  contents: read
+jobs:
+  current-selected-320-341:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify exact source and focused positive and hostile checks
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+          node --check scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs
+          node --test tests/issue33-r429-ohenry320-sodality341.test.mjs
+      - name: Required guarded official selected HTML, parser and unsaved UI
+        env:
+          DIC_R429_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '320,341'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r429
+        run: GITHUB_SHA="$DIC_R429_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independently rehash seller HTML and enforce selected fact limits
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_R429_RUN: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r429
+        run: node scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs
+      - name: Retain bounded private first-party source for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r429-selected-current
+          path: /tmp/dic33-r429/
+          retention-days: 1
+          if-no-files-found: warn
