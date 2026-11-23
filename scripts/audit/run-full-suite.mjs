@@ -32,8 +32,10 @@ export function selectFullSuiteShard(plan,shard='all'){
  // Native HIGH #3761: validate 340/91.4s, cloud 339/55s, approval 135/32.7s.
  // After prior redistribution, actual 45036645973 remained validate 84s,
  // cloud 59s and approval 48s plus protected serial.
- // Shift 40 more of ~814 files (23 cloud, 17 approval); no omissions,
- // extra runner/build, duplicate tests or protected serial changes.
+ // Historical validate-tail transfer remains; newest merged HIGH source f3b38fb
+ // measured cloud 94.8s, validate 48.4s + security, approval 45.6s.
+ // Transfer every fourth original cloud slot to validate and every fourth
+ // to approval; keep all corpus files, one build and protected serial unchanged.
  const parallel=plan.parallel.filter((_,i)=>{
   if(lanes===3){
    const original=i%3;
@@ -43,7 +45,12 @@ export function selectFullSuiteShard(plan,shard='all'){
     if(slot%12===3||slot%8===4)return selected===1;
     return selected===0;
    }
-   if(original===1)return selected===1;
+   if(original===1){
+    // Two of each four formerly cloud-owned files use idle HIGH validate/approval.
+    // Keep each file on exactly one existing runner; never change security serial.
+    const lane=slot%4===0?0:slot%4===2?2:1;
+    return selected===lane;
+   }
    const quarter=slot%4;
    return (quarter===0?(slot%16===0?2:0):quarter===1?1:2)===selected;
   }
