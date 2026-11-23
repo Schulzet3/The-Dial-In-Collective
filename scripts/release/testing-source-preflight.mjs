@@ -56,6 +56,13 @@ export function analyzeTestingBaseline({baselineQueue,liveQueue,developmentSha,
      else if(!paths.some(p=>first.includes(p)))reason='NO_OWNED_FIRST_PARENT_DEPLOYABLE_CHANGE';
      else if((untrackedMergedPaths=sorted(first.filter(p=>DEPLOYABLE.test(p)&&!paths.includes(p)))).length)
       reason='MERGED_DEPLOYABLE_SCOPE_UNDECLARED';
+     // A package-only source pin must not omit the scripts, official CI, or
+     // acceptance tests changed in that SAME implementation merge. They are
+     // the executable/tested feature, even when not classified as app runtime.
+     else if(paths.includes('package.json')&&
+       (untrackedMergedPaths=sorted(first.filter(p=>
+        /^(?:scripts\/|\.github\/workflows\/|tests\/)/.test(p)&&!paths.includes(p)))).length)
+      reason='MERGED_PACKAGE_EXECUTION_OR_CI_SCOPE_UNDECLARED';
      else {
       selectedObjects=paths.map(p=>({path:p,merged:sourceObjectAt(sha,p),
        live:sourceObjectAt(developmentSha,p),published:sourceObjectAt(published,p)}));
