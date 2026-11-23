@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectedWestrockFailures as problems} from '../scripts/audit/issue33-r427-westrock322-323-check.mjs';
+import {selectedWestrockFailures as problems,selectedWestrockProductJsonRoast as roastProof} from '../scripts/audit/issue33-r427-westrock322-323-check.mjs';
 
 const campo="Raiz Campo Sur Whole Bean Coffee Pack SKU#: 37096. Campo sur is inspired by the Brazilian countryside where the majority of the world's coffee is grown. What's better than spending your morning overlooking the countryside with a warm cup of rich coffee in your hands watching the sun rise over the hills.";
-const cb={name:'Raiz Campo Sur Whole Bean Coffee Pack'};
+const cb={name:'Raiz Campo Sur Whole Bean Coffee Pack',roast_level:'Medium'};
 const palmera="Raiz Palmera Whole Bean Coffee Pack SKU#: 37095. Palmera reminds us of those warm, sunny days with a cool breeze. This 100% Central/South American Arabica is blended for a medium roast and body, with a nice sweet caramel flavor, and a nutty lingering finish that is perfect for your iced or hot drinks.";
 const pb={name:'Raiz Palmera Whole Bean Coffee Pack',origin:'Central America, South America',
   roast_level:'Medium',tasting_notes:'sweet caramel, nutty'};
@@ -61,4 +61,37 @@ test('322 and 323 seller review and other product contamination forbidden',()=>{
 });
 test('Neither unrelated corpus index nor invalid coffee number qualifies',()=>{
   assert.deepEqual(problems(324,palmera,pb),['unknown_original603_case']);
+});
+
+const mkShopify=(id,title,handle,tag='Medium Roast',vendor='S&D Coffee & Tea')=>
+  '<script type="application/json" id="ProductJson-'+id+'">'+JSON.stringify({
+    id,title,handle,vendor,tags:['Coffee',tag,'Sustainability']})+'</script>';
+const opts={name:'Raiz Campo Sur Whole Bean Coffee Pack',roaster:'S&D Coffee & Tea',
+  source_url:'https://shop.westrockcoffee.com/products/raiz-campo-sur-whole-bean-coffee'};
+test('322 matching selected ProductJson tag, vendor, handle, unique id proves Medium',()=>{
+  assert.deepEqual(roastProof(mkShopify(7151264497851,opts.name,
+    'raiz-campo-sur-whole-bean-coffee'),opts),{
+      value:'Medium',source:'exact_selected_shopify_ProductJson_id_title_handle_vendor_tags',
+      product_id:7151264497851});
+});
+test('322 another product handle and mismatched vendor cannot borrow Medium',()=>{
+  assert.equal(roastProof(mkShopify(7151264497851,opts.name,'palmera'),opts),null);
+  assert.equal(roastProof(mkShopify(7151264497851,opts.name,
+    'raiz-campo-sur-whole-bean-coffee','Medium Roast','Other Coffee'),opts),null);
+});
+test('322 altered product id and contradictory roast tags fail closed',()=>{
+  assert.equal(roastProof(mkShopify(123,opts.name,
+    'raiz-campo-sur-whole-bean-coffee').replace('ProductJson-123','ProductJson-456'),opts),null);
+  assert.equal(roastProof(mkShopify(123,opts.name,'raiz-campo-sur-whole-bean-coffee')
+    .replace('"Sustainability"','"Dark Roast"'),opts),null);
+});
+test('322 no chosen Medium or duplicated matching inline ProductJson is not proof',()=>{
+  assert.equal(roastProof(mkShopify(123,opts.name,
+    'raiz-campo-sur-whole-bean-coffee','Medium Body'),opts),null);
+  const a=mkShopify(123,opts.name,'raiz-campo-sur-whole-bean-coffee');
+  assert.equal(roastProof(a+a,opts),null);
+});
+test('322 canonical Medium must exist alongside the exact literal tag',()=>{
+  assert.ok(problems(322,campo,{...cb,roast_level:''})
+    .includes('selected_campo_sur_exact_product_tag_roast_omitted_or_wrong'));
 });

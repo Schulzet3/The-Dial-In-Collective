@@ -14,6 +14,35 @@ const decode=x=>String(x??'').replace(/&(?:amp|#0*38|#x0*26);/giu,'&')
   .replace(/&(?:nbsp|#0*160|#x0*a0);/giu,' ');
 const selectedText=html=>decode(productMarkup(html).replace(/<[^>]*>/gu,' '))
   .replace(/\s+/gu,' ').trim();
+
+/** Identity-bound selected Shopify ProductJson only; unrelated product cards never count. */
+export function selectedWestrockProductJsonRoast(html,{name='',roaster='',source_url=''}={}){
+  if(typeof html!=='string'||html.length>2_000_000)return null;
+  let handle;
+  try{
+    const u=new URL(source_url);
+    if(u.protocol!=='https:'||u.username||u.password||u.port)return null;
+    handle=u.pathname.match(/^\/products\/([a-z0-9][a-z0-9-]{1,120})\/?$/iu)?.[1];
+  }catch{return null}
+  if(!handle||!name||!roaster)return null;
+  const matched=[];
+  for(const m of html.matchAll(/<script\b([^>]{0,600})>([\s\S]{0,200000}?)<\/script>/giu)){
+    const attr=m[1],sid=attr.match(/\bid\s*=\s*["']ProductJson-(\d+)["']/iu);
+    if(!sid||!/\btype\s*=\s*["']application\/json["']/iu.test(attr))continue;
+    let product;try{product=JSON.parse(m[2].trim())}catch{return null}
+    if(!product||!Number.isSafeInteger(product.id)||String(product.id)!==sid[1]||
+       norm(product.title)!==norm(name)||String(product.handle||'').toLowerCase()!==handle.toLowerCase()||
+       norm(product.vendor)!==norm(roaster))continue;
+    matched.push(product);
+  }
+  if(matched.length!==1||!Array.isArray(matched[0].tags))return null;
+  const product=matched[0],roasts=product.tags.filter(x=>typeof x==='string'&&
+    /^(?:light|medium|dark|medium-light|medium-dark) roast$/iu.test(x.trim()));
+  if(roasts.length!==1||roasts[0].trim().toLowerCase()!=='medium roast')return null;
+  return {value:'Medium',source:'exact_selected_shopify_ProductJson_id_title_handle_vendor_tags',
+    product_id:product.id};
+}
+
 const products={
   322:{name:'Raiz Campo Sur Whole Bean Coffee Pack',
     url:'https://shop.westrockcoffee.com/products/raiz-campo-sur-whole-bean-coffee'},
@@ -38,8 +67,10 @@ export function selectedWestrockFailures(number,selected,fields={}){
       errors.push('unpublished_campo_sur_selected_coffee_spec_invented');
     if(f&&/\b(?:brazil|chocolate|caramel|nutty|fruity|almond|citrus|rich coffee)\b/iu.test(f))
       errors.push('foreign_flavor_or_adjective_as_campo_sur_tasting_notes');
-    // An old frozen Medium is NOT independently verified as a direct roast
-    // here; metadata/product tag requires separate identity-bound proof.
+    if(fields.roast_level!=='Medium')
+      errors.push('selected_campo_sur_exact_product_tag_roast_omitted_or_wrong');
+    // Verify the selected Shopify ProductJson id/title/handle/vendor/Medium Roast
+    // identity separately against raw HTML; never inherit frozen medium alone.
   }else{
     if(!/100% central\s*\/\s*south american arabica/iu.test(s)||
        !/blended for a medium roast and body/iu.test(s)||
@@ -97,6 +128,11 @@ if(process.env.DIC_ISSUE33_R427_RUN==='1'){
       'tasting_notes','roast_level','elevation_m','decaffeination_method','release_label'])
       need(String(parser?.fields?.[key]??'')===String(r.current_fields?.[key]??''),
         'raw_html_reparse_field_parity_'+number+'_'+key);
+    const exactRoast=selectedWestrockProductJsonRoast(html,{
+      name:r.current_fields?.name||'',roaster:r.current_fields?.roaster||'',
+      source_url:r.final_url||expected.url});
+    need(exactRoast?.value==='Medium'&&r.current_fields?.roast_level==='Medium',
+      'missing_matching_selected_shopify_productjson_medium_roast_'+number);
     for(const err of selectedWestrockFailures(number,selectedText(html),r.current_fields||{}))
       failures.push(number+'_'+err);
     need(!parser?.roaster_recipe?.dose_g&&!parser?.roaster_recipe?.yield_g,
@@ -106,7 +142,7 @@ if(process.env.DIC_ISSUE33_R427_RUN==='1'){
       fields:r.current_fields,conflicts:r.conflicts||[],
       add_coffee_unsaved:r.add_coffee_ui_rendered,source_review:r.source_review_rendered,
       // Audit uncertainty, not an asserted seller-backed fixed roast:
-      ...(number===322?{campo_sur_roast_source_independently_certified:false}:{})});
+      selected_medium_roast_product_json:exactRoast});
   }
   const result={source_sha:head,cases:[322,323],manual_certified:0,provider_writes:0,
     failures,records:out};
