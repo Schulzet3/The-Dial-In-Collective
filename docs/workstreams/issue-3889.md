@@ -115,3 +115,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e 
 
 ## November 23 — Correct literal shell/regex escaping before first hosted prospective source run [skip netlify]
 - Repair main receipt producer to print a real newline rather than trailing literal backslash-n and ensure focused workflow permission assertion tests actual YAML whitespace. This is strictly source/QA preflight before PR CI, not candidate CI or READY evidence; no provider or development queue effect.
+
+DIC_PREFLIGHT_VERIFIED development_sha=680479d5e168ac4a4df98329fafaa96aaa550c3e preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23 — #3908 exact native CI failure triage/repair [skip netlify]
+- PR native controller workflow 45282552062 / job 138070490597 completed FAILURE: 273/274 PASS, one NEW assertion erroneously matched an existing harmless YAML explanatory comment `Netlify build`. Correct test to examine noncomment workflow lines, preserving prohibition on actual publish/push commands. No workflow relaxation, skipped checks or simulated success; require new exact-head native CI PASS before merge.

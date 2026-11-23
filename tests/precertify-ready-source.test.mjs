@@ -306,5 +306,6 @@ test('#3889 two-phase workflow preview does not pre-promote development READY or
  assert.match(script,/prospectiveReadyItemId/);
  assert.match(script,/candidateTreeReceipt/);
  assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
- assert.doesNotMatch(workflow,/POST.*publish|git push|netlify build/i);
+ const executable=workflow.split('\n').filter(line=>!/^\s*#/.test(line)).join('\n');
+ assert.doesNotMatch(executable,/POST.*publish|\bgit push\b|\bnetlify\s+build\b/i);
 });
