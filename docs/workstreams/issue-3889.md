@@ -1,0 +1,11 @@
+# Issue #3889 — TESTING cohort nonpublishing source preflight [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d9fc859d81a23e10ee2cd0e1a37013b93a4980e5 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-23 — Phase 1 source-bound read-only 63-ID inventory
+- OWNER: #3889 requires all immutable 63 TESTING to become genuinely independently READY, never by renaming an untested state. #3347 permits NONPUBLISHING source-isolated candidate CI, but the main release controller still strictly selects READY; do not bypass it.
+- SOURCE: exact verified development d9fc859d81a23e10ee2cd0e1a37013b93a4980e5, pinned baseline queue blob 46304f47eb0e78fac8c7845155af86080900b3c4 (42 recorded merged, 21 no recorded merge), published tested source 2d22d448160d428a977f06482323646b92818fcf; main parent f296149723492bca2936b3b223fba7c6cca6c06f.
+- CHANGE: new separate read-only scripts/release/testing-source-preflight.mjs + six focused tests. Fails closed on exact branch drift, missing baseline/preflight Git objects, invalid states, absent ancestry, first-parent ownership, later blob edits, published parity, shared unready paths. Explicit SOURCE_ONLY_PROVISIONAL never means READY/VERIFIED, certified_ready_count is always zero and publication_authorized=false. Does NOT change READY-only candidate producer or publisher.
+- FOCUSED TEST: six local Node22 synthetic provenance, drift, overlap, merged-source, false-READY and baseline-invariance tests PASS (6/6, 158 ms in isolated harness); official main PR/merged controller CI pending exact SHA verification. No runtime or queue change, CI mutation, deployment, provider/DB/member/backup or grant.
+- TRADEOFF: one cheap source inventory ahead of costly frozen-tree CI; no duplicate full suite or build. This is FIRST phase, not five-check candidate certification. The 0-READY pipeline remains HOLD until separate provisional-candidate isolation and publisher-rejected manifest path exists.
+- NEXT ACTION: exact merged-main CI, run the 63-ID read-only inventory against live development in a full Git checkout; add the isolated second nonpublishing provisional candidate mode and five exact native candidate-SHA checks without changing a TESTING queue label to READY first; reconcile each result with #3889 and domain owners.
