@@ -275,7 +275,7 @@ export function discoverReviewedRestoredR232CoffeeTests({queue,restoredPaths,
  const owner=queue?.items?.find(i=>i.id===s.item);
  const obj=(sha,path)=>sourceObjectAt(sha,path);
  if(owner?.issue!==s.issue||owner.state!=='TESTING'||
-    (owner.merged_source_sha!==null&&owner.merged_source_sha!==undefined)||
+    (owner.merged_source_sha!=null&&owner.merged_source_sha!==s.merge)||
     owner.scope_paths?.length!==1||owner.scope_paths[0]!==s.runtime||
     obj(publishedSourceSha,s.runtime)!=='100644:'+s.oldRuntime||
     obj(developmentSourceSha,s.runtime)!=='100644:'+s.newRuntime||

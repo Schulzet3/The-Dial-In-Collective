@@ -639,6 +639,13 @@ test('#3347 R232 TESTING runtime and its two complete published coffee tests sta
   publishedSourceSha:A,developmentSourceSha:B,
   sourceObjectAt:testObj,selectedReadyItems:[one]};
  assert.deepEqual(discoverReviewedRestoredR232CoffeeTests(input),Object.keys(s.testBlobs).sort());
+ // The exact R232 PR #2940 was independently verified merged in development.
+ // A truthful queue provenance correction cannot disable published test pairing.
+ assert.deepEqual(discoverReviewedRestoredR232CoffeeTests({...input,
+  queue:{items:[{...owner,merged_source_sha:s.merge}]} }),Object.keys(s.testBlobs).sort());
+ assert.throws(()=>discoverReviewedRestoredR232CoffeeTests({...input,
+  queue:{items:[{...owner,merged_source_sha:'f'.repeat(40)}]}}),/owner or runtime provenance/);
+
  assert.deepEqual(discoverReviewedRestoredR232CoffeeTests({...input,restoredPaths:[]}),[]);
  assert.throws(()=>discoverReviewedRestoredR232CoffeeTests({...input,
   queue:{items:[{...owner,state:'READY'}]}}),/owner or runtime provenance/);
