@@ -1,0 +1,8 @@
+# Issue #3851 independent clean published-base source pin
+
+DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## November 23, 2026 — clean code/test freeze for provisional #3347 candidate [skip netlify]
+- Verified last deployed frozen candidate is d4af1c4e13d1babe6f10d277d5243582eb798c56, release 5ef0e190237a0fa8e391b086c5baeaaa962ae264. This source-pin commit inherits only that exact published tree and makes 4 string-verified hunks to site/cloud/main.js (initial auth callback admission delay and same-owner cached first paint); restores them one-for-one in reverse to the exact published Git blob 55191f2d6ed31454b3636a618af746bd33251e8a. site/cloud.html adds defer to published Supabase vendor script; the selected regression file is byte-identical to live merged PR #3852 tests. No unrelated 2026-11-22 unready feature/code, SQL, workflows or provider settings selected.
+- DIC #3851 original change merged nonforce to development 4b7b3f85ea2992486c37bfb908a734bcdb22780d, exact tested PR head c42a270ae075bf0b9a1118f2eff65ce9bdf8218e: validate 45125569707, cloud/mobile 45125569717, approval 45125569668, SQL 45125569670 and security 45125569758 all SUCCESS; frozen-source exact CI NOT YET RUN.
+- This is a reviewed source-only pin and test provenance, not a release candidate, grant, production deploy or READY certification. Next first-parent source-history nonforce merge into development preserving existing app/test/workflow blob parity, then provisional READY-only source candidate with five exact GitHub jobs; no production until new one-use chat controller/Netlify readback.
