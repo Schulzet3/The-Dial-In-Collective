@@ -1,0 +1,52 @@
+name: DIC nonpublishing frozen TESTING candidate evidence
+# #3889: purely READ-ONLY source & five native push-job audit.
+# A successful inspection is not a READY promotion and cannot publish.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/dic-testing-frozen-evidence.yml'
+      - 'scripts/release/verify-testing-frozen-evidence.mjs'
+      - 'tests/verify-testing-frozen-evidence.test.mjs'
+      - 'docs/TESTING_3889_ACTIVE_CANDIDATE.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dic-testing-frozen-evidence.yml'
+      - 'scripts/release/verify-testing-frozen-evidence.mjs'
+      - 'tests/verify-testing-frozen-evidence.test.mjs'
+      - 'docs/TESTING_3889_ACTIVE_CANDIDATE.json'
+  workflow_run:
+    workflows:
+      - DIC approval, implementation and continuity contract
+      - DIC cloud app build and tests
+      - DIC cloud UX regression checks
+      - DIC isolated SQL release regression
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: dic-testing3889-readonly-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+jobs:
+  audit-frozen-testing-source:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && startsWith(github.event.workflow_run.head_branch, 'release-candidates/testing3889-'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fail-closed source/CI identity negative and positive tests
+        run: node --test tests/verify-testing-frozen-evidence.test.mjs
+      - name: Read actual exact candidate Git tree and five independent PUSH-native jobs
+        if: github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIC_COMPLETED_SOURCE_SHA: ${{ github.event.workflow_run.head_sha || '' }}
+        run: node scripts/release/verify-testing-frozen-evidence.mjs docs/TESTING_3889_ACTIVE_CANDIDATE.json
