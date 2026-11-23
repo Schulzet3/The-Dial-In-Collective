@@ -72,3 +72,70 @@ test('package-only source cannot omit its co-merged Node runner, CI workflows, o
   developmentSha:DEV,...git,firstParentChangedPaths:()=>['package.json']});
  assert.equal(clean.items[0].status,'SOURCE_ONLY_PROVISIONAL');
 });
+
+import {planProvisionalTestingCandidate,PROVISIONAL_KIND} from '../scripts/release/testing-provisional-plan.mjs';
+const psha=x=>x.repeat(40),pid=n=>'DIC-Q-509-'+n;
+const pmerge=psha('c'),pdev=psha('d'),ppublished=psha('e');
+const prow=n=>({id:pid(n),state:'TESTING',merged_source_sha:n<=42?pmerge:null,
+ scope_paths:['supabase/migrations/'+n+'.sql']});
+const pbaseline={items:Array.from({length:63},(_,i)=>prow(i+1))};
+const plive={...pbaseline,published_base:{tested_source_sha:ppublished}};
+const pinventory={kind:'DIC-TESTING-COHORT-SOURCE-INVENTORY-1',
+ baseline_dev_sha:'d9fc859d81a23e10ee2cd0e1a37013b93a4980e5',
+ baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+ cohort_count:63,certified_ready_count:0,publication_authorized:false,
+ fingerprint:psha('1')+'2'.repeat(24),development_sha:pdev,published_source_sha:ppublished,
+ items:pbaseline.items.map((i,n)=>({id:i.id,live_state:'TESTING',
+ status:n<42?'SOURCE_ONLY_PROVISIONAL':'HOLD',
+ reason:n<42?'NEEDS_FROZEN_CANDIDATE_AND_FIVE_EXACT_CI_CHECKS':'NO_RECORDED_MERGED_SOURCE'}))};
+const pexec={inventory:pinventory,baselineQueue:pbaseline,liveQueue:plive,selectedId:pid(1),
+ developmentChangedPaths:['supabase/migrations/1.sql','src/server/another.mjs','tests/example.test.mjs'],
+ firstParentChangedPaths:()=>['supabase/migrations/1.sql','tests/example.test.mjs'],
+ sourceObjectAt:(ref,path)=>ref===ppublished?null:'100644:'+psha('a')};
+test('phase-two source plan is deterministic and strictly nonpublishing/not READY',()=>{
+ const p=planProvisionalTestingCandidate(pexec);
+ assert.equal(p.kind,PROVISIONAL_KIND);assert.equal(p.status,'PROVISIONAL_SOURCE_PLAN_ONLY');
+ assert.equal(p.publication_authorized,false);assert.equal(p.certified_ready_count,0);
+ assert.deepEqual(p.selected_ready_item_ids,[]);assert.equal(p.candidate_sha,null);
+ assert.deepEqual(p.selected_blobs.map(x=>x.path),['supabase/migrations/1.sql','tests/example.test.mjs']);
+ assert.deepEqual(p.restored_to_published_paths,['src/server/another.mjs']);
+ assert.match(p.candidate_branch,/^release-candidates\/testing3889-[0-9a-f]{20}$/);
+ assert.equal(p.fingerprint,planProvisionalTestingCandidate(pexec).fingerprint);
+});
+test('phase-two refuses unmerged, READY-labelled and phase-one HOLD records',()=>{
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,selectedId:pid(43)}),/selected source/);
+ const q={...plive,items:plive.items.map(i=>i.id===pid(1)?{...i,state:'READY'}:i)};
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,liveQueue:q}),/selected source/);
+ const changed={...pinventory,items:pinventory.items.map(i=>i.id===pid(1)?{...i,status:'HOLD',reason:'MERGED_DEPLOYABLE_SCOPE_UNDECLARED'}:i)};
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,inventory:changed}),/selected source/);
+});
+test('phase-two refuses changed baseline/owned scope/merged Git identity',()=>{
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,inventory:{...pinventory,baseline_queue_blob:psha('b')}}),/immutable/);
+ const q={...plive,items:plive.items.map(i=>i.id===pid(1)?{...i,scope_paths:['src/server/other.mjs']}:i)};
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,liveQueue:q}),/frozen merged SHA/);
+ const m={...plive,items:plive.items.map(i=>i.id===pid(1)?{...i,merged_source_sha:psha('f')}:i)};
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,liveQueue:m}),/frozen merged SHA/);
+});
+test('phase-two refuses omitted importer and package runner/workflow dependency',()=>{
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ firstParentChangedPaths:()=>['supabase/migrations/1.sql','src/server/untracked.mjs']}),/missing from declared scope/);
+ const pack={...pbaseline,items:pbaseline.items.map(i=>i.id===pid(1)?{...i,scope_paths:['package.json']}:i)};
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,baselineQueue:pack,
+ liveQueue:{...plive,items:pack.items},developmentChangedPaths:['package.json','scripts/audit/runner.mjs'],
+ firstParentChangedPaths:()=>['package.json','scripts/audit/runner.mjs']}),/package test runner/);
+});
+test('phase-two rejects stale acceptance tests, unknown executables and parity gaps',()=>{
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ sourceObjectAt:(ref,path)=>path==='tests/example.test.mjs'&&ref===pdev?'100644:'+psha('b'):ref===ppublished?null:'100644:'+psha('a')}),/not current and unpublished/);
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ developmentChangedPaths:[...pexec.developmentChangedPaths,'dynamic/mystery-loader.mjs']}),/unknown changed-source/);
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ developmentChangedPaths:['src/server/another.mjs']}),/selected path unchanged/);
+});
+test('phase-two refuses unsafe paths, duplicate diff or inaccessible Git objects',()=>{
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ firstParentChangedPaths:()=>['supabase/migrations/1.sql','../untrusted.mjs']}),/invalid first-parent/);
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,
+ developmentChangedPaths:['src/server/another.mjs','src/server/another.mjs']}),/exact queue/);
+ assert.throws(()=>planProvisionalTestingCandidate({...pexec,sourceObjectAt:()=>{throw Error('unavailable');}}),/missing source blob/);
+});
