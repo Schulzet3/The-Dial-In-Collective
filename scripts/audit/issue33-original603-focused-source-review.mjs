@@ -24,7 +24,11 @@ if(existsSync(optionalPageFlyH3))
  ({selectedShopifyPageFlyH3Identity}=await import(optionalPageFlyH3.href));
 import {selectedShopifyTrackedOfferH2Identity} from './issue33-shopify-tracked-offer-h2.mjs';
 import {selectedShopifyMainProductH2Identity} from './issue33-shopify-main-product-h2.mjs';
-import {selectedShopifyMainRichTextCoffee} from '../../src/server/coffee-selected-shopify-variant-richtext.mjs';
+// Optional #33 module: published source lacks it; keep selected evidence when present.
+const optionalRichText=new URL('../../src/server/coffee-selected-shopify-variant-richtext.mjs',import.meta.url);
+let selectedShopifyMainRichTextCoffee=()=>null;
+if(existsSync(optionalRichText))
+ ({selectedShopifyMainRichTextCoffee}=await import(optionalRichText.href));
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
