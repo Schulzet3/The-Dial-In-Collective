@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {join,resolve} from 'node:path';
+import {join,resolve,posix} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {BASELINE_DEV_SHA,BASELINE_QUEUE_BLOB,inspectTestingBaseline} from './testing-source-preflight.mjs';
 import {PROVISIONAL_KIND,planProvisionalTestingCandidate} from './testing-provisional-plan.mjs';
@@ -59,6 +59,33 @@ function validatePlan(plan){
     plan.candidate_branch!=='release-candidates/testing3889-'+fp.slice(0,20))
   hold('plan fingerprint or branch does not match exact source');
 }
+
+// Cheap, read-only, exact-tree import closure before spending on candidate CI.
+// Published script/test bytes may refer to later unselected #33 modules. Such a
+// source cannot be certified merely by restoring other deployable paths.
+export function assertFrozenAuditServerImportClosure({paths,readSource,hasPath}={}){
+ if(!Array.isArray(paths)||typeof readSource!=='function'||typeof hasPath!=='function')
+  hold('static audit/server import source evidence unavailable');
+ for(const path of paths){
+  if(!/^(?:scripts\/audit|src\/server)\/.*\.[cm]?js$/.test(path)||!hasPath(path))continue;
+  const source=readSource(path);
+  if(typeof source!=='string')hold('cannot read active audit/server module: '+path);
+  const imports=[...source.matchAll(/^\s*(?:import|export)\s+(?:[^;\n]*?\s+from\s+)?['"](\.{1,2}\/[^'"\n]+)['"]/gm)]
+   .map(m=>m[1]);
+  for(const spec of imports){
+   const target=posix.normalize(posix.join(posix.dirname(path),spec.split(/[?#]/)[0]));
+   if(target.startsWith('../')||target.startsWith('/')||!target)
+    hold('unsafe static relative import: '+path+' -> '+spec);
+   const variants=posix.extname(target)?[target]:
+    [target,target+'.js',target+'.mjs',target+'.cjs',target+'.json',
+     target+'/index.js',target+'/index.mjs'];
+   if(!variants.some(hasPath))
+    hold('unresolved active audit/server relative import: '+path+' -> '+spec);
+  }
+ }
+ return true;
+}
+
 // NEVER publishes a branch. Returns a local immutable Git object for readback.
 export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflightBlobSha}={}){
  validatePlan(plan);
@@ -136,6 +163,11 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
    git(['update-index','--add','--cacheinfo','100644',sha,path],{env});
   }
   const treeSha=git(['write-tree'],{env});
+  const auditAndServer=git(['ls-tree','-r','--name-only',treeSha,'--','scripts/audit','src/server'])
+   .split(/\r?\n/).filter(Boolean);
+  assertFrozenAuditServerImportClosure({paths:auditAndServer,
+   readSource:path=>git(['show',treeSha+':'+path],{trim:false}),
+   hasPath:path=>at(treeSha,path)!==null});
   const candidateSha=git(['commit-tree',treeSha,'-p',plan.development_sha,'-m',
    'Freeze nonpublishing #3889 TESTING source '+plan.selected_testing_item_id+' [skip netlify]'],{env});
   if(!SHA.test(treeSha)||!SHA.test(candidateSha)||
