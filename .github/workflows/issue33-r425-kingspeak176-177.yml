@@ -6,7 +6,6 @@ on:
       - '.github/workflows/issue33-r425-kingspeak176-177.yml'
       - 'scripts/audit/issue33-r425-kingspeak176-177-check.mjs'
       - 'tests/issue33-r425-kingspeak176-177.test.mjs'
-      - 'docs/workstreams/ops-issue33-r425-kingspeak176-177-20261123.md'
   push:
     branches: [development/backend-foundation]
     paths:
@@ -40,7 +39,7 @@ jobs:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '176,177'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r425
         run: GITHUB_SHA="$DIC_R425_EXACT_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
-      - name: Independently rehash selected first-party source and reject stale roast review leaks
+      - name: Independently rehash selected first-party source and reject stale handle leaks
         if: always()
         env:
           DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
