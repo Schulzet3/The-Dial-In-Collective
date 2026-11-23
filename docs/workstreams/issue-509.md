@@ -1,3 +1,16 @@
+# Issue #509 R471 — 430 new native catalog descriptions and 3 full SQL bodies [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2b282f47186b602d240636572ee47b1e9e01aca2 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC / November 22 Denver. FIRST retrieved live development `2b282f47186b602d240636572ee47b1e9e01aca2` and verified immutable `docs/ai/PREFLIGHT.md` Git blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f` by independently calculating the Git SHA-1 from its exact contents, BEFORE other authority/provider reads. Main `1c7f77844e899776d2f866f9c824a4a0cba58d56`; release/production `5ef0e190237a0fa8e391b086c5baeaaa962ae264`. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11; strictly read-only.
+
+**New direct semantic provider coverage:** individually read **430 complete `pg_description` catalog records** at global ranks **3001–3421 and 3492–3500**, **15229 literal comment characters**, each exact class/OID/typed identity, full text, md5, 1-end character range, semantic role and retention verdict in [append-only R471 ledger](../audits/issue509-r471-core-comments-3001-3421-and-3492-3500-20261123.json). Also read full source for **three built-in SQL wrappers** `pg_catalog.numeric_pl_pg_lsn(numeric,pg_lsn)` and both `pg_catalog.ts_debug` overloads (exact source hashes and full text in ledger); did not invoke. Covered multirange operators, BRIN/SP-GiST callbacks, text encoding conversion, snapshots/XID visibility, replication origins, regex, aggregate/array/JSON helpers, server statistics/administrative functions and access methods. Privileged file reads, pg_upgrade/pg_stat_reset, replication/WAL mutations and logging not executed. Native compiled C/internal bodies remain UNVERIFIED.
+
+**No duplicate coverage:** R461/R462 previously reviewed **70 provider/application COMMENT entries at ranks 3422–3491**; rechecked every live OID/subid/full word/MD5 against both immutable ledgers, **70/70 exact parity**, **zero new review credit** for them. Previously known `private.project_shot` production comment drift remains TESTING development migration only; no new finding or change. The entire ordered comment range through rank **3500/5344** is now covered across old/new receipts without double-counting. New accurate global next cursor **rank 3501, character 1**.
+
+No new reproducible DIC app/Edge defect, measured bottleneck or consumer-proven removable object from this increment. No migration/app/Edge/test/CI modifications; docs-only exact-source CI **NOT_APPLICABLE**, never PASS. Existing coffee-verifier deployment drift already notified and unchanged; publication remains owner-gated. No production SQL/data/Auth/Storage/Edge/config change, no GitHub main/release/backups/billing/Publish, no #267 code-line credit. Full provider baseline **IN_PROGRESS**; preserve hourly schedule and owner-action-only alerts.
+
+---
+
 # Issue #509 R470 — 400 new core catalog description meanings [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=3642a98f6ef7cddc833666ba3c5028b9be80e345 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
