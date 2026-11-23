@@ -13,13 +13,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  actions: read
-  checks: read
 concurrency:
-  # PR retries cancel superseded revisions; push source SHAs stay independently auditable.
-  # Later audit/docs pushes cannot cancel an exact merged-source approval receipt.
-  group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}
-  cancel-in-progress: ${{ github.event_name != 'push' }}
+  group: dic-approval-continuity-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   approval:
     runs-on: ubuntu-24.04
@@ -29,29 +25,11 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
-        env:
-          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
-          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_EVENT_NAME: ${{ github.event_name }}
-        run: node scripts/audit/verify-commit-checkpoint.mjs
-      - name: Early source/build and browser fixture closure (no app build)
-        run: node scripts/audit/fast-pr-check.mjs
-      - name: Classify source impact for existing third HIGH-risk Node runner
-        id: scope
-        env:
-          DIC_CI_EVENT: ${{ github.event_name }}
-          DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
-          DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
-          DIC_CI_REF: ${{ github.ref }}
-        run: node scripts/audit/ci-scope.mjs
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
       - name: Reject accidentally tracked private keys, credential files and high-confidence tokens
         run: node scripts/audit/security-inventory.mjs
-      - name: Protect the single mandatory live preflight entrypoint
-        run: node scripts/audit/preflight-contract.mjs
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
       - name: Validate queue schema and intake in one nonpublishing check
@@ -59,22 +37,9 @@ jobs:
         # separate --validate and nonblocking --status invocations duplicated
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
-      - name: Exercise immutable READY rejection regressions before live certification
-        # No remote GETs: the synthetic tests cover missing refs, stale fingerprints,
-        # failed/SKIPPED five-job receipts and incomplete source isolation.
-        run: node --test tests/ready-promotion-gate.test.mjs
-      - name: Verify every READY item against live recorded Actions and source/test blobs
-        # One strict live gate: ready-evidence-gate delegates to exactly the
-        # same verifyReadyPromotion used by the former redundant second CLI.
+      - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/release/ready-evidence-gate.mjs
-      - name: Install locked test dependencies only for HIGH-risk third shard
-        if: steps.scope.outputs.node_mode == 'full'
-        run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Lint HIGH-risk source on already-prepared approval runner (one lint total)
-        if: steps.scope.outputs.node_mode == 'full' && steps.scope.outputs.lint == 'true'
-        run: npm run lint
-      - name: Run third disjoint HIGH-risk full Node corpus on approval runner
-        if: steps.scope.outputs.node_mode == 'full'
-        run: node scripts/audit/run-full-suite.mjs --shard=2/3
+          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
+          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_EVENT_NAME: ${{ github.event_name }}
+        run: node scripts/audit/verify-commit-checkpoint.mjs

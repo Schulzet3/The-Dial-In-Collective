@@ -142,9 +142,7 @@ export function createMemberApprovalBroker({
    if(Object.keys(input).length!==1)return denied(400);
    if(await rpc('dic_member_approval_claim_poll')!==true)return reply({ok:true,handled:0});
    let handled=0,failed=0,unconfigured=false;
-   // Push-only signing keys must not block independent approval emails.
-   let pollKeyPromise;
-   const pollKeys=()=>pollKeyPromise??=keys();
+   const key=await keys();
    const sendPush=async(endpoint,keyData)=>{
     const safe=safeEndpoint(endpoint);if(!safe)throw Error('Untrusted endpoint');
     const auth=await vapidAuthorization(safe,keyData,now);
@@ -185,24 +183,19 @@ export function createMemberApprovalBroker({
        if(!Array.isArray(endpoints)||endpoints.length>3)throw Error('Invalid device list');
        if(!endpoints.length)outcome='skipped';
        else {
-        const key=await pollKeys();
         if(!key)throw Error('Vault key unavailable');
         const checks=await Promise.allSettled(endpoints.map(async ep=>{
          if(!HASH.test(String(ep?.hash||''))||!safeEndpoint(ep?.endpoint)||
            await fingerprint(ep.endpoint)!==ep.hash)throw Error('Malformed endpoint');
          const result=await sendPush(ep.endpoint,key);
          const route=SUBS+'?endpoint_hash=eq.'+ep.hash;
-         // A gone endpoint is retired, not an acknowledged delivery.
-         if(result.gone){await rest(route,{method:'DELETE'});return 'gone';}
-         if(result.ok){
-          await rest(route,{method:'PATCH',prefer:'return=minimal',
-           body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});
-          return 'accepted';
-         }
-         throw Error('Push provider did not accept the message');
+         if(result.gone)await rest(route,{method:'DELETE'});
+         else if(result.ok)await rest(route,{method:'PATCH',prefer:'return=minimal',
+          body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});
+         else throw Error('Push provider did not accept the message');
         }));
         if(checks.some(c=>c.status==='rejected'))throw Error('Some devices not acknowledged');
-        outcome=checks.some(c=>c.status==='fulfilled'&&c.value==='accepted')?'sent':'skipped';
+        outcome='sent';
        }
       }
      }catch{/* Do not log member email, push endpoint, tokens, or secrets. */}

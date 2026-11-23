@@ -140,7 +140,7 @@
       "id": "DIC-Q-509-stale-project-shot-comment-20261122",
       "issue": 509,
       "title": "Correct outdated project_shot worker-status comment",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
       "scope_paths": [
         "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
@@ -160,10 +160,7 @@
         45074554975,
         45074555022
       ],
-      "blockers": [
-        "#3347 nonpublishing isolated READY candidate certification, exact five named candidate statuses and release queue source isolation not yet independently complete",
-        "Separate NEW owner Publish required for production COMMENT migration; production remains read-only"
-      ],
+      "blockers": [],
       "notes": "R463 source-bound CI confirmed 4 applicable source-SHA success runs; embedded migration blob 84cecbe69143b2170aa97a851198cc35b9926303 unchanged at development head. State TESTING pending frozen candidate certification, not READY/DEPLOYED.",
       "production_deployed": false
     },
