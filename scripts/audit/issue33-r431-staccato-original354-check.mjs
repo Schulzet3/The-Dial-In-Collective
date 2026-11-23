@@ -25,7 +25,7 @@ export function selectedR431Failures(number,selected,fields={}){
  if(!f('producer').includes('elvin suazo'))errors.push('selected_grower_missing_or_borrowed');
  if(f('process')!=='natural')errors.push('selected_green_process_not_natural');
  if(f('roast_level')!=='light')errors.push('selected_light_roast_missing');
- if(!f('elevation_m').includes('1600'))errors.push('selected_elevation_missing');
+ if(!String(fields.elevation_m??'').replace(/[^0-9]/gu,'').includes('1600'))errors.push('selected_elevation_missing');
  if(f('variety')!=='ihcafe 90')
   errors.push('this_lot_ihcafe90_not_farmwide_bourbon_pacas_or_other_varieties');
  for(const x of ['citrus','blueberry','sweet finish'])
@@ -40,7 +40,8 @@ export function selectedR431Failures(number,selected,fields={}){
 if(process.env.DIC_ISSUE33_R431_RUN==='1'){
  const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR,sha=process.env.DIC_EXPECTED_SHA;
  if(!dir||!/^[a-f0-9]{40}$/u.test(sha||''))throw Error('exact_source_sha_and_artifact_directory_required');
- const report=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'));
+ let report={};try{report=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'))}
+ catch{console.error('required_official_runner_evidence_report_missing');process.exitCode=1}
  const failures=[],proof=[];const require=(condition,label)=>{if(!condition)failures.push(label)};
  require(report.source_sha===sha,'source_sha_not_exact');
  require(JSON.stringify(report.case_numbers)==='[354]'&&report.records?.length===1,'not_exact_frozen354');

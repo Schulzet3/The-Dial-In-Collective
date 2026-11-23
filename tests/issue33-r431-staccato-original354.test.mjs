@@ -31,3 +31,8 @@ test('no invented decaf and no misattributed farm',()=>{
  assert.ok(bad({...good,farm:'Finca Elsewhere'}).includes('wrong_selected_farm'));
 });
 test('product source missing directly selected flavor makes afterproof fail closed',()=>assert.ok(bad(good,chosen.replace('Subtle Blueberry','Other Coffee')).some(x=>x.startsWith('current_selected_literal_missing_'))));
+
+test('literal comma-thousands ~1,600 meters must not be rejected by the evidence checker',()=>{
+ assert.deepEqual(bad({...good,elevation_m:'1600 MASL'}),[]);
+ assert.ok(bad({...good,elevation_m:'1400 MASL'}).includes('selected_elevation_missing'));
+});
