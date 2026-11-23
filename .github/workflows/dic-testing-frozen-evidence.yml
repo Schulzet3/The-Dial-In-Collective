@@ -45,7 +45,8 @@ jobs:
       - name: Fail-closed source/CI identity negative and positive tests
         run: node --test tests/verify-testing-frozen-evidence.test.mjs
       - name: Read actual exact candidate Git tree and five independent PUSH-native jobs
-        if: github.event_name != 'pull_request'
+        # PR execution exposes the same authenticated, read-only exact source
+        # inventory; a missing independent PUSH receipt is a genuine HOLD.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DIC_COMPLETED_SOURCE_SHA: ${{ github.event.workflow_run.head_sha || '' }}
