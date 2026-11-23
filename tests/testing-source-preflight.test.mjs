@@ -56,3 +56,19 @@ test('merged untracked deployable importer is a HOLD even when owned leaf change
  assert.deepEqual(r.items[0].untracked_merged_paths,[missing]);
  assert.equal(r.certified_ready_count,0);
 });
+
+test('package-only source cannot omit its co-merged Node runner, CI workflows, or acceptance tests',()=>{
+ const packageItems=baseline.items.map((i,n)=>n===0?{...i,scope_paths:['package.json']}:i);
+ const packageQueue={...baseline,items:packageItems};
+ const changed=['package.json','scripts/audit/run-full-suite.mjs',
+  '.github/workflows/cloud-beta-ci.yml','tests/ci-optimization.test.mjs'];
+ const r=analyzeTestingBaseline({baselineQueue:packageQueue,liveQueue:packageQueue,
+  developmentSha:DEV,...git,firstParentChangedPaths:()=>changed});
+ assert.equal(r.items[0].status,'HOLD');
+ assert.equal(r.items[0].reason,'MERGED_PACKAGE_EXECUTION_OR_CI_SCOPE_UNDECLARED');
+ assert.deepEqual(r.items[0].untracked_merged_paths,changed.slice(1).sort());
+ assert.equal(r.certified_ready_count,0);
+ const clean=analyzeTestingBaseline({baselineQueue:packageQueue,liveQueue:packageQueue,
+  developmentSha:DEV,...git,firstParentChangedPaths:()=>['package.json']});
+ assert.equal(clean.items[0].status,'SOURCE_ONLY_PROVISIONAL');
+});
