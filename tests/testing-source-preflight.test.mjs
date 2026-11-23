@@ -148,7 +148,7 @@ import {tmpdir as testTmp} from 'node:os';
 import {join as testJoin,dirname as testDirname} from 'node:path';
 import {execFileSync as testExec} from 'node:child_process';
 import {createHash as testHash} from 'node:crypto';
-import {freezeProvisionalTestingPlan,FROZEN_TESTING_KIND,FROZEN_TESTING_MANIFEST} from '../scripts/release/stage-testing-provisional-candidate.mjs';
+import {freezeProvisionalTestingPlan,FROZEN_TESTING_KIND,FROZEN_TESTING_MANIFEST,assertFrozenAuditServerImportClosure} from '../scripts/release/stage-testing-provisional-candidate.mjs';
 function gitFixture(){
  const dir=testMkdtemp(testJoin(testTmp(),'dic-3889-real-git-'));
  const git=(...args)=>testExec('git',args,{cwd:dir,encoding:'utf8'}).trim();
@@ -238,4 +238,24 @@ test('phase 2b rejects unaccounted unfinished executable changes, even if plan h
   assert.throws(()=>freezeProvisionalTestingPlan({repoDir:f.dir,plan:forged,
    preflightBlobSha:f.preflight}),/account for all changed executable source/);
  }finally{f.cleanup();}
+});
+
+test('phase 2b cheap import-closure rejects unselected #33 module omitted by source isolation',()=>{
+ const missing='scripts/audit/issue33-original603-focused-source-review.mjs';
+ const relative='../../src/server/coffee-selected-shopify-variant-richtext.mjs';
+ const reader=path=>path===missing?
+  "import {review} from '"+relative+"';\nexport {review};\n":'';
+ const paths=[missing,'src/server/safe.mjs'];
+ const present=new Set(paths);
+ assert.throws(()=>assertFrozenAuditServerImportClosure({paths,readSource:reader,
+  hasPath:path=>present.has(path)}),/unresolved active audit\/server relative import/);
+ present.add('src/server/coffee-selected-shopify-variant-richtext.mjs');
+ assert.doesNotThrow(()=>assertFrozenAuditServerImportClosure({paths,readSource:reader,
+  hasPath:path=>present.has(path)}));
+});
+test('phase 2b cheap audit import-closure fails shut on absent Git read evidence',()=>{
+ assert.throws(()=>assertFrozenAuditServerImportClosure({paths:['scripts/audit/fail.mjs'],
+  readSource:()=>null,hasPath:()=>true}),/cannot read active audit\/server module/);
+ assert.throws(()=>assertFrozenAuditServerImportClosure({
+  paths:['scripts/audit/fail.mjs'],readSource:()=>'',hasPath:null}),/evidence unavailable/);
 });
