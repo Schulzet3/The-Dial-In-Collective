@@ -24,11 +24,13 @@ import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,discoverReviewedRestoredUnreadyAdminTests,discoverReviewedRestoredStartupTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
+import {proposeProspectiveReadyQueue,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
 export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSourceSha,
- selectedIds,branch,pinnedReadyPaths=[],createLocalRef=true}={}){
+ selectedIds,branch,pinnedReadyPaths=[],createLocalRef=true,
+ prospectiveReadyItemId=null}={}){
  if(!SHA.test(developmentSourceSha||'')||!BRANCH.test(branch||''))
   throw Error('Candidate staging requires an exact development commit and safe release-candidates/<slug> branch');
  const git=(args,{env=process.env,input,trim=true}={})=>{
@@ -37,7 +39,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   return trim?s.trim():s;
  };
  const queueRaw=git(['show',developmentSourceSha+':docs/RELEASE_QUEUE.json'],{trim:false});
- const queue=JSON.parse(queueRaw);
+ let queue=JSON.parse(queueRaw),prospective=null,stagedQueueRaw=queueRaw;
  const publishedSourceSha=queue.published_base?.tested_source_sha;
  if(!SHA.test(publishedSourceSha||''))throw Error('Invalid actual published source in queue');
  const ancestor=memoizeImmutableGitRead((a,b)=>{
@@ -64,6 +66,17 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   if(!object)throw Error('Last selected READY merge lacks file: '+path);
   return object;
  };
+ if(prospectiveReadyItemId!==null){
+  if(selectedIds?.length!==1||selectedIds[0]!==prospectiveReadyItemId||
+     !/^release-candidates\/prospect3889-[a-f0-9]{20}$/.test(branch))
+   throw Error('Prospective READY preview requires sole selected ID and immutable nonpublishing prospect3889 branch');
+  const baseline=JSON.parse(git(['cat-file','blob',BASELINE_QUEUE_BLOB],{trim:false}));
+  prospective=proposeProspectiveReadyQueue({baselineQueue:baseline,liveQueue:queue,
+   selectedId:prospectiveReadyItemId,developmentSourceSha,
+   firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt});
+  queue=prospective.queue;
+  stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
+ }
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
  const workflowOnlyTests=discoverReviewedWorkflowTestExclusions({
@@ -112,6 +125,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    GIT_AUTHOR_NAME:'DIC READY candidate staging',GIT_AUTHOR_EMAIL:'ready-candidate@users.noreply.github.com',
    GIT_COMMITTER_NAME:'DIC READY candidate staging',GIT_COMMITTER_EMAIL:'ready-candidate@users.noreply.github.com'};
   git(['read-tree',developmentSourceSha],{env});
+  if(prospective){
+   const blob=git(['hash-object','-w','--stdin'],{env,input:stagedQueueRaw});
+   if(!SHA.test(blob))throw Error('Prospective READY queue blob could not be frozen');
+   git(['update-index','--add','--cacheinfo','100644',blob,'docs/RELEASE_QUEUE.json'],{env});
+  }
   for(const path of [...plan.restored_paths,...unpublishedWorkflows]){
 
    const object=sourceObjectAt(publishedSourceSha,path);
@@ -147,7 +165,10 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
    restored_to_published_unready_test_paths:restoredTests,
-   publication_authorized:false};
+   publication_authorized:false,
+   ...(prospective?{prospective_ready_preview:{status:prospective.status,
+    selected_id:prospective.selected_id,baseline_queue_blob:BASELINE_QUEUE_BLOB,
+    identity_sha256:prospective.identity_sha256}}:{})};
   // New candidate Git commits change code/workflows, so carry a fresh
   // exact-parent journal receipt validated by approval continuity.
   let preflightBlob,preflightText;
@@ -165,6 +186,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Development parent: '+developmentSourceSha+'\n'+
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
+   (prospective?'- PROSPECTIVE ONLY: development queue is still TESTING; no READY claim, certificate, production grant or Publish.\n':'')+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+
@@ -189,7 +211,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    developmentChangedPaths:changed(publishedSourceSha,developmentSourceSha),
    candidateChangedPaths:changed(publishedSourceSha,commit),
    stagedCommitChangedPaths:changed(developmentSourceSha,commit),
-   developmentDriftPaths:[],liveQueue:queue,queueContentMatches:queueRaw===
+   developmentDriftPaths:[],liveQueue:queue,queueContentMatches:stagedQueueRaw===
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
    sourceObjectAt,isAncestor:ancestor});
   assertCandidateRelativeImports(plan.included_paths,{
@@ -202,7 +224,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   });
   if(createLocalRef)
    git(['update-ref','refs/heads/'+branch,commit,ZERO]);
-  return {candidate_sha:commit,branch,manifest,plan};
+  return {candidate_sha:commit,branch,manifest,plan,
+   prospective_status:prospective?.status||null};
  }finally{rmSync(temp,{recursive:true,force:true});}
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
@@ -210,12 +233,15 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
   const [developmentSourceSha,branch,ids,...flags]=process.argv.slice(2);
   const push=flags.includes('--push');
   const pins=flags.filter(x=>x.startsWith('--pin=')).map(x=>x.slice(6));
-  if(!ids||flags.some(x=>x!=='--push'&&!x.startsWith('--pin='))||
+  const proposals=flags.filter(x=>x.startsWith('--prospective='));
+  if(!ids||flags.some(x=>x!=='--push'&&!x.startsWith('--pin=')&&!x.startsWith('--prospective='))||
+     proposals.length>1||
      flags.filter(x=>x==='--push').length>1||
      pins.some(x=>!x||x.includes(',')||!x.includes('/')))
    throw Error('Usage: node stage-ready-only-candidate.mjs <dev SHA> <release-candidates/name> <READY ID[,ID]> [--pin=path] [--push]');
   const result=stageReadyOnlyCandidate({developmentSourceSha,branch,
-    selectedIds:ids.split(','),pinnedReadyPaths:pins});
+    selectedIds:ids.split(','),pinnedReadyPaths:pins,
+   prospectiveReadyItemId:proposals[0]?.slice('--prospective='.length)||null});
   if(push){
    execFileSync('git',['push','--porcelain','origin',result.candidate_sha+':refs/heads/'+branch],
     {encoding:'utf8',timeout:30000,stdio:['ignore','pipe','pipe']});
@@ -225,6 +251,8 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
   }
   console.log('[DIC candidate source] '+JSON.stringify({status:push?'CI_PENDING':'STAGED_LOCAL_ONLY',
    candidate_sha:result.candidate_sha,branch:result.branch,
-   selected_ready_ids:result.manifest.selected_ready_item_ids,excluded_paths:result.plan.restored_paths}));
+   selected_ready_ids:result.manifest.selected_ready_item_ids,
+   prospective_status:result.prospective_status,
+   excluded_paths:result.plan.restored_paths}));
  }catch(e){console.error('[DIC candidate HOLD] '+e.message);process.exitCode=2;}
 }
