@@ -46,14 +46,35 @@ test('operational READY audit stays mandatory on development; candidates retain 
  const path='.github/workflows/approval-continuity.yml';
  const src=file(path);
  const ref=process.env.GITHUB_REF||'';
- if(ref.startsWith('refs/heads/release-candidates/')&&
-    /^[a-z0-9][a-z0-9-]{2,80}$/.test(ref.slice('refs/heads/release-candidates/'.length))){
-  const manifest=JSON.parse(file('docs/RELEASE_CANDIDATE.json'));
-  assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
+ // GitHub executes a draft PR on refs/pull/N/merge, not on the candidate
+ // branch. Only treat it as a source-isolated TESTING rehearsal if the actual
+ // PR head is that branch AND the synthetic merge tree equals its head tree.
+ // PR evidence can never replace the five exact frozen push-source CI checks.
+ const candidatePr=/^refs\/pull\/[1-9]\d*\/merge$/.test(ref)&&
+   (process.env.GITHUB_HEAD_REF||'').startsWith('release-candidates/testing3889-');
+ const candidateRef=candidatePr?'refs/heads/'+process.env.GITHUB_HEAD_REF:ref;
+ if(candidateRef.startsWith('refs/heads/release-candidates/')&&
+    /^[a-z0-9][a-z0-9-]{2,80}$/.test(candidateRef.slice('refs/heads/release-candidates/'.length))){
+  let manifest;
+  try{manifest=JSON.parse(file('docs/TESTING_3889_CANDIDATE.json'));}
+  catch(e){if(e?.code!=='ENOENT')throw e;manifest=JSON.parse(file('docs/RELEASE_CANDIDATE.json'));}
+  assert.ok(['DIC-READY-ONLY-SOURCE-1','DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1'].includes(manifest.kind));
   assert.equal(manifest.publication_authorized,false);
-  assert.equal('refs/heads/'+manifest.candidate_branch,ref);
+  assert.equal('refs/heads/'+manifest.candidate_branch,candidateRef);
+  if(candidatePr){
+   assert.equal(manifest.kind,'DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1');
+   assert.equal(process.env.GITHUB_EVENT_NAME,'pull_request');
+   assert.equal(process.env.GITHUB_REPOSITORY,'Schulzet3/The-Dial-In-Collective');
+   const git=(...args)=>execFileSync('git',args,{encoding:'utf8',timeout:15000}).trim();
+   const ancestry=git('rev-list','--parents','-n','1','HEAD').split(' ');
+   assert.equal(ancestry.length,3,'candidate PR must be an actual two-parent GitHub merge');
+   assert.equal(ancestry[1],manifest.development_source_sha,
+    'PR merged against a stale or unrelated development source');
+   assert.equal(git('rev-parse','HEAD^{tree}'),git('rev-parse',ancestry[2]+'^{tree}'),
+    'PR synthetic merge tree must match the exact candidate source tree');
+  }
   assert.match(manifest.published_source_sha,/^[a-f0-9]{40}$/);
-  assert.ok(manifest.restored_unpublished_workflow_paths?.includes(path),
+  assert.ok((manifest.restored_unpublished_workflow_paths||manifest.restored_to_published_paths)?.includes(path),
    'isolation must declare restoration of the mandatory development workflow');
   const actualPublished=execFileSync('git',['show',manifest.published_source_sha+':'+path],
    {encoding:'utf8',timeout:15000,maxBuffer:30000});

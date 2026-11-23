@@ -43,14 +43,6 @@ const isNavigation=(node,attrs)=>/^(?:navigation|menubar|menu)$/i.test(attrs.rol
  /^(?:full-menu|mobile-menu|site-navigation)$/.test(node.tag)||/^(?:nav|navigation|site-nav)$/i.test(attrs.id||'')||
  /(?:^|\s)(?:header__navigation|site-navigation|dropdown_column__menu)(?:\s|$)/i.test(attrs.class||'')||
  Object.keys(attrs).some(key=>/^data-meganav(?:-|$)/.test(key));
-// Breadcrumb collection membership is navigation, not the selected bag's roast.
-// The product body may be nested beside a div.breadcrumbs rather than <nav>.
-// Exclude only bounded, explicitly named breadcrumb wrappers, never the product.
-const isBreadcrumb=(node,attrs)=>['div','section','ol','ul','aside'].includes(node.tag)&&
- (String(attrs.class||'').split(/\s+/).some(value=>
-   /^(?:breadcrumb|breadcrumbs|woocommerce-breadcrumb)$/i.test(value))||
-  /^breadcrumbs?$/i.test(attrs.role||'')||
-  /^breadcrumbs?$/i.test(attrs['aria-label']||''));
 const isProductCostAside=(node,attrs)=>node.tag==='aside'&&
  [attrs.class,attrs.id,attrs['aria-label']].some(value=>/(?:^|[\s_-])(?:costs?|transparency)(?:$|[\s_-])/i.test(value||''));
 const isRelated=(node,attrs)=>CONTAINER.has(node.tag)&&(node.tag==='product-recommendations'||node.tag==='recommendations'||
@@ -143,7 +135,7 @@ function withoutRelatedProducts(page,onTruncated){
     ranges.push([node.start,node.end]);
   }
   if(node.tag==='aside'&&!isProductCostAside(node,attrs))ranges.push([node.start,node.end]);
-  if(isNavigation(node,attrs)||isBreadcrumb(node,attrs))ranges.push([node.start,node.end]);
+  if(isNavigation(node,attrs))ranges.push([node.start,node.end]);
   if(loopCards.has(index))ranges.push([node.start,node.end]);
   if(!CONTAINER.has(node.tag))continue;
   const explicit=isRelated(node,attrs);

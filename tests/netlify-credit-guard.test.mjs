@@ -19,8 +19,11 @@ test('isolated READY candidates restore EXACT published Netlify guard bytes; upg
  const claim={...release,commitMessage:release.subject+'\n\n[skip netlify]\n'};
  const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  let manifest=null;
- try{manifest=JSON.parse(readFileSync(new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}catch{}
- const restored=manifest?.kind==='DIC-READY-ONLY-SOURCE-1'&&
+ for(const name of ['TESTING_3889_CANDIDATE.json','RELEASE_CANDIDATE.json']){
+  try{manifest=JSON.parse(readFileSync(new URL('../docs/'+name,import.meta.url),'utf8'));break;}
+  catch(e){if(e?.code!=='ENOENT')throw e;}
+ }
+ const restored=['DIC-READY-ONLY-SOURCE-1','DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1'].includes(manifest?.kind)&&
   manifest.restored_to_published_paths?.includes('scripts/netlify/should-ignore-build.mjs');
  if(restored){
   const queue=JSON.parse(readFileSync(new URL('../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
