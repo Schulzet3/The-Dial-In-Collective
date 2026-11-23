@@ -10,24 +10,41 @@
     {
       "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
       "issue": 455,
-      "pr": null,
+      "pr": 3854,
       "title": "Match Log/Edit Shot measured dose, yield and time HTML inputs to permitted fractions",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "43306c3d8ea38aaf01491e16ca9930fcbcce6c47",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 R460 owner Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; prior source blob 0270a6cbb7dcaf7df39946f19164712a2e2eace5",
       "tests": [
-        "Negative prechange: three real form controls step=.1 despite numeric model permitting other decimals; no observed Save-block because novalidate.",
-        "New three R461 actual CloudApp/model positive and negative regressions plus updated R456 expectation: pending CI, not PASS."
+        "Actual source fix only three measured Log/Edit Shot dose/yield/time step='.1' → 'any'; model continues finite validated decimal bounds and full five taste scales. Cloud input blob bfa0ddf1a80f8d33560aac092e8f2453c2d54ba3; revised R456 test blob c7466a875eb958ede6f5a5b15f2c3a60a2102c17; three new R461 test blob 32b29bf48e178ccc7814fc30a17f9f375751c669.",
+        "PR #3854 exact head 32adfb79dbd574a3f14d09d53cdd6a416b7c6b8e: R461 three named actual CloudApp/model negative/positive cases PASS, modified R456 PASS (cloud-tests job 137530242116), cloud shard 2947 PASS/0 FAIL/0 SKIPPED; Node22 validate 1785 PASS/0 FAIL/6 intentionally SKIPPED; governance approval 1497 PASS/0 FAIL.",
+        "PR-head CI: validate/build 45125965287, Cloud/browser/mobile/offline 45125965272, governance 45125965292, SQL 45125965305, security 45125965359, imported regressions 45125965438, exact-selected 45125965432 and 45125965270 all completed SUCCESS. Original603 45125965418 SKIPPED, explicitly NOT PASS.",
+        "Nonforce squash [skip netlify] PR #3854 merged 43306c3d8ea38aaf01491e16ca9930fcbcce6c47 with one parent a90df231dc5213408fa2fb05fde4a3113e2a5e0a. Exact six merged blob SHAs equal tested PR head; no overlapping concurrent changes. Merged-source validate 45126206309, Cloud/browser/mobile/offline 45126206379, approval 45126206347, imported regressions 45126206518, exact-selected 45126206367 ALL COMPLETED SUCCESS.",
+        "No observed member-device stepMismatch or blocked Save; actual browser suite successful but no human device or espresso taste effectiveness study. Remain TESTING until #3347 isolated candidate five successful checks and owner publication authorization."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45125965287,
+        45125965272,
+        45125965292,
+        45125965305,
+        45125965359,
+        45125965438,
+        45125965432,
+        45125965270,
+        45126206309,
+        45126206379,
+        45126206347,
+        45126206518,
+        45126206367
+      ],
       "blockers": [
-        "Exact new source Node22/cloud/mobile/browser/offline/a11y and governance CI unexecuted at authoring; source not merged.",
-        "#3347 independent frozen five-check source candidate required for READY; NEW explicit owner Publish required for deployment."
+        "Independent #3347 frozen source-isolated READY candidate and five exact successful source-bound statuses not certified. TESTING is not READY.",
+        "New explicit owner Publish needed to release; no live environment changes authorized."
       ],
-      "notes": "Development-only numeric HTML step consistency; no member-data reads, telemetry, Locked target, physical user impact or improved cup-quality claims.",
+      "notes": "R461 safely merged development via #3854 43306c3d8ea38aaf01491e16ca9930fcbcce6c47 with original measured 3-digit+ inputs enabled by HTML step=any; all five tastes, original shot/notes/history, numerical targets, RLS/private/outbox unchanged. PR-head and merged-source exact-app CI SUCCESS, frozen603 SKIPPED; no empirical user/cup study. Original S019 verification and real next-shot efficacy remain separate research gaps.",
       "production_deployed": false
     },
     {
