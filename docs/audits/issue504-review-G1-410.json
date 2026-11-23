@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-410",
+  "status": "SOURCE_ONLY_CONDITIONAL_PENDING_ORDERED_INTEGRATION",
+  "preflight": {
+    "development_sha": "cb70f113626dfb1fc90238a4129fd6b2dd9f43f6",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "verified_by": "Immutable fetched PREFLIGHT.md, same path Git blob decoded bytes equality before all other documents"
+  },
+  "current_branches_at_prewrite": {
+    "development_sha": "cb70f113626dfb1fc90238a4129fd6b2dd9f43f6",
+    "main_sha": "57adc419ed4b106e158435b465971f5986537b41",
+    "release_sha": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5"
+  },
+  "source_boundary": "Complete original native GitHub PR TITLE and BODY literal direct semantic review only. PR reviews, discussions, patches, source files and Actions logs excluded. Original field text is sealed even if historical title is later prefixed.",
+  "source_order": {
+    "after": "G1-409 original PR #2854",
+    "first": 2855,
+    "last": 2862,
+    "next_original_pr": 2863,
+    "canonical_unintegrated_next_pr": 1375
+  },
+  "method": "Direct semantic reading of eight whole original PR title/body fields, followed by separately reproducible literal snapshots, precise word and line ranges, source GitHub refs/status, per-record ownership and disposition. Count whitespace-delimited words and UTF-8 bytes. Archive-added title text not original credit.",
+  "sums": {
+    "original_records": 8,
+    "original_title_words": 75,
+    "original_body_words": 894,
+    "original_combined_words": 969,
+    "original_utf8_bytes": 8470,
+    "closed_merged_archival_candidates": 7,
+    "new_267_source_lines_credited": 0
+  },
+  "records": [
+    {
+      "github_kind": "pull_request",
+      "number": 2855,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2855",
+      "original_title": "fix(#28): prevent owner Google Drive passphrase form false 403 [skip netlify]",
+      "original_body": "**Source-confirmed browser/server header conflict.** The live owner setup GET sets `Referrer-Policy: no-referrer`, so a native navigation form POST may have `Origin: null` (documented MDN behavior). Existing POST requires exact `https://app.dialincollective.com` before checking the valid passphrase, hence recurring 403 even with matching secret. Live Netlify GET 200/POST 403 logs independently corroborate the failure, but do **not** expose the actual Origin request header; no fabricated request-header observation.\n\n**Narrow correction:** Only the owner passphrase form's GET response now uses `Referrer-Policy: same-origin`; this allows browsers to supply the real Origin on same-origin native POST. All OAuth callbacks, token exchange and unrelated pages remain `no-referrer`. Strict Origin verification, timing-safe passphrase match and owner-only `drive.file`/folder proof unchanged. Added regression for the form response header, correct Origin -> 303 Google, rejected `Origin:null` / missing Origin / cross-origin, and OAuth redirect `no-referrer`. New explicit IN_PROGRESS queue item; previously DEPLOYED setup is kept accurately recorded. Production passphrase was subsequently edited after last deploy; new separately authorized release will also refresh Netlify function environment.\n\nSame-commit preflight receipt in scoped #28 journal: development `b3e48350030d9a10ea3b59318b2a7f338eb17658`, `docs/ai/PREFLIGHT.md` Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. No backup/provider/DB writes. CI and READY pending. **Not authorization to publish**. Owner `Get this fixed` + `Find it` authorizes development, not release.",
+      "original_title_word_range": [
+        1,
+        11
+      ],
+      "original_body_word_range": [
+        1,
+        199
+      ],
+      "original_body_physical_line_range": [
+        1,
+        5
+      ],
+      "original_title_words": 11,
+      "original_body_words": 199,
+      "original_combined_words": 210,
+      "original_title_newline_body_utf8_bytes": 1720,
+      "source_version": {
+        "created_at": "2026-11-15T05:24:56Z",
+        "updated_at": "2026-11-15T05:28:52Z",
+        "closed_at": "2026-11-15T05:28:52Z",
+        "merged_at": "2026-11-15T05:28:52Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "810b8144a18fde2fc33e6bf4f165ad6966ea8acc",
+        "base_sha": "b3e48350030d9a10ea3b59318b2a7f338eb17658",
+        "merge_commit_sha": "6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6"
+      },
+      "owner": "#28",
+      "classification": "HISTORICAL_MERGED_OWNER_DRIVE_ORIGIN_FIX",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "Confirmed historical mismatch between no-referrer form GET and strict Origin POST, followed by an intentionally narrow same-origin response-policy correction. The PR admits it did not observe actual request Origin and records CI/production as pending; do not treat a merged fix as live Drive provider acceptance or current backup success."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2856,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2856",
+      "original_title": "docs(#504): G1-268 historical PR #1706–1713 word review [skip netlify]",
+      "original_body": "Documentation-only, immutable source-bound Issue #504 G1-268: direct complete original title/body semantic review of historical PRs #1706–1713 (8 records, 789 Unicode-whitespace original words, 6,970 UTF-8 bytes). One same-commit scoped journal/receipt/conditional ledger `docs/workstreams/issue-504-G1-268.md`, original literal fields and per-item source PR IDs/head+merge SHAs, exact ranges/dispositions. Independently checked three #267 strict original lines25–27 (3/3), zero duplicate code credit. Triaged three failed CI jobs from #28/#33 as deterministic, no reruns or overlapping fixes. Conditional cumulative 1,884 records/363,179 original words only if G1-187–267 predecessor drafts integrate exactly once; central merged baseline remains G1-186 (1,228/292,217). This PR is DRAFT/UNMERGED; DO NOT MERGE until predecessor chain reconciled and exact-source CI verified. Next original PR #1714. No executable, queue, provider, backup, publication or production changes. [skip netlify]",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        118
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 118,
+      "original_combined_words": 127,
+      "original_title_newline_body_utf8_bytes": 1069,
+      "source_version": {
+        "created_at": "2026-11-15T05:38:09Z",
+        "updated_at": "2026-11-15T05:38:09Z",
+        "closed_at": null,
+        "merged_at": null,
+        "state": "open",
+        "merged": false,
+        "draft": true,
+        "head_sha": "0ae0a8502b2cc730351c083f65244ef78550a865",
+        "base_sha": "4922aa906800412d1f5dc448be90378b2679767d",
+        "merge_commit_sha": "fcbe1f93a3f4787e8259e8e14116a565eeb95207"
+      },
+      "owner": "#504",
+      "classification": "OPEN_DRAFT_UNINTEGRATED_AUDIT_EVIDENCE",
+      "disposition": "PRESERVE_OPEN_DRAFT_TITLE",
+      "semantic": "G1-268 metadata-only receipt is conditional and remains open draft; earlier 2026 original #1714 next marker is historical for that substream, not this batch's next original PR. No semantic code credit or merged CI proof."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2857,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2857",
+      "original_title": "docs(#455): R274 source-bound Robusta roast-curve claim review [skip netlify]",
+      "original_body": "Issue #455 Option B research-only. Immutable PREFLIGHT verified at `4922aa906800412d1f5dc448be90378b2679767d`, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` (same-commit journal receipt). Fresh prewrite development parent `67c748f34ed50a7c7b2382d3734684a99debd26b`, unchanged previous canonical ledger blob `9b29290412a03568d59219aa746e4b10a4f85c71`. Two paths only; non-destructive parent-tree commit. Independently read first-party PubMed abstract DOI `10.1016/j.foodchem.2026.150220` and Ferrara author-institution record: 4 Robusta coffees × 3 roast speeds, medium roast target, chemical and descriptive sensory association. **Full original methods, panel raw data, publisher PDF not accessed**; not personal espresso five-rating or improved-cup evidence. Append one unique source, two bounded checks, one P3 research-only HOLD, 153/449/217 -> 154/451/218. No algorithm, policy, user data, SQL/Auth/provider, main/release, queue or publication change; no #267 line review credit. Wait for exact PR-head CI before safe nonforce merge. Set `[skip netlify]` in merge commit title. Scoped same-commit journal records source, preflight, limits, next action.",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        130
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 130,
+      "original_combined_words": 139,
+      "original_title_newline_body_utf8_bytes": 1237,
+      "source_version": {
+        "created_at": "2026-11-15T05:47:33Z",
+        "updated_at": "2026-11-15T05:52:39Z",
+        "closed_at": "2026-11-15T05:52:39Z",
+        "merged_at": "2026-11-15T05:52:38Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "d37e6dafeab0a46966cb79fc14fd82defec7c09a",
+        "base_sha": "67c748f34ed50a7c7b2382d3734684a99debd26b",
+        "merge_commit_sha": "fc45eed37a7e9ec19bebd5cd21ac8be39dbdad1e"
+      },
+      "owner": "#455",
+      "classification": "HISTORICAL_MERGED_RESEARCH_ONLY",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "Robusta 4 by 3 roast-speed abstract and author attribution are limited to associations, not full paper methods/raw panel data, espresso effectiveness or approved policy. Preserve documented uncertainty and delegated research ownership."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2858,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2858",
+      "original_title": "test(issue33): R219 original603 #334/#337 official selected source [skip netlify]",
+      "original_body": "DEVELOPMENT ONLY; no publication or provider data writes. Preflight verified at source `492227fe83e3d223e25b9315f623be571249252f` with `docs/ai/PREFLIGHT.md` blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Atomic source `49f23bb9f67ff8219486a6af2a30d3247bec9daa` includes a same-commit scoped journal, 8 focused positive/adversarial contracts, a guarded current official-product #334/#337 selected-identity/SHA/parser/Add Coffee/Source Review afterproof and event-trigger workflow. Immutable 603-case register, scorer, oracle, and original captures unchanged; no runtime parser change unless red-first source evidence justifies one. R215 pagination gate separately owned, not modified. PR-head real official-source checks and applicable exact-source CI pending; do not mark VERIFIED/READY from a proposed PR. #33 remains OPEN.",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        87
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 87,
+      "original_combined_words": 96,
+      "original_title_newline_body_utf8_bytes": 909,
+      "source_version": {
+        "created_at": "2026-11-15T06:01:59Z",
+        "updated_at": "2026-11-15T06:07:02Z",
+        "closed_at": "2026-11-15T06:07:02Z",
+        "merged_at": "2026-11-15T06:07:01Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "49f23bb9f67ff8219486a6af2a30d3247bec9daa",
+        "base_sha": "492227fe83e3d223e25b9315f623be571249252f",
+        "merge_commit_sha": "d3b9b39d5a932b4161a5ed712166441f197eb2a1"
+      },
+      "owner": "#33",
+      "classification": "HISTORICAL_MERGED_COFFEE_SOURCE_TEST",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "Bounded original603 #334/#337 selected-source checks and contracts describe test scope, not universal 603-case accuracy. Keep unresolved source identity/provenance with #33; do not modify current parser or frozen oracle."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2859,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2859",
+      "original_title": "fix(#28): unblock Chrome/Safari Google Drive authorization handoff [skip netlify]",
+      "original_body": "Owner reproduced apparently inert **Authorize Google Drive** clicks. Live Netlify POSTs returned 303 to Google but initial HTML `Content-Security-Policy: form-action 'self'` blocks external redirects after a form submission in Chromium (cross-browser inconsistency). The accepted passphrase was not the problem.\n\nFix only the owner-only OAuth handoff: successful password POST returns CSP-safe no-store HTML; nonce-bound script performs top-level navigation to exact Google authorization URL; visible direct link remains if navigation is blocked. Strict Origin, password, PKCE, minimal `drive.file`, signed session cookies, no-referrer, private folder and existing backups unchanged. Regression test covers browser handoff, link, cookie, no secret leakage and original CSP.\n\n**Preflight** live development `d3b9b39d5a932b4161a5ed712166441f197eb2a1`, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`; same-commit journal. **No publication authorized** by this fix; merge only after required checks, then prepare isolated READY queue item. Google Picker's separate third-party-cookie error requires follow-up evidence; do not misstate it resolved.",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        137
+      ],
+      "original_body_physical_line_range": [
+        1,
+        5
+      ],
+      "original_title_words": 9,
+      "original_body_words": 137,
+      "original_combined_words": 146,
+      "original_title_newline_body_utf8_bytes": 1226,
+      "source_version": {
+        "created_at": "2026-11-15T06:20:12Z",
+        "updated_at": "2026-11-15T06:26:31Z",
+        "closed_at": "2026-11-15T06:26:31Z",
+        "merged_at": "2026-11-15T06:26:31Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "3cf590925a8758f6dd3321bbce7a017843fa8779",
+        "base_sha": "d3b9b39d5a932b4161a5ed712166441f197eb2a1",
+        "merge_commit_sha": "59259207f257e3d35657b3db968eabe20a1e8a71"
+      },
+      "owner": "#28",
+      "classification": "HISTORICAL_MERGED_OWNER_DRIVE_CSP_HANDOFF",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "CSP form-action self may prevent cross-site redirect after POST despite 303, separate from wrong passphrase. Nonce navigation and direct-link fallback were narrow fixes; Google Picker cookie error and real provider acceptance remain separate and are not claimed resolved."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2860,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2860",
+      "original_title": "docs(#267): V11AO original frozen F215:1100–1166 direct semantic review [skip netlify]",
+      "original_body": "Development-only #267 V2 strict 67 additional direct AI source-line assessments at immutable original F215:1100–1166. Each literal individually interpreted and tied to source Git blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf; unchanged pinned/live archival counterpart, 0 current executable and 0 post-pin delta credit. Includes SAME-COMMIT V11AO scoped journal and immutable preflight d3b9b39d5a932b4161a5ed712166441f197eb2a1 / 2fb236bbfa6bac48513eeb3bd157b260853af06d. Old F001:1–41 and V11AN:1030–1099 revalidated without duplicate counts. Docs-only; no runtime/source, production/provider, backups, release or data changes. No unverified tests labeled passed; #267 stays OPEN. Next F215:1167.",
+      "original_title_word_range": [
+        1,
+        10
+      ],
+      "original_body_word_range": [
+        1,
+        75
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 10,
+      "original_body_words": 75,
+      "original_combined_words": 85,
+      "original_title_newline_body_utf8_bytes": 791,
+      "source_version": {
+        "created_at": "2026-11-15T06:21:25Z",
+        "updated_at": "2026-11-15T06:22:23Z",
+        "closed_at": "2026-11-15T06:22:23Z",
+        "merged_at": "2026-11-15T06:22:23Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "4a68bbf2ac06131ee2b54e1bfb5a4378c4dc338e",
+        "base_sha": "d3b9b39d5a932b4161a5ed712166441f197eb2a1",
+        "merge_commit_sha": "84c5cedafc852427fcb50845854c833101e212cd"
+      },
+      "owner": "#267",
+      "classification": "HISTORICAL_MERGED_DELEGATED_FROZEN_REVIEW",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "V11AO covers frozen F215 lines1100–1166 only under #267, not #504 code credit. The immutable frozen/pinned parity is historical evidence and no current runtime defect is established here."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2861,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2861",
+      "original_title": "docs(#267): V11AP original F215:1167–1235 direct semantic evidence [skip netlify]",
+      "original_body": "Development-only strict source audit: 69 new disjoint original frozen physical lines F215:1167–1235 (Gnosis Red Bourbon DECAF roaster/elevation), each separately interpreted and bound to original/pinned/live Git blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. Same-commit scoped preflight development 84c5cedafc852427fcb50845854c833101e212cd, PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Prior V11AO ended F215:1166 with no overlap. No code, provider, deployment, backup, production, database or member mutation; original603 untouched. No active bug claimed from history. Test/CI not labeled PASS before readback. Issue #267 OPEN; next F215:1236.",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        72
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 72,
+      "original_combined_words": 81,
+      "original_title_newline_body_utf8_bytes": 747,
+      "source_version": {
+        "created_at": "2026-11-15T06:23:04Z",
+        "updated_at": "2026-11-15T06:23:48Z",
+        "closed_at": "2026-11-15T06:23:47Z",
+        "merged_at": "2026-11-15T06:23:47Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "c906b6a82964fa81e7bb6aef073ba999119cba87",
+        "base_sha": "84c5cedafc852427fcb50845854c833101e212cd",
+        "merge_commit_sha": "e53100d59bd2137ae847e05baea71f6f009bf8b4"
+      },
+      "owner": "#267",
+      "classification": "HISTORICAL_MERGED_DELEGATED_FROZEN_REVIEW",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "V11AP frozen F215 lines1167–1235 follows V11AO without apparent numerical overlap. Original Gnosis source semantics are #267-owned, not currently verified source behavior."
+    },
+    {
+      "github_kind": "pull_request",
+      "number": 2862,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2862",
+      "original_title": "docs(#267): V11AQ direct original F215:1236–1297 semantic evidence [skip netlify]",
+      "original_body": "Development-only V2 strict 62 new nonoverlap original frozen lines F215:1236–1297, each source-bound and individually assessed with original source/pinned/live Git blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. Immutable preflight same-commit development e53100d59bd2137ae847e05baea71f6f009bf8b4 / Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. F215 predecessor V11AP ended 1235, zero duplicate credit. Historical Peru 1500–2350 and Dominican 1300 elevations: numeric value equivalence independent of strict score, production parser NOT tested, no active bug asserted. Docs-only; no app code, data, release, backup, provider or deployment change. #267 stays OPEN, next F215:1298.",
+      "original_title_word_range": [
+        1,
+        9
+      ],
+      "original_body_word_range": [
+        1,
+        76
+      ],
+      "original_body_physical_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 76,
+      "original_combined_words": 85,
+      "original_title_newline_body_utf8_bytes": 771,
+      "source_version": {
+        "created_at": "2026-11-15T06:24:26Z",
+        "updated_at": "2026-11-15T06:25:07Z",
+        "closed_at": "2026-11-15T06:25:07Z",
+        "merged_at": "2026-11-15T06:25:07Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_sha": "135438cc09bd96f4a90de61ba490d3cbf3d94687",
+        "base_sha": "e53100d59bd2137ae847e05baea71f6f009bf8b4",
+        "merge_commit_sha": "c832cd2e92db4408939edd1906e59503b882aa16"
+      },
+      "owner": "#267",
+      "classification": "HISTORICAL_MERGED_DELEGATED_FROZEN_REVIEW",
+      "disposition": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY",
+      "semantic": "V11AQ frozen F215 lines1236–1297 follows V11AP without apparent numerical overlap; numerical elevation equivalence is not independent parser verification. Preserve evidence and do not double-count source lines."
+    }
+  ],
+  "delegated_267_check": {
+    "receipt_path": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C70-96-100-C71-1-25-20261121-V13BN.json",
+    "receipt_blob_sha": "ee84c9a056acce1bdecc1a64795266643d87efeb",
+    "pinned_source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "source_path": "scripts/audit/source-release-dossier.mjs",
+    "source_blob_sha": "0d5244e6cb1b00d7be17cf121231ff36f3c0f395",
+    "verified_exact_physical_lines": [
+      23,
+      24
+    ],
+    "verified_literal_matches": "2/2",
+    "new_code_lines_credited": 0,
+    "global_267_complete": false
+  },
+  "findings": "Seven closed merged history records can be archived by title only after source receipt is immutable and then read back. One OPEN DRAFT #2856 must remain current. #28 historical Origin/CSP fixes do not verify present owner Drive acceptance; #455 abstract is not espresso-policy evidence; #33 original603 tests are not corpus completion; #267 frozen review is owned separately.",
+  "ci_triage": "Prior #33 original603 selected-heading failure was deterministic and already tracked; no new failure log adjudicated in this bounded PR metadata read; no transient job rerun authorized.",
+  "functional_tests": "NOT_RUN_DOCS_ONLY_NOT_PASS",
+  "exact_pr_head_ci": "NOT_VERIFIED",
+  "merged_source_ci": "NOT_RUN",
+  "provider": "NOT_APPLICABLE",
+  "remainder": "All PR discussion/reviews/diffs, other issues/comments, workflow job logs/artifacts, tags/releases/commits/trees/binary metadata, live content drift, remaining original RELEASE_QUEUE suffix and delegated #267 baseline remain.",
+  "canonical_coverage_prior": {
+    "integrated_batches": 226,
+    "github_objects": 1548,
+    "github_original_words": 327503,
+    "original_file_lines": 7919,
+    "original_file_words": 60754
+  },
+  "integrity_notes": "G1-187 onward detached/draft source receipts not canonical until ordered native/CI integration, no double-credit."
+}
