@@ -2,7 +2,7 @@ import test from 'node:test';
 import {createHash as cryptoCreateHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
- prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt} from '../scripts/release/precertify-ready-source.mjs';
+ prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt,assertReadyFirstParentDeployable} from '../scripts/release/precertify-ready-source.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'ready',owner_source:'owner approval',
  state:'READY',merged_source_sha:B,scope_paths:['site/main.js'],
@@ -43,6 +43,22 @@ test('#3347 pre-certification skips only source-proven unmerged same-file labels
   [one.id,second.id],['site/main.js'],
   {...exact,isAncestor:()=>{throw Error('missing commit');}}),/ancestry\/parity unavailable/,
   'ambiguously ordered co-selected READY merges must fail closed');
+});
+test('#3667 QA-only first-parent READY pin fails before duplicate frozen candidate CI',()=>{
+ assert.equal(assertReadyFirstParentDeployable([one],sha=>{
+  assert.equal(sha,B);return ['tests/source-hygiene.test.mjs','site/main.js'];
+ }),true);
+ for(const paths of [['tests/source-hygiene.test.mjs'],['docs/workstreams/issue-3851.md'],
+  ['site/unrelated.js']])
+  assert.throws(()=>assertReadyFirstParentDeployable([one],()=>paths),
+   /no first-parent changed owned deployable path/);
+ assert.throws(()=>assertReadyFirstParentDeployable([one],()=>null),/Git diff unavailable/);
+ assert.throws(()=>assertReadyFirstParentDeployable([one],()=>[null]),/Git diff unavailable/);
+ assert.throws(()=>assertReadyFirstParentDeployable([{...one,merged_source_sha:null}],()=>['site/main.js']),
+  /source identity missing/);
+ const another={...one,id:'DIC-Q-102',scope_paths:['site/another.js']};
+ assert.equal(assertReadyFirstParentDeployable([one,another],()=>
+  ['site/main.js','site/another.js']),true,'co-selected items may each own a subset');
 });
 test('#3347 candidate name is stable across unready changes, but changes with READY bytes',()=>{
  const b=frozenReadyBranch(q,[one],B);
