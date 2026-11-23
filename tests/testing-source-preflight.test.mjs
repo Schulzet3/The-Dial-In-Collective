@@ -259,3 +259,24 @@ test('phase 2b cheap audit import-closure fails shut on absent Git read evidence
  assert.throws(()=>assertFrozenAuditServerImportClosure({
   paths:['scripts/audit/fail.mjs'],readSource:()=>'',hasPath:null}),/evidence unavailable/);
 });
+
+
+import {reviewTestingQaSupport,TESTING_QA_SUPPORT_PATHS} from '../scripts/release/stage-testing-provisional-candidate.mjs';
+test('TESTING candidate QA-only support requires one independently merged exact Git source and six reviewed paths',()=>{
+ const QA='c'.repeat(40),DEV='d'.repeat(40),PUB='e'.repeat(40);
+ const obj=(ref)=>ref===PUB?'100644:'+'1'.repeat(40):'100644:'+'2'.repeat(40);
+ const p={qaSourceSha:QA,developmentSha:DEV,publishedSha:PUB,
+  restoredPaths:[...TESTING_QA_SUPPORT_PATHS,'site/cloud/main.js'],
+  selectedPaths:['supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql'],
+  firstParentPaths:()=>[...TESTING_QA_SUPPORT_PATHS,'docs/workstreams/issue-3889.md'],
+  sourceObjectAt:(ref,path)=>obj(ref),isAncestor:()=>true};
+ const result=reviewTestingQaSupport(p);
+ assert.deepEqual(result.map(x=>x.path),[...TESTING_QA_SUPPORT_PATHS]);
+ assert.equal(result.every(x=>x.source_sha===obj(QA)),true);
+ assert.deepEqual(reviewTestingQaSupport({...p,qaSourceSha:null}),[]);
+ assert.throws(()=>reviewTestingQaSupport({...p,isAncestor:()=>false}),/not in current development ancestry/);
+ assert.throws(()=>reviewTestingQaSupport({...p,firstParentPaths:()=>[...TESTING_QA_SUPPORT_PATHS,'site/cloud/main.js']}),/unreviewed executable/);
+ assert.throws(()=>reviewTestingQaSupport({...p,restoredPaths:p.restoredPaths.slice(1)}),/not independently isolated/);
+ assert.throws(()=>reviewTestingQaSupport({...p,selectedPaths:[...p.selectedPaths,TESTING_QA_SUPPORT_PATHS[0]]}),/selected, absent/);
+ assert.throws(()=>reviewTestingQaSupport({...p,sourceObjectAt:()=>obj(PUB)}),/reviewed\/current/);
+});

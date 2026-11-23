@@ -20,6 +20,42 @@ const ordered=a=>[...new Set(a)].sort();
 const same=(a,b)=>JSON.stringify(ordered(a))===JSON.stringify(ordered(b));
 const validPath=p=>typeof p==='string'&&SAFE.test(p)&&!p.startsWith('/')&&!p.includes('..')&&!p.includes('//');
 const hold=s=>{throw Error('TESTING frozen source HOLD: '+s);};
+// Only these independently reviewed NONSHIPPED tests/QA scripts may remain
+// newer than the published baseline in a TESTING candidate. A distinct merged
+// development commit must have changed exactly these executable paths.
+export const TESTING_QA_SUPPORT_PATHS=Object.freeze([
+ 'scripts/audit/issue33-original603-focused-source-review.mjs',
+ 'tests/helpers/release-published-restoration.mjs',
+ 'tests/issue2258-member-approval-notices.test.mjs',
+ 'tests/netlify-credit-guard.test.mjs',
+ 'tests/preflight-contract.test.mjs',
+ 'tests/required-check-workflows.test.mjs'
+]);
+export function reviewTestingQaSupport({qaSourceSha,developmentSha,publishedSha,
+ restoredPaths,selectedPaths,firstParentPaths,sourceObjectAt,isAncestor}={}){
+ if(qaSourceSha==null)return [];
+ if(!SHA.test(qaSourceSha)||!SHA.test(developmentSha||'')||!SHA.test(publishedSha||'')||
+    !Array.isArray(restoredPaths)||!Array.isArray(selectedPaths)||
+    typeof firstParentPaths!=='function'||typeof sourceObjectAt!=='function'||
+    typeof isAncestor!=='function')hold('QA support exact Git source proof unavailable');
+ if(!isAncestor(qaSourceSha,developmentSha))
+  hold('QA support commit not in current development ancestry');
+ let first;
+ try{first=firstParentPaths(qaSourceSha);}catch{hold('QA support first-parent source diff unavailable');}
+ if(!Array.isArray(first)||!same(first.filter(p=>REVIEWED.test(p)),TESTING_QA_SUPPORT_PATHS))
+  hold('QA support commit contains unreviewed executable paths');
+ return TESTING_QA_SUPPORT_PATHS.map(path=>{
+  if(selectedPaths.includes(path)||!restoredPaths.includes(path))
+   hold('QA support path is selected, absent or not independently isolated: '+path);
+  let qa,dev,pub;
+  try{qa=sourceObjectAt(qaSourceSha,path);dev=sourceObjectAt(developmentSha,path);
+      pub=sourceObjectAt(publishedSha,path);}
+  catch{hold('QA support Git object cannot be read: '+path);}
+  if(!/^100(?:644|755):[0-9a-f]{40}$/.test(qa||'')||qa!==dev||qa===pub)
+   hold('QA support must be exact reviewed/current new test bytes: '+path);
+  return {path,source_sha:qa};
+ });
+}
 function reader(repoDir){
  return (args,{env=process.env,input,trim=true}={})=>{
   const value=execFileSync('git',args,{cwd:repoDir,env,input,encoding:'utf8',
@@ -87,7 +123,7 @@ export function assertFrozenAuditServerImportClosure({paths,readSource,hasPath}=
 }
 
 // NEVER publishes a branch. Returns a local immutable Git object for readback.
-export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflightBlobSha}={}){
+export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflightBlobSha,qaSourceSha=null}={}){
  validatePlan(plan);
  if(!SHA.test(preflightBlobSha||''))hold('exact development preflight blob required');
  const git=reader(repoDir);
@@ -123,6 +159,16 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
  for(const path of plan.restored_to_published_paths)
   if(at(plan.development_sha,path)===at(plan.published_sha,path))
    hold('restoration has no development drift: '+path);
+ const qaSupport=reviewTestingQaSupport({qaSourceSha,
+  developmentSha:plan.development_sha,publishedSha:plan.published_sha,
+  restoredPaths:plan.restored_to_published_paths,
+  selectedPaths:plan.selected_blobs.map(x=>x.path),
+  firstParentPaths:sha=>changed(sha+'^',sha),
+  sourceObjectAt:at,
+  isAncestor:(a,b)=>{try{git(['merge-base','--is-ancestor',a,b]);return true;}
+                     catch{return false;}}});
+ const qaPaths=qaSupport.map(x=>x.path);
+ const actuallyRestored=plan.restored_to_published_paths.filter(p=>!qaPaths.includes(p));
  const temp=mkdtempSync(join(tmpdir(),'dic-testing3889-'));
  try{
   const env={...process.env,GIT_INDEX_FILE:join(temp,'index'),
@@ -131,7 +177,7 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
    GIT_COMMITTER_NAME:'DIC nonpublishing TESTING evidence',
    GIT_COMMITTER_EMAIL:'dic-testing-candidate@users.noreply.github.com'};
   git(['read-tree',plan.development_sha],{env});
-  for(const path of plan.restored_to_published_paths){
+  for(const path of actuallyRestored){
    const object=at(plan.published_sha,path);
    if(object){
     const [mode,sha]=object.split(':');
@@ -143,8 +189,9 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
    baseline_queue_blob:plan.baseline_blob,development_source_sha:plan.development_sha,
    published_source_sha:plan.published_sha,selected_testing_item_id:plan.selected_testing_item_id,
    merged_source_sha:plan.merged_source_sha,plan_fingerprint:plan.fingerprint,
-   selected_blobs:plan.selected_blobs,restored_to_published_paths:plan.restored_to_published_paths,
-   status:'FROZEN_SOURCE_ONLY_CI_NOT_RUN',selected_ready_item_ids:[],
+   selected_blobs:plan.selected_blobs,restored_to_published_paths:actuallyRestored,
+   qa_compatibility_source_sha:qaSourceSha,qa_compatibility_blobs:qaSupport,
+   status:qaSupport.length?'FROZEN_SOURCE_WITH_QA_COMPATIBILITY_CI_NOT_RUN':'FROZEN_SOURCE_ONLY_CI_NOT_RUN',selected_ready_item_ids:[],
    certified_ready_count:0,publication_authorized:false};
   const line='DIC_PREFLIGHT_VERIFIED development_sha='+plan.development_sha+
     ' preflight_blob_sha='+preflightBlobSha;
@@ -155,7 +202,8 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
     '- Published tested base: '+plan.published_sha+'\n'+
     '- Selected merge source: '+plan.merged_source_sha+'\n'+
     '- Plan fingerprint: '+plan.fingerprint+'\n'+
-    '- Restored unrelated executable paths: '+plan.restored_to_published_paths.length+'\n'+
+    '- Restored unrelated executable paths: '+actuallyRestored.length+'\n'+
+    '- Independently reviewed nonshipped QA support: '+qaSupport.length+' from '+(qaSourceSha||'none')+'\n'+
     '- Local Git tree only; candidate five native checks NOT RUN, NOT READY, NOT publishable.\n';
   for(const [path,content] of [[FROZEN_TESTING_MANIFEST,JSON.stringify(manifest,null,2)+'\n'],[JOURNAL,journal]]){
    const sha=git(['hash-object','-w','--stdin'],{env,input:content});
@@ -184,22 +232,24 @@ export function freezeProvisionalTestingPlan({repoDir=process.cwd(),plan,preflig
    hold('frozen manifest Git blob readback mismatch');
   for(const {path,source_sha} of plan.selected_blobs)
    if(at(candidateSha,path)!==source_sha)hold('selected Git object changed at freeze: '+path);
-  for(const path of plan.restored_to_published_paths)
+  for(const path of actuallyRestored)
    if(at(candidateSha,path)!==at(plan.published_sha,path))
     hold('unready Git object was not fully restored: '+path);
+  for(const {path,source_sha} of qaSupport)
+   if(at(candidateSha,path)!==source_sha)hold('QA support blob was not retained from reviewed source: '+path);
   if(!same(changed(plan.published_sha,candidateSha).filter(p=>REVIEWED.test(p)),
-    plan.selected_blobs.map(x=>x.path)))
+    [...plan.selected_blobs.map(x=>x.path),...qaPaths]))
    hold('candidate includes unrelated executable source or omits selected tests');
   if(!same(changed(plan.development_sha,candidateSha),
-    [...plan.restored_to_published_paths,FROZEN_TESTING_MANIFEST,JOURNAL]))
+    [...actuallyRestored,FROZEN_TESTING_MANIFEST,JOURNAL]))
    hold('candidate commit changed unreviewed paths');
   return {status:'FROZEN_LOCAL_SOURCE_ONLY_NO_REF_OR_CI',kind:FROZEN_TESTING_KIND,
    candidate_sha:candidateSha,tree_sha:treeSha,development_sha:plan.development_sha,
    published_sha:plan.published_sha,selected_testing_item_id:plan.selected_testing_item_id,
-   manifest,publication_authorized:false,certified_ready_count:0};
+   manifest,qa_support_blobs:qaSupport,publication_authorized:false,certified_ready_count:0};
  }finally{rmSync(temp,{recursive:true,force:true});}
 }
-export function prepareProvisionalTestingCandidate({repoDir=process.cwd(),developmentSha,selectedId}={}){
+export function prepareProvisionalTestingCandidate({repoDir=process.cwd(),developmentSha,selectedId,qaSourceSha=null}={}){
  if(!SHA.test(developmentSha||''))hold('exact live development SHA required');
  const inventory=inspectTestingBaseline({repoDir,developmentSha});
  const git=reader(repoDir);
@@ -215,12 +265,12 @@ export function prepareProvisionalTestingCandidate({repoDir=process.cwd(),develo
  const plan=planProvisionalTestingCandidate({inventory,baselineQueue,liveQueue,selectedId,
   developmentChangedPaths:changes(inventory.published_source_sha,developmentSha),
   firstParentChangedPaths:sha=>changes(sha+'^',sha),sourceObjectAt:at});
- return freezeProvisionalTestingPlan({repoDir,plan,preflightBlobSha:inventory.preflight_blob_sha});
+ return freezeProvisionalTestingPlan({repoDir,plan,preflightBlobSha:inventory.preflight_blob_sha,qaSourceSha});
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
-  if(process.argv.length!==4)hold('usage: stage-testing-provisional-candidate.mjs <development SHA> <one TESTING ID>');
+  if(![4,5].includes(process.argv.length))hold('usage: stage-testing-provisional-candidate.mjs <development SHA> <one TESTING ID> [reviewed QA merge SHA]');
   console.log(JSON.stringify(prepareProvisionalTestingCandidate({
-   developmentSha:process.argv[2],selectedId:process.argv[3]})));
+   developmentSha:process.argv[2],selectedId:process.argv[3],qaSourceSha:process.argv[4]||null})));
  }catch(e){console.error('[DIC #3889 candidate HOLD] '+e.message);process.exitCode=2;}
 }
