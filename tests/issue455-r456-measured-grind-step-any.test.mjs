@@ -55,8 +55,8 @@ test('R456 Edit Shot retains non-tenth original grind, five tastes and private n
 test('R456 fresh blank and arbitrary fractional number controls have no tenth-step grid',()=>{
  const blank=field('Grind Setting','grindSetting','',{required:true,type:'number',step:'any'});
  const fractional=field('Grind Setting','grindSetting','0.155',{required:true,type:'number',step:'any'});
- assert.match(blank,/value="" required step="any" inputmode="decimal"/);
- assert.match(fractional,/value="0\.155" required step="any" inputmode="decimal"/);
+ assert.match(blank,/value="" required\s+step="any" inputmode="decimal"/);
+ assert.match(fractional,/value="0\.155" required\s+step="any" inputmode="decimal"/);
  assert.doesNotMatch(blank,/\bmin=/);
  assert.doesNotMatch(blank,/step="\.1"/);
 });

@@ -1,3 +1,12 @@
+## November 23, 2026 UTC — #455 R456 focused pre-CI test assertion correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- **Source/test context:** real `site/lib/ui.js::field` uses an optional placeholder slot, leaving two valid HTML spaces before the step attribute when placeholder is omitted. Initial R456 test had two fragile assertions demanding exactly one space. This SAME-COMMIT test-only correction changes those exact patterns to a whitespace-flexible `\\s+` while still strictly requiring `step="any" inputmode="decimal"`, blank and non-tenth measured values. No app source, queue, test scope, five ratings, private notes, offline records, numeric recommendation grid, settings or Locked policy changed.
+- **Evidence:** immutable current development SHA `310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115`, verified PREFLIGHT Git blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`; parent PR source `5c3096a802004507a2b1c403c92fd091800f7b3d`; previous test Git blob `d53efbb5675d8b50d5a0e96d764f40722a7b90f3`, journal Git blob `dd21929c0b4852945ff4b546a1651d7803ece229`. Initial PR-head CI was still in progress and cannot be counted PASS. All new focused/hosted Node22, browser/mobile/offline/a11y/governance checks need actual readback before merge. No provider/member/production writes, publication, empirical cup-quality claims or fabricated browser outcomes. Next: inspect final PR-head CI and repair failures if any; remain TESTING.
+
+---
+
 ## November 23, 2026 UTC — #455 R456 measured Log/Edit Shot grinder-input HTML-step consistency [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
