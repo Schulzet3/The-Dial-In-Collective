@@ -1250,3 +1250,15 @@ DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 
 - Main parent: 1c7f77844e899776d2f866f9c824a4a0cba58d56
 - Development grant/cert head: 1b033474d47e2957f324a1e8113b21810875fb3d
 - Tested immutable candidate: release-candidates/ready3347-46b08c73d86cc4574552; four exact successful native push workflows, five named jobs; previous candidate failed and excluded. No SQL/Edge DB writes. One-use controller and one Netlify build only, no direct provider edits.
+
+## DIC-20261123-INSTANT-3851-R2 controller request [skip netlify]
+- Release ID: DIC-20261123-INSTANT-3851-R2
+- Tested source: 2d22d448160d428a977f06482323646b92818fcf
+- Mode: publish
+- Owner source: Owner November 22, 2026 at 23:29 America/Denver, this chat: 'Build it, test it, implement it, and deploy it. You have my approval.' Exactly ONE return-member #3851 instant coffee first-paint release; old unclaimed failed-before-claim request superseded and not replayed, no unrelated READY items or future releases.
+- Main parent: 2e95ca715b824f5de35c446a78743a4231be4a71
+- Development grant/cert head: a43a201a9ed92e804b14d96a3e69530200a8c612
+- PREFLIGHT at live development: c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; actual development SHA a43a201a9ed92e804b14d96a3e69530200a8c612 verified before request.
+- R2 immutable source branch native five exact completed SUCCESS: approval 45129746102; sql 45129745970; cloud-tests plus mobile-browser-qa 45129745953; validate 45129745980. READY source pin a9303f97d4aa0ae4e6ead4fe64283537821c8fc9 first-parent published d4af1c4e, changed app HTML and main.js; 522 other unfinished paths isolated by source receipt 45129596076. Independent READY approval latest 45130200066 and scoped grant a43a201a9ed92e804b14d96a3e69530200a8c612.
+- Last request DIC-20261123-INSTANT-3851 controller 45129045714 FAILED BEFORE CLAIM and grant was marked SUPERSEDED. Readback showed unchanged release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264, Netlify deploy 6b0344fd039acce2c0364f2b READY/current and no #3851 consumption. This is a single recovery route, not a second publication.
+- One Git-connected Netlify production build only if guarded main push controller permits; no manual/direct provider publisher, SQL/Edge/private data writes, force, unrelated items or grant replay. Verify exact Git/Netlify postflight before DEPLOYED.
