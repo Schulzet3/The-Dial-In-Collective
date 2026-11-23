@@ -1,3 +1,10 @@
+## November 23, 2026 UTC — #455 R461 measured fraction Log/Edit Shot step fix merged; TESTING [skip netlify]
+
+- [PR #3854](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3854) nonforce [skip netlify] merged `43306c3d8ea38aaf01491e16ca9930fcbcce6c47`. Measured dose/yield/time numeric HTML step now `any` for already-model-valid original fractional readings; grinder, all five tastes, validation ranges and Locked one-change recommendations unchanged. Three new R461 actual CloudApp/model regressions and updated R456 PASS. Exact PR-head Node22/cloud/UX/mobile/offline/SQL/security/governance CI SUCCESS; original603 SKIPPED, not PASS.
+- Exact merged-source Node22/build 45126206309, cloud/browser/mobile/offline 45126206379, governance 45126206347, imported 45126206518 and selected 45126206367 all COMPLETED SUCCESS. Queue `DIC-Q-455-r461-measured-dose-yield-time-step-any` **TESTING**; independent #3347 candidate certification/five statuses and new owner Publish remain required. No production provider change, empirical espresso-quality improvement or user-device impact claimed. S019 and observed recommendation effectiveness remain open.
+
+---
+
 ## November 23, 2026 UTC — #455 R461 fractional measured Log/Edit Shot inputs, SAFE development proposal; CI PENDING [skip netlify]
 
 - DIC_PREFLIGHT_VERIFIED development_sha=4b7b3f85ea2992486c37bfb908a734bcdb22780d preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f. Owner #455 Option B R460 source-backed discrepancy: three measured dose/yield/time form inputs changed from step .1 to any, preserving real model bounds, existing grinder, five ratings, original measurements/notes and private history. Correct prior R456 test and add focused R461 three-case real CloudApp/model synthetic regressions.
