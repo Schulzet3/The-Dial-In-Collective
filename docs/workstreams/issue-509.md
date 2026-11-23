@@ -1,3 +1,14 @@
+# Issue #509 R469 — 400 new native catalog comment meanings [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=d772b433be4e5d01ed734699ecc2a89685cf4c12 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC / November 22 Denver. Verified immutable GitHub development preflight by independently recomputing the Git blob SHA from its exact content before any other task/provider read. Read-only Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY, PostgreSQL 17.11.0.003; main 1c7f77844e899776d2f866f9c824a4a0cba58d56; release/production 5ef0e190237a0fa8e391b086c5baeaaa962ae264.
+
+**New direct, complete catalog-comment semantics:** Individually read all 400 ordered live pg_description entries **ranks 2201–2600/5344**, **10566 original description characters**. Exact provider OID, function typed identity, all original description words, MD5, 1-end character range, checked semantic category and object-level interpretation/retention in [append-only R469 audit ledger](../audits/issue509-r469-core-comments-2201-2600-20261123.json). 400 distinct pg_catalog INTERNAL functions; descriptions include JSONB and text-search operators, typed enum/network/index helpers, catalog introspection and server maintenance. Dangerous file/large-object/WAL/pg_upgrade/pg_promote declarations were **not executed**. Native compiled implementation source remains UNVERIFIED. Prior #267 GitHub source line review is not duplicated, and prior catalog-comment ranges remain intact. Provider total rechecked at 5,344.
+
+**Disposition:** No new reproducible DIC behavior defect, consumer-proven redundant application object or safe source removal in this slice. Built-in compatibility helpers retained. No SQL/Edge/app/test/CI modification; docs-only CI NOT_APPLICABLE, not PASS. Previously identified Edge verifier parser deployment drift remains owner-Publish gated and already alerted; R461 project_shot COMMENT migration stays TESTING pending #3347 source-isolated certification. No production database/data/Auth/Storage/Edge/config, main/release, Publish, backup, billing or task schedule changes. Full Supabase baseline **IN_PROGRESS**, exact next unreviewed catalog-comment cursor **rank 2601/5344, char 1**. Owner-action-only alert policy unchanged.
+
+---
+
 # Issue #509 R468a — per-OID interpretation precision corrections [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=7978912d73d06171c6bf06737f274e6475874319 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
