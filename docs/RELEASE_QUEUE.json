@@ -10,25 +10,41 @@
     {
       "id": "DIC-Q-455-r462-optional-measured-temperature-step-any",
       "issue": 455,
-      "pr": null,
+      "pr": 3861,
       "title": "Allow measured fractional optional brew temperature in Log/Edit Shot HTML",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "2f9228ed1fe07654896147472597c917a821a8d7",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=adc45e555c46cff49f01f4c2ee41dee7ce28df38 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; original CloudApp Git blob bfa0ddf1a80f8d33560aac092e8f2453c2d54ba3; Locked Master §14.7 and current model validateShot allow optional actual temperature.",
       "tests": [
-        "Source negative: measured optional temperature uses step='1' despite model accepting 70–100 C fractional actual readings; native stepMismatch possible for 93.25 C / 200.5 F; form novalidate, so blocked Save or member impact NOT established.",
-        "R462 four actual-module synthetic new/edit/hidden/valid-negative regression cases authored, EXECUTION and exact-source CI PENDING, NOT PASS.",
-        "Change only actual optional temperature field step to any; already copied recommendation format/bounds and all five taste scales, measured originals/notes, setup/feed/style/privacy untouched."
+        "Original current Log Shot optional measured temperature step='1' native HTML constraint mismatched model-accepted fractional actual °C/F; novalidate, so Save blocking or physical member harm unproven. One source field changed to step='any'; display rounding and physical model bounds unchanged.",
+        "Exact PR #3861 head 7dc4a89ad39989089162dbb6cf5f03374cd9108b: ALL FOUR R462 named synthetic Log/Edit/hidden/temperature/model positive-negative cases PASS in Cloud job 137553605422; Cloud shard 3024 PASS /0 FAIL /0 SKIP, Node22 validate shard 1711 PASS /0 FAIL /6 SKIP, governance 1517 PASS /0 FAIL /0 SKIP.",
+        "PR-head applicable CI completed SUCCESS: Node22/build 45133317969; cloud/browser/mobile/offline 45133317915; approval 45133317857; isolated SQL 45133317908; security 45133317954; selected dependency 45133317992, R171 45133317943 and R172 45133317861. Frozen original603 45133317889 SKIPPED, NOT PASS.",
+        "Nonforce squash [skip netlify] PR #3861 merged development 2f9228ed1fe07654896147472597c917a821a8d7, one parent adc45e555c46cff49f01f4c2ee41dee7ce28df38. All five exact merged source/test/queue/journal/status Git blobs equal PASSING PR head; only five intended changed paths.",
+        "Exact merged-source push CI ALL COMPLETED SUCCESS: Node22/build 45133574633, Cloud/browser/mobile/offline 45133574695 (R462 four named PASS again, cloud 3024 PASS/0 FAIL/0 SKIP), approval 45133574660, selected dependency 45133574655 and R171 45133574613; no redundant SQL/security reruns for unchanged code."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        45133317969,
+        45133317915,
+        45133317857,
+        45133317908,
+        45133317954,
+        45133317992,
+        45133317943,
+        45133317861,
+        45133574633,
+        45133574695,
+        45133574660,
+        45133574655,
+        45133574613
+      ],
       "blockers": [
-        "Run applicable exact-source Node22, Cloud/browser/mobile/offline/accessibility, approval and source security CI; repair failures and nonforce merge with readback before any integrated-success claim.",
-        "Independent #3347 frozen source-isolated five-success READY certification pending. Publish requires a separate NEW owner instruction."
+        "Independent #3347 source-isolated frozen READY-candidate plus five applicable exact-source successful checks not yet certified; development TESTING is NOT READY.",
+        "New owner Publish command remains mandatory to release. No production/provider access or espresso-cup effectiveness measured."
       ],
-      "notes": "Development-only; no new numeric targets, measured quality outcomes, telemetry, member data, production provider effects, or S019 scientific verification.",
+      "notes": "Merged development source only via PR #3861, SHA 2f9228ed1fe07654896147472597c917a821a8d7. Original measured fractional optional temperature preserved; all five tastes/notes/History and approved recommendation precision/policy unchanged. Exact merged R462 four regressions and applicable source-bound CI PASS; independent READY still pending. Original S019 and optional consented same-coffee next-shot outcomes unverified. No deployment, production/member/telemetry changes.",
       "production_deployed": false
     },
     {
