@@ -1,3 +1,14 @@
+# Issue #509 R473 — all 809 operator metadata definitions directly reviewed [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2f9228ed1fe07654896147472597c917a821a8d7 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-23 UTC. Live development SHA 2f9228ed1fe07654896147472597c917a821a8d7 and immutable verified PREFLIGHT blob c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f fetched before any other GitHub/provid­er reads. Concurrent development Git base e33acea37ef8cbd78d9250f2169ba69c5eec2a7c. Connected Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11.0.003; SELECT-only catalog inspection.
+
+Reviewed **809/809 complete accessible pg_operator catalog metadata rows** (**799** PostgreSQL built-ins, **10** pg_trgm extension operators), **214017 complete metadata JSON characters**, unique OIDs, full 1–end per-object source record and database MD5; typed signatures/implementations, commutator/negator reciprocal constraints, planner selectivity, join/hash compatibility, functional roles and retain verdict in append-only [ranks 1–400](../audits/issue509-r473-operator-metadata-1-400-20261123.json) and [401–809](../audits/issue509-r473-operator-metadata-401-809-20261123.json). **Not** compiled PostgreSQL / pg_trgm native implementation-source coverage and **not** full Supabase baseline. Zero broken commutator pairs, zero broken negator pairs, zero missing implementation OIDs. Built-in `record *= record` merge capability is intentional. pg_trgm operators cannot be retired based on zero non-system GIN indexes: dynamically resolved operators and other consumers not disproven. No new reproducible app bug, justified database removal or measured bottleneck.
+
+No app/Edge/migration/test/CI changes; CI NOT_APPLICABLE, not PASS. Production data/SQL/Auth/Storage/Edge/config read-only. No backup, main/release, publish, plan, alert or schedule changes; #267 source code review credit zero. Baseline **IN_PROGRESS**. Next distinct route: direct full operator class/family, amop/amproc definitions and their dependencies; reconcile prior proof first and prioritize actual DIC runtime defects. Prior owner-notified unchanged issue not re-alerted.
+
+---
+
 # Issue #509 R472 — 1,844 additional complete catalog descriptions; comment route complete [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=a90df231dc5213408fa2fb05fde4a3113e2a5e0a preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 
