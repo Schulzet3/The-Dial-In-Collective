@@ -115,7 +115,7 @@ for(const target of targets){
    r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
      !r.selected_form_h2.length&&!r.selected_page_h2.length&&
      !r.selected_elementor_h2.length)
-     ? (selectedShopifyMainRichTextCoffee(res.html,{source_url:r.final_url})?.selected_product_identity ||
+     ? (selectedShopifyMainRichTextCoffee(res.html,{source_url:r.final_url,expected_name:target.Coffee})?.selected_product_identity ||
        selectedShopifyCurrentVisibleIdentity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
       selectedShopifyPurchaseH3Identity(res.html,{

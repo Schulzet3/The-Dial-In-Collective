@@ -64,3 +64,15 @@ test('fake selected canonical other coffee fails source identity',()=>{
  assert.equal(selectedShopifyMainRichTextCoffee(html.replace('rel="canonical" href="'+url+'"',
   'rel="canonical" href="https://coffee-store.example/products/other-coffee"'),{source_url:url}),null);
 });
+
+test('recycled original URL must not certify an archived, different selected coffee',()=>{
+ const {url,html}=selected('PAPUA NEW GUINEA Highlands','papua-new-guinea-highlands',
+  'Darker','Dark Chocolate, Black Cherry, and Mild Spice');
+ // Ordinary preview is allowed to display the CURRENT selected merchant bag.
+ assert.equal(selectedShopifyMainRichTextCoffee(html,{source_url:url})?.fields.name,
+  'PAPUA NEW GUINEA Highlands');
+ // The independent original603 adjudicator must reject a different frozen name.
+ assert.equal(selectedShopifyMainRichTextCoffee(html,{source_url:url,expected_name:'Archived Different Ethiopia Coffee'}),null);
+ assert.equal(selectedShopifyMainRichTextCoffee(html,{source_url:url,expected_name:'PAPUA NEW GUINEA Highlands'})?.fields.name,
+  'PAPUA NEW GUINEA Highlands');
+});

@@ -7,7 +7,7 @@ const at=n=>coffeeHtmlAttributes(n.attributes);
 const within=(p,n)=>n.start>=p.headEnd&&n.end<=p.contentEnd;
 const text=s=>String(s||'').replace(/<[^<>]{0,600}>/gu,' ')
  .replace(/&(?:amp|nbsp);/giu,' ').replace(/\s+/gu,' ').trim();
-export function selectedShopifyMainRichTextCoffee(html,{source_url}={}){
+export function selectedShopifyMainRichTextCoffee(html,{source_url,expected_name}={}){
  if(typeof html!=='string'||html.length>2_000_000)return null;
  let u;try{u=new URL(source_url)}catch{return null}
  const path=u.pathname.replace(/\/$/u,''),handle=path.match(/^\/products\/([a-z0-9][a-z0-9-]{3,155})$/iu)?.[1];
@@ -34,6 +34,13 @@ export function selectedShopifyMainRichTextCoffee(html,{source_url}={}){
  if(variants.length!==1)return null;
  const name=String(at(variants[0])['data-product-title']).trim();
  if(name.length>150||/[<>]/u.test(name))return null;
+ // Historical original603 certification is separate from ordinary current
+ // preview. A repurposed URL may still have matching URL/variant IDs, but
+ // it MUST NOT certify the archived coffee or transfer its old facts.
+ if(expected_name!==undefined&&(
+   typeof expected_name!=='string'||
+   name.normalize('NFKC').toLocaleLowerCase('en-US')!==expected_name.normalize('NFKC').toLocaleLowerCase('en-US')
+ ))return null;
  const captions=nodes.filter(n=>n.tag==='h3'&&n.end<=root.start&&root.start-n.end<22_000&&
   n.contentEnd-n.headEnd<500).map(n=>scoped.slice(n.headEnd,n.contentEnd)).map(s=>
   s.match(/^\s*<strong\b[^<>]{0,300}>\s*(Roast Level|Tasting Notes)\s*:\s*<\/strong>\s*([^<>]{1,250})\s*$/iu)).filter(Boolean);
