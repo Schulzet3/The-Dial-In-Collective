@@ -23,13 +23,11 @@ export function selectedKatiDirectFailures(n,text,fields){
  if(!e.notes.every(x=>t.includes(x)))failures.push('seller_direct_tasting_not_printed');
  if(!e.notes.every(x=>notes.includes(x)))failures.push('published_selected_tasting_omitted');
  if(n===174){
-  if(!/roast level:\s*medium\b/iu.test(text))failures.push('selected_current_medium_not_printed');
-  if(f.roast_level!=='Medium')failures.push('current_seller_medium_not_retained_or_stale_lighter');
+  if(!/roast level:\s*lighter\b/iu.test(text))failures.push('selected_current_lighter_not_printed');
+  if(f.roast_level)failures.push('relative_lighter_not_absolute_roast');
  }else{
   if(!/roast level:\s*darker\b/iu.test(text))failures.push('selected_darker_not_printed');
-  // Comparative "Darker" is preserved in evidence; never presume a measured Agtron.
-  if(f.roast_level&&!['Dark','Medium-Dark'].includes(f.roast_level))
-   failures.push('unsupported_selected_darker_normalization');
+  if(f.roast_level)failures.push('relative_darker_not_absolute_roast');
  }
  if(/caramel|crema|hollander|customer review|rooftop/iu.test(notes))
   failures.push('shopper_review_or_other_coffee_sensory_contamination');
@@ -53,6 +51,7 @@ if(process.env.DIC_ISSUE33_KATI_R424_RUN==='1'){
   if(!r){failures.push('missing_record_'+n);continue;}
   need(r.official_url===item.url&&r.final_url?.replace(/\/$/u,'')===item.url,'exact_url_or_redirect_'+n);
   need(r.status==='FETCHED'&&r.parser_ok===true&&r.selected_heading_identity_verified===true&&
+  r.selected_embedded_product_identity?.method==='shopify_main_product_variant_h3_own_richtext'&&
    r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'first_party_parser_identity_unsaved_UI_'+n);
   let html;
   try{html=readFileSync(join(dir,'case-'+n+'.html'),'utf8');}
