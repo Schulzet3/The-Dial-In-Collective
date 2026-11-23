@@ -1,3 +1,24 @@
+## November 23, 2026 UTC — #455 R456 focused pre-CI test assertion correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- **Source/test context:** real `site/lib/ui.js::field` uses an optional placeholder slot, leaving two valid HTML spaces before the step attribute when placeholder is omitted. Initial R456 test had two fragile assertions demanding exactly one space. This SAME-COMMIT test-only correction changes those exact patterns to a whitespace-flexible `\\s+` while still strictly requiring `step="any" inputmode="decimal"`, blank and non-tenth measured values. No app source, queue, test scope, five ratings, private notes, offline records, numeric recommendation grid, settings or Locked policy changed.
+- **Evidence:** immutable current development SHA `310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115`, verified PREFLIGHT Git blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`; parent PR source `5c3096a802004507a2b1c403c92fd091800f7b3d`; previous test Git blob `d53efbb5675d8b50d5a0e96d764f40722a7b90f3`, journal Git blob `dd21929c0b4852945ff4b546a1651d7803ece229`. Initial PR-head CI was still in progress and cannot be counted PASS. All new focused/hosted Node22, browser/mobile/offline/a11y/governance checks need actual readback before merge. No provider/member/production writes, publication, empirical cup-quality claims or fabricated browser outcomes. Next: inspect final PR-head CI and repair failures if any; remain TESTING.
+
+---
+
+## November 23, 2026 UTC — #455 R456 measured Log/Edit Shot grinder-input HTML-step consistency [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- **Owner authority / current source:** Issue #455 Option B SAFE, preceding R455 source/HTML-spec negative. Preflight Git commit `310a1b9fdd2b1a5cb9f8b313a0380bbb59bdf115` / exact matching `PREFLIGHT.md` blob `c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f`, fetched before task route. Pre-fix Cloud source Git blob `5c24e203db233692589f064fadb819fe68302cf6`; journal `69050d0c3b788b956967d148ddf0aca6de7d6135`, queue `e0a0de1177f4a7507cbe6349a7fd5ece177ad46a`. One unrelated concurrent #509 commit arrived after the initial preflight; retrieved and verified the new SHA preflight, preserved its first-parent source history and independently checked no overlapping files.
+- **Reproducible gap:** Actual CloudApp new/edit form declared `type=number step=.1` for measured grind, while model and R417 persist legitimate non-tenth measured original dial readings. Standard HTML number step matching can flag an entered 2.45 or changed original value as a stepMismatch, though the form is `novalidate` and Save blocking was NOT observed. A browser/device impact beyond native input semantics is not asserted.
+- **SAME-COMMIT changes:** `site/cloud/main.js` changes only measured Log/Edit Shot grinder input to `step:'any'`; three actual-module positive/negative synthetic regressions in `tests/issue455-r456-measured-grind-step-any.test.mjs`; new TESTING-only queue item `DIC-Q-455-r456-measured-grind-step-any`; and this scoped journal with fresh preflight receipt. Other dose/yield/time steps, numeric validation, recommended grinder tenth grid, five tastes, private notes/history, Turbo/Fast-Flow, Slow Feed, calibration and optional temperature preserved. No change to Locked decisions, new user data, science claims, live providers, production, release or Netlify.
+- **Execution state:** Node22 focused regressions and applicable source-bound CI **PENDING, NOT PASS** at authoring; negative case previous step=.1, positive expected step=any; exact Chrome/phone/offline behavior UNVERIFIED. Existing R417/R421 source suites unchanged. On initial browser automation the old code did not produce a verified user-blocking failure; do not invent one. No SQL/Auth/Edge/member reads/writes.
+- **Next:** inspect PR-head Node22/cloud/mobile/offline/a11y/approval/SQL/security checks; fix failures and nonforce integrate only when successful, then read merged SHA/CI and reconcile TESTING queue. Owner #3347 isolated frozen candidate with five exact successes remains required before READY. S019 primary original and measured real-world next-shot effects remain unverified; #455 OPEN.
+
+---
+
 ## November 22, 2026 UTC — #455 R453 R417 source/CI provenance reconciled; frozen READY still unverified [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=25959972779bcb6b7808d29ed1a134c28700bfdd preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
