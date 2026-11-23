@@ -1,0 +1,56 @@
+name: DIC Issue33 R431 original354 Staccato current official selected
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r431-staccato-original354.yml'
+      - 'scripts/audit/issue33-r431-staccato-original354-check.mjs'
+      - 'tests/issue33-r431-staccato-original354.test.mjs'
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-r431-staccato-original354.yml'
+      - 'scripts/audit/issue33-r431-staccato-original354-check.mjs'
+      - 'tests/issue33-r431-staccato-original354.test.mjs'
+permissions:
+  contents: read
+jobs:
+  selected-original354:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Exact source SHA and 13 positive and hostile cases
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$DIC_EXPECTED_SHA"
+          node --check scripts/audit/issue33-r431-staccato-original354-check.mjs
+          node --test tests/issue33-r431-staccato-original354.test.mjs
+      - name: Hard required official HTTPS selected H1 current parser and unsaved Add Coffee
+        env:
+          DIC_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '354'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r431
+        run: GITHUB_SHA="$DIC_SOURCE_SHA" node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent actual first-party HTML SHA reparse and lot-specific afterproof
+        if: always()
+        env:
+          DIC_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_ISSUE33_R431_RUN: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r431
+        run: node scripts/audit/issue33-r431-staccato-original354-check.mjs
+      - name: One-day bounded first-party evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r431-original354-official
+          path: /tmp/dic33-r431/
+          retention-days: 1
+          if-no-files-found: warn
