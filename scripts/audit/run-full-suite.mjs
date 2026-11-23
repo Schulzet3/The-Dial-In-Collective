@@ -32,8 +32,11 @@ export function selectFullSuiteShard(plan,shard='all'){
  // Native HIGH #3761: validate 340/91.4s, cloud 339/55s, approval 135/32.7s.
  // After prior redistribution, actual 45036645973 remained validate 84s,
  // cloud 59s and approval 48s plus protected serial.
- // Shift 40 more of ~814 files (23 cloud, 17 approval); no omissions,
- // extra runner/build, duplicate tests or protected serial changes.
+ // Historical validate-tail transfer remains; newest merged HIGH source f3b38fb
+ // measured cloud 94.8s, validate 48.4s + security, approval 45.6s.
+ // Transfer ~1/8 original cloud slots to validate, ~1/4 to approval; shift
+ // protected serial test from new-longer validate lane to shorter cloud lane,
+ // AFTER cloud general work at concurrency 1. Keep each file exactly once.
  const parallel=plan.parallel.filter((_,i)=>{
   if(lanes===3){
    const original=i%3;
@@ -43,21 +46,28 @@ export function selectFullSuiteShard(plan,shard='all'){
     if(slot%12===3||slot%8===4)return selected===1;
     return selected===0;
    }
-   if(original===1)return selected===1;
+   if(original===1){
+    // One of each eight cloud-owned files uses validate; one of each four uses approval.
+    // Keep each file on exactly one existing runner; never change security serial.
+    const lane=slot%8===0?0:slot%4===2?2:1;
+    return selected===lane;
+   }
    const quarter=slot%4;
    return (quarter===0?(slot%16===0?2:0):quarter===1?1:2)===selected;
   }
   return (i%2===0||i%12===1?0:1)===selected;
  });
  // Keep the time-budgeted HTML corpus serial and isolated AFTER general tests.
- // HIGH validate has the consistently shorter measured Node tail; legacy two-way
- // retains protected security isolation on its original final cloud lane.
+ // Measured PR 3869 first iteration: validate 76.1s general + 15.1s serial,
+ // cloud 42.0s general, approval 62.6s general. Place serial after shorter
+ // cloud general to remove ~15s from the actual HIGH critical tail.
+ // Legacy two-way keeps its original final cloud protected serial.
  // Four measured HIGH CI pairs show a recurring cloud Node tail: 89/90/89/89s
  // versus 65/96/66/65s validate. Keep the original even-index split and
  // move just every sixth odd-index file (i%12===1) to validate to balance
  // the critical path without duplicate tests or additional runners.
  // This balances the two required jobs without removing or duplicating files.
- const serial=selected===(lanes===3?0:lanes-1)?plan.serial:[];
+ const serial=selected===(lanes===3?1:lanes-1)?plan.serial:[];
  if(!parallel.length)throw Error('Full-suite shard is empty');
  return {parallel,serial};
 }
