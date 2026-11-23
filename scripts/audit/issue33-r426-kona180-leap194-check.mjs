@@ -39,7 +39,7 @@ export function selectedCurrentOriginalR426Failures(number,selected,fields={}){
     if(/\b(?:honey|natural|anaerobic)\b/iu.test(String(fields.process||'')))
       fail.push('another_processing_method_invented');
   }else{
-    if(!/swiss water.{0,22}process is a 100% chemical free decaffeination process/iu.test(s)||
+    if(!/\bthe swiss water.{0,12}process is a 100% chemical free decaffeination process/iu.test(s)||
        !/tasting notes:\s*characteristically smooth,\s*mellow,\s*and sweet/iu.test(s)||
        !/slight caramel note and pleasant acidity/iu.test(s))
       fail.push('selected_decaf_direct_description_missing');
