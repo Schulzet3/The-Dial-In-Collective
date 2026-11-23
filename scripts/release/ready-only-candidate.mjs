@@ -22,6 +22,36 @@ export function assertExactCandidateStagedPaths(actual,...provenanceGroups){
 export const CANDIDATE_RECEIPT_PATH='docs/RELEASE_CANDIDATE.json';
 export const CANDIDATE_JOURNAL_PATH='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 export const CANDIDATE_KIND='DIC-READY-ONLY-SOURCE-1';
+// A prospective READY row is source-shaped for exact native CI, not yet live
+// READY or publisher-eligible. Only a verified one-row staging queue delta
+// may accompany this precise #3889 nonpublishing candidate.
+export function reviewedProspectiveReadyQueuePath({manifest,queue,developmentSourceSha,
+ candidateSha,candidateBranch,sourceObjectAt}={}){
+ const x=manifest?.prospective_ready_preview;
+ if(x===undefined)return [];
+ const fail=why=>{throw Error('Prospective READY queue staging HOLD: '+why);};
+ if(x?.status!=='PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'||
+   x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+   !/^[a-f0-9]{64}$/.test(x.identity_sha256||'')||
+   !/^DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(x.selected_id||'')||
+   !(candidateBranch?.split('/').length===2&&candidateBranch.split('/')[0]==='release-candidates'&&
+     /^prospect3889-[a-f0-9]{20}$/.test(candidateBranch.split('/')[1]))||
+   manifest.candidate_branch!==candidateBranch||manifest.publication_authorized!==false||
+   !Array.isArray(manifest.selected_ready_item_ids)||
+   manifest.selected_ready_item_ids.length!==1||
+   manifest.selected_ready_item_ids[0]!==x.selected_id||
+   queue?.items?.find(i=>i.id===x.selected_id)?.state!=='READY')
+  fail('identity, branch, baseline, original selected state or publication exclusion mismatch');
+ if(typeof sourceObjectAt!=='function'||!SHA.test(developmentSourceSha||'')||
+   !SHA.test(candidateSha||''))fail('exact Git tree reader unavailable');
+ const before=sourceObjectAt(developmentSourceSha,'docs/RELEASE_QUEUE.json');
+ const after=sourceObjectAt(candidateSha,'docs/RELEASE_QUEUE.json');
+ if(!/^100644:[a-f0-9]{40}$/.test(before||'')||
+   !/^100644:[a-f0-9]{40}$/.test(after||'')||before===after)
+  fail('prospective candidate did not stage its changed READY-shaped queue Git blob');
+ return ['docs/RELEASE_QUEUE.json'];
+}
+
 // Production publication must never edit/create GitHub Actions workflows.
 // The Actions GITHUB_TOKEN publisher has no workflows scope. Keep all CI
 // workflow evolution on main/development and restore exact published bytes
@@ -996,9 +1026,12 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   }
  }
  // Preserve every provenance check above; count a doubly qualified path once.
+ const prospectiveQueuePaths=reviewedProspectiveReadyQueuePath({manifest,queue,
+  developmentSourceSha:manifest.development_source_sha,candidateSha,
+  candidateBranch,sourceObjectAt});
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
-  excludedTests,workflowOnlyTests,frozenWorkflows,
+  excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))

@@ -819,3 +819,32 @@ test('#3347 unpublished PageFly audit helper excluded only with exact R374 scope
  assert.deepEqual(discoverExcludedUnreadyTests({...args,sourceObjectAt:(r,p)=>
   r===B&&p===path?'100644:'+'0'.repeat(40):at(r,p)}),[]);
 });
+
+
+test('#3889 prospective READY path requires exact reviewed source, 63-ID original baseline and nonpublishing state',async()=>{
+ const {reviewedProspectiveReadyQueuePath}=await import('../scripts/release/ready-only-candidate.mjs');
+ const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
+ const id='DIC-Q-509-stale-project-shot-comment-20261122';
+ const branch='release-candidates/prospect3889-'+'f'.repeat(20);
+ const manifest={publication_authorized:false,candidate_branch:branch,
+  selected_ready_item_ids:[id],prospective_ready_preview:{
+   status:'PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING',
+   baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+   selected_id:id,identity_sha256:'e'.repeat(64)}};
+ const queue={items:[{id,state:'READY'}]};
+ const opts={manifest,queue,developmentSourceSha:A,candidateSha:B,candidateBranch:branch,
+  sourceObjectAt:(sha,path)=>path==='docs/RELEASE_QUEUE.json'?sha===A?'100644:'+C:'100644:'+B:null};
+ assert.deepEqual(reviewedProspectiveReadyQueuePath({...opts,manifest:{}}),[]);
+ assert.deepEqual(reviewedProspectiveReadyQueuePath(opts),['docs/RELEASE_QUEUE.json']);
+ const edits=[
+  x=>{x.manifest.publication_authorized=true},
+  x=>{x.manifest.selected_ready_item_ids=[]},
+  x=>{x.manifest.prospective_ready_preview.identity_sha256='fake'},
+  x=>{x.manifest.prospective_ready_preview.baseline_queue_blob='f'.repeat(40)},
+  x=>{x.queue.items[0].state='TESTING'},
+  x=>{x.candidateBranch='release-candidates/ready3347-'+'f'.repeat(20)},
+  x=>{x.sourceObjectAt=()=>null},
+  x=>{x.sourceObjectAt=()=> '100644:'+C},
+ ];
+ for(const edit of edits){const x=structuredClone({manifest,queue,developmentSourceSha:A,candidateSha:B,candidateBranch:branch});x.sourceObjectAt=opts.sourceObjectAt;edit(x);assert.throws(()=>reviewedProspectiveReadyQueuePath(x),/HOLD/);}
+});
