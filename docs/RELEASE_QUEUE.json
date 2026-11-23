@@ -1030,7 +1030,7 @@
       "pr": null,
       "title": "Preserve withdrawn Community state during unverified-coffee link recheck",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee",
       "scope_paths": [
         "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql"
       ],
@@ -1055,7 +1055,7 @@
         "#96 real hosted signed-in/member acceptance and owner Publish remain unverified/unauthorized; November 15 migration is unapplied in production."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only. No live Supabase production SQL/Auth/Storage/Edge or deployment. Preflight 357df799b1232fb4aefba0d0b46a14689e341aae blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Owner Publish required.\nR375 2026-11-20: Historical CI-UNVERIFIED blocker reconciled to actual SQL workflow logs and identical Git objects. Verified synthetic regression, not actual production member impact. Keep TESTING; no live writes."
+      "notes": "Development-only. No live Supabase production SQL/Auth/Storage/Edge or deployment. Preflight 357df799b1232fb4aefba0d0b46a14689e341aae blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Owner Publish required.\nR375 2026-11-20: Historical CI-UNVERIFIED blocker reconciled to actual SQL workflow logs and identical Git objects. Verified synthetic regression, not actual production member impact. Keep TESTING; no live writes.\n#3889 verified first-parent migration introduction fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee (parent 357df799b1232fb4aefba0d0b46a14689e341aae), exact current unchanged Git blob d629d2f0cbd6c9f291a8b4538340c1de549f04a1; authenticated nonpublishing main PR #3905 read-only CI 45263391549 and GitHub compare ancestry into development 066fca8666dd57f967040ed0a58eec1d6401b360. This is merged SOURCE attribution only, NOT READY certification or proof of production application."
     },
     {
       "id": "DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf",
@@ -15492,7 +15492,7 @@
       "pr": null,
       "title": "Fail closed on SQL NULL coffee promotion method or explicit confirmation flag",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "af0537cc8313328269eca4f92a5e4439bf84848b",
       "scope_paths": [
         "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
       ],
@@ -15505,7 +15505,7 @@
       "blockers": [
         "Exact-source PostgreSQL17, Node22, privacy/security, browser applicability and approval/governance checks not yet verified; remain TESTING, never READY without verified tests."
       ],
-      "notes": "Low-severity latent input validation, not a proven HTTP security exploit, affected data or permission bypass. Source-only no backfill, preserve all historical migrations, archive/member/community state, release boundary and #96/#33 ownership.",
+      "notes": "Low-severity latent input validation, not a proven HTTP security exploit, affected data or permission bypass. Source-only no backfill, preserve all historical migrations, archive/member/community state, release boundary and #96/#33 ownership.\n#3889 verified first-parent migration introduction af0537cc8313328269eca4f92a5e4439bf84848b (parent 517fdd185d7b9463cc6a89c00e536ddd50b8838a), exact current unchanged Git blob 252f96469855dd7b8e56528ef5db99e5bccbf439; authenticated nonpublishing main PR #3905 read-only CI 45263391549 and GitHub compare ancestry into development 066fca8666dd57f967040ed0a58eec1d6401b360. This is merged SOURCE attribution only, NOT READY certification or proof of production application.",
       "production_deployed": false
     },
     {
@@ -15612,7 +15612,7 @@
       "pr": null,
       "title": "Reject NULL receipt channel/outcome for service-only approval delivery",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
       "scope_paths": [
         "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
       ],
@@ -15625,7 +15625,7 @@
         "Source-bound isolated PostgreSQL, Node22, privacy/security and approval checks pending; do not promote READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only source, no publish, production SQL/Edge/Auth/Storage/member change or observed customer impact."
+      "notes": "Development-only source, no publish, production SQL/Edge/Auth/Storage/member change or observed customer impact.\n#3889 verified first-parent migration introduction 1bf9fa82686e19642a2158fd8105df6755dc7bed (parent 9f23b49b5e601b36610f512c6274762bf8733542), exact current unchanged Git blob dea27e959e052b06bc032f4522d91312eea779eb; authenticated nonpublishing main PR #3905 read-only CI 45263391549 and GitHub compare ancestry into development 066fca8666dd57f967040ed0a58eec1d6401b360. This is merged SOURCE attribution only, NOT READY certification or proof of production application."
     },
     {
       "id": "DIC-Q-508-netlify-comments-current-release-20261114",
