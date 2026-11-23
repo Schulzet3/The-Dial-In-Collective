@@ -144,3 +144,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=544b06558ab9ab6df4eea0410277b1a3c19f2fe4 
 - Main operations-only patch tests literal source-to-prospective queue transformation: solely one original TESTING row to READY with cleared blockers, unchanged other rows, and requires exact candidate queue **bytes** already adopted on live development before the publisher may accept it. Unpromoted or differing queues always HOLD. Existing ordinary READY queue equality is preserved.
 - Separately allows only seven exact nonshipped QA source exclusions previously independently frozen/restored in `b1cbddd2...`, proven absent or byte-equal to the published baseline; confirms the two merged `544b06558...` QA helper/test blobs and candidate SHA. No generic test skip, source admission, READY write, grant, release request, Netlify, provider or publication.
 - Added adversarial tests for stale/mutated queue, unpromoted state, unrelated record edit, different source SHA, additional/missing QA paths, wrong published blobs and publication markers. Require hosted exact main PR/merged CI SUCCESS before treating controller as repaired. Remaining: demonstrate publisher-compatible read-only exact-source acceptance and independent #3347 READY certificate, then make only an evidence-atomic development queue transition; otherwise keep all 63 TESTING.
+
+
+DIC_PREFLIGHT_VERIFIED development_sha=544b06558ab9ab6df4eea0410277b1a3c19f2fe4 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-23 — #3889 controller acceptance assertion realigned [skip netlify]
+- The existing main controller source-order regression asserted literal old queue equality. Update its source assertion to require the new strict `reviewedProspectivePromotionQueueParity` guard and raw original/candidate/live queue evidence, while preserving checks that validation precedes grant and release claim. No change to test execution policy or release trigger.
