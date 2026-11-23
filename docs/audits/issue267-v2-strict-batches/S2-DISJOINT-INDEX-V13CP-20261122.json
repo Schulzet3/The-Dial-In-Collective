@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13CP",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CO-20261122.json",
+  "development_prewrite_sha": "259c74964dfaa88d8e31e3d758cfd7589420384c",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "tracks": [
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-164-193-20261122-V13CP.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 164,
+          "last_line": 193,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C81-73-102-20261122-V13CP.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 81,
+          "path": "scripts/qa/issue33-hosted-auth-e2e.py",
+          "source_blob_sha": "d44b63b34844e8e402dfe1cec418e164e2d53724",
+          "first_line": 73,
+          "last_line": 102,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "review_method": "DIRECT_PER_LINE_AI_NOT_HUMAN",
+  "new_lines": 60,
+  "previous_lines_revalidated_without_credit": 60,
+  "full_original_git_blob_parity": "PASS_2_OF_2",
+  "archive_json_parse": "PASS",
+  "pr_actions": "PENDING_AT_COMMIT",
+  "merged_actions": "PENDING_AT_COMMIT",
+  "runtime": "NOT_RUN_DOCS_ONLY",
+  "provider": "NOT_APPLICABLE",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED",
+  "finding": "QA script documentation mismatch: previous C81:72 says new tab, C81:73 reloads same tab; no app defect reproduced",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 194
+    },
+    "pinned": {
+      "index": 81,
+      "path": "scripts/qa/issue33-hosted-auth-e2e.py",
+      "line": 103
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE"
+}
