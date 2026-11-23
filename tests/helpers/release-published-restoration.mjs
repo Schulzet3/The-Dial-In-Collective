@@ -65,6 +65,7 @@ function currentBlob(path){
  return createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
 }
 export function frozenExcludedReadySource(paths){
+ if(frozenExcludedTestingSource(paths))return true;
  const m=selectedAdmissionCandidate();if(!m)return false;
  assert.ok(Array.isArray(paths)&&paths.length>0);
  for(const path of paths){
@@ -77,6 +78,7 @@ export function frozenExcludedReadySource(paths){
  return true;
 }
 export function frozenAdmissionScopedSource(){
+ if(frozenExcludedTestingSource(['site/cloud/main.js','site/cloud/client.js']))return true;
  const m=selectedAdmissionCandidate();if(!m)return false;
  assert.ok(m.pinned_to_ready_paths?.includes('site/cloud/main.js'),
   'Cannot classify unready Log Shot behavior without frozen mixed-file pin');
@@ -119,5 +121,51 @@ export function frozenUnselectedAuditImport(sourcePath,imported){
   'Audit source must be unselected newer code');
  assert.match(gitBlob(m.development_source_sha,target),SHA,
   'Unready target must be an excluded actual development Git object');
+ return true;
+}
+
+// #3889 TESTING-only compatibility: an unselected test is N/A only after
+// independent exact published-Git-blob parity. Never mark a CI job PASS here.
+let testingManifestCache;
+function testingManifest(){
+ if(testingManifestCache!==undefined)return testingManifestCache;
+ let m;
+ try{m=JSON.parse(readFileSync(new URL('../../docs/TESTING_3889_CANDIDATE.json',import.meta.url),'utf8'));}
+ catch(e){if(e?.code==='ENOENT')return testingManifestCache=null;throw e;}
+ assert.equal(m.kind,'DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1');
+ assert.equal(m.publication_authorized,false);assert.equal(m.certified_ready_count,0);
+ assert.deepEqual(m.selected_ready_item_ids,[]);
+ assert.equal(m.status,'FROZEN_SOURCE_WITH_QA_COMPATIBILITY_CI_NOT_RUN');
+ assert.match(m.published_source_sha,SHA);assert.match(m.development_source_sha,SHA);
+ assert.match(m.merged_source_sha,SHA);assert.match(m.baseline_queue_blob,SHA);
+ assert.equal(m.selected_testing_item_id,'DIC-Q-509-stale-project-shot-comment-20261122');
+ assert.equal(m.selected_blobs?.length,1);
+ assert.equal(m.selected_blobs[0]?.path,'supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql');
+ assert.equal(m.selected_blobs[0]?.source_sha,
+   '100644:'+gitBlob('HEAD',m.selected_blobs[0].path));
+ assert.equal(gitBlob(m.merged_source_sha,m.selected_blobs[0].path),gitBlob('HEAD',m.selected_blobs[0].path));
+ assert.ok(Array.isArray(m.restored_to_published_paths)&&m.restored_to_published_paths.length>0);
+ const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
+ assert.equal(q.published_base.tested_source_sha,m.published_source_sha);
+ assert.equal(q.items.find(x=>x.id===m.selected_testing_item_id)?.state,'TESTING');
+ assert.equal(q.items.some(x=>x.state==='READY'),false);
+ const branch=process.env.GITHUB_REF||'';
+ if(branch.startsWith('refs/heads/release-candidates/'))
+  assert.equal(branch,'refs/heads/'+m.candidate_branch);
+ try{readFileSync(new URL('../../docs/RELEASE_CANDIDATE.json',import.meta.url));
+  assert.fail('nonpublishing TESTING candidate must not have READY publisher manifest');
+ }catch(e){if(e?.code!=='ENOENT')throw e;}
+ return testingManifestCache=m;
+}
+function frozenExcludedTestingSource(paths){
+ const m=testingManifest();if(!m)return false;
+ assert.ok(Array.isArray(paths)&&paths.length>0);
+ for(const path of paths){
+  assert.ok(!m.selected_blobs.some(x=>x.path===path),'cannot exclude selected TESTING path '+path);
+  const pub=gitBlob(m.published_source_sha,path),dev=gitBlob(m.development_source_sha,path);
+  assert.ok(m.restored_to_published_paths.includes(path)||dev===pub,
+   'unselected path must be restored or originally identical: '+path);
+  assert.equal(currentBlob(path),pub,'unselected TESTING source not exact published Git bytes: '+path);
+ }
  return true;
 }

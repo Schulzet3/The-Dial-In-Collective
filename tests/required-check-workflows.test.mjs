@@ -46,14 +46,23 @@ test('operational READY audit stays mandatory on development; candidates retain 
  const path='.github/workflows/approval-continuity.yml';
  const src=file(path);
  const ref=process.env.GITHUB_REF||'';
- if(ref.startsWith('refs/heads/release-candidates/')&&
-    /^[a-z0-9][a-z0-9-]{2,80}$/.test(ref.slice('refs/heads/release-candidates/'.length))){
-  const manifest=JSON.parse(file('docs/RELEASE_CANDIDATE.json'));
-  assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
+ let testingManifest=null;
+ try{testingManifest=JSON.parse(file('docs/TESTING_3889_CANDIDATE.json'));}
+ catch(e){if(e?.code!=='ENOENT')throw e;}
+ if(testingManifest || (ref.startsWith('refs/heads/release-candidates/')&&
+    /^[a-z0-9][a-z0-9-]{2,80}$/.test(ref.slice('refs/heads/release-candidates/'.length)))){
+  const manifest=testingManifest||JSON.parse(file('docs/RELEASE_CANDIDATE.json'));
+  assert.ok(['DIC-READY-ONLY-SOURCE-1','DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1'].includes(manifest.kind));
   assert.equal(manifest.publication_authorized,false);
-  assert.equal('refs/heads/'+manifest.candidate_branch,ref);
+  if(ref.startsWith('refs/heads/release-candidates/'))
+   assert.equal('refs/heads/'+manifest.candidate_branch,ref);
+  else if(ref){
+   assert.match(ref,/^refs\/pull\/[0-9]+\/merge$/,'candidate PR must bind immutable head branch');
+   assert.equal(process.env.GITHUB_EVENT_NAME,'pull_request');
+   assert.equal(process.env.GITHUB_HEAD_REF,manifest.candidate_branch);
+  }
   assert.match(manifest.published_source_sha,/^[a-f0-9]{40}$/);
-  assert.ok(manifest.restored_unpublished_workflow_paths?.includes(path),
+  assert.ok((manifest.restored_unpublished_workflow_paths||manifest.restored_to_published_paths)?.includes(path),
    'isolation must declare restoration of the mandatory development workflow');
   const actualPublished=execFileSync('git',['show',manifest.published_source_sha+':'+path],
    {encoding:'utf8',timeout:15000,maxBuffer:30000});
