@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13CX",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13CW-20261123.json",
+  "development_prewrite_sha": "aa912b9f643bf99047db7c9b66d254c8c3dfbcf1",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "tracks": [
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-404-433-20261123-V13CX.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 222,
+          "path": "docs/audits/application_pass3_tests.json",
+          "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+          "first_line": 404,
+          "last_line": 433,
+          "line_count": 30
+        }
+      ]
+    },
+    {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C83-34-63-20261123-V13CX.json",
+      "ranges": [
+        {
+          "manifest_index_1_based": 83,
+          "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+          "source_blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+          "first_line": 34,
+          "last_line": 63,
+          "line_count": 30
+        }
+      ]
+    }
+  ],
+  "new_lines": 60,
+  "prior_lines_revalidated_without_credit": 60,
+  "full_git_blob_parity": "PASS_BOTH",
+  "live_pinned_blob_parity": "PASS",
+  "frozen_archive_json_parse": "PASS",
+  "first_original_workflow_line_one_rechecked_without_credit": true,
+  "tests": {
+    "archived_json_parse": "PASS",
+    "source_blob_literals": "PASS",
+    "node22_app": "NOT_RUN_DOCS_ONLY",
+    "lint_build_mobile_browser_offline_sql_auth_rls_603": "NOT_RUN_DOCS_ONLY",
+    "exact_pr_ci": "PENDING",
+    "exact_merged_ci": "PENDING"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "post_pin_drift": "INCOMPLETE_UNCREDITED",
+  "provisional_R2_C2": {
+    "frozen": 5451,
+    "pinned": 6462,
+    "not_recredited": true
+  },
+  "older_strict_S2": {
+    "frozen": 7635,
+    "pinned": 9318,
+    "not_recredited": true
+  },
+  "finding": {
+    "id": "V13CX-C83-35",
+    "severity": "POTENTIAL_RECOVERY_ONLY_HIGH_IF_USED",
+    "classification": "STATIC_RISK_NOT_REPRODUCED_LIVE",
+    "evidence": "SQL lines 34–36 catch all exceptions from RLS enablement and raise log without rethrow; recovery-only DDL callback can finish despite failed RLS enable. No claim of existing live exposure.",
+    "disposition": "#96 scoped isolated recovery-test/fail-closed assessment before any authorized use; no historical source edit or production probe"
+  },
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 434
+    },
+    "pinned": {
+      "index": 83,
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "line": 64
+    }
+  },
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE"
+}
