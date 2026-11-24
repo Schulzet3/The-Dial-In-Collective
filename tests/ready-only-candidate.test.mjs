@@ -1097,7 +1097,7 @@ test('#3889 independently replayed two-ID batch queue parity requires exact LIVE
 
 test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exact plan and support',async()=>{
  const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:validate}=await import('../scripts/release/ready-only-candidate.mjs');
- const dev='454ae58eb69552173411c4cd237de7e35a73a622',prior='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',
+ const dev='b58c1a4c856fc65a56bf27b2a0ded20245f6351b',prior='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',
   reference='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',previous='16bc481b2c66c5229c70e513c76141b086b8e535',
   pub='2d22d448160d428a977f06482323646b92818fcf',candidate='a'.repeat(40);
  const ids=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122','DIC-Q-3667-ci-parallel-full-suite'];
@@ -1108,8 +1108,8 @@ test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exa
   development_source_sha:dev,published_base:{tested_source_sha:pub},identity_sha256:'c'.repeat(64),
   added_ids:[ids[2]],retained_ready_ids:ids.slice(0,2),queue};
  const support={
-  'tests/helpers/release-published-restoration.mjs':['d7fd8e39e85e794b1d04ce01af98707426810aa9','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
-  'tests/preflight-contract.test.mjs':['bc4dd3dd4368ea1d14b71c293abe85105feb25a8','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
+  'tests/helpers/release-published-restoration.mjs':['7a13c4b9a76a9fb03a491d33e559fc4cd9709e1c','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
+  'tests/preflight-contract.test.mjs':['77f41ca1c434271a1100dfc3e27fa18ef110800d','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
   'tests/required-check-workflows.test.mjs':['50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']};
  const selectedPath='scripts/audit/run-full-suite.mjs',current='100644:'+'d'.repeat(40),old='100644:'+'e'.repeat(40);
  const expected=paths.filter(x=>x!==selectedPath);
