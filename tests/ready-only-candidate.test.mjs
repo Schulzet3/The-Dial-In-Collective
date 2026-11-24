@@ -1094,3 +1094,52 @@ test('#3889 independently replayed two-ID batch queue parity requires exact LIVE
  const extra=structuredClone(proposed);extra.items.push(row('DIC-Q-509-extra',509,'READY'));
  assert.equal(parity({...opts,prospectiveBatchPlan:{...p,queue:extra},candidateQueue:JSON.stringify(extra,null,2)+'\n',liveQueue:JSON.stringify(extra,null,2)+'\n'}),false);
 });
+
+test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exact plan and support',async()=>{
+ const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:validate}=await import('../scripts/release/ready-only-candidate.mjs');
+ const dev='454ae58eb69552173411c4cd237de7e35a73a622',prior='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',
+  reference='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',previous='16bc481b2c66c5229c70e513c76141b086b8e535',
+  pub='2d22d448160d428a977f06482323646b92818fcf',candidate='a'.repeat(40);
+ const ids=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122','DIC-Q-3667-ci-parallel-full-suite'];
+ const merges=['513f98ac06cdd0fe569390354420158458342859','5b5159823908f3ae660f45b3ad93c096be586aec','8e89dfe9'+'b'.repeat(32)];
+ const queue={items:ids.map((id,n)=>({id,state:'READY',merged_source_sha:merges[n],scope_paths:[n===2?'package.json':'site/fixture'+n]}))};
+ const p={kind:'DIC-PROSPECTIVE-CHRONOLOGICAL-BATCH-3889-V2',status:'PROSPECTIVE_BATCH_PLAN_ONLY',
+  publication_authorized:false,ready_certified:false,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+  development_source_sha:dev,published_base:{tested_source_sha:pub},identity_sha256:'c'.repeat(64),
+  added_ids:[ids[2]],retained_ready_ids:ids.slice(0,2),queue};
+ const support={
+  'tests/helpers/release-published-restoration.mjs':['d7fd8e39e85e794b1d04ce01af98707426810aa9','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
+  'tests/preflight-contract.test.mjs':['bc4dd3dd4368ea1d14b71c293abe85105feb25a8','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
+  'tests/required-check-workflows.test.mjs':['50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']};
+ const selectedPath='scripts/audit/run-full-suite.mjs',current='100644:'+'d'.repeat(40),old='100644:'+'e'.repeat(40);
+ const expected=paths.filter(x=>x!==selectedPath);
+ const read=(ref,path)=>{
+  if(support[path]){
+   if(ref===prior)return '100644:'+support[path][1];
+   if([dev,candidate].includes(ref))return '100644:'+support[path][0];
+   return null;
+  }
+  if(path===selectedPath){
+   if([merges[2],dev,reference,candidate].includes(ref))return current;
+   if([merges[2]+'^',pub,previous,prior].includes(ref))return old;
+  }
+  if([dev,reference].includes(ref))return current;
+  if([pub,previous,prior,candidate].includes(ref))return path.includes('issue33')?null:old;
+  return null;
+ };
+ const args={queue,selectedIds:ids,publishedSourceSha:pub,developmentSourceSha:dev,sourceObjectAt:read,prospectiveBatchPlan:p};
+ const manifest={selected_ready_item_ids:ids,prospective_ready_batch_preview:{},restored_reviewed_batch_qa_paths:expected};
+ const proof={...args,manifest,candidateSha:candidate};
+ assert.deepEqual(discover(args),expected);
+ assert.deepEqual(validate(proof),expected);
+ assert.deepEqual(discover({...args,prospectiveBatchPlan:null}),[]);
+ assert.throws(()=>validate({...proof,manifest:{...manifest,restored_reviewed_batch_qa_paths:paths}}),/HOLD/);
+ assert.throws(()=>validate({...proof,manifest:{...manifest,restored_reviewed_batch_qa_paths:[...expected,'site/intruder.js']}}),/HOLD/);
+ assert.throws(()=>discover({...args,prospectiveBatchPlan:{...p,publication_authorized:true}}),/HOLD/);
+ assert.throws(()=>discover({...args,prospectiveBatchPlan:{...p,added_ids:[]}}),/HOLD/);
+ assert.throws(()=>discover({...args,prospectiveBatchPlan:{...p,queue:{items:queue.items.slice(1)}}}),/HOLD/);
+ assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===candidate&&x===expected[0]?current:read(r,x)}),/HOLD/);
+ assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===dev&&x===Object.keys(support)[0]?old:read(r,x)}),/HOLD/);
+ assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===merges[2]&&x===Object.keys(support)[0]?current:read(r,x)}),/HOLD/);
+ assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===prior&&x===expected[0]?current:read(r,x)}),/HOLD/);
+});

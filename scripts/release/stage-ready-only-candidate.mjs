@@ -92,7 +92,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   queue=batch.queue;stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
  }
  const batchQaPaths=batch?discoverReviewedBatchQaRestoration({queue,selectedIds,
-  publishedSourceSha,developmentSourceSha,sourceObjectAt}):[];
+  publishedSourceSha,developmentSourceSha,sourceObjectAt,prospectiveBatchPlan:batch}):[];
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
  const workflowOnlyTests=discoverReviewedWorkflowTestExclusions({
