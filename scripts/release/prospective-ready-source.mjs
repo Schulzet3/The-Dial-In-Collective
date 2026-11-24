@@ -37,8 +37,11 @@ function reviewedParentAuditOnly({original,current,marker,developmentSourceSha,s
   return true;
  }catch{return false;}
 }
-export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId,
- developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}={}){
+export function proposeProspectiveReadyQueue(args={}){
+ return proposeProspectiveReadyQueueInternal(args,null);
+}
+function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedId,
+ developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}={},sharedProof=null){
  const hold=why=>{throw Error('PROSPECTIVE_READY_HOLD: '+why);};
  if(!SHA.test(developmentSourceSha||'')||typeof selectedId!=='string'||
    typeof firstParentChangedPaths!=='function'||typeof isAncestor!=='function'||
@@ -83,8 +86,9 @@ export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId
   const published=liveQueue.published_base.tested_source_sha;
   for(const path of current.scope_paths){
    const merged=sourceObjectAt(current.merged_source_sha,path);
+   const exactShared=sharedProof?.get(current.id+'\u0000'+path)===merged;
    if(!/^100(?:644|755):[a-f0-9]{40}$/.test(merged||'')||
-     merged!==sourceObjectAt(developmentSourceSha,path)||
+     (!exactShared&&merged!==sourceObjectAt(developmentSourceSha,path))||
      merged===sourceObjectAt(published,path))
     hold('selected scope differs from merged source or published bytes: '+path);
   }
@@ -107,10 +111,61 @@ export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId
   baseline_count:63,selected_id:selectedId,identity_sha256:fingerprint,queue};
 }
 
+// Shared prospective TESTING owners can be co-selected only when actual
+// first-parent Git objects form one uninterrupted byte chain from the published
+// object to the exact current development object. This is preparation only,
+// not a READY certificate, test/workflow exemption or publisher admission.
+// Retained READY overlaps and ANY excluded unfinished owner remain HOLD.
+function proveSharedProspectiveSources({selected,originalReady,liveQueue,
+ developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}){
+ const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: shared selected source needs reviewed chronology: '+why);};
+ const byPath=new Map();
+ for(const row of [...originalReady,...selected]){
+  for(const path of row.scope_paths){
+   const owners=byPath.get(path)||[];owners.push(row);byPath.set(path,owners);
+  }
+ }
+ const proof=new Map(),chains=[];
+ for(const [path,owners] of [...byPath.entries()].sort(([a],[b])=>a.localeCompare(b))){
+  if(owners.length<2)continue;
+  if(owners.some(row=>row.state!=='TESTING')||
+     typeof sourceObjectAt!=='function'||typeof isAncestor!=='function'||
+     new Set(owners.map(row=>row.merged_source_sha)).size!==owners.length)
+   hold(path);
+  const remaining=[...owners],ordered=[];
+  while(remaining.length){
+   const earliest=remaining.filter(row=>remaining.every(other=>row===other||
+    isAncestor(row.merged_source_sha,other.merged_source_sha)===true));
+   if(earliest.length!==1)hold('ambiguous merge ancestry '+path);
+   const row=earliest[0];ordered.push(row);remaining.splice(remaining.indexOf(row),1);
+  }
+  let previous=sourceObjectAt(liveQueue.published_base.tested_source_sha,path);
+  const published=previous,steps=[];
+  for(const row of ordered){
+   const merge=row.merged_source_sha;
+   if(!SHA.test(merge||'')||isAncestor(merge,developmentSourceSha)!==true||
+      !firstParentChangedPaths(merge)?.includes(path))
+    hold('missing first-parent ownership '+row.id+' '+path);
+   const before=sourceObjectAt(merge+'^',path),after=sourceObjectAt(merge,path);
+   if(before!==previous||!/^100(?:644|755):[a-f0-9]{40}$/.test(after||'')||
+      after===before||after===published)
+    hold('unselected or discontinuous bytes '+row.id+' '+path);
+   proof.set(row.id+'\u0000'+path,after);
+   steps.push({id:row.id,merge_sha:merge,parent_object:before,object:after});
+   previous=after;
+  }
+  if(previous!==sourceObjectAt(developmentSourceSha,path))
+   hold('unreviewed live tip '+path);
+  chains.push({path,published_object:published,steps});
+ }
+ return {proof,chains};
+}
+
 /**
- * #3889: read-only, disjoint-scope expansion of a live READY selection.
+ * #3889: read-only, source-proven expansion of a live READY selection.
  * Every added item must independently pass the existing strict preview gate.
- * Shared runtime paths require separate chronology/pinning proof, not this lane.
+ * Shared TESTING paths require exact first-parent byte continuity. Retained
+ * READY or excluded unfinished overlaps still require separate isolation proof.
  * Neither the returned queue nor its fingerprint is a publisher certificate.
  */
 export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}){
@@ -127,19 +182,15 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
  const originalReady=liveQueue.items.filter(i=>i.state==='READY');
  const selected=ordered.map(id=>liveQueue.items.find(i=>i.id===id));
  if(selected.some(i=>!i||i.state!=='TESTING'))hold('selected item is not live TESTING');
- const ownerByPath=new Map();
- for(const i of [...originalReady,...selected]){
-  for(const path of i.scope_paths){
-   if(ownerByPath.has(path))hold('shared selected source needs reviewed chronology: '+path);
-   ownerByPath.set(path,i.id);
-  }
- }
  const newPaths=new Set(selected.flatMap(i=>i.scope_paths));
  for(const i of liveQueue.items){
   if(ordered.includes(i.id)||!['TESTING','IN_PROGRESS','BLOCKED'].includes(i.state))continue;
   if(i.scope_paths.some(path=>newPaths.has(path)))
    hold('unfinished overlapping owner requires reviewed source isolation: '+i.id);
  }
+ let shared;
+ try{shared=proveSharedProspectiveSources({...readers,selected,originalReady});}
+ catch(e){if(String(e.message).includes('PROSPECTIVE_BATCH_HOLD:'))throw e;hold('shared source Git proof unavailable: '+String(e.message).slice(0,160));}
  let queue=structuredClone(liveQueue);
  const proofs=[];
  for(const id of ordered){
@@ -147,7 +198,7 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   const actual=firstParentChangedPaths(original.merged_source_sha);
   if(!Array.isArray(actual)||!same(sorted(deployableChangedPaths(actual)),sorted(original.scope_paths)))
    hold('declared scope does not equal first-parent deployable paths: '+id);
-  const p=proposeProspectiveReadyQueue({...readers,liveQueue:queue,selectedId:id});
+  const p=proposeProspectiveReadyQueueInternal({...readers,liveQueue:queue,selectedId:id},shared.proof);
   queue=p.queue;
   proofs.push({id,identity_sha256:p.identity_sha256});
  }
@@ -155,11 +206,11 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
  if(!same(retained,liveQueue.items.filter(i=>!ordered.includes(i.id))))
   hold('nonselected record changed');
  const selectedReadyItems=queue.items.filter(i=>i.state==='READY').sort((a,b)=>a.id.localeCompare(b.id));
- const identity={kind:'DIC-PROSPECTIVE-DISJOINT-BATCH-3889-V1',baseline_dev_sha:BASELINE_DEV_SHA,
+ const identity={kind:shared.chains.length?'DIC-PROSPECTIVE-CHRONOLOGICAL-BATCH-3889-V2':'DIC-PROSPECTIVE-DISJOINT-BATCH-3889-V1',baseline_dev_sha:BASELINE_DEV_SHA,
   baseline_queue_blob:BASELINE_QUEUE_BLOB,published_base:queue.published_base,
   development_source_sha:developmentSourceSha,added_ids:ordered,
   retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
-  preview_proofs:proofs};
+  preview_proofs:proofs,...(shared.chains.length?{shared_source_chains:shared.chains}:{})};
  return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
   status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,queue};
 }
