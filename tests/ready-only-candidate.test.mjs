@@ -1025,7 +1025,7 @@ test('#3889 exact two-ID batch reuses only previously certified seven nonshipped
  const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:validate}=await import('../scripts/release/ready-only-candidate.mjs');
  const dev='c5a8cd443b39fc2e12699bf596682f5cf8fbf65c',ref='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',pub='2d22d448160d428a977f06482323646b92818fcf',previous='16bc481b2c66c5229c70e513c76141b086b8e535',candidate='a'.repeat(40);
  const ids=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122'];
- const merges=['513f98ac06cdd0fe569390354420158342859','5b5159823908f3ae660f45b3ad93c096be586aec'];
+ const merges=['513f98ac06cdd0fe569390354420158458342859','5b5159823908f3ae660f45b3ad93c096be586aec'];
  const queue={items:ids.map((id,n)=>({id,state:'READY',merged_source_sha:merges[n]}))};
  const support={'tests/helpers/release-published-restoration.mjs':'fe1dd86406dc1c984dd4024a47225d1f8d4a40c0','tests/preflight-contract.test.mjs':'f893c068e20c2445bc5596eda6b36c832974f195'};
  const current='100644:'+'b'.repeat(40),old='100644:'+'c'.repeat(40);
