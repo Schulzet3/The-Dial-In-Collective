@@ -1143,3 +1143,45 @@ test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exa
  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===merges[2]&&x===Object.keys(support)[0]?current:read(r,x)}),/HOLD/);
  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===prior&&x===expected[0]?current:read(r,x)}),/HOLD/);
 });
+
+
+test('#3889 mixed selected and excluded reviewed SQL fixtures preserve selected exact first-parent tests',()=>{
+ const specs=REVIEWED_UNREADY_SQL_SUITE.filter(s=>[
+  'pending_canonical_name_response.sql','recommendation_unique_controls.sql',
+  'community_outlier_null_revision.sql','admin_shot_delete_family_refresh.sql',
+  'admin_account_delete_completed_receipt.sql'].some(n=>s.path.endsWith('/'+n)));
+ assert.equal(specs.length,5);
+ const rows=specs.map((spec,i)=>({id:'DIC-Q-509-fixture-'+i,issue:509,
+  state:i===4?'TESTING':'READY',merged_source_sha:String(i+1).repeat(40),scope_paths:[spec.migration]}));
+ const selected=rows.slice(0,4),objects=new Map();
+ const key=(ref,path)=>ref+':'+path;
+ for(const [i,spec] of specs.entries()){
+  const row=rows[i];
+  // Use distinct valid hexadecimal object IDs for both selected and excluded.
+  const migration='100644:'+['a','b','c','d','e'][i].repeat(40);
+  for(const ref of [B,row.merged_source_sha,spec.sourceMerge]){
+   objects.set(key(ref,spec.migration),migration);
+   objects.set(key(ref,spec.path),'100644:'+spec.unpublishedBlob);
+  }
+ }
+ const sourceObjectAt=(ref,path)=>objects.get(key(ref,path))??null;
+ const args={queue:{items:rows},restoredPaths:[specs[4].migration],
+  publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt,selectedReadyItems:selected};
+ assert.deepEqual(discoverReviewedRestoredSqlTests(args),[specs[4].path]);
+ assert.deepEqual(discoverReviewedRestoredSqlTests({...args,queue:{items:selected},restoredPaths:[],
+  sourceObjectAt:(r,p)=>[specs[4].path,specs[4].migration].includes(p)?null:sourceObjectAt(r,p)}),[]);
+ const spec=specs[0],row=selected[0];
+ for(const [ref,path,object] of [[B,spec.path,'100644:'+D],
+  [row.merged_source_sha,spec.path,'100644:'+D],
+  [row.merged_source_sha+'^',spec.path,'100644:'+D],
+  [row.merged_source_sha,spec.migration,'100644:'+D],
+  [spec.sourceMerge,spec.migration,'100644:'+D],
+  [A,spec.migration,'100644:'+D]]){
+  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(r,p)=>
+   r===ref&&p===path?object:sourceObjectAt(r,p)}),/Selected READY SQL fixture lacks exact/);
+ }
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,restoredPaths:[...args.restoredPaths,spec.migration]}),/Selected READY SQL fixture lacks exact/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:rows.map(x=>x===row?{...x,state:'TESTING'}:x)}}),/Selected READY SQL fixture lacks exact/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:[...rows,{...row,id:'DIC-Q-509-unready-overlap',state:'TESTING'}]}}),/Selected READY SQL fixture lacks exact/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(r,p)=>r===selected[1].merged_source_sha&&p===spec.path?'100644:'+D:sourceObjectAt(r,p)}),/Other selected READY merge modified SQL fixture/);
+});
