@@ -293,9 +293,17 @@ test('#3889 selected specialist workflows stay published and already-published a
   assert.ok(published);
   assert.equal(sourceObjectAt(prior,path),published);
   assert.equal(sourceObjectAt('HEAD',path),published);
-  for(const r of [prior,'HEAD',manifest.development_source_sha])
+  for(const r of [prior,'HEAD'])
    assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,p)=>
     ref===r&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}));
+  const driftedDevelopment={...opts,sourceObjectAt:(ref,p)=>
+   ref===manifest.development_source_sha&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)};
+  // The runner's historical object differs from its certified published
+  // object, so the published-support proof requires exact live parity.
+  // Coverage's historical object IS the frozen published object; a later
+  // unready development edit must not invalidate retained certified bytes.
+  if(path===runner)assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope(driftedDevelopment));
+  else assert.deepEqual(verifyGeneralProspectiveBatchReadyTestScope(driftedDevelopment),selected);
  }
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,manifest:{...manifest,
   restored_unpublished_workflow_paths:manifest.restored_unpublished_workflow_paths.filter(p=>p!==workflow)}}));
