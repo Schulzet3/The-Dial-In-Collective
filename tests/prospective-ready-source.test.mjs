@@ -56,3 +56,39 @@ test('no arbitrary extra READY proposals and no state transition on original dev
  const p=proposeProspectiveReadyQueue(g);
  assert.equal(g.liveQueue.items[1].state,'IN_PROGRESS');assert.equal(p.queue.items[1].state,'IN_PROGRESS');
 });
+
+test('disjoint expansion retains existing READY records and atomically plans two original TESTING IDs',async()=>{
+ const {proposeDisjointProspectiveReadyBatch:batch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const f=fixture(),second=f.liveQueue.items[1].id,prior=f.liveQueue.items[2];
+ prior.state='READY';prior.blockers=[];
+ const secondPath=f.liveQueue.items[1].scope_paths[0];
+ f.firstParentChangedPaths=sha=>sha===M?['supabase/migrations/selected.sql']:sha===B?[secondPath]:[];
+ f.isAncestor=(sha,dev)=>[M,B].includes(sha)&&dev===A;
+ const originalReader=f.sourceObjectAt;
+ f.sourceObjectAt=(sha,path)=>path===secondPath?sha===P?null:[A,B].includes(sha)?'100644:'+C:null:originalReader(sha,path);
+ const before=structuredClone(f.liveQueue);
+ const r=batch({...f,selectedIds:[second,id]});
+ assert.equal(r.status,'PROSPECTIVE_BATCH_PLAN_ONLY');
+ assert.equal(r.ready_certified,false);assert.equal(r.publication_authorized,false);
+ assert.deepEqual(r.retained_ready_ids,[prior.id]);
+ assert.deepEqual(r.added_ids,[id,second].sort());
+ assert.deepEqual(r.queue.items.filter(x=>x.state==='READY').map(x=>x.id).sort(),[id,second,prior.id].sort());
+ assert.deepEqual(r.queue.items[2],prior);
+ assert.deepEqual(f.liveQueue,before);
+ assert.equal(batch({...f,selectedIds:[id,second]}).identity_sha256,r.identity_sha256);
+ const edits=[
+  x=>{x.selectedIds=[id,id]},
+  x=>{x.selectedIds=[prior.id]},
+  x=>{x.liveQueue.items[3].scope_paths.push(secondPath)},
+  x=>{x.liveQueue.items[2].scope_paths.push(secondPath)},
+  x=>{x.liveQueue.items[1].ci_runs=[]},
+  x=>{x.firstParentChangedPaths=()=>['supabase/migrations/selected.sql','supabase/migrations/undeclared.sql']},
+  x=>{x.liveQueue.items[1].blockers.push('Auth actual member acceptance unverified')},
+ ];
+ for(const edit of edits){
+  const x={...f,liveQueue:structuredClone(f.liveQueue),selectedIds:[id,second]};
+  edit(x);const untouched=structuredClone(x.liveQueue);
+  assert.throws(()=>batch(x),/HOLD/);
+  assert.deepEqual(x.liveQueue,untouched);
+ }
+});
