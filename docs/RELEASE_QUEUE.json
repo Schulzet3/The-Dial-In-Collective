@@ -15621,7 +15621,7 @@
       "issue": 509,
       "pr": null,
       "title": "Reject NULL receipt channel/outcome for service-only approval delivery",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
       "scope_paths": [
         "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
@@ -15637,9 +15637,7 @@
         43633899352,
         43633899372
       ],
-      "blockers": [
-        "Independent #3347 source-isolated frozen candidate five exact native checks not yet certified."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Development-only source, no publish, production SQL/Edge/Auth/Storage/member change or observed customer impact.\n#3889 verified first-parent migration introduction 1bf9fa82686e19642a2158fd8105df6755dc7bed (parent 9f23b49b5e601b36610f512c6274762bf8733542), exact current unchanged Git blob dea27e959e052b06bc032f4522d91312eea779eb; authenticated nonpublishing main PR #3905 read-only CI 45263391549 and GitHub compare ancestry into development 066fca8666dd57f967040ed0a58eec1d6401b360. This is merged SOURCE attribution only, NOT READY certification or proof of production application."
     },
@@ -16192,7 +16190,7 @@
       "issue": 509,
       "pr": null,
       "title": "Return current canonical name after an earlier Pending coffee becomes the global primary name",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "e50727444db83e76a02a037c7575a995707a585f",
       "scope_paths": [
         "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
@@ -16209,9 +16207,7 @@
         43901492764,
         43901492065
       ],
-      "blockers": [
-        "Independent #3347 candidate five checks and downstream #33 contract acceptance remain unverified."
-      ],
+      "blockers": [],
       "notes": "Development-only narrow returned JSON name correction, preserve historical migrations, RLS, private function grants, first-entry precedence, alias/provenance, existing shots and Locked member behavior. No production provider write, Publish or release authorization.\n#3889 independent GitHub PR #3048 merged e50727444db83e76a02a037c7575a995707a585f, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate.",
       "production_deployed": false
     },
@@ -17261,7 +17257,7 @@
       "issue": 509,
       "pr": null,
       "title": "Reject duplicate controls in member-selected recommendation provenance",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "8187c2cd99aa33c39fc686f199faf8957e6faf9e",
       "scope_paths": [
         "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
@@ -17277,9 +17273,7 @@
         44365461803,
         44365462042
       ],
-      "blockers": [
-        "Independent #3347 candidate and actual #96 hosted member acceptance unverified; separate owner Publish required."
-      ],
+      "blockers": [],
       "notes": "Development-only immutable migration adds distinct-element validation to optional shot recommendation_context; preserves prior JSON-null guard, two allowed controls and original shot history; no known member incident, no production effects.\n#3889 independent GitHub PR #3292 merged 8187c2cd99aa33c39fc686f199faf8957e6faf9e, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate.",
       "production_deployed": false
     },
@@ -17288,7 +17282,7 @@
       "issue": 509,
       "pr": 3295,
       "title": "Reject NULL expected revision during held Community outlier confirmation",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
       "scope_paths": [
         "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
@@ -17305,9 +17299,7 @@
         44371660234,
         44371659861
       ],
-      "blockers": [
-        "Independent #3347 candidate and genuine #96 hosted signed-in acceptance unverified; NEW owner Publish required."
-      ],
+      "blockers": [],
       "notes": "Only null-unsafe revision predicate changed to IS DISTINCT FROM in complete current function. Preserve admitted-owner checks, Community eligibility/fingerprint and replay rules, all migration history, member data. No live Supabase writes or deployment.\n#3889 independent GitHub PR #3295 merged dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate.",
       "production_deployed": false
     },
@@ -17503,7 +17495,7 @@
       "id": "DIC-Q-509-admin-shot-delete-family-refresh",
       "issue": 509,
       "title": "Recalculate personal recipe family and Current after Admin deletes a shot",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
       "scope_paths": [
         "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
@@ -17521,10 +17513,7 @@
         44512334965,
         44512334942
       ],
-      "blockers": [
-        "Independent #3347 candidate and shared runner proof required; separate exact-selected workflow failure retained.",
-        "The existing production mismatch is unchanged and requires separately accepted repair and a NEW owner Publish; no automatic live data write."
-      ],
+      "blockers": [],
       "notes": "#509 R358 source-only; preserve family history, Community, favorite/Current and authorization; no publication.\n#3889 independent GitHub PR #3399 merged 9b97754c7a80d988947657978ec7cad1af9ed3ae, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate.",
       "production_deployed": false
     },
@@ -17661,7 +17650,7 @@
       "id": "DIC-Q-509-admin-completed-delete-retry-count",
       "issue": 509,
       "title": "Return stored Community removal count on completed Admin deletion retry",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "367e290386b1f659af4d6a2e54e21fbd43bbb841",
       "scope_paths": [
         "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
@@ -17679,10 +17668,7 @@
         44590981819,
         44590982128
       ],
-      "blockers": [
-        "Independent #3347 source-isolated candidate five native checks not yet certified.",
-        "New owner Publish required before migration; real #96 acceptance unverified."
-      ],
+      "blockers": [],
       "notes": "Future-only CREATE OR REPLACE preserves all earlier migrations, Auth, Community, immutable history and other function branches; release unchanged.\n#3889 independent GitHub PR #3445 merged 367e290386b1f659af4d6a2e54e21fbd43bbb841, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate.",
       "production_deployed": false
     },
