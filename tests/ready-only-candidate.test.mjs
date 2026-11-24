@@ -1053,3 +1053,44 @@ test('#3889 exact two-ID batch reuses only previously certified seven nonshipped
  }
  assert.throws(()=>validate({...proof,publishedSourceSha:dev}),/HOLD/);
 });
+
+test('#3889 independently replayed two-ID batch queue parity requires exact LIVE bytes and preserves old READY',async()=>{
+ const {reviewedProspectivePromotionQueueParity:parity}=await import('../scripts/release/ready-only-candidate.mjs');
+ const oldId='DIC-Q-509-stale-project-shot-comment-20261122',newId='DIC-Q-33-r399-original99-producer-tenure-precision';
+ const row=(id,issue,state)=>({id,issue,title:'Synthetic scoped source',state,
+  owner_source:'https://github.com/Schulzet3/The-Dial-In-Collective/issues/3889',
+  merged_source_sha:'a'.repeat(40),scope_paths:['src/server/'+issue+'.mjs'],
+  tests:['synthetic PASS'],ci_runs:[1234],blockers:state==='TESTING'?['frozen candidate pending']:[]});
+ const source={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
+  published_base:{tested_source_sha:'2d22d448160d428a977f06482323646b92818fcf',
+   release_sha:'5b256f1fc0717d3635f7148b934a1f91f8991685',netlify_deploy_id:'synthetic'},
+  items:[row(oldId,509,'READY'),row(newId,33,'TESTING')],history:[]};
+ const proposed=structuredClone(source);proposed.items[1].state='READY';proposed.items[1].blockers=[];
+ const p={status:'PROSPECTIVE_BATCH_PLAN_ONLY',ready_certified:false,publication_authorized:false,
+  baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+  development_source_sha:'e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0',
+  identity_sha256:'1'.repeat(64),added_ids:[newId],retained_ready_ids:[oldId],queue:proposed};
+ const m={kind:'DIC-READY-ONLY-SOURCE-1',publication_authorized:false,
+  candidate_branch:'release-candidates/prospectbatch3889-'+'1'.repeat(20),
+  development_source_sha:p.development_source_sha,published_source_sha:source.published_base.tested_source_sha,
+  selected_ready_item_ids:[newId,oldId],
+  prospective_ready_batch_preview:{status:p.status,publication_authorized:false,
+   ready_certified:false,baseline_queue_blob:p.baseline_queue_blob,
+   added_ids:[newId],retained_ready_ids:[oldId],identity_sha256:p.identity_sha256}};
+ const originalQueue=JSON.stringify(source,null,2)+'\n',candidateQueue=JSON.stringify(proposed,null,2)+'\n';
+ const opts={manifest:m,originalQueue,candidateQueue,liveQueue:candidateQueue,prospectiveBatchPlan:p};
+ assert.equal(parity(opts),true);
+ assert.equal(parity({...opts,prospectiveBatchPlan:null}),false,'remote manifest alone cannot certify source');
+ assert.equal(parity({...opts,liveQueue:originalQueue}),false,'unpromoted queue is not READY');
+ assert.equal(parity({...opts,liveQueue:candidateQueue+' '}),false,'live byte drift is forbidden');
+ assert.equal(parity({...opts,manifest:{...m,publication_authorized:true}}),false,'no release grant');
+ assert.equal(parity({...opts,manifest:{...m,selected_ready_item_ids:[newId]}}),false);
+ assert.equal(parity({...opts,manifest:{...m,prospective_ready_batch_preview:{...m.prospective_ready_batch_preview,identity_sha256:'2'.repeat(64)}}}),false);
+ const forged=structuredClone(proposed);forged.items[0].title='Tampered old READY';
+ assert.equal(parity({...opts,candidateQueue:JSON.stringify(forged,null,2)+'\n',liveQueue:JSON.stringify(forged,null,2)+'\n'}),false);
+ const flawed=structuredClone(proposed);flawed.items[1].scope_paths=['src/server/intruder.mjs'];
+ const wrongPlan={...p,queue:flawed};
+ assert.equal(parity({...opts,prospectiveBatchPlan:wrongPlan}),false);
+ const extra=structuredClone(proposed);extra.items.push(row('DIC-Q-509-extra',509,'READY'));
+ assert.equal(parity({...opts,prospectiveBatchPlan:{...p,queue:extra},candidateQueue:JSON.stringify(extra,null,2)+'\n',liveQueue:JSON.stringify(extra,null,2)+'\n'}),false);
+});

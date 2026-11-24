@@ -144,3 +144,14 @@ test('#3781 controller binds certified exact candidate CI before legacy item evi
  assert.match(src,/frozenCandidateRunIds,frozenCandidateBranch:candidateBranch/);
  assert.match(src,/if\(!evidence.ready\)throw Error/);
 });
+
+test('#3889 publication controller independently replays prospective batch source before candidate validation',()=>{
+ const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
+ assert.match(src,/proposeDisjointProspectiveReadyBatch\(\{/);
+ assert.match(src,/baselineQueue:json\(git\(\['cat-file','blob',BASELINE_QUEUE_BLOB\]/);
+ assert.match(src,/liveQueue:json\(originalQueue/);
+ assert.match(src,/selectedIds:manifest\.prospective_ready_batch_preview\.added_ids/);
+ assert.match(src,/firstParentChangedPaths:commit=>listDiff\(commit\+'\^',commit\)/);
+ assert.match(src,/queueContentMatches:reviewedProspectivePromotionQueueParity\(\{manifest,[\s\S]*?prospectiveBatchPlan\}\)/);
+ assert.match(src,/sourceObjectAt:objectAt,isAncestor:\(a,b\)=>verifiedGitAncestry\(a,b\),prospectiveBatchPlan/);
+});
