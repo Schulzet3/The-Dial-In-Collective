@@ -241,6 +241,182 @@ export function verifyProspectiveBatchReadyTestScope({manifest,queue,branch,comm
  return true;
 }
 
+// General prospective cohort QA: independently reconstruct the exact immutable
+// parent-to-candidate queue and selected first-parent source/test objects.
+// This verifies test applicability only; never certifies READY or publication.
+const QUEUE_PATH='docs/RELEASE_QUEUE.json';
+const CERT_PATH='docs/READY_BATCH_CERTIFICATION.json';
+const hex64=/^[a-f0-9]{64}$/;
+const sortedUnique=xs=>[...new Set(xs)].sort();
+const sourcePath=p=>/^(?:site\/|src\/server\/|netlify\/functions\/|supabase\/migrations\/|supabase\/functions\/)/.test(p)||
+ ['build_cloud.mjs','netlify.toml','supabase/config.toml','package.json','package-lock.json',
+  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
+  'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt',
+  'scripts/pwa/member-approval-worker.template.txt'].includes(p);
+const safePath=p=>typeof p==='string'&&/^[A-Za-z0-9_.\/-]+$/.test(p)&&!p.startsWith('/')&&!p.includes('..');
+const fileObject=/^100(?:644|755):[a-f0-9]{40}$/;
+const sameJSON=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+function blobOfText(raw){
+ assert.equal(typeof raw,'string');
+ const bytes=Buffer.from(raw,'utf8');
+ return '100644:'+createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+}
+function exactGitJSON(ref,path,readGitText,sourceObjectAt){
+ const raw=readGitText(ref,path);
+ assert.equal(sourceObjectAt(ref,path),blobOfText(raw),'independent Git JSON blob mismatch '+path);
+ return {raw,value:JSON.parse(raw)};
+}
+export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
+ readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor}={}){
+ const p=m?.prospective_ready_batch_preview;
+ if(p===undefined)return false;
+ assert.equal(m.schema_version,1);
+ assert.equal(m.kind,'DIC-READY-ONLY-SOURCE-1');
+ assert.equal(m.publication_authorized,false);
+ assert.equal(m.prospective_ready_preview,undefined);
+ assert.equal(p.status,'PROSPECTIVE_BATCH_PLAN_ONLY');
+ assert.equal(p.publication_authorized,false);
+ assert.equal(p.ready_certified,false);
+ assert.equal(p.baseline_queue_blob,PROSPECTIVE_BASELINE);
+ assert.match(p.identity_sha256||'',hex64);
+ assert.match(m.candidate_branch||'',/^release-candidates\/prospectbatch3889-[a-f0-9]{20}$/);
+ assert.match(m.development_source_sha||'',SHA);
+ assert.equal(m.published_source_sha,PROSPECTIVE_PUBLISHED);
+ assert.equal(commitParent,m.development_source_sha);
+ if(branch)assert.ok(branch==='refs/heads/'+m.candidate_branch||/^refs\/pull\/[1-9][0-9]*\/merge$/.test(branch),
+  'unexpected candidate ref');
+ for(const read of [readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor])
+  assert.equal(typeof read,'function','independent Git readers required');
+ const dev=m.development_source_sha,pub=m.published_source_sha;
+ assert.equal(isAncestor(pub,dev),true,'published source must be an ancestor');
+ const baseline=exactGitJSON(BATCH_BASELINE_DEV,QUEUE_PATH,readGitText,sourceObjectAt);
+ assert.equal(blobOfText(baseline.raw),'100644:'+PROSPECTIVE_BASELINE);
+ const parent=exactGitJSON(dev,QUEUE_PATH,readGitText,sourceObjectAt);
+ const candidate=exactGitJSON('HEAD',QUEUE_PATH,readGitText,sourceObjectAt);
+ assert.deepEqual(candidate.value,q);
+ const cohort=baseline.value.items.filter(x=>x.state==='TESTING');
+ assert.equal(cohort.length,63);
+ assert.equal(new Set(cohort.map(x=>x.id)).size,63);
+ for(const value of [baseline.value,parent.value,q]){
+  assert.equal(value.published_base?.tested_source_sha,pub);
+  assert.equal(new Set(value.items.map(x=>x.id)).size,value.items.length);
+  assert.deepEqual(value.published_base,parent.value.published_base);
+ }
+ const baseRows=new Map(cohort.map(x=>[x.id,x]));
+ const parentRows=new Map(parent.value.items.map(x=>[x.id,x]));
+ assert.ok(cohort.every(x=>parentRows.has(x.id)),'baseline cohort incomplete');
+ const added=p.added_ids,retained=p.retained_ready_ids;
+ for(const ids of [added,retained,m.selected_ready_item_ids]){
+  assert.ok(Array.isArray(ids));
+  assert.deepEqual(ids,sortedUnique(ids));
+  assert.ok(ids.every(id=>typeof id==='string'&&/^DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(id)));
+ }
+ assert.ok(added.length);
+ assert.deepEqual(retained,parent.value.items.filter(x=>x.state==='READY').map(x=>x.id).sort());
+ const selected=[...added,...retained];
+ assert.equal(new Set(selected).size,selected.length);
+ assert.deepEqual(m.selected_ready_item_ids,[...selected].sort());
+ const expected=structuredClone(parent.value);
+ for(const id of added){
+  const row=expected.items.find(x=>x.id===id),original=baseRows.get(id);
+  assert.ok(row&&original&&row.state==='TESTING');
+  assert.equal(row.issue,original.issue);
+  assert.deepEqual(row.scope_paths,original.scope_paths);
+  row.state='READY';row.blockers=[];
+ }
+ assert.deepEqual(q,expected,'only exact selected TESTING-to-READY queue changes permitted');
+ assert.equal(candidate.raw,JSON.stringify(expected,null,2)+'\n','candidate queue raw byte parity');
+ assert.deepEqual(q.items.filter(x=>x.state==='READY').map(x=>x.id).sort(),m.selected_ready_item_ids);
+ const excluded=new Set();
+ for(const key of ['restored_to_published_paths','restored_unpublished_workflow_paths',
+  'excluded_unready_test_paths','restored_to_published_unready_test_paths','restored_reviewed_batch_qa_paths']){
+  const paths=m[key]??[];
+  assert.ok(Array.isArray(paths)&&paths.every(safePath));
+  for(const path of paths)excluded.add(path);
+ }
+ // Preserve old READY bytes from the exact previously certified candidate,
+ // never from a later development file. New selected paths must have a
+ // continuous published-to-live source chain, including tests and workflows.
+ let previousCandidate=null;
+ if(retained.length){
+  const cert=exactGitJSON(dev,CERT_PATH,readGitText,sourceObjectAt).value;
+  assert.equal(cert.kind,'DIC-PREVALIDATED-READY-BATCH-1');
+  assert.match(cert.candidate_sha||'',SHA);
+  assert.match(cert.ready_selection_sha256||'',hex64);
+  previousCandidate=cert.candidate_sha;
+  const old=exactGitJSON(previousCandidate,QUEUE_PATH,readGitText,sourceObjectAt).value;
+  assert.deepEqual(old.items.filter(x=>x.state==='READY').map(x=>x.id).sort(),retained);
+  for(const id of retained)assert.deepEqual(old.items.find(x=>x.id===id),parentRows.get(id));
+ }
+ const owners=new Map();
+ for(const id of selected){
+  const row=q.items.find(x=>x.id===id),merge=row.merged_source_sha;
+  assert.match(merge||'',SHA);
+  assert.equal(row.production_deployed,false);
+  assert.ok(row.tests?.length&&row.ci_runs?.length&&row.ci_runs.every(x=>Number.isSafeInteger(x)&&x>0));
+  assert.deepEqual(row.blockers,[]);
+  assert.equal(isAncestor(merge,dev),true);
+  const changes=firstParentChangedPaths(merge);
+  assert.ok(Array.isArray(changes)&&changes.every(safePath));
+  assert.deepEqual(sortedUnique(changes.filter(sourcePath)),sortedUnique(row.scope_paths));
+  // Every selected executable, test, workflow and other non-document first-
+  // parent path is protected, not just the queue's deployable path inventory.
+  const paths=sortedUnique(changes.filter(path=>!path.startsWith('docs/')));
+  assert.ok(paths.length&&row.scope_paths.every(path=>paths.includes(path)));
+  for(const path of paths){
+   assert.ok(!excluded.has(path),'selected source/test/workflow excluded: '+path);
+   const list=owners.get(path)||[];
+   list.push({id,merge,retained:retained.includes(id)});owners.set(path,list);
+  }
+ }
+ for(const row of parent.value.items){
+  if(selected.includes(row.id)||!['TESTING','IN_PROGRESS','BLOCKED'].includes(row.state))continue;
+  for(const path of row.scope_paths??[]){
+   assert.ok(!(owners.get(path)||[]).some(x=>!x.retained),
+    'excluded unfinished owner overlaps new selected source: '+path);
+  }
+ }
+ for(const [path,list] of owners){
+  assert.equal(new Set(list.map(x=>x.merge)).size,list.length,'ambiguous selected path ownership');
+  const allRetained=list.every(x=>x.retained);
+  assert.ok(allRetained||list.every(x=>!x.retained),'retained READY overlap requires separate reviewed isolation');
+  let previous=sourceObjectAt(pub,path);
+  const remaining=[...list];
+  while(remaining.length){
+   const earliest=remaining.filter(x=>remaining.every(y=>x===y||isAncestor(x.merge,y.merge)===true));
+   assert.equal(earliest.length,1,'ambiguous selected merge chronology: '+path);
+   const x=earliest[0];remaining.splice(remaining.indexOf(x),1);
+   const before=sourceObjectAt(x.merge+'^',path),after=sourceObjectAt(x.merge,path);
+   assert.ok(fileObject.test(after||''),'selected path missing or unsafe: '+path);
+   assert.notEqual(before,after,'selected first-parent change missing: '+path);
+   if(!allRetained)assert.equal(before,previous,'unselected intervening bytes: '+path);
+   previous=after;
+  }
+  assert.equal(sourceObjectAt('HEAD',path),previous,'selected candidate object mismatch: '+path);
+  if(allRetained)assert.equal(sourceObjectAt(previousCandidate,path),previous,'retained READY drift: '+path);
+  else assert.equal(sourceObjectAt(dev,path),previous,'selected development tip drift: '+path);
+ }
+ return [...owners.keys()].sort();
+}
+function gitText(ref,path){
+ return execFileSync('git',['show',ref+':'+path],{encoding:'utf8',timeout:20000,maxBuffer:4000000});
+}
+function gitObject(ref,path){
+ const lines=execFileSync('git',['ls-tree','-z',ref,'--',path],{encoding:'utf8',timeout:15000}).split('\0').filter(Boolean);
+ if(!lines.length)return null;
+ assert.equal(lines.length,1);
+ const x=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(lines[0]);
+ assert.ok(x&&x[3]===path,'unexpected Git path or mode: '+path);
+ return x[1]+':'+x[2];
+}
+function firstParentPaths(sha){
+ return execFileSync('git',['diff','--name-only','--no-renames',sha+'^',sha],{encoding:'utf8',timeout:15000}).split(/\r?\n/).filter(Boolean);
+}
+function gitAncestor(a,b){
+ try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+ catch(e){if(e.status===1)return false;throw e;}
+}
+let generalSelectedPaths=null;
 let prospectiveCache;
 function prospectiveCandidate(){
  if(prospectiveCache!==undefined)return prospectiveCache;
@@ -251,15 +427,21 @@ function prospectiveCandidate(){
  const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
  const parent=execFileSync('git',['rev-parse','HEAD^'],{encoding:'utf8',timeout:15000}).trim();
  const opts={manifest:m,queue:q,branch:process.env.GITHUB_REF||'',commitParent:parent,sourceObjectAt:gitBlob};
- if(m.prospective_ready_batch_preview!==undefined)verifyProspectiveBatchReadyTestScope(opts);
- else verifyProspectiveReadyTestScope(opts);
+ if(m.prospective_ready_batch_preview!==undefined){
+  if(sameJSON(m.selected_ready_item_ids,[BATCH_R399_ID,PROSPECTIVE_ID]))verifyProspectiveBatchReadyTestScope(opts);
+  else generalSelectedPaths=verifyGeneralProspectiveBatchReadyTestScope({...opts,readGitText:gitText,
+   sourceObjectAt:gitObject,firstParentChangedPaths:firstParentPaths,isAncestor:gitAncestor});
+ }else verifyProspectiveReadyTestScope(opts);
  return prospectiveCache=m;
 }
 function frozenExcludedProspectiveSource(paths){
  const m=prospectiveCandidate();if(!m)return false;
  assert.ok(Array.isArray(paths)&&paths.length>0);
+ // For a generalized candidate, any selected path must run the original
+ // assertion, never receive an N/A classification.
+ if(generalSelectedPaths&&paths.some(path=>generalSelectedPaths.includes(path)))return false;
  for(const path of paths){
-  assert.ok(!(m.prospective_ready_batch_preview!==undefined?BATCH_SELECTED_PATHS:[PROSPECTIVE_MIGRATION]).includes(path),
+  assert.ok(!(m.prospective_ready_batch_preview!==undefined?(generalSelectedPaths||BATCH_SELECTED_PATHS):[PROSPECTIVE_MIGRATION]).includes(path),
    'selected prospective source and tests must NEVER be excluded: '+path);
   const published=gitBlob(m.published_source_sha,path);
   const developed=gitBlob(m.development_source_sha,path);
