@@ -74,3 +74,60 @@ export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId
   publication_authorized:false,ready_certified:false,
   baseline_count:63,selected_id:selectedId,identity_sha256:fingerprint,queue};
 }
+
+/**
+ * #3889: read-only, disjoint-scope expansion of a live READY selection.
+ * Every added item must independently pass the existing strict preview gate.
+ * Shared runtime paths require separate chronology/pinning proof, not this lane.
+ * Neither the returned queue nor its fingerprint is a publisher certificate.
+ */
+export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}){
+ const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: '+why);};
+ if(!Array.isArray(selectedIds)||!selectedIds.length||
+    selectedIds.some(id=>typeof id!=='string'||!/^DIC-Q-[0-9]+-[a-z0-9-]+$/.test(id))||
+    new Set(selectedIds).size!==selectedIds.length)
+  hold('explicit unique original TESTING IDs required');
+ const {liveQueue,baselineQueue,developmentSourceSha,firstParentChangedPaths}=readers;
+ if(queueSchemaErrors(liveQueue).length||queueSchemaErrors(baselineQueue).length||
+    !SHA.test(developmentSourceSha||'')||typeof firstParentChangedPaths!=='function')
+  hold('exact queue/source readers unavailable');
+ const ordered=sorted(selectedIds);
+ const originalReady=liveQueue.items.filter(i=>i.state==='READY');
+ const selected=ordered.map(id=>liveQueue.items.find(i=>i.id===id));
+ if(selected.some(i=>!i||i.state!=='TESTING'))hold('selected item is not live TESTING');
+ const ownerByPath=new Map();
+ for(const i of [...originalReady,...selected]){
+  for(const path of i.scope_paths){
+   if(ownerByPath.has(path))hold('shared selected source needs reviewed chronology: '+path);
+   ownerByPath.set(path,i.id);
+  }
+ }
+ const newPaths=new Set(selected.flatMap(i=>i.scope_paths));
+ for(const i of liveQueue.items){
+  if(ordered.includes(i.id)||!['TESTING','IN_PROGRESS','BLOCKED'].includes(i.state))continue;
+  if(i.scope_paths.some(path=>newPaths.has(path)))
+   hold('unfinished overlapping owner requires reviewed source isolation: '+i.id);
+ }
+ let queue=structuredClone(liveQueue);
+ const proofs=[];
+ for(const id of ordered){
+  const original=selected.find(i=>i.id===id);
+  const actual=firstParentChangedPaths(original.merged_source_sha);
+  if(!Array.isArray(actual)||!same(sorted(deployableChangedPaths(actual)),sorted(original.scope_paths)))
+   hold('declared scope does not equal first-parent deployable paths: '+id);
+  const p=proposeProspectiveReadyQueue({...readers,liveQueue:queue,selectedId:id});
+  queue=p.queue;
+  proofs.push({id,identity_sha256:p.identity_sha256});
+ }
+ const retained=queue.items.filter(i=>!ordered.includes(i.id));
+ if(!same(retained,liveQueue.items.filter(i=>!ordered.includes(i.id))))
+  hold('nonselected record changed');
+ const selectedReadyItems=queue.items.filter(i=>i.state==='READY').sort((a,b)=>a.id.localeCompare(b.id));
+ const identity={kind:'DIC-PROSPECTIVE-DISJOINT-BATCH-3889-V1',baseline_dev_sha:BASELINE_DEV_SHA,
+  baseline_queue_blob:BASELINE_QUEUE_BLOB,published_base:queue.published_base,
+  development_source_sha:developmentSourceSha,added_ids:ordered,
+  retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
+  preview_proofs:proofs};
+ return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
+  status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,queue};
+}
