@@ -15,6 +15,7 @@ import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch,
  auditMissingUnreadyMergeEvidence} from './release-queue.mjs';
 import {validateReadyOnlyCandidate,reviewedProspectivePromotionQueueParity,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
+import {proposeDisjointProspectiveReadyBatch,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
 import {verifyReadyItems,githubReleaseReaders,certifiedFrozenCandidateRuns} from './ready-evidence-gate.mjs';
 import {liveControllerIndex} from './observe-chat-controller-event.mjs';
 import {validateReleaseTriggerReceipt} from './release-reliability.mjs';
@@ -327,6 +328,18 @@ export async function executeSingleUseRelease(settings=process.env){
   const originalQueue=git(['show',sourceAnchor+':docs/RELEASE_QUEUE.json'],{trim:false});
   const liveQueue=git(['show',developmentHead+':docs/RELEASE_QUEUE.json'],{trim:false});
   const candidateQueue=git(['show',sha+':docs/RELEASE_QUEUE.json'],{trim:false});
+  // Replay the immutable prospective TESTING plan from reviewed Git objects,
+  // never from a remote candidate manifest. A stale or forged selected source
+  // must HOLD before one-use grant/release code can run.
+  const prospectiveBatchPlan=manifest.prospective_ready_batch_preview!==undefined?
+   proposeDisjointProspectiveReadyBatch({
+    baselineQueue:json(git(['cat-file','blob',BASELINE_QUEUE_BLOB]),'original 63-item baseline'),
+    liveQueue:json(originalQueue,'frozen development queue at candidate parent'),
+    selectedIds:manifest.prospective_ready_batch_preview.added_ids,
+    developmentSourceSha:sourceAnchor,
+    firstParentChangedPaths:commit=>listDiff(commit+'^',commit),
+    isAncestor:(a,b)=>verifiedGitAncestry(a,b),sourceObjectAt:objectAt
+   }):null;
   queueGate=validateReadyOnlyCandidate(queuedSource,{
    manifest,publishedSourceSha:lastPublishedTestedSha,developmentHead,
    candidateSha:sha,candidateBranch,actualParents:git(['rev-list','--parents','-n','1',sha]).split(/\s+/),
@@ -335,9 +348,9 @@ export async function executeSingleUseRelease(settings=process.env){
    stagedCommitChangedPaths:listDiff(sourceAnchor,sha),
    developmentDriftPaths:listDiff(sourceAnchor,developmentHead),
    queueContentMatches:reviewedProspectivePromotionQueueParity({manifest,
-    originalQueue,candidateQueue,liveQueue}),
+    originalQueue,candidateQueue,liveQueue,prospectiveBatchPlan}),
    liveQueue:json(liveQueue,'current development release queue'),
-   sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
+   sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b),prospectiveBatchPlan
   });
   assertCandidateRelativeImports(queueGate.deployable_paths,{
    readSource:path=>git(['show',sha+':'+path]),
