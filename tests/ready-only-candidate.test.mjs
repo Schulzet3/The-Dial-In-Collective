@@ -1168,6 +1168,12 @@ test('#3889 mixed selected and excluded reviewed SQL fixtures preserve selected 
  const args={queue:{items:rows},restoredPaths:[specs[4].migration],
   publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt,selectedReadyItems:selected};
  assert.deepEqual(discoverReviewedRestoredSqlTests(args),[specs[4].path]);
+ // planReadyOnlyCandidate deliberately projects ready_items without state.
+ // The authoritative queue row, not the projection, establishes READY.
+ const projected=selected.map(({state,...row})=>row);
+ assert.deepEqual(discoverReviewedRestoredSqlTests({...args,selectedReadyItems:projected}),[specs[4].path]);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:projected,queue:{items:rows.map(x=>x===selected[0]?{...x,state:'TESTING'}:x)}}),/Selected READY SQL fixture lacks exact/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:projected.map((x,i)=>i===0?{...x,state:'TESTING'}:x)}),/Selected READY SQL fixture lacks exact/);
  assert.deepEqual(discoverReviewedRestoredSqlTests({...args,queue:{items:selected},restoredPaths:[],
   sourceObjectAt:(r,p)=>[specs[4].path,specs[4].migration].includes(p)?null:sourceObjectAt(r,p)}),[]);
  const spec=specs[0],row=selected[0];
