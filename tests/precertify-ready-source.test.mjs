@@ -309,3 +309,32 @@ test('#3889 two-phase workflow preview does not pre-promote development READY or
  const executable=workflow.split('\n').filter(line=>!/^\s*#/.test(line)).join('\n');
  assert.doesNotMatch(executable,/POST.*publish|\bgit push\b|\bnetlify\s+build\b/i);
 });
+
+test('#3889 scoped hosted prospective input is exact-source-bound, read-only and consumed only on its own main push',async()=>{
+ const {prospectiveReceiptArg}=await import('../scripts/release/prospective-receipt-input.mjs');
+ const dev='a'.repeat(40),pre='b'.repeat(40),blob='c'.repeat(40),published='d'.repeat(40);
+ const id='DIC-Q-33-r399-original99-producer-tenure-precision';
+ const plan={schema_version:1,kind:'DIC-NONPUBLISHING-PROSPECTIVE-RECEIPT-3889',development_sha:dev,
+  preflight_blob:pre,queue_blob:blob,published_source_sha:published,selected_testing_ids:[id],publication_authorized:false};
+ const readers={developmentSha:dev,readBlob:(sha,p)=>p.endsWith('PREFLIGHT.md')?pre:blob,
+  readQueue:()=>({published_base:{tested_source_sha:published},items:[{id,state:'TESTING'}]})};
+ assert.equal(prospectiveReceiptArg(plan,readers),'--prospective-batch='+id);
+ for(const edit of [
+  (p,r)=>p.publication_authorized=true,
+  (p,r)=>p.selected_testing_ids.push(id),
+  (p,r)=>p.selected_testing_ids=['--push'],
+  (p,r)=>p.grant='forged',
+  (p,r)=>r.developmentSha='e'.repeat(40),
+  (p,r)=>r.readBlob=()=>dev,
+  (p,r)=>r.readQueue=()=>({published_base:{tested_source_sha:published},items:[{id,state:'READY'}]}),
+  (p,r)=>p.published_source_sha=dev,
+ ]){const p=structuredClone(plan),r={...readers};edit(p,r);assert.throws(()=>prospectiveReceiptArg(p,r),/HOLD/);}
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ assert.ok(workflow.includes("'docs/workstreams/issue-3889-prospective-input.json'"));
+ assert.ok(workflow.includes('if [ "$EVENT" = \'push\' ]; then'));
+ assert.ok(workflow.includes('git diff --name-only "$PUSH_BEFORE" "$GITHUB_SHA" -- "$plan_path"'));
+ assert.ok(workflow.includes('test "$(git rev-parse HEAD)" = "$GITHUB_SHA"'));
+ assert.ok(workflow.includes('--receipt "$prospective_arg"'));
+ assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
+ assert.doesNotMatch(workflow,/\bgit push\b|\bnetlify\s+build\b|POST.*publish/i);
+});
