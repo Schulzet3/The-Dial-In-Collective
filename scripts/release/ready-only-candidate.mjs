@@ -252,11 +252,11 @@ const BATCH_QA_SUPPORT=[
 // #3889 arbitrary-cohort compatibility. Preserve the original READY1/READY2
 // proof exactly, and only use the new merged support after independent
 // prospective-plan replay. Never use an untrusted manifest to select QA paths.
-const GENERAL_BATCH_QA_FIX='454ae58eb69552173411c4cd237de7e35a73a622';
+const GENERAL_BATCH_QA_FIX='b58c1a4c856fc65a56bf27b2a0ded20245f6351b';
 const GENERAL_BATCH_PRIOR='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5';
 const GENERAL_BATCH_SUPPORT=[
- ['tests/helpers/release-published-restoration.mjs','d7fd8e39e85e794b1d04ce01af98707426810aa9','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
- ['tests/preflight-contract.test.mjs','bc4dd3dd4368ea1d14b71c293abe85105feb25a8','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
+ ['tests/helpers/release-published-restoration.mjs','7a13c4b9a76a9fb03a491d33e559fc4cd9709e1c','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
+ ['tests/preflight-contract.test.mjs','77f41ca1c434271a1100dfc3e27fa18ef110800d','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
 ];
 function discoverGeneralBatchQaRestoration({queue,selectedIds,publishedSourceSha,
