@@ -92,3 +92,33 @@ test('disjoint expansion retains existing READY records and atomically plans two
   assert.deepEqual(x.liveQueue,untouched);
  }
 });
+
+test('R399 exact narrow specialist receipt admits preview only; parent audit and all other defects stay open',()=>{
+ const f=fixture(),r=f.liveQueue.items[0],o=f.baselineQueue.items[0];
+ const marker='Original603 603 selected current identities/lot/source manual semantic adjudication unfinished, #33 OPEN; related #267 V2/#96 scoped separately.';
+ const merge='513f98ac06cdd0fe569390354420158458342859',head='f06e3f7c4143c9f9b8409bed7d062c16a0269a23';
+ const path='src/server/coffee-narrative-evidence.mjs',testPath='tests/coffee-issue33-r399-keller-tenure.test.mjs';
+ const row={id:'DIC-Q-33-r399-original99-producer-tenure-precision',issue:33,pr:3678,merged_source_sha:merge,scope_paths:[path],
+  ci_runs:[44987903105,44987902345,44987902359,44987902371,44988168022,44988168102,44988168054,44988168083],
+  blockers:['#3347 candidate certification pending',marker]};
+ Object.assign(r,structuredClone(row));Object.assign(o,structuredClone(row));f.selectedId=row.id;
+ f.firstParentChangedPaths=()=>[path,testPath];f.isAncestor=(m,d)=>m===merge&&d===A;
+ f.sourceObjectAt=(sha,p)=>[merge,head,A].includes(sha)?p===path?'100644:3de11626496a0b698e558ec8929f0158e3083b0a':p===testPath?'100644:16c4d572ecd43860a9cd4f1a7f2baffd670382ee':null:null;
+ const before=structuredClone(f.liveQueue),result=proposeProspectiveReadyQueue(f);
+ assert.equal(result.ready_certified,false);assert.equal(result.publication_authorized,false);
+ assert.deepEqual(f.liveQueue,before);assert.equal(result.queue.items[0].state,'READY');
+ for(const edit of [
+  x=>{x.liveQueue.items[0].ci_runs.pop()},
+  x=>{x.liveQueue.items[0].blockers.push('Auth real hosted acceptance failed')},
+  x=>{x.liveQueue.items[0].blockers[1]+=' and a new defect'},
+  x=>{x.baselineQueue.items[0].blockers.pop()},
+  x=>{x.sourceObjectAt=(s,p)=>p===path?'100644:3de11626496a0b698e558ec8929f0158e3083b0a':null},
+  x=>{x.firstParentChangedPaths=()=>[path]},
+  x=>{x.isAncestor=()=>false},
+  x=>{x.liveQueue.items[0].pr=123},
+  x=>{x.liveQueue.items[0].id=x.baselineQueue.items[0].id=x.selectedId='DIC-Q-33-unrelated'},
+ ]) {
+  const x={...f,liveQueue:structuredClone(f.liveQueue),baselineQueue:structuredClone(f.baselineQueue)};
+  edit(x);assert.throws(()=>proposeProspectiveReadyQueue(x),/HOLD/);
+ }
+});
