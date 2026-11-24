@@ -186,6 +186,72 @@ export function reviewedProspectiveQaRestorationPaths({manifest,queue,developmen
 }
 
 
+
+// #3889: reuse the exact previously certified nonshipped restoration for
+// this two-ID batch only. Never infer permission from a path name or manifest.
+const BATCH_QA_REFERENCE='544b06558ab9ab6df4eea0410277b1a3c19f2fe4';
+const BATCH_QA_CERTIFIED='16bc481b2c66c5229c70e513c76141b086b8e535';
+const BATCH_QA_PUBLISHED='2d22d448160d428a977f06482323646b92818fcf';
+const BATCH_QA_IDS=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122'];
+const BATCH_QA_MERGES=['513f98ac06cdd0fe569390354420158458342859','5b5159823908f3ae660f45b3ad93c096be586aec'];
+export const BATCH_QA_PATHS=[
+ 'scripts/audit/run-full-suite.mjs',
+ 'tests/ci-optimization.test.mjs',
+ 'scripts/audit/issue33-r429-ohenry320-sodality341-check.mjs',
+ 'scripts/audit/issue33-r430-disciples-original100-check.mjs',
+ 'scripts/audit/issue33-r431-staccato-original354-check.mjs',
+ 'scripts/audit/issue33-r433-duesouth-selected-check.mjs',
+ 'scripts/audit/issue33-r434-south17-selected-check.mjs'
+].sort();
+const BATCH_QA_SUPPORT=[
+ ['tests/helpers/release-published-restoration.mjs','fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'],
+ ['tests/preflight-contract.test.mjs','f893c068e20c2445bc5596eda6b36c832974f195']
+];
+export function discoverReviewedBatchQaRestoration({queue,selectedIds,publishedSourceSha,
+ developmentSourceSha,sourceObjectAt}={}){
+ if(!Array.isArray(selectedIds)||!equal(selectedIds,BATCH_QA_IDS))return [];
+ const hold=why=>{throw Error('Prospective batch QA restoration HOLD: '+why);};
+ if(publishedSourceSha!==BATCH_QA_PUBLISHED||!SHA.test(developmentSourceSha||'')||
+    typeof sourceObjectAt!=='function')hold('published baseline or Git reader mismatch');
+ for(let n=0;n<BATCH_QA_IDS.length;n++){
+  const row=queue?.items?.find(x=>x.id===BATCH_QA_IDS[n]);
+  if(row?.state!=='READY'||row.merged_source_sha!==BATCH_QA_MERGES[n])
+   hold('selected merge identity changed');
+ }
+ for(const path of BATCH_QA_PATHS){
+  const current=sourceObjectAt(developmentSourceSha,path);
+  const previous=sourceObjectAt(BATCH_QA_REFERENCE,path);
+  const published=sourceObjectAt(publishedSourceSha,path);
+  if(!/^100644:[a-f0-9]{40}$/.test(current||'')||current!==previous||
+     current===published||sourceObjectAt(BATCH_QA_CERTIFIED,path)!==published)
+   hold('reviewed source drift: '+path);
+  for(const merge of BATCH_QA_MERGES)
+   if(sourceObjectAt(merge,path)!==sourceObjectAt(merge+'^',path))
+    hold('selected merge owns QA path: '+path);
+ }
+ for(const [path,blob] of BATCH_QA_SUPPORT)
+  if(sourceObjectAt(developmentSourceSha,path)!=='100644:'+blob||
+     sourceObjectAt(BATCH_QA_CERTIFIED,path)!=='100644:'+blob)
+   hold('reviewed compatibility support changed: '+path);
+ return [...BATCH_QA_PATHS];
+}
+export function reviewedBatchQaRestorationPaths({manifest,queue,developmentSourceSha,
+ publishedSourceSha,candidateSha,sourceObjectAt}={}){
+ const selectedIds=manifest?.selected_ready_item_ids;
+ const expected=manifest?.prospective_ready_batch_preview?
+  discoverReviewedBatchQaRestoration({queue,selectedIds,developmentSourceSha,publishedSourceSha,sourceObjectAt}):[];
+ const declared=manifest?.restored_reviewed_batch_qa_paths||[];
+ if(!Array.isArray(declared)||!equal(declared,expected))
+  throw Error('Prospective batch QA restoration HOLD: exact manifest path set mismatch');
+ for(const path of expected)
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+   throw Error('Prospective batch QA restoration HOLD: candidate differs from published '+path);
+ if(expected.length)for(const [path,blob] of BATCH_QA_SUPPORT)
+  if(sourceObjectAt(candidateSha,path)!=='100644:'+blob)
+   throw Error('Prospective batch QA restoration HOLD: candidate compatibility support changed '+path);
+ return expected;
+}
+
 // #3889 last journal-only staging delta: the prospective frozen source predates
 // two nonshipped scoped journal entries. This narrow byte-pinned historical
 // prefix is not a selected deployable change or generalized journal exemption.
@@ -1199,13 +1265,16 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const reviewedQaPaths=reviewedProspectiveQaRestorationPaths({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
+ const batchQaPaths=reviewedBatchQaRestorationPaths({manifest,queue,
+  developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
+  candidateSha,sourceObjectAt});
  const reviewedScopedJournalPaths=reviewedProspectiveScopedJournalPath({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
   excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,prospectiveBatchPaths,reviewedQaPaths,
-  reviewedScopedJournalPaths,
+  reviewedScopedJournalPaths,batchQaPaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
