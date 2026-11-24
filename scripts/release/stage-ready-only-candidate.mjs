@@ -21,7 +21,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,discoverReviewedRestoredUnreadyAdminTests,discoverReviewedRestoredStartupTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
+ discoverReviewedBatchQaRestoration,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,discoverReviewedRestoredUnreadyAdminTests,discoverReviewedRestoredStartupTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 import {proposeProspectiveReadyQueue,proposeDisjointProspectiveReadyBatch,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
@@ -91,6 +91,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    throw Error('Prospective batch must retain every current READY and select exactly the planned additions');
   queue=batch.queue;stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
  }
+ const batchQaPaths=batch?discoverReviewedBatchQaRestoration({queue,selectedIds,
+  publishedSourceSha,developmentSourceSha,sourceObjectAt}):[];
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
  const workflowOnlyTests=discoverReviewedWorkflowTestExclusions({
@@ -144,7 +146,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    if(!SHA.test(blob))throw Error('Prospective READY queue blob could not be frozen');
    git(['update-index','--add','--cacheinfo','100644',blob,'docs/RELEASE_QUEUE.json'],{env});
   }
-  for(const path of [...plan.restored_paths,...unpublishedWorkflows]){
+  for(const path of [...plan.restored_paths,...unpublishedWorkflows,...batchQaPaths]){
 
    const object=sourceObjectAt(publishedSourceSha,path);
    if(object){const [mode,sha]=object.split(':');
@@ -180,6 +182,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    excluded_unready_test_paths:unpublishedTests,
    restored_to_published_unready_test_paths:restoredTests,
    publication_authorized:false,
+   ...(batchQaPaths.length?{restored_reviewed_batch_qa_paths:batchQaPaths}:{}),
    ...(prospective?{prospective_ready_preview:{status:prospective.status,
     selected_id:prospective.selected_id,baseline_queue_blob:BASELINE_QUEUE_BLOB,
     identity_sha256:prospective.identity_sha256}}:{}),
@@ -205,6 +208,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
    (prospective||batch?'- PROSPECTIVE ONLY: development queue additions are still TESTING; no READY claim, certificate, production grant or Publish.\n':'')+
+   '- Restored reviewed nonshipped batch QA paths: '+(batchQaPaths.join(', ')||'(none)')+'\n'+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+

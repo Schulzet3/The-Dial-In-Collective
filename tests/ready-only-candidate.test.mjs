@@ -1020,3 +1020,32 @@ test('#3889 batch staging admits only an independently replayed exact local plan
  ]){const o=structuredClone({...opts,sourceObjectAt:undefined});o.sourceObjectAt=opts.sourceObjectAt;edit(o);assert.throws(()=>prove(o),/HOLD/);}
  assert.throws(()=>prove({...opts,sourceObjectAt:()=> '100644:'+C}),/HOLD/);
 });
+
+test('#3889 exact two-ID batch reuses only previously certified seven nonshipped restorations',async()=>{
+ const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:validate}=await import('../scripts/release/ready-only-candidate.mjs');
+ const dev='c5a8cd443b39fc2e12699bf596682f5cf8fbf65c',ref='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',pub='2d22d448160d428a977f06482323646b92818fcf',previous='16bc481b2c66c5229c70e513c76141b086b8e535',candidate='a'.repeat(40);
+ const ids=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122'];
+ const merges=['513f98ac06cdd0fe569390354420158342859','5b5159823908f3ae660f45b3ad93c096be586aec'];
+ const queue={items:ids.map((id,n)=>({id,state:'READY',merged_source_sha:merges[n]}))};
+ const support={'tests/helpers/release-published-restoration.mjs':'fe1dd86406dc1c984dd4024a47225d1f8d4a40c0','tests/preflight-contract.test.mjs':'f893c068e20c2445bc5596eda6b36c832974f195'};
+ const current='100644:'+'b'.repeat(40),old='100644:'+'c'.repeat(40);
+ const read=(sha,path)=>{
+  if(support[path])return '100644:'+support[path];
+  if([dev,ref].includes(sha))return current;
+  if([pub,previous,candidate].includes(sha))return path.includes('issue33')?null:old;
+  return null;
+ };
+ const args={queue,selectedIds:ids,publishedSourceSha:pub,developmentSourceSha:dev,sourceObjectAt:read};
+ const manifest={selected_ready_item_ids:ids,prospective_ready_batch_preview:{},restored_reviewed_batch_qa_paths:paths};
+ const proof={...args,manifest,candidateSha:candidate};
+ assert.equal(paths.length,7);
+ assert.deepEqual(discover(args),paths);
+ assert.deepEqual(validate(proof),paths);
+ assert.deepEqual(discover({...args,selectedIds:[ids[0]]}),[]);
+ assert.throws(()=>validate({...proof,manifest:{...manifest,restored_reviewed_batch_qa_paths:[]}}),/HOLD/);
+ assert.throws(()=>validate({...proof,manifest:{...manifest,restored_reviewed_batch_qa_paths:[...paths,'site/intruder.js']}}),/HOLD/);
+ for(const [sha,path] of [[dev,paths[0]],[previous,paths[0]],[merges[0],paths[0]],[candidate,paths[0]],[candidate,Object.keys(support)[0]]]){
+  assert.throws(()=>validate({...proof,sourceObjectAt:(r,p)=>r===sha&&p===path?'100644:'+'d'.repeat(40):read(r,p)}),/HOLD/);
+ }
+ assert.throws(()=>validate({...proof,publishedSourceSha:dev}),/HOLD/);
+});
