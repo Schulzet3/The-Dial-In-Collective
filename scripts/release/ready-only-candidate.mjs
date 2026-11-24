@@ -90,9 +90,48 @@ export function reviewedProspectiveBatchQueuePath({manifest,queue,developmentSou
 // candidate SHA, then adopted only if development later records identical bytes.
 // This is a comparison gate, NEVER a READY certification or publication grant.
 export function reviewedProspectivePromotionQueueParity({manifest,originalQueue,
- candidateQueue,liveQueue}={}){
+ candidateQueue,liveQueue,prospectiveBatchPlan=null}={}){
  if(typeof originalQueue!=='string'||typeof candidateQueue!=='string')return false;
  if(originalQueue===candidateQueue)return true; // Existing ordinary READY-only contract.
+ // A new TESTING batch may be published ONLY after independent source-bound
+ // planning against the immutable original queue, followed by a verified
+ // LIVE queue whose bytes equal the fully tested candidate. This comparison
+ // grants no publication and substitutes for NONE of the five named CI jobs.
+ if(manifest?.prospective_ready_batch_preview!==undefined){
+  const x=manifest.prospective_ready_batch_preview,p=prospectiveBatchPlan;
+  if(!p||x.status!=='PROSPECTIVE_BATCH_PLAN_ONLY'||p.status!==x.status||
+     x.publication_authorized!==false||x.ready_certified!==false||
+     p.publication_authorized!==false||p.ready_certified!==false||
+     x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+     p.baseline_queue_blob!==x.baseline_queue_blob||
+     x.identity_sha256!==p.identity_sha256||
+     !/^[a-f0-9]{64}$/.test(x.identity_sha256||'')||
+     manifest.kind!==CANDIDATE_KIND||manifest.publication_authorized!==false||
+     manifest.prospective_ready_preview!==undefined||
+     manifest.development_source_sha!==p.development_source_sha||
+     !/^release-candidates\/prospectbatch3889-[a-f0-9]{20}$/.test(manifest.candidate_branch||'')||
+     !Array.isArray(p.added_ids)||!p.added_ids.length||
+     !Array.isArray(p.retained_ready_ids)||
+     !equal(x.added_ids||[],p.added_ids)||
+     !equal(x.retained_ready_ids||[],p.retained_ready_ids)||
+     !equal(manifest.selected_ready_item_ids||[],[...p.added_ids,...p.retained_ready_ids])||
+     manifest.published_source_sha!==p.queue?.published_base?.tested_source_sha||
+     candidateQueue!==JSON.stringify(p.queue,null,2)+'\n'||liveQueue!==candidateQueue)
+   return false;
+  try{
+   const before=JSON.parse(originalQueue),expected=structuredClone(before);
+   if(queueSchemaErrors(before).length||queueSchemaErrors(p.queue).length||
+      !Array.isArray(before.items)||before.items.length!==p.queue.items.length||
+      JSON.stringify(before.published_base)!==JSON.stringify(p.queue.published_base)||
+      !equal(before.items.filter(i=>i.state==='READY').map(i=>i.id),p.retained_ready_ids))return false;
+   for(const id of p.added_ids){
+    const item=expected.items.find(i=>i.id===id);
+    if(!item||item.state!=='TESTING'||!Array.isArray(item.blockers))return false;
+    item.state='READY';item.blockers=[];
+   }
+   return JSON.stringify(expected)===JSON.stringify(p.queue);
+  }catch{return false;}
+ }
  const x=manifest?.prospective_ready_preview;
  if(x?.status!=='PROSPECTIVE_ONLY_FIVE_CI_AND_PROMOTION_PENDING'||
   x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
