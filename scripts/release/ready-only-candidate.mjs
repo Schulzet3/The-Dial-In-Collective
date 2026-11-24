@@ -442,7 +442,7 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
   const owners=(queue?.items||[]).filter(i=>i.scope_paths?.includes(spec.migration)&&i.state!=='DEPLOYED');
   const row=owners[0];
   const migration=sourceObjectAt(developmentSourceSha,spec.migration);
-  if(chosen.length!==1||owners.length!==1||item.issue!==509||item.state!=='READY'||
+  if(chosen.length!==1||owners.length!==1||item.issue!==509||(item.state!==undefined&&item.state!=='READY')||
      row?.id!==item.id||row.issue!==509||row.state!=='READY'||
      row.merged_source_sha!==merge||item.scope_paths.length!==1||
      row.scope_paths.length!==1||(spec.itemId&&item.id!==spec.itemId)||
