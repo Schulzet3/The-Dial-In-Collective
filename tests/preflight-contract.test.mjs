@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {auditPreflightContract,CONTRACT_PATHS} from '../scripts/audit/preflight-contract.mjs';
 const testingReceipt=new URL('../docs/TESTING_3889_CANDIDATE.json',import.meta.url);
 const receiptPath=existsSync(testingReceipt)?testingReceipt:new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
@@ -56,7 +57,7 @@ test('removing Git-object receipt audit from continuity is rejected',()=>{
  assert.match(change('docs/ai/PREFLIGHT.md',s=>s.replace('DIC_PREFLIGHT_VERIFIED','MISSING_EVIDENCE')).join(' '),/missing mandatory contract/);
 });
 
-import {verifyProspectiveReadyTestScope,verifyProspectiveBatchReadyTestScope} from './helpers/release-published-restoration.mjs';
+import {verifyProspectiveReadyTestScope,verifyProspectiveBatchReadyTestScope,verifyGeneralProspectiveBatchReadyTestScope} from './helpers/release-published-restoration.mjs';
 test('#3889 prospective published-source QA excludes only exact proven unselected work',()=>{
  const id='DIC-Q-509-stale-project-shot-comment-20261122';
  const migration='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
@@ -128,4 +129,65 @@ test('#3889 two-ID preview requires exact selection, immutable queue and selecte
  assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,queue:{...q,items:[...q.items,row('unready',33,'f'.repeat(40),'other')]}}));
  assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>path===selectedTest?'f'.repeat(40):sourceObjectAt(ref,path)}));
  assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>ref==='HEAD'&&path==='docs/RELEASE_QUEUE.json'?'f'.repeat(40):sourceObjectAt(ref,path)}));
+});
+
+test('#3889 generalized scope reconstructs exact queue and rejects selected test or source contamination',()=>{
+ const baselineRef='d9fc859d81a23e10ee2cd0e1a37013b93a4980e5';
+ const baselineRaw=execFileSync('git',['show',baselineRef+':docs/RELEASE_QUEUE.json'],{
+  encoding:'utf8',maxBuffer:4000000,timeout:15000});
+ const baseline=JSON.parse(baselineRaw),pub=baseline.published_base.tested_source_sha;
+ // Pick three distinct real baseline scope identities.
+ const distinct=[];
+ for(const x of baseline.items.filter(x=>x.state==='TESTING'&&x.scope_paths.length===1)){
+  if(!distinct.some(y=>y.scope_paths[0]===x.scope_paths[0]))distinct.push(x);
+  if(distinct.length===3)break;
+ }
+ assert.equal(distinct.length,3);
+ const rows=distinct.map((x,i)=>({...x,merged_source_sha:String(i+1).repeat(40),
+  state:'TESTING',production_deployed:false,tests:['fixture regression'],ci_runs:[i+1],blockers:['candidate certification']}));
+ const parent=structuredClone(baseline);
+ parent.items=parent.items.map(x=>rows.find(y=>y.id===x.id)||{...x,state:x.state==='TESTING'?'DEPLOYED':x.state});
+ const queue=structuredClone(parent);
+ for(const row of queue.items.filter(x=>rows.some(y=>y.id===x.id))){row.state='READY';row.blockers=[];}
+ const ids=rows.map(x=>x.id).sort(),dev='a'.repeat(40);
+ const m={schema_version:1,kind:'DIC-READY-ONLY-SOURCE-1',publication_authorized:false,
+  candidate_branch:'release-candidates/prospectbatch3889-'+'a'.repeat(20),
+  development_source_sha:dev,published_source_sha:pub,selected_ready_item_ids:ids,
+  restored_to_published_paths:[],restored_unpublished_workflow_paths:[],
+  prospective_ready_batch_preview:{status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,
+   ready_certified:false,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+   added_ids:ids,retained_ready_ids:[],identity_sha256:'b'.repeat(64)}};
+ const pathRows=rows.map((x,i)=>({row:x,path:x.scope_paths[0],test:'tests/fixture-'+i+'.mjs',
+  before:'100644:'+'c'.repeat(40),after:'100644:'+String(i+4).repeat(40)}));
+ const raw={ [baselineRef]:baselineRaw,[dev]:JSON.stringify(parent,null,2)+'\n',HEAD:JSON.stringify(queue,null,2)+'\n'};
+ const sourceObjectAt=(ref,path)=>{
+  if(path==='docs/RELEASE_QUEUE.json'){
+   const s=raw[ref];if(s===undefined)return null;
+   const bytes=Buffer.from(s,'utf8');
+   return '100644:'+createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+  }
+  const x=pathRows.find(x=>[x.path,x.test].includes(path));if(!x)return null;
+  return [pub,x.row.merged_source_sha+'^'].includes(ref)?x.before:x.after;
+ };
+ const opts={manifest:m,queue,branch:'refs/heads/'+m.candidate_branch,commitParent:dev,
+  readGitText:ref=>raw[ref],sourceObjectAt,
+  firstParentChangedPaths:sha=>{const x=pathRows.find(x=>x.row.merged_source_sha===sha);return [x.path,x.test];},
+  isAncestor:(a,b)=>b===dev};
+ const selected=verifyGeneralProspectiveBatchReadyTestScope(opts);
+ assert.deepEqual(selected,pathRows.flatMap(x=>[x.path,x.test]).sort());
+ for(const changes of [
+  {publication_authorized:true},{selected_ready_item_ids:ids.slice(1)},
+  {restored_to_published_paths:[pathRows[0].path]},
+  {excluded_unready_test_paths:[pathRows[0].test]},
+  {restored_unpublished_workflow_paths:[pathRows[0].test]},
+  {prospective_ready_batch_preview:{...m.prospective_ready_batch_preview,added_ids:ids.slice(1)}}
+ ])assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,manifest:{...m,...changes}}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,commitParent:'f'.repeat(40)}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,branch:'refs/heads/unreviewed'}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>
+  ref==='HEAD'&&path===pathRows[0].test?'100644:'+'f'.repeat(40):sourceObjectAt(ref,path)}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>
+  ref===pathRows[0].row.merged_source_sha+'^'&&path===pathRows[0].path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,path)}));
+ const changed=structuredClone(queue);changed.items.find(x=>!ids.includes(x.id)).title+=' altered';
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:changed}));
 });
