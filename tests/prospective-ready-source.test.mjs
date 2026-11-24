@@ -122,3 +122,34 @@ test('R399 exact narrow specialist receipt admits preview only; parent audit and
   edit(x);assert.throws(()=>proposeProspectiveReadyQueue(x),/HOLD/);
  }
 });
+
+test('co-selected shared TESTING path requires contiguous published-to-live first-parent objects; no per-ID rebuild',async()=>{
+ const {proposeDisjointProspectiveReadyBatch:batch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const f=fixture(),second=f.liveQueue.items[1].id,path='site/cloud/main.js';
+ for(const q of [f.baselineQueue,f.liveQueue])for(const row of q.items.slice(0,2))row.scope_paths=[path];
+ const pub='100644:'+P,first='100644:'+M,last='100644:'+B;
+ f.firstParentChangedPaths=sha=>[M,B].includes(sha)?[path]:[];
+ f.isAncestor=(sha,tip)=>(sha===M&&[B,A].includes(tip))||(sha===B&&tip===A);
+ f.sourceObjectAt=(sha,p)=>p!==path?null:sha===P||sha===M+'^'?pub:sha===M||sha===B+'^'?first:[B,A].includes(sha)?last:null;
+ const input={...f,selectedIds:[second,id]},before=structuredClone(f.liveQueue);
+ const result=batch(input);
+ assert.equal(result.kind,'DIC-PROSPECTIVE-CHRONOLOGICAL-BATCH-3889-V2');
+ assert.deepEqual(result.shared_source_chains,[{path,published_object:pub,steps:[{id,merge_sha:M,parent_object:pub,object:first},{id:second,merge_sha:B,parent_object:first,object:last}]}]);
+ assert.equal(result.ready_certified,false);assert.equal(result.publication_authorized,false);
+ assert.deepEqual(f.liveQueue,before);
+ assert.equal(batch({...input,selectedIds:[id,second]}).identity_sha256,result.identity_sha256);
+ const read=f.sourceObjectAt;
+ for(const edit of [
+  x=>{x.sourceObjectAt=(sha,p)=>sha===M+'^'?last:read(sha,p)},
+  x=>{x.sourceObjectAt=(sha,p)=>sha===B+'^'?pub:read(sha,p)},
+  x=>{x.sourceObjectAt=(sha,p)=>sha===A?first:read(sha,p)},
+  x=>{x.isAncestor=()=>true},
+  x=>{x.firstParentChangedPaths=()=>['site/unrelated.js']},
+  x=>{x.liveQueue.items[3].scope_paths.push(path)},
+  x=>{x.liveQueue.items[1].state='READY';x.liveQueue.items[1].blockers=[];x.selectedIds=[id]},
+  x=>{x.liveQueue.items[1].ci_runs=[]},
+ ]){
+  const x={...input,liveQueue:structuredClone(f.liveQueue)};edit(x);
+  assert.throws(()=>batch(x),/HOLD/);
+ }
+});
