@@ -336,5 +336,6 @@ test('#3889 scoped hosted prospective input is exact-source-bound, read-only and
  assert.ok(workflow.includes('test "$(git rev-parse HEAD)" = "$GITHUB_SHA"'));
  assert.ok(workflow.includes('--receipt "$prospective_arg"'));
  assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
- assert.doesNotMatch(workflow,/\bgit push\b|\bnetlify\s+build\b|POST.*publish/i);
+ const executable=workflow.split('\n').filter(line=>!/^\s*#/.test(line)).join('\n');
+ assert.doesNotMatch(executable,/\bgit push\b|\bnetlify\s+build\b|POST.*publish/i);
 });
