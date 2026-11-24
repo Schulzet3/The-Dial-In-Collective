@@ -172,25 +172,95 @@ export function verifyProspectiveReadyTestScope({manifest,queue,branch,commitPar
  assert.ok(Array.isArray(manifest.restored_unpublished_workflow_paths));
  return true;
 }
+
+const BATCH_R399_ID='DIC-Q-33-r399-original99-producer-tenure-precision';
+const BATCH_R399_MERGE='513f98ac06cdd0fe569390354420158458342859';
+const BATCH_R399_PATH='src/server/coffee-narrative-evidence.mjs';
+const BATCH_R399_TEST='tests/coffee-issue33-r399-keller-tenure.test.mjs';
+const BATCH_R399_BLOB='3de11626496a0b698e558ec8929f0158e3083b0a';
+const BATCH_R399_TEST_BLOB='16c4d572ecd43860a9cd4f1a7f2baffd670382ee';
+const BATCH_BASELINE_DEV='d9fc859d81a23e10ee2cd0e1a37013b93a4980e5';
+const BATCH_PARENT_QUEUE='dd9c0ea0ad69590555b243dc3e5c81b6ac080e0c';
+const BATCH_PROSPECTIVE_QUEUE='3f4e6ed4fc81e843c10cc17b2468c34bc3a04818';
+const BATCH_SELECTED_PATHS=[PROSPECTIVE_MIGRATION,BATCH_R399_PATH,BATCH_R399_TEST];
+// Reviewed two-ID #3889 scope only. A new selection or queue requires its own
+// exact proof. Do not classify selected source/tests as not applicable.
+export function verifyProspectiveBatchReadyTestScope({manifest,queue,branch,commitParent,sourceObjectAt}={}){
+ const p=manifest?.prospective_ready_batch_preview;
+ if(p===undefined)return false;
+ assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
+ assert.equal(manifest.schema_version,1);
+ assert.equal(manifest.publication_authorized,false);
+ assert.equal(manifest.prospective_ready_preview,undefined);
+ assert.equal(p.status,'PROSPECTIVE_BATCH_PLAN_ONLY');
+ assert.equal(p.publication_authorized,false);
+ assert.equal(p.ready_certified,false);
+ assert.equal(p.baseline_queue_blob,PROSPECTIVE_BASELINE);
+ assert.deepEqual(p.added_ids,[BATCH_R399_ID]);
+ assert.deepEqual(p.retained_ready_ids,[PROSPECTIVE_ID]);
+ assert.match(p.identity_sha256||'',/^[a-f0-9]{64}$/);
+ assert.match(manifest.candidate_branch||'',/^release-candidates\/prospectbatch3889-[a-f0-9]{20}$/);
+ assert.deepEqual(manifest.selected_ready_item_ids,[BATCH_R399_ID,PROSPECTIVE_ID]);
+ assert.match(manifest.development_source_sha||'',SHA);
+ assert.equal(manifest.published_source_sha,PROSPECTIVE_PUBLISHED);
+ assert.equal(commitParent,manifest.development_source_sha);
+ if((branch||'').startsWith('refs/heads/release-candidates/'))
+  assert.equal(branch,'refs/heads/'+manifest.candidate_branch);
+ assert.equal(queue?.published_base?.tested_source_sha,PROSPECTIVE_PUBLISHED);
+ assert.ok(Array.isArray(queue.items));
+ const ready=queue.items.filter(x=>x.state==='READY');
+ assert.deepEqual(ready.map(x=>x.id).sort(),[BATCH_R399_ID,PROSPECTIVE_ID]);
+ for(const [id,issue,merge,path] of [[PROSPECTIVE_ID,509,PROSPECTIVE_MERGE,PROSPECTIVE_MIGRATION],
+  [BATCH_R399_ID,33,BATCH_R399_MERGE,BATCH_R399_PATH]]){
+  const item=ready.find(x=>x.id===id);
+  assert.equal(item.issue,issue);assert.equal(item.merged_source_sha,merge);
+  assert.deepEqual(item.scope_paths,[path]);assert.deepEqual(item.blockers,[]);
+  assert.equal(item.production_deployed,false);
+  assert.ok(Array.isArray(item.tests)&&item.tests.length>0);
+  assert.ok(Array.isArray(item.ci_runs)&&item.ci_runs.length>0);
+ }
+ assert.equal(typeof sourceObjectAt,'function');
+ assert.equal(sourceObjectAt(BATCH_BASELINE_DEV,'docs/RELEASE_QUEUE.json'),PROSPECTIVE_BASELINE);
+ assert.equal(sourceObjectAt(manifest.development_source_sha,'docs/RELEASE_QUEUE.json'),BATCH_PARENT_QUEUE);
+ assert.equal(sourceObjectAt('HEAD','docs/RELEASE_QUEUE.json'),BATCH_PROSPECTIVE_QUEUE);
+ for(const [path,merge,blob] of [[PROSPECTIVE_MIGRATION,PROSPECTIVE_MERGE,PROSPECTIVE_MIGRATION_BLOB],
+  [BATCH_R399_PATH,BATCH_R399_MERGE,BATCH_R399_BLOB],
+  [BATCH_R399_TEST,BATCH_R399_MERGE,BATCH_R399_TEST_BLOB]]){
+  for(const key of ['restored_to_published_paths','restored_unpublished_workflow_paths','excluded_unready_test_paths',
+   'restored_to_published_unready_test_paths','restored_reviewed_batch_qa_paths']){
+   if(manifest[key]!==undefined){
+    assert.ok(Array.isArray(manifest[key]));
+    assert.ok(!manifest[key].includes(path),'selected batch path may never be restored/excluded: '+path);
+   }
+  }
+  for(const ref of ['HEAD',merge,manifest.development_source_sha])
+   assert.equal(sourceObjectAt(ref,path),blob,'selected batch source/test must retain exact reviewed Git object: '+path);
+ }
+ assert.ok(Array.isArray(manifest.restored_to_published_paths));
+ assert.ok(Array.isArray(manifest.restored_unpublished_workflow_paths));
+ return true;
+}
+
 let prospectiveCache;
 function prospectiveCandidate(){
  if(prospectiveCache!==undefined)return prospectiveCache;
  let m;
  try{m=JSON.parse(readFileSync(new URL('../../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}
  catch(e){if(e?.code==='ENOENT')return prospectiveCache=null;throw e;}
- if(m?.prospective_ready_preview===undefined)return prospectiveCache=null;
+ if(m?.prospective_ready_preview===undefined&&m?.prospective_ready_batch_preview===undefined)return prospectiveCache=null;
  const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
  const parent=execFileSync('git',['rev-parse','HEAD^'],{encoding:'utf8',timeout:15000}).trim();
- verifyProspectiveReadyTestScope({manifest:m,queue:q,branch:process.env.GITHUB_REF||'',
-  commitParent:parent,sourceObjectAt:gitBlob});
+ const opts={manifest:m,queue:q,branch:process.env.GITHUB_REF||'',commitParent:parent,sourceObjectAt:gitBlob};
+ if(m.prospective_ready_batch_preview!==undefined)verifyProspectiveBatchReadyTestScope(opts);
+ else verifyProspectiveReadyTestScope(opts);
  return prospectiveCache=m;
 }
 function frozenExcludedProspectiveSource(paths){
  const m=prospectiveCandidate();if(!m)return false;
  assert.ok(Array.isArray(paths)&&paths.length>0);
  for(const path of paths){
-  assert.notEqual(path,PROSPECTIVE_MIGRATION,
-   'selected prospective migration tests must NEVER be excluded');
+  assert.ok(!(m.prospective_ready_batch_preview!==undefined?BATCH_SELECTED_PATHS:[PROSPECTIVE_MIGRATION]).includes(path),
+   'selected prospective source and tests must NEVER be excluded: '+path);
   const published=gitBlob(m.published_source_sha,path);
   const developed=gitBlob(m.development_source_sha,path);
   assert.ok(m.restored_to_published_paths.includes(path)||
