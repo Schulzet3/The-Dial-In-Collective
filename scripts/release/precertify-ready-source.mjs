@@ -10,6 +10,7 @@ import {tmpdir} from 'node:os';
 import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {stageReadyOnlyCandidate} from './stage-ready-only-candidate.mjs';
+import {proposeDisjointProspectiveReadyBatch,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 import {CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH} from './ready-only-candidate.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -180,7 +181,7 @@ export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha
 
 export function prevalidateReadySource({
  repoDir=process.cwd(),developmentSourceSha,push=false,receipt=false,
- prospectiveReadyItemId=null,expectedHostedEnv=process.env
+ prospectiveReadyItemId=null,prospectiveReadyItemIds=null,expectedHostedEnv=process.env
 }={}){
  if(!SHA.test(developmentSourceSha||''))throw Error('Exact development source SHA required');
  if(push)throw Error('Actions ref push prohibited; use --receipt then trusted GitHub connector');
@@ -192,6 +193,8 @@ export function prevalidateReadySource({
  const raw=git(['show',developmentSourceSha+':docs/RELEASE_QUEUE.json']);
  let queue=JSON.parse(raw);
  let items=selectedReadyItems(queue);
+ if(prospectiveReadyItemIds!==null&&prospectiveReadyItemId!==null)
+  throw Error('Select only one prospective preparation mode');
  if(!items.length&&prospectiveReadyItemId!==null){
   // PREVIEW ONLY: source-staged queue, not a live READY promotion. The strict
   // 63-ID ancestry and blob proof is rechecked by stageReadyOnlyCandidate.
@@ -203,15 +206,7 @@ export function prevalidateReadySource({
   selected.state='READY';selected.blockers=[];
   items=selectedReadyItems(queue);
  }
- if(!items.length)return {status:'NO_READY_ITEMS',count:0};
- // Fail before candidate tree recreation and expensive hosted jobs when the
- // cited merged source is merely a QA/documentation commit (#3851 evidence).
- assertReadyFirstParentDeployable(items,sha=>git(['diff','--name-only',
-  '--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean));
- const branch=prospectiveReadyItemId!==null?
-  frozenReadyBranch(queue,items,developmentSourceSha).replace('ready3347-','prospect3889-'):
-  frozenReadyBranch(queue,items,developmentSourceSha);
- const ids=items.map(i=>i.id);
+ if(!items.length&&prospectiveReadyItemIds===null)return {status:'NO_READY_ITEMS',count:0};
  const published=queue.published_base.tested_source_sha;
  if(!SHA.test(published))throw Error('Missing published tested source');
  const changePaths=git(['diff','--name-only','--no-renames',published,developmentSourceSha])
@@ -229,6 +224,21 @@ export function prevalidateReadySource({
   try{git(['merge-base','--is-ancestor',a,b]);return true;}
   catch(e){if(e.status===1)return false;throw Error('Git merge ancestry unavailable');}
  };
+ // Independently replay the strict plan against actual immutable Git objects.
+ // This is local/receipt-only; no live queue update or publisher admission.
+ if(prospectiveReadyItemIds!==null){
+  const baselineQueue=JSON.parse(git(['cat-file','blob',BASELINE_QUEUE_BLOB]));
+  const preview=proposeDisjointProspectiveReadyBatch({baselineQueue,liveQueue:queue,
+   selectedIds:prospectiveReadyItemIds,developmentSourceSha,
+   firstParentChangedPaths:sha=>git(['diff','--name-only','--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean),
+   isAncestor,sourceObjectAt});
+  queue=preview.queue;items=selectedReadyItems(queue);
+ }
+ assertReadyFirstParentDeployable(items,sha=>git(['diff','--name-only',
+  '--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean));
+ const prefix=prospectiveReadyItemIds!==null?'prospectbatch3889-':prospectiveReadyItemId!==null?'prospect3889-':'ready3347-';
+ const branch=frozenReadyBranch(queue,items,developmentSourceSha).replace('ready3347-',prefix);
+ const ids=items.map(i=>i.id);
  const pins=requiredReadyPins(queue,ids,changePaths,{
   developmentSourceSha,sourceObjectAt,isAncestor});
  const transportBranch=branch.replace('release-candidates/','ready-transports/');
@@ -250,7 +260,7 @@ export function prevalidateReadySource({
  }
  const staged=stageReadyOnlyCandidate({repoDir,developmentSourceSha,
   selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false,
-  prospectiveReadyItemId});
+  prospectiveReadyItemId,prospectiveReadyItemIds});
  if(receipt)return candidateTreeReceipt({repoDir,developmentSourceSha,staged});
  const transport=push?neutralWorkflowTransportCommit({repoDir,developmentSourceSha,
   candidateSha:staged.candidate_sha,
@@ -283,10 +293,12 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const [source,mode,prospective]=process.argv.slice(2);
   if(!SHA.test(source||'')||!['--dry-run','--receipt'].includes(mode)||
      process.argv.length>5||
-     (prospective!==undefined&&!/^--prospective=DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(prospective)))
-   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--receipt [--prospective=<63 baseline TESTING ID>]');
+     (prospective!==undefined&&!/^--prospective=DIC-Q-[1-9][0-9]*-[a-z0-9-]+$/.test(prospective)&&
+      !/^--prospective-batch=DIC-Q-[1-9][0-9]*-[a-z0-9-]+(?:,DIC-Q-[1-9][0-9]*-[a-z0-9-]+)*$/.test(prospective)))
+   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--receipt [--prospective=<63 baseline TESTING ID>|--prospective-batch=<ID[,ID]>]');
   const outcome=prevalidateReadySource({developmentSourceSha:source,receipt:mode==='--receipt',
-   prospectiveReadyItemId:prospective?.slice('--prospective='.length)||null});
+   prospectiveReadyItemId:prospective?.startsWith('--prospective=')?prospective.slice('--prospective='.length):null,
+   prospectiveReadyItemIds:prospective?.startsWith('--prospective-batch=')?prospective.slice('--prospective-batch='.length).split(','):null});
   console.log('[DIC READY pre-certification] '+JSON.stringify(outcome));
  }catch(e){console.error('[DIC READY pre-certification] HOLD: '+e.message);process.exitCode=2;}
 }
