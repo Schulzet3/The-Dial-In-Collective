@@ -249,9 +249,67 @@ const BATCH_QA_SUPPORT=[
  ['tests/helpers/release-published-restoration.mjs','8ba8fd6f41cb5193a892868efd0c87840af24d90','fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'],
  ['tests/preflight-contract.test.mjs','f2aab94820d72d5c9f51cefa46137d5593b3a276','f893c068e20c2445bc5596eda6b36c832974f195']
 ];
+// #3889 arbitrary-cohort compatibility. Preserve the original READY1/READY2
+// proof exactly, and only use the new merged support after independent
+// prospective-plan replay. Never use an untrusted manifest to select QA paths.
+const GENERAL_BATCH_QA_FIX='454ae58eb69552173411c4cd237de7e35a73a622';
+const GENERAL_BATCH_PRIOR='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5';
+const GENERAL_BATCH_SUPPORT=[
+ ['tests/helpers/release-published-restoration.mjs','d7fd8e39e85e794b1d04ce01af98707426810aa9','8ba8fd6f41cb5193a892868efd0c87840af24d90'],
+ ['tests/preflight-contract.test.mjs','bc4dd3dd4368ea1d14b71c293abe85105feb25a8','f2aab94820d72d5c9f51cefa46137d5593b3a276'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
+];
+function discoverGeneralBatchQaRestoration({queue,selectedIds,publishedSourceSha,
+ developmentSourceSha,sourceObjectAt,prospectiveBatchPlan:p}){
+ const hold=why=>{throw Error('Prospective generalized batch QA restoration HOLD: '+why);};
+ if(!p||!['DIC-PROSPECTIVE-DISJOINT-BATCH-3889-V1','DIC-PROSPECTIVE-CHRONOLOGICAL-BATCH-3889-V2'].includes(p.kind)||
+  p.status!=='PROSPECTIVE_BATCH_PLAN_ONLY'||p.publication_authorized!==false||p.ready_certified!==false||
+  p.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+  p.development_source_sha!==developmentSourceSha||p.published_base?.tested_source_sha!==publishedSourceSha||
+  publishedSourceSha!==BATCH_QA_PUBLISHED||!SHA.test(developmentSourceSha||'')||
+  typeof sourceObjectAt!=='function'||!Array.isArray(selectedIds)||
+  !Array.isArray(p.added_ids)||!p.added_ids.length||!Array.isArray(p.retained_ready_ids)||
+  !/^[a-f0-9]{64}$/.test(p.identity_sha256||'')||
+  JSON.stringify(queue)!==JSON.stringify(p.queue)||
+  !equal(selectedIds,[...p.added_ids,...p.retained_ready_ids])||
+  !equal(selectedIds,queue.items.filter(i=>i.state==='READY').map(i=>i.id))||
+  new Set(selectedIds).size!==selectedIds.length)
+  hold('exact replayed prospective plan and selected queue required');
+ const selected=selectedIds.map(id=>queue.items.find(i=>i.id===id));
+ if(selected.some(i=>!i||i.state!=='READY'||!SHA.test(i.merged_source_sha||'')))
+  hold('selected merge evidence missing');
+ const selectedOwns=path=>selected.some(i=>
+  i.scope_paths?.includes(path)||sourceObjectAt(i.merged_source_sha,path)!==sourceObjectAt(i.merged_source_sha+'^',path));
+ // A compatibility helper cannot silently replace a selected test or source.
+ for(const [path,mergedBlob,previousBlob] of GENERAL_BATCH_SUPPORT){
+  if(selectedOwns(path)||sourceObjectAt(developmentSourceSha,path)!=='100644:'+mergedBlob||
+   sourceObjectAt(GENERAL_BATCH_QA_FIX,path)!=='100644:'+mergedBlob||
+   sourceObjectAt(GENERAL_BATCH_PRIOR,path)!=='100644:'+previousBlob)
+   hold('selected or changed reviewed compatibility support: '+path);
+ }
+ const restored=[];
+ for(const path of BATCH_QA_PATHS){
+  // Selected owners retain their own reviewed source and original tests;
+  // the generalized candidate QA verifies that exact Git chain separately.
+  if(selectedOwns(path))continue;
+  const current=sourceObjectAt(developmentSourceSha,path);
+  const reference=sourceObjectAt(BATCH_QA_REFERENCE,path);
+  const published=sourceObjectAt(publishedSourceSha,path);
+  if(!/^100644:[a-f0-9]{40}$/.test(current||'')||current!==reference||
+   current===published||sourceObjectAt(GENERAL_BATCH_PRIOR,path)!==published||
+   sourceObjectAt(BATCH_QA_CERTIFIED,path)!==published)
+   hold('reviewed nonselected QA source drift: '+path);
+  restored.push(path);
+ }
+ return restored;
+}
 export function discoverReviewedBatchQaRestoration({queue,selectedIds,publishedSourceSha,
- developmentSourceSha,sourceObjectAt}={}){
- if(!Array.isArray(selectedIds)||!equal(selectedIds,BATCH_QA_IDS))return [];
+ developmentSourceSha,sourceObjectAt,prospectiveBatchPlan=null}={}){
+ if(!Array.isArray(selectedIds)||!equal(selectedIds,BATCH_QA_IDS)){
+  if(!prospectiveBatchPlan)return [];
+  return discoverGeneralBatchQaRestoration({queue,selectedIds,publishedSourceSha,
+   developmentSourceSha,sourceObjectAt,prospectiveBatchPlan});
+ }
  const hold=why=>{throw Error('Prospective batch QA restoration HOLD: '+why);};
  if(publishedSourceSha!==BATCH_QA_PUBLISHED||!SHA.test(developmentSourceSha||'')||
     typeof sourceObjectAt!=='function')hold('published baseline or Git reader mismatch');
@@ -280,17 +338,19 @@ export function discoverReviewedBatchQaRestoration({queue,selectedIds,publishedS
  return [...BATCH_QA_PATHS];
 }
 export function reviewedBatchQaRestorationPaths({manifest,queue,developmentSourceSha,
- publishedSourceSha,candidateSha,sourceObjectAt}={}){
+ publishedSourceSha,candidateSha,sourceObjectAt,prospectiveBatchPlan=null}={}){
  const selectedIds=manifest?.selected_ready_item_ids;
+ const generalized=manifest?.prospective_ready_batch_preview&&prospectiveBatchPlan&&!equal(selectedIds,BATCH_QA_IDS);
  const expected=manifest?.prospective_ready_batch_preview?
-  discoverReviewedBatchQaRestoration({queue,selectedIds,developmentSourceSha,publishedSourceSha,sourceObjectAt}):[];
+  discoverReviewedBatchQaRestoration({queue,selectedIds,developmentSourceSha,publishedSourceSha,
+   sourceObjectAt,prospectiveBatchPlan}):[];
  const declared=manifest?.restored_reviewed_batch_qa_paths||[];
  if(!Array.isArray(declared)||!equal(declared,expected))
   throw Error('Prospective batch QA restoration HOLD: exact manifest path set mismatch');
  for(const path of expected)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    throw Error('Prospective batch QA restoration HOLD: candidate differs from published '+path);
- if(expected.length)for(const [path,blob] of BATCH_QA_SUPPORT)
+ if(generalized||expected.length)for(const [path,blob] of (generalized?GENERAL_BATCH_SUPPORT:BATCH_QA_SUPPORT))
   if(sourceObjectAt(candidateSha,path)!=='100644:'+blob)
    throw Error('Prospective batch QA restoration HOLD: candidate compatibility support changed '+path);
  return expected;
@@ -1311,7 +1371,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   candidateSha,sourceObjectAt});
  const batchQaPaths=reviewedBatchQaRestorationPaths({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
-  candidateSha,sourceObjectAt});
+  candidateSha,sourceObjectAt,prospectiveBatchPlan});
  const reviewedScopedJournalPaths=reviewedProspectiveScopedJournalPath({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
