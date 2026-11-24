@@ -430,19 +430,53 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
     !Array.isArray(selectedReadyItems))
   throw Error('SQL test restoration provenance unavailable');
+ const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
+ // A reviewed fixture is not inherently unready. If its actual migration
+ // owner is selected, retain the exact test and prove the selected first-
+ // parent change, current object and historical reviewed bytes independently.
+ // This is not a test waiver or a new admission path for a queue row.
+ const selectedFixture=spec=>{
+  const chosen=selectedReadyItems.filter(i=>i.scope_paths?.includes(spec.migration));
+  if(!chosen.length)return false;
+  const item=chosen[0],merge=item.merged_source_sha;
+  const owners=(queue?.items||[]).filter(i=>i.scope_paths?.includes(spec.migration)&&i.state!=='DEPLOYED');
+  const row=owners[0];
+  const migration=sourceObjectAt(developmentSourceSha,spec.migration);
+  if(chosen.length!==1||owners.length!==1||item.issue!==509||item.state!=='READY'||
+     row?.id!==item.id||row.issue!==509||row.state!=='READY'||
+     row.merged_source_sha!==merge||item.scope_paths.length!==1||
+     row.scope_paths.length!==1||(spec.itemId&&item.id!==spec.itemId)||
+     !SHA.test(merge||'')||restoredPaths.includes(spec.migration)||
+     !/^100644:[a-f0-9]{40}$/.test(migration||'')||
+     sourceObjectAt(publishedSourceSha,spec.migration)!==null||
+     sourceObjectAt(merge+'^',spec.migration)!==null||
+     sourceObjectAt(merge,spec.migration)!==migration||
+     sourceObjectAt(spec.sourceMerge,spec.migration)!==migration||
+     !same(publishedSourceSha,spec.path,spec.publishedBlob)||
+     !same(merge+'^',spec.path,spec.publishedBlob)||
+     !same(merge,spec.path,spec.unpublishedBlob)||
+     !same(spec.sourceMerge,spec.path,spec.unpublishedBlob)||
+     !same(developmentSourceSha,spec.path,spec.unpublishedBlob))
+   throw Error('Selected READY SQL fixture lacks exact source/migration provenance: '+spec.path);
+  for(const other of selectedReadyItems.filter(i=>i.id!==item.id)){
+   if(!SHA.test(other.merged_source_sha||'')||
+      sourceObjectAt(other.merged_source_sha,spec.path)!==sourceObjectAt(other.merged_source_sha+'^',spec.path))
+    throw Error('Other selected READY merge modified SQL fixture: '+spec.path);
+  }
+  return true;
+ };
  // No migration is being excluded, so there is no migration-specific SQL
  // fixture to restore. Synthetic READY-only tests legitimately have no SQL.
  if(!restoredPaths.some(path=>path.startsWith('supabase/migrations/'))){
   const original=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
-  if(sourceObjectAt(developmentSourceSha,original.path)==='100644:'+original.unpublishedBlob)
+  if(!selectedFixture(original)&&sourceObjectAt(developmentSourceSha,original.path)==='100644:'+original.unpublishedBlob)
    throw Error('Unready SQL case-path test source/owner is not independently attributable');
   for(const fixture of REVIEWED_UNREADY_SQL_SUITE)
-   if(sourceObjectAt(developmentSourceSha,fixture.path)==='100644:'+fixture.unpublishedBlob)
+   if(!selectedFixture(fixture)&&sourceObjectAt(developmentSourceSha,fixture.path)==='100644:'+fixture.unpublishedBlob)
     throw Error('Unready SQL regression source lacks excluded TESTING migration: '+fixture.path);
   return [];
  }
  const restored=[];
- const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
  const readyUnchanged=path=>{
   for(const item of selectedReadyItems){
    if(!SHA.test(item.merged_source_sha||'')||
@@ -452,7 +486,7 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
   }
  };
  const originalCurrent=sourceObjectAt(developmentSourceSha,original.path);
- if(originalCurrent==='100644:'+original.unpublishedBlob){
+ if(!selectedFixture(original)&&originalCurrent==='100644:'+original.unpublishedBlob){
   if(!same(publishedSourceSha,original.path,original.publishedBlob))
    throw Error('Published SQL identity test blob has unreviewed drift');
   const owner=queue?.items?.find(i=>i.id===original.itemId);
@@ -467,10 +501,11 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
    throw Error('Unready SQL case-path test source/owner is not independently attributable');
   readyUnchanged(original.path);
   restored.push(original.path);
- }else if(originalCurrent!==null){
+ }else if(!selectedFixture(original)&&originalCurrent!==null){
   throw Error('Unreviewed SQL case-path test source drift');
  }
  for(const spec of REVIEWED_UNREADY_SQL_SUITE){
+  if(selectedFixture(spec))continue;
   const current=sourceObjectAt(developmentSourceSha,spec.path);
   // Synthetic/older source fixtures without this exact unready test are not
   // eligible to restore it; an altered real test is always a HOLD.
