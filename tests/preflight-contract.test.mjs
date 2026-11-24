@@ -191,3 +191,58 @@ test('#3889 generalized scope reconstructs exact queue and rejects selected test
  const changed=structuredClone(queue);changed.items.find(x=>!ids.includes(x.id)).title+=' altered';
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:changed}));
 });
+
+test('#3889 exact eight-ID frozen sibling and already-published SQL runner support remain source-bound',()=>{
+ const frozen='8d144c217c52bff2780ff6c199282a0445ac1f8a';
+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:4000000,timeout:20000});
+ const ref=r=>r==='HEAD'?frozen:r;
+ const readGitText=(r,path)=>git('show',ref(r)+':'+path);
+ const sourceObjectAt=(r,path)=>{
+  const lines=git('ls-tree','-z',ref(r),'--',path).split('\0').filter(Boolean);
+  if(!lines.length)return null;
+  assert.equal(lines.length,1);
+  const match=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(lines[0]);
+  assert.ok(match&&match[3]===path);
+  return match[1]+':'+match[2];
+ };
+ const readParents=sha=>{
+  const [commit,...parents]=git('rev-list','--parents','-n','1',sha).trim().split(/\s+/);
+  assert.equal(commit,sha);return parents;
+ };
+ const isAncestor=(a,b)=>{
+  try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+  catch(e){if(e.status===1)return false;throw e;}
+ };
+ const manifest=JSON.parse(readGitText('HEAD','docs/RELEASE_CANDIDATE.json'));
+ const queue=JSON.parse(readGitText('HEAD','docs/RELEASE_QUEUE.json'));
+ const opts={manifest,queue,branch:'refs/heads/'+manifest.candidate_branch,commitParent:readParents(frozen)[0],
+  readGitText,sourceObjectAt,readParents,isAncestor,
+  firstParentChangedPaths:sha=>git('diff','--name-only','--no-renames',sha+'^',sha).split(/\r?\n/).filter(Boolean)};
+ assert.equal(isAncestor(manifest.published_source_sha,opts.commitParent),false);
+ const selected=verifyGeneralProspectiveBatchReadyTestScope(opts);
+ const runner='scripts/audit/isolated-sql-regression.sh';
+ const fixture='supabase/tests/member_approval_finish_null_receipts.sql';
+ assert.equal(manifest.selected_ready_item_ids.length,8);
+ const historicalId='DIC-Q-509-member-approval-null-receipt-guard';
+ const historical=queue.items.find(x=>x.id===historicalId);
+ assert.ok(historical&&!Object.hasOwn(historical,'production_deployed'));
+ for(const invalid of [true,null,'false',false]){
+  const changed=structuredClone(queue);
+  changed.items.find(x=>x.id===historicalId).production_deployed=invalid;
+  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:changed}));
+ }
+ const removed=structuredClone(queue);
+ const explicit=removed.items.find(x=>x.id!==historicalId&&manifest.selected_ready_item_ids.includes(x.id));
+ assert.equal(explicit.production_deployed,false);
+ delete explicit.production_deployed;
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:removed}));
+ assert.ok(selected.includes(runner)&&selected.includes(fixture));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,readParents:()=>[]}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,readParents:()=>['f'.repeat(40)]}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,readGitText:(r,p)=>
+  r===manifest.published_source_sha&&p==='docs/RELEASE_CANDIDATE.json'?'{}':readGitText(r,p)}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(r,p)=>
+  r==='HEAD'&&p===runner?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)}));
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(r,p)=>
+  r==='HEAD'&&p===fixture?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)}));
+});

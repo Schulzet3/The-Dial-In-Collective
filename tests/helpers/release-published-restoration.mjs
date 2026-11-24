@@ -267,7 +267,7 @@ function exactGitJSON(ref,path,readGitText,sourceObjectAt){
  return {raw,value:JSON.parse(raw)};
 }
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
- readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor}={}){
+ readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents}={}){
  const p=m?.prospective_ready_batch_preview;
  if(p===undefined)return false;
  assert.equal(m.schema_version,1);
@@ -288,7 +288,20 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  for(const read of [readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor])
   assert.equal(typeof read,'function','independent Git readers required');
  const dev=m.development_source_sha,pub=m.published_source_sha;
- assert.equal(isAncestor(pub,dev),true,'published source must be an ancestor');
+ // A published frozen tree can be a sibling of development, not an ancestor.
+ // Independently bind its actual sole parent and immutable manifest before
+ // proving that parent's ancestry; never substitute a caller-supplied base.
+ if(isAncestor(pub,dev)!==true){
+  assert.equal(typeof readParents,'function','independent published parent reader required');
+  const frozen=exactGitJSON(pub,'docs/RELEASE_CANDIDATE.json',readGitText,sourceObjectAt).value;
+  assert.equal(frozen.schema_version,1);
+  assert.equal(frozen.kind,'DIC-READY-ONLY-SOURCE-1');
+  assert.equal(frozen.publication_authorized,false);
+  assert.match(frozen.candidate_branch||'',/^release-candidates\/ready3347-[a-f0-9]{20}$/);
+  assert.match(frozen.development_source_sha||'',SHA);
+  assert.deepEqual(readParents(pub),[frozen.development_source_sha],'published frozen parent mismatch');
+  assert.equal(isAncestor(frozen.development_source_sha,dev),true,'published frozen parent must be an ancestor');
+ }
  const baseline=exactGitJSON(BATCH_BASELINE_DEV,QUEUE_PATH,readGitText,sourceObjectAt);
  assert.equal(blobOfText(baseline.raw),'100644:'+PROSPECTIVE_BASELINE);
  const parent=exactGitJSON(dev,QUEUE_PATH,readGitText,sourceObjectAt);
@@ -352,7 +365,14 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  for(const id of selected){
   const row=q.items.find(x=>x.id===id),merge=row.merged_source_sha;
   assert.match(merge||'',SHA);
-  assert.equal(row.production_deployed,false);
+  // Historical queue schema permitted an omitted deployment flag. Only
+  // accept omission preserved in both immutable baseline and exact live parent;
+  // a removed flag, null, true or other altered value never proves readiness.
+  if(!Object.hasOwn(row,'production_deployed')){
+   const original=baseRows.get(id),prior=parentRows.get(id);
+   assert.ok(original&&prior&&!Object.hasOwn(original,'production_deployed')&&
+    !Object.hasOwn(prior,'production_deployed'),'unproven historical deployment flag omission');
+  }else assert.equal(row.production_deployed,false);
   assert.ok(row.tests?.length&&row.ci_runs?.length&&row.ci_runs.every(x=>Number.isSafeInteger(x)&&x>0));
   assert.deepEqual(row.blockers,[]);
   assert.equal(isAncestor(merge,dev),true);
@@ -381,6 +401,14 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   const allRetained=list.every(x=>x.retained);
   assert.ok(allRetained||list.every(x=>!x.retained),'retained READY overlap requires separate reviewed isolation');
   let previous=sourceObjectAt(pub,path);
+  // The SQL runner/coverage support is already published at a later reviewed
+  // revision. Keep its exact published bytes and execute the selected SQL
+  // fixtures; historical edits to this shared support are not new runtime.
+  // Never apply this rule to migrations, dedicated tests or workflows.
+  const publishedSupport=!allRetained&&
+   ['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path)&&
+   fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
+   sourceObjectAt('HEAD',path)===previous;
   const remaining=[...list];
   while(remaining.length){
    const earliest=remaining.filter(x=>remaining.every(y=>x===y||isAncestor(x.merge,y.merge)===true));
@@ -389,9 +417,10 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    const before=sourceObjectAt(x.merge+'^',path),after=sourceObjectAt(x.merge,path);
    assert.ok(fileObject.test(after||''),'selected path missing or unsafe: '+path);
    assert.notEqual(before,after,'selected first-parent change missing: '+path);
-   if(!allRetained)assert.equal(before,previous,'unselected intervening bytes: '+path);
+   if(!allRetained&&!publishedSupport)assert.equal(before,previous,'unselected intervening bytes: '+path);
    previous=after;
   }
+  if(publishedSupport)continue; // exact published runner is retained and not excluded
   assert.equal(sourceObjectAt('HEAD',path),previous,'selected candidate object mismatch: '+path);
   if(allRetained)assert.equal(sourceObjectAt(previousCandidate,path),previous,'retained READY drift: '+path);
   else assert.equal(sourceObjectAt(dev,path),previous,'selected development tip drift: '+path);
@@ -412,6 +441,11 @@ function gitObject(ref,path){
 function firstParentPaths(sha){
  return execFileSync('git',['diff','--name-only','--no-renames',sha+'^',sha],{encoding:'utf8',timeout:15000}).split(/\r?\n/).filter(Boolean);
 }
+function gitParents(sha){
+ const [commit,...parents]=execFileSync('git',['rev-list','--parents','-n','1',sha],{encoding:'utf8',timeout:15000}).trim().split(/\s+/);
+ assert.equal(commit,sha);
+ return parents;
+}
 function gitAncestor(a,b){
  try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
  catch(e){if(e.status===1)return false;throw e;}
@@ -430,7 +464,7 @@ function prospectiveCandidate(){
  if(m.prospective_ready_batch_preview!==undefined){
   if(sameJSON(m.selected_ready_item_ids,[BATCH_R399_ID,PROSPECTIVE_ID]))verifyProspectiveBatchReadyTestScope(opts);
   else generalSelectedPaths=verifyGeneralProspectiveBatchReadyTestScope({...opts,readGitText:gitText,
-   sourceObjectAt:gitObject,firstParentChangedPaths:firstParentPaths,isAncestor:gitAncestor});
+   sourceObjectAt:gitObject,firstParentChangedPaths:firstParentPaths,isAncestor:gitAncestor,readParents:gitParents});
  }else verifyProspectiveReadyTestScope(opts);
  return prospectiveCache=m;
 }
