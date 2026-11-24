@@ -83,3 +83,50 @@ test('#3889 prospective published-source QA excludes only exact proven unselecte
  assert.throws(()=>verifyProspectiveReadyTestScope({...opts,queue:{...q,items:[...q.items,{id:'unready',state:'READY'}]}}));
  assert.throws(()=>verifyProspectiveReadyTestScope({...opts,sourceObjectAt:()=> 'f'.repeat(40)}));
 });
+
+import {verifyProspectiveBatchReadyTestScope} from './helpers/release-published-restoration.mjs';
+test('#3889 two-ID preview requires exact selection, immutable queue and selected runtime/test objects',()=>{
+ const migration='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
+ const runtime='src/server/coffee-narrative-evidence.mjs';
+ const selectedTest='tests/coffee-issue33-r399-keller-tenure.test.mjs';
+ const r399='DIC-Q-33-r399-original99-producer-tenure-precision';
+ const ready1='DIC-Q-509-stale-project-shot-comment-20261122';
+ const dev='a'.repeat(40),pub='2d22d448160d428a977f06482323646b92818fcf';
+ const baseline='d9fc859d81a23e10ee2cd0e1a37013b93a4980e5';
+ const baselineQueue='46304f47eb0e78fac8c7845155af86080900b3c4';
+ const m={schema_version:1,kind:'DIC-READY-ONLY-SOURCE-1',publication_authorized:false,
+  candidate_branch:'release-candidates/prospectbatch3889-'+'a'.repeat(20),
+  development_source_sha:dev,published_source_sha:pub,selected_ready_item_ids:[r399,ready1],
+  restored_to_published_paths:['site/cloud/main.js'],restored_unpublished_workflow_paths:[],
+  excluded_unready_test_paths:[],
+  prospective_ready_batch_preview:{status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,
+   ready_certified:false,baseline_queue_blob:baselineQueue,added_ids:[r399],
+   retained_ready_ids:[ready1],identity_sha256:'b'.repeat(64)}};
+ const row=(id,issue,merged_source_sha,path)=>({id,issue,merged_source_sha,state:'READY',
+  scope_paths:[path],tests:['source test'],ci_runs:[1],blockers:[],production_deployed:false});
+ const q={published_base:{tested_source_sha:pub},items:[
+  row(ready1,509,'5b5159823908f3ae660f45b3ad93c096be586aec',migration),
+  row(r399,33,'513f98ac06cdd0fe569390354420158458342859',runtime)]};
+ const objects={[migration]:'84cecbe69143b2170aa97a851198cc35b9926303',
+  [runtime]:'3de11626496a0b698e558ec8929f0158e3083b0a',
+  [selectedTest]:'16c4d572ecd43860a9cd4f1a7f2baffd670382ee'};
+ const sourceObjectAt=(ref,path)=>path==='docs/RELEASE_QUEUE.json'?
+  ({[baseline]:baselineQueue,[dev]:'dd9c0ea0ad69590555b243dc3e5c81b6ac080e0c',HEAD:'3f4e6ed4fc81e843c10cc17b2468c34bc3a04818'})[ref]:objects[path];
+ const opts={manifest:m,queue:q,commitParent:dev,branch:'refs/heads/'+m.candidate_branch,sourceObjectAt};
+ assert.equal(verifyProspectiveBatchReadyTestScope(opts),true);
+ assert.equal(verifyProspectiveBatchReadyTestScope({...opts,manifest:{}}),false);
+ for(const changes of [
+  {publication_authorized:true},{selected_ready_item_ids:[ready1]},
+  {candidate_branch:'release-candidates/unreviewed'},
+  {prospective_ready_preview:{}},
+  {restored_to_published_paths:[runtime]},
+  {excluded_unready_test_paths:[selectedTest]},
+  {prospective_ready_batch_preview:{...m.prospective_ready_batch_preview,ready_certified:true}},
+  {prospective_ready_batch_preview:{...m.prospective_ready_batch_preview,retained_ready_ids:[]}}
+ ]) assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,manifest:{...m,...changes}}));
+ assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,commitParent:'c'.repeat(40)}));
+ assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,branch:'refs/heads/release-candidates/another'}));
+ assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,queue:{...q,items:[...q.items,row('unready',33,'f'.repeat(40),'other')]}}));
+ assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>path===selectedTest?'f'.repeat(40):sourceObjectAt(ref,path)}));
+ assert.throws(()=>verifyProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>ref==='HEAD'&&path==='docs/RELEASE_QUEUE.json'?'f'.repeat(40):sourceObjectAt(ref,path)}));
+});
