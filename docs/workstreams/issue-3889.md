@@ -206,3 +206,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=c5a8cd443b39fc2e12699bf596682f5cf8fbf65c 
 
 DIC_PREFLIGHT_VERIFIED development_sha=c5a8cd443b39fc2e12699bf596682f5cf8fbf65c preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 - Initial PR #3918 run 45320383331 failed the new adversarial test: malformed typed R399 merge identity in test fixture (37 characters); guard already uses exact 40-hex queue merge SHA. Corrected fixture from actual current queue Git blob; no guard weakening. Repeat required controller job at corrected SHA.
+
+DIC_PREFLIGHT_VERIFIED development_sha=e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-24 #3889 reviewed two-ID QA pin reconciliation [skip netlify]
+- Owner authorizes nonpublishing TESTING-to-READY certification. Main parent 3c34e75f7eb6c80bb067a625df066760f42ca38f, development preflight e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0/c59d7d. PR #3919 nonforce squash merged development e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0, exact PR SHA 4e00ef65f0a3446b8a7a68df328590c7bd8300ef with approval/validate/cloud/browser/SQL SUCCESS; merged-source CI must be independently checked.
+- Repair only the two reviewed merged nonshipped QA compatibility blob mappings for prospective R399 + retained READY1. Preserve independently certified prior READY1 blobs alongside new development/test exact blobs, without weakening seven restored QA paths, selected runtime/test provenance, unchanged published bytes, five SUCCESS jobs, or publisher boundary.
+- Test independently forged prior/new/candidate QA blob and restoration source objects HOLD; real main controller CI still required, then freeze ONE new immutable publisher-ineligible prospective source, read native five exact-SHA PUSH jobs before any READY promotion. No release, Netlify, Supabase/provider/member, backup or spending.
