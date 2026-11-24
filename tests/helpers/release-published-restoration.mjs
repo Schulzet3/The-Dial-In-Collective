@@ -340,12 +340,18 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  assert.deepEqual(q,expected,'only exact selected TESTING-to-READY queue changes permitted');
  assert.equal(candidate.raw,JSON.stringify(expected,null,2)+'\n','candidate queue raw byte parity');
  assert.deepEqual(q.items.filter(x=>x.state==='READY').map(x=>x.id).sort(),m.selected_ready_item_ids);
- const excluded=new Set();
+ const excluded=new Set(),workflowRestorations=new Set(),otherExclusions=new Set();
  for(const key of ['restored_to_published_paths','restored_unpublished_workflow_paths',
-  'excluded_unready_test_paths','restored_to_published_unready_test_paths','restored_reviewed_batch_qa_paths']){
+  'excluded_unpublished_workflow_test_paths','excluded_unready_test_paths','restored_to_published_unready_test_paths','restored_reviewed_batch_qa_paths']){
   const paths=m[key]??[];
   assert.ok(Array.isArray(paths)&&paths.every(safePath));
-  for(const path of paths)excluded.add(path);
+  for(const path of paths){
+   excluded.add(path);
+   if(key==='restored_unpublished_workflow_paths'){
+    assert.ok(/^\.github\/workflows\/[^/]+\.ya?ml$/.test(path),'invalid restored workflow path: '+path);
+    workflowRestorations.add(path);
+   }else otherExclusions.add(path);
+  }
  }
  // Preserve old READY bytes from the exact previously certified candidate,
  // never from a later development file. New selected paths must have a
@@ -384,7 +390,14 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   const paths=sortedUnique(changes.filter(path=>!path.startsWith('docs/')));
   assert.ok(paths.length&&row.scope_paths.every(path=>paths.includes(path)));
   for(const path of paths){
-   assert.ok(!excluded.has(path),'selected source/test/workflow excluded: '+path);
+   // Release candidates must preserve published workflow bytes, even for a
+   // selected historical specialist's workflow. Its first-parent and live
+   // provenance are still verified below; never exempt selected source/tests.
+   const workflow=/^\.github\/workflows\/[^/]+\.ya?ml$/.test(path);
+   if(workflow){
+    assert.ok(workflowRestorations.has(path)&&!otherExclusions.has(path),
+     'selected workflow lacks exclusive published restoration: '+path);
+   }else assert.ok(!excluded.has(path),'selected source/test/workflow excluded: '+path);
    const list=owners.get(path)||[];
    list.push({id,merge,retained:retained.includes(id)});owners.set(path,list);
   }
@@ -401,14 +414,25 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   const allRetained=list.every(x=>x.retained);
   assert.ok(allRetained||list.every(x=>!x.retained),'retained READY overlap requires separate reviewed isolation');
   let previous=sourceObjectAt(pub,path);
+  const published=previous;
+  const workflow=workflowRestorations.has(path);
+  // A historical audit checker can already be present at its exact selected
+  // bytes in published source (e.g. its earlier publication alongside other
+  // work). Keep that checker and run its selected tests; only the redundant
+  // historical introduction is exempt from published-to-first-parent equality.
+  const alreadyPublishedAudit=!allRetained&&list.length===1&&
+   /^scripts\/audit\/[^/]+\.mjs$/.test(path)&&fileObject.test(published||'')&&
+   sourceObjectAt(list[0].merge,path)===published&&
+   sourceObjectAt(dev,path)===published&&sourceObjectAt('HEAD',path)===published;
   // The SQL runner/coverage support is already published at a later reviewed
   // revision. Keep its exact published bytes and execute the selected SQL
   // fixtures; historical edits to this shared support are not new runtime.
   // Never apply this rule to migrations, dedicated tests or workflows.
-  const publishedSupport=!allRetained&&
+  const publishedSupport=
    ['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path)&&
    fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
-   sourceObjectAt('HEAD',path)===previous;
+   sourceObjectAt('HEAD',path)===previous&&
+   (!allRetained||sourceObjectAt(previousCandidate,path)===previous);
   const remaining=[...list];
   while(remaining.length){
    const earliest=remaining.filter(x=>remaining.every(y=>x===y||isAncestor(x.merge,y.merge)===true));
@@ -417,8 +441,20 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    const before=sourceObjectAt(x.merge+'^',path),after=sourceObjectAt(x.merge,path);
    assert.ok(fileObject.test(after||''),'selected path missing or unsafe: '+path);
    assert.notEqual(before,after,'selected first-parent change missing: '+path);
-   if(!allRetained&&!publishedSupport)assert.equal(before,previous,'unselected intervening bytes: '+path);
+   if(!allRetained&&!publishedSupport&&!alreadyPublishedAudit)
+    assert.equal(before,previous,'unselected intervening bytes: '+path);
    previous=after;
+  }
+  if(workflow){
+   // Independent candidate CI is still mandatory on the published workflows.
+   // Historical specialist workflow bytes remain bound to the exact live
+   // merged source, while the candidate (and any retained certificate)
+   // must contain only the published object, including a proven absence.
+   assert.notEqual(published,previous,'restored selected workflow has no unpublished change: '+path);
+   assert.equal(sourceObjectAt(dev,path),previous,'selected development workflow drift: '+path);
+   assert.equal(sourceObjectAt('HEAD',path),published,'selected workflow not restored to published: '+path);
+   if(allRetained)assert.equal(sourceObjectAt(previousCandidate,path),published,'retained READY workflow drift: '+path);
+   continue;
   }
   if(publishedSupport)continue; // exact published runner is retained and not excluded
   assert.equal(sourceObjectAt('HEAD',path),previous,'selected candidate object mismatch: '+path);

@@ -246,3 +246,71 @@ test('#3889 exact eight-ID frozen sibling and already-published SQL runner suppo
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(r,p)=>
   r==='HEAD'&&p===fixture?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)}));
 });
+
+// Reproduce the exact failed READY10 candidate using independent frozen Git objects.
+// All required native jobs remain separate; this test proves only source-scope compatibility.
+test('#3889 selected specialist workflows stay published and already-published audit checker remains exact',()=>{
+ const frozen='a9deb5994796c3791ea7bcf4886af32cb4872495';
+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:4000000,timeout:20000});
+ const ref=r=>r==='HEAD'?frozen:r;
+ const readGitText=(r,path)=>git('show',ref(r)+':'+path);
+ const sourceObjectAt=(r,path)=>{
+  const lines=git('ls-tree','-z',ref(r),'--',path).split('\0').filter(Boolean);
+  if(!lines.length)return null;
+  assert.equal(lines.length,1);
+  const match=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(lines[0]);
+  assert.ok(match&&match[3]===path);
+  return match[1]+':'+match[2];
+ };
+ const readParents=sha=>{
+  const [commit,...parents]=git('rev-list','--parents','-n','1',sha).trim().split(/\s+/);
+  assert.equal(commit,sha);return parents;
+ };
+ const isAncestor=(a,b)=>{
+  try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+  catch(e){if(e.status===1)return false;throw e;}
+ };
+ const manifest=JSON.parse(readGitText('HEAD','docs/RELEASE_CANDIDATE.json'));
+ const queue=JSON.parse(readGitText('HEAD','docs/RELEASE_QUEUE.json'));
+ const opts={manifest,queue,branch:'refs/heads/'+manifest.candidate_branch,commitParent:readParents(frozen)[0],
+  readGitText,sourceObjectAt,readParents,isAncestor,
+  firstParentChangedPaths:sha=>git('diff','--name-only','--no-renames',sha+'^',sha).split(/\r?\n/).filter(Boolean)};
+ const workflow='.github/workflows/issue33-r232-original371-372.yml';
+ const checker='scripts/audit/issue33-r232-original371-372-check.mjs';
+ const regression='tests/coffee-issue33-r232-original371-372.test.mjs';
+ const merge='b585b9cf646da868e6c7c8871289c82f6d96e6ca';
+ assert.equal(manifest.selected_ready_item_ids.length,10);
+ assert.equal(sourceObjectAt(manifest.published_source_sha,workflow),null);
+ assert.equal(sourceObjectAt(manifest.published_source_sha,checker),sourceObjectAt(merge,checker));
+ assert.equal(sourceObjectAt(merge+'^',checker),null);
+ const selected=verifyGeneralProspectiveBatchReadyTestScope(opts);
+ const runner='scripts/audit/isolated-sql-regression.sh';
+ const coverage='tests/sql-runner-coverage.test.mjs';
+ const prior=JSON.parse(readGitText(manifest.development_source_sha,'docs/READY_BATCH_CERTIFICATION.json')).candidate_sha;
+ for(const path of [workflow,checker,regression,runner,coverage])assert.ok(selected.includes(path));
+ for(const path of [runner,coverage]){
+  const published=sourceObjectAt(manifest.published_source_sha,path);
+  assert.ok(published);
+  assert.equal(sourceObjectAt(prior,path),published);
+  assert.equal(sourceObjectAt('HEAD',path),published);
+  for(const r of [prior,'HEAD'])
+   assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,p)=>
+    ref===r&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}));
+  const driftedDevelopment={...opts,sourceObjectAt:(ref,p)=>
+   ref===manifest.development_source_sha&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)};
+  // The runner's historical object differs from its certified published
+  // object, so the published-support proof requires exact live parity.
+  // Coverage's historical object IS the frozen published object; a later
+  // unready development edit must not invalidate retained certified bytes.
+  if(path===runner)assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope(driftedDevelopment));
+  else assert.deepEqual(verifyGeneralProspectiveBatchReadyTestScope(driftedDevelopment),selected);
+ }
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,manifest:{...manifest,
+  restored_unpublished_workflow_paths:manifest.restored_unpublished_workflow_paths.filter(p=>p!==workflow)}}));
+ for(const path of [workflow,checker,regression])assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,
+  manifest:{...manifest,excluded_unready_test_paths:[...manifest.excluded_unready_test_paths,path]}}));
+ for(const [r,p] of [['HEAD',workflow],[manifest.development_source_sha,workflow],['HEAD',checker],
+  [manifest.development_source_sha,checker],[merge,checker],['HEAD',regression]])
+  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>
+   ref===r&&path===p?'100644:'+'f'.repeat(40):sourceObjectAt(ref,path)}));
+});
