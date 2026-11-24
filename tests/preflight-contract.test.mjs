@@ -56,7 +56,7 @@ test('removing Git-object receipt audit from continuity is rejected',()=>{
  assert.match(change('docs/ai/PREFLIGHT.md',s=>s.replace('DIC_PREFLIGHT_VERIFIED','MISSING_EVIDENCE')).join(' '),/missing mandatory contract/);
 });
 
-import {verifyProspectiveReadyTestScope} from './helpers/release-published-restoration.mjs';
+import {verifyProspectiveReadyTestScope,verifyProspectiveBatchReadyTestScope} from './helpers/release-published-restoration.mjs';
 test('#3889 prospective published-source QA excludes only exact proven unselected work',()=>{
  const id='DIC-Q-509-stale-project-shot-comment-20261122';
  const migration='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
@@ -84,7 +84,6 @@ test('#3889 prospective published-source QA excludes only exact proven unselecte
  assert.throws(()=>verifyProspectiveReadyTestScope({...opts,sourceObjectAt:()=> 'f'.repeat(40)}));
 });
 
-import {verifyProspectiveBatchReadyTestScope} from './helpers/release-published-restoration.mjs';
 test('#3889 two-ID preview requires exact selection, immutable queue and selected runtime/test objects',()=>{
  const migration='supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql';
  const runtime='src/server/coffee-narrative-evidence.mjs';
