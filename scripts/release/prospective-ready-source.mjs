@@ -8,6 +8,35 @@ export const BASELINE_QUEUE_BLOB='46304f47eb0e78fac8c7845155af86080900b3c4';
 const SHA=/^[a-f0-9]{40}$/;
 const sorted=xs=>[...new Set(xs)].sort();
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+// R399 is a narrow source fix, not certification of the parent original603 audit.
+// Its scoped specialist afterproof (#3678/#3685, exact job 137103214703) was
+// independently read, including actual selected #99 producer and no conflicts.
+// Match this exact audit-only marker, source and test bytes and original CI IDs.
+// All other substantive blockers remain hard HOLD. This is preview only;
+// actual five native frozen-candidate jobs and publisher verification still apply.
+const R399_ID='DIC-Q-33-r399-original99-producer-tenure-precision';
+const R399_PARENT_AUDIT='Original603 603 selected current identities/lot/source manual semantic adjudication unfinished, #33 OPEN; related #267 V2/#96 scoped separately.';
+const R399_MERGE='513f98ac06cdd0fe569390354420158458342859';
+const R399_TESTED='f06e3f7c4143c9f9b8409bed7d062c16a0269a23';
+const R399_PATH='src/server/coffee-narrative-evidence.mjs';
+const R399_TEST='tests/coffee-issue33-r399-keller-tenure.test.mjs';
+const R399_REQUIRED_RUNS=[44987903105,44987902345,44987902359,44987902371,44988168022,44988168102,44988168054,44988168083];
+function reviewedParentAuditOnly({original,current,marker,developmentSourceSha,sourceObjectAt,firstParentChangedPaths,isAncestor}){
+ if(marker!==R399_PARENT_AUDIT||original.id!==R399_ID||current.id!==R399_ID||
+    original.issue!==33||current.issue!==33||current.pr!==3678||
+    original.merged_source_sha!==R399_MERGE||current.merged_source_sha!==R399_MERGE||
+    !same(current.scope_paths,[R399_PATH])||!original.blockers.includes(marker)||
+    !R399_REQUIRED_RUNS.every(id=>original.ci_runs.includes(id)&&current.ci_runs.includes(id)))return false;
+ try{
+  const changed=firstParentChangedPaths(R399_MERGE);
+  if(!same(sorted(deployableChangedPaths(changed)),[R399_PATH])||
+     !changed.includes(R399_TEST)||isAncestor(R399_MERGE,developmentSourceSha)!==true)return false;
+  for(const [path,object] of [[R399_PATH,'100644:3de11626496a0b698e558ec8929f0158e3083b0a'],[R399_TEST,'100644:16c4d572ecd43860a9cd4f1a7f2baffd670382ee']]){
+   if([R399_MERGE,R399_TESTED,developmentSourceSha].some(ref=>sourceObjectAt(ref,path)!==object))return false;
+  }
+  return true;
+ }catch{return false;}
+}
 export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId,
  developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}={}){
  const hold=why=>{throw Error('PROSPECTIVE_READY_HOLD: '+why);};
@@ -32,9 +61,12 @@ export function proposeProspectiveReadyQueue({baselineQueue,liveQueue,selectedId
    current.ci_runs.some(id=>!Number.isSafeInteger(id)||id<=0))
   hold('selected original item is not source-tracked TESTING with existing test receipts');
  // No speculative deletion of non-candidate domain defects or actual source failures.
- if(current.blockers.some(b=>typeof b!=='string'||
+ // The single independently reviewed parent-audit marker is not a defect in R399.
+ if(current.blockers.some(b=>!reviewedParentAuditOnly({original,current,marker:b,
+   developmentSourceSha,sourceObjectAt,firstParentChangedPaths,isAncestor})&&
+   (typeof b!=='string'||
    !(/#3347|candidate.*certification|new owner Publish/i.test(b))||
-   /(?:unavailable|failed|auth|external|real hosted|privacy|source mismatch|pending seller)/i.test(b)))
+   /(?:unavailable|failed|auth|external|real hosted|privacy|source mismatch|pending seller)/i.test(b))))
   hold('unresolved substantive blocker requires its specialist before preview');
  let changed;
  try{changed=firstParentChangedPaths(current.merged_source_sha);}catch{
