@@ -203,9 +203,12 @@ export const BATCH_QA_PATHS=[
  'scripts/audit/issue33-r433-duesouth-selected-check.mjs',
  'scripts/audit/issue33-r434-south17-selected-check.mjs'
 ].sort();
+// The original certified READY1 candidate and the new #3919 development merge
+// have different reviewed, nonshipped QA blobs. Both identities are required.
+const BATCH_QA_MERGED_FIX='e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0';
 const BATCH_QA_SUPPORT=[
- ['tests/helpers/release-published-restoration.mjs','fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'],
- ['tests/preflight-contract.test.mjs','f893c068e20c2445bc5596eda6b36c832974f195']
+ ['tests/helpers/release-published-restoration.mjs','8ba8fd6f41cb5193a892868efd0c87840af24d90','fe1dd86406dc1c984dd4024a47225d1f8d4a40c0'],
+ ['tests/preflight-contract.test.mjs','f2aab94820d72d5c9f51cefa46137d5593b3a276','f893c068e20c2445bc5596eda6b36c832974f195']
 ];
 export function discoverReviewedBatchQaRestoration({queue,selectedIds,publishedSourceSha,
  developmentSourceSha,sourceObjectAt}={}){
@@ -229,10 +232,12 @@ export function discoverReviewedBatchQaRestoration({queue,selectedIds,publishedS
    if(sourceObjectAt(merge,path)!==sourceObjectAt(merge+'^',path))
     hold('selected merge owns QA path: '+path);
  }
- for(const [path,blob] of BATCH_QA_SUPPORT)
-  if(sourceObjectAt(developmentSourceSha,path)!=='100644:'+blob||
-     sourceObjectAt(BATCH_QA_CERTIFIED,path)!=='100644:'+blob)
-   hold('reviewed compatibility support changed: '+path);
+ for(const [path,mergedBlob,priorCertifiedBlob] of BATCH_QA_SUPPORT)
+  if(sourceObjectAt(developmentSourceSha,path)!=='100644:'+mergedBlob||
+     sourceObjectAt(BATCH_QA_MERGED_FIX,path)!=='100644:'+mergedBlob||
+     sourceObjectAt(BATCH_QA_CERTIFIED,path)!=='100644:'+priorCertifiedBlob||
+     sourceObjectAt(publishedSourceSha,path)==='100644:'+mergedBlob)
+   hold('reviewed merged compatibility QA provenance changed: '+path);
  return [...BATCH_QA_PATHS];
 }
 export function reviewedBatchQaRestorationPaths({manifest,queue,developmentSourceSha,
