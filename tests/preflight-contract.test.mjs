@@ -284,7 +284,19 @@ test('#3889 selected specialist workflows stay published and already-published a
  assert.equal(sourceObjectAt(manifest.published_source_sha,checker),sourceObjectAt(merge,checker));
  assert.equal(sourceObjectAt(merge+'^',checker),null);
  const selected=verifyGeneralProspectiveBatchReadyTestScope(opts);
- for(const path of [workflow,checker,regression])assert.ok(selected.includes(path));
+ const runner='scripts/audit/isolated-sql-regression.sh';
+ const coverage='tests/sql-runner-coverage.test.mjs';
+ const prior=JSON.parse(readGitText(manifest.development_source_sha,'docs/READY_BATCH_CERTIFICATION.json')).candidate_sha;
+ for(const path of [workflow,checker,regression,runner,coverage])assert.ok(selected.includes(path));
+ for(const path of [runner,coverage]){
+  const published=sourceObjectAt(manifest.published_source_sha,path);
+  assert.ok(published);
+  assert.equal(sourceObjectAt(prior,path),published);
+  assert.equal(sourceObjectAt('HEAD',path),published);
+  for(const r of [prior,'HEAD',manifest.development_source_sha])
+   assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,p)=>
+    ref===r&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}));
+ }
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,manifest:{...manifest,
   restored_unpublished_workflow_paths:manifest.restored_unpublished_workflow_paths.filter(p=>p!==workflow)}}));
  for(const path of [workflow,checker,regression])assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,

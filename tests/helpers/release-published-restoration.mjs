@@ -428,10 +428,11 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   // revision. Keep its exact published bytes and execute the selected SQL
   // fixtures; historical edits to this shared support are not new runtime.
   // Never apply this rule to migrations, dedicated tests or workflows.
-  const publishedSupport=!allRetained&&
+  const publishedSupport=
    ['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path)&&
    fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
-   sourceObjectAt('HEAD',path)===previous;
+   sourceObjectAt('HEAD',path)===previous&&
+   (!allRetained||sourceObjectAt(previousCandidate,path)===previous);
   const remaining=[...list];
   while(remaining.length){
    const earliest=remaining.filter(x=>remaining.every(y=>x===y||isAncestor(x.merge,y.merge)===true));
