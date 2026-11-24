@@ -37,3 +37,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=c5a8cd443b39fc2e12699bf596682f5cf8fbf65c 
 
 DIC_PREFLIGHT_VERIFIED development_sha=c5a8cd443b39fc2e12699bf596682f5cf8fbf65c preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 - Exact PR #3919 initial approval 45334522642/138243343448 FAILED zero-warning ESLint solely on duplicate import in preflight-contract.test.mjs. Consolidated the two named imports without any test/source assertion change. Initial failure preserved; corrected exact-source CI pending. [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e7508effcb45a77c0f73c8f2f236d6e5b3ffe8d0 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## 2026-11-24 #3889 frozen-candidate PR synthetic-ref false failure repair [skip netlify]
+- Source-only QA test repair: candidate 248b91589848f187ad5d0eb4cdbde54f9368e6cf [draft #3921] validation 5,023 tests 4,996 PASS/1 FAIL/26 SKIP; failure is required-check-workflows.test.mjs assuming refs/pull/3921/merge was an ordinary development PR. Approval/cloud/isolated SQL PR jobs succeeded, mobile/browser pending; these PR jobs are NOT five exact candidate PUSH checks.
+- Permit only reviewed release-candidate family, pull_request event and true refs/pull/N/merge, independently verify manifest branch, direct development parent and byte-identical GitHub merge/head trees before using existing strict published workflow parity assertion. Normal development PR still requires operational READY audit, malformed context fails closed; no test removed or result relabeled. Added positive/hostile branch routing unit tests. This is nonshipped QA-only, no app/SQL/Auth/CI workflow or provider changes.
+- NEXT: exact development CI + nonforce merge/readback, update main QA provenance pin and one newly frozen candidate, verify native PUSH five SUCCESS and publisher parity before R399 READY. No Publish/grant/Netlify/provider/production effects.
