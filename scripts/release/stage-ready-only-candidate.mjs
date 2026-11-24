@@ -24,13 +24,13 @@ import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,discoverReviewedRestoredUnreadyAdminTests,discoverReviewedRestoredStartupTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
-import {proposeProspectiveReadyQueue,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
+import {proposeProspectiveReadyQueue,proposeDisjointProspectiveReadyBatch,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
 export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSourceSha,
  selectedIds,branch,pinnedReadyPaths=[],createLocalRef=true,
- prospectiveReadyItemId=null}={}){
+ prospectiveReadyItemId=null,prospectiveReadyItemIds=null}={}){
  if(!SHA.test(developmentSourceSha||'')||!BRANCH.test(branch||''))
   throw Error('Candidate staging requires an exact development commit and safe release-candidates/<slug> branch');
  const git=(args,{env=process.env,input,trim=true}={})=>{
@@ -39,7 +39,9 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   return trim?s.trim():s;
  };
  const queueRaw=git(['show',developmentSourceSha+':docs/RELEASE_QUEUE.json'],{trim:false});
- let queue=JSON.parse(queueRaw),prospective=null,stagedQueueRaw=queueRaw;
+ let queue=JSON.parse(queueRaw),prospective=null,batch=null,stagedQueueRaw=queueRaw;
+ if(prospectiveReadyItemId!==null&&prospectiveReadyItemIds!==null)
+  throw Error('Select only one prospective preparation mode');
  const publishedSourceSha=queue.published_base?.tested_source_sha;
  if(!SHA.test(publishedSourceSha||''))throw Error('Invalid actual published source in queue');
  const ancestor=memoizeImmutableGitRead((a,b)=>{
@@ -76,6 +78,18 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt});
   queue=prospective.queue;
   stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
+ }
+ if(prospectiveReadyItemIds!==null){
+  if(createLocalRef||!/^release-candidates\/prospectbatch3889-[a-f0-9]{20}$/.test(branch))
+   throw Error('Prospective batch preparation is local receipt-only; no ref creation');
+  const baselineQueue=JSON.parse(git(['cat-file','blob',BASELINE_QUEUE_BLOB],{trim:false}));
+  batch=proposeDisjointProspectiveReadyBatch({baselineQueue,liveQueue:queue,
+   selectedIds:prospectiveReadyItemIds,developmentSourceSha,
+   firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt});
+  const all=batch.queue.items.filter(i=>i.state==='READY').map(i=>i.id).sort();
+  if(!Array.isArray(selectedIds)||JSON.stringify([...selectedIds].sort())!==JSON.stringify(all))
+   throw Error('Prospective batch must retain every current READY and select exactly the planned additions');
+  queue=batch.queue;stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
  }
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
@@ -125,7 +139,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    GIT_AUTHOR_NAME:'DIC READY candidate staging',GIT_AUTHOR_EMAIL:'ready-candidate@users.noreply.github.com',
    GIT_COMMITTER_NAME:'DIC READY candidate staging',GIT_COMMITTER_EMAIL:'ready-candidate@users.noreply.github.com'};
   git(['read-tree',developmentSourceSha],{env});
-  if(prospective){
+  if(prospective||batch){
    const blob=git(['hash-object','-w','--stdin'],{env,input:stagedQueueRaw});
    if(!SHA.test(blob))throw Error('Prospective READY queue blob could not be frozen');
    git(['update-index','--add','--cacheinfo','100644',blob,'docs/RELEASE_QUEUE.json'],{env});
@@ -168,7 +182,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    publication_authorized:false,
    ...(prospective?{prospective_ready_preview:{status:prospective.status,
     selected_id:prospective.selected_id,baseline_queue_blob:BASELINE_QUEUE_BLOB,
-    identity_sha256:prospective.identity_sha256}}:{})};
+    identity_sha256:prospective.identity_sha256}}:{}),
+   ...(batch?{prospective_ready_batch_preview:{status:batch.status,
+    baseline_queue_blob:BASELINE_QUEUE_BLOB,added_ids:batch.added_ids,
+    retained_ready_ids:batch.retained_ready_ids,identity_sha256:batch.identity_sha256,
+    publication_authorized:false,ready_certified:false}}:{})};
   // New candidate Git commits change code/workflows, so carry a fresh
   // exact-parent journal receipt validated by approval continuity.
   let preflightBlob,preflightText;
@@ -186,7 +204,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Development parent: '+developmentSourceSha+'\n'+
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
-   (prospective?'- PROSPECTIVE ONLY: development queue is still TESTING; no READY claim, certificate, production grant or Publish.\n':'')+
+   (prospective||batch?'- PROSPECTIVE ONLY: development queue additions are still TESTING; no READY claim, certificate, production grant or Publish.\n':'')+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+
@@ -213,7 +231,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    stagedCommitChangedPaths:changed(developmentSourceSha,commit),
    developmentDriftPaths:[],liveQueue:queue,queueContentMatches:stagedQueueRaw===
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
-   sourceObjectAt,isAncestor:ancestor});
+   sourceObjectAt,isAncestor:ancestor,prospectiveBatchPlan:batch});
   assertCandidateRelativeImports(plan.included_paths,{
    readSource:path=>git(['show',commit+':'+path]),
    hasPath:path=>sourceObjectAt(commit,path)!==null
@@ -225,7 +243,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   if(createLocalRef)
    git(['update-ref','refs/heads/'+branch,commit,ZERO]);
   return {candidate_sha:commit,branch,manifest,plan,
-   prospective_status:prospective?.status||null};
+   prospective_status:prospective?.status||batch?.status||null};
  }finally{rmSync(temp,{recursive:true,force:true});}
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){

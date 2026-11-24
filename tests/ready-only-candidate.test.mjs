@@ -998,3 +998,25 @@ test('#3889 historical scoped workstream journal is exact-parent, exact candidat
  assert.throws(()=>assertExactCandidateStagedPaths(
   [path,'docs/RELEASE_QUEUE.json'],[path]),/staging commit changes unrelated paths/);
 });
+
+
+test('#3889 batch staging admits only an independently replayed exact local plan; never remote manifest alone',async()=>{
+ const {reviewedProspectiveBatchQueuePath:prove,reviewedProspectivePromotionQueueParity:parity}=await import('../scripts/release/ready-only-candidate.mjs');
+ const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),branch='release-candidates/prospectbatch3889-'+'d'.repeat(20);
+ const ids=['DIC-Q-509-first','DIC-Q-509-second'];
+ const rows=ids.map((id,i)=>({id,issue:509,title:'synthetic '+i,state:'READY',owner_source:'fixture',merged_source_sha:A,scope_paths:['site/'+i+'.js'],tests:['fixture'],ci_runs:[123],blockers:[]}));
+ const queue={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',published_base:{tested_source_sha:A,release_sha:B,netlify_deploy_id:'fixture'},items:rows,history:[]};
+ const p={status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,development_source_sha:A,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',identity_sha256:'e'.repeat(64),added_ids:[ids[1]],retained_ready_ids:[ids[0]],queue};
+ const x={status:p.status,baseline_queue_blob:p.baseline_queue_blob,identity_sha256:p.identity_sha256,added_ids:p.added_ids,retained_ready_ids:p.retained_ready_ids,publication_authorized:false,ready_certified:false};
+ const manifest={publication_authorized:false,development_source_sha:A,candidate_branch:branch,selected_ready_item_ids:ids,prospective_ready_batch_preview:x};
+ const opts={manifest,queue,developmentSourceSha:A,candidateSha:B,candidateBranch:branch,prospectiveBatchPlan:p,sourceObjectAt:sha=>'100644:'+(sha===A?C:B)};
+ assert.deepEqual(prove(opts),['docs/RELEASE_QUEUE.json']);
+ assert.throws(()=>prove({...opts,prospectiveBatchPlan:null}),/HOLD/);
+ assert.equal(parity({manifest,originalQueue:'old',candidateQueue:'new',liveQueue:'new'}),false);
+ for(const edit of [
+  o=>{o.manifest.selected_ready_item_ids.pop()},o=>{o.manifest.prospective_ready_batch_preview.identity_sha256='f'.repeat(64)},
+  o=>{o.manifest.publication_authorized=true},o=>{o.prospectiveBatchPlan.ready_certified=true},
+  o=>{o.queue.items[0].state='TESTING'},o=>{o.manifest.prospective_ready_batch_preview.added_ids=['DIC-Q-509-other']},
+ ]){const o=structuredClone({...opts,sourceObjectAt:undefined});o.sourceObjectAt=opts.sourceObjectAt;edit(o);assert.throws(()=>prove(o),/HOLD/);}
+ assert.throws(()=>prove({...opts,sourceObjectAt:()=> '100644:'+C}),/HOLD/);
+});

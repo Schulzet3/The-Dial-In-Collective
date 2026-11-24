@@ -53,6 +53,39 @@ export function reviewedProspectiveReadyQueuePath({manifest,queue,developmentSou
 }
 
 
+// #3889 batch preparation is deliberately NOT a publisher acceptance path.
+// Require the independently replayed in-memory plan from local staging. A
+// remote manifest alone can never authorize a queue change or publication.
+export function reviewedProspectiveBatchQueuePath({manifest,queue,developmentSourceSha,
+ candidateSha,candidateBranch,sourceObjectAt,prospectiveBatchPlan}={}){
+ const x=manifest?.prospective_ready_batch_preview;
+ if(x===undefined)return [];
+ const p=prospectiveBatchPlan;
+ const hold=why=>{throw Error('Prospective READY batch staging HOLD: '+why);};
+ if(!p||p.status!=='PROSPECTIVE_BATCH_PLAN_ONLY'||p.publication_authorized!==false||p.ready_certified!==false||
+    manifest.prospective_ready_preview!==undefined||manifest.publication_authorized!==false||
+    manifest.development_source_sha!==developmentSourceSha||p.development_source_sha!==developmentSourceSha||
+    manifest.candidate_branch!==candidateBranch||!/^release-candidates\/prospectbatch3889-[a-f0-9]{20}$/.test(candidateBranch||'')||
+    x.status!==p.status||x.baseline_queue_blob!=='46304f47eb0e78fac8c7845155af86080900b3c4'||
+    p.baseline_queue_blob!==x.baseline_queue_blob||x.publication_authorized!==false||x.ready_certified!==false||
+    !/^[a-f0-9]{64}$/.test(x.identity_sha256||'')||x.identity_sha256!==p.identity_sha256||
+    !Array.isArray(x.added_ids)||!x.added_ids.length||!Array.isArray(x.retained_ready_ids)||
+    JSON.stringify(x.added_ids)!==JSON.stringify(p.added_ids)||JSON.stringify(x.retained_ready_ids)!==JSON.stringify(p.retained_ready_ids)||
+    JSON.stringify(queue)!==JSON.stringify(p.queue)||queueSchemaErrors(queue).length)
+  hold('independent local plan, immutable identity, queue, or nonpublication mismatch');
+ const selected=[...x.added_ids,...x.retained_ready_ids];
+ const actual=queue.items.filter(i=>i.state==='READY').map(i=>i.id);
+ if(new Set(selected).size!==selected.length||!Array.isArray(manifest.selected_ready_item_ids)||
+    !equal(selected,actual)||!equal(selected,manifest.selected_ready_item_ids)||
+    !SHA.test(developmentSourceSha||'')||!SHA.test(candidateSha||'')||typeof sourceObjectAt!=='function')
+  hold('all existing READY plus exact planned additions required');
+ const before=sourceObjectAt(developmentSourceSha,'docs/RELEASE_QUEUE.json');
+ const after=sourceObjectAt(candidateSha,'docs/RELEASE_QUEUE.json');
+ if(!/^100644:[a-f0-9]{40}$/.test(before||'')||!/^100644:[a-f0-9]{40}$/.test(after||'')||before===after)
+  hold('staged prospective queue object must differ from live source');
+ return ['docs/RELEASE_QUEUE.json'];
+}
+
 // #3889: a prospective READY-shaped queue is validated on its own exact native
 // candidate SHA, then adopted only if development later records identical bytes.
 // This is a comparison gate, NEVER a READY certification or publication grant.
@@ -920,7 +953,7 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
 export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,developmentHead,
  candidateSha,actualParents,developmentChangedPaths,candidateChangedPaths,
  stagedCommitChangedPaths,developmentDriftPaths,queueContentMatches,liveQueue,sourceObjectAt,
- candidateBranch,isAncestor}={}){
+ candidateBranch,isAncestor,prospectiveBatchPlan=null}={}){
  const reject=reason=>{throw Error('Isolated READY candidate HOLD: '+reason);};
  if(!manifest||manifest.schema_version!==1||manifest.kind!==CANDIDATE_KIND||
   !SHA.test(candidateSha||'')||!SHA.test(developmentHead||'')||
@@ -1160,6 +1193,9 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const prospectiveQueuePaths=reviewedProspectiveReadyQueuePath({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,candidateSha,
   candidateBranch,sourceObjectAt});
+ const prospectiveBatchPaths=reviewedProspectiveBatchQueuePath({manifest,queue,
+  developmentSourceSha:manifest.development_source_sha,candidateSha,candidateBranch,
+  sourceObjectAt,prospectiveBatchPlan});
  const reviewedQaPaths=reviewedProspectiveQaRestorationPaths({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
@@ -1168,7 +1204,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   candidateSha,sourceObjectAt});
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
-  excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,reviewedQaPaths,
+  excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,prospectiveBatchPaths,reviewedQaPaths,
   reviewedScopedJournalPaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
