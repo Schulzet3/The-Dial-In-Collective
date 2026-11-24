@@ -223,6 +223,19 @@ test('#3889 exact eight-ID frozen sibling and already-published SQL runner suppo
  const runner='scripts/audit/isolated-sql-regression.sh';
  const fixture='supabase/tests/member_approval_finish_null_receipts.sql';
  assert.equal(manifest.selected_ready_item_ids.length,8);
+ const historicalId='DIC-Q-509-member-approval-null-receipt-guard';
+ const historical=queue.items.find(x=>x.id===historicalId);
+ assert.ok(historical&&!Object.hasOwn(historical,'production_deployed'));
+ for(const invalid of [true,null,'false',false]){
+  const changed=structuredClone(queue);
+  changed.items.find(x=>x.id===historicalId).production_deployed=invalid;
+  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:changed}));
+ }
+ const removed=structuredClone(queue);
+ const explicit=removed.items.find(x=>x.id!==historicalId&&manifest.selected_ready_item_ids.includes(x.id));
+ assert.equal(explicit.production_deployed,false);
+ delete explicit.production_deployed;
+ assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,queue:removed}));
  assert.ok(selected.includes(runner)&&selected.includes(fixture));
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,readParents:()=>[]}));
  assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,readParents:()=>['f'.repeat(40)]}));

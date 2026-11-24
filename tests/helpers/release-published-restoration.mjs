@@ -365,7 +365,14 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  for(const id of selected){
   const row=q.items.find(x=>x.id===id),merge=row.merged_source_sha;
   assert.match(merge||'',SHA);
-  assert.equal(row.production_deployed,false);
+  // Historical queue schema permitted an omitted deployment flag. Only
+  // accept omission preserved in both immutable baseline and exact live parent;
+  // a removed flag, null, true or other altered value never proves readiness.
+  if(!Object.hasOwn(row,'production_deployed')){
+   const original=baseRows.get(id),prior=parentRows.get(id);
+   assert.ok(original&&prior&&!Object.hasOwn(original,'production_deployed')&&
+    !Object.hasOwn(prior,'production_deployed'),'unproven historical deployment flag omission');
+  }else assert.equal(row.production_deployed,false);
   assert.ok(row.tests?.length&&row.ci_runs?.length&&row.ci_runs.every(x=>Number.isSafeInteger(x)&&x>0));
   assert.deepEqual(row.blockers,[]);
   assert.equal(isAncestor(merge,dev),true);
