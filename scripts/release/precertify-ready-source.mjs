@@ -179,6 +179,45 @@ export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha
   manifest,delta_entries,journal_append};
 }
 
+// Run the *candidate's* independently reviewed selected-test ownership gate
+// before exporting any prospective batch receipt. No checkout, app build,
+// remote write or replacement of mandatory exact candidate CI.
+export function assertProspectiveCandidateQaScope({repoDir=process.cwd(),candidateSha}={}){
+ if(!SHA.test(candidateSha||''))throw Error('Exact prospective QA candidate SHA required');
+ const program=`
+import {execFileSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+const sha=process.argv[1];
+const git=(args)=>execFileSync('git',args,{encoding:'utf8',timeout:45000,maxBuffer:8*1024*1024,stdio:['ignore','pipe','pipe']});
+const ref=r=>r==='HEAD'?sha:r;
+const readGitText=(r,p)=>git(['show',ref(r)+':'+p]);
+const sourceObjectAt=(r,p)=>{
+ const rows=git(['ls-tree','-z',ref(r),'--',p]).split('\\0').filter(Boolean);
+ if(!rows.length)return null;
+ assert.equal(rows.length,1);
+ const x=/^(100644|100755) blob ([a-f0-9]{40})\\t(.+)$/.exec(rows[0]);
+ assert.ok(x&&x[3]===p);
+ return x[1]+':'+x[2];
+};
+const readParents=r=>git(['rev-list','--parents','-n','1',r]).trim().split(/\\s+/).slice(1);
+const isAncestor=(a,b)=>{try{git(['merge-base','--is-ancestor',a,b]);return true;}catch(e){if(e.status===1)return false;throw e;}};
+const firstParentChangedPaths=r=>git(['diff','--name-only','--no-renames',r+'^',r]).split(/\\r?\\n/).filter(Boolean);
+const firstParentPatch=(r,p)=>git(['diff','--no-color','--no-ext-diff','--no-textconv','--no-renames','--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',r+'^',r,'--',p]);
+const manifest=JSON.parse(readGitText(sha,'docs/RELEASE_CANDIDATE.json'));
+const queue=JSON.parse(readGitText(sha,'docs/RELEASE_QUEUE.json'));
+assert.deepEqual(readParents(sha),[manifest.development_source_sha]);
+const source=readGitText(sha,'tests/helpers/release-published-restoration.mjs');
+assert.equal(sourceObjectAt(sha,'tests/helpers/release-published-restoration.mjs'),sourceObjectAt(manifest.development_source_sha,'tests/helpers/release-published-restoration.mjs'));
+const {verifyGeneralProspectiveBatchReadyTestScope:verify}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const paths=verify({manifest,queue,branch:'refs/heads/'+manifest.candidate_branch,commitParent:readParents(sha)[0],readGitText,sourceObjectAt,readParents,isAncestor,firstParentChangedPaths,firstParentPatch});
+assert.ok(Array.isArray(paths)&&paths.length>0,'Independent selected QA source proof required');
+console.log('Independent prospective selected QA scope PASS: '+paths.length+' paths');
+`;
+ try{return execFileSync(process.execPath,['--input-type=module','--eval',program,candidateSha],{
+  cwd:repoDir,encoding:'utf8',timeout:240000,maxBuffer:4*1024*1024,stdio:['ignore','pipe','pipe']}).trim();}
+ catch(e){throw Error('Independent prospective selected QA scope HOLD: '+String(e.stderr||e.message).slice(-2500));}
+}
+
 export function prevalidateReadySource({
  repoDir=process.cwd(),developmentSourceSha,push=false,receipt=false,
  prospectiveReadyItemId=null,prospectiveReadyItemIds=null,expectedHostedEnv=process.env
@@ -265,6 +304,7 @@ export function prevalidateReadySource({
  const staged=stageReadyOnlyCandidate({repoDir,developmentSourceSha,
   selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false,
   prospectiveReadyItemId,prospectiveReadyItemIds});
+ if(prospectiveReadyItemIds!==null)assertProspectiveCandidateQaScope({repoDir,candidateSha:staged.candidate_sha});
  if(receipt)return candidateTreeReceipt({repoDir,developmentSourceSha,staged});
  const transport=push?neutralWorkflowTransportCommit({repoDir,developmentSourceSha,
   candidateSha:staged.candidate_sha,
