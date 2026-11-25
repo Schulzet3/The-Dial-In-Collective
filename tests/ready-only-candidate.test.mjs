@@ -1095,9 +1095,9 @@ test('#3889 independently replayed two-ID batch queue parity requires exact LIVE
  assert.equal(parity({...opts,prospectiveBatchPlan:{...p,queue:extra},candidateQueue:JSON.stringify(extra,null,2)+'\n',liveQueue:JSON.stringify(extra,null,2)+'\n'}),false);
 });
 
-for(const generation of [1,2,3,4,5,6])test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exact plan and support, generation '+generation,async()=>{
+for(const generation of [1,2,3,4,5,6,7])test('#3889 arbitrary cohort QA restores only unselected reviewed paths with exact plan and support, generation '+generation,async()=>{
  const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:validate}=await import('../scripts/release/ready-only-candidate.mjs');
- const oldDev='b58c1a4c856fc65a56bf27b2a0ded20245f6351b',v2Dev='85ece2e2b4e38b3445e5125045748dd212e421d4',v3Dev='c4b3f2c10d54a4790cc0cd0b2b3b190dc46e501a',v4Dev='22254f501af8c0d5f6f89763ea5387b755fdd0bf',v5Dev='542949c23fbbf481de00acdbd77e6c926ebde879',dev=generation===6?'09c45de5063e1d743ce497aea2557974c86f52ca':generation===5?v5Dev:generation===4?v4Dev:generation===3?v3Dev:generation===2?v2Dev:oldDev,prior='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',
+ const oldDev='b58c1a4c856fc65a56bf27b2a0ded20245f6351b',v2Dev='85ece2e2b4e38b3445e5125045748dd212e421d4',v3Dev='c4b3f2c10d54a4790cc0cd0b2b3b190dc46e501a',v4Dev='22254f501af8c0d5f6f89763ea5387b755fdd0bf',v5Dev='542949c23fbbf481de00acdbd77e6c926ebde879',v6Dev='09c45de5063e1d743ce497aea2557974c86f52ca',dev=generation===7?'37d5dae3002490d71580dc5cfa26ff8e4622daf3':generation===6?v6Dev:generation===5?v5Dev:generation===4?v4Dev:generation===3?v3Dev:generation===2?v2Dev:oldDev,prior='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',
   reference='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',previous='16bc481b2c66c5229c70e513c76141b086b8e535',
   pub='2d22d448160d428a977f06482323646b92818fcf',candidate='a'.repeat(40);
  const ids=['DIC-Q-33-r399-original99-producer-tenure-precision','DIC-Q-509-stale-project-shot-comment-20261122','DIC-Q-3667-ci-parallel-full-suite'];
@@ -1131,9 +1131,12 @@ for(const generation of [1,2,3,4,5,6])test('#3889 arbitrary cohort QA restores o
   'tests/helpers/release-published-restoration.mjs':'03ea670669ec6ebd14c23106d55c33aea56d5220',
   'tests/preflight-contract.test.mjs':'dc947f96e3d3f7efd7f74f8709db5b988791bb71',
   'tests/required-check-workflows.test.mjs':'50d74fa8ef9e39043b11c467a519aa8a70573835'};
+ const v7Support={...v6Support,'tests/helpers/release-published-restoration.mjs':'fce0d1efadd78d3dceb453c0a70f385c600bcc43'};
+ const addedRegression='tests/issue3889-context-amendment.test.mjs',regressionBlob='100644:4828fc6099dbbbe9a751182aa9c62ca411d91725';
  const selectedPath='scripts/audit/run-full-suite.mjs',current='100644:'+'d'.repeat(40),old='100644:'+'e'.repeat(40);
  const expected=paths.filter(x=>x!==selectedPath);
  const read=(ref,path)=>{
+  if(path===addedRegression)return generation===7&&[dev,candidate].includes(ref)?regressionBlob:null;
   if(support[path]){
    if(ref===prior)return '100644:'+support[path][1];
    if(ref===oldDev)return '100644:'+support[path][0];
@@ -1141,7 +1144,8 @@ for(const generation of [1,2,3,4,5,6])test('#3889 arbitrary cohort QA restores o
    if(ref===v3Dev)return '100644:'+newestSupport[path];
    if(ref===v4Dev)return '100644:'+v4Support[path];
    if(ref===v5Dev)return '100644:'+v5Support[path];
-   if([dev,candidate].includes(ref))return '100644:'+(generation===6?v6Support[path]:generation===5?v5Support[path]:generation===4?v4Support[path]:generation===3?newestSupport[path]:generation===2?newSupport[path]:support[path][0]);
+   if(ref===v6Dev)return '100644:'+v6Support[path];
+   if([dev,candidate].includes(ref))return '100644:'+(generation===7?v7Support[path]:generation===6?v6Support[path]:generation===5?v5Support[path]:generation===4?v4Support[path]:generation===3?newestSupport[path]:generation===2?newSupport[path]:support[path][0]);
    return null;
   }
   if(path===selectedPath){
@@ -1165,6 +1169,16 @@ for(const generation of [1,2,3,4,5,6])test('#3889 arbitrary cohort QA restores o
  assert.throws(()=>discover({...args,prospectiveBatchPlan:{...p,queue:{items:queue.items.slice(1)}}}),/HOLD/);
  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===candidate&&x===expected[0]?current:read(r,x)}),/HOLD/);
  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===dev&&x===Object.keys(support)[0]?old:read(r,x)}),/HOLD/);
+ if(generation===7){
+  const helper=Object.keys(v7Support)[0];
+  for(const ref of [dev,candidate])for(const path of [helper,addedRegression]){
+   assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===ref&&x===path?old:read(r,x)}),/HOLD/);
+   assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===ref&&x===path?null:read(r,x)}),/HOLD/);
+  }
+  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===v6Dev&&x===addedRegression?regressionBlob:read(r,x)}),/HOLD/);
+  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===v6Dev&&x===helper?old:read(r,x)}),/HOLD/);
+  assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===merges[2]&&x===addedRegression?regressionBlob:read(r,x)}),/HOLD/);
+ }
  if(generation===6){
   for(const path of Object.keys(v6Support).slice(0,2)){
    assert.throws(()=>validate({...proof,sourceObjectAt:(r,x)=>r===dev&&x===path?'100644:'+v5Support[path]:read(r,x)}),/HOLD/);

@@ -297,8 +297,17 @@ const GENERAL_BATCH_SUPPORT_V6=[
  ['tests/preflight-contract.test.mjs','dc947f96e3d3f7efd7f74f8709db5b988791bb71','24518329594e4937675c4c30a0d82c73e2882215'],
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
 ];
+// #3960: independently tested recommendation-context direct-child correction.
+const GENERAL_BATCH_QA_FIX_V7='37d5dae3002490d71580dc5cfa26ff8e4622daf3';
+const GENERAL_BATCH_SUPPORT_V7=[
+ ['tests/helpers/release-published-restoration.mjs','fce0d1efadd78d3dceb453c0a70f385c600bcc43','03ea670669ec6ebd14c23106d55c33aea56d5220'],
+ ['tests/preflight-contract.test.mjs','dc947f96e3d3f7efd7f74f8709db5b988791bb71','dc947f96e3d3f7efd7f74f8709db5b988791bb71'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
+ ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725',null]
+];
 function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V7,prior:GENERAL_BATCH_QA_FIX_V6,support:GENERAL_BATCH_SUPPORT_V7},
   {fix:GENERAL_BATCH_QA_FIX_V6,prior:GENERAL_BATCH_QA_FIX_V5,support:GENERAL_BATCH_SUPPORT_V6},
   {fix:GENERAL_BATCH_QA_FIX_V5,prior:GENERAL_BATCH_QA_FIX_V4,support:GENERAL_BATCH_SUPPORT_V5},
   {fix:GENERAL_BATCH_QA_FIX_V4,prior:GENERAL_BATCH_QA_FIX_V3,support:GENERAL_BATCH_SUPPORT_V4},
@@ -309,7 +318,7 @@ function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const matched=generations.filter(g=>g.support.every(([path,blob,prior])=>
   sourceObjectAt(developmentSourceSha,path)==='100644:'+blob&&
   sourceObjectAt(g.fix,path)==='100644:'+blob&&
-  sourceObjectAt(g.prior,path)==='100644:'+prior));
+  sourceObjectAt(g.prior,path)===(prior===null?null:'100644:'+prior)));
  if(matched.length!==1)throw Error('Prospective generalized batch QA restoration HOLD: exact reviewed QA generation missing or mixed');
  return matched[0];
 }
