@@ -403,7 +403,7 @@ test('#3889 exact direct-child amendments and selected published guards reject f
 // another hosted candidate build. This frozen failure remains historical
 // evidence, not a five-job success or a certification.
 test('#3889 22-addition frozen source proves exact mixed published SQL support and all selected paths',async()=>{
- const {reviewedPublishedSqlSupport:support}=await import('./helpers/release-published-restoration.mjs');
+ const {reviewedPublishedSqlSupport:support,reviewedAlreadyPublishedAmendedQa:amended}=await import('./helpers/release-published-restoration.mjs');
  const frozen='a2ee7680879b34aeb4ef91cb71fdc5f40a659cb8';
  const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:8000000,timeout:30000});
  const ref=r=>r==='HEAD'?frozen:r;
@@ -432,6 +432,22 @@ test('#3889 22-addition frozen source proves exact mixed published SQL support a
   assert.equal(support({...opts,sourceObjectAt:(ref,p)=>ref===r&&p===runner?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}),false);
  for(const path of ['site/cloud/main.js','supabase/tests/pending_coffee_null_guards.sql','.github/workflows/dic-isolated-sql.yml'])
   assert.equal(support({...opts,path,sourceObjectAt:()=> '100644:'+'f'.repeat(40)}),false);
+ const fixture='supabase/tests/pending_coffee_null_guards.sql';
+ const introduction='af0537cc8313328269eca4f92a5e4439bf84848b';
+ const amendment='19b06f1a890ac26c9f8b9f13ce6c3a4634c85615';
+ const fixOpts={path:fixture,merges:[introduction,amendment],pub,dev,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt};
+ assert.equal(sourceObjectAt(introduction+'^',fixture),null);
+ assert.equal(sourceObjectAt(introduction,fixture),'100644:bb1ec0f354cb6ed9cad5353de68d4865c9fdcabf');
+ assert.equal(sourceObjectAt(pub,fixture),'100644:be4ea6842ab2dd8c4eaf364c68f98613eb6424b0');
+ assert.equal(amended(fixOpts),true);
+ assert.equal(amended({...fixOpts,path:'supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql'}),false);
+ assert.equal(amended({...fixOpts,merges:[amendment,introduction]}),false);
+ for(const r of [pub,introduction+'^'])assert.equal(amended({...fixOpts,sourceObjectAt:(ref,p)=>ref===r&&p===fixture?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}),false);
+ for(const r of [dev,'HEAD',amendment,introduction,amendment+'^'])
+  assert.throws(()=>amended({...fixOpts,sourceObjectAt:(ref,p)=>ref===r&&p===fixture?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}));
+ assert.throws(()=>amended({...fixOpts,readParents:()=>[pub]}));
+ assert.throws(()=>amended({...fixOpts,isAncestor:()=>false}));
+ assert.throws(()=>amended({...fixOpts,firstParentChangedPaths:()=>[]}));
  const paths=verifyGeneralProspectiveBatchReadyTestScope({manifest,queue,branch:'refs/heads/'+manifest.candidate_branch,
   commitParent:readParents(frozen)[0],readGitText,sourceObjectAt,readParents,isAncestor,firstParentChangedPaths,firstParentPatch});
  for(const path of [runner,'supabase/tests/pending_coffee_null_guards.sql','tests/issue455-local-success-physical-bounds.test.mjs','site/cloud/main.js'])

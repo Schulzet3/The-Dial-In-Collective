@@ -327,8 +327,8 @@ export function verifySelectedOnlyQaReplay({path,merges,publishedRef,liveRef,rea
  let selected=exact(publishedRef,published);
  for(const merge of merges){
   const before=sourceObjectAt(merge+'^',path),after=sourceObjectAt(merge,path);
-  assert.equal(before?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
-  assert.equal(after?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
+  assert.equal(before?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch: '+path+' at '+merge);
+  assert.equal(after?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch: '+path+' at '+merge);
   selected=replayQaExactTextPatch({path,selected,before:exact(merge+'^',before),after:exact(merge,after),
    patch:firstParentPatch(merge,path),beforeObject:before,afterObject:after});
  }
@@ -396,6 +396,31 @@ export function reviewedPublishedSelectedGuard({path,merges,pub,dev,mainSelected
  assert.equal(sourceObjectAt('HEAD',path),pair[1]);
  if(allRetained)assert.equal(sourceObjectAt(priorCandidate,path),pair[1]);
  else assert.equal(sourceObjectAt(dev,path),pair[1]);
+ return true;
+}
+
+// A reviewed direct-child amendment can already be published even though its
+// dedicated selected fixture was first introduced after the historical parent.
+// Bind the actual introduction, sole direct child and final published bytes;
+// no assertion is excluded and no runtime/workflow path can use this rule.
+export function reviewedAlreadyPublishedAmendedQa({path,merges,pub,dev,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
+ if(!/^(?:tests|supabase\/tests)\//.test(path)||merges.length!==2)return false;
+ const entry=REVIEWED_AMENDMENTS.find(x=>x.parent===merges[0]&&x.merge===merges[1]&&Object.hasOwn(x.objects,path));
+ if(!entry||sourceObjectAt(entry.parent+'^',path)!==null)return false;
+ const object=entry.objects[path];
+ if(sourceObjectAt(pub,path)!==object)return false;
+ assert.deepEqual(readParents(entry.merge),[entry.parent]);
+ assert.equal(isAncestor(entry.merge,dev),true);
+ assert.ok(firstParentChangedPaths(entry.parent).includes(path));
+ assert.ok(firstParentChangedPaths(entry.merge).includes(path));
+ const introduced=sourceObjectAt(entry.parent,path);
+ assert.ok(fileObject.test(introduced||''));
+ assert.equal(introduced.slice(0,6),object.slice(0,6));
+ assert.notEqual(introduced,object);
+ assert.equal(sourceObjectAt(entry.merge+'^',path),introduced);
+ assert.equal(sourceObjectAt(entry.merge,path),object);
+ assert.equal(sourceObjectAt(dev,path),object);
+ assert.equal(sourceObjectAt('HEAD',path),object);
  return true;
 }
 
@@ -594,7 +619,10 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}))continue;
   if(discontinuous){
    assert.equal(sourceObjectAt(dev,path),previous,'unreviewed selected tip: '+path);
-   verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,
+   const publishedAmendment=!allRetained&&list.every(x=>!x.retained&&x.id===list[0].id)&&
+    reviewedAlreadyPublishedAmendedQa({path,merges:orderedMerges,pub,dev,
+     readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
+   if(!publishedAmendment)verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,
     readGitText,sourceObjectAt,firstParentPatch});
   }
   if(workflow){
