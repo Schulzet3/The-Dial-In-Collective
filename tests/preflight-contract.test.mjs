@@ -495,3 +495,34 @@ test('#3889 stale-family independent QA binds both historical migrations and eve
  ])assert.throws(()=>review({...opts,...bad}));
  assert.equal(review({...opts,row:{...row,id:'DIC-Q-509-other'}}),null);
 });
+
+
+test('#3889 exact independent historical CI metadata replay preserves every other queue byte',async()=>{
+ const {reviewedHistoricalQaReceiptQueue}=await import('./helpers/release-published-restoration.mjs');
+ const ref='3661913e21808ebb4205e8c804c2bb231b2ad41a';
+ const prior='7ad87165296f638d87638c1120527e30fdac82ba';
+ const path='docs/RELEASE_QUEUE.json';
+ const readGitText=(sha,p)=>execFileSync('git',['show',sha+':'+p],{encoding:'utf8',maxBuffer:4000000,timeout:20000});
+ const raw=readGitText(ref,path),value=JSON.parse(raw);
+ const sourceObjectAt=(sha,p)=>'100644:'+execFileSync('git',['rev-parse',sha+':'+p],{encoding:'utf8',timeout:15000}).trim();
+ assert.equal(sourceObjectAt(ref,path),'100644:af0266a5cb9e56394bf976383adeda9b47653b38');
+ const id='DIC-Q-509-stale-family-statistics-reconcile';
+ const options={parent:{raw,value},added:[id],previousCandidate:prior,readGitText,sourceObjectAt};
+ const corrected=reviewedHistoricalQaReceiptQueue(options);
+ const expected=structuredClone(value);
+ const removed=[["DIC-Q-509-admin-normalized-identity",[44405688303,44406406046,44406406174]],["DIC-Q-509-source-path-case-guard-20261115",[43715405733]],["DIC-Q-509-confirm-coffee-null-name",[44289071815,44289071927,44289525218,44290199558]],["DIC-Q-33-r347-original299-directions-source",[44685623135,44686742250]],["DIC-Q-509-admin-push-lazy-vault-poll",[44740390567,44741312173]],["DIC-Q-455-r444-pending-shot-form-lock",[45029642249]]];
+ for(const [id,ids] of removed){
+  const row=expected.items.find(x=>x.id===id);
+  row.ci_runs=row.ci_runs.filter(run=>!ids.includes(run));
+ }
+ expected.items.find(x=>x.id===id).ci_runs.unshift(44519926449,44519926537,44519926388,44519926461);
+ assert.deepEqual(corrected,expected);
+ assert.equal(JSON.stringify(value,null,2)+'\n',raw);
+ assert.equal(reviewedHistoricalQaReceiptQueue({...options,added:['other']}),null);
+ assert.equal(reviewedHistoricalQaReceiptQueue({...options,parent:{raw:raw+' ',value}}),null);
+ assert.throws(()=>reviewedHistoricalQaReceiptQueue({...options,previousCandidate:ref}));
+ assert.throws(()=>reviewedHistoricalQaReceiptQueue({...options,sourceObjectAt:()=>null}));
+ assert.throws(()=>reviewedHistoricalQaReceiptQueue({...options,readGitText:()=>raw+' '}));
+ const changed=structuredClone(value);changed.items.find(x=>x.id===id).ci_runs.push(999);
+ assert.throws(()=>reviewedHistoricalQaReceiptQueue({...options,parent:{raw,value:changed}}));
+});

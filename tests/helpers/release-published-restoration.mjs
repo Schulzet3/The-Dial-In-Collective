@@ -503,6 +503,85 @@ export function reviewedStaleFamilyQa({row,dev,pub,retained=false,priorCandidate
  return {byPath,publishedFixtures:FAMILY_PATHS.slice(2,5)};
 }
 
+// #3889 independent receipt-only QA replay: never trust main's plan or a
+// manifest-provided removal list. Exact frozen READY51 queue and previous
+// certificate are independently bound. No source, test, blocker or state
+// is changed here; the caller still performs every selected-source proof.
+const RECEIPT_Q51='af0266a5cb9e56394bf976383adeda9b47653b38';
+const RECEIPT_C51='7ad87165296f638d87638c1120527e30fdac82ba';
+const RECEIPT_FAMILY='DIC-Q-509-stale-family-statistics-reconcile';
+const RECEIPT_REMOVALS=[
+  [
+    "DIC-Q-509-admin-normalized-identity",
+    [
+      44405688303,
+      44406406046,
+      44406406174
+    ]
+  ],
+  [
+    "DIC-Q-509-source-path-case-guard-20261115",
+    [
+      43715405733
+    ]
+  ],
+  [
+    "DIC-Q-509-confirm-coffee-null-name",
+    [
+      44289071815,
+      44289071927,
+      44289525218,
+      44290199558
+    ]
+  ],
+  [
+    "DIC-Q-33-r347-original299-directions-source",
+    [
+      44685623135,
+      44686742250
+    ]
+  ],
+  [
+    "DIC-Q-509-admin-push-lazy-vault-poll",
+    [
+      44740390567,
+      44741312173
+    ]
+  ],
+  [
+    "DIC-Q-455-r444-pending-shot-form-lock",
+    [
+      45029642249
+    ]
+  ]
+];
+export function reviewedHistoricalQaReceiptQueue({parent,added,previousCandidate,readGitText,sourceObjectAt}={}){
+ if(!added?.includes(RECEIPT_FAMILY)||blobOfText(parent.raw)!=='100644:'+RECEIPT_Q51)return null;
+ assert.equal(previousCandidate,RECEIPT_C51,'historical receipt correction requires exact READY51 certificate');
+ assert.equal(parent.raw,JSON.stringify(parent.value,null,2)+'\n');
+ const old=exactGitJSON(previousCandidate,QUEUE_PATH,readGitText,sourceObjectAt);
+ assert.equal(old.raw,parent.raw,'historical queue differs from frozen READY51 bytes');
+ const corrected=structuredClone(parent.value);
+ for(const [id,remove] of RECEIPT_REMOVALS){
+  const rows=corrected.items.filter(x=>x.id===id);
+  assert.equal(rows.length,1);
+  const row=rows[0];
+  assert.equal(row.state,'READY');
+  assert.equal(new Set(row.ci_runs).size,row.ci_runs.length);
+  for(const run of remove)assert.ok(row.ci_runs.includes(run),'missing exact archived receipt '+run);
+  row.ci_runs=row.ci_runs.filter(run=>!remove.includes(run));
+  assert.ok(row.ci_runs.length,'retained successful refs required');
+ }
+ const rows=corrected.items.filter(x=>x.id===RECEIPT_FAMILY);
+ assert.equal(rows.length,1);
+ const family=rows[0];
+ assert.equal(family.state,'TESTING');
+ assert.equal(family.merged_source_sha,'1def2c9d6573297c406192b413ffc3e7620ffe7a');
+ assert.deepEqual(family.ci_runs,[44526403238,44526403147,44526403127,44526403259]);
+ family.ci_runs.unshift(44519926449,44519926537,44519926388,44519926461);
+ return corrected;
+}
+
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
  readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
@@ -566,7 +645,8 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  const selected=[...added,...retained];
  assert.equal(new Set(selected).size,selected.length);
  assert.deepEqual(m.selected_ready_item_ids,[...selected].sort());
- const expected=structuredClone(parent.value);
+ const receiptCert=retained.length?exactGitJSON(dev,CERT_PATH,readGitText,sourceObjectAt).value:null;
+ const expected=reviewedHistoricalQaReceiptQueue({parent,added,previousCandidate:receiptCert?.candidate_sha,readGitText,sourceObjectAt})||structuredClone(parent.value);
  for(const id of added){
   const row=expected.items.find(x=>x.id===id),original=baseRows.get(id);
   assert.ok(row&&original&&row.state==='TESTING');
@@ -595,7 +675,7 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  // continuous published-to-live source chain, including tests and workflows.
  let previousCandidate=null;
  if(retained.length){
-  const cert=exactGitJSON(dev,CERT_PATH,readGitText,sourceObjectAt).value;
+  const cert=receiptCert;
   assert.equal(cert.kind,'DIC-PREVALIDATED-READY-BATCH-1');
   assert.match(cert.candidate_sha||'',SHA);
   assert.match(cert.ready_selection_sha256||'',hex64);
