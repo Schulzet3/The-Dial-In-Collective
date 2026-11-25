@@ -337,6 +337,67 @@ export function verifySelectedOnlyQaReplay({path,merges,publishedRef,liveRef,rea
  return true;
 }
 
+// The original merge retains its full ownership. These independently reviewed
+// direct-child corrections extend only its existing paths, never another row.
+const REVIEWED_AMENDMENTS=[
+ {id:'DIC-Q-455-r411-nonpersonal-starting-yield-boundary',
+  parent:'3945a7353dadf81e7702170dde58cb95241e5782',merge:'0e377d1037d22518e7f42bc3935cb1c2d76f000b',
+  objects:{'site/lib/engine.js':'100644:bdec2d5c00783cc0394667cae112e9a0ad9f2c98',
+   'tests/issue455-r411-nonpersonal-prior-yield-boundary.test.mjs':'100644:76ef54b0e6afa2ae48ffc194561e4f5e57f1d2fc'}},
+ {id:'DIC-Q-509-pending-coffee-null-flags',
+  parent:'af0537cc8313328269eca4f92a5e4439bf84848b',merge:'19b06f1a890ac26c9f8b9f13ce6c3a4634c85615',
+  objects:{'supabase/tests/pending_coffee_null_guards.sql':'100644:be4ea6842ab2dd8c4eaf364c68f98613eb6424b0'}}
+];
+export function reviewedSelectedQaAmendment({row,dev,initialPaths,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
+ const entry=REVIEWED_AMENDMENTS.find(x=>x.id===row.id&&x.parent===row.merged_source_sha);
+ if(!entry)return null;
+ assert.equal(typeof readParents,'function');
+ assert.deepEqual(readParents(entry.merge),[entry.parent],'selected amendment is not the exact sole direct child');
+ assert.equal(isAncestor(entry.merge,dev),true);
+ const paths=firstParentChangedPaths(entry.merge).filter(p=>!p.startsWith('docs/')).sort();
+ assert.deepEqual(paths,Object.keys(entry.objects).sort());
+ for(const path of paths){
+  assert.ok(initialPaths.includes(path),'amendment cannot add unowned paths');
+  assert.equal(sourceObjectAt(entry.merge,path),entry.objects[path]);
+  assert.notEqual(sourceObjectAt(entry.parent,path),entry.objects[path]);
+ }
+ return {merge:entry.merge,paths};
+}
+
+// These exact published test blobs preserve the selected assertions under
+// the #3781 admission guard. The guard must NOT skip a selected main.js.
+// Require independent historical continuity and candidate/published parity.
+const GUARD_COMMIT='e85780b670f9d89328fdf46ba035b9d81205bb18';
+const GUARD_PARENT='c7bb311b92a64271fe22ed29a80deb62d77b8475';
+const GUARD_OBJECTS={
+ 'tests/cloud-shot-rating-focus.test.mjs':['100644:590cf96c2f1e2bf216ba7f76fac2f21090fec5b6','100644:3a55870c51fb5c422f3f06e257bc54065491e894'],
+ 'tests/cloud-draft-recommendation-context.test.mjs':['100644:256646aa00684386e2af1efdc3b5d036c7d5fca3','100644:2f945becd412b964e43094c9951f28711fb9cc6a']
+};
+export function reviewedPublishedSelectedGuard({path,merges,pub,dev,mainSelected,allRetained=false,priorCandidate,
+ readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
+ const pair=GUARD_OBJECTS[path];
+ if(!pair||!mainSelected||!merges.length||sourceObjectAt(merges.at(-1),path)!==pair[0])return false;
+ assert.equal(typeof readParents,'function');
+ assert.deepEqual(readParents(GUARD_COMMIT),[GUARD_PARENT]);
+ assert.equal(isAncestor(GUARD_COMMIT,dev),true);
+ assert.ok(firstParentChangedPaths(GUARD_COMMIT).includes(path));
+ assert.equal(sourceObjectAt(GUARD_PARENT,path),pair[0]);
+ assert.equal(sourceObjectAt(GUARD_COMMIT,path),pair[1]);
+ let previous=sourceObjectAt(merges[0]+'^',path);
+ for(const merge of merges){
+  assert.equal(sourceObjectAt(merge+'^',path),previous,'selected shared test chronology is discontinuous');
+  const next=sourceObjectAt(merge,path);
+  assert.ok(fileObject.test(next||'')&&next!==previous);
+  previous=next;
+ }
+ assert.equal(previous,pair[0]);
+ assert.equal(sourceObjectAt(pub,path),pair[1]);
+ assert.equal(sourceObjectAt('HEAD',path),pair[1]);
+ if(allRetained)assert.equal(sourceObjectAt(priorCandidate,path),pair[1]);
+ else assert.equal(sourceObjectAt(dev,path),pair[1]);
+ return true;
+}
+
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
  readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
@@ -460,6 +521,7 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   // parent path is protected, not just the queue's deployable path inventory.
   const paths=sortedUnique(changes.filter(path=>!path.startsWith('docs/')));
   assert.ok(paths.length&&row.scope_paths.every(path=>paths.includes(path)));
+  const amendment=reviewedSelectedQaAmendment({row,dev,initialPaths:paths,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
   for(const path of paths){
    // Release candidates must preserve published workflow bytes, even for a
    // selected historical specialist's workflow. Its first-parent and live
@@ -470,7 +532,9 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
      'selected workflow lacks exclusive published restoration: '+path);
    }else assert.ok(!excluded.has(path),'selected source/test/workflow excluded: '+path);
    const list=owners.get(path)||[];
-   list.push({id,merge,retained:retained.includes(id)});owners.set(path,list);
+   list.push({id,merge,retained:retained.includes(id)});
+   if(amendment?.paths.includes(path))list.push({id,merge:amendment.merge,retained:retained.includes(id)});
+   owners.set(path,list);
   }
  }
  for(const row of parent.value.items){
@@ -517,6 +581,9 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    orderedMerges.push(x.merge);
    previous=after;
   }
+  if(reviewedPublishedSelectedGuard({path,merges:orderedMerges,pub,dev,
+   mainSelected:owners.has('site/cloud/main.js'),allRetained,priorCandidate:previousCandidate,
+   readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}))continue;
   if(discontinuous){
    assert.equal(sourceObjectAt(dev,path),previous,'unreviewed selected tip: '+path);
    verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,

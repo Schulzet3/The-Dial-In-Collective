@@ -353,3 +353,47 @@ test('#3889 selected-only QA replay reproduces exact main.js with all 13 histori
   {sourceObjectAt:(ref,p)=>ref===liveRef?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}
  ])assert.throws(()=>verify({...opts,...bad}));
 });
+
+
+test('#3889 exact direct-child amendments and selected published guards reject forged source',async()=>{
+ const {reviewedSelectedQaAmendment:amend,reviewedPublishedSelectedGuard:guard}=await import('./helpers/release-published-restoration.mjs');
+ const dev='c4b3f2c10d54a4790cc0cd0b2b3b190dc46e501a',pub='2d22d448160d428a977f06482323646b92818fcf';
+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:4000000,timeout:20000});
+ const sourceObjectAt=(ref,path)=>{
+  const lines=git('ls-tree','-z',ref==='HEAD'?dev:ref,'--',path).split('\0').filter(Boolean);
+  if(!lines.length)return null;
+  assert.equal(lines.length,1);
+  const m=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(lines[0]);
+  assert.ok(m&&m[3]===path);return m[1]+':'+m[2];
+ };
+ const readParents=sha=>git('rev-list','--parents','-n','1',sha).trim().split(/\s+/).slice(1);
+ const isAncestor=(a,b)=>{try{git('merge-base','--is-ancestor',a,b);return true;}
+  catch(e){if(e.status===1)return false;throw e;}};
+ const firstParentChangedPaths=sha=>git('diff','--name-only','--no-renames',sha+'^',sha).split(/\r?\n/).filter(Boolean);
+ const common={dev,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt};
+ for(const [id,merge] of [
+  ['DIC-Q-455-r411-nonpersonal-starting-yield-boundary','3945a7353dadf81e7702170dde58cb95241e5782'],
+  ['DIC-Q-509-pending-coffee-null-flags','af0537cc8313328269eca4f92a5e4439bf84848b']
+ ]){
+  const opts={...common,row:{id,merged_source_sha:merge},initialPaths:firstParentChangedPaths(merge).filter(p=>!p.startsWith('docs/'))};
+  const result=amend(opts);assert.ok(result?.paths.length);
+  for(const bad of [{readParents:()=>['f'.repeat(40)]},{isAncestor:()=>false},
+   {initialPaths:[]},{firstParentChangedPaths:()=>['site/cloud/client.js']},
+   {sourceObjectAt:(r,p)=>r===result.merge?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)}])
+   assert.throws(()=>amend({...opts,...bad}));
+  assert.equal(amend({...opts,row:{id:'unselected',merged_source_sha:merge}}),null);
+ }
+ for(const [path,merges] of [
+  ['tests/cloud-shot-rating-focus.test.mjs',['893a83491956fe58e2472aecd783c262f1e20874','c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99']],
+  ['tests/cloud-draft-recommendation-context.test.mjs',['bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9','52a506aff7c59018b07be0ffa8e90758aa9d3376','d0d28c9dff4114651fd872f0da7cd0747d065fea','d8f247aa63754adb52d9e8f9994f1821f46bcadc']]
+ ]){
+  const opts={...common,path,merges,pub,mainSelected:true};
+  assert.equal(guard(opts),true);
+  assert.equal(guard({...opts,mainSelected:false}),false);
+  assert.equal(guard({...opts,merges:merges.slice(0,-1)}),false);
+  for(const bad of [{readParents:()=>[]},{isAncestor:()=>false},
+   {sourceObjectAt:(r,p)=>r==='HEAD'&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)},
+   {sourceObjectAt:(r,p)=>r===pub&&p===path?'100644:'+'f'.repeat(40):sourceObjectAt(r,p)}])
+   assert.throws(()=>guard({...opts,...bad}));
+ }
+});
