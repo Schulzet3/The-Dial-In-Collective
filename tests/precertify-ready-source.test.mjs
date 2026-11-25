@@ -349,3 +349,20 @@ test('#3889 cheap independent prospective QA gate fails closed before receipt',(
  const source=readFileSync(new URL('../scripts/release/precertify-ready-source.mjs',import.meta.url),'utf8');
  assert.ok(source.indexOf('if(prospectiveReadyItemIds!==null)assertProspectiveCandidateQaScope')<source.indexOf('if(receipt)return candidateTreeReceipt'));
 });
+
+
+test('#3889 prospective publisher audit input is exact, read-only and fail-closed',async()=>{
+ const {validateProspectivePublisherAuditInput:validate}=await import('../scripts/release/verify-certified-ready-evidence.mjs');
+ const input={schema_version:1,kind:'DIC-NONPUBLISHING-PROSPECTIVE-PUBLISHER-AUDIT-3889',
+  development_sha:A,preflight_blob:B,candidate_sha:C,candidate_branch:'release-candidates/prospectbatch3889-'+'a'.repeat(20),
+  candidate_queue_blob:B,run_ids:[1,2,3,4],publication_authorized:false};
+ assert.equal(validate(input,A),true);
+ for(const bad of [{publication_authorized:true},{development_sha:B},{candidate_sha:'bad'},{candidate_branch:'release/production'},
+  {candidate_queue_blob:null},{run_ids:[1,1]},{run_ids:[]},{run_ids:[1,2,3,4,5,6]},{run_ids:[0]},{grant:'forbidden'}])
+  assert.throws(()=>validate({...input,...bad},A));
+ assert.throws(()=>validate(input,B));
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ assert.match(workflow,/READ_ONLY_PROSPECTIVE_PUBLISHER_EVIDENCE_SUCCESS/);
+ assert.ok(workflow.includes('test "$(git rev-parse HEAD)" = "$GITHUB_SHA"'));
+ assert.ok(workflow.includes('verify-certified-ready-evidence.mjs "$SOURCE_SHA" "$audit_path"'));
+});
