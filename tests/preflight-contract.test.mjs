@@ -497,8 +497,8 @@ test('#3889 stale-family independent QA binds both historical migrations and eve
 });
 
 
-import {reviewedHistoricalQaReceiptQueue} from './helpers/release-published-restoration.mjs';
-test('#3889 exact independent historical CI metadata replay preserves every other queue byte',()=>{
+test('#3889 exact independent historical CI metadata replay preserves every other queue byte',async()=>{
+ const {reviewedHistoricalQaReceiptQueue}=await import('./helpers/release-published-restoration.mjs');
  const ref='3661913e21808ebb4205e8c804c2bb231b2ad41a';
  const prior='7ad87165296f638d87638c1120527e30fdac82ba';
  const path='docs/RELEASE_QUEUE.json';
