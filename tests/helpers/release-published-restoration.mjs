@@ -266,8 +266,79 @@ function exactGitJSON(ref,path,readGitText,sourceObjectAt){
  assert.equal(sourceObjectAt(ref,path),blobOfText(raw),'independent Git JSON blob mismatch '+path);
  return {raw,value:JSON.parse(raw)};
 }
+// Independent QA verification: reconstruct selected first-parent patches from
+// actual Git objects. No main receipt/manifest-provided patch or blob accepted.
+function replayQaExactTextPatch({before,after,selected,patch,path,beforeObject,afterObject}){
+ const fail=why=>{throw Error('selected-only replay '+path+': '+why);};
+ const lines=s=>{
+  if(typeof s!=='string'||!s.endsWith('\n')||/[\r\u0000\ufffd]/.test(s))fail('not exact LF text');
+  return s.slice(0,-1).split('\n');
+ };
+ const old=lines(before),wanted=lines(after),current=lines(selected),diff=lines(patch);
+ if(!/^100(?:644|755):[a-f0-9]{40}$/.test(beforeObject||'')||
+    !/^100(?:644|755):[a-f0-9]{40}$/.test(afterObject||'')||
+    beforeObject.slice(0,6)!==afterObject.slice(0,6))fail('unsafe or changed mode');
+ if(diff[0]!=='diff --git a/'+path+' b/'+path||
+    diff[1]!=='index '+beforeObject.slice(7)+'..'+afterObject.slice(7)+' '+beforeObject.slice(0,6)||
+    diff[2]!=='--- a/'+path||diff[3]!=='+++ b/'+path)fail('unbound or unsupported patch header');
+ const historical=old.slice();
+ let i=4,offset=0,oldEnd=0,selectedEnd=0,count=0;
+ const matches=(hay,pos,needle)=>pos>=0&&pos+needle.length<=hay.length&&needle.every((x,j)=>hay[pos+j]===x);
+ while(i<diff.length){
+  const h=/^@@ -([0-9]+)(?:,([0-9]+))? \+([0-9]+)(?:,([0-9]+))? @@(?: .*)?$/.exec(diff[i++]);
+  if(!h)fail('malformed or unsupported hunk header');
+  const start=Number(h[1])-1,oldCount=Number(h[2]??1),newStart=Number(h[3])-1,newCount=Number(h[4]??1);
+  if(![start,oldCount,newStart,newCount].every(Number.isSafeInteger)||
+     start<oldEnd||oldCount<1||newCount<1||newStart!==start+offset)fail('invalid or overlapping hunk positions');
+  const a=[],b=[];let context=0,changes=0;
+  while(i<diff.length&&!diff[i].startsWith('@@ ')){
+   const line=diff[i++],type=line[0],value=line.slice(1);
+   if(type===' '){a.push(value);b.push(value);context++;}
+   else if(type==='-'){a.push(value);changes++;}
+   else if(type==='+'){b.push(value);changes++;}
+   else fail('unsupported or truncated hunk');
+  }
+  if(a.length!==oldCount||b.length!==newCount||!context||!changes||
+     !matches(old,start,a)||!matches(historical,start+offset,a))fail('historical preimage or hunk counts mismatch');
+  historical.splice(start+offset,a.length,...b);
+  offset+=b.length-a.length;oldEnd=start+a.length;
+  let pos=-1;
+  for(let j=0;j<=current.length-a.length;j++)if(matches(current,j,a)){
+   if(pos!==-1)fail('ambiguous selected full context');pos=j;
+  }
+  if(pos<selectedEnd||pos<0)fail('missing or out-of-order selected full context');
+  current.splice(pos,a.length,...b);selectedEnd=pos+b.length;count++;
+ }
+ if(!count||historical.length!==wanted.length||!matches(historical,0,wanted))fail('historical postimage mismatch');
+ return current.join('\n')+'\n';
+}
+
+export function verifySelectedOnlyQaReplay({path,merges,publishedRef,liveRef,readGitText,sourceObjectAt,firstParentPatch}){
+ assert.ok(safePath(path)&&Array.isArray(merges)&&merges.length&&new Set(merges).size===merges.length);
+ assert.ok(merges.every(sha=>SHA.test(sha))&&SHA.test(publishedRef)&&SHA.test(liveRef));
+ assert.equal(typeof firstParentPatch,'function','missing independent first-parent patch reader');
+ const exact=(ref,object)=>{
+  assert.ok(fileObject.test(object||''),'missing independent regular Git object '+path);
+  const value=readGitText(ref,path);
+  assert.equal(blobOfText(value).slice(7),object.slice(7),'independent Git text blob mismatch '+path);
+  return value;
+ };
+ const published=sourceObjectAt(publishedRef,path),live=sourceObjectAt(liveRef,path);
+ let selected=exact(publishedRef,published);
+ for(const merge of merges){
+  const before=sourceObjectAt(merge+'^',path),after=sourceObjectAt(merge,path);
+  assert.equal(before?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
+  assert.equal(after?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
+  selected=replayQaExactTextPatch({path,selected,before:exact(merge+'^',before),after:exact(merge,after),
+   patch:firstParentPatch(merge,path),beforeObject:before,afterObject:after});
+ }
+ assert.equal(live?.slice(0,6),published.slice(0,6));
+ assert.equal(selected,exact(liveRef,live),'selected-only QA replay differs from live bytes '+path);
+ return true;
+}
+
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
- readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents}={}){
+ readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
  if(p===undefined)return false;
  assert.equal(m.schema_version,1);
@@ -433,7 +504,8 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
    sourceObjectAt('HEAD',path)===previous&&
    (!allRetained||sourceObjectAt(previousCandidate,path)===previous);
-  const remaining=[...list];
+  const remaining=[...list],orderedMerges=[];
+  let discontinuous=false;
   while(remaining.length){
    const earliest=remaining.filter(x=>remaining.every(y=>x===y||isAncestor(x.merge,y.merge)===true));
    assert.equal(earliest.length,1,'ambiguous selected merge chronology: '+path);
@@ -441,9 +513,14 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    const before=sourceObjectAt(x.merge+'^',path),after=sourceObjectAt(x.merge,path);
    assert.ok(fileObject.test(after||''),'selected path missing or unsafe: '+path);
    assert.notEqual(before,after,'selected first-parent change missing: '+path);
-   if(!allRetained&&!publishedSupport&&!alreadyPublishedAudit)
-    assert.equal(before,previous,'unselected intervening bytes: '+path);
+   if(!allRetained&&!publishedSupport&&!alreadyPublishedAudit&&before!==previous)discontinuous=true;
+   orderedMerges.push(x.merge);
    previous=after;
+  }
+  if(discontinuous){
+   assert.equal(sourceObjectAt(dev,path),previous,'unreviewed selected tip: '+path);
+   verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,
+    readGitText,sourceObjectAt,firstParentPatch});
   }
   if(workflow){
    // Independent candidate CI is still mandatory on the published workflows.
@@ -477,6 +554,11 @@ function gitObject(ref,path){
 function firstParentPaths(sha){
  return execFileSync('git',['diff','--name-only','--no-renames',sha+'^',sha],{encoding:'utf8',timeout:15000}).split(/\r?\n/).filter(Boolean);
 }
+function gitFirstParentPatch(sha,path){
+ return execFileSync('git',['diff','--no-color','--no-ext-diff','--no-textconv','--no-renames',
+  '--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',
+  sha+'^',sha,'--',path],{encoding:'utf8',timeout:20000,maxBuffer:4000000});
+}
 function gitParents(sha){
  const [commit,...parents]=execFileSync('git',['rev-list','--parents','-n','1',sha],{encoding:'utf8',timeout:15000}).trim().split(/\s+/);
  assert.equal(commit,sha);
@@ -500,7 +582,8 @@ function prospectiveCandidate(){
  if(m.prospective_ready_batch_preview!==undefined){
   if(sameJSON(m.selected_ready_item_ids,[BATCH_R399_ID,PROSPECTIVE_ID]))verifyProspectiveBatchReadyTestScope(opts);
   else generalSelectedPaths=verifyGeneralProspectiveBatchReadyTestScope({...opts,readGitText:gitText,
-   sourceObjectAt:gitObject,firstParentChangedPaths:firstParentPaths,isAncestor:gitAncestor,readParents:gitParents});
+   sourceObjectAt:gitObject,firstParentChangedPaths:firstParentPaths,isAncestor:gitAncestor,readParents:gitParents,
+   firstParentPatch:gitFirstParentPatch});
  }else verifyProspectiveReadyTestScope(opts);
  return prospectiveCache=m;
 }
