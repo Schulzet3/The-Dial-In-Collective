@@ -229,6 +229,11 @@ function proveSharedProspectiveSources({selected,originalReady,liveQueue,
  const proof=new Map(),chains=[];
  for(const [path,owners] of [...byPath.entries()].sort(([a],[b])=>a.localeCompare(b))){
   if(owners.length<2)continue;
+  // Already-certified co-owners do not participate in a NEW prospective
+  // source chain. Their unchanged records and frozen candidate bytes remain
+  // mandatory in staging and independent selected QA verification. A mixed
+  // retained/new path must still HOLD; never treat a new owner as retained.
+  if(owners.every(row=>row.state==='READY'))continue;
   if(owners.some(row=>row.state!=='TESTING')||
      typeof sourceObjectAt!=='function'||typeof isAncestor!=='function'||
      new Set(owners.map(row=>row.merged_source_sha)).size!==owners.length)

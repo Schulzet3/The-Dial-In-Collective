@@ -238,3 +238,22 @@ test('reviewed direct-child source amendments preserve original ownership and re
   assert.throws(()=>review({...opts,...bad}),/HOLD/);
  assert.equal(review({...opts,row:{...opts.row,id:'unselected'}}),null);
 });
+
+
+test('later disjoint expansion retains a previously certified multi-owner cohort without replaying it as new',async()=>{
+ const {proposeDisjointProspectiveReadyBatch:batch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const f=fixture(),old=f.liveQueue.items.slice(1,3),shared='site/cloud/main.js';
+ for(const row of old){row.state='READY';row.blockers=[];row.scope_paths=[shared];}
+ old[0].merged_source_sha=B;old[1].merged_source_sha=C;
+ const before=structuredClone(f.liveQueue);
+ const result=batch({...f,selectedIds:[id]});
+ assert.deepEqual(result.retained_ready_ids,old.map(x=>x.id).sort());
+ assert.deepEqual(result.queue.items.slice(1,3),old);
+ assert.deepEqual(f.liveQueue,before);
+ assert.equal(result.ready_certified,false);
+ assert.equal(result.publication_authorized,false);
+ // A new TESTING owner of the old path is not a retained owner: reject.
+ const mixed=structuredClone(f.liveQueue);mixed.items[0].scope_paths=[shared];
+ const base=structuredClone(f.baselineQueue);base.items[0].scope_paths=[shared];
+ assert.throws(()=>batch({...f,liveQueue:mixed,baselineQueue:base,selectedIds:[id],firstParentChangedPaths:()=>[shared]}),/HOLD/);
+});
