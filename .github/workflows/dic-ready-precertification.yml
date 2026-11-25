@@ -17,6 +17,7 @@ on:
       - 'scripts/release/ready-evidence-gate.mjs'
       - 'scripts/release/verify-certified-ready-evidence.mjs'
       - 'docs/workstreams/issue-3889-prospective-input.json'
+      - 'docs/workstreams/issue-3889-prospective-publisher-audit.json'
   workflow_run:
     workflows: ['DIC approval, implementation and continuity contract']
     types: [completed]
@@ -166,11 +167,20 @@ jobs:
           EVENT: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before || '' }}
           SOURCE_SHA: ${{ steps.source.outputs.development_sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p qa_artifacts/ready-source
           plan_path='docs/workstreams/issue-3889-prospective-input.json'
           prospective_arg=''
+          audit_path='docs/workstreams/issue-3889-prospective-publisher-audit.json'
+          if [ "$EVENT" = 'push' ] && [ "$(git diff --name-only "$PUSH_BEFORE" "$GITHUB_SHA" -- "$audit_path")" = "$audit_path" ]; then
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            audit_stdout="$(node scripts/release/verify-certified-ready-evidence.mjs "$SOURCE_SHA" "$audit_path")"
+            printf '%s\n' "$audit_stdout" | sed -n 's/^\[DIC nonpublishing publisher parity\] //p' > qa_artifacts/ready-source/receipt.json
+            node -e "const r=JSON.parse(require('node:fs').readFileSync('qa_artifacts/ready-source/receipt.json','utf8')); if(r.status!=='READ_ONLY_PROSPECTIVE_PUBLISHER_EVIDENCE_SUCCESS'||r.count<1||!Array.isArray(r.verified_ids)||r.verified_ids.length!==r.count)process.exit(2)"
+            exit 0
+          fi
           # A new exact pinned input is consumed only on its main push, never
           # on schedules, unrelated pushes or workflow_run. No ref or queue write.
           if [ "$EVENT" = 'push' ]; then
