@@ -197,3 +197,9 @@ test('#3889 malformed prospective plan or partial selection cannot enter frozen 
   assert.match(forged.errors.join(' '),/Exact all-selected/);
  }
 });
+
+test('#3889 nonpublishing certified-source verifier denies missing or invalid immutable anchor',async()=>{
+ const {verifyCertifiedReadyEvidence}=await import('../scripts/release/verify-certified-ready-evidence.mjs');
+ for(const developmentSha of [undefined,'main','not-a-sha'])
+  await assert.rejects(verifyCertifiedReadyEvidence({developmentSha}),/Exact live development SHA required/);
+});

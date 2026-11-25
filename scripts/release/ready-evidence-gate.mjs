@@ -103,7 +103,7 @@ export function reviewedSelectedReadyOverlaps(items,{
 export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObjectAt,
  mergeChangedPaths,currentSourceSha,publishedSourceSha,candidateSha,candidateChangedPaths,
  allowedPinnedPaths=[],isAncestor,frozenCandidateRunIds=[],frozenCandidateBranch,
- prospectiveBatchPlan=null}={}){
+ prospectiveBatchPlan=null,repoDir=process.cwd()}={}){
  const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={},testPathsByItem={};
  if(!Array.isArray(items)||typeof loadRun!=='function'||typeof loadChecks!=='function'||
   typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
@@ -116,7 +116,7 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
     canonical(queue.items.filter(i=>i.state==='READY').sort((a,b)=>a.id.localeCompare(b.id))))
     throw Error('Exact all-selected frozen candidate and CI receipt required');
    if(items.length>2)selectedQaProof=proveGeneralFrozenQa({candidateSha,candidateBranch:frozenCandidateBranch,
-    publishedSourceSha,queue,prospectiveBatchPlan});
+    publishedSourceSha,queue,prospectiveBatchPlan,repoDir});
   }catch(e){return {ready:false,errors:[...errors,String(e.message||e)],verified};}
  }
  const runCache=new Map(),checkCache=new Map();

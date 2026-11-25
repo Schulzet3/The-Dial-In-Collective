@@ -65,6 +65,8 @@ jobs:
           node --check scripts/release/release-queue.mjs
           node --check scripts/release/ready-only-candidate.mjs
           node --check scripts/release/ready-evidence-gate.mjs
+          node --check scripts/release/verified-prospective-qa.mjs
+          node --check scripts/release/verify-certified-ready-evidence.mjs
           node --check scripts/release/observe-chat-controller-event.mjs
           node --check scripts/release/stage-ready-only-candidate.mjs
           node --check scripts/release/precertify-ready-source.mjs

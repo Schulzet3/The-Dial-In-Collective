@@ -13,6 +13,9 @@ on:
       - 'scripts/release/precertify-ready-source.mjs'
       - 'scripts/release/stage-ready-only-candidate.mjs'
       - 'scripts/release/ready-only-candidate.mjs'
+      - 'scripts/release/verified-prospective-qa.mjs'
+      - 'scripts/release/ready-evidence-gate.mjs'
+      - 'scripts/release/verify-certified-ready-evidence.mjs'
       - 'docs/workstreams/issue-3889-prospective-input.json'
   workflow_run:
     workflows: ['DIC approval, implementation and continuity contract']
@@ -143,6 +146,20 @@ jobs:
             fi
           fi
           echo "development_sha=$head_sha" >> "$GITHUB_OUTPUT"
+      - name: Reverify existing exact certified candidate with the actual publisher evidence gates (read only)
+        if: steps.source.outputs.development_sha != '' && github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          SOURCE_SHA: ${{ steps.source.outputs.development_sha }}
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only "$PUSH_BEFORE" "$GITHUB_SHA" -- scripts/release/verified-prospective-qa.mjs scripts/release/ready-evidence-gate.mjs scripts/release/verify-certified-ready-evidence.mjs)"
+          if [ -n "$changed" ]; then
+            node scripts/release/verify-certified-ready-evidence.mjs "$SOURCE_SHA"
+          else
+            echo 'Exact frozen publisher evidence audit not requested by this source change'
+          fi
       - name: Prove exact candidate Git tree and print source-bound read-only receipt
         if: steps.source.outputs.development_sha != ''
         env:
