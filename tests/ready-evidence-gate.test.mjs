@@ -181,3 +181,25 @@ test('#3781 frozen READY certificate binds exact selection, base, source, branch
   {queue:{...certifiedQueue,items:[{...item,tests:['changed']}]}}
  ])assert.throws(()=>certifiedFrozenCandidateRuns({...base,...changed}),/certificate|source-bound/);
 });
+
+test('#3889 malformed prospective plan or partial selection cannot enter frozen evidence path',async()=>{
+ const selected=[item,{...item,id:'DIC-Q-1938-second'},{...item,id:'DIC-Q-1938-third'}];
+ const q={...queue,items:selected};
+ const common={...deps,queue:q,items:selected,
+  publishedSourceSha:B,candidateSha:C,frozenCandidateBranch:'release-candidates/prospectbatch3889-'+'a'.repeat(20),
+  frozenCandidateRunIds:[21],prospectiveBatchPlan:{queue:q}};
+ const result=await verifyReadyItems(common);
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/Frozen prospective publisher QA HOLD/);
+ for(const override of [{items:selected.slice(0,2)},{frozenCandidateRunIds:[]}]){
+  const forged=await verifyReadyItems({...common,...override});
+  assert.equal(forged.ready,false);
+  assert.match(forged.errors.join(' '),/Exact all-selected/);
+ }
+});
+
+test('#3889 nonpublishing certified-source verifier denies missing or invalid immutable anchor',async()=>{
+ const {verifyCertifiedReadyEvidence}=await import('../scripts/release/verify-certified-ready-evidence.mjs');
+ for(const developmentSha of [undefined,'main','not-a-sha'])
+  await assert.rejects(verifyCertifiedReadyEvidence({developmentSha}),/Exact live development SHA required/);
+});

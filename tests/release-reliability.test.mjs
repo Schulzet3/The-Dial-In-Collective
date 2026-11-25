@@ -92,3 +92,15 @@ test('#3347 candidate source evidence only accepts exact dual-absent test paths'
   (sha,p)=>p!==path?present:sha===head?'100644:'+'a'.repeat(40):present
  ])assert.equal(assessReadyEvidence(selected,{...cases,sourceObjectAt:f}).ready,false);
 });
+
+test('#3889 forged candidate QA maps cannot replace historical source proof or five checks',()=>{
+ const blob='100644:'+'f'.repeat(40),testPath='tests/selected.test.mjs';
+ const req={mergedSha:S,ciSourceSha:B,changedPaths:item.scope_paths,
+  checks:checks.map(x=>({...x,sha:B})),testPaths:[testPath],sourceObjectAt:()=>blob};
+ assert.equal(assessReadyEvidence(item,req).ready,true);
+ for(const forged of [true,{},Object.freeze({candidateSha:B,objects:{[item.scope_paths[0]]:blob,[testPath]:blob}})]){
+  assert.equal(assessReadyEvidence(item,{...req,selectedQaProof:forged}).ready,false);
+  assert.equal(assessReadyEvidence(item,{...req,ciSourceSha:S,checks,selectedQaProof:forged}).ready,false);
+ }
+ assert.equal(assessReadyEvidence(item,{...req,checks:req.checks.map(x=>x.name==='sql'?{...x,status:'in_progress'}:x)}).ready,false);
+});

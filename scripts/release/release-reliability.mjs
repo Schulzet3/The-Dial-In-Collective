@@ -1,6 +1,7 @@
 // Pure, nonpublishing enforcement helpers: source-bound READY receipts,
 // published-to-candidate risk and canonical GitHub push-run observation.
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {verifiedSelectedCandidatePath} from './verified-prospective-qa.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 export const PRODUCTION_CHECKS=Object.freeze(['approval','validate','cloud-tests','mobile-browser-qa','sql']);
 const RUN_NAME='DIC chat-approved single-use production request';
@@ -24,7 +25,7 @@ function referencedTestPaths(item){
   (x.match(/tests\/[A-Za-z0-9_.\/-]+\.test\.mjs/g)||[]):[]));
 }
 export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],changedPaths=[],
- dependenciesReady=true,sourceObjectAt,testPaths}={}){
+ dependenciesReady=true,sourceObjectAt,testPaths,selectedQaProof=null}={}){
  const errors=[];
  if(item?.state!=='READY')errors.push('item not marked READY');
  if(!SHA.test(item?.merged_source_sha||'')||item.merged_source_sha!==mergedSha)
@@ -43,10 +44,10 @@ export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],change
  const byName=new Map(checks.map(x=>[x?.name,x]));
  for(const name of PRODUCTION_CHECKS){
   const x=byName.get(name);
-  if(!x||x.sha!==tested||x.conclusion!=='success'||x.status==='skipped'||x.status==='pending')
+  if(!x||x.sha!==tested||x.conclusion!=='success'||x.status!=='completed')
    errors.push('missing successful exact-source CI status: '+name);
  }
- if(SHA.test(tested||'')&&tested!==mergedSha){
+ if(SHA.test(tested||'')&&(tested!==mergedSha||selectedQaProof!==null)){
   const checked=unique([...(item?.scope_paths||[]),...(testPaths||referencedTestPaths(item))]);
   if(typeof sourceObjectAt!=='function'||!(testPaths||referencedTestPaths(item)).length)
    errors.push('tested head parity missing verified code/test blob evidence');
@@ -54,6 +55,15 @@ export function assessReadyEvidence(item,{mergedSha,ciSourceSha,checks=[],change
    let a,b;
    try{a=sourceObjectAt(tested,path);b=sourceObjectAt(mergedSha,path);}
    catch{errors.push('unreadable tested head or merged blob: '+path);continue;}
+   // A reviewed prospective cohort is not historical single-merge equality.
+   // The actual immutable candidate, exact row and original per-path ownership
+   // must have an opaque proof from independent Git verification. No fake
+   // object equality or caller-supplied path allowlist can replace it.
+   if(selectedQaProof!==null){
+    if(!verifiedSelectedCandidatePath(selectedQaProof,item,tested,path,a))
+     errors.push('independent frozen selected source proof missing or differs: '+path);
+    continue;
+   }
    // A first-parent-deleted test is exactly absent from BOTH immutable refs.
    // This is parity only for changed test provenance, never an owned runtime path.
    if(a===null&&b===null&&!(item?.scope_paths||[]).includes(path))continue;
@@ -93,7 +103,7 @@ export function validateReleaseTriggerReceipt({requestCommitSha,mainHeadSha,work
 }
 export function preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
  changedPaths,checksByItem={},ciSourceByItem={},sourceObjectAt,dependenciesReadyByItem={},
- allowedPinnedPaths=[],testPathsByItem={}}={}){
+ allowedPinnedPaths=[],testPathsByItem={},selectedQaProof=null}={}){
  const errors=queueSchemaErrors(queue);
  if(!SHA.test(publishedSourceSha||'')||queue?.published_base?.tested_source_sha!==publishedSourceSha)
   errors.push('published source mismatch');
@@ -111,7 +121,7 @@ export function preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha
   const checked=checksByItem[item.id]||[];
   const receipt=assessReadyEvidence(item,{mergedSha:item.merged_source_sha,
    ciSourceSha:ciSourceByItem[item.id],checks:checked,changedPaths:changed,
-   sourceObjectAt,testPaths:testPathsByItem[item.id],
+   sourceObjectAt,testPaths:testPathsByItem[item.id],selectedQaProof,
     dependenciesReady:dependenciesReadyByItem[item.id]!==false});
   errors.push(...receipt.failures.map(x=>item.id+': '+x));
   for(const path of changed){

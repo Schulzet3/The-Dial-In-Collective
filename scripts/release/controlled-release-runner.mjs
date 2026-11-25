@@ -315,7 +315,7 @@ export async function executeSingleUseRelease(settings=process.env){
    if(!match||match[3]!==path)throw Error('Unsafe candidate Git tree entry');
    return match[1]+':'+match[2];
   };
- let queueGate;
+ let queueGate,prospectiveBatchPlan=null;
  if(candidateBranch){
   const manifest=json(git(['show',sha+':'+CANDIDATE_RECEIPT_PATH]),'READY-only source manifest');
   const sourceAnchor=manifest.development_source_sha;
@@ -331,7 +331,7 @@ export async function executeSingleUseRelease(settings=process.env){
   // Replay the immutable prospective TESTING plan from reviewed Git objects,
   // never from a remote candidate manifest. A stale or forged selected source
   // must HOLD before one-use grant/release code can run.
-  const prospectiveBatchPlan=manifest.prospective_ready_batch_preview!==undefined?
+  prospectiveBatchPlan=manifest.prospective_ready_batch_preview!==undefined?
    proposeDisjointProspectiveReadyBatch({
     baselineQueue:json(git(['cat-file','blob',BASELINE_QUEUE_BLOB]),'original 63-item baseline'),
     liveQueue:json(originalQueue,'frozen development queue at candidate parent'),
@@ -402,7 +402,7 @@ export async function executeSingleUseRelease(settings=process.env){
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
   candidateChangedPaths:changedSourcePaths,
   allowedPinnedPaths:queueGate.pinned_ready_paths||[],
-  frozenCandidateRunIds,frozenCandidateBranch:candidateBranch,
+  frozenCandidateRunIds,frozenCandidateBranch:candidateBranch,prospectiveBatchPlan,
   isAncestor:(a,b)=>verifiedGitAncestry(a,b)
  });
  if(!evidence.ready)throw Error('READY live evidence HOLD before claim: '+
