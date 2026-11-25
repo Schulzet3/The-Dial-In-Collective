@@ -132,9 +132,12 @@ test('no subscribed device is skipped rather than generating fabricated push del
  assert.equal(f.sentPush.length,0);
  assert.ok(f.receipts.some(r=>r.p_channel==='push'&&r.p_outcome==='skipped'));
 });
+// These three regressions instantiate only createMemberApprovalBroker with an isolated mock fetcher.
+// Selecting an independent Admin broker must not turn on unselected member fixes.
+// The existing source-bound guard denies N/A for a selected member broker and verifies exact published bytes.
 test('Vault key RPC failure retries only push while independent approval email is sent',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  const f=fixture({vaultStatus:503});
@@ -148,8 +151,8 @@ test('Vault key RPC failure retries only push while independent approval email i
 });
 
 test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  const f=fixture({vaultStatus:503,pushItems:[]});
@@ -177,8 +180,8 @@ test('duplicate cron claim sends no email or push',async()=>{
 });
 
 test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  for(const pushStatus of [404,410]){
