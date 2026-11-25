@@ -268,8 +268,17 @@ const GENERAL_BATCH_SUPPORT_V2=[
  ['tests/preflight-contract.test.mjs','5317e8d96e14a4d1fc4e7b668f13c342f9cb335d','77f41ca1c434271a1100dfc3e27fa18ef110800d'],
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
 ];
+// #3940 independently verified selected-only first-parent QA, exact merged bytes.
+// Historical generations remain independently verifiable; mixed support HOLDS.
+const GENERAL_BATCH_QA_FIX_V3='c4b3f2c10d54a4790cc0cd0b2b3b190dc46e501a';
+const GENERAL_BATCH_SUPPORT_V3=[
+ ['tests/helpers/release-published-restoration.mjs','cdfe549202ef91d917476968de3567a66c6113c2','241d2013e3a0c6473e68c7c738592d71428b6f0a'],
+ ['tests/preflight-contract.test.mjs','13f7b9da15639ce131ce82ef7a6e7e9ea2d26baf','5317e8d96e14a4d1fc4e7b668f13c342f9cb335d'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
+];
 function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V3,prior:GENERAL_BATCH_QA_FIX_V2,support:GENERAL_BATCH_SUPPORT_V3},
   {fix:GENERAL_BATCH_QA_FIX_V2,prior:GENERAL_BATCH_QA_FIX,support:GENERAL_BATCH_SUPPORT_V2},
   {fix:GENERAL_BATCH_QA_FIX,prior:GENERAL_BATCH_PRIOR,support:GENERAL_BATCH_SUPPORT}
  ];
