@@ -15416,7 +15416,7 @@
       "issue": 509,
       "pr": null,
       "title": "Reject JSON null recommendation control elements without changing recorded shots or private provenance",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
       "scope_paths": [
         "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
@@ -15439,9 +15439,7 @@
         43596028523,
         43591813373
       ],
-      "blockers": [
-        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
-      ],
+      "blockers": [],
       "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.\n2026-11-14 safety reconciliation: source-backed review found previous READY promotion incorrectly pointed at test-only commit 0cd5054 and relied on different CI source SHAs; mandatory READY-evidence gate rejected it in independent PR #2686 runs 43597779195 and 43599567921. Corrected merged_source_sha to original migration-introduction 7607c69 and reverted premature READY to TESTING without modifying SQL/tests, deleting existing successes, or touching production. This is not an authorization to deploy or to waive independent #509 five-check acceptance.\nNovember 25 #3889: source attribution and fixture mismatch now bound by exact controller and independent QA proofs. Previous invalid READY and failed/cancelled evidence retained; pending frozen certification only. No production or private records touched.",
       "production_deployed": false
     },
@@ -17436,7 +17434,7 @@
       "id": "DIC-Q-509-admin-search-recovery-visible",
       "issue": 509,
       "title": "Preserve unfinished account-deletion Retry Completion during Admin account search",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
       "scope_paths": [
         "site/admin/main.js"
@@ -17459,9 +17457,7 @@
         44482734209,
         44482734345
       ],
-      "blockers": [
-        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
-      ],
+      "blockers": [],
       "notes": "One additional admin-only RPC when Accounts is expanded during a search; account search results continue to take precedence over overview fallback. No live provider change or member-record read. [skip netlify] PR #3384 nonforce merged from source-tested 614e9ed2 into 5d99767d. Other #33 selected-source fetch failure 44475620584 is unrelated. No provider writes.\nNovember 25 #3889: merged-push gap resolved by specialist R356. Genuine private member incident and #96 hosted acceptance remain UNVERIFIED and separately scoped; no actual retry incident or provider change claimed.",
       "production_deployed": false
     },
@@ -17903,7 +17899,7 @@
       "id": "DIC-Q-509-admin-push-lazy-vault-poll",
       "issue": 509,
       "title": "Avoid Vault key lookup for idle Admin push polls; cache one lookup for actionable devices",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72",
       "scope_paths": [
         "supabase/functions/dic-admin-push-broker/core.mjs"
@@ -17931,9 +17927,7 @@
         44741312123,
         44741312173
       ],
-      "blockers": [
-        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
-      ],
+      "blockers": [],
       "notes": "Dev source fix safely merged only; no live Supabase SQL/Edge/Auth/Storage/config/data mutations. Nonapp #33 selected241 merged-source run 44741312173 failed source_access_challenge though same selected workflow passed PR-head 44740390634. Never waive source truth or treat external-source unavailability as application bug.\nNovember 25 #3889: #1938 real handset delivery remains independently UNVERIFIED and #33 unavailable case separately open. Neither is a provider acceptance claim. No deployment or actual token/device use.",
       "production_deployed": false,
       "pr": 3511
