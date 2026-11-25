@@ -153,3 +153,69 @@ test('co-selected shared TESTING path requires contiguous published-to-live firs
   assert.throws(()=>batch(x),/HOLD/);
  }
 });
+
+
+// #3889 exact first-parent patches may be replayed across deployed-only context,
+// never across absent/ambiguous hunks, extra live changes or false Git objects.
+test('selected-only text replay requires exact historical postimage and unique full context',async()=>{
+ const {replayExactTextPatch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const input={
+  "before": "outside old\nanchor\nvalue old\nend\n",
+  "after": "outside old\nanchor\nvalue new\nend\n",
+  "selected": "published outside\nanchor\nvalue old\nend\n",
+  "patch": "diff --git a/site/cloud/main.js b/site/cloud/main.js\nindex aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb 100644\n--- a/site/cloud/main.js\n+++ b/site/cloud/main.js\n@@ -2,3 +2,3 @@\n anchor\n-value old\n+value new\n end\n",
+  "path": "site/cloud/main.js",
+  "beforeObject": "100644:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "afterObject": "100644:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+};
+ assert.equal(replayExactTextPatch(input),"published outside\nanchor\nvalue new\nend\n");
+ for(const bad of [
+  {...input,selected:input.selected+input.selected},
+  {...input,selected:'missing\n'},
+  {...input,after:input.after+'extra\n'},
+  {...input,patch:input.patch.replace(' end\n','')},
+  {...input,patch:input.patch.replace('@@ -2,3 +2,3','@@ -1,3 +1,3')},
+  {...input,afterObject:'100755:'+input.afterObject.slice(7)},
+  {...input,patch:input.patch.replace('index ','bogus ')}
+ ])assert.throws(()=>replayExactTextPatch(bad),/selected-only replay/);
+});
+
+test('prospective shared replay accepts only exact selected final Git object; no arbitrary source pin',async()=>{
+ const {proposeDisjointProspectiveReadyBatch:batch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const {createHash}=await import('node:crypto');
+ const f=fixture(),second=f.liveQueue.items[1].id,path='site/cloud/main.js';
+ for(const q of [f.baselineQueue,f.liveQueue])for(const row of q.items.slice(0,2))row.scope_paths=[path];
+ const texts={
+  [P]:'published outside\nanchor A\nold A\nend A\nspacer\nanchor B\nold B\nend B\n',
+  [M+'^']:'historical outside\nanchor A\nold A\nend A\nspacer\nanchor B\nold B\nend B\n',
+  [M]:'historical outside\nanchor A\nnew A\nend A\nspacer\nanchor B\nold B\nend B\n',
+  [B+'^']:'published outside\nanchor A\nnew A\nend A\nspacer\nanchor B\nold B\nend B\n',
+  [B]:'published outside\nanchor A\nnew A\nend A\nspacer\nanchor B\nnew B\nend B\n'
+ };
+ texts[A]=texts[B];
+ const object=text=>'100644:'+createHash('sha1').update('blob '+Buffer.byteLength(text)+'\0').update(text).digest('hex');
+ f.firstParentChangedPaths=sha=>[M,B].includes(sha)?[path]:[];
+ f.isAncestor=(sha,tip)=>(sha===M&&[B,A].includes(tip))||(sha===B&&tip===A);
+ f.sourceTextAt=(sha,p)=>p===path?texts[sha]:undefined;
+ f.sourceObjectAt=(sha,p)=>p===path&&texts[sha]?object(texts[sha]):null;
+ f.firstParentPatch=(sha,p)=>{
+  assert.equal(p,path);
+  const tag=sha===M?'A':'B',start=sha===M?2:6;
+  return 'diff --git a/'+path+' b/'+path+'\nindex '+object(texts[sha+'^']).slice(7)+'..'+object(texts[sha]).slice(7)+' 100644\n--- a/'+path+'\n+++ b/'+path+'\n@@ -'+start+',3 +'+start+',3 @@\n anchor '+tag+'\n-old '+tag+'\n+new '+tag+'\n end '+tag+'\n';
+ };
+ const input={...f,selectedIds:[id,second]};
+ const before=structuredClone(f.liveQueue),result=batch(input);
+ assert.equal(result.shared_source_chains[0].selected_only_replay,true);
+ assert.equal(result.ready_certified,false);
+ assert.equal(result.publication_authorized,false);
+ assert.deepEqual(f.liveQueue,before);
+ assert.equal(batch({...input,selectedIds:[second,id]}).identity_sha256,result.identity_sha256);
+ for(const changed of [
+  {sourceTextAt:undefined},
+  {sourceTextAt:(sha,p)=>sha===M?texts[M]+'forged\n':f.sourceTextAt(sha,p)},
+  {firstParentPatch:(sha,p)=>f.firstParentPatch(sha,p).replace(' end A\n','')},
+  {sourceObjectAt:(sha,p)=>sha===A?object(texts[A]+'unselected\n'):f.sourceObjectAt(sha,p)},
+  {sourceTextAt:(sha,p)=>sha===P?texts[P]+texts[P]:f.sourceTextAt(sha,p)},
+  {liveQueue:{...f.liveQueue,items:f.liveQueue.items.map((row,i)=>i===3?{...row,scope_paths:[path]}:row)}}
+ ])assert.throws(()=>batch({...input,...changed}),/HOLD/);
+});
