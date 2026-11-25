@@ -184,3 +184,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=09c45de5063e1d743ce497aea2557974c86f52ca 
   - DIC-Q-509-calibration-order-fallback
   - DIC-Q-509-pending-coffee-null-flags
   - DIC-Q-509-shot-timestamp-determinism
+
+
+## Nov 25 UTC #3889 — exact R347/R406 source receipts, TESTING only [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=e924f84749f5962df3a34ded2da8084292c01cef preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- #3951 merged metadata-only at e924f84749f5962df3a34ded2da8084292c01cef; queue exact frozen blob 56dba91d217d80432c87c478675193cb9ab3f187, 32 READY / 31 TESTING, merged approval 139209030621 still pending at preparation. Independently rechecked R347/R406 actual source jobs 136122759511 and 137174839403 SUCCESS, scoped official afterproof previously independently hash verified (14606278638/14749713907). R347 merge 3d1884b7b724d9ebdaa111d5db3e0d9d872ee839 and R406 da3d9623642663f8ee0af9ff1752546ddc5417ce first-parent source scope only src/server/coffee-fact-compatibility.mjs; published ea342f2be4ca130d90107d27d612bda1055617f3 -> R347 92b0523f11491063b4c7c86821fc82c928e1a034 = R406 parent -> R406 2d4ef4886a6e75b61ca4375fc540b992ee73930c = live. Tests 0d2e1239430e204ee3eccdcfd39ecf3ce99cec3a and 285e9216b91d34fac60f5e452216105213ffa1bc match exact merge/live. No other unfinished or retained owner of runtime path. Preserve actual old #241 external failure, broader original603 audit and hosted acceptance separately as unverified. Reconcile stale per-item blockers only, no READY state change. Candidate required with retained READY32 and both new IDs; no competing writes, no production/Netlify/provider/Publish/grant changes. Require actual approval before integration and exact merged readback.
