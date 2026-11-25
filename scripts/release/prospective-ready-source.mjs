@@ -2,6 +2,7 @@
 // The proposed queue is NEVER written to live development by this module.
 // It is not certification, a release grant, publication, or proof of five CI jobs.
 import {createHash} from 'node:crypto';
+import {reviewedHistoricalReceiptCorrection} from './reviewed-3889-receipts.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 export const BASELINE_DEV_SHA='d9fc859d81a23e10ee2cd0e1a37013b93a4980e5';
 export const BASELINE_QUEUE_BLOB='46304f47eb0e78fac8c7845155af86080900b3c4';
@@ -120,7 +121,7 @@ export function proposeProspectiveReadyQueue(args={}){
  return proposeProspectiveReadyQueueInternal(args,null);
 }
 function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedId,
- developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}={},sharedProof=null){
+ developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}={},sharedProof=null,compositeProof=null){
  const hold=why=>{throw Error('PROSPECTIVE_READY_HOLD: '+why);};
  if(!SHA.test(developmentSourceSha||'')||typeof selectedId!=='string'||
    typeof firstParentChangedPaths!=='function'||typeof isAncestor!=='function'||
@@ -144,7 +145,7 @@ function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedI
   hold('selected original item is not source-tracked TESTING with existing test receipts');
  // No speculative deletion of non-candidate domain defects or actual source failures.
  // The single independently reviewed parent-audit marker is not a defect in R399.
- if(current.blockers.some(b=>!reviewedParentAuditOnly({original,current,marker:b,
+ if(current.blockers.some(b=>!(compositeProof?.id===STALE_FAMILY_ID&&current.id===STALE_FAMILY_ID&&b==='Exact first-parent attribution for both declared migrations and selected regression/runner proof unresolved; separate exact-selected failure retained.')&&!reviewedParentAuditOnly({original,current,marker:b,
    developmentSourceSha,sourceObjectAt,firstParentChangedPaths,isAncestor})&&
    (typeof b!=='string'||
    !(/#3347|candidate.*certification|new owner Publish/i.test(b))||
@@ -377,6 +378,8 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
     selectedIds.some(id=>typeof id!=='string'||!/^DIC-Q-[0-9]+-[a-z0-9-]+$/.test(id))||
     new Set(selectedIds).size!==selectedIds.length)
   hold('explicit unique original TESTING IDs required');
+ const correction=reviewedHistoricalReceiptCorrection(readers.liveQueue,{selectedIds,developmentSourceSha:readers.developmentSourceSha,sourceObjectAt:readers.sourceObjectAt});
+ if(correction)readers={...readers,liveQueue:correction.queue};
  const {liveQueue,baselineQueue,developmentSourceSha,firstParentChangedPaths}=readers;
  if(queueSchemaErrors(liveQueue).length||queueSchemaErrors(baselineQueue).length||
     !SHA.test(developmentSourceSha||'')||typeof firstParentChangedPaths!=='function')
@@ -409,7 +412,7 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   const actual=composite?composite.source_merges.flatMap(s=>s.changed_paths):firstParentChangedPaths(original.merged_source_sha);
   if(!Array.isArray(actual)||!same(sorted(deployableChangedPaths(actual)),sorted(original.scope_paths)))
    hold('declared scope does not equal first-parent deployable paths: '+id);
-  const p=proposeProspectiveReadyQueueInternal({...readers,liveQueue:queue,selectedId:id},shared.proof);
+  const p=proposeProspectiveReadyQueueInternal({...readers,liveQueue:queue,selectedId:id},shared.proof,composite);
   queue=p.queue;
   proofs.push({id,identity_sha256:p.identity_sha256});
  }
@@ -421,7 +424,7 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   baseline_queue_blob:BASELINE_QUEUE_BLOB,published_base:queue.published_base,
   development_source_sha:developmentSourceSha,added_ids:ordered,
   retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
-  preview_proofs:proofs,...(shared.chains.length?{shared_source_chains:shared.chains}:{}),
+  preview_proofs:proofs,...(correction?{historical_receipt_reconciliation:correction.receipt}:{}),...(shared.chains.length?{shared_source_chains:shared.chains}:{}),
   ...(amendments.size?{selected_amendments:[...amendments.values()]}:{}),
   ...(composites.size?{selected_composite_sources:[...composites.values()]}:{})};
  return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
