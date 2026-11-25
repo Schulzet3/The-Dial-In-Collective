@@ -7,10 +7,12 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {assessReadyEvidence,preflightReadyBatch,PRODUCTION_CHECKS} from './release-reliability.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {proveGeneralFrozenQa,verifiedSelectedCandidatePath,verifiedSelectedCompositeSources} from './verified-prospective-qa.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const RUN_URL=/^https:\/\/github\.com\/Schulzet3\/The-Dial-In-Collective\/actions\/runs\/([1-9][0-9]*)\/job\/([1-9][0-9]*)$/;
 const sorted=xs=>[...new Set(xs)].sort();
+const sameRunIds=(a,b)=>JSON.stringify(sorted(a))===JSON.stringify(sorted(b));
 // A frozen READY certificate is source identity, not a waiver of any test.
 // Verify its exact queue selection before using its immutable candidate push CI.
 const canonical=value=>Array.isArray(value)?'['+value.map(canonical).join(',')+']':
@@ -61,7 +63,7 @@ export function exactRecordedChecks(checkRuns,sourceSha,recordedRunIds){
 
 /** Source-bound proof of ordered co-selected READY changes to one frozen file. */
 export function reviewedSelectedReadyOverlaps(items,{
- candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor
+ candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor,selectedQaProof=null
 }={}){
  if(!Array.isArray(items)||!SHA.test(candidateSha||'')||!Array.isArray(candidateChangedPaths)||
     typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
@@ -90,7 +92,8 @@ export function reviewedSelectedReadyOverlaps(items,{
    owner===tip||isAncestor(owner.merged_source_sha,tip.merged_source_sha)===true));
   if(tips.length!==1)throw Error('Same-file READY owners lack one ordered Git tip: '+path);
   const candidate=sourceObjectAt(candidateSha,path);
-  if(!candidate||candidate!==sourceObjectAt(tips[0].merged_source_sha,path))
+  if(!candidate||(candidate!==sourceObjectAt(tips[0].merged_source_sha,path)&&
+   !(selectedQaProof!==null&&listed.every(item=>verifiedSelectedCandidatePath(selectedQaProof,item,candidateSha,path,candidate)))))
    throw Error('Frozen candidate differs from last selected READY source: '+path);
   reviewed.push(path);
  }
@@ -99,11 +102,23 @@ export function reviewedSelectedReadyOverlaps(items,{
 
 export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObjectAt,
  mergeChangedPaths,currentSourceSha,publishedSourceSha,candidateSha,candidateChangedPaths,
- allowedPinnedPaths=[],isAncestor,frozenCandidateRunIds=[],frozenCandidateBranch}={}){
+ allowedPinnedPaths=[],isAncestor,frozenCandidateRunIds=[],frozenCandidateBranch,
+ prospectiveBatchPlan=null}={}){
  const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={},testPathsByItem={};
  if(!Array.isArray(items)||typeof loadRun!=='function'||typeof loadChecks!=='function'||
   typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
   return {ready:false,errors:[...errors,'READY gate requires GitHub CI and exact Git object readers'],verified};
+ let selectedQaProof=null;
+ if(prospectiveBatchPlan!==null){
+  try{
+   if(!Array.isArray(frozenCandidateRunIds)||!frozenCandidateRunIds.length||
+    canonical([...items].sort((a,b)=>a.id.localeCompare(b.id)))!==
+    canonical(queue.items.filter(i=>i.state==='READY').sort((a,b)=>a.id.localeCompare(b.id))))
+    throw Error('Exact all-selected frozen candidate and CI receipt required');
+   if(items.length>2)selectedQaProof=proveGeneralFrozenQa({candidateSha,candidateBranch:frozenCandidateBranch,
+    publishedSourceSha,queue,prospectiveBatchPlan});
+  }catch(e){return {ready:false,errors:[...errors,String(e.message||e)],verified};}
+ }
  const runCache=new Map(),checkCache=new Map();
  const run=async id=>{
   if(!runCache.has(id))runCache.set(id,await loadRun(id));
@@ -120,7 +135,8 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
       !Array.isArray(item.ci_runs)||!item.ci_runs.length||
       item.ci_runs.some(id=>!Number.isSafeInteger(id)||id<=0))
     throw Error('not a source-certified READY item');
-   const changed=mergeChangedPaths(item.merged_source_sha);
+   const composites=selectedQaProof===null?[]:verifiedSelectedCompositeSources(selectedQaProof,item,candidateSha);
+   const changed=composites.length?sorted(composites.flatMap(s=>s.changed_paths)):mergeChangedPaths(item.merged_source_sha);
    if(!Array.isArray(changed))throw Error('merged first-parent Git diff unavailable');
    const actualPaths=deployableChangedPaths(changed);
    // Every source and test changed by the merge is bound to the tested HEAD,
@@ -134,6 +150,14 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
      throw Error('cited GitHub Actions run '+id+' is missing, failed, skipped or not source-bound');
     return x;
    }));
+   for(const step of composites){
+    if(step.run_ids.some(id=>!runs.some(x=>x.id===id&&x.head_sha===step.merge_sha&&x.event==='push')))
+     throw Error('Composite historical run source mismatch: '+step.merge_sha);
+    const originalChecks=exactRecordedChecks(await checks(step.merge_sha),step.merge_sha,step.run_ids);
+    if(originalChecks.some(x=>x.status!=='completed'||x.conclusion!=='success'||!x.recorded)||
+     !sameRunIds(originalChecks.map(x=>x.recorded_run_id),step.run_ids))
+     throw Error('Composite historical five exact native checks missing: '+step.merge_sha);
+   }
    // Frozen candidates are tested against their own exact five SUCCESS checks,
    // not against prior PR heads containing independently unready same-file code.
    // Preserve and verify every original cited item run as well.
@@ -172,7 +196,7 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
     }
     const audit=assessReadyEvidence(item,{mergedSha:item.merged_source_sha,
       ciSourceSha:sha,checks:recorded,changedPaths:actualPaths,
-      sourceObjectAt,testPaths:provenancePaths});
+      sourceObjectAt,testPaths:provenancePaths,selectedQaProof});
     if(audit.ready){chosen={sha,recorded,risk:audit.risk};break;}
     failures=audit.failures;
    }
@@ -203,13 +227,13 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
   let coOwned=[];
   try{
    coOwned=reviewedSelectedReadyOverlaps(items,{
-    candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor
+    candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor,selectedQaProof
    });
   }catch(e){errors.push(String(e.message||e));}
   if(errors.length===0){
    const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
     changedPaths:candidateChangedPaths,checksByItem,ciSourceByItem,sourceObjectAt,
-    testPathsByItem,allowedPinnedPaths:[...new Set([...allowedPinnedPaths,...coOwned])]});
+    testPathsByItem,selectedQaProof,allowedPinnedPaths:[...new Set([...allowedPinnedPaths,...coOwned])]});
    errors.push(...batch.errors);
   }
  }
