@@ -3,7 +3,7 @@ import test from 'node:test';
 import {createHash as cryptoCreateHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
- prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt,assertReadyFirstParentDeployable} from '../scripts/release/precertify-ready-source.mjs';
+ prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt,assertReadyFirstParentDeployable,assertProspectiveCandidateQaScope} from '../scripts/release/precertify-ready-source.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'ready',owner_source:'owner approval',
  state:'READY',merged_source_sha:B,scope_paths:['site/main.js'],
@@ -338,4 +338,13 @@ test('#3889 scoped hosted prospective input is exact-source-bound, read-only and
  assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
  const executable=workflow.split('\n').filter(line=>!/^\s*#/.test(line)).join('\n');
  assert.doesNotMatch(executable,/\bgit push\b|\bnetlify\s+build\b|POST.*publish/i);
+});
+
+// The receipt cannot be emitted when the actual candidate or its independent
+// selected-test verifier is absent, or when the verifier rejects the tree.
+test('#3889 cheap independent prospective QA gate fails closed before receipt',()=>{
+ assert.throws(()=>assertProspectiveCandidateQaScope({candidateSha:'invalid'}),/Exact prospective QA/);
+ assert.throws(()=>assertProspectiveCandidateQaScope({candidateSha:'a'.repeat(40)}),/Independent prospective selected QA scope HOLD/);
+ const source=readFileSync(new URL('../scripts/release/precertify-ready-source.mjs',import.meta.url),'utf8');
+ assert.ok(source.indexOf('if(prospectiveReadyItemIds!==null)assertProspectiveCandidateQaScope')<source.indexOf('if(receipt)return candidateTreeReceipt'));
 });

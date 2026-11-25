@@ -283,8 +283,16 @@ const GENERAL_BATCH_SUPPORT_V4=[
  ['tests/preflight-contract.test.mjs','76904dbfe1e57df278601c4bf846f2f02a69a754','13f7b9da15639ce131ce82ef7a6e7e9ea2d26baf'],
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
 ];
+// #3947 independently reviewed R405 published test guard.
+const GENERAL_BATCH_QA_FIX_V5='542949c23fbbf481de00acdbd77e6c926ebde879';
+const GENERAL_BATCH_SUPPORT_V5=[
+ ['tests/helpers/release-published-restoration.mjs','04f6010a7c2ca781b3e9c0eca3bf18d83e623826','61a2010c1726b5c719eebf3afe933194ee8bed10'],
+ ['tests/preflight-contract.test.mjs','24518329594e4937675c4c30a0d82c73e2882215','76904dbfe1e57df278601c4bf846f2f02a69a754'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835']
+];
 function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V5,prior:GENERAL_BATCH_QA_FIX_V4,support:GENERAL_BATCH_SUPPORT_V5},
   {fix:GENERAL_BATCH_QA_FIX_V4,prior:GENERAL_BATCH_QA_FIX_V3,support:GENERAL_BATCH_SUPPORT_V4},
   {fix:GENERAL_BATCH_QA_FIX_V3,prior:GENERAL_BATCH_QA_FIX_V2,support:GENERAL_BATCH_SUPPORT_V3},
   {fix:GENERAL_BATCH_QA_FIX_V2,prior:GENERAL_BATCH_QA_FIX,support:GENERAL_BATCH_SUPPORT_V2},
