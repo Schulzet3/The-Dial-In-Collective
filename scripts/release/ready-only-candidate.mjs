@@ -3,6 +3,7 @@
 // a selected READY path overlaps unfinished source (including same-file edits).
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 import {posix} from 'node:path';
+import {ORIGINAL_QUEUE,exactQueueBlob,applyReviewedReceiptDelta,FAMILY_ID} from './reviewed-3889-receipts.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 import {generalBatchQaGeneration,GENERAL_BATCH_PRIOR} from './reviewed-general-batch-qa.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -120,7 +121,10 @@ export function reviewedProspectivePromotionQueueParity({manifest,originalQueue,
      candidateQueue!==JSON.stringify(p.queue,null,2)+'\n'||liveQueue!==candidateQueue)
    return false;
   try{
-   const before=JSON.parse(originalQueue),expected=structuredClone(before);
+   const before=JSON.parse(originalQueue);
+   const correction=p.historical_receipt_reconciliation;
+   if(correction&&(exactQueueBlob(before)!==ORIGINAL_QUEUE||originalQueue!==JSON.stringify(before,null,2)+'\n'||!p.added_ids.includes(FAMILY_ID)))return false;
+   const expected=correction?applyReviewedReceiptDelta(before):structuredClone(before);
    if(queueSchemaErrors(before).length||queueSchemaErrors(p.queue).length||
       !Array.isArray(before.items)||before.items.length!==p.queue.items.length||
       JSON.stringify(before.published_base)!==JSON.stringify(p.queue.published_base)||

@@ -1,3 +1,4 @@
+import './reviewed-3889-receipts.test.mjs';
 import './prospective-ready-source.test.mjs';
 import test from 'node:test';
 import {createHash as cryptoCreateHash} from 'node:crypto';
