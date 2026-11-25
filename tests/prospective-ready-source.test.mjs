@@ -219,3 +219,22 @@ test('prospective shared replay accepts only exact selected final Git object; no
   {liveQueue:{...f.liveQueue,items:f.liveQueue.items.map((row,i)=>i===3?{...row,scope_paths:[path]}:row)}}
  ])assert.throws(()=>batch({...input,...changed}),/HOLD/);
 });
+
+
+test('reviewed direct-child source amendments preserve original ownership and reject fake ancestry or paths',async()=>{
+ const {reviewedSelectedAmendment:review}=await import('../scripts/release/prospective-ready-source.mjs');
+ const parent='3945a7353dadf81e7702170dde58cb95241e5782',merge='0e377d1037d22518e7f42bc3935cb1c2d76f000b';
+ const engine='site/lib/engine.js',ui='site/lib/ui.js',reg='tests/issue455-r411-nonpersonal-prior-yield-boundary.test.mjs';
+ const objects={[engine]:'100644:bdec2d5c00783cc0394667cae112e9a0ad9f2c98',[reg]:'100644:76ef54b0e6afa2ae48ffc194561e4f5e57f1d2fc'};
+ const opts={row:{id:'DIC-Q-455-r411-nonpersonal-starting-yield-boundary',merged_source_sha:parent,scope_paths:[engine,ui]},
+  developmentSourceSha:A,readParents:sha=>sha===merge?[parent]:[],isAncestor:(a,b)=>a===merge&&b===A,
+  firstParentChangedPaths:sha=>sha===parent?[engine,ui,reg]:sha===merge?[engine,reg,'docs/workstreams/amendment.md']:[],
+  sourceObjectAt:(sha,path)=>sha===merge?objects[path]:'100644:'+P};
+ assert.deepEqual(review(opts),{id:opts.row.id,parent,merge,paths:[engine,reg].sort(),objects});
+ for(const bad of [{readParents:()=>[]},{readParents:()=>[parent,A]},{isAncestor:()=>false},
+  {firstParentChangedPaths:sha=>sha===merge?[engine,reg,ui]:opts.firstParentChangedPaths(sha)},
+  {firstParentChangedPaths:sha=>sha===parent?[engine,ui]:opts.firstParentChangedPaths(sha)},
+  {sourceObjectAt:()=>null},{row:{...opts.row,scope_paths:[ui]}}])
+  assert.throws(()=>review({...opts,...bad}),/HOLD/);
+ assert.equal(review({...opts,row:{...opts.row,id:'unselected'}}),null);
+});

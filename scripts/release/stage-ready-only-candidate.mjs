@@ -86,6 +86,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   batch=proposeDisjointProspectiveReadyBatch({baselineQueue,liveQueue:queue,
    selectedIds:prospectiveReadyItemIds,developmentSourceSha,
    firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt,
+   readParents:sha=>git(['rev-list','--parents','-n','1',sha]).trim().split(/\s+/).slice(1),
    sourceTextAt:(ref,path)=>git(['show',ref+':'+path],{trim:false}),
    firstParentPatch:(sha,path)=>git(['diff','--no-color','--no-ext-diff','--no-textconv','--no-renames',
     '--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',sha+'^',sha,'--',path],{trim:false})});
