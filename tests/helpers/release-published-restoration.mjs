@@ -327,8 +327,8 @@ export function verifySelectedOnlyQaReplay({path,merges,publishedRef,liveRef,rea
  let selected=exact(publishedRef,published);
  for(const merge of merges){
   const before=sourceObjectAt(merge+'^',path),after=sourceObjectAt(merge,path);
-  assert.equal(before?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
-  assert.equal(after?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch');
+  assert.equal(before?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch: '+path+' at '+merge);
+  assert.equal(after?.slice(0,6),published.slice(0,6),'selected QA replay mode mismatch: '+path+' at '+merge);
   selected=replayQaExactTextPatch({path,selected,before:exact(merge+'^',before),after:exact(merge,after),
    patch:firstParentPatch(merge,path),beforeObject:before,afterObject:after});
  }
@@ -399,6 +399,40 @@ export function reviewedPublishedSelectedGuard({path,merges,pub,dev,mainSelected
  return true;
 }
 
+// A reviewed direct-child amendment can already be published even though its
+// dedicated selected fixture was first introduced after the historical parent.
+// Bind the actual introduction, sole direct child and final published bytes;
+// no assertion is excluded and no runtime/workflow path can use this rule.
+export function reviewedAlreadyPublishedAmendedQa({path,merges,pub,dev,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
+ if(!/^(?:tests|supabase\/tests)\//.test(path)||merges.length!==2)return false;
+ const entry=REVIEWED_AMENDMENTS.find(x=>x.parent===merges[0]&&x.merge===merges[1]&&Object.hasOwn(x.objects,path));
+ if(!entry||sourceObjectAt(entry.parent+'^',path)!==null)return false;
+ const object=entry.objects[path];
+ if(sourceObjectAt(pub,path)!==object)return false;
+ assert.deepEqual(readParents(entry.merge),[entry.parent]);
+ assert.equal(isAncestor(entry.merge,dev),true);
+ assert.ok(firstParentChangedPaths(entry.parent).includes(path));
+ assert.ok(firstParentChangedPaths(entry.merge).includes(path));
+ const introduced=sourceObjectAt(entry.parent,path);
+ assert.ok(fileObject.test(introduced||''));
+ assert.equal(introduced.slice(0,6),object.slice(0,6));
+ assert.notEqual(introduced,object);
+ assert.equal(sourceObjectAt(entry.merge+'^',path),introduced);
+ assert.equal(sourceObjectAt(entry.merge,path),object);
+ assert.equal(sourceObjectAt(dev,path),object);
+ assert.equal(sourceObjectAt('HEAD',path),object);
+ return true;
+}
+
+// Shared SQL test orchestration is not deployable runtime. Only the two exact
+// published support paths may co-own historical retained and new tests. Both
+// candidate and prior certified candidate must preserve identical bytes.
+export function reviewedPublishedSqlSupport({path,pub,dev,priorCandidate,hasRetained,sourceObjectAt}){
+ if(!['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path))return false;
+ const published=sourceObjectAt(pub,path);
+ return fileObject.test(published||'')&&sourceObjectAt(dev,path)===published&&
+  sourceObjectAt('HEAD',path)===published&&(!hasRetained||sourceObjectAt(priorCandidate,path)===published);
+}
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
  readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
@@ -548,7 +582,6 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  for(const [path,list] of owners){
   assert.equal(new Set(list.map(x=>x.merge)).size,list.length,'ambiguous selected path ownership');
   const allRetained=list.every(x=>x.retained);
-  assert.ok(allRetained||list.every(x=>!x.retained),'retained READY overlap requires separate reviewed isolation');
   let previous=sourceObjectAt(pub,path);
   const published=previous;
   const workflow=workflowRestorations.has(path);
@@ -564,11 +597,10 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   // revision. Keep its exact published bytes and execute the selected SQL
   // fixtures; historical edits to this shared support are not new runtime.
   // Never apply this rule to migrations, dedicated tests or workflows.
-  const publishedSupport=
-   ['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path)&&
-   fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
-   sourceObjectAt('HEAD',path)===previous&&
-   (!allRetained||sourceObjectAt(previousCandidate,path)===previous);
+  const publishedSupport=reviewedPublishedSqlSupport({path,pub,dev,priorCandidate:previousCandidate,
+   hasRetained:list.some(x=>x.retained),sourceObjectAt});
+  assert.ok(allRetained||list.every(x=>!x.retained)||publishedSupport,
+   'retained READY overlap requires separate reviewed isolation: '+path);
   const remaining=[...list],orderedMerges=[];
   let discontinuous=false;
   while(remaining.length){
@@ -587,7 +619,10 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}))continue;
   if(discontinuous){
    assert.equal(sourceObjectAt(dev,path),previous,'unreviewed selected tip: '+path);
-   verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,
+   const publishedAmendment=!allRetained&&list.every(x=>!x.retained&&x.id===list[0].id)&&
+    reviewedAlreadyPublishedAmendedQa({path,merges:orderedMerges,pub,dev,
+     readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
+   if(!publishedAmendment)verifySelectedOnlyQaReplay({path,merges:orderedMerges,publishedRef:pub,liveRef:dev,
     readGitText,sourceObjectAt,firstParentPatch});
   }
   if(workflow){
