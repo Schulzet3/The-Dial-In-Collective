@@ -180,13 +180,45 @@ function proveSelectedOnlyReplay({path,steps,published,live,publishedRef,develop
  if(live.slice(0,6)!==published.slice(0,6)||selected!==exactText(developmentSourceSha,live))throw Error('selected-only replay does not equal live Git bytes');
 }
 
+// The reviewed exact direct-child corrections extend the original source
+// ownership, rather than replacing its first-parent merge attribution.
+// They are NOT a certificate or a source pin; the full chain still has to
+// reproduce the live selected source, and the independent QA checks its tests.
+const REVIEWED_AMENDMENTS=[
+ {id:'DIC-Q-455-r411-nonpersonal-starting-yield-boundary',
+  parent:'3945a7353dadf81e7702170dde58cb95241e5782',merge:'0e377d1037d22518e7f42bc3935cb1c2d76f000b',
+  objects:{'site/lib/engine.js':'100644:bdec2d5c00783cc0394667cae112e9a0ad9f2c98',
+   'tests/issue455-r411-nonpersonal-prior-yield-boundary.test.mjs':'100644:76ef54b0e6afa2ae48ffc194561e4f5e57f1d2fc'}},
+ {id:'DIC-Q-509-pending-coffee-null-flags',
+  parent:'af0537cc8313328269eca4f92a5e4439bf84848b',merge:'19b06f1a890ac26c9f8b9f13ce6c3a4634c85615',
+  objects:{'supabase/tests/pending_coffee_null_guards.sql':'100644:be4ea6842ab2dd8c4eaf364c68f98613eb6424b0'}}
+];
+export function reviewedSelectedAmendment({row,developmentSourceSha,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
+ const entry=REVIEWED_AMENDMENTS.find(x=>x.id===row.id&&x.parent===row.merged_source_sha);
+ if(!entry)return null;
+ const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: direct-child selected amendment '+why);};
+ if(typeof readParents!=='function'||!same(readParents(entry.merge),[entry.parent])||
+   isAncestor(entry.merge,developmentSourceSha)!==true)
+  hold('missing exact sole parent/ancestry');
+ const initial=firstParentChangedPaths(entry.parent);
+ const paths=sorted(firstParentChangedPaths(entry.merge).filter(p=>!p.startsWith('docs/')));
+ if(!same(paths,sorted(Object.keys(entry.objects)))||!paths.every(path=>initial.includes(path)))
+  hold('unknown or unowned changed path');
+ for(const path of paths){
+  if(sourceObjectAt(entry.merge,path)!==entry.objects[path]||sourceObjectAt(entry.parent,path)===entry.objects[path])
+   hold('exact object/first-parent mismatch '+path);
+  if(deployableChangedPaths([path]).length&&!row.scope_paths.includes(path))hold('amendment outside original deployable scope '+path);
+ }
+ return {id:row.id,parent:entry.parent,merge:entry.merge,paths,objects:entry.objects};
+}
+
 // Shared prospective TESTING owners can be co-selected only when actual
 // first-parent Git objects form one uninterrupted byte chain from the published
 // object to the exact current development object. This is preparation only,
 // not a READY certificate, test/workflow exemption or publisher admission.
 // Retained READY overlaps and ANY excluded unfinished owner remain HOLD.
 function proveSharedProspectiveSources({selected,originalReady,liveQueue,
- developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt,sourceTextAt,firstParentPatch}){
+ developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt,sourceTextAt,firstParentPatch,amendments=new Map()}){
  const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: shared selected source needs reviewed chronology: '+why);};
  const byPath=new Map();
  for(const row of [...originalReady,...selected]){
@@ -224,6 +256,14 @@ function proveSharedProspectiveSources({selected,originalReady,liveQueue,
    proof.set(row.id+'\u0000'+path,after);
    steps.push({id:row.id,merge_sha:merge,parent_object:before,object:after});
    previous=after;
+   const correction=amendments.get(row.id);
+   if(correction?.paths.includes(path)){
+    const amended=sourceObjectAt(correction.merge,path);
+    if(sourceObjectAt(correction.merge+'^',path)!==previous||amended!==correction.objects[path]||amended===previous)
+     hold('direct-child amendment discontinuity '+row.id+' '+path);
+    steps.push({id:row.id,merge_sha:correction.merge,parent_object:previous,object:amended});
+    previous=amended;
+   }
   }
   const live=sourceObjectAt(developmentSourceSha,path);
   if(previous!==live)hold('unreviewed live tip '+path);
@@ -264,8 +304,13 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   if(i.scope_paths.some(path=>newPaths.has(path)))
    hold('unfinished overlapping owner requires reviewed source isolation: '+i.id);
  }
+ const amendments=new Map();
+ for(const row of selected){
+  const proof=reviewedSelectedAmendment({...readers,row});
+  if(proof)amendments.set(row.id,proof);
+ }
  let shared;
- try{shared=proveSharedProspectiveSources({...readers,selected,originalReady});}
+ try{shared=proveSharedProspectiveSources({...readers,selected,originalReady,amendments});}
  catch(e){if(String(e.message).includes('PROSPECTIVE_BATCH_HOLD:'))throw e;hold('shared source Git proof unavailable: '+String(e.message).slice(0,160));}
  let queue=structuredClone(liveQueue);
  const proofs=[];
@@ -286,7 +331,8 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   baseline_queue_blob:BASELINE_QUEUE_BLOB,published_base:queue.published_base,
   development_source_sha:developmentSourceSha,added_ids:ordered,
   retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
-  preview_proofs:proofs,...(shared.chains.length?{shared_source_chains:shared.chains}:{})};
+  preview_proofs:proofs,...(shared.chains.length?{shared_source_chains:shared.chains}:{}),
+  ...(amendments.size?{selected_amendments:[...amendments.values()]}:{})};
  return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
   status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,queue};
 }
