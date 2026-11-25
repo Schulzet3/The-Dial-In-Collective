@@ -15428,19 +15428,21 @@
         "Run241 current development source/test/runner exact Git blobs unchanged against tested 0cd5054c: dadd06e1982a84d289481b661702f9940e375b7d, 61e496319939f59eb4b7843fdb93aa6b4c1e33fa, a3f86ff03a2c23cd510cc1dcd4c988a01bbebb2e",
         "Exact source PostgreSQL17 + signed JWT owner HTTP + backup 43591859535 SUCCESS; Node22/lint/build 43591859617 SUCCESS, both at 0cd5054c.",
         "Queue intake/approval 43592032732 SUCCESS at 05a6af51, current-descendant approval 43596028523 SUCCESS at c5b555; prior failed intake and cancelled initial checks NOT treated as PASS.",
-        "Corrective evidence: exact GitHub commit 7607c69f62f65979079fd02a0d25f4b7653a2303 adds migration SQL and original regression; 0cd5054c6684a63062daf794e33ea265daf5ce66 changes only SQL test and journal. Approval CI 43599567921 confirmed broken READY record. Status TESTING until one source-bound five-check verified."
+        "Corrective evidence: exact GitHub commit 7607c69f62f65979079fd02a0d25f4b7653a2303 adds migration SQL and original regression; 0cd5054c6684a63062daf794e33ea265daf5ce66 changes only SQL test and journal. Approval CI 43599567921 confirmed broken READY record. Status TESTING until one source-bound five-check verified.",
+        "#3959/#3960 verified exact direct-child attribution (main 234b770b4a864e4b8031df5355c95cd93dd7cae9, development 37d5dae3002490d71580dc5cfa26ff8e4622daf3); V7 controller #3961 merged 949b17ff7c382da6930a602634b378078e75c6ab, controller/event 139427436082/139427435574 SUCCESS. Original migration dadd06e1982a84d289481b661702f9940e375b7d unchanged; direct-child fixture 61e496319939f59eb4b7843fdb93aa6b4c1e33fa exact published/current bytes; shared runner 76578af1b7a2a9acce39802e2db933a8af9d0d10 explicitly runs selected fixture when selected migration exists.",
+        "Historical original SHA approval failed missing queue intake, SQL/validate cancelled; corrected fixture SQL 43591859535 and validate 43591859617 SUCCESS, cloud/browser 43591813373 SUCCESS at original source; no single historical five-job certificate claimed."
       ],
       "ci_runs": [
         43591859535,
         43591859617,
         43592032732,
-        43596028523
+        43596028523,
+        43591813373
       ],
       "blockers": [
-        "Exact Git verification found that former recorded READY SHA 0cd5054c6684a63062daf794e33ea265daf5ce66 changed only test/journal; the deployable SQL migration was introduced at 7607c69f62f65979079fd02a0d25f4b7653a2303. Previous READY certification is invalid until source attribution repaired.",
-        "Existing cited successful check runs are split across different SHAs; no single verified source has all five successful recorded statuses with identical migration/test blobs. Maintain TESTING pending #509-specific evidence and valid promotion."
+        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
       ],
-      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.\n2026-11-14 safety reconciliation: source-backed review found previous READY promotion incorrectly pointed at test-only commit 0cd5054 and relied on different CI source SHAs; mandatory READY-evidence gate rejected it in independent PR #2686 runs 43597779195 and 43599567921. Corrected merged_source_sha to original migration-introduction 7607c69 and reverted premature READY to TESTING without modifying SQL/tests, deleting existing successes, or touching production. This is not an authorization to deploy or to waive independent #509 five-check acceptance.",
+      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.\n2026-11-14 safety reconciliation: source-backed review found previous READY promotion incorrectly pointed at test-only commit 0cd5054 and relied on different CI source SHAs; mandatory READY-evidence gate rejected it in independent PR #2686 runs 43597779195 and 43599567921. Corrected merged_source_sha to original migration-introduction 7607c69 and reverted premature READY to TESTING without modifying SQL/tests, deleting existing successes, or touching production. This is not an authorization to deploy or to waive independent #509 five-check acceptance.\nNovember 25 #3889: source attribution and fixture mismatch now bound by exact controller and independent QA proofs. Previous invalid READY and failed/cancelled evidence retained; pending frozen certification only. No production or private records touched.",
       "production_deployed": false
     },
     {
@@ -17443,21 +17445,24 @@
       "tests": [
         "Direct full live Supabase overview SQL and dependent Admin deletion functions; client and published UI consumer; zero pending production deletions at audit",
         "Deterministic defect: search suppressed overview RPC, removing pending_deletions despite paged account response",
-        "PR-head SQL, Node22/cloud, browser/Chromium rerun, security inventory, approval/continuity checks all exact-source SUCCESS; source/test Git blobs read back equal at merged SHA"
+        "PR-head SQL, Node22/cloud, browser/Chromium rerun, security inventory, approval/continuity checks all exact-source SUCCESS; source/test Git blobs read back equal at merged SHA",
+        "Specialist #509 R356 merged push 5d99767db18ead26f7d9b0e358a5b6a7dfc8f206: approval 44482734154, validate 44482734247, cloud/mobile 44482734209, exact-selected 44482734345 SUCCESS; exact PR 614e9ed2eb8db3cac1067a4a33fbc08b392123e0 SQL 44475620395 SUCCESS. Published and prior frozen READY48 preimages match sole parent ede100b0c108de7b839794dc44af39f664c9f361; runtime 275ddaed464efc10050539fdc4be2a8b7092fb96 and test bd4e95b55c4f6b4f139739c77c4d1a215a8cf640 match live merged bytes."
       ],
       "ci_runs": [
         44475620395,
         44475620379,
         44475620356,
         44475620466,
-        44475620450
+        44475620450,
+        44482734154,
+        44482734247,
+        44482734209,
+        44482734345
       ],
       "blockers": [
-        "Exact merged-push CI, independent release-isolated READY-candidate source/combined tests not yet verified; retain TESTING",
-        "Genuine hosted account-deletion retry behavior not tested against private member data; preserve #96 boundary",
-        "Production changes require separate explicit owner Publish"
+        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
       ],
-      "notes": "One additional admin-only RPC when Accounts is expanded during a search; account search results continue to take precedence over overview fallback. No live provider change or member-record read. [skip netlify] PR #3384 nonforce merged from source-tested 614e9ed2 into 5d99767d. Other #33 selected-source fetch failure 44475620584 is unrelated. No provider writes.",
+      "notes": "One additional admin-only RPC when Accounts is expanded during a search; account search results continue to take precedence over overview fallback. No live provider change or member-record read. [skip netlify] PR #3384 nonforce merged from source-tested 614e9ed2 into 5d99767d. Other #33 selected-source fetch failure 44475620584 is unrelated. No provider writes.\nNovember 25 #3889: merged-push gap resolved by specialist R356. Genuine private member incident and #96 hosted acceptance remain UNVERIFIED and separately scoped; no actual retry incident or provider change claimed.",
       "production_deployed": false
     },
     {
@@ -17909,7 +17914,8 @@
         "R388: five isolated synthetic Node22 regression cases, code+tests+journal+TESTING queue atomically committed at PR head 8a06bf4a; R388a repaired false-positive fixture token scanning at eff7c549 with same-commit journal.",
         "Exact PR #3511 final head eff7c5497d690f6435fdaa55b6356494f16a5c7f: Node22/build 44740390715 SUCCESS, browser/cloud 44740390517 SUCCESS, approval 44740390582 SUCCESS, isolated SQL 44740390516 SUCCESS, source security 44740390548 SUCCESS, #33 selected241 44740390634 SUCCESS, #33 selected251 44740390504 SUCCESS. Frozen original603 44740390567 SKIPPED (not PASS).",
         "Nonforce explicit [skip netlify] squash merged into development cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72: source blob 94027e63493e720bc137b43e0d468741b780d92b and test blob 4d2f213b91b1d0f31b73b0df1aef28fcb2d412ec exactly match passed PR head.",
-        "Exact merged-source approval 44741312042, browser 44741312030, Node22/build 44741312123 SUCCESS. Concurrent #33 original241 44741312173 FAILED from external official site source_access_challenge, not app-code assertion; independent owner #33 follow-up. Actual live Supabase Edge dic-admin-push-broker remains v3 bundle ca7ce5f9, old source, no deployment."
+        "Exact merged-source approval 44741312042, browser 44741312030, Node22/build 44741312123 SUCCESS. Concurrent #33 original241 44741312173 FAILED from external official site source_access_challenge, not app-code assertion; independent owner #33 follow-up. Actual live Supabase Edge dic-admin-push-broker remains v3 bundle ca7ce5f9, old source, no deployment.",
+        "Independent #3889 source graph: sole parent f2daba164a6c6c003c1261576b4a0e7b21dcbb12 runtime e1a467cc0bb9d94ea824953eec88aaf8d6c428dd and absent test match published/READY48; selected runtime 94027e63493e720bc137b43e0d468741b780d92b and five-case regression 4d2f213b91b1d0f31b73b0df1aef28fcb2d412ec equal current development. Merged approval/validate/cloud/mobile SUCCESS re-read; unrelated #33 exact-selected failure 44741312173 verified actual job 136305369528 logs Buesaco official source challenge, 0 HTML bytes. Not a passed coffee audit or broker failure."
       ],
       "ci_runs": [
         44740390715,
@@ -17926,10 +17932,9 @@
         44741312173
       ],
       "blockers": [
-        "Not yet independently frozen and source-isolated under #3347 nonpublishing READY-candidate five-check gate; do not promote from TESTING based on PR-head success or isolated merged job success.",
-        "Production Edge remains v3; no owner Publish grant. Separate #1938 genuine handset delivery acceptance remains UNVERIFIED; #33 selected-source live access challenge separately owned."
+        "Independent #3347 nonpublishing source-isolated frozen candidate and five exact-source SUCCESS jobs required before READY."
       ],
-      "notes": "Dev source fix safely merged only; no live Supabase SQL/Edge/Auth/Storage/config/data mutations. Nonapp #33 selected241 merged-source run 44741312173 failed source_access_challenge though same selected workflow passed PR-head 44740390634. Never waive source truth or treat external-source unavailability as application bug.",
+      "notes": "Dev source fix safely merged only; no live Supabase SQL/Edge/Auth/Storage/config/data mutations. Nonapp #33 selected241 merged-source run 44741312173 failed source_access_challenge though same selected workflow passed PR-head 44740390634. Never waive source truth or treat external-source unavailability as application bug.\nNovember 25 #3889: #1938 real handset delivery remains independently UNVERIFIED and #33 unavailable case separately open. Neither is a provider acceptance claim. No deployment or actual token/device use.",
       "production_deployed": false,
       "pr": 3511
     },
