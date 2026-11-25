@@ -495,7 +495,12 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
    const steps=spec.chain, paths=steps.map(x=>x.migration);
    const chosen=selectedReadyItems.filter(i=>i.scope_paths?.some(p=>paths.includes(p)));
    const current=sourceObjectAt(developmentSourceSha,spec.path);
-   if(!chosen.length&&current===null&&sourceObjectAt(publishedSourceSha,spec.path)===null)return false;
+   const relevant=chosen.length||restoredPaths.some(p=>paths.includes(p))||
+    (queue?.items||[]).some(i=>i.state!=='DEPLOYED'&&i.scope_paths?.some(p=>paths.includes(p)))||
+    current==='100644:'+spec.unpublishedBlob||
+    (sourceObjectAt(publishedSourceSha,spec.path)==='100644:'+spec.publishedBlob&&
+     current!=='100644:'+spec.publishedBlob);
+   if(!relevant)return false;
    const hold=()=>{throw Error('Shared SQL fixture lacks complete exact source/migration provenance: '+spec.path);};
    if((chosen.length!==0&&chosen.length!==steps.length)||
       !same(publishedSourceSha,spec.path,spec.publishedBlob)||

@@ -1269,6 +1269,7 @@ test('#3889 shared SQL fixture requires both exact chronological migration owner
  const read=(r,p)=>objects.get(r+':'+p)??null;
  const args={queue:{items:rows},restoredPaths:[],publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,selectedReadyItems:rows};
  assert.deepEqual(discoverReviewedRestoredSqlTests(args),[]);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:[]},selectedReadyItems:[]}),/Shared SQL fixture lacks/);
  for(const row of rows){
   const other=rows.find(x=>x!==row);
   assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:[row],restoredPaths:other.scope_paths,queue:{items:[row,{...other,state:'TESTING'}]}}),/Shared SQL fixture lacks/);
