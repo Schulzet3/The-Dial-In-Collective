@@ -384,6 +384,7 @@ test('#3889 exact direct-child amendments and selected published guards reject f
   assert.equal(amend({...opts,row:{id:'unselected',merged_source_sha:merge}}),null);
  }
  for(const [path,merges] of [
+  ['tests/issue455-local-success-physical-bounds.test.mjs',['997b3c5d50f3a3d25999ddaf2f10044c906abcb7']],
   ['tests/cloud-shot-rating-focus.test.mjs',['893a83491956fe58e2472aecd783c262f1e20874','c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99']],
   ['tests/cloud-draft-recommendation-context.test.mjs',['bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9','52a506aff7c59018b07be0ffa8e90758aa9d3376','d0d28c9dff4114651fd872f0da7cd0747d065fea','d8f247aa63754adb52d9e8f9994f1821f46bcadc']]
  ]){
