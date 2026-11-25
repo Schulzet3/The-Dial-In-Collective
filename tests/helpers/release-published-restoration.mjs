@@ -371,7 +371,8 @@ const GUARD_COMMIT='e85780b670f9d89328fdf46ba035b9d81205bb18';
 const GUARD_PARENT='c7bb311b92a64271fe22ed29a80deb62d77b8475';
 const GUARD_OBJECTS={
  'tests/cloud-shot-rating-focus.test.mjs':['100644:590cf96c2f1e2bf216ba7f76fac2f21090fec5b6','100644:3a55870c51fb5c422f3f06e257bc54065491e894'],
- 'tests/cloud-draft-recommendation-context.test.mjs':['100644:256646aa00684386e2af1efdc3b5d036c7d5fca3','100644:2f945becd412b964e43094c9951f28711fb9cc6a']
+ 'tests/cloud-draft-recommendation-context.test.mjs':['100644:256646aa00684386e2af1efdc3b5d036c7d5fca3','100644:2f945becd412b964e43094c9951f28711fb9cc6a'],
+ 'tests/issue455-local-success-physical-bounds.test.mjs':['100644:c7357cd031bab6b8bb9ae031a5aa1e477c651f6d','100644:a1aae20cbf99e624752ad57f0375f6ee7c0a9e83']
 };
 export function reviewedPublishedSelectedGuard({path,merges,pub,dev,mainSelected,allRetained=false,priorCandidate,
  readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
