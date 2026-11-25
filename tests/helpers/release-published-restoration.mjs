@@ -436,6 +436,73 @@ export function reviewedPublishedSqlSupport({path,pub,dev,priorCandidate,hasReta
  return fileObject.test(published||'')&&sourceObjectAt(dev,path)===published&&
   sourceObjectAt('HEAD',path)===published&&(!hasRetained||sourceObjectAt(priorCandidate,path)===published);
 }
+
+// #3889 independent QA proof for the two historical stale-family source
+// merges. This verifier deliberately does not import or trust main planning,
+// queue notes or a manifest-provided source inventory. Both actual migration
+// introductions and the complete named fixture chain must be present.
+// Published SQL support is retained byte-for-byte; no selected test is skipped.
+const FAMILY_ID='DIC-Q-509-stale-family-statistics-reconcile';
+const FAMILY_FIRST='a45bb63ffd8a3eee164828c3c81e63baa6a8f155';
+const FAMILY_LAST='1def2c9d6573297c406192b413ffc3e7620ffe7a';
+const FAMILY_PATHS=[
+ 'supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql',
+ 'supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql',
+ 'supabase/tests/family_statistics_historical_reconcile_pre.sql',
+ 'supabase/tests/family_statistics_historical_reconcile_post.sql',
+ 'supabase/tests/family_statistics_complete_reconcile_post.sql',
+ 'scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'
+];
+const FAMILY_PRE=[
+ null,null,null,null,null,'ff048e4e1e68cfeb73b82c922148683813107ad9','ffafb78bdaf9751696d2b6b948857c79abd66b1a'];
+const FAMILY_MID=[
+ '8b66a860e6dba420c447d0c9de13d7e69e53879c',null,'2573be7360c184b33fa6f44609e18d7e25c60178','a64c72781017301d4b547842099f09c8a01e25d9',null,'32e169dda9f3a297656198b9a7e60a48322fdb86','6035e6e4af92722e279c5376ba3fd75ed174c41c'];
+const FAMILY_POST=[
+ '8b66a860e6dba420c447d0c9de13d7e69e53879c','26b06be50ebb0c823ec6a98a0015963925dcc6f0','730b789570f85ffb085bb74c0011408bb7f62c9f','a64c72781017301d4b547842099f09c8a01e25d9','7013829d296a2d6b1a9a450374285ab8738169f4','526ccf9a276acee21e4362cacf8a2fda69b8c8d2','587d36c5931b1c14220914bd32460af5690984e9'];
+export function reviewedStaleFamilyQa({row,dev,pub,retained=false,priorCandidate=null,
+ readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}={}){
+ if(row?.id!==FAMILY_ID)return null;
+ assert.equal(row.issue,509);assert.equal(row.merged_source_sha,FAMILY_LAST);
+ assert.deepEqual(sortedUnique(row.scope_paths),FAMILY_PATHS.slice(0,2));
+ assert.equal(row.scope_paths.length,2);
+ assert.equal(pub,PROSPECTIVE_PUBLISHED);assert.match(dev||'',SHA);
+ for(const reader of [readParents,isAncestor,firstParentChangedPaths,sourceObjectAt])assert.equal(typeof reader,'function');
+ assert.ok([44519926449,44519926537,44519926388,44519926461,44526403238,44526403147,44526403127,44526403259]
+  .every(id=>row.ci_runs?.includes(id)),'missing dual historical source receipts');
+ const p1=['5eca094cf069b820e9cbfd927f7dc6469e2e84fa','89fcc5a79855b0a44d77e787aca8b33dbf043688'];
+ const p2=['1521edf9c6a81ce80253a217dcf08d5c0b0b5f83','0977a43e4a6eb15c8bb1e33de59ed44577f364c2'];
+ assert.deepEqual(readParents(FAMILY_FIRST),p1);assert.deepEqual(readParents(FAMILY_LAST),p2);
+ assert.equal(isAncestor(FAMILY_FIRST,p2[0]),true);
+ assert.equal(isAncestor(FAMILY_LAST,dev),true);
+ const object=sha=>sha===null?null:'100644:'+sha;
+ const byPath=new Map();
+ for(const [merge,parent,before,after] of [[FAMILY_FIRST,p1[0],FAMILY_PRE,FAMILY_MID],[FAMILY_LAST,p2[0],FAMILY_MID,FAMILY_POST]]){
+  const expected=FAMILY_PATHS.filter((_,i)=>before[i]!==after[i]).sort();
+  const changed=firstParentChangedPaths(merge);
+  assert.ok(Array.isArray(changed)&&changed.every(safePath));
+  assert.deepEqual(changed.filter(p=>!p.startsWith('docs/')).sort(),expected);
+  for(const [i,path] of FAMILY_PATHS.entries()){
+   assert.equal(sourceObjectAt(parent,path),object(before[i]),'historical family first-parent object mismatch '+path);
+   assert.equal(sourceObjectAt(merge,path),object(after[i]),'historical family source object mismatch '+path);
+   if(before[i]!==after[i])byPath.set(path,[...(byPath.get(path)||[]),merge]);
+  }
+ }
+ const final=[...FAMILY_POST.slice(0,5),'76578af1b7a2a9acce39802e2db933a8af9d0d10','9550fd21ff0edc93adbeed716e657a504a41d2e9'];
+ for(const [i,path] of FAMILY_PATHS.entries()){
+  assert.equal(sourceObjectAt(pub,path),object(i<2?null:final[i]),'family published object mismatch '+path);
+  assert.equal(sourceObjectAt(dev,path),object(final[i]),'family development object mismatch '+path);
+  assert.equal(sourceObjectAt('HEAD',path),object(final[i]),'family candidate object mismatch '+path);
+  if(retained){
+   assert.match(priorCandidate||'',SHA);
+   assert.equal(sourceObjectAt(priorCandidate,path),object(final[i]),'retained family frozen source drift '+path);
+  }
+ }
+ // Return actual selected per-path owners, not a synthetic combined merge.
+ // Dedicated fixtures have already been independently proved to exist at
+ // exact final published/development/candidate bytes, and MUST run normally.
+ return {byPath,publishedFixtures:FAMILY_PATHS.slice(2,5)};
+}
+
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
  readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
@@ -537,7 +604,7 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   assert.deepEqual(old.items.filter(x=>x.state==='READY').map(x=>x.id).sort(),retained);
   for(const id of retained)assert.deepEqual(old.items.find(x=>x.id===id),parentRows.get(id));
  }
- const owners=new Map();
+ const owners=new Map(),compositeFixtures=new Map();
  for(const id of selected){
   const row=q.items.find(x=>x.id===id),merge=row.merged_source_sha;
   assert.match(merge||'',SHA);
@@ -552,7 +619,11 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   assert.ok(row.tests?.length&&row.ci_runs?.length&&row.ci_runs.every(x=>Number.isSafeInteger(x)&&x>0));
   assert.deepEqual(row.blockers,[]);
   assert.equal(isAncestor(merge,dev),true);
-  const changes=firstParentChangedPaths(merge);
+  const composite=reviewedStaleFamilyQa({row,dev,pub,retained:retained.includes(id),
+   priorCandidate:previousCandidate,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
+  if(composite)for(const path of composite.publishedFixtures)
+   compositeFixtures.set(path,{id,merges:composite.byPath.get(path)});
+  const changes=composite?[...composite.byPath.keys()]:firstParentChangedPaths(merge);
   assert.ok(Array.isArray(changes)&&changes.every(safePath));
   assert.deepEqual(sortedUnique(changes.filter(sourcePath)),sortedUnique(row.scope_paths));
   // Every selected executable, test, workflow and other non-document first-
@@ -570,7 +641,8 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
      'selected workflow lacks exclusive published restoration: '+path);
    }else assert.ok(!excluded.has(path),'selected source/test/workflow excluded: '+path);
    const list=owners.get(path)||[];
-   list.push({id,merge,retained:retained.includes(id)});
+   for(const source of composite?composite.byPath.get(path):[merge])
+    list.push({id,merge:source,retained:retained.includes(id)});
    if(amendment?.paths.includes(path))list.push({id,merge:amendment.merge,retained:retained.includes(id)});
    owners.set(path,list);
   }
@@ -616,6 +688,12 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
    if(!allRetained&&!publishedSupport&&!alreadyPublishedAudit&&before!==previous)discontinuous=true;
    orderedMerges.push(x.merge);
    previous=after;
+  }
+  if(compositeFixtures.has(path)){
+   const verified=compositeFixtures.get(path);
+   assert.ok(list.every(x=>x.id===verified.id),'unrelated selected owner of family fixture: '+path);
+   assert.deepEqual(orderedMerges,verified.merges);
+   continue; // exact dedicated fixture already verified, never excluded or skipped
   }
   if(reviewedPublishedSelectedGuard({path,merges:orderedMerges,pub,dev,
    mainSelected:owners.has('site/cloud/main.js'),allRetained,priorCandidate:previousCandidate,

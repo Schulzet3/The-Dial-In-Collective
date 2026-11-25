@@ -453,3 +453,45 @@ test('#3889 22-addition frozen source proves exact mixed published SQL support a
  for(const path of [runner,'supabase/tests/pending_coffee_null_guards.sql','tests/issue455-local-success-physical-bounds.test.mjs','site/cloud/main.js'])
   assert.ok(paths.includes(path),'selected assertion path retained '+path);
 });
+
+
+test('#3889 stale-family independent QA binds both historical migrations and every selected fixture to actual Git objects',async()=>{
+ const {reviewedStaleFamilyQa:review}=await import('./helpers/release-published-restoration.mjs');
+ const dev='eef0a6572c9c8e994894b97b516374b777a67df1',pub='2d22d448160d428a977f06482323646b92818fcf';
+ const first='a45bb63ffd8a3eee164828c3c81e63baa6a8f155',last='1def2c9d6573297c406192b413ffc3e7620ffe7a';
+ const prior='7ad87165296f638d87638c1120527e30fdac82ba';
+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',timeout:15000,maxBuffer:4000000}).trim();
+ const queue=JSON.parse(git('show',dev+':docs/RELEASE_QUEUE.json'));
+ const row=structuredClone(queue.items.find(x=>x.id==='DIC-Q-509-stale-family-statistics-reconcile'));
+ assert.equal(row.state,'TESTING');
+ row.ci_runs=[...new Set([...row.ci_runs,44519926449,44519926537,44519926388,44519926461])];
+ const sourceObjectAt=(ref,path)=>{
+  // Synthetic proposed HEAD uses actual immutable development Git objects for
+  // these seven selected paths only. This is NOT a candidate certificate.
+  const line=git('ls-tree',ref==='HEAD'?dev:ref,'--',path);
+  if(!line)return null;
+  const m=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(line);
+  assert.ok(m&&m[3]===path);return m[1]+':'+m[2];
+ };
+ const readParents=sha=>git('rev-list','--parents','-n','1',sha).split(/\s+/).slice(1);
+ const isAncestor=(a,b)=>{try{git('merge-base','--is-ancestor',a,b);return true;}catch(e){if(e.status===1)return false;throw e;}};
+ const firstParentChangedPaths=sha=>git('diff','--name-only','--no-renames',sha+'^',sha).split(/\r?\n/).filter(Boolean);
+ const opts={row,dev,pub,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt};
+ const snapshot=structuredClone(row),proof=review(opts);
+ const [m1,m2]=row.scope_paths;
+ assert.deepEqual(proof.byPath.get(m1),[first]);assert.deepEqual(proof.byPath.get(m2),[last]);
+ assert.equal(proof.byPath.size,7);assert.equal(proof.publishedFixtures.length,3);
+ assert.deepEqual(row,snapshot);
+ for(const bad of [
+  {row:{...row,merged_source_sha:first}},{row:{...row,scope_paths:[m2]}},
+  {row:{...row,ci_runs:row.ci_runs.filter(x=>x!==44519926449)}},
+  {readParents:()=>[]},{readParents:sha=>readParents(sha).reverse()},
+  {isAncestor:()=>false},{firstParentChangedPaths:sha=>[...firstParentChangedPaths(sha),'site/cloud/main.js']},
+  {firstParentChangedPaths:sha=>firstParentChangedPaths(sha).filter(p=>p!==m1)},
+  {retained:true,priorCandidate:prior},
+  ...[first,last,dev,pub,'HEAD'].map(ref=>({sourceObjectAt:(sha,p)=>sha===ref&&p===m1?'100644:'+'f'.repeat(40):sourceObjectAt(sha,p)})),
+  {sourceObjectAt:(sha,p)=>sha==='HEAD'&&p===proof.publishedFixtures[0]?null:sourceObjectAt(sha,p)},
+  {sourceObjectAt:(sha,p)=>sha==='HEAD'&&p==='scripts/audit/isolated-sql-regression.sh'?null:sourceObjectAt(sha,p)}
+ ])assert.throws(()=>review({...opts,...bad}));
+ assert.equal(review({...opts,row:{...row,id:'DIC-Q-509-other'}}),null);
+});
