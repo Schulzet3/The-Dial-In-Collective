@@ -314,3 +314,42 @@ test('#3889 selected specialist workflows stay published and already-published a
   assert.throws(()=>verifyGeneralProspectiveBatchReadyTestScope({...opts,sourceObjectAt:(ref,path)=>
    ref===r&&path===p?'100644:'+'f'.repeat(40):sourceObjectAt(ref,path)}));
 });
+
+
+// Independent exact Git history test for the actual 13-owner shared runtime
+// path. This is source-scope proof, NOT frozen candidate or five-job proof.
+test('#3889 selected-only QA replay reproduces exact main.js with all 13 historical owners',async()=>{
+ const {verifySelectedOnlyQaReplay:verify}=await import('./helpers/release-published-restoration.mjs');
+ const path='site/cloud/main.js',publishedRef='2d22d448160d428a977f06482323646b92818fcf';
+ const liveRef='f97abb69907d437eff2e8c6d70acbefe86623519';
+ const merges=[
+  'cdacca413a28d8d3cad5fa45e70e93836981be91','bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9',
+  '997b3c5d50f3a3d25999ddaf2f10044c906abcb7','742a041a903db00bace7b19994e23835e3ff6fd9',
+  '52a506aff7c59018b07be0ffa8e90758aa9d3376','d0d28c9dff4114651fd872f0da7cd0747d065fea',
+  'd8f247aa63754adb52d9e8f9994f1821f46bcadc','893a83491956fe58e2472aecd783c262f1e20874',
+  'c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99','375124af34d3eab396db5d94d37c1897f0dc8a0d',
+  'b6468c6c7bf4fbc59da1f91222eff9c27d222585','43306c3d8ea38aaf01491e16ca9930fcbcce6c47',
+  '2f9228ed1fe07654896147472597c917a821a8d7'];
+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',maxBuffer:4000000,timeout:20000});
+ const readGitText=(ref,p)=>git('show',ref+':'+p);
+ const sourceObjectAt=(ref,p)=>{
+  const lines=git('ls-tree','-z',ref,'--',p).split('\0').filter(Boolean);
+  if(!lines.length)return null;
+  assert.equal(lines.length,1);
+  const m=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(lines[0]);
+  assert.ok(m&&m[3]===p);return m[1]+':'+m[2];
+ };
+ const firstParentPatch=(sha,p)=>git('diff','--no-color','--no-ext-diff','--no-textconv','--no-renames',
+  '--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',sha+'^',sha,'--',p);
+ const opts={path,merges,publishedRef,liveRef,readGitText,sourceObjectAt,firstParentPatch};
+ assert.equal(sourceObjectAt(publishedRef,path),'100644:593c74844758d6f880888d0a40d631e6ec5d51c9');
+ assert.equal(sourceObjectAt(liveRef,path),'100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c');
+ assert.equal(verify(opts),true);
+ for(const bad of [
+  {merges:merges.slice(1)},{merges:merges.slice(0,-1)},{merges:[...merges,merges[0]]},
+  {firstParentPatch:undefined},
+  {firstParentPatch:(sha,p)=>firstParentPatch(sha,p).replace('index ','unbound ')},
+  {readGitText:(ref,p)=>ref===merges[0]?readGitText(ref,p)+'forged\n':readGitText(ref,p)},
+  {sourceObjectAt:(ref,p)=>ref===liveRef?'100644:'+'f'.repeat(40):sourceObjectAt(ref,p)}
+ ])assert.throws(()=>verify({...opts,...bad}));
+});
