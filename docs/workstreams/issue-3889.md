@@ -215,3 +215,21 @@ DIC_PREFLIGHT_VERIFIED development_sha=b4abd70b50356c719d08085c93f60545b90db13a 
 - DIC-Q-509-retire-internal-hide-shot 97661eb98275008510ef0125e978e18bd7ed2466 supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql
 - DIC-Q-509-classify-family-single-refresh 9fa94afbee78f04598ac112b6fdb3b6d13c954d2 supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql
 - DIC-Q-509-workspace-inactive-selection-guards 3df9ad1e767ee82e9d28e089d375611b510af9ac supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql
+
+## Nov 25 UTC #3889 — exact 48-ID frozen candidate certification (nonpublishing) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=094291ba36677d1f817a1db64bcdef1115d8ff51 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Owner #3889 nonpublishing fourteen-addition SQL certification, immutable baseline d9fc859d81a23e10ee2cd0e1a37013b93a4980e5 / 46304f47eb0e78fac8c7845155af86080900b3c4. Main #3957 d5579936715b6d1a13910869c2d1c2ada386d226 controller/event 45655192851/139349865666,139349865367 SUCCESS, precert 45655192527/139349862960 SUCCESS; artifact 15043095436 independently SHA256 matched 4126a4dda658971f6da18678d6bfa249d93942fed87d762fab1762e2b0de82ca. Frozen candidate 12c93c0de2894679aa051a96652dbbf0aa56b67d branch release-candidates/prospectbatch3889-40a9def20f4912f6248e, sole parent 094291ba36677d1f817a1db64bcdef1115d8ff51, tree f67475626641dbed09c028f2d7a2f658ea53c87b, manifest 9dbbd9bf85563e0926012cd476105a2b06bc2d98, exact queue 38e9a5e7f579e744e5f7efd79ccb2d8a4723d844. Complete Git trees independently verified 466 deltas, zero unexpected/unready contamination, retained READY34 scope bytes unchanged; published base 2d22d448160d428a977f06482323646b92818fcf. READY fingerprint b26d7cd040d5696a1afe66e263378c5b6111cb723b966ab54846891601d0a04d. All five exact native PUSH jobs and current check-runs completed SUCCESS: approval 45662147256/139374521101, validate 45662147128/139374518576, cloud 45662147147/139374519999, mobile 45662147147/139374520652, SQL 45662147134/139374519382. Validate 5124 PASS/0 fail/20 skips (not counted PASS). Exact queue delta fourteen TESTING->READY, no other record or top-level changed. Proposed 48 READY, 15 TESTING; 404 DEPLOYED and six separate IN_PROGRESS unchanged. Independent promotion approval and merged readback required before checklist update. Next independent Admin pair, recommendation-context amendment, stale-family dual-source and specialist #33/#3667 attribution; no duplicate candidate or publication, provider, Netlify, grant or production changes.
+- DIC-Q-509-admin-normalized-identity (e958c3acace0d908a4464b5cf95c0405510a1c8b)
+- DIC-Q-509-source-path-case-guard-20261115 (9a7ffa65955d8c2b81e41153653e19fc512f3a31)
+- DIC-Q-509-community-withdrawn-recheck-guard (fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee)
+- DIC-Q-509-import-additional-credential-keys (8f11d1b8c93cf6255dfa43de095a48ace95f5dcb)
+- DIC-Q-509-community-producer-search-parity (c155d54fd16c49ecb8744a1c1bb1c7181491790b)
+- DIC-Q-509-preview-rollover-cooldown (849d89650006c545dc86045a947bb39e1d081146)
+- DIC-Q-509-admin-merge-null-normalized-name (66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2)
+- DIC-Q-509-source-retry-rollover-cooldown (2069fda2279dbe02ec8f2766348bb8123a483e73)
+- DIC-Q-509-confirm-coffee-null-name (d516ae8a1e51b436331391b9cbb4683250704020)
+- DIC-Q-509-first-entry-no-self-alias (5f7193fb218850a3119a227c062b9a6c8ed9f19e)
+- DIC-Q-509-alias-manual-confirm (7795d5a356e2afc27420e3fb86d7eae3316c13dc)
+- DIC-Q-509-retire-internal-hide-shot (97661eb98275008510ef0125e978e18bd7ed2466)
+- DIC-Q-509-classify-family-single-refresh (9fa94afbee78f04598ac112b6fdb3b6d13c954d2)
+- DIC-Q-509-workspace-inactive-selection-guards (3df9ad1e767ee82e9d28e089d375611b510af9ac)
