@@ -157,3 +157,30 @@ DIC_PREFLIGHT_VERIFIED development_sha=542949c23fbbf481de00acdbd77e6c926ebde879 
 ## Nov 25 UTC #3889 — exact published amended fixture admission repair [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=542949c23fbbf481de00acdbd77e6c926ebde879 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
 - #3949 head a75efdb170d4dfbab9b3f8cac261c89c344e38d8: approval/validate/mobile/SQL SUCCESS 139027249851/139027249784/139027249639/139027250023, cloud 139027249380 FAILED (2319 pass, one fail). Full frozen-source regression reached mode mismatch when a selected pending-coffee SQL fixture was absent before its introduction af0537cc8313328269eca4f92a5e4439bf84848b (introduced bb1ec0f354cb6ed9cad5353de68d4865c9fdcabf) and its reviewed sole direct-child correction 19b06f1a890ac26c9f8b9f13ce6c3a4634c85615 now equals published/dev/frozen candidate be4ea6842ab2dd8c4eaf364c68f98613eb6424b0. Added exact QA-only introduction/direct-child/published/candidate proof; no selected assertion removed, no migration/runtime/workflow exemption. Actual frozen 32-ID positive regression plus forged ancestry/path/mode/object negatives. Added path/merge diagnostics. Await exact new head CI and merge proof; bind corrected QA in main and run cheap full scope gate before candidate CI. No READY promotion/publication/provider writes.
+
+## Nov 25 UTC #3889 — combined 32-ID exact frozen candidate certification (nonpublishing) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=09c45de5063e1d743ce497aea2557974c86f52ca preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Owner #3889 nonpublishing 22-addition certification, immutable baseline d9fc859d81a23e10ee2cd0e1a37013b93a4980e5 / 46304f47eb0e78fac8c7845155af86080900b3c4. V6 main 0edf1942893f1414c3efd84d9ce74adc966ef3f5 native source receipt 45577340297/139078430250 SUCCESS; artifact 15003829953 SHA256 ad42f2d38354938da8bf23d97a8a6fb37742ee97e71ec2f76e80ff773386e1d1. Frozen candidate 46432b7d382a299af3b7ad7d43628d4d0c481979, branch release-candidates/prospectbatch3889-b5715b8a084393ff38d0, sole parent 09c45de5063e1d743ce497aea2557974c86f52ca, exact tree 0409a9bbca8b416392c6384d2ef641dac9d94209, manifest 69227ba363f42a810809978b1b8e9ebec3e7373a, queue 56dba91d217d80432c87c478675193cb9ab3f187. Prior isolated tree and V6 native receipt exact tree parity checked; retained READY10 frozen bytes unchanged. All 32 selected IDs, published base 2d22d448160d428a977f06482323646b92818fcf, fingerprint 4e9bd2d96711d14b460a35621946f122c1c1d08728f798026dbd3302ff997d13 (algorithm independently reproduced prior READY10 digest). Five exact push runs and current check-runs completed SUCCESS: approval 45586914930/139110736142; validate 45586914877/139110736076; cloud 45586915081/139110736933; mobile 45586915081/139110736504; SQL 45586914910/139110735443. Validate 5109 PASS, zero failures, 20 skips (14 published unselected assertions independently isolated, six production smoke not run); no skipped selected test claimed PASS. Isolated pending_coffee_null_guards executed. Previous candidate failure preserved. Copy exact frozen queue blob, no other item changed; 22 TESTING -> proposed READY, 10 retained READY, 31 remaining TESTING, 404 DEPLOYED and six separate IN_PROGRESS unchanged, no new IDs. Require independent READY promotion approval then nonforce merge and exact merged readback before checking off IDs. No production/Netlify/provider/grant/publication mutation. Next remaining compatible R347/R406 and verified SQL cohorts; specialist ownership preserved.
+- Added IDs:
+  - DIC-Q-455-r381-recommendation-copy-accessible-names
+  - DIC-Q-455-r390-recommendation-copy-live-status
+  - DIC-Q-455-r400-one-success-window-evidence-note
+  - DIC-Q-455-r405-cross-basket-yield-eligibility
+  - DIC-Q-455-r411-nonpersonal-starting-yield-boundary
+  - DIC-Q-455-r415-grinder-tenth-boundary
+  - DIC-Q-455-r417-measured-grind-precision
+  - DIC-Q-455-r419-successful-grind-provenance
+  - DIC-Q-455-r421-grind-reference-grid
+  - DIC-Q-455-r428-null-temperature-copy
+  - DIC-Q-455-r432-slowfeed-copied-reference-feedback
+  - DIC-Q-455-r433-slowfeed-copy-action-availability
+  - DIC-Q-455-r443-validation-recommendation-button-state
+  - DIC-Q-455-r444-pending-shot-form-lock
+  - DIC-Q-455-r451-shot-modal-close-pending-save
+  - DIC-Q-455-r456-measured-grind-step-any
+  - DIC-Q-455-r458-optional-temperature-metric
+  - DIC-Q-455-r461-measured-dose-yield-time-step-any
+  - DIC-Q-455-r462-optional-measured-temperature-step-any
+  - DIC-Q-509-calibration-order-fallback
+  - DIC-Q-509-pending-coffee-null-flags
+  - DIC-Q-509-shot-timestamp-determinism
