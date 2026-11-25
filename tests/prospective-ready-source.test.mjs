@@ -257,3 +257,24 @@ test('later disjoint expansion retains a previously certified multi-owner cohort
  const base=structuredClone(f.baselineQueue);base.items[0].scope_paths=[shared];
  assert.throws(()=>batch({...f,liveQueue:mixed,baselineQueue:base,selectedIds:[id],firstParentChangedPaths:()=>[shared]}),/HOLD/);
 });
+
+test('recommendation-context fixture correction is attributed only to its exact direct child',async()=>{
+ const {reviewedSelectedAmendment:review}=await import('../scripts/release/prospective-ready-source.mjs');
+ const parent='7607c69f62f65979079fd02a0d25f4b7653a2303',merge='0cd5054c6684a63062daf794e33ea265daf5ce66';
+ const path='supabase/tests/recommendation_context_null_controls.sql';
+ const migration='supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql';
+ const object='100644:61e496319939f59eb4b7843fdb93aa6b4c1e33fa';
+ const old='100644:c6c88c23a6d024f5d15bf087d10e15f6f282109a';
+ const opts={row:{id:'DIC-Q-509-recommendation-context-null-control-guard',merged_source_sha:parent,scope_paths:[migration]},
+  developmentSourceSha:A,readParents:sha=>sha===merge?[parent]:[],isAncestor:(a,b)=>a===merge&&b===A,
+  firstParentChangedPaths:sha=>sha===parent?[migration,path,'scripts/audit/isolated-sql-regression.sh']:sha===merge?[path,'docs/workstreams/issue-509.md']:[],
+  sourceObjectAt:(sha,p)=>p===path?(sha===merge?object:sha===parent?old:null):null};
+ assert.deepEqual(review(opts),{id:opts.row.id,parent,merge,paths:[path],objects:{[path]:object}});
+ for(const bad of [{readParents:()=>[parent,A]},{readParents:()=>[]},{isAncestor:()=>false},
+  {firstParentChangedPaths:sha=>sha===merge?[path,migration]:opts.firstParentChangedPaths(sha)},
+  {firstParentChangedPaths:sha=>sha===parent?[migration]:opts.firstParentChangedPaths(sha)},
+  {sourceObjectAt:()=>old},{sourceObjectAt:()=>object}])
+  assert.throws(()=>review({...opts,...bad}),/HOLD/);
+ assert.equal(review({...opts,row:{...opts.row,id:'DIC-Q-509-other'}}),null);
+ assert.equal(review({...opts,row:{...opts.row,merged_source_sha:merge}}),null);
+});

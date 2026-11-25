@@ -191,7 +191,10 @@ const REVIEWED_AMENDMENTS=[
    'tests/issue455-r411-nonpersonal-prior-yield-boundary.test.mjs':'100644:76ef54b0e6afa2ae48ffc194561e4f5e57f1d2fc'}},
  {id:'DIC-Q-509-pending-coffee-null-flags',
   parent:'af0537cc8313328269eca4f92a5e4439bf84848b',merge:'19b06f1a890ac26c9f8b9f13ce6c3a4634c85615',
-  objects:{'supabase/tests/pending_coffee_null_guards.sql':'100644:be4ea6842ab2dd8c4eaf364c68f98613eb6424b0'}}
+  objects:{'supabase/tests/pending_coffee_null_guards.sql':'100644:be4ea6842ab2dd8c4eaf364c68f98613eb6424b0'}},
+ {id:'DIC-Q-509-recommendation-context-null-control-guard',
+  parent:'7607c69f62f65979079fd02a0d25f4b7653a2303',merge:'0cd5054c6684a63062daf794e33ea265daf5ce66',
+  objects:{'supabase/tests/recommendation_context_null_controls.sql':'100644:61e496319939f59eb4b7843fdb93aa6b4c1e33fa'}}
 ];
 export function reviewedSelectedAmendment({row,developmentSourceSha,readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}){
  const entry=REVIEWED_AMENDMENTS.find(x=>x.id===row.id&&x.parent===row.merged_source_sha);
