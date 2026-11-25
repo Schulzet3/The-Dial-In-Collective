@@ -305,8 +305,17 @@ const GENERAL_BATCH_SUPPORT_V7=[
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
  ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725',null]
 ];
+// #3968: independent two-original-merge stale-family source/fixture proof.
+const GENERAL_BATCH_QA_FIX_V8='3661913e21808ebb4205e8c804c2bb231b2ad41a';
+const GENERAL_BATCH_SUPPORT_V8=[
+ ['tests/helpers/release-published-restoration.mjs','1a46bc915f7e9b544e21f53cb5f5da6f6402774a','fce0d1efadd78d3dceb453c0a70f385c600bcc43'],
+ ['tests/preflight-contract.test.mjs','dcaacd46244189696e9b5ba04b418d13ae63070f','dc947f96e3d3f7efd7f74f8709db5b988791bb71'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
+ ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725','4828fc6099dbbbe9a751182aa9c62ca411d91725']
+];
 function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V8,prior:GENERAL_BATCH_QA_FIX_V7,support:GENERAL_BATCH_SUPPORT_V8},
   {fix:GENERAL_BATCH_QA_FIX_V7,prior:GENERAL_BATCH_QA_FIX_V6,support:GENERAL_BATCH_SUPPORT_V7},
   {fix:GENERAL_BATCH_QA_FIX_V6,prior:GENERAL_BATCH_QA_FIX_V5,support:GENERAL_BATCH_SUPPORT_V6},
   {fix:GENERAL_BATCH_QA_FIX_V5,prior:GENERAL_BATCH_QA_FIX_V4,support:GENERAL_BATCH_SUPPORT_V5},
