@@ -1251,3 +1251,38 @@ test('#3889 mixed selected and excluded reviewed SQL fixtures preserve selected 
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:[...rows,{...row,id:'DIC-Q-509-unready-overlap',state:'TESTING'}]}}),/Selected READY SQL fixture lacks exact/);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(r,p)=>r===selected[1].merged_source_sha&&p===spec.path?'100644:'+D:sourceObjectAt(r,p)}),/Other selected READY merge modified SQL fixture/);
 });
+
+test('#3889 shared SQL fixture requires both exact chronological migration owners or both excluded',()=>{
+ const spec=REVIEWED_UNREADY_SQL_SUITE.find(x=>x.path==='supabase/tests/community_quality_integrity.sql');
+ const rows=spec.chain.map(x=>({id:x.id,issue:509,state:'READY',merged_source_sha:x.merge,scope_paths:[x.migration]}));
+ const objects=new Map(),put=(r,p,b)=>objects.set(r+':'+p,'100644:'+b);
+ put(A,spec.path,spec.publishedBlob);put(B,spec.path,spec.unpublishedBlob);
+ let previous=spec.publishedBlob;
+ for(const step of spec.chain){
+  put(step.merge+'^',spec.path,previous);put(step.merge,spec.path,step.after);
+  put(step.merge,step.migration,step.migrationBlob);put(B,step.migration,step.migrationBlob);
+  previous=step.after;
+ }
+ // Historical original PR source is additionally checked on exclusion.
+ put(spec.sourceMerge,spec.path,spec.unpublishedBlob);
+ put(spec.sourceMerge+'^',spec.path,spec.chain[0].after);
+ const read=(r,p)=>objects.get(r+':'+p)??null;
+ const args={queue:{items:rows},restoredPaths:[],publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,selectedReadyItems:rows};
+ assert.deepEqual(discoverReviewedRestoredSqlTests(args),[]);
+ for(const row of rows){
+  const other=rows.find(x=>x!==row);
+  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:[row],restoredPaths:other.scope_paths,queue:{items:[row,{...other,state:'TESTING'}]}}),/Shared SQL fixture lacks/);
+ }
+ for(const step of spec.chain){
+  for(const [ref,path] of [[step.merge+'^',spec.path],[step.merge,spec.path],[B,step.migration],[A,step.migration],[step.merge+'^',step.migration]]){
+   assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(r,p)=>r===ref&&p===path?'100644:'+D:read(r,p)}),/Shared SQL fixture lacks/);
+  }
+ }
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:[...rows,{...rows[0],id:'unready-overlap',state:'TESTING'}]}}),/Shared SQL fixture lacks/);
+ const excluded=rows.map(x=>({...x,state:'TESTING'}));
+ const restoredPaths=rows.flatMap(x=>x.scope_paths);
+ assert.deepEqual(discoverReviewedRestoredSqlTests({...args,queue:{items:excluded},selectedReadyItems:[],restoredPaths}),[spec.path]);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:excluded},selectedReadyItems:[],restoredPaths:restoredPaths.slice(1)}),/Shared SQL fixture lacks/);
+ const stranger={...one,merged_source_sha:C};
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:[...rows,stranger],sourceObjectAt:(r,p)=>r===C&&p===spec.path?'100644:'+D:read(r,p)}),/Shared SQL fixture lacks/);
+});

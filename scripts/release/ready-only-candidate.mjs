@@ -488,6 +488,40 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  // parent change, current object and historical reviewed bytes independently.
  // This is not a test waiver or a new admission path for a queue row.
  const selectedFixture=spec=>{
+  // A shared fixture can have several independently selected migration owners.
+  // Admit the whole exact reviewed chain or none; a partial selection cannot
+  // safely retain the final fixture or restore away a selected regression.
+  if(spec.chain){
+   const steps=spec.chain, paths=steps.map(x=>x.migration);
+   const chosen=selectedReadyItems.filter(i=>i.scope_paths?.some(p=>paths.includes(p)));
+   const current=sourceObjectAt(developmentSourceSha,spec.path);
+   if(!chosen.length&&current===null&&sourceObjectAt(publishedSourceSha,spec.path)===null)return false;
+   const hold=()=>{throw Error('Shared SQL fixture lacks complete exact source/migration provenance: '+spec.path);};
+   if((chosen.length!==0&&chosen.length!==steps.length)||
+      !same(publishedSourceSha,spec.path,spec.publishedBlob)||
+      !same(developmentSourceSha,spec.path,spec.unpublishedBlob))hold();
+   let previous=spec.publishedBlob;
+   for(const step of steps){
+    const owners=(queue?.items||[]).filter(i=>i.state!=='DEPLOYED'&&i.scope_paths?.includes(step.migration));
+    const row=owners[0], selected=chosen.filter(i=>i.id===step.id);
+    if(owners.length!==1||row?.id!==step.id||row.issue!==509||
+       row.scope_paths.length!==1||row.merged_source_sha!==step.merge||
+       (chosen.length?row.state!=='READY'||selected.length!==1||selected[0].issue!==509||
+        selected[0].merged_source_sha!==step.merge||selected[0].scope_paths.length!==1||
+        selected[0].scope_paths[0]!==step.migration||
+        (selected[0].state!==undefined&&selected[0].state!=='READY')||restoredPaths.includes(step.migration):
+        !['TESTING','IN_PROGRESS','BLOCKED'].includes(row.state)||!restoredPaths.includes(step.migration))||
+       !same(publishedSourceSha,step.migration,null)||!same(step.merge+'^',step.migration,null)||
+       !same(step.merge,step.migration,step.migrationBlob)||!same(developmentSourceSha,step.migration,step.migrationBlob)||
+       !same(step.merge+'^',spec.path,previous)||!same(step.merge,spec.path,step.after))hold();
+    previous=step.after;
+   }
+   if(previous!==spec.unpublishedBlob)hold();
+   for(const other of selectedReadyItems.filter(i=>!steps.some(x=>x.id===i.id)))
+    if(!SHA.test(other.merged_source_sha||'')||
+       sourceObjectAt(other.merged_source_sha,spec.path)!==sourceObjectAt(other.merged_source_sha+'^',spec.path))hold();
+   return chosen.length===steps.length;
+  }
   const chosen=selectedReadyItems.filter(i=>i.scope_paths?.includes(spec.migration));
   if(!chosen.length)return false;
   const item=chosen[0],merge=item.merged_source_sha;
@@ -597,7 +631,23 @@ export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
     "publishedBlob": "149453cc3177203ca96762dbf8312c966c87eb98",
     "unpublishedBlob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
     "sourceMerge": "a6373cd1b9f6451603e147271750f89641bd03e1",
-    "migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+    "migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql",
+    "chain": [
+      {
+        "id": "DIC-Q-509-community-withdrawn-recheck-guard",
+        "merge": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee",
+        "migration": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+        "migrationBlob": "d629d2f0cbd6c9f291a8b4538340c1de549f04a1",
+        "after": "0beabbf0b3d724b22ac879eb74f3399d444ab345"
+      },
+      {
+        "id": "DIC-Q-509-community-producer-search-parity",
+        "merge": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+        "migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql",
+        "migrationBlob": "4d4fc469de4dc5ee4d55f7b15ab35f80e6809ac2",
+        "after": "80c49e9e2a3a3e5c3be89660ff624864d487b25e"
+      }
+    ]
   },
   {
     "path": "supabase/tests/source_worker_auth_and_admission.sql",
