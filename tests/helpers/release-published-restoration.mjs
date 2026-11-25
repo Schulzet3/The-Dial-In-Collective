@@ -399,6 +399,15 @@ export function reviewedPublishedSelectedGuard({path,merges,pub,dev,mainSelected
  return true;
 }
 
+// Shared SQL test orchestration is not deployable runtime. Only the two exact
+// published support paths may co-own historical retained and new tests. Both
+// candidate and prior certified candidate must preserve identical bytes.
+export function reviewedPublishedSqlSupport({path,pub,dev,priorCandidate,hasRetained,sourceObjectAt}){
+ if(!['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path))return false;
+ const published=sourceObjectAt(pub,path);
+ return fileObject.test(published||'')&&sourceObjectAt(dev,path)===published&&
+  sourceObjectAt('HEAD',path)===published&&(!hasRetained||sourceObjectAt(priorCandidate,path)===published);
+}
 export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,branch,commitParent,
  readGitText,sourceObjectAt,firstParentChangedPaths,isAncestor,readParents,firstParentPatch}={}){
  const p=m?.prospective_ready_batch_preview;
@@ -548,7 +557,6 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  for(const [path,list] of owners){
   assert.equal(new Set(list.map(x=>x.merge)).size,list.length,'ambiguous selected path ownership');
   const allRetained=list.every(x=>x.retained);
-  assert.ok(allRetained||list.every(x=>!x.retained),'retained READY overlap requires separate reviewed isolation');
   let previous=sourceObjectAt(pub,path);
   const published=previous;
   const workflow=workflowRestorations.has(path);
@@ -564,11 +572,10 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
   // revision. Keep its exact published bytes and execute the selected SQL
   // fixtures; historical edits to this shared support are not new runtime.
   // Never apply this rule to migrations, dedicated tests or workflows.
-  const publishedSupport=
-   ['scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'].includes(path)&&
-   fileObject.test(previous||'')&&sourceObjectAt(dev,path)===previous&&
-   sourceObjectAt('HEAD',path)===previous&&
-   (!allRetained||sourceObjectAt(previousCandidate,path)===previous);
+  const publishedSupport=reviewedPublishedSqlSupport({path,pub,dev,priorCandidate:previousCandidate,
+   hasRetained:list.some(x=>x.retained),sourceObjectAt});
+  assert.ok(allRetained||list.every(x=>!x.retained)||publishedSupport,
+   'retained READY overlap requires separate reviewed isolation: '+path);
   const remaining=[...list],orderedMerges=[];
   let discontinuous=false;
   while(remaining.length){
