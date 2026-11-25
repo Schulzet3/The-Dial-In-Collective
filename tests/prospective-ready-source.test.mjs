@@ -278,3 +278,57 @@ test('recommendation-context fixture correction is attributed only to its exact 
  assert.equal(review({...opts,row:{...opts.row,id:'DIC-Q-509-other'}}),null);
  assert.equal(review({...opts,row:{...opts.row,merged_source_sha:merge}}),null);
 });
+
+
+// The original dual migration row must never borrow an unobserved earlier
+// introduction from the second merge. Verify both exact Git parents and all
+// owned fixture/runner objects, not arbitrary manifest-provided claims.
+test('stale-family dual-source proof is exact, non-mutating and rejects forged history',async()=>{
+ const {reviewedStaleFamilyComposite:review,proposeDisjointProspectiveReadyBatch:batch}=await import('../scripts/release/prospective-ready-source.mjs');
+ const paths=[
+  'supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql',
+  'supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql',
+  'supabase/tests/family_statistics_historical_reconcile_pre.sql',
+  'supabase/tests/family_statistics_historical_reconcile_post.sql',
+  'supabase/tests/family_statistics_complete_reconcile_post.sql',
+  'scripts/audit/isolated-sql-regression.sh','tests/sql-runner-coverage.test.mjs'];
+ const pub='2d22d448160d428a977f06482323646b92818fcf';
+ const first='a45bb63ffd8a3eee164828c3c81e63baa6a8f155',last='1def2c9d6573297c406192b413ffc3e7620ffe7a';
+ const p1='5eca094cf069b820e9cbfd927f7dc6469e2e84fa',p2='1521edf9c6a81ce80253a217dcf08d5c0b0b5f83';
+ const before=[null,null,null,null,null,'ff048e4e1e68cfeb73b82c922148683813107ad9','ffafb78bdaf9751696d2b6b948857c79abd66b1a'];
+ const mid=['8b66a860e6dba420c447d0c9de13d7e69e53879c',null,'2573be7360c184b33fa6f44609e18d7e25c60178','a64c72781017301d4b547842099f09c8a01e25d9',null,'32e169dda9f3a297656198b9a7e60a48322fdb86','6035e6e4af92722e279c5376ba3fd75ed174c41c'];
+ const end=[mid[0],'26b06be50ebb0c823ec6a98a0015963925dcc6f0','730b789570f85ffb085bb74c0011408bb7f62c9f',mid[3],'7013829d296a2d6b1a9a450374285ab8738169f4','526ccf9a276acee21e4362cacf8a2fda69b8c8d2','587d36c5931b1c14220914bd32460af5690984e9'];
+ const live=[...end.slice(0,5),'76578af1b7a2a9acce39802e2db933a8af9d0d10','9550fd21ff0edc93adbeed716e657a504a41d2e9'];
+ const objects={[p1]:before,[first]:mid,[p2]:mid,[last]:end,[A]:live,[pub]:[null,null,...live.slice(2)]};
+ const row={id:'DIC-Q-509-stale-family-statistics-reconcile',issue:509,merged_source_sha:last,scope_paths:paths.slice(0,2),
+  state:'TESTING',title:'dual migration',owner_source:'owner scope',tests:['exact historic receipts'],
+  ci_runs:[44519926449,44519926537,44519926388,44519926461,44526403238,44526403147,44526403127,44526403259],
+  blockers:['#3347 independent candidate certification pending']};
+ const opts={row,developmentSourceSha:A,publishedSourceSha:pub,
+  readParents:s=>s===first?[p1,'89fcc5a79855b0a44d77e787aca8b33dbf043688']:s===last?[p2,'0977a43e4a6eb15c8bb1e33de59ed44577f364c2']:[],
+  isAncestor:(a,b)=>a===first&&b===p2||a===last&&b===A,
+  firstParentChangedPaths:s=>s===first?paths.filter((_,i)=>before[i]!==mid[i]):s===last?paths.filter((_,i)=>mid[i]!==end[i]):[],
+  sourceObjectAt:(s,p)=>{const v=objects[s]?.[paths.indexOf(p)];return v==null?null:'100644:'+v;}};
+ const beforeRow=structuredClone(row),proof=review(opts);
+ assert.deepEqual(proof.source_merges.map(s=>s.merge_sha),[first,last]);
+ assert.deepEqual(proof.deployable_paths,paths.slice(0,2));
+ assert.deepEqual(row,beforeRow);
+ const f=fixture();f.baselineQueue.published_base.tested_source_sha=pub;f.liveQueue.published_base.tested_source_sha=pub;
+ f.baselineQueue.items[0]=structuredClone(row);f.liveQueue.items[0]=structuredClone(row);
+ const result=batch({...f,...opts,selectedIds:[row.id]});
+ assert.deepEqual(result.selected_composite_sources,[proof]);
+ assert.equal(result.queue.items[0].state,'READY');assert.equal(f.liveQueue.items[0].state,'TESTING');
+ assert.equal(result.ready_certified,false);assert.equal(result.publication_authorized,false);
+ assert.throws(()=>proposeProspectiveReadyQueue({...f,...opts,selectedId:row.id}),/composite batch/);
+ for(const edit of [
+  {row:{...row,merged_source_sha:first}}, {row:{...row,scope_paths:[paths[1]]}},
+  {row:{...row,ci_runs:row.ci_runs.slice(4)}},{publishedSourceSha:P},
+  {readParents:()=>[]},{readParents:s=>opts.readParents(s).reverse()},
+  {isAncestor:()=>false},{firstParentChangedPaths:s=>[...opts.firstParentChangedPaths(s),'site/cloud/main.js']},
+  {firstParentChangedPaths:s=>opts.firstParentChangedPaths(s).filter(p=>p!==paths[0])},
+  ...[p1,first,p2,last,A,pub].map(ref=>({sourceObjectAt:(s,p)=>s===ref&&p===paths[0]?'100644:'+P:opts.sourceObjectAt(s,p)})),
+  {sourceObjectAt:(s,p)=>s===A&&p===paths[5]?'100644:'+P:opts.sourceObjectAt(s,p)},
+  {sourceObjectAt:(s,p)=>s===pub&&p===paths[2]?null:opts.sourceObjectAt(s,p)}
+ ])assert.throws(()=>review({...opts,...edit}),/HOLD/);
+ assert.equal(review({...opts,row:{...row,id:'DIC-Q-509-unrelated'}}),null);
+});
