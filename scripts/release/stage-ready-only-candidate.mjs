@@ -85,7 +85,10 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   const baselineQueue=JSON.parse(git(['cat-file','blob',BASELINE_QUEUE_BLOB],{trim:false}));
   batch=proposeDisjointProspectiveReadyBatch({baselineQueue,liveQueue:queue,
    selectedIds:prospectiveReadyItemIds,developmentSourceSha,
-   firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt});
+   firstParentChangedPaths:sha=>changed(sha+'^',sha),isAncestor:ancestor,sourceObjectAt,
+   sourceTextAt:(ref,path)=>git(['show',ref+':'+path],{trim:false}),
+   firstParentPatch:(sha,path)=>git(['diff','--no-color','--no-ext-diff','--no-textconv','--no-renames',
+    '--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',sha+'^',sha,'--',path],{trim:false})});
   const all=batch.queue.items.filter(i=>i.state==='READY').map(i=>i.id).sort();
   if(!Array.isArray(selectedIds)||JSON.stringify([...selectedIds].sort())!==JSON.stringify(all))
    throw Error('Prospective batch must retain every current READY and select exactly the planned additions');

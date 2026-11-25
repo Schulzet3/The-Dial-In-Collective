@@ -231,7 +231,10 @@ export function prevalidateReadySource({
   const preview=proposeDisjointProspectiveReadyBatch({baselineQueue,liveQueue:queue,
    selectedIds:prospectiveReadyItemIds,developmentSourceSha,
    firstParentChangedPaths:sha=>git(['diff','--name-only','--no-renames',sha+'^',sha]).split(/\r?\n/).filter(Boolean),
-   isAncestor,sourceObjectAt});
+   isAncestor,sourceObjectAt,
+   sourceTextAt:(ref,path)=>git(['show',ref+':'+path],{trim:false}),
+   firstParentPatch:(sha,path)=>git(['diff','--no-color','--no-ext-diff','--no-textconv','--no-renames',
+    '--full-index','--no-indent-heuristic','--diff-algorithm=myers','--unified=3','--src-prefix=a/','--dst-prefix=b/',sha+'^',sha,'--',path],{trim:false})});
   queue=preview.queue;items=selectedReadyItems(queue);
  }
  assertReadyFirstParentDeployable(items,sha=>git(['diff','--name-only',

@@ -111,13 +111,82 @@ function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedI
   baseline_count:63,selected_id:selectedId,identity_sha256:fingerprint,queue};
 }
 
+// Complete first-parent text replay is permitted only for an explicitly co-selected
+// chain with actual immutable blob identity. No fuzzy/offset fallback, binary,
+// missing or ambiguous context, mode changes, truncated patches or partial result.
+export function replayExactTextPatch({before,after,selected,patch,path,beforeObject,afterObject}){
+ const fail=why=>{throw Error('selected-only replay '+path+': '+why);};
+ const lines=s=>{
+  if(typeof s!=='string'||!s.endsWith('\n')||/[\r\u0000\ufffd]/.test(s))fail('not exact LF text');
+  return s.slice(0,-1).split('\n');
+ };
+ const old=lines(before),wanted=lines(after),current=lines(selected),diff=lines(patch);
+ if(!/^100(?:644|755):[a-f0-9]{40}$/.test(beforeObject||'')||
+    !/^100(?:644|755):[a-f0-9]{40}$/.test(afterObject||'')||
+    beforeObject.slice(0,6)!==afterObject.slice(0,6))fail('unsafe or changed mode');
+ if(diff[0]!=='diff --git a/'+path+' b/'+path||
+    diff[1]!=='index '+beforeObject.slice(7)+'..'+afterObject.slice(7)+' '+beforeObject.slice(0,6)||
+    diff[2]!=='--- a/'+path||diff[3]!=='+++ b/'+path)fail('unbound or unsupported patch header');
+ const historical=old.slice();
+ let i=4,offset=0,oldEnd=0,selectedEnd=0,count=0;
+ const matches=(hay,pos,needle)=>pos>=0&&pos+needle.length<=hay.length&&needle.every((x,j)=>hay[pos+j]===x);
+ while(i<diff.length){
+  const h=/^@@ -([0-9]+)(?:,([0-9]+))? \+([0-9]+)(?:,([0-9]+))? @@(?: .*)?$/.exec(diff[i++]);
+  if(!h)fail('malformed or unsupported hunk header');
+  const start=Number(h[1])-1,oldCount=Number(h[2]??1),newStart=Number(h[3])-1,newCount=Number(h[4]??1);
+  if(![start,oldCount,newStart,newCount].every(Number.isSafeInteger)||
+     start<oldEnd||oldCount<1||newCount<1||newStart!==start+offset)fail('invalid or overlapping hunk positions');
+  const a=[],b=[];let context=0,changes=0;
+  while(i<diff.length&&!diff[i].startsWith('@@ ')){
+   const line=diff[i++],type=line[0],value=line.slice(1);
+   if(type===' '){a.push(value);b.push(value);context++;}
+   else if(type==='-'){a.push(value);changes++;}
+   else if(type==='+'){b.push(value);changes++;}
+   else fail('unsupported or truncated hunk');
+  }
+  if(a.length!==oldCount||b.length!==newCount||!context||!changes||
+     !matches(old,start,a)||!matches(historical,start+offset,a))fail('historical preimage or hunk counts mismatch');
+  historical.splice(start+offset,a.length,...b);
+  offset+=b.length-a.length;oldEnd=start+a.length;
+  let pos=-1;
+  for(let j=0;j<=current.length-a.length;j++)if(matches(current,j,a)){
+   if(pos!==-1)fail('ambiguous selected full context');pos=j;
+  }
+  if(pos<selectedEnd||pos<0)fail('missing or out-of-order selected full context');
+  current.splice(pos,a.length,...b);selectedEnd=pos+b.length;count++;
+ }
+ if(!count||historical.length!==wanted.length||!matches(historical,0,wanted))fail('historical postimage mismatch');
+ return current.join('\n')+'\n';
+}
+
+function proveSelectedOnlyReplay({path,steps,published,live,publishedRef,developmentSourceSha,sourceTextAt,firstParentPatch}){
+ if(typeof sourceTextAt!=='function'||typeof firstParentPatch!=='function')throw Error('missing selected-only Git text/patch readers');
+ const exactText=(ref,object)=>{
+  if(!/^100(?:644|755):[a-f0-9]{40}$/.test(object||''))throw Error('selected-only replay missing regular Git object');
+  const text=sourceTextAt(ref,path);
+  if(typeof text!=='string')throw Error('selected-only replay missing text');
+  const bytes=Buffer.from(text,'utf8');
+  const hash=createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+  if(hash!==object.slice(7))throw Error('selected-only replay text Git object mismatch');
+  return text;
+ };
+ let selected=exactText(publishedRef,published);
+ for(const step of steps){
+  if(step.parent_object?.slice(0,6)!==published.slice(0,6)||step.object?.slice(0,6)!==published.slice(0,6))throw Error('selected-only replay mode mismatch');
+  selected=replayExactTextPatch({path,selected,before:exactText(step.merge_sha+'^',step.parent_object),
+   after:exactText(step.merge_sha,step.object),patch:firstParentPatch(step.merge_sha,path),
+   beforeObject:step.parent_object,afterObject:step.object});
+ }
+ if(live.slice(0,6)!==published.slice(0,6)||selected!==exactText(developmentSourceSha,live))throw Error('selected-only replay does not equal live Git bytes');
+}
+
 // Shared prospective TESTING owners can be co-selected only when actual
 // first-parent Git objects form one uninterrupted byte chain from the published
 // object to the exact current development object. This is preparation only,
 // not a READY certificate, test/workflow exemption or publisher admission.
 // Retained READY overlaps and ANY excluded unfinished owner remain HOLD.
 function proveSharedProspectiveSources({selected,originalReady,liveQueue,
- developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt}){
+ developmentSourceSha,firstParentChangedPaths,isAncestor,sourceObjectAt,sourceTextAt,firstParentPatch}){
  const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: shared selected source needs reviewed chronology: '+why);};
  const byPath=new Map();
  for(const row of [...originalReady,...selected]){
@@ -141,22 +210,29 @@ function proveSharedProspectiveSources({selected,originalReady,liveQueue,
   }
   let previous=sourceObjectAt(liveQueue.published_base.tested_source_sha,path);
   const published=previous,steps=[];
+  let discontinuous=false;
   for(const row of ordered){
    const merge=row.merged_source_sha;
    if(!SHA.test(merge||'')||isAncestor(merge,developmentSourceSha)!==true||
       !firstParentChangedPaths(merge)?.includes(path))
     hold('missing first-parent ownership '+row.id+' '+path);
    const before=sourceObjectAt(merge+'^',path),after=sourceObjectAt(merge,path);
-   if(before!==previous||!/^100(?:644|755):[a-f0-9]{40}$/.test(after||'')||
+   if(before!==previous)discontinuous=true;
+   if(!/^100(?:644|755):[a-f0-9]{40}$/.test(after||'')||
       after===before||after===published)
     hold('unselected or discontinuous bytes '+row.id+' '+path);
    proof.set(row.id+'\u0000'+path,after);
    steps.push({id:row.id,merge_sha:merge,parent_object:before,object:after});
    previous=after;
   }
-  if(previous!==sourceObjectAt(developmentSourceSha,path))
-   hold('unreviewed live tip '+path);
-  chains.push({path,published_object:published,steps});
+  const live=sourceObjectAt(developmentSourceSha,path);
+  if(previous!==live)hold('unreviewed live tip '+path);
+  if(discontinuous){
+   try{proveSelectedOnlyReplay({path,steps,published,live,publishedRef:liveQueue.published_base.tested_source_sha,
+    developmentSourceSha,sourceTextAt,firstParentPatch});}
+   catch(e){hold(String(e.message).slice(0,300));}
+  }
+  chains.push({path,published_object:published,steps,...(discontinuous?{selected_only_replay:true}:{})});
  }
  return {proof,chains};
 }
@@ -164,7 +240,7 @@ function proveSharedProspectiveSources({selected,originalReady,liveQueue,
 /**
  * #3889: read-only, source-proven expansion of a live READY selection.
  * Every added item must independently pass the existing strict preview gate.
- * Shared TESTING paths require exact first-parent byte continuity. Retained
+ * Shared TESTING paths require exact first-parent continuity or independently reconstructed selected-only replay. Retained
  * READY or excluded unfinished overlaps still require separate isolation proof.
  * Neither the returned queue nor its fingerprint is a publisher certificate.
  */
