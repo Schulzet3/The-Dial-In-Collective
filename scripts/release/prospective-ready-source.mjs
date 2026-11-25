@@ -37,7 +37,86 @@ function reviewedParentAuditOnly({original,current,marker,developmentSourceSha,s
   return true;
  }catch{return false;}
 }
+
+// #3889: the original stale-family row has TWO real source merges, not a
+// fictitious single first-parent diff. Keep its historical second merge
+// anchor and require independently observed Git parents, changed paths,
+// objects and selected fixture chronology for BOTH sources. The current
+// published runner/coverage and fixtures are retained and actually executed;
+// this proof grants neither READY nor publication.
+const STALE_FAMILY_ID='DIC-Q-509-stale-family-statistics-reconcile';
+const STALE_FAMILY_PUBLISHED='2d22d448160d428a977f06482323646b92818fcf';
+const STALE_FAMILY_PATHS=[
+ 'supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql',
+ 'supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql',
+ 'supabase/tests/family_statistics_historical_reconcile_pre.sql',
+ 'supabase/tests/family_statistics_historical_reconcile_post.sql',
+ 'supabase/tests/family_statistics_complete_reconcile_post.sql',
+ 'scripts/audit/isolated-sql-regression.sh',
+ 'tests/sql-runner-coverage.test.mjs'
+];
+const STALE_FAMILY_STEPS=[
+ {merge:'a45bb63ffd8a3eee164828c3c81e63baa6a8f155',
+  parents:['5eca094cf069b820e9cbfd927f7dc6469e2e84fa','89fcc5a79855b0a44d77e787aca8b33dbf043688'],
+  before:[null,null,null,null,null,'ff048e4e1e68cfeb73b82c922148683813107ad9','ffafb78bdaf9751696d2b6b948857c79abd66b1a'],
+  after:['8b66a860e6dba420c447d0c9de13d7e69e53879c',null,'2573be7360c184b33fa6f44609e18d7e25c60178','a64c72781017301d4b547842099f09c8a01e25d9',null,'32e169dda9f3a297656198b9a7e60a48322fdb86','6035e6e4af92722e279c5376ba3fd75ed174c41c'],
+  runs:[44519926449,44519926537,44519926388,44519926461]},
+ {merge:'1def2c9d6573297c406192b413ffc3e7620ffe7a',
+  parents:['1521edf9c6a81ce80253a217dcf08d5c0b0b5f83','0977a43e4a6eb15c8bb1e33de59ed44577f364c2'],
+  before:['8b66a860e6dba420c447d0c9de13d7e69e53879c',null,'2573be7360c184b33fa6f44609e18d7e25c60178','a64c72781017301d4b547842099f09c8a01e25d9',null,'32e169dda9f3a297656198b9a7e60a48322fdb86','6035e6e4af92722e279c5376ba3fd75ed174c41c'],
+  after:['8b66a860e6dba420c447d0c9de13d7e69e53879c','26b06be50ebb0c823ec6a98a0015963925dcc6f0','730b789570f85ffb085bb74c0011408bb7f62c9f','a64c72781017301d4b547842099f09c8a01e25d9','7013829d296a2d6b1a9a450374285ab8738169f4','526ccf9a276acee21e4362cacf8a2fda69b8c8d2','587d36c5931b1c14220914bd32460af5690984e9'],
+  runs:[44526403238,44526403147,44526403127,44526403259]}
+];
+export function reviewedStaleFamilyComposite({row,developmentSourceSha,publishedSourceSha,
+ readParents,isAncestor,firstParentChangedPaths,sourceObjectAt}={}){
+ if(row?.id!==STALE_FAMILY_ID)return null;
+ const hold=why=>{throw Error('PROSPECTIVE_BATCH_HOLD: stale-family composite '+why);};
+ const [first,last]=STALE_FAMILY_STEPS,paths=STALE_FAMILY_PATHS;
+ if(row.issue!==509||row.merged_source_sha!==last.merge||
+    !Array.isArray(row.scope_paths)||!same(sorted(row.scope_paths),paths.slice(0,2))||
+    row.scope_paths.length!==2||publishedSourceSha!==STALE_FAMILY_PUBLISHED||
+    !SHA.test(developmentSourceSha||'')||
+    [readParents,isAncestor,firstParentChangedPaths,sourceObjectAt].some(fn=>typeof fn!=='function'))
+  hold('exact row, published base or Git readers missing');
+ if(!Array.isArray(row.ci_runs)||!STALE_FAMILY_STEPS.flatMap(s=>s.runs).every(run=>row.ci_runs.includes(run)))
+  hold('both original exact native run receipts required');
+ if(isAncestor(first.merge,last.parents[0])!==true||isAncestor(last.merge,developmentSourceSha)!==true)
+  hold('source ancestry unavailable');
+ const object=blob=>blob===null?null:'100644:'+blob;
+ const steps=[];
+ for(const s of STALE_FAMILY_STEPS){
+  if(!same(readParents(s.merge),s.parents))hold('exact ordered parents mismatch '+s.merge);
+  const changed=firstParentChangedPaths(s.merge);
+  const expected=paths.filter((_,i)=>s.before[i]!==s.after[i]).sort();
+  if(!Array.isArray(changed)||changed.some(p=>typeof p!=='string')||
+     !same(changed.filter(p=>!p.startsWith('docs/')).sort(),expected))
+   hold('first-parent executable inventory mismatch '+s.merge);
+  for(const [i,path] of paths.entries()){
+   if(sourceObjectAt(s.parents[0],path)!==object(s.before[i])||
+      sourceObjectAt(s.merge,path)!==object(s.after[i]))
+    hold('first-parent object mismatch '+s.merge+' '+path);
+  }
+  steps.push({merge_sha:s.merge,first_parent_sha:s.parents[0],
+   changed_paths:expected,run_ids:[...s.runs]});
+ }
+ // The first migration is unchanged in the second merge; require both
+ // individually introduced migrations absent from publication and exact live
+ // bytes, not just the second merge containing the first file.
+ if(!same(first.after,last.before))hold('historical object chain discontinuity');
+ const final=[...last.after];
+ final[5]='76578af1b7a2a9acce39802e2db933a8af9d0d10';
+ final[6]='9550fd21ff0edc93adbeed716e657a504a41d2e9';
+ for(const [i,path] of paths.entries()){
+  if(sourceObjectAt(developmentSourceSha,path)!==object(final[i])||
+     sourceObjectAt(publishedSourceSha,path)!==object(i<2?null:final[i]))
+   hold('live/published object drift '+path);
+ }
+ return {id:row.id,source_merges:steps,deployable_paths:paths.slice(0,2),
+  source_objects:Object.fromEntries(paths.map((path,i)=>[path,object(final[i])]))};
+}
+
 export function proposeProspectiveReadyQueue(args={}){
+ if(args.selectedId===STALE_FAMILY_ID)throw Error('PROSPECTIVE_READY_HOLD: stale-family requires reviewed composite batch source');
  return proposeProspectiveReadyQueueInternal(args,null);
 }
 function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedId,
@@ -312,8 +391,10 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   if(i.scope_paths.some(path=>newPaths.has(path)))
    hold('unfinished overlapping owner requires reviewed source isolation: '+i.id);
  }
- const amendments=new Map();
+ const amendments=new Map(),composites=new Map();
  for(const row of selected){
+  const composite=reviewedStaleFamilyComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha});
+  if(composite)composites.set(row.id,composite);
   const proof=reviewedSelectedAmendment({...readers,row});
   if(proof)amendments.set(row.id,proof);
  }
@@ -324,7 +405,8 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
  const proofs=[];
  for(const id of ordered){
   const original=selected.find(i=>i.id===id);
-  const actual=firstParentChangedPaths(original.merged_source_sha);
+  const composite=composites.get(id);
+  const actual=composite?composite.source_merges.flatMap(s=>s.changed_paths):firstParentChangedPaths(original.merged_source_sha);
   if(!Array.isArray(actual)||!same(sorted(deployableChangedPaths(actual)),sorted(original.scope_paths)))
    hold('declared scope does not equal first-parent deployable paths: '+id);
   const p=proposeProspectiveReadyQueueInternal({...readers,liveQueue:queue,selectedId:id},shared.proof);
@@ -340,7 +422,8 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   development_source_sha:developmentSourceSha,added_ids:ordered,
   retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
   preview_proofs:proofs,...(shared.chains.length?{shared_source_chains:shared.chains}:{}),
-  ...(amendments.size?{selected_amendments:[...amendments.values()]}:{})};
+  ...(amendments.size?{selected_amendments:[...amendments.values()]}:{}),
+  ...(composites.size?{selected_composite_sources:[...composites.values()]}:{})};
  return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
   status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,queue};
 }
