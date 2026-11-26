@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {reviewedCiOptimizationQa,ciOptimizationQaFixture,reviewedCiOptimizationQaReceiptQueue} from './helpers/release-published-restoration.mjs';
+import {reviewedCiOptimizationQa,ciOptimizationQaFixture,reviewedCiOptimizationQaReceiptQueue,reviewedCiOperationalWorkflowText} from './helpers/release-published-restoration.mjs';
 const DEV='a'.repeat(40),CANDIDATE='b'.repeat(40);
 function fixture(){
  const spec=ciOptimizationQaFixture(),objects=new Map(),parents=new Map(),changes=new Map();
@@ -54,4 +54,23 @@ test('#3667 prospective queue adds only the exact 16 missing successful source r
  assert.equal(result.items[0].ci_runs.length,41);
  assert.deepEqual(result.items[0].ci_runs.slice(0,25),before.items[0].ci_runs);
  assert.throws(()=>reviewedCiOptimizationQaReceiptQueue({...queue,items:[{...x.row,ci_runs:[1]}]},{added:[x.row.id]}));
+});
+test('#3667 workflow metadata readers retain historical binding and frozen publisher parity',()=>{
+ for(const name of ['approval-continuity.yml','cloud-beta-ci.yml','cloud-regression.yml']){
+  const path='.github/workflows/'+name;
+  for(const ref of ['reviewed-source','review-anchor','published-source','candidate']){
+   const x=fixture(),sha={
+    'reviewed-source':x.spec.source,'review-anchor':x.spec.qa_parent,
+    'published-source':x.spec.published,candidate:CANDIDATE
+   }[ref];
+   // Plausible workflow bytes from the other proven source still cannot cross
+   // the immutable historical-versus-frozen boundary.
+   const replacement=ref==='candidate'||ref==='published-source'
+    ?x.spec.source_objects[path]:x.spec.published_objects[path];
+   x.set(sha,path,replacement);
+   assert.throws(()=>reviewedCiOptimizationQa(x.args),undefined,name+' '+ref);
+  }
+ }
+ for(const path of ['package.json','.github/workflows/unreviewed.yml','../.github/workflows/approval-continuity.yml'])
+  assert.equal(reviewedCiOperationalWorkflowText(path),null,'no unreviewed operational source override: '+path);
 });
