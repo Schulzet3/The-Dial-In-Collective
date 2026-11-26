@@ -63,8 +63,17 @@ const GENERAL_BATCH_SUPPORT_V8=[
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
  ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725','4828fc6099dbbbe9a751182aa9c62ca411d91725']
 ];
+// #3972: independently tested immutable historical receipt reconciliation.
+const GENERAL_BATCH_QA_FIX_V9='947237d17fe3f9d8ee2638c12f9633168e42176f';
+const GENERAL_BATCH_SUPPORT_V9=[
+ ['tests/helpers/release-published-restoration.mjs','5364ba19d6b28be67e27dc5336f327a3e1397516','1a46bc915f7e9b544e21f53cb5f5da6f6402774a'],
+ ['tests/preflight-contract.test.mjs','f35d7bd96d6164eba7043f6598f77a6d8b22f054','dcaacd46244189696e9b5ba04b418d13ae63070f'],
+ ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
+ ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725','4828fc6099dbbbe9a751182aa9c62ca411d91725']
+];
 export function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V9,prior:GENERAL_BATCH_QA_FIX_V8,support:GENERAL_BATCH_SUPPORT_V9},
   {fix:GENERAL_BATCH_QA_FIX_V8,prior:GENERAL_BATCH_QA_FIX_V7,support:GENERAL_BATCH_SUPPORT_V8},
   {fix:GENERAL_BATCH_QA_FIX_V7,prior:GENERAL_BATCH_QA_FIX_V6,support:GENERAL_BATCH_SUPPORT_V7},
   {fix:GENERAL_BATCH_QA_FIX_V6,prior:GENERAL_BATCH_QA_FIX_V5,support:GENERAL_BATCH_SUPPORT_V6},
