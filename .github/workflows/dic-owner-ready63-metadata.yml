@@ -28,6 +28,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          show-progress: false
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
@@ -35,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           git -c fetch.fsckObjects=true fetch --no-tags origin 5b256f1fc0717d3635f7148b934a1f91f8991685
-          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685^{tree}')" = 779fdcf2ac14496179a242a34b13ca7f4d8d6ae4
+          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685^{tree}')]" = '779fdcf2ac14496179a242a34b13ca7f4d8d6ae4]'
           test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs')" = a55a014f90ac42a0753a87005037406a6f3c4901
           test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs/RELEASE_CONSUMPTION.json')" = 728f4e4378c27979993fef865e209588c72bd1cb
           git cat-file blob 728f4e4378c27979993fef865e209588c72bd1cb | git hash-object --stdin | grep -Fx 728f4e4378c27979993fef865e209588c72bd1cb
@@ -47,8 +48,11 @@ jobs:
       - name: Verify immutable existing CI and prepare unreachable blobs only
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/release/prepare-owner-ready63-blobs.mjs --prepare
+        run: |
+          mkdir -p qa_artifacts/owner-ready63
+          node scripts/release/prepare-owner-ready63-blobs.mjs --prepare > qa_artifacts/owner-ready63/metadata.log 2>&1
       - uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: owner-ready63-public-source-and-metadata
           path: qa_artifacts/owner-ready63/
