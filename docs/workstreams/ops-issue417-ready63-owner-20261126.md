@@ -1,0 +1,23 @@
+# Owner-approved frozen READY63 release - November 26, 2026 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=593dee41d328112bcc67791a477e3b1500e030c1 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+## Authority and acceptance
+Owner current chat: Run the mandatory DIC preflight and publish all items in the queue; followed by Do what you need to do and get this deployed. Do not duplicate any efforts just fix what you need to. ONE frozen READY63 batch only, excluding all six IN_PROGRESS items, no future publication or unrelated provider/member changes.
+
+Grant DIC-20261126-READY63-01 authorizes exactly candidate d8639edb2b4ee240afe6cd507086588c2493f2a5 and its 63 enumerated IDs; max_publications=1, expiry 2026-11-27T19:27:43.981Z. No previously issued grant changed. Grant blob58a46974c7362ea4b2dc6d2ed5dad61c898880a7 was independently reconstructed/read and hash-verified from exact native helper artifact15148726702; historical prefix objects preserved. Candidate, certificate, queue, runtime, tests and workflows are UNCHANGED.
+
+## Reused source evidence, no duplicate app build
+Frozen candidate treeb4f1b2da764c4bff4a87aa582208487fe6261189, manifestc262699b420198d93a5f547405f6abdf821402b2, queuea816976d2c53e88724323d9c90370c7151bd3c84. Exact native PUSH approval45733854744/job139622226113, validate45733854753/job139622227193, cloud45733854697/job139622226831, mobile45733854697/job139622226292, SQL45733854801/job139622226402 completed SUCCESS. Actual publisher read-only parity45734361908/job139623888858 SUCCESS. All63 READY,404 DEPLOYED,six IN_PROGRESS; no silent promotion, excluded code or source substitution.
+
+Temporary task-branch-only metadata helper PR3984 must close UNMERGED after use. Fixed run-ID string/order normalization, exact immutable production object retrieval and public package/server export allowlist. Final headc3fe3b30f1da046db82462ccb72e89a7f91efdb8: helper45883767537/job140129271621 SUCCESS, seven focused tests, operations PR acceptance45883774373 SUCCESS. Artifact15148726702 1875701bytes SHA256 b19a82fb1360ff3f41560bc63acc6261a551d14e1ba5acc89340122ff9b93d8c; all83 file byte counts/Git blobs/SHA256 independently checked. No production ref, request, candidate build or provider action by helper.
+
+## Recovery prerequisite independently verified, not a new export
+Actual scheduled encrypted backup45871979205/job140089431526 SUCCESS: snapshot2026-11-26T17:57:34Z, encrypted archive2026-11-26T17:58:00.160Z, appsource5b256f1fc0717d3635f7148b934a1f91f8991685. GitHub artifact15142184581,40584384bytes,ZIP SHA256 6adeb49b9eaa23ef0f4a4e3c98ef2b8b6b6738f809b8833597d6ac64beee6979 independently equals private Drive1y8CIniwFHJSvVFoCjsnSuXyGsyYPcspA under approved direct parent1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf,not shared. Sole encrypted payload SHA2567f38b0af9f2814dab0fc40b68482ea94cb1fbf45b91d27c589da8e5213fd6027. No plaintext/key disclosure or archive mutation.
+
+Actual saved-archive restore45506286882/job138842223530 SUCCESS November24: decrypted archived source45467496440, verified manifest/payload hashes, restored52 first-party tables/Auth/metadata in disconnected PostgreSQL, cleanup PASS. That job alone is GitHub-artifact proof, NOT independent Drive-copy proof; current Drive delivery independently checked above. Hosted services/external credentials/Storage file bytes excluded from restore scope.
+
+Read-only provider aggregate at2026-11-26T19:31:37.024720Z inspected103 timestamp columns; latest observed data write2026-11-25T05:23:44.879412Z precedes backup. Baseline protected table counts/hash fingerprints retained locally, no private records copied into GitHub. Existing function definition MD5s match reviewed migration originals; ACL/search_path preserved. Candidate25 ordered SQL migrations and two Edge broker core changes still require exact application and readback after this grant approval. No production SQL/Edge change claimed here.
+
+## Required completion, not DEPLOYED
+Verify this exact docs/grant approval and merged readback. Then apply only frozen necessary provider dependencies with still-fresh recovery, verify protected data and permissions, and execute ONE existing chat controller using exact two-file one-parent nonforce main request plus append-only ops journal. Existing main8ef5bdd7eafec1587fc7c8a2a320a443215e96b8 and production5b256f1fc0717d3635f7148b934a1f91f8991685 remain unchanged at this checkpoint. Require final controller outcome, exact source/Netlify READY-current/functions/data before DEPLOYED, reconcile queue/status/issues and published-source backup pin. No future release, member mutation, paid resource, plan, visibility or schedule change authorized.
