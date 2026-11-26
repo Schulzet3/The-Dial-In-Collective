@@ -1278,3 +1278,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=fd17c5a46f01adbdfacec2095c88836b9dc8a565 
 - Development grant/cert head: e2262003bb9125cc219c9ac40d776cb27a21cbab
 - Live preflight sha c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f; five exact R2 candidate SUCCESS runs approval45129746102,sql45129745970,cloud/mobile45129745953,validate45129745980; release baseline 5ef0e190237a0fa8e391b086c5baeaaa962ae264.
 - Previous R2 45131648831 FAILED BEFORE CLAIM because owner approval provenance string differed, now repaired with EXACT UTF-8 text copied from authoritative DIC-20261123-INSTANT-3851-R3 grant, not paraphrased. R2 superseded, no grant consumed, no earlier Netlify new deploy. Strict one-source one-owner-approved release; no SQL/private data/provider direct writes or force; verify real controller + Netlify READY/current.
+
+## DIC-20261126-READY63-01 controller request [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=593dee41d328112bcc67791a477e3b1500e030c1 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+- Release ID: DIC-20261126-READY63-01
+- Tested source: d8639edb2b4ee240afe6cd507086588c2493f2a5
+- Mode: publish
+- Owner scope: Owner November 26, 2026 current chat: Run the mandatory DIC preflight and publish all items in the queue; followed by Do what you need to do and get this deployed. Do not duplicate any efforts just fix what you need to. ONE frozen READY63 batch only, excluding all six IN_PROGRESS items, no future publication or unrelated provider/member changes.
+- Reuse the frozen READY63 candidate and five exact native CI receipts; no candidate rebuild. Required recovery, provider dependencies and exact live refs are independently verified before this proposed appendix is committed. This metadata preparation alone activates no grant, request or release and is NOT DEPLOYED evidence.
