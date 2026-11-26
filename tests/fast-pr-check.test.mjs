@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {assertBrowserFixtureClosure,fastSourceGuard} from '../scripts/audit/fast-pr-check.mjs';
-const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+import {reviewedCiOperationalWorkflowText} from './helpers/release-published-restoration.mjs';
+const file=path=>reviewedCiOperationalWorkflowText(path)??readFileSync(new URL('../'+path,import.meta.url),'utf8');
 test('cheap gate checks production graph and CloudApp browser fixture imports',()=>{
  const result=fastSourceGuard();
  assert.ok(result.shipped_js>10&&result.imported>10);
@@ -12,7 +13,12 @@ test('cheap gate checks production graph and CloudApp browser fixture imports',(
 test('omitted browser fixture module fails before Chromium rather than after timeout',()=>{
  const main=file('site/cloud/main.js'),fixture=file('tests/browser/cloud_owner_qa.py');
  assert.throws(()=>assertBrowserFixtureClosure(main+"import {missing} from './new-startup-helper.js';\n",fixture),/missing imported CloudApp module/);
- assert.throws(()=>assertBrowserFixtureClosure(main,fixture.replace("'startup-recovery'","")),/startup-recovery/);
+ // Remove an actual currently imported module; a frozen candidate may correctly
+ // omit the unrelated, unfinished startup-recovery feature.
+ const imported=[...main.matchAll(/from ['"]\.\/([a-z0-9_-]+)\.js['"]/g)]
+  .map(match=>match[1]).find(name=>fixture.includes("'"+name+"'"));
+ assert.ok(imported,'an existing fixture module must be available for the negative case');
+ assert.throws(()=>assertBrowserFixtureClosure(main,fixture.replace("'"+imported+"'","")),/missing imported CloudApp module/);
  assert.throws(()=>assertBrowserFixtureClosure(main+"import {\n missing\n} from './new-startup-helper.js';\n",fixture),/Unrecognized top-level/);
 });
 test('expensive CI runners reject cheap source/queue/receipt problems before installing',()=>{

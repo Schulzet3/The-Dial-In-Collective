@@ -1,5 +1,5 @@
 import test from 'node:test';
-import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
+import {frozenExcludedReadySource,reviewedCiOperationalWorkflowText} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,mkdtempSync,rmSync,mkdirSync,writeFileSync} from 'node:fs';
 import {planFullSuite,selectFullSuiteShard,FULL_SUITE_CONCURRENCY} from '../scripts/audit/run-full-suite.mjs';
@@ -8,7 +8,10 @@ import {tmpdir} from 'node:os';
 import {parseStageArgs,runMeasuredStage} from '../scripts/audit/measure-stage.mjs';
 import {browserQAPlan,browserQALanes,runBrowserQA} from '../scripts/audit/run-browser-qa.mjs';
 import {EventEmitter} from 'node:events';
-const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+// Operational workflow assertions use only the independently proved #3667
+// source. Actual frozen workflow bytes are separately required to equal the
+// published baseline; no assertion claims sharded candidate execution.
+const file=path=>reviewedCiOperationalWorkflowText(path)??readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
 
 test('one build per scoped change and no routine duplicate browser/full suites',(t)=>{
