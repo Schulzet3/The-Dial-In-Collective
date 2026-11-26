@@ -5,30 +5,6 @@ import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
-// Current selected product-specific project team name discrepancy, never global SEO.
-const word="[\\p{Lu}][\\p{L}\\p{M}'’.-]{1,34}";
-const person=word+"(?:\\s+"+word+"){1,2}";
-const team=new RegExp("^("+person+")\\s+(?:and|&)\\s+("+person+")$","u");
-const leaders=new RegExp("\\b(?:project|team)\\s+(?:is\\s+)?led\\s+by\\s+("+person+")\\s+(?:and|&)\\s+("+person+")(?=\\s*(?:[,.;]|\\bwho\\b|\\bbuilt\\b))","u");
-const norm=s=>String(s||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z]+/g,' ').trim();
-const first=s=>norm(s).split(' ')[0]||'';
-export function selectedProducerTeamNameDisagreement(selectedHtml,{producer,clean}={}){
- if(typeof selectedHtml!=='string'||typeof producer!=='string'||typeof clean!=='function')return null;
- const label=producer.trim(),pair=team.exec(label);if(!pair||label.length>180)return null;
- for(const block of productCoffeeProse(selectedHtml,clean)){
-  if(block.educational||!block.text||block.text.length>2500)continue;
-  const match=leaders.exec(block.text);if(!match)continue;
-  const before=[pair[1],pair[2]],after=[match[1],match[2]];
-  for(const [a,b] of [[0,1],[1,0]]){
-   if(norm(before[a])!==norm(after[a]))continue;
-   if(first(before[b])!==first(after[b])||norm(before[b])===norm(after[b]))continue;
-   if(first(before[b])===first(before[a]))continue;
-   return {label,narrative:after.join(' and ')};
-  }
- }
- return null;
-}
-
 // A chosen current Producer caption can contain a human farmer and a distinct
 // named farm. Separate roles only with independently supported selected prose.
 // The complete published caption remains unchanged in the source-review facts.
@@ -1702,28 +1678,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
         (namedEstateFarmMatches||namedCurrentFarmGrower)))){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
-  // The separately labeled Farm is a place, not the named person who grows
-  // the selected coffee. A unique selected-current narrative credit can
-  // replace only a Farm fallback, not an explicit Producer or a conflict.
-  const namedCurrentNarrativeGrower=narrative.details?.named_producer||'';
-  // Station/cooperative context may surface a separate narrative producer
-  // candidate but must not displace an explicit named Farm. Require an
-  // affirmative present-tense *person* producer sentence on this product.
-  const namedCurrentHumanClaim=namedCurrentNarrativeGrower&&
-   !/\b(?:washing\s+station|processing\s+station|mill|factory|co-?op(?:erative)?|association|collective|group|station)\b/iu.test(namedCurrentNarrativeGrower)&&
-   productCoffeeProse(canonicalProduct,clean).some(block=>{
-    if(block.educational||!block.text.startsWith(namedCurrentNarrativeGrower+' is '))return false;
-    return /^(?:a|an|the)\s+(?:(?:first|second|third|fourth|fifth|[1-5](?:st|nd|rd|th))[ -]generation\s+)?(?:coffee\s+)?(?:producer|farmer|grower)\b/iu.test(
-     block.text.slice(namedCurrentNarrativeGrower.length+4));
-   });
-  if(namedCurrentHumanClaim&&namedEstateFarm&&
-     producerEvidenceByFields.get(fields)==='farm'&&
-     keyOf(namedCurrentNarrativeGrower)!==keyOf(namedEstateFarm)&&
-     !conflicts.has('producer')&&
-     (!directSelected.producer||keyOf(directSelected.producer)===keyOf(namedCurrentNarrativeGrower))){
-   addField(fields,'Producer',namedCurrentNarrativeGrower);
-   narrativeProducerByFields.add(fields);
-  }
   if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
    addField(fields,'Roast Level',directSelected.roast_level);
   if(directSelected.tasting_notes&&!fields.tasting_notes&&!conflicts.has('tasting_notes'))
@@ -3355,63 +3309,6 @@ if(fields.origin&&!conflicts.has('origin')){
   if(!roaster_details.farm)roaster_details.farm=personFarm.farm;
   if(keyOf(roaster_details.named_producer||'')===keyOf(personFarm.literal))
    roaster_details.named_producer=personFarm.producer;
- }
- // Selected coffee's washing/processing station OWNER is not thereby the
- // producer/grower of the selected green coffee. Preserve that ownership as
- // reviewable provenance; do not invent a farm role from station ownership.
- // An independent current Producer/Grower/Farmer label or affirmative current
- // coffee-growing statement about that person remains positive evidence.
- if(fields.producer&&!conflicts.has('producer')){
-  const person=String(fields.producer).trim();
-  const ownBlocks=productCoffeeProse(canonicalProduct,clean).filter(b=>!b.educational);
-  const facilityOwner=person.length>2&&person.length<=110&&ownBlocks.some(b=>{
-   const m=/\b(?:washing|processing|drying)\s+(?:station|mill)\b[^.!?]{0,180}\b(?:owned|operated|managed)\s+by\s+/iu.exec(b.text);
-   if(!m)return false;
-   const tail=normalized(b.text.slice(m.index+m[0].length)),name=normalized(person);
-   return tail===name||tail.startsWith(name+' ');
-  });
-  const directProducerCaption=source_facts.some(f=>
-   f.section!=='Different coffee in the source'&&f.field==='producer'&&
-   /^(?:producer|grower|farmer)$/iu.test(String(f.label||'').trim())&&
-   keyOf(f.value)===keyOf(person));
-  const currentGrowing=ownBlocks.some(b=>{
-   const s=normalized(b.text),name=normalized(person),at=s.indexOf(name);
-   return at>=0&&/^(?:\s+(?:grows?|cultivates?|harvests?|farms?|produces?)\s+(?:(?:this|the|selected|our|their)\s+)?(?:coffee|cherries|beans)\b)/iu.test(s.slice(at+name.length));
-  });
-  if(facilityOwner&&!directProducerCaption&&!currentGrowing){
-   rememberCoffeeReviewCandidate(fields,'producer',person,
-    'Selected processing-station owner, not independently verified coffee-growing producer');
-   delete fields.producer;
-   if(keyOf(roaster_details.named_producer||'')===keyOf(person))delete roaster_details.named_producer;
-   producer_review_note=[producer_review_note,
-    'The selected seller names '+person+' as a washing/processing station owner, not an established farm grower. Confirm Producer manually.']
-    .filter(Boolean).join(' | ').slice(0,1100);
-   if(source_facts.length<384)source_facts.push({
-    field:'producer_context',label:'Selected processing-station owner (review only)',
-    value:person,source_url,source_type:'html',
-    section:'Selected station ownership, no published farm-producer claim',conflicting:false
-   });
-  }
- }
- // Exact selected Producer caption and own project co-leader can disagree
- // about the same named co-lead; neither surname gets silently certified.
- const namedTeamDisagreement=fields.producer&&!conflicts.has('producer')
-  ?selectedProducerTeamNameDisagreement(canonicalProduct,{producer:fields.producer,clean}):null;
- if(namedTeamDisagreement){
-  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.label,
-   'Exact selected Producer caption; surname unconfirmed');
-  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.narrative,
-   'Exact selected project co-leaders; surname unconfirmed');
-  conflicts.add('producer');delete fields.producer;delete roaster_details.named_producer;
-  producer_review_note=[producer_review_note,
-   'Selected Producer caption and same-coffee project team disagree on a co-lead surname. Confirm Producer manually.']
-   .filter(Boolean).join(' | ').slice(0,1100);
-  for(const fact of source_facts)if(fact.field==='producer')fact.conflicting=true;
-  if(source_facts.length<384)source_facts.push({
-   field:'producer_context',label:'Current selected project co-leaders (review only)',
-   value:namedTeamDisagreement.narrative,source_url,source_type:'html',
-   section:'Direct selected Producer caption vs same selected project team story',conflicting:true
-  });
  }
  // The selected co-op/farm narrative and direct Farm/Region label disagree
  // on district. Preserve both raw claims, but choose neither automatically.
