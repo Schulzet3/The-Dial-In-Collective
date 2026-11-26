@@ -5,8 +5,8 @@ on:
     paths:
       - '.github/workflows/dic-owner-ready63-metadata.yml'
       - 'scripts/release/prepare-owner-ready63-blobs.mjs'
-      - 'tests/owner-ready63-blobs.test.mjs'
-      - 'docs/workstreams/ops-owner-ready63-20261126.md'
+      - 'tests/owner-ready63-*.test.mjs'
+      - 'docs/workstreams/ops-owner-ready63-*.md'
 permissions:
   contents: read
 concurrency:
@@ -36,14 +36,14 @@ jobs:
         run: |
           set -euo pipefail
           git -c fetch.fsckObjects=true fetch --no-tags origin 5b256f1fc0717d3635f7148b934a1f91f8991685
-          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685^{tree}')]" = '779fdcf2ac14496179a242a34b13ca7f4d8d6ae4]'
+          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685^{tree}')" = 779fdcf2ac14496179a242a34b13ca7f4d8d6ae4
           test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs')" = a55a014f90ac42a0753a87005037406a6f3c4901
           test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs/RELEASE_CONSUMPTION.json')" = 728f4e4378c27979993fef865e209588c72bd1cb
           git cat-file blob 728f4e4378c27979993fef865e209588c72bd1cb | git hash-object --stdin | grep -Fx 728f4e4378c27979993fef865e209588c72bd1cb
       - name: Test exact metadata transformer and write boundaries
         run: |
           node --check scripts/release/prepare-owner-ready63-blobs.mjs
-          node --test tests/owner-ready63-blobs.test.mjs
+          node --test tests/owner-ready63-*.test.mjs
           node scripts/audit/security-inventory.mjs
       - name: Verify immutable existing CI and prepare unreachable blobs only
         env:

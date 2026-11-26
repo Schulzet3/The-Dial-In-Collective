@@ -1,0 +1,7 @@
+# READY63 public source export correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=593dee41d328112bcc67791a477e3b1500e030c1 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+Owner Publish/no-duplicate #417 comment7201232912; temporary unmerged3984 only. Downloaded exact failed-run45883534646 artifact15148237272, independently SHA256 fb3d78870907c7e950814d00924988a2064a1d71d806478ee5ce969b61c99d6f,1356524bytes. Bounded log establishes actual remaining failure: export path allowlist omitted READY63 package.json and src/server coffee modules. All preceding immutable source/CI/grant-validation checks passed, but no blob write occurred. Source packet verifies473records:63READY/404DEPLOYED/6IN_PROGRESS.
+
+Repair only public export validation: permit exact root package.json and existing src/server prefix, reject traversal, backslash, empty segments and env files, retain actual selected READY source paths and regular Git blob mode checks. Add focused negative regression. Include already-public production consumption ledger for independent verification. No candidate/source/certificate/publisher change; proposed metadata remains unreachable until recovery/provider prerequisites and independent grant approval. No provider, production, grant activation or request write. Native focused tests plus existing main operations checks required; no duplicated app suite/build.
