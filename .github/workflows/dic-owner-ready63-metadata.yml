@@ -17,6 +17,8 @@ jobs:
     if: github.repository == 'Schulzet3/The-Dial-In-Collective' && github.ref == 'refs/heads/work/owner-ready63-metadata-20261126'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
+    env:
+      GIT_NO_REPLACE_OBJECTS: '1'
     permissions:
       contents: write
       actions: read
@@ -29,6 +31,14 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
+      - name: Verify exact published Git objects before metadata preparation
+        run: |
+          set -euo pipefail
+          git -c fetch.fsckObjects=true fetch --no-tags origin 5b256f1fc0717d3635f7148b934a1f91f8991685
+          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685^{tree}')" = 779fdcf2ac14496179a242a34b13ca7f4d8d6ae4
+          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs')" = a55a014f90ac42a0753a87005037406a6f3c4901
+          test "$(git rev-parse '5b256f1fc0717d3635f7148b934a1f91f8991685:docs/RELEASE_CONSUMPTION.json')" = 728f4e4378c27979993fef865e209588c72bd1cb
+          git cat-file blob 728f4e4378c27979993fef865e209588c72bd1cb | git hash-object --stdin | grep -Fx 728f4e4378c27979993fef865e209588c72bd1cb
       - name: Test exact metadata transformer and write boundaries
         run: |
           node --check scripts/release/prepare-owner-ready63-blobs.mjs
