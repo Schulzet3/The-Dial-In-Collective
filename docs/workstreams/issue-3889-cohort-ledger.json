@@ -2,9 +2,9 @@
   "schema_version": 1,
   "kind": "DIC-3889-IMMUTABLE-63-COHORT-LEDGER-1",
   "coordinator_issue": 3889,
-  "record_state": "PROPOSED_DEVELOPMENT_PROMOTION_NOT_YET_MERGED",
-  "recorded_at_utc": "2026-11-26T00:24:21Z",
-  "meaning": "Per-ID source certification for the exact queue bytes in this proposed commit. Frozen CI and publisher audit are complete; integration and merged readback are not claimed. No deployment or owner publication authority.",
+  "record_state": "EXACT_SOURCE_CERTIFIED",
+  "recorded_at_utc": "2026-11-26T01:17:37Z",
+  "meaning": "All 63 original baseline IDs have exact-source frozen-candidate and actual publisher-audit certification. This development change records their certified queue assignments; the containing Git commit/PR and subsequent #3889 readback establish integration without any invented future merge identifier. The compatibility fields proposed_queue and state_in_proposed_commit describe the assignments recorded by that containing change. No publication, standalone #3472 queue promotion, or production/provider acceptance is claimed.",
   "baseline": {
     "development_sha": "d9fc859d81a23e10ee2cd0e1a37013b93a4980e5",
     "queue_blob_sha": "46304f47eb0e78fac8c7845155af86080900b3c4",
@@ -15,37 +15,40 @@
     "merge_record_note": "Original queue metadata, not an assertion that baseline PR checks alone certified readiness."
   },
   "preflight": {
-    "development_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+    "development_sha": "d3ba05ae4ee84de25766d2a3046c1d216e3913b5",
     "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
   },
   "proposed_queue": {
-    "blob_sha": "dac49db2e3478531fb34c5e022871d8fbc04dbf2",
+    "blob_sha": "a816976d2c53e88724323d9c90370c7151bd3c84",
     "baseline_states": {
-      "READY": 52,
-      "TESTING": 11,
+      "READY": 63,
+      "TESTING": 0,
       "DEPLOYED": 0
     },
     "total_states": {
-      "READY": 52,
-      "TESTING": 11,
+      "READY": 63,
+      "TESTING": 0,
       "DEPLOYED": 404,
       "IN_PROGRESS": 6
     },
     "delta_from_verified_development": {
       "newly_source_certified_ready": [
-        "DIC-Q-509-stale-family-statistics-reconcile"
+        "DIC-Q-33-r311-original63-selected-sourcing-province",
+        "DIC-Q-33-r327-original138-icon-labeled-source",
+        "DIC-Q-33-r342-original249-review-source-roles",
+        "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+        "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+        "DIC-Q-33-r380b-original242-woo-conflicting-region",
+        "DIC-Q-33-r403-original134-selected-swiss-water-method",
+        "DIC-Q-33-r408-original123-producer-farm-roles",
+        "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+        "DIC-Q-3667-ci-parallel-full-suite",
+        "DIC-Q-509-member-approval-gone-push-receipt"
       ],
-      "retained_ready": 51,
-      "historical_ci_receipt_corrections_only": [
-        "DIC-Q-509-admin-normalized-identity",
-        "DIC-Q-509-source-path-case-guard-20261115",
-        "DIC-Q-509-confirm-coffee-null-name",
-        "DIC-Q-33-r347-original299-directions-source",
-        "DIC-Q-509-admin-push-lazy-vault-poll",
-        "DIC-Q-455-r444-pending-shot-form-lock"
-      ]
+      "retained_ready": 52,
+      "exact_virtual_receipt_and_selected_source_changes": true
     },
-    "raw_parity_rule": "Adopt the entire frozen candidate queue blob unchanged; unrelated TESTING metadata edits would invalidate this candidate parity."
+    "raw_parity_rule": "Adopt the complete certified candidate queue blob unchanged, without unrelated metadata changes."
   },
   "certificates": {
     "frozen_ready52": {
@@ -123,6 +126,1023 @@
         "unexpected_or_mismatched_paths": 0
       },
       "publication_authorized": false
+    },
+    "frozen_ready63": {
+      "kind": "EXACT_SOURCE_FIVE_NATIVE_SUCCESS_AND_ACTUAL_PUBLISHER_AUDIT",
+      "candidate_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+      "candidate_branch": "release-candidates/prospectbatch3889-ea1ae6ddf36867450dba",
+      "sole_parent_sha": "d3ba05ae4ee84de25766d2a3046c1d216e3913b5",
+      "tree_sha": "b4f1b2da764c4bff4a87aa582208487fe6261189",
+      "published_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "published_release_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+      "queue_blob_sha": "a816976d2c53e88724323d9c90370c7151bd3c84",
+      "manifest_blob_sha": "c262699b420198d93a5f547405f6abdf821402b2",
+      "ready_selection_sha256": "9d9ad00ee2fa31259815c2d2dc54560bc52596af0a9e0e71b6c116945460f6b9",
+      "native_jobs": [
+        {
+          "name": "approval",
+          "run_id": 45733854744,
+          "run_attempt": 1,
+          "job_id": 139622226113,
+          "head_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45733854744/job/139622226113"
+        },
+        {
+          "name": "validate",
+          "run_id": 45733854753,
+          "run_attempt": 1,
+          "job_id": 139622227193,
+          "head_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45733854753/job/139622227193"
+        },
+        {
+          "name": "cloud-tests",
+          "run_id": 45733854697,
+          "run_attempt": 1,
+          "job_id": 139622226831,
+          "head_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45733854697/job/139622226831"
+        },
+        {
+          "name": "mobile-browser-qa",
+          "run_id": 45733854697,
+          "run_attempt": 1,
+          "job_id": 139622226292,
+          "head_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45733854697/job/139622226292"
+        },
+        {
+          "name": "sql",
+          "run_id": 45733854801,
+          "run_attempt": 1,
+          "job_id": 139622226402,
+          "head_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45733854801/job/139622226402"
+        }
+      ],
+      "publisher_audit": {
+        "source_sha": "8ef5bdd7eafec1587fc7c8a2a320a443215e96b8",
+        "run_id": 45734361908,
+        "job_id": 139623888858,
+        "status": "completed",
+        "conclusion": "success",
+        "verified_count": 63,
+        "artifact_id": 15078227385,
+        "download_sha256": "6c88bc711f2425e5a9678c5896e818a54795d26da5c837db87c7123e071bdfc2",
+        "receipt_sha256": "0f8683705339bcffd19c4fcc5f48e22b6068efc777c76f9fc22e6b80d74902f9",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45734361908/job/139623888858"
+      },
+      "publication_authorized": false,
+      "supersedes_failed_candidate_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+      "validate_execution": {
+        "candidate_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+        "run_id": 45733854753,
+        "job_id": 139622227193,
+        "log_sha256": "29bd8cb6d481c732afabb6c3a2ff40db3bfa8d5b89fa21dca272fe8ad977e3d8",
+        "full_node_suite": {
+          "tests": 5281,
+          "pass": 5275,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 6,
+          "todo": 0,
+          "duration_ms": 142572.629529
+        },
+        "member_scopes": [
+          {
+            "path": "tests/issue2258-member-approval-notices.test.mjs",
+            "source_blob_sha": "c9dfb612b200025a316c6e018e48e10e0d518a82",
+            "executed": 15,
+            "passed": 15,
+            "skipped": 0,
+            "assertions": [
+              {
+                "name": "unverified, rejected and admitted accounts cannot create pending-member push subscriptions",
+                "tap_id": 3995,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "member JWT is required, Admin role cannot subscribe, and SSRF endpoints fail closed",
+                "tap_id": 3996,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "pending user owns an independent subscription and cannot overwrite another account endpoint",
+                "tap_id": 3997,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "approved event sends accepted email and generic payload-free member push then independently acknowledges",
+                "tap_id": 3998,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "email credentials missing: retain email for retry; an opted-in device can still receive push",
+                "tap_id": 3999,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "no subscribed device is skipped rather than generating fabricated push delivery",
+                "tap_id": 4000,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "Vault key RPC failure retries only push while independent approval email is sent",
+                "tap_id": 4001,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable",
+                "tap_id": 4002,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "failed provider remains retryable and caller cannot select an email recipient/event",
+                "tap_id": 4003,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "duplicate cron claim sends no email or push",
+                "tap_id": 4004,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "retired 404/410 push endpoints are removed but do not produce a false sent receipt",
+                "tap_id": 4005,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "schema: member endpoints are service-only and only real verified Admin approval creates both receipts",
+                "tap_id": 4006,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "dedicated service worker never replaces Admin notifications or embeds account details",
+                "tap_id": 4007,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "scheduled notification poll works through the explicitly configured no-JWT Edge gateway",
+                "tap_id": 4008,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "security-inspection PR filter covers the exact Edge gateway config without broad TOML wildcard",
+                "tap_id": 4009,
+                "outcome": "PASS_EXECUTED"
+              }
+            ]
+          },
+          {
+            "path": "tests/reviewed-member-broker-qa.test.mjs",
+            "source_blob_sha": "1ff105782bdb2728627f02c4191abc4d3a4ff3aa",
+            "executed": 4,
+            "passed": 4,
+            "skipped": 0,
+            "assertions": [
+              {
+                "name": "independent member QA attributes both exact runtime sources and full non-excluded test history",
+                "tap_id": 5108,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "independent member QA rejects missing source ownership, malformed queue, parents and workflow drift",
+                "tap_id": 5109,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "retained member source and all tests must remain at previously certified bytes",
+                "tap_id": 5110,
+                "outcome": "PASS_EXECUTED"
+              },
+              {
+                "name": "independent member queue replay is a fixed four-receipt append with exact parent, manifest and full-row binding",
+                "tap_id": 5111,
+                "outcome": "PASS_EXECUTED"
+              }
+            ]
+          }
+        ],
+        "existing_live_probe_skips": [
+          "dic-preview-coffee rejects forged JWT without touching member data",
+          "dic-preview-coffee rejects requests without an authenticated JWT",
+          "dic-verify-coffee rejects forged JWT without touching member data",
+          "dic-verify-coffee rejects requests without an authenticated JWT",
+          "published admin route serves its shell without granting private data",
+          "published application serves its sign-in shell"
+        ],
+        "scope_limit": "Actual validate execution only. Native job success is not a fabricated PASS for a conditional step that did not execute.",
+        "selected_coffee_scopes": {
+          "receipt_sha256": "16bc22e7e2b707356a015b3d4f243d478b771e367c492bb2ab589c3e8c338043",
+          "log_sha256": "29bd8cb6d481c732afabb6c3a2ff40db3bfa8d5b89fa21dca272fe8ad977e3d8",
+          "ids": 9,
+          "executed": 79,
+          "passed": 79,
+          "failed": 0,
+          "skipped": 0,
+          "missing": 0,
+          "rows": [
+            {
+              "id": "DIC-Q-33-r311-original63-selected-sourcing-province",
+              "merged_source_sha": "1e326fb0683ee745a76108f38fb3c580141831e9",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r311-original63.test.mjs",
+                  "blob_sha": "1fdd17b150dc02430bbf3c3b949738c94977365b"
+                }
+              ],
+              "executed": 7,
+              "passed": 7,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "R311 selected H1 and explicit Add Coffee / Source Review remain separate",
+                  "tap_id": 2351,
+                  "log_line": 18486
+                },
+                {
+                  "name": "R311 direct roast Medium is not replaced by link to sibling Dark",
+                  "tap_id": 2352,
+                  "log_line": 18492
+                },
+                {
+                  "name": "R311 direct sensory beats related dark-coffee flavor and process",
+                  "tap_id": 2353,
+                  "log_line": 18498
+                },
+                {
+                  "name": "R311 generic global SEO and Whitefish roastery cannot replace selected farm",
+                  "tap_id": 2354,
+                  "log_line": 18504
+                },
+                {
+                  "name": "R311 changed product identity, failed source and duplicated capture fail closed",
+                  "tap_id": 2355,
+                  "log_line": 18510
+                },
+                {
+                  "name": "R311 current direct sourcing region refines only this current chosen coffee",
+                  "tap_id": 2356,
+                  "log_line": 18516
+                },
+                {
+                  "name": "R311 sourced-region grammar refuses old lot, unselected or mill provenance",
+                  "tap_id": 2357,
+                  "log_line": 18522
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r327-original138-icon-labeled-source",
+              "merged_source_sha": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r327-original138.test.mjs",
+                  "blob_sha": "abfda824c67e4cc5defc9e01299923f1788f6d75"
+                }
+              ],
+              "executed": 12,
+              "passed": 12,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "R327 direct selected title and five own flavor signals",
+                  "tap_id": 2364,
+                  "log_line": 18564
+                },
+                {
+                  "name": "R327 distinct own decaf, grower, region and roast evidence",
+                  "tap_id": 2365,
+                  "log_line": 18570
+                },
+                {
+                  "name": "R327 unrelated sidebar/footer flavors cannot fill missing selected flavor",
+                  "tap_id": 2366,
+                  "log_line": 18576
+                },
+                {
+                  "name": "R327 changed selected H1 cannot be certified from original slug",
+                  "tap_id": 2367,
+                  "log_line": 18582
+                },
+                {
+                  "name": "R327 parser and explicit Add Coffee review controls remain available",
+                  "tap_id": 2368,
+                  "log_line": 18588
+                },
+                {
+                  "name": "R327 source fail closed on unavailable, changed identity and absent review",
+                  "tap_id": 2369,
+                  "log_line": 18594
+                },
+                {
+                  "name": "R327 generic selected icon-label direct five notes override partial prose",
+                  "tap_id": 2370,
+                  "log_line": 18600
+                },
+                {
+                  "name": "R327 related sidebar/footer icon labels cannot fill own coffee",
+                  "tap_id": 2371,
+                  "log_line": 18606
+                },
+                {
+                  "name": "R327 changed selected coffee title blocks original icon facts",
+                  "tap_id": 2372,
+                  "log_line": 18612
+                },
+                {
+                  "name": "R327 decorative image without literal tasting icon cannot label fields",
+                  "tap_id": 2373,
+                  "log_line": 18618
+                },
+                {
+                  "name": "R327 multi-line two-sentence icon profile defers to complete literal parser",
+                  "tap_id": 2374,
+                  "log_line": 18624
+                },
+                {
+                  "name": "R327 single continuous comma list with a soft break remains usable icon evidence",
+                  "tap_id": 2375,
+                  "log_line": 18630
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r342-original249-review-source-roles",
+              "merged_source_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r342-original249-review.test.mjs",
+                  "blob_sha": "7bfb95e53b9a9457923df2634ffc6a9ca0904cbc"
+                }
+              ],
+              "executed": 4,
+              "passed": 4,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "R342 retain animated-label and educational harvest literal evidence without false review field roles",
+                  "tap_id": 2376,
+                  "log_line": 18636
+                },
+                {
+                  "name": "R342 final merge of selected review facts does not re-tag animated text or country-only Harvest",
+                  "tap_id": 2377,
+                  "log_line": 18642
+                },
+                {
+                  "name": "R342 neg: similarly named other lot and genuine release remain independent",
+                  "tap_id": 2378,
+                  "log_line": 18648
+                },
+                {
+                  "name": "R342 canonical selected provenance remains a named grower, not animation or education",
+                  "tap_id": 2379,
+                  "log_line": 18654
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+              "merged_source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r349-original298.test.mjs",
+                  "blob_sha": "8a43302eeeabe0803162cd9a56d2e725ebd339ad"
+                },
+                {
+                  "path": "tests/coffee-issue33-r352-selected-analogy-tastes.test.mjs",
+                  "blob_sha": "aeff67899ebb0c9dd7a83f0e7796b99da7943ed9"
+                }
+              ],
+              "executed": 18,
+              "passed": 18,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "R349 actual chosen description identifies current Walia product rather than recycled slug",
+                  "tap_id": 2391,
+                  "log_line": 18726
+                },
+                {
+                  "name": "R349 a changed product heading fails even when identical selected description appears",
+                  "tap_id": 2392,
+                  "log_line": 18732
+                },
+                {
+                  "name": "R349 competing product in footer/nav cannot provide chosen Colombian or sugar evidence",
+                  "tap_id": 2393,
+                  "log_line": 18738
+                },
+                {
+                  "name": "R349 literal Central American sensory comparison does not supply a coffee growing country",
+                  "tap_id": 2394,
+                  "log_line": 18744
+                },
+                {
+                  "name": "R349 quoted sugar decaf method cannot be silently treated as coffee-cherry Washed process",
+                  "tap_id": 2395,
+                  "log_line": 18750
+                },
+                {
+                  "name": "R349 broad descriptors do not falsely set a roast level",
+                  "tap_id": 2396,
+                  "log_line": 18756
+                },
+                {
+                  "name": "R349 real parser selected name and Add Coffee Source Review are no-save only",
+                  "tap_id": 2397,
+                  "log_line": 18762
+                },
+                {
+                  "name": "R349 source unavailable identity mismatch or invisible UI cannot pass hard afterproof",
+                  "tap_id": 2398,
+                  "log_line": 18768
+                },
+                {
+                  "name": "R352 selected direct three tasting claims and Colombia win over the broad sensory analogy",
+                  "tap_id": 2399,
+                  "log_line": 18774
+                },
+                {
+                  "name": "R352 analogy alone cannot become producing region when explicit country omitted",
+                  "tap_id": 2400,
+                  "log_line": 18780
+                },
+                {
+                  "name": "R352 genuine country disagreement stays blank and conflicting",
+                  "tap_id": 2401,
+                  "log_line": 18786
+                },
+                {
+                  "name": "R352 direct country Guatemala is never masked",
+                  "tap_id": 2402,
+                  "log_line": 18792
+                },
+                {
+                  "name": "R352 conditional, historical, unrelated and incomplete narratives cannot supply three notes",
+                  "tap_id": 2403,
+                  "log_line": 18798
+                },
+                {
+                  "name": "R352 other coffee sidebar cannot donate exact selected narrative",
+                  "tap_id": 2404,
+                  "log_line": 18804
+                },
+                {
+                  "name": "R352 full same-paragraph evidence and singular chosen H1 are required",
+                  "tap_id": 2405,
+                  "log_line": 18810
+                },
+                {
+                  "name": "R352 no invented roast, cherry process, producer or lot",
+                  "tap_id": 2406,
+                  "log_line": 18816
+                },
+                {
+                  "name": "R354 decaf-site geography alone cannot establish green-coffee provenance",
+                  "tap_id": 2407,
+                  "log_line": 18822
+                },
+                {
+                  "name": "R354 unmasked selected decaf treatment remains without false growing origin",
+                  "tap_id": 2408,
+                  "log_line": 18828
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+              "merged_source_sha": "84bf75f33918bd1f15f037344aedced15906d6f2",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r374-original41.test.mjs",
+                  "blob_sha": "c1ba8d832cce68fc36b5ce127bc23ed0465b4bd0"
+                }
+              ],
+              "executed": 11,
+              "passed": 11,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "selected full decaf own affirmative caffeine-removal sentence identifies Sugar Process, not green Natural",
+                  "tap_id": 2419,
+                  "log_line": 18894
+                },
+                {
+                  "name": "seller typo Sugan Cane alone is NOT an inferred sugar decaffeination treatment",
+                  "tap_id": 2420,
+                  "log_line": 18900
+                },
+                {
+                  "name": "no transfer from sibling or SEO decaf description to the selected ordinary coffee",
+                  "tap_id": 2421,
+                  "log_line": 18906
+                },
+                {
+                  "name": "generic roaster education does not establish a selected decaf method",
+                  "tap_id": 2422,
+                  "log_line": 18912
+                },
+                {
+                  "name": "explicitly negated current sugar-cane method must remain blank",
+                  "tap_id": 2423,
+                  "log_line": 18918
+                },
+                {
+                  "name": "partial-caffeine selected title must not become fully decaffeinated",
+                  "tap_id": 2424,
+                  "log_line": 18924
+                },
+                {
+                  "name": "required official source access/H1/parser/no-save UI stays fail-closed",
+                  "tap_id": 2425,
+                  "log_line": 18930
+                },
+                {
+                  "name": "Spanish descafeinado is explicit full-decaf identity, but regular Spanish coffee cannot inherit method",
+                  "tap_id": 2426,
+                  "log_line": 18936
+                },
+                {
+                  "name": "PageFly H3 must be tracker/product-id/cart-form exact; recommendation/SEO/wrong product never qualifies",
+                  "tap_id": 2427,
+                  "log_line": 18942
+                },
+                {
+                  "name": "PageFly H3 current selected exact product own paragraph feeds method without an H1; excludes sibling caffeine text",
+                  "tap_id": 2428,
+                  "log_line": 18948
+                },
+                {
+                  "name": "N508-119 exact diagnostic scrub excludes nonproduct header/navigation and keeps selected description",
+                  "tap_id": 2429,
+                  "log_line": 18954
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
+              "merged_source_sha": "fea352502587653ae02c99c8a941a76729d60767",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-242-selected-woo-origin-conflict.test.mjs",
+                  "blob_sha": "2c88de0388fcd9491fcdbaf70634d69f4af04670"
+                }
+              ],
+              "executed": 5,
+              "passed": 5,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "unique selected producer H5 and Location label are materially contradictory",
+                  "tap_id": 895,
+                  "log_line": 9750
+                },
+                {
+                  "name": "actual parser retains both literals, withholds origin, leaves process and Add Coffee usable",
+                  "tap_id": 896,
+                  "log_line": 9756
+                },
+                {
+                  "name": "matching direct H5 does not manufacture a conflict",
+                  "tap_id": 897,
+                  "log_line": 9762
+                },
+                {
+                  "name": "SEO, another H1, producer mismatch, absent H5 and related products cannot override selected Location",
+                  "tap_id": 898,
+                  "log_line": 9768
+                },
+                {
+                  "name": "absent exact source label, other country and ambiguous duplicate H5 fail closed",
+                  "tap_id": 899,
+                  "log_line": 9774
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r403-original134-selected-swiss-water-method",
+              "merged_source_sha": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r403-selected-swiss-water-claim.test.mjs",
+                  "blob_sha": "2620b36c1fa439880f071795b146a04d9cf54353"
+                }
+              ],
+              "executed": 8,
+              "passed": 8,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "selected decaf H1 corroborated by exact own product description yields Water Process, not green processing or Kenya",
+                  "tap_id": 2435,
+                  "log_line": 18990
+                },
+                {
+                  "name": "title alone or sitewide nav and FAQ do not authorize method",
+                  "tap_id": 2436,
+                  "log_line": 18996
+                },
+                {
+                  "name": "regular other selected coffee never inherits decaf treatment from page menus",
+                  "tap_id": 2437,
+                  "log_line": 19002
+                },
+                {
+                  "name": "direct source must name SAME water brand as selected decaf title",
+                  "tap_id": 2438,
+                  "log_line": 19008
+                },
+                {
+                  "name": "negated, historical and contradictory selected method paragraphs stay blank",
+                  "tap_id": 2439,
+                  "log_line": 19014
+                },
+                {
+                  "name": "mixed-caffeine coffee cannot obtain full-decaf method from another product",
+                  "tap_id": 2440,
+                  "log_line": 19020
+                },
+                {
+                  "name": "genuine selected own direct cupping notes survive unrelated-coffee source quarantine",
+                  "tap_id": 2441,
+                  "log_line": 19026
+                },
+                {
+                  "name": "educational geographic labels remain review-only after selected source quarantine",
+                  "tap_id": 2442,
+                  "log_line": 19032
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r408-original123-producer-farm-roles",
+              "merged_source_sha": "96d8d08ded663012f9a9cfc30b298908b38174ab",
+              "test_objects": [
+                {
+                  "path": "tests/coffee-issue33-r408-producer-farm-caption.test.mjs",
+                  "blob_sha": "56715259c6a5e8ed35f93951f28990cac08a2136"
+                }
+              ],
+              "executed": 4,
+              "passed": 4,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "current selected producer person and separately named Fazenda must retain two roles",
+                  "tap_id": 2447,
+                  "log_line": 19062
+                },
+                {
+                  "name": "no split from untyped, metadata, unrelated, educational or uncorroborated evidence",
+                  "tap_id": 2448,
+                  "log_line": 19068
+                },
+                {
+                  "name": "reject business/collective identities, malformed values and incompatible named farms",
+                  "tap_id": 2449,
+                  "log_line": 19074
+                },
+                {
+                  "name": "missing independent current grower evidence preserves visible source for manual review",
+                  "tap_id": 2450,
+                  "log_line": 19080
+                }
+              ]
+            },
+            {
+              "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+              "merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+              "test_objects": [
+                {
+                  "path": "tests/issue33-r424-kati173-174.test.mjs",
+                  "blob_sha": "8bb0a444d4750f21899b815690f005bf3117e1cc"
+                }
+              ],
+              "executed": 10,
+              "passed": 10,
+              "skipped": 0,
+              "assertions": [
+                {
+                  "name": "current selected comparative Tanzania Lighter notes accepted",
+                  "tap_id": 4017,
+                  "log_line": 28483
+                },
+                {
+                  "name": "a stale absolute Medium cannot replace selected comparative Lighter",
+                  "tap_id": 4018,
+                  "log_line": 28489
+                },
+                {
+                  "name": "other product and customer review notes are rejected",
+                  "tap_id": 4019,
+                  "log_line": 28495
+                },
+                {
+                  "name": "unpublished producer and espresso processing are not inferred",
+                  "tap_id": 4020,
+                  "log_line": 28501
+                },
+                {
+                  "name": "selected seller notes must be present even if archived metadata matches",
+                  "tap_id": 4021,
+                  "log_line": 28507
+                },
+                {
+                  "name": "full parser accepts exact Shopify main variant no-H1 seller rich-text notes",
+                  "tap_id": 4022,
+                  "log_line": 28513
+                },
+                {
+                  "name": "incorrect variant ID and handle cannot prove exact selected merchant product",
+                  "tap_id": 4023,
+                  "log_line": 28519
+                },
+                {
+                  "name": "no customer review contamination in selected seller direct H3 notes",
+                  "tap_id": 4024,
+                  "log_line": 28525
+                },
+                {
+                  "name": "fake selected canonical other coffee fails source identity",
+                  "tap_id": 4025,
+                  "log_line": 28531
+                },
+                {
+                  "name": "recycled original URL must not certify an archived, different selected coffee",
+                  "tap_id": 4026,
+                  "log_line": 28537
+                }
+              ]
+            }
+          ],
+          "scope_limit": "Scoped original parser/source-review regressions only; historical workflow metadata exclusion, fresh official-source capture, broader603 adjudication and other native candidate jobs are separate evidence."
+        },
+        "selected_ci_and_metadata": {
+          "executed": 23,
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "original_selected_ci": 19,
+          "repaired_metadata": 3,
+          "new_binding_negative": 1,
+          "assertions": [
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "one build per scoped change and no routine duplicate browser/full suites",
+              "tap_id": 142,
+              "log_line": 5232
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "CI stage receipts cannot escape artifact dir or inject shell",
+              "tap_id": 143,
+              "log_line": 5238
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "CI timing appends success and failure receipts without arguments or environment",
+              "tap_id": 144,
+              "log_line": 5244
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "full Node suite preserves the security corpus while parallelizing other files",
+              "tap_id": 145,
+              "log_line": 5250
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "full Node suite fails closed if the isolated resource-security test disappears",
+              "tap_id": 146,
+              "log_line": 5256
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "QA-only lane runs four scoped tests on Node 22 without dependency install or browser",
+              "tap_id": 147,
+              "log_line": 5262
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "parallel browser wrapper retains every prior acceptance script at each risk level",
+              "tap_id": 148,
+              "log_line": 5268
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "bounded browser lanes are disjoint, exhaustive and preserve serial fixture order",
+              "tap_id": 149,
+              "log_line": 5274
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "parallel browser orchestration runs all suites and rejects any failed fixture",
+              "tap_id": 150,
+              "log_line": 5280
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "HIGH-risk lint runs once on earlier-free approval runner; medium lint stays validate",
+              "tap_id": 151,
+              "log_line": 5286
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "pinned Chromium cache preserves dependency installation and all browser acceptances",
+              "tap_id": 152,
+              "log_line": 5292
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "SQL release regression retains immutable source push CI and superseded-PR coalescing",
+              "tap_id": 153,
+              "log_line": 5298
+            },
+            {
+              "path": "tests/ci-optimization.test.mjs",
+              "source_blob_sha": "ec33271cadc9d07bfaaa417bc5eb161226f46bc7",
+              "name": "Chromium setup skips apt only after an actual pinned headless-shell DOM smoke",
+              "tap_id": 154,
+              "log_line": 5304
+            },
+            {
+              "path": "tests/fast-pr-check.test.mjs",
+              "source_blob_sha": "755ab443255cddd5be9977e6e416e74a89c80bf2",
+              "name": "cheap gate checks production graph and CloudApp browser fixture imports",
+              "tap_id": 3876,
+              "log_line": 27636
+            },
+            {
+              "path": "tests/fast-pr-check.test.mjs",
+              "source_blob_sha": "755ab443255cddd5be9977e6e416e74a89c80bf2",
+              "name": "omitted browser fixture module fails before Chromium rather than after timeout",
+              "tap_id": 3877,
+              "log_line": 27642
+            },
+            {
+              "path": "tests/fast-pr-check.test.mjs",
+              "source_blob_sha": "755ab443255cddd5be9977e6e416e74a89c80bf2",
+              "name": "expensive CI runners reject cheap source/queue/receipt problems before installing",
+              "tap_id": 3878,
+              "log_line": 27648
+            },
+            {
+              "path": "tests/release-ci-optimization-source-proof.test.mjs",
+              "source_blob_sha": "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477",
+              "name": "#3667 independent QA binds the complete runtime/operational source and restored workflows",
+              "tap_id": 5000,
+              "log_line": 34381
+            },
+            {
+              "path": "tests/release-ci-optimization-source-proof.test.mjs",
+              "source_blob_sha": "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477",
+              "name": "#3667 independent QA rejects unready contamination, test drift and incorrect source/candidate bindings",
+              "tap_id": 5001,
+              "log_line": 34387
+            },
+            {
+              "path": "tests/release-ci-optimization-source-proof.test.mjs",
+              "source_blob_sha": "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477",
+              "name": "#3667 prospective queue adds only the exact 16 missing successful source receipts",
+              "tap_id": 5002,
+              "log_line": 34393
+            },
+            {
+              "path": "tests/release-ci-optimization-source-proof.test.mjs",
+              "source_blob_sha": "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477",
+              "name": "#3667 workflow metadata readers retain historical binding and frozen publisher parity",
+              "tap_id": 5003,
+              "log_line": 34399
+            },
+            {
+              "path": "tests/ci-scope.test.mjs",
+              "source_blob_sha": "1b084ce4b2abacb1446653093e7059d57b921465",
+              "name": "source-bound approval push jobs cannot be canceled by unrelated later push",
+              "tap_id": 163,
+              "log_line": 5358
+            },
+            {
+              "path": "tests/ci-scope.test.mjs",
+              "source_blob_sha": "1b084ce4b2abacb1446653093e7059d57b921465",
+              "name": "exact-SHA development cloud and browser push checks finish despite subsequent pushes",
+              "tap_id": 164,
+              "log_line": 5364
+            },
+            {
+              "path": "tests/ready-promotion-gate.test.mjs",
+              "source_blob_sha": "2c1c273d546f4ff01a3b49e3e3ffc8bde5a8d387",
+              "name": "approval workflow runs exactly one live immutable READY verifier with negative regression",
+              "tap_id": 4955,
+              "log_line": 34111
+            }
+          ],
+          "repaired_and_new_assertions": [
+            {
+              "name": "source-bound approval push jobs cannot be canceled by unrelated later push",
+              "tap_id": 163,
+              "log_line": 5358
+            },
+            {
+              "name": "exact-SHA development cloud and browser push checks finish despite subsequent pushes",
+              "tap_id": 164,
+              "log_line": 5364
+            },
+            {
+              "name": "approval workflow runs exactly one live immutable READY verifier with negative regression",
+              "tap_id": 4955,
+              "log_line": 34111
+            },
+            {
+              "name": "#3667 workflow metadata readers retain historical binding and frozen publisher parity",
+              "tap_id": 5003,
+              "log_line": 34399
+            }
+          ],
+          "detailed_audit_sha256": "460f02bb8f19a12ee669d3fdba351ecb905b664dddc7b005131da666aa7c2241",
+          "immediate_gate_sha256": "61c4eec33b4af9b3083c4ab683deaadd30ea17b8d32642dd1965bca2d77b5680"
+        },
+        "additional_validate_scopes": {
+          "isolated_security": {
+            "first_line": 36115,
+            "tests": 4,
+            "suites": 0,
+            "pass": 4,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0,
+            "duration_ms": 10928.485354,
+            "last_line": 36122
+          },
+          "preinstall": {
+            "first_line": 4329,
+            "tests": 13,
+            "suites": 0,
+            "pass": 13,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0,
+            "duration_ms": 83.244143,
+            "last_line": 4336
+          },
+          "node_version": "22.23.5"
+        },
+        "measured_efficiency": {
+          "full_node_suite_duration_ms": 142572.629529,
+          "isolated_security_duration_ms": 10928.485354,
+          "observed_successful_app_builds": 1,
+          "global_request_to_ready_under_15_minutes_proven": false
+        },
+        "build_and_applicability": {
+          "observed_successful_app_builds": 1,
+          "native_step_outcomes": [
+            {
+              "job": "validate",
+              "step": "Build once for NON-UI changes",
+              "conclusion": "skipped"
+            },
+            {
+              "job": "mobile-browser-qa",
+              "step": "Build shipped application ONCE for UI, visual or Auth",
+              "conclusion": "success"
+            }
+          ],
+          "targeted_cloud_suite": "NOT_APPLICABLE: full high-risk Node corpus executes in validate",
+          "ordinary_skip_source": "tests/hosted-issue-5-10-smoke.test.mjs",
+          "ordinary_skip_source_blob": "0f421f5d1e7c5aba936159f7d513cf114da0d78e",
+          "ordinary_skip_condition": "DIC_PUBLIC_HOSTED_PROBE !== '1'"
+        }
+      }
     }
   },
   "items": [
@@ -142,7 +1162,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-33-r311-original63-selected-sourcing-province",
@@ -152,20 +1179,28 @@
       "current_merged_source_sha": "1e326fb0683ee745a76108f38fb3c580141831e9",
       "current_pr": 3317,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
-          "path": "src/server/coffee-selected-published-sourcing-region.mjs",
-          "candidate_object": null
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         },
         {
-          "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "path": "src/server/coffee-selected-published-sourcing-region.mjs",
+          "candidate_object": "100644:5206c073a43fdce048d6b85dcfdd566fbbf43499"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-selected-published-sourcing-region.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-published-sourcing-region.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r327-original138-icon-labeled-source",
@@ -175,20 +1210,28 @@
       "current_merged_source_sha": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
       "current_pr": 3413,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         },
         {
           "path": "src/server/coffee-selected-icon-specs.mjs",
-          "candidate_object": null
+          "candidate_object": "100644:e8943c005181c429eca9a82eae7de6d2d36f1a86"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-icon-specs.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-icon-specs.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r342-original249-review-source-roles",
@@ -198,16 +1241,22 @@
       "current_merged_source_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
       "current_pr": 3468,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "src/server/coffee-source-facts.mjs",
-          "candidate_object": "100644:1a760a5db212d81e93899c4fedc47320ee949946"
+          "candidate_object": "100644:7dd87bf77057f765fec61a20c6b6dcf31c8a9f87"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r347-original299-directions-source",
@@ -225,7 +1274,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
@@ -235,20 +1291,28 @@
       "current_merged_source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
       "current_pr": 3491,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
-          "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "path": "src/server/coffee-flavor-evidence.mjs",
+          "candidate_object": "100644:4d92c3ac798f4373a74354c1f297c36dd13f8558"
         },
         {
-          "path": "src/server/coffee-flavor-evidence.mjs",
-          "candidate_object": "100644:48ae3cc76e45e5324a7a149f59e784ee59ecd25d"
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-flavor-evidence.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r362-original22-breadcrumb-roast-scope",
@@ -266,7 +1330,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-product-scope.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-product-scope.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
@@ -276,24 +1347,34 @@
       "current_merged_source_sha": "84bf75f33918bd1f15f037344aedced15906d6f2",
       "current_pr": 3570,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "src/server/coffee-decaffeination-method.mjs",
-          "candidate_object": "100644:71f36151e92954a869f5e58ca7ae3933a7664c39"
+          "candidate_object": "100644:7eeea4a9a35cb3f3aca7a6e8f2e0b8595fe2e0dc"
         },
         {
           "path": "src/server/coffee-direct-product-prose.mjs",
-          "candidate_object": "100644:462a7a7f045f534f689cff2836a387fac79472aa"
+          "candidate_object": "100644:94a397062e8c72bf451cf772dc7bb4ae6d1adfad"
         },
         {
           "path": "src/server/coffee-pagefly-selected-h3.mjs",
-          "candidate_object": null
+          "candidate_object": "100644:2ef2f6e659e097001d18c5717264696ad1f29751"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-pagefly-selected-h3.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-pagefly-selected-h3.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
@@ -303,20 +1384,28 @@
       "current_merged_source_sha": "fea352502587653ae02c99c8a941a76729d60767",
       "current_pr": 3591,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
-          "path": "src/server/coffee-selected-woo-short-origin-conflict.mjs",
-          "candidate_object": null
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         },
         {
-          "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "path": "src/server/coffee-selected-woo-short-origin-conflict.mjs",
+          "candidate_object": "100644:5eddda126a7d09b775a316661e98d58a48d02c30"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-selected-woo-short-origin-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-woo-short-origin-conflict.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r399-original99-producer-tenure-precision",
@@ -334,7 +1423,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-narrative-evidence.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-narrative-evidence.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-33-r403-original134-selected-swiss-water-method",
@@ -344,24 +1440,34 @@
       "current_merged_source_sha": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
       "current_pr": null,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "src/server/coffee-direct-product-prose.mjs",
-          "candidate_object": "100644:462a7a7f045f534f689cff2836a387fac79472aa"
+          "candidate_object": "100644:94a397062e8c72bf451cf772dc7bb4ae6d1adfad"
         },
         {
           "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         },
         {
           "path": "src/server/coffee-source-facts.mjs",
-          "candidate_object": "100644:1a760a5db212d81e93899c4fedc47320ee949946"
+          "candidate_object": "100644:7dd87bf77057f765fec61a20c6b6dcf31c8a9f87"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r406-original114-country-origin-display",
@@ -379,7 +1485,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-33-r408-original123-producer-farm-roles",
@@ -389,16 +1502,22 @@
       "current_merged_source_sha": "96d8d08ded663012f9a9cfc30b298908b38174ab",
       "current_pr": null,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "src/server/coffee-page-metadata.mjs",
-          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_r408"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
@@ -408,16 +1527,27 @@
       "current_merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
       "current_pr": 3839,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc"
+        },
+        {
           "path": "src/server/coffee-selected-shopify-variant-richtext.mjs",
-          "candidate_object": null
+          "candidate_object": "100644:e2e00fe1afee5c02a1b6c3fdc98274795e0bcdfd"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "coffee_compatible"
+      "source_disposition": "CERTIFIED_RECONSTRUCTED_SELECTED_COFFEE_SOURCE",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "src/server/coffee-selected-shopify-variant-richtext.mjs"
+      ],
+      "current_scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-shopify-variant-richtext.mjs"
+      ],
+      "source_component_ref": "source_components.coffee_selected"
     },
     {
       "id": "DIC-Q-3667-ci-parallel-full-suite",
@@ -427,16 +1557,22 @@
       "current_merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
       "current_pr": 3668,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "package.json",
-          "candidate_object": "100644:ec7aa50fb9273e791f7fe54839f753097b16c150"
+          "candidate_object": "100644:1d7cc5b935f0148b4076939fda01fa9d849b9cbc"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "ci_optimization"
+      "source_disposition": "CERTIFIED_CI_OPERATIONAL_SOURCE_WITH_PUBLISHED_CANDIDATE_WORKFLOWS",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "package.json"
+      ],
+      "current_scope_paths": [
+        "package.json"
+      ],
+      "source_component_ref": "source_components.ci_optimization"
     },
     {
       "id": "DIC-Q-455-r381-recommendation-copy-accessible-names",
@@ -454,7 +1590,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r390-recommendation-copy-live-status",
@@ -476,7 +1619,16 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js",
+        "site/visual.css"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js",
+        "site/visual.css"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r400-one-success-window-evidence-note",
@@ -494,7 +1646,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
@@ -520,7 +1679,18 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r411-nonpersonal-starting-yield-boundary",
@@ -542,7 +1712,16 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r415-grinder-tenth-boundary",
@@ -560,7 +1739,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r417-measured-grind-precision",
@@ -582,7 +1768,16 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/mapping.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/mapping.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r419-successful-grind-provenance",
@@ -600,7 +1795,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r421-grind-reference-grid",
@@ -622,7 +1824,16 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r428-null-temperature-copy",
@@ -640,7 +1851,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r432-slowfeed-copied-reference-feedback",
@@ -658,7 +1876,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r433-slowfeed-copy-action-availability",
@@ -676,7 +1901,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r443-validation-recommendation-button-state",
@@ -694,7 +1926,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r444-pending-shot-form-lock",
@@ -712,7 +1951,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
@@ -730,7 +1976,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r456-measured-grind-step-any",
@@ -748,7 +2001,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r458-optional-temperature-metric",
@@ -766,7 +2026,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "current_scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
@@ -784,7 +2051,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-455-r462-optional-measured-temperature-step-any",
@@ -802,7 +2076,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-completed-delete-retry-count",
@@ -820,7 +2101,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-merge-null-normalized-name",
@@ -838,7 +2126,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-normalized-identity",
@@ -856,7 +2151,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-push-lazy-vault-poll",
@@ -874,7 +2176,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/functions/dic-admin-push-broker/core.mjs"
+      ],
+      "current_scope_paths": [
+        "supabase/functions/dic-admin-push-broker/core.mjs"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-search-recovery-visible",
@@ -892,7 +2201,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/admin/main.js"
+      ],
+      "current_scope_paths": [
+        "site/admin/main.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-admin-shot-delete-family-refresh",
@@ -910,7 +2226,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-alias-manual-confirm",
@@ -928,7 +2251,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-calibration-order-fallback",
@@ -946,7 +2276,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-classify-family-single-refresh",
@@ -964,7 +2301,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-community-producer-search-parity",
@@ -982,7 +2326,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-community-withdrawn-recheck-guard",
@@ -1000,7 +2351,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-confirm-coffee-null-name",
@@ -1018,7 +2376,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-first-entry-no-self-alias",
@@ -1036,7 +2401,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-import-additional-credential-keys",
@@ -1054,7 +2426,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-member-approval-gone-push-receipt",
@@ -1064,16 +2443,22 @@
       "current_merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
       "current_pr": 3452,
       "development_state_before": "TESTING",
-      "state_in_proposed_commit": "TESTING",
+      "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
           "path": "supabase/functions/dic-member-approval-broker/core.mjs",
-          "candidate_object": "100644:1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a"
+          "candidate_object": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a"
         }
       ],
-      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
-      "certificate_ref": null,
-      "next_action_ref": "member_broker"
+      "source_disposition": "CERTIFIED_ORIGINAL_SOURCE_WITH_SEPARATELY_ATTRIBUTED_3472_COMPONENT",
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/functions/dic-member-approval-broker/core.mjs"
+      ],
+      "current_scope_paths": [
+        "supabase/functions/dic-member-approval-broker/core.mjs"
+      ],
+      "source_component_ref": "source_components.member_broker"
     },
     {
       "id": "DIC-Q-509-member-approval-null-receipt-guard",
@@ -1091,7 +2476,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-outlier-null-revision-guard",
@@ -1109,7 +2501,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-pending-canonical-name-response",
@@ -1127,7 +2526,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-pending-coffee-null-flags",
@@ -1145,7 +2551,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-preview-rollover-cooldown",
@@ -1163,7 +2576,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-recommendation-context-null-control-guard",
@@ -1181,7 +2601,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-recommendation-unique-controls",
@@ -1199,7 +2626,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-retire-internal-hide-shot",
@@ -1217,7 +2651,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-shot-timestamp-determinism",
@@ -1235,7 +2676,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "current_scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-source-path-case-guard-20261115",
@@ -1253,7 +2701,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-source-retry-rollover-cooldown",
@@ -1271,7 +2726,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-stale-family-statistics-reconcile",
@@ -1280,7 +2742,7 @@
       "baseline_merged_source_sha": null,
       "current_merged_source_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
       "current_pr": null,
-      "development_state_before": "TESTING",
+      "development_state_before": "READY",
       "state_in_proposed_commit": "READY",
       "scope_objects_at_frozen_candidate": [
         {
@@ -1293,7 +2755,16 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+        "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+        "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-stale-project-shot-comment-20261122",
@@ -1311,7 +2782,14 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     },
     {
       "id": "DIC-Q-509-workspace-inactive-selection-guards",
@@ -1329,31 +2807,17 @@
         }
       ],
       "source_disposition": "CERTIFIED_SELECTED_SOURCE",
-      "certificate_ref": "frozen_ready52"
+      "certificate_ref": "frozen_ready63",
+      "baseline_scope_paths": [
+        "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
+      ],
+      "current_scope_paths": [
+        "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
+      ],
+      "previous_certificate_ref": "frozen_ready52"
     }
   ],
-  "pending_next_actions": {
-    "coffee_compatible": {
-      "owner_issue": 33,
-      "scope": "Eight remaining compatible coffee items; immutable source composition and shared path chronology, each selected specialist receipt and scoped tests",
-      "next": "Integrate the independent source verifier and source-bound V10 support, then certify alongside compatible peers using an exact frozen tree, five native SUCCESS jobs, actual publisher evidence audit and per-ID queue parity. Reuse verified selected-source receipts."
-    },
-    "coffee_r408": {
-      "owner_issue": 33,
-      "scope": "R408 selected producer/farm roles plus reviewed probe guard relocation needed for source-compatible staging",
-      "next": "Finish the scoped relocation/source proof with hostile tests, bind it separately from the original item source, and include with compatible coffee peers after exact-source verification."
-    },
-    "member_broker": {
-      "owner_issue": 509,
-      "scope": "Original #3452 plus separately identified #3472 Vault-isolation component and exact test chronology",
-      "next": "Integrate independent composite proof and V10 support. Verify both historical source receipts, include the tracked nonbaseline component explicitly in candidate manifest, then require all five exact candidate jobs and publisher audit."
-    },
-    "ci_optimization": {
-      "owner_issue": 3667,
-      "scope": "Exact package/runner/test and separately bound operational workflow chronology; historical four-job applicability is source-bound",
-      "next": "Integrate reviewed composite source and independent V10 QA binding; preserve published candidate workflows, prove hostile applicability cases, and require all five frozen-candidate SUCCESS jobs before READY."
-    }
-  },
+  "pending_next_actions": {},
   "separate_nonbaseline_work": {
     "preserved_deployed": {
       "count": 404,
@@ -1427,11 +2891,15 @@
         "conclusion": "success",
         "prior_cancelled_attempt_preserved": true
       },
-      "status": "SOURCE_PROOF_IMPLEMENTED_PENDING_NEXT_FROZEN_CANDIDATE",
+      "status": "EXACT_SOURCE_COMPONENT_INCLUDED_IN_CERTIFIED_CANDIDATE",
       "included_in_ready52": false,
       "ready_certified": false,
       "publication_authorized": false,
-      "acceptance_limit": "No claim of real recipient/handset, provider delivery or production acceptance."
+      "acceptance_limit": "No claim of real recipient/handset, provider delivery or production acceptance.",
+      "source_inclusion_certified": true,
+      "candidate_component_certificate_ref": "frozen_ready63",
+      "standalone_queue_promotion": false,
+      "ready_certified_meaning": "No standalone queue row is promoted; the exact component is covered within the baseline member source proof."
     },
     "infrastructure": [
       {
@@ -1462,6 +2930,18 @@
         "scope": "Main V10 immutable support registry and next candidate",
         "status": "PENDING_VERIFIED_COMBINED_DEVELOPMENT_SOURCE",
         "baseline_credit": 0
+      },
+      {
+        "scope": "Merged #3980 workflow assertion source repair and #3981 main V11 bindings; separately certified replacement candidate and actual publisher audit",
+        "development_source_sha": "d3ba05ae4ee84de25766d2a3046c1d216e3913b5",
+        "main_source_sha": "e852bdfb05d924d4ebe8592b23669f2011cf9d8d",
+        "prs": [
+          3980,
+          3981
+        ],
+        "status": "EXACT_FROZEN_CANDIDATE_AND_PUBLISHER_AUDIT_VERIFIED",
+        "baseline_credit": 0,
+        "certificate_ref": "frozen_ready63"
       }
     ]
   },
@@ -1493,5 +2973,606 @@
     "unfinished_baseline_count": 11,
     "whole_original603_certified": false,
     "new_helper_certified_by_ready52": false
-  }
+  },
+  "historical_failed_attempts": [
+    {
+      "kind": "IMMUTABLE_FAILED_CANDIDATE_HISTORY_NOT_CERTIFICATION",
+      "candidate_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+      "candidate_branch": "release-candidates/prospectbatch3889-3a4762b20de6096c7a00",
+      "sole_parent_sha": "948d1dd33c5ffa2888867acc8f1edf2bce1ad5b2",
+      "tree_sha": "b90d59443d787a1f91f0e637ace6454bbb3ef6e2",
+      "queue_blob_sha": "a816976d2c53e88724323d9c90370c7151bd3c84",
+      "manifest_blob_sha": "e5ed00d0f40c5b6f0e498ae7d40e12b569612bd5",
+      "status": "FAILED_IMMUTABLE_CANDIDATE",
+      "native_jobs": [
+        {
+          "name": "validate",
+          "run_id": 45731136963,
+          "job_id": 139613126181,
+          "head_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45731136963/job/139613126181"
+        },
+        {
+          "name": "cloud-tests",
+          "run_id": 45731136850,
+          "job_id": 139613126144,
+          "head_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45731136850/job/139613126144"
+        },
+        {
+          "name": "mobile-browser-qa",
+          "run_id": 45731136850,
+          "job_id": 139613125808,
+          "head_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45731136850/job/139613125808"
+        },
+        {
+          "name": "sql",
+          "run_id": 45731136919,
+          "job_id": 139613125799,
+          "head_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45731136919/job/139613125799"
+        },
+        {
+          "name": "approval",
+          "run_id": 45731136826,
+          "job_id": 139613125641,
+          "head_sha": "6372df32405212fa3459d9bcec25df5029c5e21a",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/45731136826/job/139613125641"
+        }
+      ],
+      "validate_counts": {
+        "tests": 5280,
+        "pass": 5271,
+        "fail": 3,
+        "skip": 6
+      },
+      "validate_log_sha256": "c792549f01cab3ee9390eeb15044a323ccdae0a9bc3098e955d3cdbf78b26404",
+      "failed_assertions": [
+        {
+          "path": "tests/ci-scope.test.mjs",
+          "line": 144,
+          "name": "source-bound approval push jobs cannot be canceled by unrelated later push"
+        },
+        {
+          "path": "tests/ci-scope.test.mjs",
+          "line": 159,
+          "name": "exact-SHA development cloud and browser push checks finish despite subsequent pushes"
+        },
+        {
+          "path": "tests/ready-promotion-gate.test.mjs",
+          "line": 142,
+          "name": "approval workflow runs exactly one live immutable READY verifier with negative regression"
+        }
+      ],
+      "repair_source_sha": "d3ba05ae4ee84de25766d2a3046c1d216e3913b5",
+      "repair_pr": 3980,
+      "repair_objects": {
+        "tests/ci-scope.test.mjs": {
+          "before": "96a77e9d6c1a63c6a9a80ce086f0c113ccdcd2e9",
+          "after": "1b084ce4b2abacb1446653093e7059d57b921465"
+        },
+        "tests/ready-promotion-gate.test.mjs": {
+          "before": "6f880ee4e5bb2b1dccffd5c1cb71155553583d07",
+          "after": "2c1c273d546f4ff01a3b49e3e3ffc8bde5a8d387"
+        },
+        "tests/release-ci-optimization-source-proof.test.mjs": {
+          "before": "b73664198b6e7c88265b65a5af45f9bd0d9a96ca",
+          "after": "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477"
+        }
+      },
+      "repair_scope": "Bind only the three operational workflow metadata assertions to their reviewed exact operational source, preserve candidate published workflow bytes, and add an adversarial proof discriminator. No runtime, dependency, workflow or queue change.",
+      "ci_transfer_permitted": false,
+      "publication_authorized": false
+    }
+  ],
+  "source_components": {
+    "verified_main_source_sha": "e852bdfb05d924d4ebe8592b23669f2011cf9d8d",
+    "proof_module_objects": {
+      "scripts/release/coffee-selected-source-proof.mjs": "100644:7e986556f5b9ce2070798e9d2633f854d333a6f3",
+      "scripts/release/reviewed-member-broker-source.mjs": "100644:bd0cf45b0ebbb719cb665e9be816ea7b3dd03580",
+      "scripts/release/reviewed-ci-optimization-source.mjs": "100644:61c517cf0d8bfaf47f3dadb8436c4a1da77ca279",
+      "scripts/release/reviewed-general-batch-qa.mjs": "100644:b19c56faf5bd4943c4355720df99a15f79adfecf"
+    },
+    "coffee_selected": {
+      "kind": "DIC-REVIEWED-COFFEE-SOURCE-COMPONENT-3889-V1",
+      "published_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "reference_source_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+      "reference_queue_blob": "af0266a5cb9e56394bf976383adeda9b47653b38",
+      "development_source_sha": "d3ba05ae4ee84de25766d2a3046c1d216e3913b5",
+      "selected_ids": [
+        "DIC-Q-33-r311-original63-selected-sourcing-province",
+        "DIC-Q-33-r327-original138-icon-labeled-source",
+        "DIC-Q-33-r342-original249-review-source-roles",
+        "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+        "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+        "DIC-Q-33-r380b-original242-woo-conflicting-region",
+        "DIC-Q-33-r403-original134-selected-swiss-water-method",
+        "DIC-Q-33-r408-original123-producer-farm-roles",
+        "DIC-Q-33-r424-kati-selected-h1-free-richtext"
+      ],
+      "source_merges": [
+        {
+          "id": "DIC-Q-33-r311-original63-selected-sourcing-province",
+          "merge": "1e326fb0683ee745a76108f38fb3c580141831e9",
+          "parent": "db84d03a192da78c1b5ff577ffbdfb400a1ae87a",
+          "paths": {
+            ".github/workflows/issue33-r311-original63.yml": [
+              null,
+              "100644:7325da5121afe195dad0b9787ed9198f2c92e0e0"
+            ],
+            "scripts/audit/issue33-r311-original63-check.mjs": [
+              null,
+              "100644:23df2a1e9b7ea8d239588103e4edc610adb65866"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:0c317c384406780918612c6c5d58afff24479db6",
+              "100644:95e3442af91092390e2d2e6a086a5c8b0c6d2404"
+            ],
+            "src/server/coffee-selected-published-sourcing-region.mjs": [
+              null,
+              "100644:5206c073a43fdce048d6b85dcfdd566fbbf43499"
+            ],
+            "tests/coffee-issue33-r311-original63.test.mjs": [
+              null,
+              "100644:1fdd17b150dc02430bbf3c3b949738c94977365b"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r327-original138-icon-labeled-source",
+          "merge": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
+          "parent": "c646c0c1fdc330cc00a347572181fe3f015ce7f2",
+          "paths": {
+            ".github/workflows/issue33-r327-original138.yml": [
+              null,
+              "100644:9e1e18559bfe1f0143e981ccc9c40683821d3c22"
+            ],
+            "scripts/audit/issue33-r327-original138-check.mjs": [
+              null,
+              "100644:501803b5587df32039bc5f40eaf2ddca7b96c823"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:05d26d839a1cf04a46fafa4e5ec57f915c4a9fd2",
+              "100644:0a56583b970216935dc2031f792ea81808cbaea3"
+            ],
+            "src/server/coffee-selected-icon-specs.mjs": [
+              null,
+              "100644:e8943c005181c429eca9a82eae7de6d2d36f1a86"
+            ],
+            "tests/coffee-issue33-r327-original138.test.mjs": [
+              null,
+              "100644:abfda824c67e4cc5defc9e01299923f1788f6d75"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r342-original249-review-source-roles",
+          "merge": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+          "parent": "edfda99ed82a56bb1d64597534002de640c2795d",
+          "paths": {
+            ".github/workflows/issue33-r342-original249-review.yml": [
+              null,
+              "100644:3f233a6fff494c2e9f1a44e166ed35579b2f9b3c"
+            ],
+            "scripts/audit/issue33-r342-original249-review-check.mjs": [
+              null,
+              "100644:dfbca18a6157ef026f1e815ae86487332fdbf810"
+            ],
+            "src/server/coffee-source-facts.mjs": [
+              "100644:1a760a5db212d81e93899c4fedc47320ee949946",
+              "100644:3b2a69b6bd8ea10882184ded0ade7481b46de52a"
+            ],
+            "tests/coffee-issue33-r342-original249-review.test.mjs": [
+              null,
+              "100644:7bfb95e53b9a9457923df2634ffc6a9ca0904cbc"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+          "merge": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
+          "parent": "67cbb36cb1e433675feb5868d617d5af802c869c",
+          "paths": {
+            ".github/workflows/issue33-r349-original298.yml": [
+              null,
+              "100644:833f8dfd2cfee926e2853c30e0c9bdaf4696699b"
+            ],
+            ".github/workflows/issue33-shared-parser-regressions.yml": [
+              "100644:4cb69f3cb9767026423c79e3d1915751cbd7a5aa",
+              "100644:e976d52a097f2c179e590192114265cb00d91bd3"
+            ],
+            "scripts/audit/issue33-r349-original298-check.mjs": [
+              null,
+              "100644:1d20cdf4d5e9d5ec45281c8c4fd2c05b2476280a"
+            ],
+            "src/server/coffee-flavor-evidence.mjs": [
+              "100644:48ae3cc76e45e5324a7a149f59e784ee59ecd25d",
+              "100644:4d92c3ac798f4373a74354c1f297c36dd13f8558"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:0a56583b970216935dc2031f792ea81808cbaea3",
+              "100644:203d935af543fc6da2aaa4e227b0321cb647d4f2"
+            ],
+            "tests/coffee-issue33-r349-original298.test.mjs": [
+              null,
+              "100644:8a43302eeeabe0803162cd9a56d2e725ebd339ad"
+            ],
+            "tests/coffee-issue33-r352-selected-analogy-tastes.test.mjs": [
+              null,
+              "100644:aeff67899ebb0c9dd7a83f0e7796b99da7943ed9"
+            ],
+            "tests/coffee-issue33-shared-ci-trigger.test.mjs": [
+              "100644:b59d48ad06f82cb3fb11855c4fd5f47af6ddcb75",
+              "100644:d121ded71e1733c351421206b9f5733e1ec392c7"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+          "merge": "84bf75f33918bd1f15f037344aedced15906d6f2",
+          "parent": "2a4f8473f21ea57365c72c25fac22aa7336bf9ec",
+          "paths": {
+            ".github/workflows/issue33-r374-original41.yml": [
+              null,
+              "100644:c97d6393f478485c59302da6d10ce5ceea08ddce"
+            ],
+            ".github/workflows/issue33-shared-parser-regressions.yml": [
+              "100644:c2f3c0cbcc3c0586f83f26f041e50f0e1856077c",
+              "100644:ba789016ab07f0c701c6bb9e10338872d8d96d55"
+            ],
+            "scripts/audit/issue33-original603-focused-source-review.mjs": [
+              "100644:49b50fa3c1a1a07e61943ad98bbb2cc31c119fac",
+              "100644:56c5d28a12a2ae00a7ab9941dc7948ec18e2808f"
+            ],
+            "scripts/audit/issue33-r374-original41-check.mjs": [
+              null,
+              "100644:a559c28ade3033723f508bf5916d9e596bc058ad"
+            ],
+            "scripts/audit/issue33-shopify-pagefly-h3.mjs": [
+              null,
+              "100644:825edd6c8ff2ff73ff65bebbee029924518eca82"
+            ],
+            "src/server/coffee-decaffeination-method.mjs": [
+              "100644:71f36151e92954a869f5e58ca7ae3933a7664c39",
+              "100644:7eeea4a9a35cb3f3aca7a6e8f2e0b8595fe2e0dc"
+            ],
+            "src/server/coffee-direct-product-prose.mjs": [
+              "100644:462a7a7f045f534f689cff2836a387fac79472aa",
+              "100644:59ad849cf56850850639f68a469c5844e642cef7"
+            ],
+            "src/server/coffee-pagefly-selected-h3.mjs": [
+              null,
+              "100644:2ef2f6e659e097001d18c5717264696ad1f29751"
+            ],
+            "tests/coffee-issue33-r374-original41.test.mjs": [
+              null,
+              "100644:af76e5cd05e0efcacaa0b3226b077b0e11c990b5"
+            ],
+            "tests/coffee-issue33-shared-ci-trigger.test.mjs": [
+              "100644:243202377546100a7ad28c89e0716f9ec65009c0",
+              "100644:f61a25edc3ebbfc4a93721458425800592bfdfea"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
+          "merge": "fea352502587653ae02c99c8a941a76729d60767",
+          "parent": "1a36a69add59bc220a94d1e16ffe88081b7ba0e5",
+          "paths": {
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:203d935af543fc6da2aaa4e227b0321cb647d4f2",
+              "100644:761e92af185c924b3e4c17cb30ec02eae42c7908"
+            ],
+            "src/server/coffee-selected-woo-short-origin-conflict.mjs": [
+              null,
+              "100644:5eddda126a7d09b775a316661e98d58a48d02c30"
+            ],
+            "tests/coffee-issue33-242-selected-woo-origin-conflict.test.mjs": [
+              null,
+              "100644:2c88de0388fcd9491fcdbaf70634d69f4af04670"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r403-original134-selected-swiss-water-method",
+          "merge": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
+          "parent": "2ef1dd0281be97aa1b067278f52ddc7229cd5196",
+          "paths": {
+            "src/server/coffee-direct-product-prose.mjs": [
+              "100644:0748d9bf284f38f78d1e5cacf95c3233f9215744",
+              "100644:2bc22ff9b94f368b81a2a589a89ac145a0b57809"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:761e92af185c924b3e4c17cb30ec02eae42c7908",
+              "100644:ff8173ebb3c5a36ed7bb19628e459298c910764d"
+            ],
+            "src/server/coffee-source-facts.mjs": [
+              "100644:3b2a69b6bd8ea10882184ded0ade7481b46de52a",
+              "100644:7dd87bf77057f765fec61a20c6b6dcf31c8a9f87"
+            ],
+            "tests/coffee-issue33-r403-selected-swiss-water-claim.test.mjs": [
+              null,
+              "100644:2620b36c1fa439880f071795b146a04d9cf54353"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r408-original123-producer-farm-roles",
+          "merge": "96d8d08ded663012f9a9cfc30b298908b38174ab",
+          "parent": "a1b2d2c25dc144f7c6d96d7360cff0e273ef1cd2",
+          "paths": {
+            ".github/workflows/issue33-r407-original119-123.yml": [
+              "100644:491749dd2a478194e1d01e435329753dec5676f8",
+              "100644:9d71944d1e8d07a142b547004c7f40793be0292b"
+            ],
+            "scripts/audit/issue33-r407-original119-123-check.mjs": [
+              "100644:f6bc68d5ac8f4fb9603edc2860b019e16b2b9356",
+              "100644:1b320d1f673a1439dc0fadc0f37bbf4080504c87"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:ff8173ebb3c5a36ed7bb19628e459298c910764d",
+              "100644:29a7eba5e1dfc2e6367b9ffe4c38602ab423573d"
+            ],
+            "tests/coffee-issue33-r408-producer-farm-caption.test.mjs": [
+              null,
+              "100644:56715259c6a5e8ed35f93951f28990cac08a2136"
+            ]
+          }
+        },
+        {
+          "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+          "merge": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+          "parent": "7f9f00aba51cbb4016509180add98df58d3e2027",
+          "paths": {
+            ".github/workflows/issue33-r424-kati173-174.yml": [
+              null,
+              "100644:4e690437e27e3e3ae16a5546e5131b669fbc86dd"
+            ],
+            "scripts/audit/issue33-original603-focused-source-review.mjs": [
+              "100644:cda89ef1d7fd5bacfde1300c59733d330b8d6819",
+              "100644:1cfb8ad340e7095ee3550e0c9fefbaa36e53d7f0"
+            ],
+            "scripts/audit/issue33-r424-kati173-174-check.mjs": [
+              null,
+              "100644:2b9181303a15771014a9e3e1bec88929c3fc9e8c"
+            ],
+            "src/server/coffee-page-metadata.mjs": [
+              "100644:29a7eba5e1dfc2e6367b9ffe4c38602ab423573d",
+              "100644:491b42d8db03439ac3f9d61271b3eb542088618d"
+            ],
+            "src/server/coffee-selected-shopify-variant-richtext.mjs": [
+              null,
+              "100644:e2e00fe1afee5c02a1b6c3fdc98274795e0bcdfd"
+            ],
+            "tests/issue33-r424-kati173-174.test.mjs": [
+              null,
+              "100644:8bb0a444d4750f21899b815690f005bf3117e1cc"
+            ]
+          }
+        }
+      ],
+      "reviewed_relocations": [
+        {
+          "kind": "DIC-3889-R408-EXACT-ADDITIONS-RELOCATION-1",
+          "merge": "96d8d08ded663012f9a9cfc30b298908b38174ab",
+          "parent": "a1b2d2c25dc144f7c6d96d7360cff0e273ef1cd2",
+          "path": "src/server/coffee-page-metadata.mjs",
+          "original_parent_blob": "ff8173ebb3c5a36ed7bb19628e459298c910764d",
+          "original_merge_blob": "29a7eba5e1dfc2e6367b9ffe4c38602ab423573d",
+          "selected_eight_blob": "b1f2bd40c8ced51b155b3486ba010b33d0c5e4f4",
+          "selected_nine_blob": "cdf1b661ad1176bf95e182133190bf9a5a7858cc",
+          "hunks": [
+            {
+              "hunk": 1,
+              "inserted_lines": 28,
+              "side": "before_exact_following_published_anchor",
+              "anchor": "// Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official\n// roaster verification and never promotes a canonical record.\nimport {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './roast-level-evidence.mjs';\n",
+              "insertion": "// A chosen current Producer caption can contain a human farmer and a distinct\n// named farm. Separate roles only with independently supported selected prose.\n// The complete published caption remains unchanged in the source-review facts.\nexport function selectedLabeledPersonFarmRoles({publishedProducer,sourceFacts,selectedProse,existingFarm}={}){\n const literal=String(publishedProducer||'').trim();\n const match=/^(.{6,110}?):\\s*((?:Fazenda|Finca|Hacienda)\\s+[\\p{Lu}][\\p{L}\\p{M}0-9'’.-]{1,45}(?:\\s+[\\p{L}\\p{M}0-9'’.-]{1,45}){0,5})$/u.exec(literal);\n if(!match)return null;\n const person=match[1].trim(),farm=match[2].trim();\n if(!/^[\\p{Lu}][\\p{L}\\p{M}'’-]{1,39}(?:\\s+(?:[\\p{Lu}][\\p{L}\\p{M}'’-]{1,39}|de|da|do|dos|das|del|van|von)){1,5}$/u.test(person)||\n    /\\b(?:coffee|company|export|trading|group|coop|cooperative|station|estate|farm|finca|fazenda|hacienda|roaster)\\b/iu.test(person))return null;\n const key=s=>String(s||'').normalize('NFKD').replace(/\\p{M}/gu,'').toLowerCase().replace(/\\s+/gu,' ').trim();\n if(existingFarm&&key(existingFarm)!==key(farm))return null;\n const direct=Array.isArray(sourceFacts)&&sourceFacts.some(f=>f.field==='producer'&&\n   /^\\s*producer\\s*:?\\s*$/iu.test(String(f.label||''))&&\n   f.source_type==='html'&&f.conflicting!==true&&\n   String(f.section||'')!=='Different coffee in the source'&&key(f.value)===key(literal));\n if(!direct||!Array.isArray(selectedProse))return null;\n const selectedGrowingCredit=selectedProse.some(b=>{\n  if(b.educational||typeof b.text!=='string'||b.text.length>2500||\n     /^\\s*producer\\s*[:：]/iu.test(b.text))return false;\n  const normalized=key(b.text),at=normalized.indexOf(key(person));\n  if(at<0)return false;\n  const near=normalized.slice(Math.max(0,at-120),at+key(person).length+210);\n  return /\\b(?:coffee\\s+from|coffee\\s+farmers?|farmers?|family\\s+farm|growers?|grows?|grown|cultivat\\w*|harvest\\w*)\\b/iu.test(near);\n });\n return selectedGrowingCredit?{producer:person,farm,literal}:null;\n}\n\n",
+              "anchor_occurrences": 1
+            },
+            {
+              "hunk": 2,
+              "inserted_lines": 12,
+              "side": "after_exact_preceding_published_anchor",
+              "anchor": " // count after primary Farm normalization. Respect the published label at\n // FINAL field reconciliation, without suppressing independently labelled\n // Producer collectives or qualified anonymous-growing-group prose.\n const countedSupplier=/^\\d{1,3}(?:,?\\d{3})?\\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu;\n if(fields.producer&&countedSupplier.test(fields.producer)){\n  const same=value=>keyOf(String(value||''))===keyOf(fields.producer);\n  const printedFarm=source_facts.some(f=>\n    f.section!=='Different coffee in the source'&&\n    /^(?:farm|farms|finca)$/i.test(String(f.label||'').trim())&&same(f.value))||\n    productCoffeeProse(canonicalProduct,clean).some(b=>\n     /^farm\\s*[:：]/i.test(b.text)&&same(b.text.replace(/^farm\\s*[:：]\\s*/i,'')));\n  const printedProducer=source_facts.some(f=>\n    f.section!=='Different coffee in the source'&&\n    /^(?:producers?|growers?)$/i.test(String(f.label||'').trim())&&same(f.value));\n  if(printedFarm&&!printedProducer){\n   rememberCoffeeReviewCandidate(fields,'producer',fields.producer,\n    'Count-only selected Farm caption; named supplier not published');\n   delete fields.producer;\n  }\n }\n",
+              "insertion": " // Direct selected Producer: PERSON: FARM is two roles only if a separate\n // selected own-coffee growing description corroborates the named person.\n const personFarm=!conflicts.has('producer')&&fields.producer\n  ?selectedLabeledPersonFarmRoles({publishedProducer:fields.producer,\n    sourceFacts:source_facts,selectedProse:productCoffeeProse(canonicalProduct,clean),\n    existingFarm:roaster_details.farm}):null;\n if(personFarm){\n  fields.producer=personFarm.producer;\n  if(!roaster_details.farm)roaster_details.farm=personFarm.farm;\n  if(keyOf(roaster_details.named_producer||'')===keyOf(personFarm.literal))\n   roaster_details.named_producer=personFarm.producer;\n }\n",
+              "anchor_occurrences": 1
+            }
+          ],
+          "excluded_context_sources": [
+            "c9b1bf2a1cecce9a67c84983eb1fd8d379f2d5f2",
+            "c1dfa5abc5433d5413b62610089dc98b6cba5b3e"
+          ],
+          "source_changes": "Two complete original insertion blocks only, no added/removed/reworded runtime statement beyond the selected original patch."
+        }
+      ],
+      "reconstructed_objects": {
+        "src/server/coffee-page-metadata.mjs": "100644:cdf1b661ad1176bf95e182133190bf9a5a7858cc",
+        "src/server/coffee-selected-published-sourcing-region.mjs": "100644:5206c073a43fdce048d6b85dcfdd566fbbf43499",
+        "src/server/coffee-selected-icon-specs.mjs": "100644:e8943c005181c429eca9a82eae7de6d2d36f1a86",
+        "src/server/coffee-source-facts.mjs": "100644:7dd87bf77057f765fec61a20c6b6dcf31c8a9f87",
+        "src/server/coffee-flavor-evidence.mjs": "100644:4d92c3ac798f4373a74354c1f297c36dd13f8558",
+        "src/server/coffee-decaffeination-method.mjs": "100644:7eeea4a9a35cb3f3aca7a6e8f2e0b8595fe2e0dc",
+        "src/server/coffee-direct-product-prose.mjs": "100644:94a397062e8c72bf451cf772dc7bb4ae6d1adfad",
+        "src/server/coffee-pagefly-selected-h3.mjs": "100644:2ef2f6e659e097001d18c5717264696ad1f29751",
+        "src/server/coffee-selected-woo-short-origin-conflict.mjs": "100644:5eddda126a7d09b775a316661e98d58a48d02c30",
+        "src/server/coffee-selected-shopify-variant-richtext.mjs": "100644:e2e00fe1afee5c02a1b6c3fdc98274795e0bcdfd",
+        ".github/workflows/issue33-r311-original63.yml": null,
+        "scripts/audit/issue33-r311-original63-check.mjs": "100644:23df2a1e9b7ea8d239588103e4edc610adb65866",
+        "tests/coffee-issue33-r311-original63.test.mjs": "100644:1fdd17b150dc02430bbf3c3b949738c94977365b",
+        ".github/workflows/issue33-r327-original138.yml": null,
+        "scripts/audit/issue33-r327-original138-check.mjs": "100644:501803b5587df32039bc5f40eaf2ddca7b96c823",
+        "tests/coffee-issue33-r327-original138.test.mjs": "100644:abfda824c67e4cc5defc9e01299923f1788f6d75",
+        ".github/workflows/issue33-r342-original249-review.yml": null,
+        "scripts/audit/issue33-r342-original249-review-check.mjs": "100644:dfbca18a6157ef026f1e815ae86487332fdbf810",
+        "tests/coffee-issue33-r342-original249-review.test.mjs": "100644:7bfb95e53b9a9457923df2634ffc6a9ca0904cbc",
+        ".github/workflows/issue33-r349-original298.yml": null,
+        ".github/workflows/issue33-shared-parser-regressions.yml": null,
+        "scripts/audit/issue33-r349-original298-check.mjs": "100644:1d20cdf4d5e9d5ec45281c8c4fd2c05b2476280a",
+        "tests/coffee-issue33-r349-original298.test.mjs": "100644:8a43302eeeabe0803162cd9a56d2e725ebd339ad",
+        "tests/coffee-issue33-r352-selected-analogy-tastes.test.mjs": "100644:aeff67899ebb0c9dd7a83f0e7796b99da7943ed9",
+        "tests/coffee-issue33-shared-ci-trigger.test.mjs": null,
+        ".github/workflows/issue33-r374-original41.yml": null,
+        "scripts/audit/issue33-original603-focused-source-review.mjs": "100644:1cfb8ad340e7095ee3550e0c9fefbaa36e53d7f0",
+        "scripts/audit/issue33-r374-original41-check.mjs": "100644:6b47cfa4736189d91df71ed6867f9455065ce4b3",
+        "scripts/audit/issue33-shopify-pagefly-h3.mjs": "100644:825edd6c8ff2ff73ff65bebbee029924518eca82",
+        "tests/coffee-issue33-r374-original41.test.mjs": "100644:c1ba8d832cce68fc36b5ce127bc23ed0465b4bd0",
+        "tests/coffee-issue33-242-selected-woo-origin-conflict.test.mjs": "100644:2c88de0388fcd9491fcdbaf70634d69f4af04670",
+        "tests/coffee-issue33-r403-selected-swiss-water-claim.test.mjs": "100644:2620b36c1fa439880f071795b146a04d9cf54353",
+        ".github/workflows/issue33-r407-original119-123.yml": null,
+        "scripts/audit/issue33-r407-original119-123-check.mjs": "100644:1b320d1f673a1439dc0fadc0f37bbf4080504c87",
+        "tests/coffee-issue33-r408-producer-farm-caption.test.mjs": "100644:56715259c6a5e8ed35f93951f28990cac08a2136",
+        ".github/workflows/issue33-r424-kati173-174.yml": null,
+        "scripts/audit/issue33-r424-kati173-174-check.mjs": "100644:2b9181303a15771014a9e3e1bec88929c3fc9e8c",
+        "tests/issue33-r424-kati173-174.test.mjs": "100644:8bb0a444d4750f21899b815690f005bf3117e1cc"
+      },
+      "publication_authorized": false,
+      "ready_certified": false,
+      "identity_sha256": "ede58aec4447cf42550aeb726a87271c48b6b863fe8787164d0849c9d9af8a77"
+    },
+    "member_broker": {
+      "original_id": "DIC-Q-509-member-approval-gone-push-receipt",
+      "original_merge_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "additional_source_components": [
+        {
+          "kind": "DIC-APPROVED-NONBASELINE-SOURCE-COMPONENT-1",
+          "id": "DIC-Q-509-member-approval-vault-isolation",
+          "baseline_id": "DIC-Q-509-member-approval-gone-push-receipt",
+          "baseline_cohort_member": false,
+          "issue": 509,
+          "pr": 3472,
+          "merged_source_sha": "afd799a98475d253a896a45f2dacd432f9964c88",
+          "scope_paths": [
+            "supabase/functions/dic-member-approval-broker/core.mjs"
+          ],
+          "owner_receipt_path": "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json",
+          "owner_receipt_blob_sha": "e8835d92fa2c5d1c73a21f69605d7660069e2bab",
+          "ci_run_ids": [
+            44663957436,
+            44663957447,
+            44663957497
+          ],
+          "publication_authorized": false,
+          "ready_certified": false
+        }
+      ],
+      "member_receipt_reconciliation": {
+        "id": "DIC-Q-509-member-approval-gone-push-receipt",
+        "original_queue_source_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+        "original_queue_blob_sha": "dac49db2e3478531fb34c5e022871d8fbc04dbf2",
+        "original_row_sha256": "ed15440c72aef6f8adc6f397aa9acfe6334085c61203fcd4a2b30a9d39bb2b60",
+        "source_shas": [
+          "d2b99b7972512989a829a6406a201ad8d9ab264e",
+          "afd799a98475d253a896a45f2dacd432f9964c88"
+        ],
+        "added_successful_run_ids": [
+          44612256444,
+          44663957436,
+          44663957447,
+          44663957497
+        ]
+      }
+    },
+    "ci_optimization": {
+      "id": "DIC-Q-3667-ci-parallel-full-suite",
+      "original_merge_sha": "8e89dfe942422789bae59338364139b274143e63",
+      "operational_source_sha": "c26cd02724be477eeb7f30b989f586716fff2c56",
+      "source_merges": [
+        {
+          "merge_sha": "8e89dfe942422789bae59338364139b274143e63",
+          "parents": [
+            "c9d86f460580faf71ed27a1d5ec54568ef2e2321"
+          ],
+          "native_run_ids": [
+            44984692878,
+            44984692927,
+            44984692870
+          ]
+        },
+        {
+          "merge_sha": "cfd8bdd7b79b503d849f1a1824ad1ddd3e95c0b4",
+          "parents": [
+            "0828f884c963613a8435f34d187db6887f63a924"
+          ],
+          "native_run_ids": [
+            44987423405,
+            44987423569,
+            44987423409
+          ]
+        },
+        {
+          "merge_sha": "426792b245dd6a43c1e528a2e4a9297cc0819601",
+          "parents": [
+            "ac0dae1004ef84316ca721f6a5f19720b516e20d"
+          ],
+          "native_run_ids": [
+            45012672134,
+            45012672123,
+            45012672118,
+            45012672154
+          ]
+        },
+        {
+          "merge_sha": "76c5090bb4103b0039903f1dc9fb173ff9f93891",
+          "parents": [
+            "a6b4097800f4df2230110890c2c2af4245849442"
+          ],
+          "native_run_ids": [
+            45017599961,
+            45017599986,
+            45017599948
+          ]
+        },
+        {
+          "merge_sha": "fbc3f49723ac16128236d2e61d8bfbcf8fc59ed2",
+          "parents": [
+            "4c3ef2d80bc42aae9cf040cd0e300752c99ff9bb"
+          ],
+          "native_run_ids": [
+            45022987746,
+            45022987844,
+            45022987714
+          ]
+        },
+        {
+          "merge_sha": "c26cd02724be477eeb7f30b989f586716fff2c56",
+          "parents": [
+            "f3b38fbdae9bb0360833110f24ca5b3cd33890bb",
+            "e380367f93990351df430f4306104e84aea64ff4"
+          ],
+          "native_run_ids": [
+            45149083785,
+            45149083798,
+            45149083776
+          ]
+        }
+      ],
+      "operational_source_objects": {
+        ".github/workflows/approval-continuity.yml": "100644:9f968f3a1d1355bd79d860cd3e5b8c7bf03e5bf5",
+        ".github/workflows/cloud-beta-ci.yml": "100644:f249e51c81805b565632e9d8fa06790a4bb37453",
+        ".github/workflows/cloud-regression.yml": "100644:68955cbb7b0d3b79a5aa40ccb50f3126ec802709",
+        ".github/workflows/isolated-sql-regression.yml": "100644:4c3921caf3526c02c9d6184f0c077711a6264486",
+        "package.json": "100644:1d7cc5b935f0148b4076939fda01fa9d849b9cbc",
+        "scripts/audit/fast-pr-check.mjs": "100644:57a28c1f89d0b11a447c918575b198c1de8928bb",
+        "scripts/audit/run-full-suite.mjs": "100644:0c49500a66ede0a2411d7f99e42ab3594b109091",
+        "scripts/audit/syntax-batch.mjs": "100644:12746c5c7db2cce68dd3e4300b48af8f52a522a7",
+        "tests/ci-optimization.test.mjs": "100644:b3b8753dd089775ea645646291b9c19e5f8dedb2",
+        "tests/fast-pr-check.test.mjs": "100644:d11a0f702d35032e3442bfc8ee8671216f3496f8",
+        "tests/site-integrity.test.mjs": "100644:6ae50d3421e46abe481383272f2bac8bd8952985"
+      },
+      "candidate_workflow_rule": "Exact published workflow bytes; operational source proof is separately bound."
+    }
+  },
+  "evidence_snapshot_sha256": "2df5991853840aae95c2a1aee7504adbc8575f7e9fcd314e270d05ce19f3e592"
 }
