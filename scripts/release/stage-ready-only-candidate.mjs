@@ -13,6 +13,35 @@ export function memoizeImmutableGitRead(reader){
   return result;
  };
 }
+// One exact immutable tree inventory per commit replaces thousands of repeated
+// ls-tree subprocesses. Directory/symlink modes remain errors when requested;
+// absent entries are proved by the complete NUL-delimited tree, never guessed.
+export function createImmutableGitObjectReader(readTree){
+ if(typeof readTree!=='function')throw Error('Immutable Git tree reader unavailable');
+ const trees=new Map(),paths=new Map(),objects=new Map();
+ const intern=(pool,value)=>{if(!pool.has(value))pool.set(value,value);return pool.get(value);};
+ return (ref,path)=>{
+  if(!/^[a-f0-9]{40}$/.test(ref||''))throw Error('Git tree cache requires an exact immutable commit SHA');
+  if(typeof path!=='string'||!path||/[\\\u0000\r\n]/.test(path)||
+   path.split('/').some(p=>!p||p==='.'||p==='..'))throw Error('Unsafe immutable tree path');
+  if(!trees.has(ref)){
+   const raw=readTree(ref);
+   if(typeof raw!=='string'||(raw&&!raw.endsWith('\0')))throw Error('Incomplete exact Git tree inventory');
+   const entries=new Map();
+   for(const line of raw.split('\0').filter(Boolean)){
+    const match=/^([0-7]{6}) (blob|tree|commit) ([a-f0-9]{40})\t([^\0]+)$/.exec(line);
+    if(!match||entries.has(match[4]))throw Error('Malformed or duplicate exact Git tree entry');
+    entries.set(intern(paths,match[4]),intern(objects,match[1]+':'+match[2]+':'+match[3]));
+   }
+   trees.set(ref,entries); // Do not memoize a failed or partial inventory.
+  }
+  const entry=trees.get(ref).get(path);
+  if(entry===undefined)return null;
+  const regular=/^(100644|100755):blob:([a-f0-9]{40})$/.exec(entry);
+  if(!regular)throw Error('Unexpected source object or unsafe mode: '+path);
+  return regular[1]+':'+regular[2];
+ };
+}
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -25,6 +54,7 @@ import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 import {proposeProspectiveReadyQueue,proposeDisjointProspectiveReadyBatch,BASELINE_QUEUE_BLOB} from './prospective-ready-source.mjs';
+import {reviewedMemberBrokerPlannedObject} from './reviewed-member-broker-source.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
@@ -49,16 +79,24 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   catch(e){if(e.status===1)return false;throw Error('Missing Git ancestry evidence');}
  });
  const changed=(a,b)=>git(['diff','--name-only','--no-renames',a,b]).split(/\r?\n/).filter(Boolean);
- const sourceObjectAt=memoizeImmutableGitRead((ref,path)=>{
-  const lines=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
-  if(!lines.length)return null;
-  if(lines.length!==1)throw Error('Ambiguous source entry: '+path);
-  const m=/^(100644|100755) blob ([0-9a-f]{40})\t(.+)$/.exec(lines[0]);
-  if(!m||m[3]!==path)throw Error('Unexpected source object or unsafe mode: '+path);
-  return m[1]+':'+m[2];
+ const treeObject=createImmutableGitObjectReader(ref=>git(['ls-tree','-r','-t','-z','--full-tree',ref],{trim:false}));
+ const exactImmutableRef=memoizeImmutableGitRead(ref=>{
+  if(SHA.test(ref||''))return ref;
+  // Only parent expressions rooted in a full immutable SHA may be resolved.
+  // Never cache HEAD, branch names, tags or arbitrary caller-supplied revspecs.
+  if(!/^[a-f0-9]{40}\^(?:[1-9][0-9]*)?$/.test(ref||''))throw Error('Mutable source ref cannot enter exact Git tree cache');
+  const resolved=git(['rev-parse','--verify',ref+'^{commit}']);
+  if(!SHA.test(resolved))throw Error('Missing exact historical parent commit');
+  return resolved;
  });
+ const sourceObjectAt=memoizeImmutableGitRead((ref,path)=>treeObject(exactImmutableRef(ref),path));
  const lastReviewedReadyObject=(owners,path)=>{
   if(!owners.length)throw Error('No selected READY owner for '+path);
+  const componentObjects=owners.map(row=>reviewedMemberBrokerPlannedObject({row,path,plan:batch,sourceObjectAt})).filter(Boolean);
+  if(componentObjects.length){
+   if(owners.length!==1||componentObjects.length!==1)throw Error('Member component overlaps another selected owner');
+   return componentObjects[0];
+  }
   // A co-selected same-file dependency is valid ONLY with one exact
   // chronologically latest reviewed merge. Never use queue entry order.
   const tips=owners.filter(tip=>owners.every(owner=>
@@ -95,15 +133,17 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    throw Error('Prospective batch must retain every current READY and select exactly the planned additions');
   queue=batch.queue;stagedQueueRaw=JSON.stringify(queue,null,2)+'\n';
  }
+ const coffee=batch?.coffeeSourceProof||null;
  const batchQaPaths=batch?discoverReviewedBatchQaRestoration({queue,selectedIds,
   publishedSourceSha,developmentSourceSha,sourceObjectAt,prospectiveBatchPlan:batch}):[];
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
  const workflowOnlyTests=discoverReviewedWorkflowTestExclusions({
-  publishedSourceSha,developmentSourceSha,restoredWorkflows:unpublishedWorkflows,sourceObjectAt
+  publishedSourceSha,developmentSourceSha,restoredWorkflows:unpublishedWorkflows,sourceObjectAt,selectedIds,coffeeSourceProof:coffee
  });
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
-  selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor,sourceObjectAt});
+  selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor,sourceObjectAt,
+  coffeeSourceProof:coffee});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const compatibleAuditSupport=discoverCompatibleAuditSupport({queue,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
@@ -131,6 +171,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    ...restoredStartupTests].sort();
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
+  if(coffee?.runtimeObjects[path])continue; // exact selected-only reconstruction has its own verified objects
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
   const selectedObject=lastReviewedReadyObject(owners,path);
   if(plan.pinned_ready_paths.includes(path)){
@@ -158,6 +199,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    else git(['update-index','--force-remove','--',path],{env});
   }
   for(const path of plan.pinned_ready_paths){
+   if(coffee?.runtimeObjects[path])continue;
    const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
    const object=lastReviewedReadyObject(owners,path);
    const [mode,sha]=object.split(':');
@@ -175,6 +217,12 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
     git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
    }else git(['update-index','--force-remove','--',path],{env});
   }
+  if(coffee)for(const [path,object] of Object.entries(coffee.objects)){
+   if(object===null){git(['update-index','--force-remove','--',path],{env});continue;}
+   const hash=git(['hash-object','-w','--stdin'],{env,input:coffee.texts[path]});
+   if(object!=='100644:'+hash)throw Error('Selected coffee reconstructed text/blob changed '+path);
+   git(['update-index','--add','--cacheinfo','100644',hash,path],{env});
+  }
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
    selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
@@ -186,6 +234,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    excluded_unready_test_paths:unpublishedTests,
    restored_to_published_unready_test_paths:restoredTests,
    publication_authorized:false,
+   ...(coffee?{reviewed_coffee_source_component:coffee.receipt}:{}),
    ...(batchQaPaths.length?{restored_reviewed_batch_qa_paths:batchQaPaths}:{}),
    ...(prospective?{prospective_ready_preview:{status:prospective.status,
     selected_id:prospective.selected_id,baseline_queue_blob:BASELINE_QUEUE_BLOB,
@@ -193,6 +242,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    ...(batch?{prospective_ready_batch_preview:{status:batch.status,
     baseline_queue_blob:BASELINE_QUEUE_BLOB,added_ids:batch.added_ids,
     retained_ready_ids:batch.retained_ready_ids,identity_sha256:batch.identity_sha256,
+    ...(batch.additional_source_components?{additional_source_components:batch.additional_source_components}:{}),
+    ...(batch.member_receipt_reconciliation?{member_receipt_reconciliation:batch.member_receipt_reconciliation}:{}),
     publication_authorized:false,ready_certified:false}}:{})};
   // New candidate Git commits change code/workflows, so carry a fresh
   // exact-parent journal receipt validated by approval continuity.

@@ -71,8 +71,53 @@ const GENERAL_BATCH_SUPPORT_V9=[
  ['tests/required-check-workflows.test.mjs','50d74fa8ef9e39043b11c467a519aa8a70573835','50d74fa8ef9e39043b11c467a519aa8a70573835'],
  ['tests/issue3889-context-amendment.test.mjs','4828fc6099dbbbe9a751182aa9c62ca411d91725','4828fc6099dbbbe9a751182aa9c62ca411d91725']
 ];
+// #3977: one exact merged coffee/member/CI independent QA generation.
+const GENERAL_BATCH_QA_FIX_V10="948d1dd33c5ffa2888867acc8f1edf2bce1ad5b2";
+const GENERAL_BATCH_SUPPORT_V10=[
+  [
+    "tests/helpers/release-published-restoration.mjs",
+    "b0dcf8a52b613c20aaa068fed8121f4555265fac",
+    "5364ba19d6b28be67e27dc5336f327a3e1397516"
+  ],
+  [
+    "tests/preflight-contract.test.mjs",
+    "36e22857aad4cb2f18634d325fb05e705fc5132c",
+    "f35d7bd96d6164eba7043f6598f77a6d8b22f054"
+  ],
+  [
+    "tests/required-check-workflows.test.mjs",
+    "50d74fa8ef9e39043b11c467a519aa8a70573835",
+    "50d74fa8ef9e39043b11c467a519aa8a70573835"
+  ],
+  [
+    "tests/issue3889-context-amendment.test.mjs",
+    "4828fc6099dbbbe9a751182aa9c62ca411d91725",
+    "4828fc6099dbbbe9a751182aa9c62ca411d91725"
+  ],
+  [
+    "tests/fixtures/issue3889-member-broker-source.json",
+    "2b9f6bb13f6d33cc3788e23f6fec4220f64264c4",
+    null
+  ],
+  [
+    "tests/release-ci-optimization-source-proof.test.mjs",
+    "b73664198b6e7c88265b65a5af45f9bd0d9a96ca",
+    null
+  ],
+  [
+    "tests/release-coffee-source-proof.test.mjs",
+    "ef2df6fa7c620ec13915e571ea16dbc14caee428",
+    null
+  ],
+  [
+    "tests/reviewed-member-broker-qa.test.mjs",
+    "1ff105782bdb2728627f02c4191abc4d3a4ff3aa",
+    null
+  ]
+];
 export function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V10,prior:GENERAL_BATCH_QA_FIX_V9,support:GENERAL_BATCH_SUPPORT_V10},
   {fix:GENERAL_BATCH_QA_FIX_V9,prior:GENERAL_BATCH_QA_FIX_V8,support:GENERAL_BATCH_SUPPORT_V9},
   {fix:GENERAL_BATCH_QA_FIX_V8,prior:GENERAL_BATCH_QA_FIX_V7,support:GENERAL_BATCH_SUPPORT_V8},
   {fix:GENERAL_BATCH_QA_FIX_V7,prior:GENERAL_BATCH_QA_FIX_V6,support:GENERAL_BATCH_SUPPORT_V7},

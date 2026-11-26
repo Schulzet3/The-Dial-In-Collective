@@ -3,6 +3,9 @@
 // It is not certification, a release grant, publication, or proof of five CI jobs.
 import {createHash} from 'node:crypto';
 import {reviewedHistoricalReceiptCorrection} from './reviewed-3889-receipts.mjs';
+import {reviewedMemberBrokerComposite,reconcileReviewedMemberReceiptQueue,MEMBER_BROKER_ID} from './reviewed-member-broker-source.mjs';
+import {reviewedCiOptimizationComposite,reconcileReviewedCiReceiptQueue} from './reviewed-ci-optimization-source.mjs';
+import {proveCoffeeSelectedSource} from './coffee-selected-source-proof.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 export const BASELINE_DEV_SHA='d9fc859d81a23e10ee2cd0e1a37013b93a4980e5';
 export const BASELINE_QUEUE_BLOB='46304f47eb0e78fac8c7845155af86080900b3c4';
@@ -118,6 +121,7 @@ export function reviewedStaleFamilyComposite({row,developmentSourceSha,published
 
 export function proposeProspectiveReadyQueue(args={}){
  if(args.selectedId===STALE_FAMILY_ID)throw Error('PROSPECTIVE_READY_HOLD: stale-family requires reviewed composite batch source');
+ if(args.selectedId===MEMBER_BROKER_ID)throw Error('PROSPECTIVE_READY_HOLD: member broker requires reviewed composite batch source');
  return proposeProspectiveReadyQueueInternal(args,null);
 }
 function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedId,
@@ -167,8 +171,10 @@ function proposeProspectiveReadyQueueInternal({baselineQueue,liveQueue,selectedI
   for(const path of current.scope_paths){
    const merged=sourceObjectAt(current.merged_source_sha,path);
    const exactShared=sharedProof?.get(current.id+'\u0000'+path)===merged;
+   const exactComposite=compositeProof?.id===MEMBER_BROKER_ID&&current.id===MEMBER_BROKER_ID&&
+    compositeProof.source_objects[path]===sourceObjectAt(developmentSourceSha,path);
    if(!/^100(?:644|755):[a-f0-9]{40}$/.test(merged||'')||
-     (!exactShared&&merged!==sourceObjectAt(developmentSourceSha,path))||
+     (!exactShared&&!exactComposite&&merged!==sourceObjectAt(developmentSourceSha,path))||
      merged===sourceObjectAt(published,path))
     hold('selected scope differs from merged source or published bytes: '+path);
   }
@@ -380,6 +386,14 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   hold('explicit unique original TESTING IDs required');
  const correction=reviewedHistoricalReceiptCorrection(readers.liveQueue,{selectedIds,developmentSourceSha:readers.developmentSourceSha,sourceObjectAt:readers.sourceObjectAt});
  if(correction)readers={...readers,liveQueue:correction.queue};
+ const memberCorrection=reconcileReviewedMemberReceiptQueue(readers.liveQueue,{...readers,selectedIds,
+  publishedSourceSha:readers.liveQueue.published_base?.tested_source_sha});
+ if(memberCorrection)readers={...readers,liveQueue:memberCorrection.queue};
+ const ciCorrection=reconcileReviewedCiReceiptQueue(readers.liveQueue,{...readers,selectedIds,
+  publishedSourceSha:readers.liveQueue.published_base?.tested_source_sha});
+ if(ciCorrection)readers={...readers,liveQueue:ciCorrection.queue};
+ const coffee=proveCoffeeSelectedSource({...readers,selectedIds});
+ if(coffee)readers={...readers,liveQueue:coffee.reconciledQueue};
  const {liveQueue,baselineQueue,developmentSourceSha,firstParentChangedPaths}=readers;
  if(queueSchemaErrors(liveQueue).length||queueSchemaErrors(baselineQueue).length||
     !SHA.test(developmentSourceSha||'')||typeof firstParentChangedPaths!=='function')
@@ -388,21 +402,34 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
  const originalReady=liveQueue.items.filter(i=>i.state==='READY');
  const selected=ordered.map(id=>liveQueue.items.find(i=>i.id===id));
  if(selected.some(i=>!i||i.state!=='TESTING'))hold('selected item is not live TESTING');
+ if(coffee)for(const row of [...originalReady,...selected.filter(i=>!coffee.ids.includes(i.id))]){
+  const owned=firstParentChangedPaths(row.merged_source_sha).filter(p=>!p.startsWith('docs/'));
+  if(owned.some(path=>coffee.protectedPaths.includes(path)))hold('coffee source overlaps another selected/retained owner: '+row.id);
+ }
  const newPaths=new Set(selected.flatMap(i=>i.scope_paths));
  for(const i of liveQueue.items){
   if(ordered.includes(i.id)||!['TESTING','IN_PROGRESS','BLOCKED'].includes(i.state))continue;
-  if(i.scope_paths.some(path=>newPaths.has(path)))
+  if(i.scope_paths.some(path=>newPaths.has(path)&&!coffee?.runtimeObjects[path]))
    hold('unfinished overlapping owner requires reviewed source isolation: '+i.id);
  }
  const amendments=new Map(),composites=new Map();
  for(const row of selected){
-  const composite=reviewedStaleFamilyComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha});
+  if(coffee?.ids.includes(row.id))continue;
+  const composite=reviewedStaleFamilyComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha})||
+   reviewedMemberBrokerComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha})||
+   reviewedCiOptimizationComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha});
   if(composite)composites.set(row.id,composite);
   const proof=reviewedSelectedAmendment({...readers,row});
   if(proof)amendments.set(row.id,proof);
  }
+ // A retained member component keeps the same separately attributable bytes;
+ // its original baseline merge is never silently rewritten to the later fix.
+ for(const row of originalReady){
+  const composite=reviewedMemberBrokerComposite({...readers,row,publishedSourceSha:liveQueue.published_base.tested_source_sha});
+  if(composite)composites.set(row.id,composite);
+ }
  let shared;
- try{shared=proveSharedProspectiveSources({...readers,selected,originalReady,amendments});}
+ try{shared=proveSharedProspectiveSources({...readers,selected:selected.filter(i=>!coffee?.ids.includes(i.id)),originalReady,amendments});}
  catch(e){if(String(e.message).includes('PROSPECTIVE_BATCH_HOLD:'))throw e;hold('shared source Git proof unavailable: '+String(e.message).slice(0,160));}
  let queue=structuredClone(liveQueue);
  const proofs=[];
@@ -412,6 +439,10 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   const actual=composite?composite.source_merges.flatMap(s=>s.changed_paths):firstParentChangedPaths(original.merged_source_sha);
   if(!Array.isArray(actual)||!same(sorted(deployableChangedPaths(actual)),sorted(original.scope_paths)))
    hold('declared scope does not equal first-parent deployable paths: '+id);
+  if(coffee?.ids.includes(id)){
+   const row=queue.items.find(x=>x.id===id);row.state='READY';row.blockers=[];
+   proofs.push({id,identity_sha256:coffee.receipt.identity_sha256});continue;
+  }
   const p=proposeProspectiveReadyQueueInternal({...readers,liveQueue:queue,selectedId:id},shared.proof,composite);
   queue=p.queue;
   proofs.push({id,identity_sha256:p.identity_sha256});
@@ -426,7 +457,15 @@ export function proposeDisjointProspectiveReadyBatch({selectedIds,...readers}={}
   retained_ready_ids:originalReady.map(i=>i.id).sort(),selected_ready_records:selectedReadyItems,
   preview_proofs:proofs,...(correction?{historical_receipt_reconciliation:correction.receipt}:{}),...(shared.chains.length?{shared_source_chains:shared.chains}:{}),
   ...(amendments.size?{selected_amendments:[...amendments.values()]}:{}),
-  ...(composites.size?{selected_composite_sources:[...composites.values()]}:{})};
- return {...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
+  ...(coffee?{reviewed_coffee_source_component:coffee.receipt}:{}),
+  ...(composites.size?{selected_composite_sources:[...composites.values()]}:{}),
+  ...([...composites.values()].some(x=>x.additional_source_components?.length)?
+   {additional_source_components:[...composites.values()].flatMap(x=>x.additional_source_components||[])}:{}),
+  ...(ciCorrection?{ci_operational_receipt_reconciliation:ciCorrection.receipt}:{}),
+  ...(memberCorrection?{member_receipt_reconciliation:memberCorrection.receipt}:{})};
+ const result={...identity,identity_sha256:createHash('sha256').update(JSON.stringify(identity)).digest('hex'),
   status:'PROSPECTIVE_BATCH_PLAN_ONLY',publication_authorized:false,ready_certified:false,queue};
+ if(coffee)Object.defineProperty(result,'coffeeSourceProof',{value:coffee});
+ if(memberCorrection)Object.defineProperty(result,'memberReceiptProof',{value:memberCorrection.proof});
+ return result;
 }

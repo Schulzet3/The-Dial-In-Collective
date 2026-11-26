@@ -4,8 +4,11 @@
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 import {posix} from 'node:path';
 import {ORIGINAL_QUEUE,exactQueueBlob,applyReviewedReceiptDelta,FAMILY_ID} from './reviewed-3889-receipts.mjs';
+import {applyReviewedCiReceiptDelta,reviewedCiOptimizationUnselectedTest} from './reviewed-ci-optimization-source.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 import {generalBatchQaGeneration,GENERAL_BATCH_PRIOR} from './reviewed-general-batch-qa.mjs';
+import {reviewedMemberBrokerPlannedObject,applyReviewedMemberReceiptDelta} from './reviewed-member-broker-source.mjs';
+import {checkedCoffeeSourceProof,assertCoffeeSelectedCandidate,applyCoffeeReviewedQueueDelta} from './coffee-selected-source-proof.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const ITEM=/^DIC-Q-[1-9][0-9]*(?:-[a-z0-9-]+)?$/;
 const sorted=items=>[...items].sort();
@@ -73,7 +76,9 @@ export function reviewedProspectiveBatchQueuePath({manifest,queue,developmentSou
     !/^[a-f0-9]{64}$/.test(x.identity_sha256||'')||x.identity_sha256!==p.identity_sha256||
     !Array.isArray(x.added_ids)||!x.added_ids.length||!Array.isArray(x.retained_ready_ids)||
     JSON.stringify(x.added_ids)!==JSON.stringify(p.added_ids)||JSON.stringify(x.retained_ready_ids)!==JSON.stringify(p.retained_ready_ids)||
-    JSON.stringify(queue)!==JSON.stringify(p.queue)||queueSchemaErrors(queue).length)
+    JSON.stringify(queue)!==JSON.stringify(p.queue)||queueSchemaErrors(queue).length||
+    JSON.stringify(x.additional_source_components||[])!==JSON.stringify(p.additional_source_components||[])||
+    JSON.stringify(x.member_receipt_reconciliation)!==JSON.stringify(p.member_receipt_reconciliation))
   hold('independent local plan, immutable identity, queue, or nonpublication mismatch');
  const selected=[...x.added_ids,...x.retained_ready_ids];
  const actual=queue.items.filter(i=>i.state==='READY').map(i=>i.id);
@@ -116,6 +121,8 @@ export function reviewedProspectivePromotionQueueParity({manifest,originalQueue,
      !Array.isArray(p.retained_ready_ids)||
      !equal(x.added_ids||[],p.added_ids)||
      !equal(x.retained_ready_ids||[],p.retained_ready_ids)||
+     JSON.stringify(x.additional_source_components||[])!==JSON.stringify(p.additional_source_components||[])||
+     JSON.stringify(x.member_receipt_reconciliation)!==JSON.stringify(p.member_receipt_reconciliation)||
      !equal(manifest.selected_ready_item_ids||[],[...p.added_ids,...p.retained_ready_ids])||
      manifest.published_source_sha!==p.queue?.published_base?.tested_source_sha||
      candidateQueue!==JSON.stringify(p.queue,null,2)+'\n'||liveQueue!==candidateQueue)
@@ -124,7 +131,22 @@ export function reviewedProspectivePromotionQueueParity({manifest,originalQueue,
    const before=JSON.parse(originalQueue);
    const correction=p.historical_receipt_reconciliation;
    if(correction&&(exactQueueBlob(before)!==ORIGINAL_QUEUE||originalQueue!==JSON.stringify(before,null,2)+'\n'||!p.added_ids.includes(FAMILY_ID)))return false;
-   const expected=correction?applyReviewedReceiptDelta(before):structuredClone(before);
+   let expected=correction?applyReviewedReceiptDelta(before):structuredClone(before);
+   if(p.member_receipt_reconciliation)expected=applyReviewedMemberReceiptDelta(expected,{
+    proof:p.memberReceiptProof,developmentSourceSha:p.development_source_sha,
+    selectedIds:p.added_ids,receipt:p.member_receipt_reconciliation});
+   if(p.ci_operational_receipt_reconciliation){
+    if(!p.added_ids.includes('DIC-Q-3667-ci-parallel-full-suite'))return false;
+    const ci=applyReviewedCiReceiptDelta(expected);
+    if(JSON.stringify(p.ci_operational_receipt_reconciliation)!==JSON.stringify(ci.receipt))return false;
+    expected=ci.queue;
+   }
+   const coffee=checkedCoffeeSourceProof(p.coffeeSourceProof,{developmentSourceSha:p.development_source_sha,
+    publishedSourceSha:manifest.published_source_sha,selectedIds:manifest.selected_ready_item_ids});
+   if(coffee){
+    if(JSON.stringify(manifest.reviewed_coffee_source_component)!==JSON.stringify(coffee.receipt))return false;
+    expected=applyCoffeeReviewedQueueDelta(expected,coffee);
+   }else if(manifest.reviewed_coffee_source_component!==undefined)return false;
    if(queueSchemaErrors(before).length||queueSchemaErrors(p.queue).length||
       !Array.isArray(before.items)||before.items.length!==p.queue.items.length||
       JSON.stringify(before.published_base)!==JSON.stringify(p.queue.published_base)||
@@ -288,7 +310,9 @@ function discoverGeneralBatchQaRestoration({queue,selectedIds,publishedSourceSha
   const current=sourceObjectAt(developmentSourceSha,path);
   const reference=sourceObjectAt(BATCH_QA_REFERENCE,path);
   const published=sourceObjectAt(publishedSourceSha,path);
-  if(!/^100644:[a-f0-9]{40}$/.test(current||'')||current!==reference||
+  const reviewedCiAmendment=reviewedCiOptimizationUnselectedTest({selectedIds,path,
+   developmentSourceSha,publishedSourceSha,qaFixSha:generation.fix,referenceObject:reference,sourceObjectAt});
+  if(!/^100644:[a-f0-9]{40}$/.test(current||'')||(!reviewedCiAmendment&&current!==reference)||
    current===published||sourceObjectAt(GENERAL_BATCH_PRIOR,path)!==published||
    sourceObjectAt(BATCH_QA_CERTIFIED,path)!==published)
    hold('reviewed nonselected QA source drift: '+path);
@@ -392,17 +416,25 @@ export const REVIEWED_WORKFLOW_TEST=Object.freeze({
 });
 export const REVIEWED_CI_FAST_PR_TEST=Object.freeze({
  path:'tests/fast-pr-check.test.mjs',sourceBlob:'d11a0f702d35032e3442bfc8ee8671216f3496f8',
+ reviewedAmendedBlob:'755ab443255cddd5be9977e6e416e74a89c80bf2',
  restoredWorkflow:'.github/workflows/cloud-beta-ci.yml'
 });
 // Full published workflow bytes never execute newer workflow-only tests.
 export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,
- developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
+ developmentSourceSha,restoredWorkflows,sourceObjectAt,selectedIds=[],coffeeSourceProof=null}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows))return [];
- return sorted([REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST]
-  .filter(spec=>restoredWorkflows.includes(spec.restoredWorkflow)&&
-   sourceObjectAt(publishedSourceSha,spec.path)===null&&
-   sourceObjectAt(developmentSourceSha,spec.path)==='100644:'+spec.sourceBlob)
-  .map(spec=>spec.path));
+ const coffee=checkedCoffeeSourceProof(coffeeSourceProof,{developmentSourceSha,publishedSourceSha,
+  selectedIds:coffeeSourceProof?.ids||[]});
+ const extra=coffee?coffee.metadataOnlyPaths.filter(path=>
+  sourceObjectAt(publishedSourceSha,path)===null&&coffee.objects[path]===null&&
+  coffee.workflowPaths.includes('.github/workflows/issue33-shared-parser-regressions.yml')&&
+  restoredWorkflows.includes('.github/workflows/issue33-shared-parser-regressions.yml')):[];
+ return sorted([...extra,...[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST]
+  .filter(spec=>!(spec===REVIEWED_CI_FAST_PR_TEST&&selectedIds.includes('DIC-Q-3667-ci-parallel-full-suite'))&&
+   restoredWorkflows.includes(spec.restoredWorkflow)&&sourceObjectAt(publishedSourceSha,spec.path)===null&&
+   [spec.sourceBlob,spec.reviewedAmendedBlob].filter(Boolean).some(blob=>
+    sourceObjectAt(developmentSourceSha,spec.path)==='100644:'+blob))
+  .map(spec=>spec.path)]);
 }
 
 export const REVIEWED_SOURCE_PATH_CASE_SQL_TEST=Object.freeze({
@@ -1096,8 +1128,11 @@ export function assertCandidateStaticNamedExports(paths,{readSource,hasPath}={})
 }
 
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
- selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor,sourceObjectAt}={}){
+ selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor,sourceObjectAt,coffeeSourceProof=null}={}){
  const errors=queueSchemaErrors(queue);
+ let coffee=null;
+ try{coffee=checkedCoffeeSourceProof(coffeeSourceProof,{developmentSourceSha,publishedSourceSha,selectedIds});}
+ catch(e){errors.push(e.message);}
  if(!SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||'')||
     typeof isAncestor!=='function')errors.push('Missing source anchors/ancestry');
  if(queue?.published_base?.tested_source_sha!==publishedSourceSha)
@@ -1152,6 +1187,10 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
   const chosen=owners.filter(i=>wanted.has(i.id)&&i.state==='READY');
   const competing=owners.filter(i=>!wanted.has(i.id)&&i.state!=='DEPLOYED');
   const deployed=owners.filter(i=>i.state==='DEPLOYED');
+  if(coffee?.runtimeObjects[path]){
+   if(!chosen.length||chosen.some(i=>!coffee.ids.includes(i.id)))errors.push('Unreviewed owner overlaps exact reconstructed coffee source: '+path);
+   included.push(path);if(competing.length)pinned.push(path);continue;
+  }
   if(!owners.length||(!chosen.length&&!competing.length))
    errors.push('Untracked or DEPLOYED-only unpublished deployable source: '+path);
   else if(chosen.length&&competing.length){
@@ -1220,6 +1259,14 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   reject('Candidate must be ONE direct nonmerge child of the verified development source');
  if(typeof isAncestor!=='function'||typeof sourceObjectAt!=='function')
   reject('Git ancestry or tree readback is unavailable');
+ const coffee=checkedCoffeeSourceProof(prospectiveBatchPlan?.coffeeSourceProof,{
+  developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
+  selectedIds:manifest.selected_ready_item_ids});
+ if(coffee){
+  if(JSON.stringify(manifest.reviewed_coffee_source_component)!==JSON.stringify(coffee.receipt))
+   reject('Coffee component manifest does not match independently recomputed source proof');
+  assertCoffeeSelectedCandidate(coffee,{candidateSha,sourceObjectAt});
+ }else if(manifest.reviewed_coffee_source_component!==undefined)reject('Unverified coffee component receipt');
  try{if(isAncestor(manifest.development_source_sha,developmentHead)!==true)
   reject('Candidate staging source no longer in development ancestry');}
  catch(e){reject('Cannot verify development ancestry: '+e.message);}
@@ -1298,7 +1345,8 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const plan=planReadyOnlyCandidate(queue,{
   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
   selectedIds:manifest.selected_ready_item_ids,
-  pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor,sourceObjectAt});
+  pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor,sourceObjectAt,
+  coffeeSourceProof:coffee});
  if(!plan.ready)reject(plan.errors.join('; '));
  if(!manifest.risk_classification||
     JSON.stringify(manifest.risk_classification)!==JSON.stringify(classifyReleaseRisk(plan.included_paths)))
@@ -1324,13 +1372,19 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(workflowOnlyTests)||new Set(workflowOnlyTests).size!==workflowOnlyTests.length||
    !equal(workflowOnlyTests,discoverReviewedWorkflowTestExclusions({
      publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
-     restoredWorkflows:frozenWorkflows,sourceObjectAt
+     restoredWorkflows:frozenWorkflows,sourceObjectAt,selectedIds:manifest.selected_ready_item_ids,coffeeSourceProof:coffee
    })))
   reject('Only one byte-pinned, reviewed workflow-only test can be excluded when its workflow was restored');
  for(const path of workflowOnlyTests){
+  if(coffee?.metadataOnlyPaths.includes(path)){
+   if(sourceObjectAt(candidateSha,path)!==null||sourceObjectAt(publishedSourceSha,path)!==null)
+    reject('Reviewed coffee workflow metadata test not restored to published absence');
+   continue; // full original ownership, exact live bytes and candidate absence proved independently
+  }
   const spec=[REVIEWED_WORKFLOW_TEST,REVIEWED_CI_FAST_PR_TEST].find(x=>x.path===path);
   if(!spec||sourceObjectAt(candidateSha,path)!==null||
-     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+spec.sourceBlob||
+     ![spec.sourceBlob,spec.reviewedAmendedBlob].filter(Boolean).some(blob=>
+      sourceObjectAt(manifest.development_source_sha,path)==='100644:'+blob)||
      sourceObjectAt(publishedSourceSha,path)!==null)
    reject('Workflow-only test exclusion source/blob/absence mismatch: '+path);
   // Never exclude a test introduced or modified by ANY selected READY merge.
@@ -1458,16 +1512,27 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const reviewedScopedJournalPaths=reviewedProspectiveScopedJournalPath({manifest,queue,
   developmentSourceSha:manifest.development_source_sha,publishedSourceSha,
   candidateSha,sourceObjectAt});
+ const coffeeChangedPaths=coffee?coffee.protectedPaths.filter(path=>
+  sourceObjectAt(manifest.development_source_sha,path)!==coffee.objects[path]):[];
+ if(coffee)for(const path of coffee.protectedPaths){
+  if(coffee.workflowPaths.includes(path)||coffee.metadataOnlyPaths.includes(path))continue;
+  if([...plan.restored_paths,...compatibleAuditSupport,...restoredTests,...excludedTests,...batchQaPaths].includes(path))
+   reject('Selected coffee source/assertion falsely classified as unready support '+path);
+ }
  assertExactCandidateStagedPaths(stagedCommitChangedPaths||[],
   plan.restored_paths,plan.pinned_ready_paths,compatibleAuditSupport,restoredTests,
   excludedTests,workflowOnlyTests,frozenWorkflows,prospectiveQueuePaths,prospectiveBatchPaths,reviewedQaPaths,
-  reviewedScopedJournalPaths,batchQaPaths,
+  reviewedScopedJournalPaths,batchQaPaths,coffeeChangedPaths,
   [CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH]);
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('Unready file was not exactly restored to published bytes: '+path);
  for(const path of plan.included_paths){
   const candidateBlob=sourceObjectAt(candidateSha,path);
+  if(coffee?.runtimeObjects[path]){
+   if(candidateBlob!==coffee.runtimeObjects[path])reject('Reconstructed coffee candidate runtime changed '+path);
+   continue;
+  }
   const isPinned=plan.pinned_ready_paths.includes(path);
   if(isPinned){
    if(candidateBlob===sourceObjectAt(manifest.development_source_sha,path))
@@ -1479,7 +1544,9 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   // Require the final blob to equal the exact Git blob from at least one
   // selected READY merged commit that owns this file.
   const readyOwners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
-  if(!readyOwners.some(i=>sourceObjectAt(i.merged_source_sha,path)===candidateBlob))
+  const componentObject=readyOwners.length===1?
+   reviewedMemberBrokerPlannedObject({row:readyOwners[0],path,plan:prospectiveBatchPlan,sourceObjectAt}):null;
+  if(!readyOwners.some(i=>sourceObjectAt(i.merged_source_sha,path)===candidateBlob)&&componentObject!==candidateBlob)
    reject('Selected file includes edits after its verified READY merge: '+path);
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
