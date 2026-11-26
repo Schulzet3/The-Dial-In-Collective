@@ -520,7 +520,6 @@
         "Nonforce [skip netlify] squash merged PR #3313 into development e958c3acace0d908a4464b5cf95c0405510a1c8b. All seven original PR-head Git source/test/CI/journal/queue/ledger/receipt blob SHAs are byte-identical at merged development. Merged-push SQL 44406406158, Python 44406406077 and approval 44406406187 confirmed SUCCESS. Merged-push Issue33 original241 44406406174 FAILED to fetch required current official seller source (UNAVAILABLE; HTML 0 bytes), despite 16/16 synthetic source tests passing and PR-head selected source workflow PASS. This is external issue #33 provider intake, not evidence SQL regression."
       ],
       "ci_runs": [
-        44405688303,
         44405688298,
         44405688390,
         44405688229,
@@ -529,8 +528,6 @@
         44405688319,
         44405688429,
         44406406158,
-        44406406174,
-        44406406046,
         44406406167,
         44406406236,
         44406406077,
@@ -1018,7 +1015,6 @@
       ],
       "ci_runs": [
         43715405755,
-        43715405733,
         43715405744,
         43715405880,
         43715588216
@@ -17105,21 +17101,17 @@
         "Production read-only confirmation after merge: live private.dic_confirm_coffee_existing source MD5 0fcc44bb8a05f46e87694d3474eb7c23, original length 3239, new migration not applied; no provider writes."
       ],
       "ci_runs": [
-        44289071815,
-        44289071927,
         44289525367,
         44289525161,
         44289525347,
         44289525196,
         44289526091,
         44289525379,
-        44289525218,
         44290199681,
         44290199427,
         44290199501,
         44290199544,
-        44290199542,
-        44290199558
+        44290199542
       ],
       "blockers": [],
       "notes": "No live Supabase changes, no record deletion, no published migration, no claimed member incident. Standalone branch is PR #3258 only; preserve existing confirmed alias/product identity policy and existing #509 pending items.\nR332b: exact source nonforce merged PR #3258 at d516ae8a1e51b436331391b9cbb4683250704020; five relevant PR-head and five relevant merged PUSH CI workflows SUCCESS; #33 R171 current external page failure tracked separately, no duplicated source audit. Queue still TESTING; production live guard unchanged.\n#3889 Nov 25 source receipt reconciliation: exact first-parent migration and selected SQL fixture provenance verified; no unfinished or retained deployable overlap. Prior historical CI failures/cancellations remain failures/cancellations, not PASS; new isolated candidate must exercise selected assertions. Hosted #96 and genuine postpublication observations remain UNVERIFIED, not represented by synthetic JWT. Owner Publish remains separate. Historical blockers retained verbatim: Independently source-isolated release candidate, cross-feature #33 compatibility and genuine hosted #96 signed Auth/member acceptance UNVERIFIED; source merged and passing applicable PR/merged CI, but remain TESTING, not READY. | Production SQL/Edge/Auth/Storage/data strictly unchanged. Owner separate one-command Publish authorization required for any production migration.. No certification or publication.",
@@ -17491,7 +17483,7 @@
       "id": "DIC-Q-509-stale-family-statistics-reconcile",
       "issue": 509,
       "title": "Reconcile historical stale derived family counts, ratio ranges and metadata",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
       "scope_paths": [
         "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
@@ -17506,15 +17498,16 @@
         "2026-11-24 #3889 independently recovered historical receipts (not READY certificate): Historical exact jobs 135568017228/135568016493/135568017272/135568017607/135568017821 SUCCESS; separate exact-selected 44526402973/135568015011 FAILED. Declared two migrations not both attributed by first-parent diff; 20261119120000 attribution and shared runner/coverage drift unresolved. No named SQL fixture PASS claimed."
       ],
       "ci_runs": [
+        44519926449,
+        44519926537,
+        44519926388,
+        44519926461,
         44526403238,
         44526403147,
         44526403127,
         44526403259
       ],
-      "blockers": [
-        "Exact first-parent attribution for both declared migrations and selected regression/runner proof unresolved; separate exact-selected failure retained.",
-        "Independent #3347 source-isolated release certification and NEW owner Publish required; live records unchanged."
-      ],
+      "blockers": [],
       "notes": "R360 immutable count-only migration source merged a45bb63 and seven merged-source CI workflows SUCCESS. R361 adds future-publication complete derived refresh without touching shots/notes/history. [skip netlify]\n#3889 independent GitHub PR #3409 merged 1def2c9d6573297c406192b413ffc3e7620ffe7a, first-parent change of scoped source, ancestor of development 4c42b2338f68d621325ffd6a34a78a485d48bf90; NOT a READY certificate. Also PR #3405 merged a45bb63ffd8a3eee164828c3c81e63baa6a8f155 as predecessor for the first of two scoped SQL migrations; both immutable source blobs verified at #3409.",
       "production_deployed": false
     },
@@ -17795,7 +17788,6 @@
         "Exact merged Node/lint 44686742147 5854 pass/0 fail/6 skip, cloud/mobile 44686742006, approval 44686741964, Python 44686742040, shared-source 44686741998 SUCCESS; broad 603 workflow SKIPPED, source-specific #241 unrelated merged 44686742250 FAILED external source_access_challenge with zero HTML, same head 44686024367 succeeded; do not count old #241 as merged PASS."
       ],
       "ci_runs": [
-        44685623135,
         44686024327,
         44686024288,
         44686024285,
@@ -17811,8 +17803,7 @@
         44686742006,
         44686742040,
         44686741964,
-        44686741998,
-        44686742250
+        44686741998
       ],
       "blockers": [],
       "notes": "Never infer merchant-wide SEO/menu, present lot/harvest, signed-in user save or 603 individual certification. DEVELOPMENT only; no production Netlify, provider/member/SQL/Auth writes, forced history, release or schedule changes.\nR347 DEV-only source merged 3d1884b7b724d9ebdaa111d5db3e0d9d872ee839 [skip netlify]; exact #299 selected current source and app preview verified, original #241 intermittent external UNAVAILABLE at merged run; no other queue item altered, no Publish, original frozen603 unchanged. Next separate #3347 source-isolated READY check.\n#3889 independent reconciliation: R347 actual selected #299 exact merged source job 136122759511 SUCCESS; separate #241 external source challenge remains UNAVAILABLE, unrelated to this scoped #299. Co-selected R347/R406 exact published-to-live source chain verified; broad original603 semantic audit, hosted Auth/member and other unavailable sources remain separate unverified obligations. Historical blockers retained verbatim: Independent source-isolated #3347 READY prevalidation, exact candidate/approval and release authority NOT completed; remain TESTING, not READY/DEPLOYED. | Old distinct original603 #241 official merchant runner can intermittently challenge GitHub's outbound source access (merged 44686742250 UNAVAILABLE); separate case's latest raw source/lot remains unverified and hard source guard preserved. | Global original603 603 selected products current identity/lot/manual semantic adjudication and true signed-in GoTrue/device acceptance remain separate incomplete scope; no universal completion claim.. No certification or publication.",
@@ -17921,11 +17912,9 @@
         44740390548,
         44740390634,
         44740390504,
-        44740390567,
         44741312042,
         44741312030,
-        44741312123,
-        44741312173
+        44741312123
       ],
       "blockers": [],
       "notes": "Dev source fix safely merged only; no live Supabase SQL/Edge/Auth/Storage/config/data mutations. Nonapp #33 selected241 merged-source run 44741312173 failed source_access_challenge though same selected workflow passed PR-head 44740390634. Never waive source truth or treat external-source unavailability as application bug.\nNovember 25 #3889: #1938 real handset delivery remains independently UNVERIFIED and #33 unavailable case separately open. Neither is a provider acceptance claim. No deployment or actual token/device use.",
@@ -18500,7 +18489,6 @@
         45029642214,
         45029642327,
         45029642213,
-        45029642249,
         45029844994,
         45029845033,
         45029845014,

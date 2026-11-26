@@ -1,0 +1,1497 @@
+{
+  "schema_version": 1,
+  "kind": "DIC-3889-IMMUTABLE-63-COHORT-LEDGER-1",
+  "coordinator_issue": 3889,
+  "record_state": "PROPOSED_DEVELOPMENT_PROMOTION_NOT_YET_MERGED",
+  "recorded_at_utc": "2026-11-26T00:24:21Z",
+  "meaning": "Per-ID source certification for the exact queue bytes in this proposed commit. Frozen CI and publisher audit are complete; integration and merged readback are not claimed. No deployment or owner publication authority.",
+  "baseline": {
+    "development_sha": "d9fc859d81a23e10ee2cd0e1a37013b93a4980e5",
+    "queue_blob_sha": "46304f47eb0e78fac8c7845155af86080900b3c4",
+    "selection": "All and only the 63 TESTING item IDs in this immutable queue",
+    "count": 63,
+    "recorded_merged": 42,
+    "without_recorded_merge": 21,
+    "merge_record_note": "Original queue metadata, not an assertion that baseline PR checks alone certified readiness."
+  },
+  "preflight": {
+    "development_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f"
+  },
+  "proposed_queue": {
+    "blob_sha": "dac49db2e3478531fb34c5e022871d8fbc04dbf2",
+    "baseline_states": {
+      "READY": 52,
+      "TESTING": 11,
+      "DEPLOYED": 0
+    },
+    "total_states": {
+      "READY": 52,
+      "TESTING": 11,
+      "DEPLOYED": 404,
+      "IN_PROGRESS": 6
+    },
+    "delta_from_verified_development": {
+      "newly_source_certified_ready": [
+        "DIC-Q-509-stale-family-statistics-reconcile"
+      ],
+      "retained_ready": 51,
+      "historical_ci_receipt_corrections_only": [
+        "DIC-Q-509-admin-normalized-identity",
+        "DIC-Q-509-source-path-case-guard-20261115",
+        "DIC-Q-509-confirm-coffee-null-name",
+        "DIC-Q-33-r347-original299-directions-source",
+        "DIC-Q-509-admin-push-lazy-vault-poll",
+        "DIC-Q-455-r444-pending-shot-form-lock"
+      ]
+    },
+    "raw_parity_rule": "Adopt the entire frozen candidate queue blob unchanged; unrelated TESTING metadata edits would invalidate this candidate parity."
+  },
+  "certificates": {
+    "frozen_ready52": {
+      "kind": "DIC-PREVALIDATED-READY-BATCH-1",
+      "candidate_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+      "candidate_branch": "release-candidates/prospectbatch3889-eeb5185dbab67c7ddb5d",
+      "sole_parent_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+      "tree_sha": "d92ffd73367f571cb25d55e6e598f2e93a71f09d",
+      "published_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
+      "published_release_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+      "queue_blob_sha": "dac49db2e3478531fb34c5e022871d8fbc04dbf2",
+      "manifest_blob_sha": "2ac6e99f0cea354105a4facf23843fd1423a9832",
+      "ready_selection_sha256": "dcc87d0908c18c2b74c098c5392b2fd852e42a4a199649bd48a3b914e59b0de3",
+      "native_jobs": [
+        {
+          "name": "approval",
+          "run_id": 45727080435,
+          "job_id": 139599525921,
+          "head_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "validate",
+          "run_id": 45727080280,
+          "job_id": 139599524426,
+          "head_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "cloud-tests",
+          "run_id": 45727080281,
+          "job_id": 139599524553,
+          "head_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "mobile-browser-qa",
+          "run_id": 45727080281,
+          "job_id": 139599525052,
+          "head_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "sql",
+          "run_id": 45727080251,
+          "job_id": 139599524657,
+          "head_sha": "58d5902c39e7aad61fc5a8b0acc072c2be1df4ef",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "publisher_audit": {
+        "status": "READ_ONLY_PROSPECTIVE_PUBLISHER_EVIDENCE_SUCCESS",
+        "verified_count": 52,
+        "main_sha": "0e1f19e5fde58f47fb9b19ede06268689862cde9",
+        "run_id": 45727983877,
+        "job_id": 139602582625,
+        "native_status": "completed",
+        "native_conclusion": "success",
+        "artifact_zip_sha256": "ab1a569d428894a790d1f05813f6a4b56fb464c7a42944210945bfd07687cca8",
+        "receipt_json_sha256": "dcb8a1a38dc3e3612ce14fd821b421ed83b92cad9b921b392f6cdcef858bb0a3",
+        "receipt_kind": "Actual source-isolation and live publisher evidence gates, read-only prospective mode"
+      },
+      "tree_receipt_check": {
+        "delta_paths": 459,
+        "unexpected_or_mismatched_paths": 0
+      },
+      "publication_authorized": false
+    }
+  },
+  "items": [
+    {
+      "id": "DIC-Q-33-r232-selected-annual-release-role",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "b585b9cf646da868e6c7c8871289c82f6d96e6ca",
+      "current_pr": 2940,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-identity-evidence.mjs",
+          "candidate_object": "100644:a75ec662fec764f41982bcbb3bbfb2798f7c5b1d"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-33-r311-original63-selected-sourcing-province",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "1e326fb0683ee745a76108f38fb3c580141831e9",
+      "current_pr": 3317,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-selected-published-sourcing-region.mjs",
+          "candidate_object": null
+        },
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r327-original138-icon-labeled-source",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
+      "current_pr": 3413,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        },
+        {
+          "path": "src/server/coffee-selected-icon-specs.mjs",
+          "candidate_object": null
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r342-original249-review-source-roles",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+      "current_merged_source_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+      "current_pr": 3468,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-source-facts.mjs",
+          "candidate_object": "100644:1a760a5db212d81e93899c4fedc47320ee949946"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r347-original299-directions-source",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "3d1884b7b724d9ebdaa111d5db3e0d9d872ee839",
+      "current_merged_source_sha": "3d1884b7b724d9ebdaa111d5db3e0d9d872ee839",
+      "current_pr": 3485,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-fact-compatibility.mjs",
+          "candidate_object": "100644:2d4ef4886a6e75b61ca4375fc540b992ee73930c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
+      "current_merged_source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
+      "current_pr": 3491,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        },
+        {
+          "path": "src/server/coffee-flavor-evidence.mjs",
+          "candidate_object": "100644:48ae3cc76e45e5324a7a149f59e784ee59ecd25d"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r362-original22-breadcrumb-roast-scope",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "674926baf71e5d4d0c4705e0c4df26ed1c336d9a",
+      "current_pr": 3531,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-product-scope.mjs",
+          "candidate_object": "100644:2d9d38bd2780ce7467d1ed3a851728bf4ecad252"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "84bf75f33918bd1f15f037344aedced15906d6f2",
+      "current_merged_source_sha": "84bf75f33918bd1f15f037344aedced15906d6f2",
+      "current_pr": 3570,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-decaffeination-method.mjs",
+          "candidate_object": "100644:71f36151e92954a869f5e58ca7ae3933a7664c39"
+        },
+        {
+          "path": "src/server/coffee-direct-product-prose.mjs",
+          "candidate_object": "100644:462a7a7f045f534f689cff2836a387fac79472aa"
+        },
+        {
+          "path": "src/server/coffee-pagefly-selected-h3.mjs",
+          "candidate_object": null
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "fea352502587653ae02c99c8a941a76729d60767",
+      "current_pr": 3591,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-selected-woo-short-origin-conflict.mjs",
+          "candidate_object": null
+        },
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r399-original99-producer-tenure-precision",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "513f98ac06cdd0fe569390354420158458342859",
+      "current_merged_source_sha": "513f98ac06cdd0fe569390354420158458342859",
+      "current_pr": 3678,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-narrative-evidence.mjs",
+          "candidate_object": "100644:3de11626496a0b698e558ec8929f0158e3083b0a"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-33-r403-original134-selected-swiss-water-method",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
+      "current_pr": null,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-direct-product-prose.mjs",
+          "candidate_object": "100644:462a7a7f045f534f689cff2836a387fac79472aa"
+        },
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        },
+        {
+          "path": "src/server/coffee-source-facts.mjs",
+          "candidate_object": "100644:1a760a5db212d81e93899c4fedc47320ee949946"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-33-r406-original114-country-origin-display",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "da3d9623642663f8ee0af9ff1752546ddc5417ce",
+      "current_merged_source_sha": "da3d9623642663f8ee0af9ff1752546ddc5417ce",
+      "current_pr": 3745,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-fact-compatibility.mjs",
+          "candidate_object": "100644:2d4ef4886a6e75b61ca4375fc540b992ee73930c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-33-r408-original123-producer-farm-roles",
+      "issue": 33,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "96d8d08ded663012f9a9cfc30b298908b38174ab",
+      "current_pr": null,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "candidate_object": "100644:0c317c384406780918612c6c5d58afff24479db6"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_r408"
+    },
+    {
+      "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+      "issue": 33,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+      "current_merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+      "current_pr": 3839,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "src/server/coffee-selected-shopify-variant-richtext.mjs",
+          "candidate_object": null
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "coffee_compatible"
+    },
+    {
+      "id": "DIC-Q-3667-ci-parallel-full-suite",
+      "issue": 3667,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
+      "current_merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
+      "current_pr": 3668,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "package.json",
+          "candidate_object": "100644:ec7aa50fb9273e791f7fe54839f753097b16c150"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "ci_optimization"
+    },
+    {
+      "id": "DIC-Q-455-r381-recommendation-copy-accessible-names",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "cdacca413a28d8d3cad5fa45e70e93836981be91",
+      "current_merged_source_sha": "cdacca413a28d8d3cad5fa45e70e93836981be91",
+      "current_pr": 3473,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r390-recommendation-copy-live-status",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9",
+      "current_merged_source_sha": "bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9",
+      "current_pr": 3503,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        },
+        {
+          "path": "site/visual.css",
+          "candidate_object": "100644:177a375ae49d11c9db823e9244a5541def5cde81"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r400-one-success-window-evidence-note",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "6290cf1a6a87dc7452615933f8f1765eddcf9997",
+      "current_merged_source_sha": "6290cf1a6a87dc7452615933f8f1765eddcf9997",
+      "current_pr": 3536,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/ui.js",
+          "candidate_object": "100644:b19877da48434817a51f74c0d4b0c906c58aec5f"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "997b3c5d50f3a3d25999ddaf2f10044c906abcb7",
+      "current_merged_source_sha": "997b3c5d50f3a3d25999ddaf2f10044c906abcb7",
+      "current_pr": 3554,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "candidate_object": "100644:b19877da48434817a51f74c0d4b0c906c58aec5f"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r411-nonpersonal-starting-yield-boundary",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "3945a7353dadf81e7702170dde58cb95241e5782",
+      "current_merged_source_sha": "3945a7353dadf81e7702170dde58cb95241e5782",
+      "current_pr": 3573,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "candidate_object": "100644:b19877da48434817a51f74c0d4b0c906c58aec5f"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r415-grinder-tenth-boundary",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "a106ceca5fa55dedede482a69a46bf8d8fce982e",
+      "current_merged_source_sha": "a106ceca5fa55dedede482a69a46bf8d8fce982e",
+      "current_pr": 3584,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r417-measured-grind-precision",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
+      "current_merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
+      "current_pr": 3594,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "candidate_object": "100644:3098193b0688ae3b80853b398cecfdc11d843156"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r419-successful-grind-provenance",
+      "issue": 455,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "426fa52710ebb88574d1bf35712fc11299cc82fc",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r421-grind-reference-grid",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "742a041a903db00bace7b19994e23835e3ff6fd9",
+      "current_merged_source_sha": "742a041a903db00bace7b19994e23835e3ff6fd9",
+      "current_pr": 3606,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/engine.js",
+          "candidate_object": "100644:33515aa60ce0357d7c4953138c43aeb8eab065a3"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r428-null-temperature-copy",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "52a506aff7c59018b07be0ffa8e90758aa9d3376",
+      "current_merged_source_sha": "52a506aff7c59018b07be0ffa8e90758aa9d3376",
+      "current_pr": 3633,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r432-slowfeed-copied-reference-feedback",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "d0d28c9dff4114651fd872f0da7cd0747d065fea",
+      "current_merged_source_sha": "d0d28c9dff4114651fd872f0da7cd0747d065fea",
+      "current_pr": 3650,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r433-slowfeed-copy-action-availability",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "d8f247aa63754adb52d9e8f9994f1821f46bcadc",
+      "current_merged_source_sha": "d8f247aa63754adb52d9e8f9994f1821f46bcadc",
+      "current_pr": 3657,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r443-validation-recommendation-button-state",
+      "issue": 455,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "893a83491956fe58e2472aecd783c262f1e20874",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r444-pending-shot-form-lock",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99",
+      "current_merged_source_sha": "c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99",
+      "current_pr": 3770,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "375124af34d3eab396db5d94d37c1897f0dc8a0d",
+      "current_merged_source_sha": "375124af34d3eab396db5d94d37c1897f0dc8a0d",
+      "current_pr": 3810,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r456-measured-grind-step-any",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "b6468c6c7bf4fbc59da1f91222eff9c27d222585",
+      "current_merged_source_sha": "b6468c6c7bf4fbc59da1f91222eff9c27d222585",
+      "current_pr": 3829,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r458-optional-temperature-metric",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "d772b433be4e5d01ed734699ecc2a89685cf4c12",
+      "current_merged_source_sha": "d772b433be4e5d01ed734699ecc2a89685cf4c12",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/lib/ui.js",
+          "candidate_object": "100644:b19877da48434817a51f74c0d4b0c906c58aec5f"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "43306c3d8ea38aaf01491e16ca9930fcbcce6c47",
+      "current_merged_source_sha": "43306c3d8ea38aaf01491e16ca9930fcbcce6c47",
+      "current_pr": 3854,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-455-r462-optional-measured-temperature-step-any",
+      "issue": 455,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "2f9228ed1fe07654896147472597c917a821a8d7",
+      "current_merged_source_sha": "2f9228ed1fe07654896147472597c917a821a8d7",
+      "current_pr": 3861,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/main.js",
+          "candidate_object": "100644:d5dab67b677ac42bcb4195f918ad4f7ed6b7a46c"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-completed-delete-retry-count",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "367e290386b1f659af4d6a2e54e21fbd43bbb841",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql",
+          "candidate_object": "100644:dfd7f2d505af9e121c09eb20ed7af2e19253faef"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-merge-null-normalized-name",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+      "current_merged_source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+      "current_pr": 3160,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
+          "candidate_object": "100644:7bc866ec985f9706abcbe10d900728a1bb6dc991"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-normalized-identity",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+      "current_merged_source_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+      "current_pr": 3313,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql",
+          "candidate_object": "100644:6b0cea7c1b7430929cb1ea91f31c105c581e3420"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-push-lazy-vault-poll",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72",
+      "current_merged_source_sha": "cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72",
+      "current_pr": 3511,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+          "candidate_object": "100644:94027e63493e720bc137b43e0d468741b780d92b"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-search-recovery-visible",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+      "current_merged_source_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/admin/main.js",
+          "candidate_object": "100644:275ddaed464efc10050539fdc4be2a8b7092fb96"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-admin-shot-delete-family-refresh",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+          "candidate_object": "100644:4e7d595d5a65e293e8153dd3b08f8c847bd6dd3a"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-alias-manual-confirm",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+      "current_merged_source_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+      "current_pr": 3273,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql",
+          "candidate_object": "100644:11594cd6b29e21d642acf864181669887205dc80"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-calibration-order-fallback",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "db2372f7c15e8c6aabf1468ffb6df18b6c8da873",
+      "current_merged_source_sha": "db2372f7c15e8c6aabf1468ffb6df18b6c8da873",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/mapping.js",
+          "candidate_object": "100644:3098193b0688ae3b80853b398cecfdc11d843156"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-classify-family-single-refresh",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "9fa94afbee78f04598ac112b6fdb3b6d13c954d2",
+      "current_pr": 3411,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
+          "candidate_object": "100644:a677aeb63935a70fc42a76290c8f570349a2180e"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-community-producer-search-parity",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+      "current_merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+      "current_pr": 3086,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql",
+          "candidate_object": "100644:4d4fc469de4dc5ee4d55f7b15ab35f80e6809ac2"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+          "candidate_object": "100644:d629d2f0cbd6c9f291a8b4538340c1de549f04a1"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-confirm-coffee-null-name",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
+      "current_merged_source_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
+      "current_pr": 3258,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql",
+          "candidate_object": "100644:b8b9aa2e49ba6fe673207db926a393937b35e3d0"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-first-entry-no-self-alias",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+      "current_merged_source_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+      "current_pr": 3264,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql",
+          "candidate_object": "100644:6a34eff579b75e70eabca1b6c7ca99ecb2292d9d"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-import-additional-credential-keys",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
+      "current_merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
+      "current_pr": 3073,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql",
+          "candidate_object": "100644:80db6eb8a5c95a6977798009ec2f338e24094cd2"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-member-approval-gone-push-receipt",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "current_merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "current_pr": 3452,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "TESTING",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/functions/dic-member-approval-broker/core.mjs",
+          "candidate_object": "100644:1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a"
+        }
+      ],
+      "source_disposition": "EXCLUDED_AT_PUBLISHED_BYTES",
+      "certificate_ref": null,
+      "next_action_ref": "member_broker"
+    },
+    {
+      "id": "DIC-Q-509-member-approval-null-receipt-guard",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+          "candidate_object": "100644:dea27e959e052b06bc032f4522d91312eea779eb"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-outlier-null-revision-guard",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "current_pr": 3295,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql",
+          "candidate_object": "100644:da405a3c3972f87a77dd7da1cbad20df88510874"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-pending-canonical-name-response",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "e50727444db83e76a02a037c7575a995707a585f",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql",
+          "candidate_object": "100644:bbc6983264c9ad05158bf782a8c4b8aaa5651fe7"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-pending-coffee-null-flags",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "af0537cc8313328269eca4f92a5e4439bf84848b",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql",
+          "candidate_object": "100644:252f96469855dd7b8e56528ef5db99e5bccbf439"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-preview-rollover-cooldown",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "849d89650006c545dc86045a947bb39e1d081146",
+      "current_merged_source_sha": "849d89650006c545dc86045a947bb39e1d081146",
+      "current_pr": 3154,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql",
+          "candidate_object": "100644:7fb6375cd18747c792a6daef411b0bd24cbc9f28"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-recommendation-context-null-control-guard",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
+      "current_merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql",
+          "candidate_object": "100644:dadd06e1982a84d289481b661702f9940e375b7d"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-recommendation-unique-controls",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "8187c2cd99aa33c39fc686f199faf8957e6faf9e",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql",
+          "candidate_object": "100644:eaed6b0418aeb60970c43e0c8dd4cfda3ae9e1a1"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-retire-internal-hide-shot",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "97661eb98275008510ef0125e978e18bd7ed2466",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql",
+          "candidate_object": "100644:c2e96a9cc52e15568ad9177c73c2cf8044720387"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-shot-timestamp-determinism",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "a788b3e31c2e1f0d7921a52f67a9035d3eda5a6a",
+      "current_pr": 3460,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "site/cloud/mapping.js",
+          "candidate_object": "100644:3098193b0688ae3b80853b398cecfdc11d843156"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-source-path-case-guard-20261115",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "current_merged_source_sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+          "candidate_object": "100644:72d24dca72d1171ea832b26c0ebe080f2ad858c5"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-source-retry-rollover-cooldown",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "current_merged_source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "current_pr": 3162,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql",
+          "candidate_object": "100644:6fed54555a82d78080873c886cf1c46df46caa8d"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-stale-family-statistics-reconcile",
+      "issue": 509,
+      "baseline_merge_recorded": false,
+      "baseline_merged_source_sha": null,
+      "current_merged_source_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
+      "current_pr": null,
+      "development_state_before": "TESTING",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+          "candidate_object": "100644:8b66a860e6dba420c447d0c9de13d7e69e53879c"
+        },
+        {
+          "path": "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql",
+          "candidate_object": "100644:26b06be50ebb0c823ec6a98a0015963925dcc6f0"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-stale-project-shot-comment-20261122",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
+      "current_merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql",
+          "candidate_object": "100644:84cecbe69143b2170aa97a851198cc35b9926303"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    },
+    {
+      "id": "DIC-Q-509-workspace-inactive-selection-guards",
+      "issue": 509,
+      "baseline_merge_recorded": true,
+      "baseline_merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+      "current_merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+      "current_pr": null,
+      "development_state_before": "READY",
+      "state_in_proposed_commit": "READY",
+      "scope_objects_at_frozen_candidate": [
+        {
+          "path": "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql",
+          "candidate_object": "100644:d9a8859876e1efaac318a8668949b467b3fa421b"
+        }
+      ],
+      "source_disposition": "CERTIFIED_SELECTED_SOURCE",
+      "certificate_ref": "frozen_ready52"
+    }
+  ],
+  "pending_next_actions": {
+    "coffee_compatible": {
+      "owner_issue": 33,
+      "scope": "Eight remaining compatible coffee items; immutable source composition and shared path chronology, each selected specialist receipt and scoped tests",
+      "next": "Integrate the independent source verifier and source-bound V10 support, then certify alongside compatible peers using an exact frozen tree, five native SUCCESS jobs, actual publisher evidence audit and per-ID queue parity. Reuse verified selected-source receipts."
+    },
+    "coffee_r408": {
+      "owner_issue": 33,
+      "scope": "R408 selected producer/farm roles plus reviewed probe guard relocation needed for source-compatible staging",
+      "next": "Finish the scoped relocation/source proof with hostile tests, bind it separately from the original item source, and include with compatible coffee peers after exact-source verification."
+    },
+    "member_broker": {
+      "owner_issue": 509,
+      "scope": "Original #3452 plus separately identified #3472 Vault-isolation component and exact test chronology",
+      "next": "Integrate independent composite proof and V10 support. Verify both historical source receipts, include the tracked nonbaseline component explicitly in candidate manifest, then require all five exact candidate jobs and publisher audit."
+    },
+    "ci_optimization": {
+      "owner_issue": 3667,
+      "scope": "Exact package/runner/test and separately bound operational workflow chronology; historical four-job applicability is source-bound",
+      "next": "Integrate reviewed composite source and independent V10 QA binding; preserve published candidate workflows, prove hostile applicability cases, and require all five frozen-candidate SUCCESS jobs before READY."
+    }
+  },
+  "separate_nonbaseline_work": {
+    "preserved_deployed": {
+      "count": 404,
+      "state": "DEPLOYED",
+      "unchanged_from_development_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+      "readback_queue_blob_sha": "dac49db2e3478531fb34c5e022871d8fbc04dbf2",
+      "not_part_of_63": true
+    },
+    "existing_in_progress": [
+      {
+        "id": "DIC-Q-33-residual-source-accuracy",
+        "issue": 33,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": null
+      },
+      {
+        "id": "DIC-Q-33-original603-independent-source-review",
+        "issue": 33,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": null
+      },
+      {
+        "id": "DIC-Q-368-immutable-claim-git-cd-suppression",
+        "issue": 368,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": "2c58c10ff16e81ebd38699eac3cf74881602b9f7"
+      },
+      {
+        "id": "DIC-Q-33-r117-unrendered-metadata-shell",
+        "issue": 33,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": "2e2a1df1bb7fa9854637cf7eb5960138ce1eafc2"
+      },
+      {
+        "id": "DIC-Q-33-r141-119-radiate-literal-island-blend-origin",
+        "issue": 33,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": "91dbc9c324352ea419ccaa07bf46a7c63b53e98b"
+      },
+      {
+        "id": "DIC-Q-33-r201-original299-post-ready-anonymous-grower",
+        "issue": 33,
+        "state": "IN_PROGRESS",
+        "merged_source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26"
+      }
+    ],
+    "approved_member_vault_component": {
+      "id": "DIC-Q-509-member-approval-vault-isolation",
+      "baseline_cohort_member": false,
+      "baseline_parent_id": "DIC-Q-509-member-approval-gone-push-receipt",
+      "issue": 509,
+      "pr": 3472,
+      "merged_source_sha": "afd799a98475d253a896a45f2dacd432f9964c88",
+      "scope_object": {
+        "path": "supabase/functions/dic-member-approval-broker/core.mjs",
+        "object": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a"
+      },
+      "owner_receipt": {
+        "path": "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json",
+        "blob_sha": "e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+      },
+      "historical_source_runs": [
+        44663957436,
+        44663957447,
+        44663957497
+      ],
+      "validate_retry": {
+        "run_id": 44663957447,
+        "attempt": 2,
+        "job_id": 139597896626,
+        "conclusion": "success",
+        "prior_cancelled_attempt_preserved": true
+      },
+      "status": "SOURCE_PROOF_IMPLEMENTED_PENDING_NEXT_FROZEN_CANDIDATE",
+      "included_in_ready52": false,
+      "ready_certified": false,
+      "publication_authorized": false,
+      "acceptance_limit": "No claim of real recipient/handset, provider delivery or production acceptance."
+    },
+    "infrastructure": [
+      {
+        "scope": "Main nonpublishing V9 QA binding, corrected READY52 input and read-only actual publisher audit",
+        "prs": [
+          3974,
+          3975,
+          3976
+        ],
+        "status": "READY52_SOURCE_AND_AUDIT_EVIDENCE_RECORDED_ABOVE",
+        "baseline_credit": 0
+      },
+      {
+        "scope": "Independent member/coffee/CI source-proof helper and focused tests in this proposed development commit",
+        "status": "NATIVE_DEVELOPMENT_CI_AND_MERGED_READBACK_PENDING",
+        "paths": [
+          "tests/helpers/release-published-restoration.mjs",
+          "tests/fixtures/issue3889-member-broker-source.json",
+          "tests/reviewed-member-broker-qa.test.mjs",
+          "tests/release-coffee-source-proof.test.mjs",
+          "tests/release-ci-optimization-source-proof.test.mjs",
+          "tests/ci-optimization.test.mjs",
+          "tests/fast-pr-check.test.mjs"
+        ],
+        "baseline_credit": 0
+      },
+      {
+        "scope": "Main V10 immutable support registry and next candidate",
+        "status": "PENDING_VERIFIED_COMBINED_DEVELOPMENT_SOURCE",
+        "baseline_credit": 0
+      }
+    ]
+  },
+  "bounded_coffee_acceptance": {
+    "r403": {
+      "issue_comment": 7076689181,
+      "run_id": 45003857954,
+      "job_id": 137151014468,
+      "source_sha": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
+      "independent_raw_rehash_and_selected_semantic_receipt": "RECOVERED_REUSABLE"
+    },
+    "r380b": {
+      "issue_comment": 7062029523,
+      "run_id": 44899001138,
+      "job_id": 136830685669,
+      "source_sha": "fea352502587653ae02c99c8a941a76729d60767",
+      "selected_source_semantics": "VERIFIED_BOUNDED_GEED_GEDEB_CONFLICT",
+      "raw_html_sha256": "361326a8cbc9fc7c372434eada8545c1547f221e5a892f30f80dbf691793dab6",
+      "hash_qualification": "RUNNER_REPORTED; independent raw rehash not asserted",
+      "ui_acceptance": "Inferred from successful exact source job and mandatory selected-H1/Add-Coffee/Source-Review predicate",
+      "acceptance_predicate_blob": "60fae102bfd7dc3acbd57e083af8e294df4a7b25",
+      "eligibility": "Eligible for exact frozen candidate inclusion; independent raw rehash is not a mandatory gate in this row or current Locked/source policy. Candidate certification remains pending."
+    }
+  },
+  "boundaries": {
+    "publication_authorized": false,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "unfinished_baseline_count": 11,
+    "whole_original603_certified": false,
+    "new_helper_certified_by_ready52": false
+  }
+}

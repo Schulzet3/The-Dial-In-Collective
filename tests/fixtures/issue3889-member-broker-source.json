@@ -1,0 +1,234 @@
+{
+  "description": "Actual immutable Git source snapshot for adversarial source-proof tests; candidate HEAD mappings in tests are simulated, no CI or readiness claim. Referenced historical run status is independently read by publisher, not by this fixture.",
+  "development_sha": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+  "published_sha": "2d22d448160d428a977f06482323646b92818fcf",
+  "row": {
+    "id": "DIC-Q-509-member-approval-gone-push-receipt",
+    "issue": 509,
+    "pr": 3452,
+    "title": "Record retired member approval push endpoints as skipped rather than falsely sent",
+    "state": "TESTING",
+    "merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+    "scope_paths": [
+      "supabase/functions/dic-member-approval-broker/core.mjs"
+    ],
+    "owner_source": "Owner issue #509 autonomous provider semantic audit, cross-layer SQL-Edge contract; DIC_PREFLIGHT_VERIFIED development_sha=31972dfeb87624ea5a8b3192c4bc88255e061ccf preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Coordinate still-open #2258 real delivery verification; production read-only.",
+    "tests": [
+      "Exact deployed Edge v1 core.mjs byte-identical to immutable GitHub development before fix; on a push 404/410 the prior code deleted the endpoint, fulfilled Promise.allSettled and returned sent even with zero accepted providers.",
+      "Direct complete live public.dic_member_approval_claim/claim_poll/finish definitions; 0 live member approval deliveries and 0 push subscriptions (no member incident claimed).",
+      "New isolated Node22 test mocks each 404/410, validates endpoint DELETE and zero PATCH, skipped push acknowledgement and separate successful email; 2xx unchanged.",
+      "PR #3452 tested head 26b3d74da619e9584ab644322df7365610b58fad all applicable Node22, browser, SQL workflow, approval, security and selected #33 workflows SUCCESS; original frozen corpus SKIPPED. Exact merged source d2b99b7972512989a829a6406a201ad8d9ab264e status: some workflows IN_PROGRESS (not PASS)."
+    ],
+    "ci_runs": [
+      44602832336,
+      44602832355,
+      44602832163,
+      44602832499,
+      44602832351,
+      44602832140,
+      44602832041,
+      44612256397,
+      44612256441,
+      44612256428,
+      44612256444,
+      44663957436,
+      44663957447,
+      44663957497
+    ],
+    "blockers": [
+      "#3347 independent frozen candidate certification pending; no new owner Publish"
+    ],
+    "notes": "No production SQL/Edge/Auth/Storage/config/data changes. Existing migration/identity/event IDs remain unchanged; no extra user notification.",
+    "production_deployed": false
+  },
+  "parents": {
+    "d2b99b7972512989a829a6406a201ad8d9ab264e": [
+      "f9f42b0d13e89ebc78aa50f2c6e2823d5ada7ab2",
+      "26b3d74da619e9584ab644322df7365610b58fad"
+    ],
+    "afd799a98475d253a896a45f2dacd432f9964c88": [
+      "0a08e269a919110a0beaaef253be1e9dfb38775d",
+      "044bdfcb693966ba91599245b9d18e323caecfd7"
+    ],
+    "e85780b670f9d89328fdf46ba035b9d81205bb18": [
+      "c7bb311b92a64271fe22ed29a80deb62d77b8475"
+    ],
+    "4c42b2338f68d621325ffd6a34a78a485d48bf90": [
+      "d9fc859d81a23e10ee2cd0e1a37013b93a4980e5"
+    ],
+    "a9ecf011fe0cac741246234202145f0474533969": [
+      "7aedd1cd0cc0aa734831b1cb9871ab48d9269a8a"
+    ]
+  },
+  "changes": {
+    "d2b99b7972512989a829a6406a201ad8d9ab264e": [
+      "docs/RELEASE_QUEUE.json",
+      "docs/audits/issue509-r369-member-approval-gone-receipt-20261119.json",
+      "docs/audits/issue509-supabase-object-ledger.json",
+      "docs/workstreams/issue-509.md",
+      "supabase/functions/dic-member-approval-broker/core.mjs",
+      "tests/issue2258-member-approval-notices.test.mjs"
+    ],
+    "afd799a98475d253a896a45f2dacd432f9964c88": [
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json",
+      "docs/audits/issue509-supabase-object-ledger.json",
+      "docs/workstreams/issue-509.md",
+      "supabase/functions/dic-member-approval-broker/core.mjs",
+      "tests/issue2258-member-approval-notices.test.mjs"
+    ],
+    "e85780b670f9d89328fdf46ba035b9d81205bb18": [
+      ".github/workflows/issue3781-provisional-ready-source-receipt.yml",
+      "docs/workstreams/issue-3781.md",
+      "scripts/audit/issue33-original603-focused-source-review.mjs",
+      "tests/ci-optimization.test.mjs",
+      "tests/ci-scope.test.mjs",
+      "tests/cloud-draft-recommendation-context.test.mjs",
+      "tests/cloud-shot-rating-focus.test.mjs",
+      "tests/coffee-issue33-brewtus-selected-smallholder-credit.test.mjs",
+      "tests/coffee-issue33-combat-night-vision-smallholder-coops.test.mjs",
+      "tests/coffee-issue33-mbingo-selected-harvest-farms.test.mjs",
+      "tests/helpers/release-published-restoration.mjs",
+      "tests/issue2258-member-approval-notices.test.mjs",
+      "tests/issue455-local-success-physical-bounds.test.mjs",
+      "tests/ready-promotion-gate.test.mjs"
+    ],
+    "4c42b2338f68d621325ffd6a34a78a485d48bf90": [
+      "docs/workstreams/issue-3889.md",
+      "scripts/audit/issue33-original603-focused-source-review.mjs",
+      "tests/helpers/release-published-restoration.mjs",
+      "tests/issue2258-member-approval-notices.test.mjs",
+      "tests/netlify-credit-guard.test.mjs",
+      "tests/preflight-contract.test.mjs",
+      "tests/required-check-workflows.test.mjs"
+    ],
+    "a9ecf011fe0cac741246234202145f0474533969": [
+      "docs/workstreams/ops-issue-3889-member-admin-candidate-scope.md",
+      "tests/issue2258-member-approval-notices.test.mjs"
+    ]
+  },
+  "objects": {
+    "947237d17fe3f9d8ee2638c12f9633168e42176f": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c9dfb612b200025a316c6e018e48e10e0d518a82",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "2d22d448160d428a977f06482323646b92818fcf": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c2486b828c08365acd1aca8cd74242093be16c08",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "d2b99b7972512989a829a6406a201ad8d9ab264e": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:113ffd9ac7bc45839a0566da8837edd22352adf2",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:9ebf20df39d311d8d743ee6eb8b7b443584ec712",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": null
+    },
+    "afd799a98475d253a896a45f2dacd432f9964c88": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:48ac09eaf2a000200b444cc9104ffba50893e246",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "e85780b670f9d89328fdf46ba035b9d81205bb18": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c2486b828c08365acd1aca8cd74242093be16c08",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "4c42b2338f68d621325ffd6a34a78a485d48bf90": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:881f9d25ab46a54df14edb0584249a8118bbb6bf",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "a9ecf011fe0cac741246234202145f0474533969": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c9dfb612b200025a316c6e018e48e10e0d518a82",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "f9f42b0d13e89ebc78aa50f2c6e2823d5ada7ab2": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:179dc171aa7ab11b182b8832c3fd3f733dbc6824",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": null
+    },
+    "0a08e269a919110a0beaaef253be1e9dfb38775d": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:113ffd9ac7bc45839a0566da8837edd22352adf2",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:9ebf20df39d311d8d743ee6eb8b7b443584ec712",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": null
+    },
+    "c7bb311b92a64271fe22ed29a80deb62d77b8475": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:48ac09eaf2a000200b444cc9104ffba50893e246",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "d9fc859d81a23e10ee2cd0e1a37013b93a4980e5": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c2486b828c08365acd1aca8cd74242093be16c08",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "7aedd1cd0cc0aa734831b1cb9871ab48d9269a8a": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:881f9d25ab46a54df14edb0584249a8118bbb6bf",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "d2b99b7972512989a829a6406a201ad8d9ab264e^": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:179dc171aa7ab11b182b8832c3fd3f733dbc6824",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": null
+    },
+    "afd799a98475d253a896a45f2dacd432f9964c88^": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:113ffd9ac7bc45839a0566da8837edd22352adf2",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:9ebf20df39d311d8d743ee6eb8b7b443584ec712",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": null
+    },
+    "e85780b670f9d89328fdf46ba035b9d81205bb18^": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:48ac09eaf2a000200b444cc9104ffba50893e246",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "4c42b2338f68d621325ffd6a34a78a485d48bf90^": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:c2486b828c08365acd1aca8cd74242093be16c08",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    },
+    "a9ecf011fe0cac741246234202145f0474533969^": {
+      "supabase/functions/dic-member-approval-broker/core.mjs": "100644:3834e530c379d60f0ff60ae22115cc552a4e5d8a",
+      "tests/issue2258-member-approval-notices.test.mjs": "100644:881f9d25ab46a54df14edb0584249a8118bbb6bf",
+      "docs/audits/issue509-r377-member-approval-vault-isolation-20261120.json": "100644:e8835d92fa2c5d1c73a21f69605d7660069e2bab"
+    }
+  },
+  "ancestors": [
+    [
+      "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "0a08e269a919110a0beaaef253be1e9dfb38775d"
+    ],
+    [
+      "afd799a98475d253a896a45f2dacd432f9964c88",
+      "c7bb311b92a64271fe22ed29a80deb62d77b8475"
+    ],
+    [
+      "afd799a98475d253a896a45f2dacd432f9964c88",
+      "947237d17fe3f9d8ee2638c12f9633168e42176f"
+    ],
+    [
+      "e85780b670f9d89328fdf46ba035b9d81205bb18",
+      "947237d17fe3f9d8ee2638c12f9633168e42176f"
+    ],
+    [
+      "4c42b2338f68d621325ffd6a34a78a485d48bf90",
+      "947237d17fe3f9d8ee2638c12f9633168e42176f"
+    ],
+    [
+      "a9ecf011fe0cac741246234202145f0474533969",
+      "947237d17fe3f9d8ee2638c12f9633168e42176f"
+    ],
+    [
+      "e85780b670f9d89328fdf46ba035b9d81205bb18",
+      "d9fc859d81a23e10ee2cd0e1a37013b93a4980e5"
+    ],
+    [
+      "4c42b2338f68d621325ffd6a34a78a485d48bf90",
+      "7aedd1cd0cc0aa734831b1cb9871ab48d9269a8a"
+    ],
+    [
+      "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "947237d17fe3f9d8ee2638c12f9633168e42176f"
+    ]
+  ]
+}
