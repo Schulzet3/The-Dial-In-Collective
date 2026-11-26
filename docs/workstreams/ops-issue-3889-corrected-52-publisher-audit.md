@@ -1,0 +1,9 @@
+# #3889 actual corrected 52-item publisher evidence audit [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=947237d17fe3f9d8ee2638c12f9633168e42176f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+2026-11-26 UTC (Nov 25 MST): Exact nonpublishing candidate 58d5902c39e7aad61fc5a8b0acc072c2be1df4ef, sole parent 947237d17fe3f9d8ee2638c12f9633168e42176f, tree d92ffd73367f571cb25d55e6e598f2e93a71f09d, queue dac49db2e3478531fb34c5e022871d8fbc04dbf2, manifest 2ac6e99f0cea354105a4facf23843fd1423a9832. Hosted main source receipt 45726761807/job139598458316 SUCCESS, artifact15074732304 SHA25619c6af3b19c4be9a1def11ba2c3cbe415d539b7ecddac4841ba9345fbc965308 independently downloaded/rehashed and matched complete local tree/459 deltas. Retained51 scope objects unchanged; workflows exactly published; source/dependency/fixture and queue schema checks PASS.
+
+All FIVE exact native push jobs COMPLETED SUCCESS: approval45727080435/139599525921; validate45727080280/139599524426 (5148 PASS,0fail,20skip not counted PASS); cloud45727080281/139599524553; mobile/browser45727080281/139599525052; isolatedSQL45727080251/139599524657. No PR-head substitution. Thirteen historical failed/skipped references archived by exact reviewed reconciliation; stale-family both original migration source/run sets retained.
+
+This new audit input invokes ONLY the actual read-only prospective publisher evidence gate. Native controller and actual audit still must succeed before any queue/certificate promotion. It binds live TESTING parent, published source/release, corrected raw queue, immutable candidate/tree and native runs. No blanket CI waiver, release request, grant, publication, Netlify, provider/member/DB, backup or visibility changes. Parallel remaining11 baseline source attribution work proceeds independently; no competing candidate.
