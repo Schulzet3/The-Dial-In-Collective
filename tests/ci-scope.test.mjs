@@ -1,5 +1,5 @@
 import test from 'node:test';
-import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
+import {frozenExcludedReadySource,reviewedCiOperationalWorkflowText} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {docsOnlyPaths,classifyChanges,classifyImpactPaths} from '../scripts/audit/ci-scope.mjs';
 const A='a'.repeat(40),B='b'.repeat(40);
@@ -146,7 +146,10 @@ test('source-bound approval push jobs cannot be canceled by unrelated later push
   t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
  }
 
- const yaml=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ // Selected operational assertions use their exact reviewed source; the helper
+ // independently requires the frozen candidate workflow to retain published bytes.
+ const yaml=reviewedCiOperationalWorkflowText('.github/workflows/approval-continuity.yml')??
+  readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
  assert.ok(yaml.includes("group: dic-approval-continuity-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"));
  assert.ok(yaml.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"));
  const group=(event,ref,head)=>ref+'-'+(event==='push'?head:'pr');
@@ -165,7 +168,8 @@ test('exact-SHA development cloud and browser push checks finish despite subsequ
   ['cloud-beta-ci.yml','dic-cloud-beta-ci'],
   ['cloud-regression.yml','dic-cloud-regression']
  ]){
-  const workflow=readFileSync(new URL('../.github/workflows/'+filename,import.meta.url),'utf8');
+  const workflow=reviewedCiOperationalWorkflowText('.github/workflows/'+filename)??
+   readFileSync(new URL('../.github/workflows/'+filename,import.meta.url),'utf8');
   assert.ok(workflow.includes("group: "+prefix+"-${{ github.ref }}-${{ github.event_name == 'push' && github.sha || 'pr' }}"),filename);
   assert.ok(workflow.includes("cancel-in-progress: ${{ github.event_name != 'push' }}"),filename);
   assert.equal(classifyImpactPaths(['.github/workflows/'+filename]).tier,'high');
