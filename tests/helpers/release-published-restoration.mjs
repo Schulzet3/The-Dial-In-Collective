@@ -918,6 +918,45 @@ export function reviewedHistoricalQaReceiptQueue({parent,added,previousCandidate
  return corrected;
 }
 
+// Independent exact replay of the four member source receipts. The full row
+// is pinned to the immutable READY52 queue; no metadata other than ci_runs
+// changes here, and no original run is removed or promoted from failure.
+const memberReceiptOriginalRuns=[44602832336,44602832355,44602832163,44602832499,
+ 44602832351,44602832140,44602832041,44612256397,44612256441,44612256428];
+const memberReceiptAddedRuns=[44612256444,44663957436,44663957447,44663957497];
+const memberReceiptCanonical=x=>Array.isArray(x)?'['+x.map(memberReceiptCanonical).join(',')+']':x&&typeof x==='object'?
+ '{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+':'+memberReceiptCanonical(x[k])).join(',')+'}':JSON.stringify(x);
+export function reviewedMemberBrokerQaReceiptQueue(queue,{added,parent,dev,sourceObjectAt,manifestReceipt}={}){
+ const id='DIC-Q-509-member-approval-gone-push-receipt';
+ if(!added?.includes(id)){assert.equal(manifestReceipt,undefined,'unselected member receipt marker');return queue;}
+ assert.equal(new Set(added).size,added.length);assert.match(dev||'',SHA);
+ assert.equal(typeof sourceObjectAt,'function');
+ assert.equal(sourceObjectAt('58d5902c39e7aad61fc5a8b0acc072c2be1df4ef',QUEUE_PATH),
+  '100644:dac49db2e3478531fb34c5e022871d8fbc04dbf2','immutable member reference queue');
+ assert.equal(typeof parent?.raw,'string');
+ assert.equal(sourceObjectAt(dev,QUEUE_PATH),blobOfText(parent.raw),'member parent Git queue');
+ assert.deepEqual(parent.value,JSON.parse(parent.raw));
+ assert.deepEqual(parent.value.published_base,queue.published_base);
+ assert.equal(queue.published_base?.tested_source_sha,PROSPECTIVE_PUBLISHED);
+ const rows=queue.items.filter(x=>x.id===id),prior=parent.value.items.filter(x=>x.id===id);
+ assert.equal(rows.length,1);assert.equal(prior.length,1);assert.deepEqual(rows[0],prior[0],'member parent row drift');
+ const row=rows[0];assert.equal(row.state,'TESTING');
+ const original=JSON.stringify(row.ci_runs)===JSON.stringify(memberReceiptOriginalRuns);
+ assert.ok(original||JSON.stringify(row.ci_runs)===JSON.stringify([...memberReceiptOriginalRuns,...memberReceiptAddedRuns]),
+  'exact original member receipts or fixed append required');
+ const copy=structuredClone(row);copy.ci_runs=[...memberReceiptOriginalRuns];
+ assert.equal(createHash('sha256').update(memberReceiptCanonical(copy)).digest('hex'),
+  'ed15440c72aef6f8adc6f397aa9acfe6334085c61203fcd4a2b30a9d39bb2b60','immutable full member row');
+ if(!original){assert.equal(manifestReceipt,undefined,'no repeated member receipt delta');return queue;}
+ assert.deepEqual(manifestReceipt,{id,original_queue_source_sha:'58d5902c39e7aad61fc5a8b0acc072c2be1df4ef',
+  original_queue_blob_sha:'dac49db2e3478531fb34c5e022871d8fbc04dbf2',
+  original_row_sha256:'ed15440c72aef6f8adc6f397aa9acfe6334085c61203fcd4a2b30a9d39bb2b60',
+  source_shas:['d2b99b7972512989a829a6406a201ad8d9ab264e','afd799a98475d253a896a45f2dacd432f9964c88'],
+  added_successful_run_ids:[...memberReceiptAddedRuns]},'independent member receipt manifest');
+ const output=structuredClone(queue);output.items.find(x=>x.id===id).ci_runs=[...memberReceiptOriginalRuns,...memberReceiptAddedRuns];
+ return output;
+}
+
 // Independent #3889 member-broker source proof. It does not import main's
 // planner or trust its source map. #3452 remains the original cohort item;
 // #3472 is a separately named, owner-receipted component of the same frozen
@@ -1053,7 +1092,9 @@ export function verifyGeneralProspectiveBatchReadyTestScope({manifest:m,queue:q,
  assert.deepEqual(m.selected_ready_item_ids,[...selected].sort());
  const receiptCert=retained.length?exactGitJSON(dev,CERT_PATH,readGitText,sourceObjectAt).value:null;
  const historical=reviewedHistoricalQaReceiptQueue({parent,added,previousCandidate:receiptCert?.candidate_sha,readGitText,sourceObjectAt})||structuredClone(parent.value);
- const receiptQueue=reviewedCiOptimizationQaReceiptQueue(historical,{added});
+ const memberReceipts=reviewedMemberBrokerQaReceiptQueue(historical,{added,parent,dev,sourceObjectAt,
+  manifestReceipt:p.member_receipt_reconciliation});
+ const receiptQueue=reviewedCiOptimizationQaReceiptQueue(memberReceipts,{added});
  const coffee=verifyReviewedCoffeeSelectedQa({addedIds:added,parentQueue:receiptQueue,manifest:m,
   readGitText,sourceObjectAt,firstParentChangedPaths,firstParentPatch,readParents,isAncestor});
  const expected=coffee?.queue||receiptQueue;

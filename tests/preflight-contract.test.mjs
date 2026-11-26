@@ -136,13 +136,13 @@ test('#3889 generalized scope reconstructs exact queue and rejects selected test
  const baselineRaw=execFileSync('git',['show',baselineRef+':docs/RELEASE_QUEUE.json'],{
   encoding:'utf8',maxBuffer:4000000,timeout:15000});
  const baseline=JSON.parse(baselineRaw),pub=baseline.published_base.tested_source_sha;
- // Pick three distinct real baseline scope identities.
- const distinct=[];
- for(const x of baseline.items.filter(x=>x.state==='TESTING'&&x.scope_paths.length===1)){
-  if(!distinct.some(y=>y.scope_paths[0]===x.scope_paths[0]))distinct.push(x);
-  if(distinct.length===3)break;
- }
- assert.equal(distinct.length,3);
+ // Keep this generic proof fixture independent of specialized source groups.
+ // Exact real baseline identities preserve the original queue/source negatives.
+ const fixtureIds=['DIC-Q-455-r462-optional-measured-temperature-step-any',
+  'DIC-Q-509-stale-project-shot-comment-20261122','DIC-Q-509-admin-normalized-identity'];
+ const distinct=fixtureIds.map(id=>baseline.items.find(x=>x.id===id));
+ assert.ok(distinct.every(x=>x?.state==='TESTING'&&x.scope_paths.length===1));
+ assert.equal(new Set(distinct.map(x=>x.scope_paths[0])).size,3);
  const rows=distinct.map((x,i)=>({...x,merged_source_sha:String(i+1).repeat(40),
   state:'TESTING',production_deployed:false,tests:['fixture regression'],ci_runs:[i+1],blockers:['candidate certification']}));
  const parent=structuredClone(baseline);

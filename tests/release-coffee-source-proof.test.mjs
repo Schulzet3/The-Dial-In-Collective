@@ -1,8 +1,7 @@
-import {relocateCoffeeSelectedQa as relocate} from './helpers/release-published-restoration.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {reconstructCoffeeSelectedQa,verifyReviewedCoffeeSelectedQa} from './helpers/release-published-restoration.mjs';
+import {relocateCoffeeSelectedQa as relocate,reconstructCoffeeSelectedQa,verifyReviewedCoffeeSelectedQa} from './helpers/release-published-restoration.mjs';
 const hash=t=>'100644:'+createHash('sha1').update('blob '+Buffer.byteLength(t)+'\0').update(t).digest('hex');
 const S=n=>String(n).repeat(40);
 const runtime='src/server/coffee-example.mjs',testPath='tests/coffee-example.test.mjs',workflow='.github/workflows/coffee-example.yml';
