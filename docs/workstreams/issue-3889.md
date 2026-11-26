@@ -273,3 +273,38 @@ DIC_PREFLIGHT_VERIFIED development_sha=948d1dd33c5ffa2888867acc8f1edf2bce1ad5b2 
 - Reused scoped native evidence: all 79 selected coffee assertions, all 19 member/runtime/source assertions and all 19 selected #3667 operational assertions actually executed PASS in the failed candidate. These scoped passes do not certify READY or replace new candidate-SHA native checks. R380b's previously documented unrecovered raw-artifact limitation remains unchanged; no fresh source acceptance is invented.
 - Live queue remains exact certified52 blob `dac49db2e3478531fb34c5e022871d8fbc04dbf2`: original cohort 52 READY / 11 TESTING, plus 404 DEPLOYED and six separate IN_PROGRESS. The existing READY52 certificate, published source `2d22d448160d428a977f06482323646b92818fcf`, and production `5b256f1fc0717d3635f7148b934a1f91f8991685` remain unchanged.
 - Next: nonforce integrate this scoped repair with exact native CI; bind actual merged bytes as V11, preserving historical generations and rejecting mixed test generations; prepare one corrected full63 candidate, independently prove unchanged runtime and exact source/queue/test/workflow bindings, then require all five exact native SUCCESS jobs and actual publisher audit. A separate62 promotion would change the raw queue anchor and require another complete certification/audit cycle; this minimal shared source-binding repair preserves the compatible full cohort and avoids that extra cycle. No old candidate status is transferred to a new SHA. Request-to-READY under15 minutes remains unverified. No Publish, grant/request, Netlify/provider/DB/member, backup/visibility/secrets/spending, force or production mutation.
+
+## #3889 — exact-source certification of all original 63 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d3ba05ae4ee84de25766d2a3046c1d216e3913b5 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+Evidence snapshot: 2026-11-26T01:17:37Z. This development change records genuine frozen-source certification for all original 63 baseline IDs; the containing Git commit/PR and subsequent #3889 readback establish integration. No future merge identifier is asserted.
+
+### Immutable source and preserved cohort
+
+- Original baseline `d9fc859d81a23e10ee2cd0e1a37013b93a4980e5`, queue `46304f47eb0e78fac8c7845155af86080900b3c4`: exactly 63 IDs, with the original 42 recorded merges / 21 missing-merge records preserved as historical attribution.
+- Frozen candidate `d8639edb2b4ee240afe6cd507086588c2493f2a5`, branch `release-candidates/prospectbatch3889-ea1ae6ddf36867450dba`, sole parent `d3ba05ae4ee84de25766d2a3046c1d216e3913b5`, tree `b4f1b2da764c4bff4a87aa582208487fe6261189`.
+- Queue `a816976d2c53e88724323d9c90370c7151bd3c84`; manifest `c262699b420198d93a5f547405f6abdf821402b2`; selection fingerprint `9d9ad00ee2fa31259815c2d2dc54560bc52596af0a9e0e71b6c116945460f6b9`. The whole raw queue is adopted unchanged; all 63 per-ID final scope objects are recorded in the ledger.
+- The 52 previously certified rows retain their earlier certificate as history and are covered again by this exact 63-source certificate. The remaining 11 are the nine selected #33 sources, member-broker composite, and #3667 operational CI source. #3472 is an approved separately named source component, with no standalone queue promotion or production-recipient acceptance claim. All 404 DEPLOYED and six nonbaseline IN_PROGRESS rows are unchanged.
+
+### Native checks and actual publisher audit
+
+- approval: native PUSH 45733854744/139622226113 — COMPLETED SUCCESS at `d8639edb2b4ee240afe6cd507086588c2493f2a5`.
+- validate: native PUSH 45733854753/139622227193 — COMPLETED SUCCESS at `d8639edb2b4ee240afe6cd507086588c2493f2a5`.
+- cloud-tests: native PUSH 45733854697/139622226831 — COMPLETED SUCCESS at `d8639edb2b4ee240afe6cd507086588c2493f2a5`.
+- mobile-browser-qa: native PUSH 45733854697/139622226292 — COMPLETED SUCCESS at `d8639edb2b4ee240afe6cd507086588c2493f2a5`.
+- sql: native PUSH 45733854801/139622226402 — COMPLETED SUCCESS at `d8639edb2b4ee240afe6cd507086588c2493f2a5`.
+- Validate log SHA256 `29bd8cb6d481c732afabb6c3a2ff40db3bfa8d5b89fa21dca272fe8ad977e3d8`: 5281 full-corpus tests, 5275 passed, zero failed/cancelled/todo, six existing live/public probes skipped. All 15 member runtime regressions and four independent member proof/receipt tests executed PASS, zero member skips. Conditional steps that did not execute are not reported as tested PASS.
+- Fresh selected-source assertion readback: **79** parser/source-review regressions across the nine #33 IDs executed PASS, zero failed/skipped/missing; **23** CI/metadata assertions executed PASS (19 original selected CI assertions, three repaired workflow assertions, one new negative binding assertion). Each recorded title is bound to the exact candidate test blob and raw validate log line. Isolated security **4/4** and preinstall **13/13** executed PASS separately.
+- Measured full Node duration **142572.629529 ms**; isolated security **10928.485354 ms**. Exactly one observed app build succeeded in mobile/browser; validate's NON-UI build step was SKIPPED. Targeted cloud suites were NOT_APPLICABLE because the full high-risk Node corpus executed in validate. The six existing hosted public probes remain conditional on DIC_PUBLIC_HOSTED_PROBE; they are not represented as executed PASS.
+- Actual publisher audit source `8ef5bdd7eafec1587fc7c8a2a320a443215e96b8`, run/job 45734361908/139623888858, COMPLETED SUCCESS, verified all 63 exact IDs. Artifact 15078227385, downloaded ZIP SHA256 `6c88bc711f2425e5a9678c5896e818a54795d26da5c837db87c7123e071bdfc2`, receipt SHA256 `0f8683705339bcffd19c4fcc5f48e22b6068efc777c76f9fc22e6b80d74902f9`. The audit exercised the actual publisher source isolation, queue parity and native evidence gates without publication.
+
+### Failed attempt and scoped repair
+
+- Candidate `6372df32405212fa3459d9bcec25df5029c5e21a` remains FAILED: validate 45731136963/139613126181 reported 5,271 passed, three failed, six skipped. Its four other successful jobs remain attributed only to that failed candidate.
+- #3980 merged the exact three-file QA repair as `d3ba05ae4ee84de25766d2a3046c1d216e3913b5`; #3981 main V11 source bindings merged as `e852bdfb05d924d4ebe8592b23669f2011cf9d8d`. Operational workflow assertions read their reviewed c26 source while candidate native workflows remain exact published bytes. V11’s ten support objects and anti-mix negatives are pinned; generations 1–10 remain independently verifiable. The candidate runtime, dependencies, workflows and raw queue match the prior prepared source; only the three QA files and documentation changed. No native check result was transferred to this new SHA.
+- Existing exact specialist evidence and source proofs were reused. The ledger retains bounded R380b/R403 evidence and excludes any universal live-merchant or physical-device acceptance claim. Request-to-READY under 15 minutes is not claimed from these records.
+
+### Remaining work and authority
+
+No unresolved source-certification action remains for the original 63 in this recorded change. Separate IN_PROGRESS work and production-dependent acceptance retain their existing ownership and scope. Published source `2d22d448160d428a977f06482323646b92818fcf` and production `5b256f1fc0717d3635f7148b934a1f91f8991685` are unchanged. No Publish request, grant, deployment, Netlify build, provider/member/database write, or publication authority is created.

@@ -1,3 +1,11 @@
+## #3889 — exact-source certification of all original 63 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d3ba05ae4ee84de25766d2a3046c1d216e3913b5 preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
+
+- Source evidence verified at 2026-11-26T01:17:37Z: all original **63** baseline IDs have exact-source READY certification. This change records candidate queue blob `a816976d2c53e88724323d9c90370c7151bd3c84` unchanged, preserves all **404 DEPLOYED** and **six separate IN_PROGRESS** rows, and keeps #3472 separately attributable.
+- Frozen candidate `d8639edb2b4ee240afe6cd507086588c2493f2a5`, tree `b4f1b2da764c4bff4a87aa582208487fe6261189`, has five exact native PUSH jobs SUCCESS plus actual read-only publisher audit 45734361908/139623888858 SUCCESS for all 63 IDs. Validate executed 5275 passing tests, zero failures, and the six previously documented live/public probe skips; selected coffee79, member19 and CI/metadata23 assertions each executed PASS with zero scoped skips. One app build ran in mobile; conditional validate build and targeted cloud work remain explicitly SKIPPED/NOT_APPLICABLE.
+- The failed6372 attempt remains recorded as FAILED; its jobs are not transferred. The containing development commit/PR and subsequent #3889 readback establish integration. No publication or provider writes. Exact per-ID source objects, previous52 evidence, repair history and new-work boundaries are recorded in [the cohort ledger](workstreams/issue-3889-cohort-ledger.json) and [scoped journal](workstreams/issue-3889.md).
+
 ## November 25, America/Denver — #3889 corrected certification and remaining QA [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=947237d17fe3f9d8ee2638c12f9633168e42176f preflight_blob_sha=c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f
