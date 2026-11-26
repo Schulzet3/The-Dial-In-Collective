@@ -115,8 +115,63 @@ const GENERAL_BATCH_SUPPORT_V10=[
     null
   ]
 ];
+// #3889: exact merged operational workflow assertion QA generation; runtime and workflow bytes unchanged.
+const GENERAL_BATCH_QA_FIX_V11="d3ba05ae4ee84de25766d2a3046c1d216e3913b5";
+const GENERAL_BATCH_SUPPORT_V11=[
+  [
+    "tests/helpers/release-published-restoration.mjs",
+    "b0dcf8a52b613c20aaa068fed8121f4555265fac",
+    "b0dcf8a52b613c20aaa068fed8121f4555265fac"
+  ],
+  [
+    "tests/preflight-contract.test.mjs",
+    "36e22857aad4cb2f18634d325fb05e705fc5132c",
+    "36e22857aad4cb2f18634d325fb05e705fc5132c"
+  ],
+  [
+    "tests/required-check-workflows.test.mjs",
+    "50d74fa8ef9e39043b11c467a519aa8a70573835",
+    "50d74fa8ef9e39043b11c467a519aa8a70573835"
+  ],
+  [
+    "tests/issue3889-context-amendment.test.mjs",
+    "4828fc6099dbbbe9a751182aa9c62ca411d91725",
+    "4828fc6099dbbbe9a751182aa9c62ca411d91725"
+  ],
+  [
+    "tests/fixtures/issue3889-member-broker-source.json",
+    "2b9f6bb13f6d33cc3788e23f6fec4220f64264c4",
+    "2b9f6bb13f6d33cc3788e23f6fec4220f64264c4"
+  ],
+  [
+    "tests/release-ci-optimization-source-proof.test.mjs",
+    "56034e3ca6b5b287573436d2ccb8fcc3b7e0a477",
+    "b73664198b6e7c88265b65a5af45f9bd0d9a96ca"
+  ],
+  [
+    "tests/release-coffee-source-proof.test.mjs",
+    "ef2df6fa7c620ec13915e571ea16dbc14caee428",
+    "ef2df6fa7c620ec13915e571ea16dbc14caee428"
+  ],
+  [
+    "tests/reviewed-member-broker-qa.test.mjs",
+    "1ff105782bdb2728627f02c4191abc4d3a4ff3aa",
+    "1ff105782bdb2728627f02c4191abc4d3a4ff3aa"
+  ],
+  [
+    "tests/ci-scope.test.mjs",
+    "1b084ce4b2abacb1446653093e7059d57b921465",
+    "96a77e9d6c1a63c6a9a80ce086f0c113ccdcd2e9"
+  ],
+  [
+    "tests/ready-promotion-gate.test.mjs",
+    "2c1c273d546f4ff01a3b49e3e3ffc8bde5a8d387",
+    "6f880ee4e5bb2b1dccffd5c1cb71155553583d07"
+  ]
+];
 export function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
  const generations=[
+  {fix:GENERAL_BATCH_QA_FIX_V11,prior:GENERAL_BATCH_QA_FIX_V10,support:GENERAL_BATCH_SUPPORT_V11},
   {fix:GENERAL_BATCH_QA_FIX_V10,prior:GENERAL_BATCH_QA_FIX_V9,support:GENERAL_BATCH_SUPPORT_V10},
   {fix:GENERAL_BATCH_QA_FIX_V9,prior:GENERAL_BATCH_QA_FIX_V8,support:GENERAL_BATCH_SUPPORT_V9},
   {fix:GENERAL_BATCH_QA_FIX_V8,prior:GENERAL_BATCH_QA_FIX_V7,support:GENERAL_BATCH_SUPPORT_V8},
@@ -133,5 +188,13 @@ export function generalBatchQaGeneration(developmentSourceSha,sourceObjectAt){
   sourceObjectAt(g.fix,path)==='100644:'+blob&&
   sourceObjectAt(g.prior,path)===(prior===null?null:'100644:'+prior)));
  if(matched.length!==1)throw Error('Prospective generalized batch QA restoration HOLD: exact reviewed QA generation missing or mixed');
+ // V10 predates these two metadata bindings. A reverted discriminator must not
+ // let changed/missing V11 metadata masquerade as the exact historical V10.
+ if(matched[0].fix===GENERAL_BATCH_QA_FIX_V10){
+  for(const [path,,prior] of GENERAL_BATCH_SUPPORT_V11.slice(-2))
+   for(const ref of [developmentSourceSha,matched[0].fix,matched[0].prior])
+    if(sourceObjectAt(ref,path)!=='100644:'+prior)
+     throw Error('Prospective generalized batch QA restoration HOLD: mixed V10/V11 metadata support');
+ }
  return matched[0];
 }
