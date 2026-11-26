@@ -7,7 +7,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {assessReadyEvidence,preflightReadyBatch,PRODUCTION_CHECKS} from './release-reliability.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
-import {proveGeneralFrozenQa,verifiedSelectedCandidatePath,verifiedSelectedCompositeSources} from './verified-prospective-qa.mjs';
+import {proveGeneralFrozenQa,verifiedSelectedCandidatePath,verifiedSelectedCompositeSources,verifiedSelectedHistoricalCheckNames} from './verified-prospective-qa.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const RUN_URL=/^https:\/\/github\.com\/Schulzet3\/The-Dial-In-Collective\/actions\/runs\/([1-9][0-9]*)\/job\/([1-9][0-9]*)$/;
@@ -153,10 +153,12 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
    for(const step of composites){
     if(step.run_ids.some(id=>!runs.some(x=>x.id===id&&x.head_sha===step.merge_sha&&x.event==='push')))
      throw Error('Composite historical run source mismatch: '+step.merge_sha);
-    const originalChecks=exactRecordedChecks(await checks(step.merge_sha),step.merge_sha,step.run_ids);
+    const applicable=verifiedSelectedHistoricalCheckNames(selectedQaProof,item,candidateSha,step);
+    const originalChecks=exactRecordedChecks(await checks(step.merge_sha),step.merge_sha,step.run_ids)
+     .filter(check=>!applicable||applicable.includes(check.name));
     if(originalChecks.some(x=>x.status!=='completed'||x.conclusion!=='success'||!x.recorded)||
      !sameRunIds(originalChecks.map(x=>x.recorded_run_id),step.run_ids))
-     throw Error('Composite historical five exact native checks missing: '+step.merge_sha);
+     throw Error('Composite historical applicable exact native checks missing: '+step.merge_sha);
    }
    // Frozen candidates are tested against their own exact five SUCCESS checks,
    // not against prior PR heads containing independently unready same-file code.

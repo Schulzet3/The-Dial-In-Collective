@@ -1319,3 +1319,145 @@ test('#3889 shared SQL fixture requires both exact chronological migration owner
  const stranger={...one,merged_source_sha:C};
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,selectedReadyItems:[...rows,stranger],sourceObjectAt:(r,p)=>r===C&&p===spec.path?'100644:'+D:read(r,p)}),/Shared SQL fixture lacks/);
 });
+
+// #3977 exact V10 support generation. These synthetic reader cases grant no CI
+// certification; the binding constants were derived from the actual merged Git objects.
+const QA_V10_BINDING={
+  "fix": "948d1dd33c5ffa2888867acc8f1edf2bce1ad5b2",
+  "prior": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+  "support": [
+    [
+      "tests/helpers/release-published-restoration.mjs",
+      "b0dcf8a52b613c20aaa068fed8121f4555265fac",
+      "5364ba19d6b28be67e27dc5336f327a3e1397516"
+    ],
+    [
+      "tests/preflight-contract.test.mjs",
+      "36e22857aad4cb2f18634d325fb05e705fc5132c",
+      "f35d7bd96d6164eba7043f6598f77a6d8b22f054"
+    ],
+    [
+      "tests/required-check-workflows.test.mjs",
+      "50d74fa8ef9e39043b11c467a519aa8a70573835",
+      "50d74fa8ef9e39043b11c467a519aa8a70573835"
+    ],
+    [
+      "tests/issue3889-context-amendment.test.mjs",
+      "4828fc6099dbbbe9a751182aa9c62ca411d91725",
+      "4828fc6099dbbbe9a751182aa9c62ca411d91725"
+    ],
+    [
+      "tests/fixtures/issue3889-member-broker-source.json",
+      "2b9f6bb13f6d33cc3788e23f6fec4220f64264c4",
+      null
+    ],
+    [
+      "tests/release-ci-optimization-source-proof.test.mjs",
+      "b73664198b6e7c88265b65a5af45f9bd0d9a96ca",
+      null
+    ],
+    [
+      "tests/release-coffee-source-proof.test.mjs",
+      "ef2df6fa7c620ec13915e571ea16dbc14caee428",
+      null
+    ],
+    [
+      "tests/reviewed-member-broker-qa.test.mjs",
+      "1ff105782bdb2728627f02c4191abc4d3a4ff3aa",
+      null
+    ]
+  ],
+  "previous": {
+    "fix": "947237d17fe3f9d8ee2638c12f9633168e42176f",
+    "prior": "3661913e21808ebb4205e8c804c2bb231b2ad41a",
+    "support": [
+      [
+        "tests/helpers/release-published-restoration.mjs",
+        "5364ba19d6b28be67e27dc5336f327a3e1397516",
+        "1a46bc915f7e9b544e21f53cb5f5da6f6402774a"
+      ],
+      [
+        "tests/preflight-contract.test.mjs",
+        "f35d7bd96d6164eba7043f6598f77a6d8b22f054",
+        "dcaacd46244189696e9b5ba04b418d13ae63070f"
+      ],
+      [
+        "tests/required-check-workflows.test.mjs",
+        "50d74fa8ef9e39043b11c467a519aa8a70573835",
+        "50d74fa8ef9e39043b11c467a519aa8a70573835"
+      ],
+      [
+        "tests/issue3889-context-amendment.test.mjs",
+        "4828fc6099dbbbe9a751182aa9c62ca411d91725",
+        "4828fc6099dbbbe9a751182aa9c62ca411d91725"
+      ]
+    ]
+  },
+  "source_checked": true,
+  "publication_authorized": false,
+  "ci_certified": false
+};
+function qaV10Fixture(){
+ const b=QA_V10_BINDING,dev='a'.repeat(40),candidate='b'.repeat(40),
+  pub='2d22d448160d428a977f06482323646b92818fcf',reference='544b06558ab9ab6df4eea0410277b1a3c19f2fe4',
+  earlier='0317f0ac5b627dff27180acfcb9c014a4c1ef0e5',previous='16bc481b2c66c5229c70e513c76141b086b8e535';
+ const ids=['DIC-Q-509-v10-first','DIC-Q-509-v10-second','DIC-Q-455-v10-third'],merges=[1,2,3].map(i=>String(i).repeat(40));
+ const queue={items:ids.map((id,i)=>({id,state:'READY',merged_source_sha:merges[i],scope_paths:['site/fixture'+i+'.js']}))};
+ const p={kind:'DIC-PROSPECTIVE-DISJOINT-BATCH-3889-V1',status:'PROSPECTIVE_BATCH_PLAN_ONLY',
+  publication_authorized:false,ready_certified:false,baseline_queue_blob:'46304f47eb0e78fac8c7845155af86080900b3c4',
+  development_source_sha:dev,published_base:{tested_source_sha:pub},identity_sha256:'c'.repeat(64),
+  added_ids:[ids[2]],retained_ready_ids:ids.slice(0,2),queue};
+ const support=new Map(b.support.map(x=>[x[0],x])),old=new Map(b.previous.support.map(x=>[x[0],x]));
+ const current='100644:'+'d'.repeat(40),published='100644:'+'e'.repeat(40);
+ const read=(ref,path)=>{
+  const s=support.get(path);
+  if(s){
+   if([dev,candidate,b.fix].includes(ref))return '100644:'+s[1];
+   if(ref===b.prior)return s[2]===null?null:'100644:'+s[2];
+   if(ref===b.previous.prior){const value=old.get(path)?.[2];return value===null||value===undefined?null:'100644:'+value;}
+   return null;
+  }
+  if([dev,reference].includes(ref))return current;
+  if([pub,earlier,previous,candidate].includes(ref))return path.includes('issue33')?null:published;
+  return null;
+ };
+ return {b,dev,candidate,pub,queue,p,ids,merges,read,current,published};
+}
+test('#3889 V10 binds eight exact nonselected support objects and preserves V9',async()=>{
+ const {generalBatchQaGeneration:find}=await import('../scripts/release/reviewed-general-batch-qa.mjs');
+ const f=qaV10Fixture(),g=find(f.dev,f.read);
+ assert.equal(g.fix,f.b.fix);assert.equal(g.prior,f.b.prior);assert.deepEqual(g.support,f.b.support);
+ assert.equal(g.support.length,8);
+ for(const path of ['tests/ci-optimization.test.mjs','tests/fast-pr-check.test.mjs'])
+  assert.equal(g.support.some(x=>x[0]===path),false,'selected-owned assertions are not compatibility support');
+ assert.deepEqual(find(f.b.prior,f.read),f.b.previous,'historical V9 evidence remains independently verifiable');
+});
+test('#3889 V10 rejects unknown, mixed, missing and falsified prior support without fallback',async()=>{
+ const {generalBatchQaGeneration:find}=await import('../scripts/release/reviewed-general-batch-qa.mjs');
+ const f=qaV10Fixture();
+ for(const [path,blob,prior] of f.b.support){
+  for(const ref of [f.dev,f.b.fix])for(const value of [null,'100644:'+'f'.repeat(40)])
+   assert.throws(()=>find(f.dev,(r,p)=>r===ref&&p===path?value:f.read(r,p)),/HOLD/);
+  const corruptPrior=prior===null?'100644:'+blob:null;
+  assert.throws(()=>find(f.dev,(r,p)=>r===f.b.prior&&p===path?corruptPrior:f.read(r,p)),/HOLD/);
+ }
+ const helper=f.b.support[0][0],old=f.b.support[0][2];
+ assert.throws(()=>find(f.dev,(r,p)=>r===f.dev&&p===helper?'100644:'+old:f.read(r,p)),/HOLD/);
+ assert.throws(()=>find('f'.repeat(40),f.read),/HOLD/);
+});
+test('#3889 V10 candidate restoration rejects support drift and selected support overlap',async()=>{
+ const {BATCH_QA_PATHS:paths,discoverReviewedBatchQaRestoration:discover,reviewedBatchQaRestorationPaths:verify}=await import('../scripts/release/ready-only-candidate.mjs');
+ const f=qaV10Fixture();
+ const args={queue:f.queue,selectedIds:f.ids,publishedSourceSha:f.pub,developmentSourceSha:f.dev,
+  sourceObjectAt:f.read,prospectiveBatchPlan:f.p};
+ const manifest={selected_ready_item_ids:f.ids,prospective_ready_batch_preview:{},restored_reviewed_batch_qa_paths:paths};
+ const request={...args,manifest,candidateSha:f.candidate};
+ assert.deepEqual(discover(args),paths);assert.deepEqual(verify(request),paths);
+ for(const [path,blob] of f.b.support){
+  for(const value of [null,'100644:'+'f'.repeat(40)])
+   assert.throws(()=>verify({...request,sourceObjectAt:(r,p)=>r===f.candidate&&p===path?value:f.read(r,p)}),/HOLD/);
+  assert.throws(()=>discover({...args,sourceObjectAt:(r,p)=>r===f.merges[2]&&p===path?'100644:'+blob:f.read(r,p)}),/selected or changed reviewed compatibility support/);
+ }
+ assert.throws(()=>verify({...request,manifest:{...manifest,restored_reviewed_batch_qa_paths:[]}}),/HOLD/);
+ assert.throws(()=>verify({...request,manifest:{...manifest,restored_reviewed_batch_qa_paths:[...paths,'tests/unrelated.test.mjs']}}),/HOLD/);
+});

@@ -4,6 +4,8 @@
 import {execFileSync} from 'node:child_process';
 import {generalBatchQaGeneration} from './reviewed-general-batch-qa.mjs';
 import {reviewedStaleFamilyComposite} from './prospective-ready-source.mjs';
+import {reviewedMemberBrokerComposite,reviewedMemberHistoricalCheckNames} from './reviewed-member-broker-source.mjs';
+import {reviewedCiOptimizationComposite,reviewedCiHistoricalCheckNames} from './reviewed-ci-optimization-source.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const OBJ=/^100(?:644|755):[a-f0-9]{40}$/;
 const safePath=p=>typeof p==='string'&&/^[A-Za-z0-9_.\/-]+$/.test(p)&&!p.includes('..');
@@ -100,7 +102,11 @@ export function proveGeneralFrozenQa({candidateSha,candidateBranch,publishedSour
  const rows=new Map();
  for(const item of selected){
   const composite=reviewedStaleFamilyComposite({row:item,developmentSourceSha:dev,publishedSourceSha,
-   readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
+   readParents,isAncestor,firstParentChangedPaths,sourceObjectAt})||
+   reviewedMemberBrokerComposite({row:item,developmentSourceSha:dev,publishedSourceSha,
+    readParents,isAncestor,firstParentChangedPaths,sourceObjectAt})||
+   reviewedCiOptimizationComposite({row:item,developmentSourceSha:dev,publishedSourceSha,
+    readParents,isAncestor,firstParentChangedPaths,sourceObjectAt});
   const changed=composite?sorted(composite.source_merges.flatMap(s=>s.changed_paths)):
    firstParentChangedPaths(item.merged_source_sha);
   const owned=sorted([...item.scope_paths,...changed.filter(path=>!path.startsWith('docs/'))]);
@@ -128,4 +134,18 @@ export function verifiedSelectedCompositeSources(proof,item,sha){
  const bound=verifiedRow(proof,item,sha);
  if(!bound)throw Error('Unverified candidate row receipt');
  return structuredClone(bound.row.composite);
+}
+
+// Historical applicability is issued only by the opaque, independently
+// source-proven row receipt. Neither a manifest nor a caller-supplied list
+// may remove a check. Frozen-candidate verification always uses all five.
+export function verifiedSelectedHistoricalCheckNames(proof,item,sha,step){
+ const bound=verifiedRow(proof,item,sha);
+ if(!bound||!bound.row.composite.some(x=>JSON.stringify(x)===JSON.stringify(step)))
+  throw Error('Unverified historical applicability receipt');
+ const member=reviewedMemberHistoricalCheckNames(step);
+ if(member)return member;
+ if(step?.historical_applicability==='DIC-3889-EXACT-CI-ONLY-1')return reviewedCiHistoricalCheckNames(step);
+ if(step?.historical_applicability!==undefined)throw Error('Unknown historical applicability source');
+ return ['approval','validate','cloud-tests','mobile-browser-qa','sql'];
 }
