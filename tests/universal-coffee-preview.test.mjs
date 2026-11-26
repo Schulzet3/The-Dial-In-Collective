@@ -153,8 +153,9 @@ test('Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso r
  assert.equal(r.fields.tasting_notes,'citra hops, mandarin, sugarcane');
  assert.equal(r.fields.elevation_m,'2000-2100 masl');
  assert.equal(r.fields.producer,'850 small scale producers');
- // The source explicitly calls this the last offering for 2026.
- assert.equal(r.fields.release_label,'2026');
+ // Last selection of 2026 and RELATIONSHIP since 2026 are annual context,
+ // not a selected lot, specific harvest or distinct coffee release.
+ assert.equal(r.fields.release_label,undefined);
  assert.deepEqual(r.roaster_recipe,{dose_g:18.5,yield_g:36,time_s_min:20,time_s_max:22});
  const markup=coffeeUrlPreviewMarkup(r);
  assert.match(markup,/Autofill Results/);

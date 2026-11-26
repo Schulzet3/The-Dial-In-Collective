@@ -1,0 +1,2461 @@
+{
+  "issue": 509,
+  "run": "R477",
+  "utc_date": "2026-11-23",
+  "project_ref": "azviqqejypsefzilgonr",
+  "github_development_preflight_sha": "90cc91e258f40fb9d0f4ff1e4e1b1d9b1a0fb473",
+  "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+  "source": "Connected production pg_catalog SELECT-only; all item raw catalog text stored; no member/Auth records or secrets",
+  "boundary": "DO_NOT_WRITE_PRODUCTION",
+  "conclusions": "No reproduced DIC application bug, verified dead database object, or safe removal from this catalog slice. Compiled functions and hosting settings unverified.",
+  "catalog": "pg_catalog.pg_conversion",
+  "sort": "ascending oid",
+  "coverage": {
+    "directly_inspected": 128,
+    "total": 128,
+    "raw_characters": 21946,
+    "first_oid": 4402,
+    "last_oid": 4531
+  },
+  "checks": {
+    "default_per_direction": "128/128 unique",
+    "reverse_direction": "128/128 registered",
+    "implementation": "128/128 resolved PostgreSQL C functions; native bodies not accessible",
+    "schema": "pg_catalog",
+    "volatility": "immutable"
+  },
+  "items": [
+    {
+      "rank": 1,
+      "object": "pg_conversion:4402",
+      "oid": 4402,
+      "name": "koi8_r_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4402\",\"conname\":\"koi8_r_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":22,\"contoencoding\":7,\"conproc\":\"koi8r_to_mic\",\"condefault\":true,\"rn\":1}",
+      "provider_md5": "e80e7c0c3a37b52c297aaa40253f85cf",
+      "character_coverage": {
+        "start": 1,
+        "end": 164,
+        "reviewed": 164
+      },
+      "semantics": "Default server character-set converter KOI8R -> MULE_INTERNAL; C routine koi8r_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 2,
+      "object": "pg_conversion:4403",
+      "oid": 4403,
+      "name": "mic_to_koi8_r",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4403\",\"conname\":\"mic_to_koi8_r\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":22,\"conproc\":\"mic_to_koi8r\",\"condefault\":true,\"rn\":2}",
+      "provider_md5": "9f100b11461fdcf8e82f7c95c6a00eed",
+      "character_coverage": {
+        "start": 1,
+        "end": 164,
+        "reviewed": 164
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> KOI8R; C routine mic_to_koi8r; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 3,
+      "object": "pg_conversion:4404",
+      "oid": 4404,
+      "name": "iso_8859_5_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4404\",\"conname\":\"iso_8859_5_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":25,\"contoencoding\":7,\"conproc\":\"iso_to_mic\",\"condefault\":true,\"rn\":3}",
+      "provider_md5": "e7df45d32b6a1faa725312490494c1e7",
+      "character_coverage": {
+        "start": 1,
+        "end": 166,
+        "reviewed": 166
+      },
+      "semantics": "Default server character-set converter ISO_8859_5 -> MULE_INTERNAL; C routine iso_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 4,
+      "object": "pg_conversion:4405",
+      "oid": 4405,
+      "name": "mic_to_iso_8859_5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4405\",\"conname\":\"mic_to_iso_8859_5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":25,\"conproc\":\"mic_to_iso\",\"condefault\":true,\"rn\":4}",
+      "provider_md5": "c2ce771eb1cba6603be4d23689638e15",
+      "character_coverage": {
+        "start": 1,
+        "end": 166,
+        "reviewed": 166
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> ISO_8859_5; C routine mic_to_iso; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 5,
+      "object": "pg_conversion:4406",
+      "oid": 4406,
+      "name": "windows_1251_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4406\",\"conname\":\"windows_1251_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":23,\"contoencoding\":7,\"conproc\":\"win1251_to_mic\",\"condefault\":true,\"rn\":5}",
+      "provider_md5": "4313bd1f9ea584a8e5c9df7de455562c",
+      "character_coverage": {
+        "start": 1,
+        "end": 172,
+        "reviewed": 172
+      },
+      "semantics": "Default server character-set converter WIN1251 -> MULE_INTERNAL; C routine win1251_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 6,
+      "object": "pg_conversion:4407",
+      "oid": 4407,
+      "name": "mic_to_windows_1251",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4407\",\"conname\":\"mic_to_windows_1251\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":23,\"conproc\":\"mic_to_win1251\",\"condefault\":true,\"rn\":6}",
+      "provider_md5": "538d81c7b7e24874e33cad2c8bccedb1",
+      "character_coverage": {
+        "start": 1,
+        "end": 172,
+        "reviewed": 172
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> WIN1251; C routine mic_to_win1251; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 7,
+      "object": "pg_conversion:4408",
+      "oid": 4408,
+      "name": "windows_866_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4408\",\"conname\":\"windows_866_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":20,\"contoencoding\":7,\"conproc\":\"win866_to_mic\",\"condefault\":true,\"rn\":7}",
+      "provider_md5": "1c027038401fd2d0cc42f006079cb861",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter WIN866 -> MULE_INTERNAL; C routine win866_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 8,
+      "object": "pg_conversion:4409",
+      "oid": 4409,
+      "name": "mic_to_windows_866",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4409\",\"conname\":\"mic_to_windows_866\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":20,\"conproc\":\"mic_to_win866\",\"condefault\":true,\"rn\":8}",
+      "provider_md5": "63712d5cead576ac1d33147be9d9a691",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> WIN866; C routine mic_to_win866; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 9,
+      "object": "pg_conversion:4410",
+      "oid": 4410,
+      "name": "koi8_r_to_windows_1251",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4410\",\"conname\":\"koi8_r_to_windows_1251\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":22,\"contoencoding\":23,\"conproc\":\"koi8r_to_win1251\",\"condefault\":true,\"rn\":9}",
+      "provider_md5": "ed6ab5264d57482d10898b4c1c84722e",
+      "character_coverage": {
+        "start": 1,
+        "end": 178,
+        "reviewed": 178
+      },
+      "semantics": "Default server character-set converter KOI8R -> WIN1251; C routine koi8r_to_win1251; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 10,
+      "object": "pg_conversion:4411",
+      "oid": 4411,
+      "name": "windows_1251_to_koi8_r",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4411\",\"conname\":\"windows_1251_to_koi8_r\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":23,\"contoencoding\":22,\"conproc\":\"win1251_to_koi8r\",\"condefault\":true,\"rn\":10}",
+      "provider_md5": "d1e055c12d22c988ac0b3a3cf5812b6c",
+      "character_coverage": {
+        "start": 1,
+        "end": 179,
+        "reviewed": 179
+      },
+      "semantics": "Default server character-set converter WIN1251 -> KOI8R; C routine win1251_to_koi8r; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 11,
+      "object": "pg_conversion:4412",
+      "oid": 4412,
+      "name": "koi8_r_to_windows_866",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4412\",\"conname\":\"koi8_r_to_windows_866\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":22,\"contoencoding\":20,\"conproc\":\"koi8r_to_win866\",\"condefault\":true,\"rn\":11}",
+      "provider_md5": "ed245d013d40c54313b2bd759ef13c20",
+      "character_coverage": {
+        "start": 1,
+        "end": 177,
+        "reviewed": 177
+      },
+      "semantics": "Default server character-set converter KOI8R -> WIN866; C routine koi8r_to_win866; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 12,
+      "object": "pg_conversion:4413",
+      "oid": 4413,
+      "name": "windows_866_to_koi8_r",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4413\",\"conname\":\"windows_866_to_koi8_r\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":20,\"contoencoding\":22,\"conproc\":\"win866_to_koi8r\",\"condefault\":true,\"rn\":12}",
+      "provider_md5": "1f4938613f120bff8f6e96a77ef43bcb",
+      "character_coverage": {
+        "start": 1,
+        "end": 177,
+        "reviewed": 177
+      },
+      "semantics": "Default server character-set converter WIN866 -> KOI8R; C routine win866_to_koi8r; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 13,
+      "object": "pg_conversion:4414",
+      "oid": 4414,
+      "name": "windows_866_to_windows_1251",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4414\",\"conname\":\"windows_866_to_windows_1251\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":20,\"contoencoding\":23,\"conproc\":\"win866_to_win1251\",\"condefault\":true,\"rn\":13}",
+      "provider_md5": "86822c0e16b6f5025d8cc18d6318cd73",
+      "character_coverage": {
+        "start": 1,
+        "end": 185,
+        "reviewed": 185
+      },
+      "semantics": "Default server character-set converter WIN866 -> WIN1251; C routine win866_to_win1251; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 14,
+      "object": "pg_conversion:4415",
+      "oid": 4415,
+      "name": "windows_1251_to_windows_866",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4415\",\"conname\":\"windows_1251_to_windows_866\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":23,\"contoencoding\":20,\"conproc\":\"win1251_to_win866\",\"condefault\":true,\"rn\":14}",
+      "provider_md5": "d90b3eb46331a62c8d8279eac50c3e52",
+      "character_coverage": {
+        "start": 1,
+        "end": 185,
+        "reviewed": 185
+      },
+      "semantics": "Default server character-set converter WIN1251 -> WIN866; C routine win1251_to_win866; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 15,
+      "object": "pg_conversion:4416",
+      "oid": 4416,
+      "name": "iso_8859_5_to_koi8_r",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4416\",\"conname\":\"iso_8859_5_to_koi8_r\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":25,\"contoencoding\":22,\"conproc\":\"iso_to_koi8r\",\"condefault\":true,\"rn\":15}",
+      "provider_md5": "8989a2c7ed0121d2a8d0cd91493aecfb",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter ISO_8859_5 -> KOI8R; C routine iso_to_koi8r; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 16,
+      "object": "pg_conversion:4417",
+      "oid": 4417,
+      "name": "koi8_r_to_iso_8859_5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4417\",\"conname\":\"koi8_r_to_iso_8859_5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":22,\"contoencoding\":25,\"conproc\":\"koi8r_to_iso\",\"condefault\":true,\"rn\":16}",
+      "provider_md5": "367126a2ede86d8e35669ac4f0eb5c49",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter KOI8R -> ISO_8859_5; C routine koi8r_to_iso; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 17,
+      "object": "pg_conversion:4418",
+      "oid": 4418,
+      "name": "iso_8859_5_to_windows_1251",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4418\",\"conname\":\"iso_8859_5_to_windows_1251\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":25,\"contoencoding\":23,\"conproc\":\"iso_to_win1251\",\"condefault\":true,\"rn\":17}",
+      "provider_md5": "ce3894dfb0f02a8facd6f0a3158db29b",
+      "character_coverage": {
+        "start": 1,
+        "end": 181,
+        "reviewed": 181
+      },
+      "semantics": "Default server character-set converter ISO_8859_5 -> WIN1251; C routine iso_to_win1251; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 18,
+      "object": "pg_conversion:4419",
+      "oid": 4419,
+      "name": "windows_1251_to_iso_8859_5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4419\",\"conname\":\"windows_1251_to_iso_8859_5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":23,\"contoencoding\":25,\"conproc\":\"win1251_to_iso\",\"condefault\":true,\"rn\":18}",
+      "provider_md5": "7e15984ae11c01cc15bb247327704e68",
+      "character_coverage": {
+        "start": 1,
+        "end": 181,
+        "reviewed": 181
+      },
+      "semantics": "Default server character-set converter WIN1251 -> ISO_8859_5; C routine win1251_to_iso; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 19,
+      "object": "pg_conversion:4420",
+      "oid": 4420,
+      "name": "iso_8859_5_to_windows_866",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4420\",\"conname\":\"iso_8859_5_to_windows_866\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":25,\"contoencoding\":20,\"conproc\":\"iso_to_win866\",\"condefault\":true,\"rn\":19}",
+      "provider_md5": "76164b58d5d7785e8b36ffb3f5233ac8",
+      "character_coverage": {
+        "start": 1,
+        "end": 179,
+        "reviewed": 179
+      },
+      "semantics": "Default server character-set converter ISO_8859_5 -> WIN866; C routine iso_to_win866; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 20,
+      "object": "pg_conversion:4421",
+      "oid": 4421,
+      "name": "windows_866_to_iso_8859_5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4421\",\"conname\":\"windows_866_to_iso_8859_5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":20,\"contoencoding\":25,\"conproc\":\"win866_to_iso\",\"condefault\":true,\"rn\":20}",
+      "provider_md5": "56794ed77743e8a0eb0adbdf73bae485",
+      "character_coverage": {
+        "start": 1,
+        "end": 179,
+        "reviewed": 179
+      },
+      "semantics": "Default server character-set converter WIN866 -> ISO_8859_5; C routine win866_to_iso; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 21,
+      "object": "pg_conversion:4422",
+      "oid": 4422,
+      "name": "euc_cn_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4422\",\"conname\":\"euc_cn_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":2,\"contoencoding\":7,\"conproc\":\"euc_cn_to_mic\",\"condefault\":true,\"rn\":21}",
+      "provider_md5": "179efc1ffe311f5869654a1ab2d1aa16",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter EUC_CN -> MULE_INTERNAL; C routine euc_cn_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 22,
+      "object": "pg_conversion:4423",
+      "oid": 4423,
+      "name": "mic_to_euc_cn",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4423\",\"conname\":\"mic_to_euc_cn\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":2,\"conproc\":\"mic_to_euc_cn\",\"condefault\":true,\"rn\":22}",
+      "provider_md5": "f0b20ffa76edb223f699c2e75e252c53",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> EUC_CN; C routine mic_to_euc_cn; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 23,
+      "object": "pg_conversion:4424",
+      "oid": 4424,
+      "name": "euc_jp_to_sjis",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4424\",\"conname\":\"euc_jp_to_sjis\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":1,\"contoencoding\":35,\"conproc\":\"euc_jp_to_sjis\",\"condefault\":true,\"rn\":23}",
+      "provider_md5": "a64fa2f6f33b34fac85390860dee8475",
+      "character_coverage": {
+        "start": 1,
+        "end": 168,
+        "reviewed": 168
+      },
+      "semantics": "Default server character-set converter EUC_JP -> SJIS; C routine euc_jp_to_sjis; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 24,
+      "object": "pg_conversion:4425",
+      "oid": 4425,
+      "name": "sjis_to_euc_jp",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4425\",\"conname\":\"sjis_to_euc_jp\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":35,\"contoencoding\":1,\"conproc\":\"sjis_to_euc_jp\",\"condefault\":true,\"rn\":24}",
+      "provider_md5": "bfe12358c20a7f843e408352410067b5",
+      "character_coverage": {
+        "start": 1,
+        "end": 168,
+        "reviewed": 168
+      },
+      "semantics": "Default server character-set converter SJIS -> EUC_JP; C routine sjis_to_euc_jp; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 25,
+      "object": "pg_conversion:4426",
+      "oid": 4426,
+      "name": "euc_jp_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4426\",\"conname\":\"euc_jp_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":1,\"contoencoding\":7,\"conproc\":\"euc_jp_to_mic\",\"condefault\":true,\"rn\":25}",
+      "provider_md5": "f408b0e0c22d4f9d521cf04b021b3573",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter EUC_JP -> MULE_INTERNAL; C routine euc_jp_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 26,
+      "object": "pg_conversion:4427",
+      "oid": 4427,
+      "name": "sjis_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4427\",\"conname\":\"sjis_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":35,\"contoencoding\":7,\"conproc\":\"sjis_to_mic\",\"condefault\":true,\"rn\":26}",
+      "provider_md5": "a03fadea98cbeee22a9bbf2b3d13e7bc",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter SJIS -> MULE_INTERNAL; C routine sjis_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 27,
+      "object": "pg_conversion:4428",
+      "oid": 4428,
+      "name": "mic_to_euc_jp",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4428\",\"conname\":\"mic_to_euc_jp\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":1,\"conproc\":\"mic_to_euc_jp\",\"condefault\":true,\"rn\":27}",
+      "provider_md5": "a19a781232c5c6e41b41a83f35e74f2d",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> EUC_JP; C routine mic_to_euc_jp; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 28,
+      "object": "pg_conversion:4429",
+      "oid": 4429,
+      "name": "mic_to_sjis",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4429\",\"conname\":\"mic_to_sjis\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":35,\"conproc\":\"mic_to_sjis\",\"condefault\":true,\"rn\":28}",
+      "provider_md5": "99c4fad1db58ac2538ca9b5fccc5acf3",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> SJIS; C routine mic_to_sjis; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 29,
+      "object": "pg_conversion:4430",
+      "oid": 4430,
+      "name": "euc_kr_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4430\",\"conname\":\"euc_kr_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":3,\"contoencoding\":7,\"conproc\":\"euc_kr_to_mic\",\"condefault\":true,\"rn\":29}",
+      "provider_md5": "dc23ebdafb0592cd8d17d185245c9c0a",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter EUC_KR -> MULE_INTERNAL; C routine euc_kr_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 30,
+      "object": "pg_conversion:4431",
+      "oid": 4431,
+      "name": "mic_to_euc_kr",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4431\",\"conname\":\"mic_to_euc_kr\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":3,\"conproc\":\"mic_to_euc_kr\",\"condefault\":true,\"rn\":30}",
+      "provider_md5": "d0e1082373e60f4e188e9851ecb66870",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> EUC_KR; C routine mic_to_euc_kr; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 31,
+      "object": "pg_conversion:4432",
+      "oid": 4432,
+      "name": "euc_tw_to_big5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4432\",\"conname\":\"euc_tw_to_big5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":4,\"contoencoding\":36,\"conproc\":\"euc_tw_to_big5\",\"condefault\":true,\"rn\":31}",
+      "provider_md5": "23797ecbc8a81e5d7e5cb1b9299fa72c",
+      "character_coverage": {
+        "start": 1,
+        "end": 168,
+        "reviewed": 168
+      },
+      "semantics": "Default server character-set converter EUC_TW -> BIG5; C routine euc_tw_to_big5; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 32,
+      "object": "pg_conversion:4433",
+      "oid": 4433,
+      "name": "big5_to_euc_tw",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4433\",\"conname\":\"big5_to_euc_tw\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":36,\"contoencoding\":4,\"conproc\":\"big5_to_euc_tw\",\"condefault\":true,\"rn\":32}",
+      "provider_md5": "a31fa01caaed749d7f1cae38bb46d401",
+      "character_coverage": {
+        "start": 1,
+        "end": 168,
+        "reviewed": 168
+      },
+      "semantics": "Default server character-set converter BIG5 -> EUC_TW; C routine big5_to_euc_tw; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 33,
+      "object": "pg_conversion:4434",
+      "oid": 4434,
+      "name": "euc_tw_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4434\",\"conname\":\"euc_tw_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":4,\"contoencoding\":7,\"conproc\":\"euc_tw_to_mic\",\"condefault\":true,\"rn\":33}",
+      "provider_md5": "acb238d8596005f62af9f63dfb0237c2",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter EUC_TW -> MULE_INTERNAL; C routine euc_tw_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 34,
+      "object": "pg_conversion:4435",
+      "oid": 4435,
+      "name": "big5_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4435\",\"conname\":\"big5_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":36,\"contoencoding\":7,\"conproc\":\"big5_to_mic\",\"condefault\":true,\"rn\":34}",
+      "provider_md5": "3afe980c58ba8d3a23aa55eac3f41ef0",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter BIG5 -> MULE_INTERNAL; C routine big5_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 35,
+      "object": "pg_conversion:4436",
+      "oid": 4436,
+      "name": "mic_to_euc_tw",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4436\",\"conname\":\"mic_to_euc_tw\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":4,\"conproc\":\"mic_to_euc_tw\",\"condefault\":true,\"rn\":35}",
+      "provider_md5": "98bb78ceaeb69a39f9ee1dc537d9569c",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> EUC_TW; C routine mic_to_euc_tw; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 36,
+      "object": "pg_conversion:4437",
+      "oid": 4437,
+      "name": "mic_to_big5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4437\",\"conname\":\"mic_to_big5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":36,\"conproc\":\"mic_to_big5\",\"condefault\":true,\"rn\":36}",
+      "provider_md5": "9c4f58d0aeea21334ab90ac7462ddb46",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> BIG5; C routine mic_to_big5; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 37,
+      "object": "pg_conversion:4438",
+      "oid": 4438,
+      "name": "iso_8859_2_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4438\",\"conname\":\"iso_8859_2_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":9,\"contoencoding\":7,\"conproc\":\"latin2_to_mic\",\"condefault\":true,\"rn\":37}",
+      "provider_md5": "96526618d51ec923aa0b82fa64c71d91",
+      "character_coverage": {
+        "start": 1,
+        "end": 169,
+        "reviewed": 169
+      },
+      "semantics": "Default server character-set converter LATIN2 -> MULE_INTERNAL; C routine latin2_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 38,
+      "object": "pg_conversion:4439",
+      "oid": 4439,
+      "name": "mic_to_iso_8859_2",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4439\",\"conname\":\"mic_to_iso_8859_2\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":9,\"conproc\":\"mic_to_latin2\",\"condefault\":true,\"rn\":38}",
+      "provider_md5": "c4ecc2c6f3840791d443dcad46ff4ef7",
+      "character_coverage": {
+        "start": 1,
+        "end": 169,
+        "reviewed": 169
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> LATIN2; C routine mic_to_latin2; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 39,
+      "object": "pg_conversion:4440",
+      "oid": 4440,
+      "name": "windows_1250_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4440\",\"conname\":\"windows_1250_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":29,\"contoencoding\":7,\"conproc\":\"win1250_to_mic\",\"condefault\":true,\"rn\":39}",
+      "provider_md5": "b55794cf28043fbd138d5a5bb5ce406c",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter WIN1250 -> MULE_INTERNAL; C routine win1250_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 40,
+      "object": "pg_conversion:4441",
+      "oid": 4441,
+      "name": "mic_to_windows_1250",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4441\",\"conname\":\"mic_to_windows_1250\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":29,\"conproc\":\"mic_to_win1250\",\"condefault\":true,\"rn\":40}",
+      "provider_md5": "f263ae85c6ee8c208d30760d22b5dca7",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> WIN1250; C routine mic_to_win1250; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 41,
+      "object": "pg_conversion:4442",
+      "oid": 4442,
+      "name": "iso_8859_2_to_windows_1250",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4442\",\"conname\":\"iso_8859_2_to_windows_1250\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":9,\"contoencoding\":29,\"conproc\":\"latin2_to_win1250\",\"condefault\":true,\"rn\":41}",
+      "provider_md5": "1eef6b4c2d950ce4807152a29d609dde",
+      "character_coverage": {
+        "start": 1,
+        "end": 183,
+        "reviewed": 183
+      },
+      "semantics": "Default server character-set converter LATIN2 -> WIN1250; C routine latin2_to_win1250; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 42,
+      "object": "pg_conversion:4443",
+      "oid": 4443,
+      "name": "windows_1250_to_iso_8859_2",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4443\",\"conname\":\"windows_1250_to_iso_8859_2\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":29,\"contoencoding\":9,\"conproc\":\"win1250_to_latin2\",\"condefault\":true,\"rn\":42}",
+      "provider_md5": "c557d878aabc8ebf67c6533e00e37300",
+      "character_coverage": {
+        "start": 1,
+        "end": 183,
+        "reviewed": 183
+      },
+      "semantics": "Default server character-set converter WIN1250 -> LATIN2; C routine win1250_to_latin2; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 43,
+      "object": "pg_conversion:4444",
+      "oid": 4444,
+      "name": "iso_8859_1_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4444\",\"conname\":\"iso_8859_1_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":8,\"contoencoding\":7,\"conproc\":\"latin1_to_mic\",\"condefault\":true,\"rn\":43}",
+      "provider_md5": "b96fe55016488fb769ec7cc0680558f9",
+      "character_coverage": {
+        "start": 1,
+        "end": 169,
+        "reviewed": 169
+      },
+      "semantics": "Default server character-set converter LATIN1 -> MULE_INTERNAL; C routine latin1_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 44,
+      "object": "pg_conversion:4445",
+      "oid": 4445,
+      "name": "mic_to_iso_8859_1",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4445\",\"conname\":\"mic_to_iso_8859_1\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":8,\"conproc\":\"mic_to_latin1\",\"condefault\":true,\"rn\":44}",
+      "provider_md5": "f33aaa1c7c657e8e37fa6fcb5de74711",
+      "character_coverage": {
+        "start": 1,
+        "end": 169,
+        "reviewed": 169
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> LATIN1; C routine mic_to_latin1; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 45,
+      "object": "pg_conversion:4446",
+      "oid": 4446,
+      "name": "iso_8859_3_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4446\",\"conname\":\"iso_8859_3_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":10,\"contoencoding\":7,\"conproc\":\"latin3_to_mic\",\"condefault\":true,\"rn\":45}",
+      "provider_md5": "6ffdf5129be863759872730e37158ab7",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter LATIN3 -> MULE_INTERNAL; C routine latin3_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 46,
+      "object": "pg_conversion:4447",
+      "oid": 4447,
+      "name": "mic_to_iso_8859_3",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4447\",\"conname\":\"mic_to_iso_8859_3\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":10,\"conproc\":\"mic_to_latin3\",\"condefault\":true,\"rn\":46}",
+      "provider_md5": "257b664a303f12e778c896c505fab883",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> LATIN3; C routine mic_to_latin3; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 47,
+      "object": "pg_conversion:4448",
+      "oid": 4448,
+      "name": "iso_8859_4_to_mic",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4448\",\"conname\":\"iso_8859_4_to_mic\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":11,\"contoencoding\":7,\"conproc\":\"latin4_to_mic\",\"condefault\":true,\"rn\":47}",
+      "provider_md5": "93205bd4fe635ca620d937d1fa5a869b",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter LATIN4 -> MULE_INTERNAL; C routine latin4_to_mic; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 48,
+      "object": "pg_conversion:4449",
+      "oid": 4449,
+      "name": "mic_to_iso_8859_4",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4449\",\"conname\":\"mic_to_iso_8859_4\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":7,\"contoencoding\":11,\"conproc\":\"mic_to_latin4\",\"condefault\":true,\"rn\":48}",
+      "provider_md5": "dfa158f347c3c000a3f31c3fe9d17357",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter MULE_INTERNAL -> LATIN4; C routine mic_to_latin4; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 49,
+      "object": "pg_conversion:4452",
+      "oid": 4452,
+      "name": "big5_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4452\",\"conname\":\"big5_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":36,\"contoencoding\":6,\"conproc\":\"big5_to_utf8\",\"condefault\":true,\"rn\":49}",
+      "provider_md5": "0062bd196a885037fab65829da90da3c",
+      "character_coverage": {
+        "start": 1,
+        "end": 164,
+        "reviewed": 164
+      },
+      "semantics": "Default server character-set converter BIG5 -> UTF8; C routine big5_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 50,
+      "object": "pg_conversion:4453",
+      "oid": 4453,
+      "name": "utf8_to_big5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4453\",\"conname\":\"utf8_to_big5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":36,\"conproc\":\"utf8_to_big5\",\"condefault\":true,\"rn\":50}",
+      "provider_md5": "0234d5845a5e45b4790e6fb206088bd3",
+      "character_coverage": {
+        "start": 1,
+        "end": 164,
+        "reviewed": 164
+      },
+      "semantics": "Default server character-set converter UTF8 -> BIG5; C routine utf8_to_big5; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 51,
+      "object": "pg_conversion:4454",
+      "oid": 4454,
+      "name": "utf8_to_koi8_r",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4454\",\"conname\":\"utf8_to_koi8_r\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":22,\"conproc\":\"utf8_to_koi8r\",\"condefault\":true,\"rn\":51}",
+      "provider_md5": "050f82a3471eb7f2439c38509fed4a3c",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> KOI8R; C routine utf8_to_koi8r; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 52,
+      "object": "pg_conversion:4455",
+      "oid": 4455,
+      "name": "koi8_r_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4455\",\"conname\":\"koi8_r_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":22,\"contoencoding\":6,\"conproc\":\"koi8r_to_utf8\",\"condefault\":true,\"rn\":52}",
+      "provider_md5": "b5438cfa7927257e2a866d2bc437394d",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter KOI8R -> UTF8; C routine koi8r_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 53,
+      "object": "pg_conversion:4456",
+      "oid": 4456,
+      "name": "utf8_to_koi8_u",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4456\",\"conname\":\"utf8_to_koi8_u\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":34,\"conproc\":\"utf8_to_koi8u\",\"condefault\":true,\"rn\":53}",
+      "provider_md5": "c93c9a2369c490be70da472fa9e193ec",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> KOI8U; C routine utf8_to_koi8u; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 54,
+      "object": "pg_conversion:4457",
+      "oid": 4457,
+      "name": "koi8_u_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4457\",\"conname\":\"koi8_u_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":34,\"contoencoding\":6,\"conproc\":\"koi8u_to_utf8\",\"condefault\":true,\"rn\":54}",
+      "provider_md5": "19ff524060ece4c5320729cf08d9b373",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter KOI8U -> UTF8; C routine koi8u_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 55,
+      "object": "pg_conversion:4458",
+      "oid": 4458,
+      "name": "utf8_to_windows_866",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4458\",\"conname\":\"utf8_to_windows_866\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":20,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":55}",
+      "provider_md5": "319993320818300ca56d7b741d63d8fc",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN866; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 56,
+      "object": "pg_conversion:4459",
+      "oid": 4459,
+      "name": "windows_866_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4459\",\"conname\":\"windows_866_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":20,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":56}",
+      "provider_md5": "6469329ecf992580b3d910be5a26a5ab",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter WIN866 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 57,
+      "object": "pg_conversion:4460",
+      "oid": 4460,
+      "name": "utf8_to_windows_874",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4460\",\"conname\":\"utf8_to_windows_874\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":21,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":57}",
+      "provider_md5": "b8c751fb74e93a580309b7abadfe5caf",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN874; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 58,
+      "object": "pg_conversion:4461",
+      "oid": 4461,
+      "name": "windows_874_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4461\",\"conname\":\"windows_874_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":21,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":58}",
+      "provider_md5": "bbf0127bfebdd146bfb4d2321adb7d4e",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter WIN874 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 59,
+      "object": "pg_conversion:4462",
+      "oid": 4462,
+      "name": "utf8_to_windows_1250",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4462\",\"conname\":\"utf8_to_windows_1250\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":29,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":59}",
+      "provider_md5": "d15a46d3c0a0efb379d3fafbe5207c60",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1250; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 60,
+      "object": "pg_conversion:4463",
+      "oid": 4463,
+      "name": "windows_1250_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4463\",\"conname\":\"windows_1250_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":29,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":60}",
+      "provider_md5": "c9d9c7e42e7fb99bfa3d075c6e6acbb5",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1250 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 61,
+      "object": "pg_conversion:4464",
+      "oid": 4464,
+      "name": "utf8_to_windows_1251",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4464\",\"conname\":\"utf8_to_windows_1251\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":23,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":61}",
+      "provider_md5": "c2c4a8a556dc3af28adb2436f6a5c9f4",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1251; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 62,
+      "object": "pg_conversion:4465",
+      "oid": 4465,
+      "name": "windows_1251_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4465\",\"conname\":\"windows_1251_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":23,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":62}",
+      "provider_md5": "f085e2c3816a4d3d4424f7cd997cfe22",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1251 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 63,
+      "object": "pg_conversion:4466",
+      "oid": 4466,
+      "name": "utf8_to_windows_1252",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4466\",\"conname\":\"utf8_to_windows_1252\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":24,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":63}",
+      "provider_md5": "21be4dd6cc148fddcec0dc053addf595",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1252; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 64,
+      "object": "pg_conversion:4467",
+      "oid": 4467,
+      "name": "windows_1252_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4467\",\"conname\":\"windows_1252_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":24,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":64}",
+      "provider_md5": "43b0303e8d84dba77961beace6db7ead",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1252 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 65,
+      "object": "pg_conversion:4468",
+      "oid": 4468,
+      "name": "utf8_to_windows_1253",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4468\",\"conname\":\"utf8_to_windows_1253\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":30,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":65}",
+      "provider_md5": "7687e8c5e73baa4dc7c08237db19fb26",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1253; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 66,
+      "object": "pg_conversion:4469",
+      "oid": 4469,
+      "name": "windows_1253_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4469\",\"conname\":\"windows_1253_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":30,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":66}",
+      "provider_md5": "252ff79d66c0fbbaf5ee113f68582da9",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1253 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 67,
+      "object": "pg_conversion:4470",
+      "oid": 4470,
+      "name": "utf8_to_windows_1254",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4470\",\"conname\":\"utf8_to_windows_1254\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":31,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":67}",
+      "provider_md5": "84fbcb6eec52fce81145d58b1a981bbe",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1254; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 68,
+      "object": "pg_conversion:4471",
+      "oid": 4471,
+      "name": "windows_1254_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4471\",\"conname\":\"windows_1254_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":31,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":68}",
+      "provider_md5": "c58863f5d4b57961ec18e2d53799c9ea",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1254 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 69,
+      "object": "pg_conversion:4472",
+      "oid": 4472,
+      "name": "utf8_to_windows_1255",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4472\",\"conname\":\"utf8_to_windows_1255\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":32,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":69}",
+      "provider_md5": "1ec1b6964d002a07e7e777d22e641b82",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1255; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 70,
+      "object": "pg_conversion:4473",
+      "oid": 4473,
+      "name": "windows_1255_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4473\",\"conname\":\"windows_1255_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":32,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":70}",
+      "provider_md5": "8a27ee750ebfb900e68bbf7054d69690",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1255 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 71,
+      "object": "pg_conversion:4474",
+      "oid": 4474,
+      "name": "utf8_to_windows_1256",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4474\",\"conname\":\"utf8_to_windows_1256\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":18,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":71}",
+      "provider_md5": "ca7ea9fa42c5db274a88f5596653fc7e",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1256; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 72,
+      "object": "pg_conversion:4475",
+      "oid": 4475,
+      "name": "windows_1256_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4475\",\"conname\":\"windows_1256_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":18,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":72}",
+      "provider_md5": "2156d66a1be732bb85ca2979fef48a23",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1256 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 73,
+      "object": "pg_conversion:4476",
+      "oid": 4476,
+      "name": "utf8_to_windows_1257",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4476\",\"conname\":\"utf8_to_windows_1257\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":33,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":73}",
+      "provider_md5": "a7b15d408d26ecbad80daf44a21cc9e9",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1257; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 74,
+      "object": "pg_conversion:4477",
+      "oid": 4477,
+      "name": "windows_1257_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4477\",\"conname\":\"windows_1257_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":33,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":74}",
+      "provider_md5": "0f47cd2f52daedeada0f35c3abdb87e9",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1257 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 75,
+      "object": "pg_conversion:4478",
+      "oid": 4478,
+      "name": "utf8_to_windows_1258",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4478\",\"conname\":\"utf8_to_windows_1258\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":19,\"conproc\":\"utf8_to_win\",\"condefault\":true,\"rn\":75}",
+      "provider_md5": "b32224c9c0a07241e919c68d64ab8d3b",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter UTF8 -> WIN1258; C routine utf8_to_win; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 76,
+      "object": "pg_conversion:4479",
+      "oid": 4479,
+      "name": "windows_1258_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4479\",\"conname\":\"windows_1258_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":19,\"contoencoding\":6,\"conproc\":\"win_to_utf8\",\"condefault\":true,\"rn\":76}",
+      "provider_md5": "93bd241646aad438cb614d75d98c9e7b",
+      "character_coverage": {
+        "start": 1,
+        "end": 171,
+        "reviewed": 171
+      },
+      "semantics": "Default server character-set converter WIN1258 -> UTF8; C routine win_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 77,
+      "object": "pg_conversion:4480",
+      "oid": 4480,
+      "name": "euc_cn_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4480\",\"conname\":\"euc_cn_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":2,\"contoencoding\":6,\"conproc\":\"euc_cn_to_utf8\",\"condefault\":true,\"rn\":77}",
+      "provider_md5": "28e641d9ee8595a2cb40cae4370dbc42",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter EUC_CN -> UTF8; C routine euc_cn_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 78,
+      "object": "pg_conversion:4481",
+      "oid": 4481,
+      "name": "utf8_to_euc_cn",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4481\",\"conname\":\"utf8_to_euc_cn\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":2,\"conproc\":\"utf8_to_euc_cn\",\"condefault\":true,\"rn\":78}",
+      "provider_md5": "dd576caa6efeaed938279c1b0884c317",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> EUC_CN; C routine utf8_to_euc_cn; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 79,
+      "object": "pg_conversion:4482",
+      "oid": 4482,
+      "name": "euc_jp_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4482\",\"conname\":\"euc_jp_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":1,\"contoencoding\":6,\"conproc\":\"euc_jp_to_utf8\",\"condefault\":true,\"rn\":79}",
+      "provider_md5": "5aa1bcc0c81f0ac50beeca85cdfbc15f",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter EUC_JP -> UTF8; C routine euc_jp_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 80,
+      "object": "pg_conversion:4483",
+      "oid": 4483,
+      "name": "utf8_to_euc_jp",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4483\",\"conname\":\"utf8_to_euc_jp\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":1,\"conproc\":\"utf8_to_euc_jp\",\"condefault\":true,\"rn\":80}",
+      "provider_md5": "ddbb0dbafb099d12f3110447152ad380",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> EUC_JP; C routine utf8_to_euc_jp; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 81,
+      "object": "pg_conversion:4484",
+      "oid": 4484,
+      "name": "euc_kr_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4484\",\"conname\":\"euc_kr_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":3,\"contoencoding\":6,\"conproc\":\"euc_kr_to_utf8\",\"condefault\":true,\"rn\":81}",
+      "provider_md5": "fcb040d42ec9c84d4631c1b847fd4007",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter EUC_KR -> UTF8; C routine euc_kr_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 82,
+      "object": "pg_conversion:4485",
+      "oid": 4485,
+      "name": "utf8_to_euc_kr",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4485\",\"conname\":\"utf8_to_euc_kr\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":3,\"conproc\":\"utf8_to_euc_kr\",\"condefault\":true,\"rn\":82}",
+      "provider_md5": "4f504ed7ce32ab7bfd8793b92244118d",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> EUC_KR; C routine utf8_to_euc_kr; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 83,
+      "object": "pg_conversion:4486",
+      "oid": 4486,
+      "name": "euc_tw_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4486\",\"conname\":\"euc_tw_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":4,\"contoencoding\":6,\"conproc\":\"euc_tw_to_utf8\",\"condefault\":true,\"rn\":83}",
+      "provider_md5": "fe24b13850e67dd0adc309ae4d676896",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter EUC_TW -> UTF8; C routine euc_tw_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 84,
+      "object": "pg_conversion:4487",
+      "oid": 4487,
+      "name": "utf8_to_euc_tw",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4487\",\"conname\":\"utf8_to_euc_tw\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":4,\"conproc\":\"utf8_to_euc_tw\",\"condefault\":true,\"rn\":84}",
+      "provider_md5": "070b997a94223fba72c993fafcff9ac8",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> EUC_TW; C routine utf8_to_euc_tw; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 85,
+      "object": "pg_conversion:4488",
+      "oid": 4488,
+      "name": "gb18030_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4488\",\"conname\":\"gb18030_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":39,\"contoencoding\":6,\"conproc\":\"gb18030_to_utf8\",\"condefault\":true,\"rn\":85}",
+      "provider_md5": "3d8685a903e322c82fa8e98e706d63c1",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter GB18030 -> UTF8; C routine gb18030_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 86,
+      "object": "pg_conversion:4489",
+      "oid": 4489,
+      "name": "utf8_to_gb18030",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4489\",\"conname\":\"utf8_to_gb18030\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":39,\"conproc\":\"utf8_to_gb18030\",\"condefault\":true,\"rn\":86}",
+      "provider_md5": "3d01d39eac36700deb46089c3bb8d9f5",
+      "character_coverage": {
+        "start": 1,
+        "end": 170,
+        "reviewed": 170
+      },
+      "semantics": "Default server character-set converter UTF8 -> GB18030; C routine utf8_to_gb18030; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 87,
+      "object": "pg_conversion:4490",
+      "oid": 4490,
+      "name": "gbk_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4490\",\"conname\":\"gbk_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":37,\"contoencoding\":6,\"conproc\":\"gbk_to_utf8\",\"condefault\":true,\"rn\":87}",
+      "provider_md5": "30cb357af7bfe2aab4248154ca90d823",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter GBK -> UTF8; C routine gbk_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 88,
+      "object": "pg_conversion:4491",
+      "oid": 4491,
+      "name": "utf8_to_gbk",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4491\",\"conname\":\"utf8_to_gbk\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":37,\"conproc\":\"utf8_to_gbk\",\"condefault\":true,\"rn\":88}",
+      "provider_md5": "6091a081af04699876efc95d801267bb",
+      "character_coverage": {
+        "start": 1,
+        "end": 162,
+        "reviewed": 162
+      },
+      "semantics": "Default server character-set converter UTF8 -> GBK; C routine utf8_to_gbk; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 89,
+      "object": "pg_conversion:4492",
+      "oid": 4492,
+      "name": "utf8_to_iso_8859_2",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4492\",\"conname\":\"utf8_to_iso_8859_2\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":9,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":89}",
+      "provider_md5": "38202de3b5db90fd4279766076884ab9",
+      "character_coverage": {
+        "start": 1,
+        "end": 172,
+        "reviewed": 172
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN2; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 90,
+      "object": "pg_conversion:4493",
+      "oid": 4493,
+      "name": "iso_8859_2_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4493\",\"conname\":\"iso_8859_2_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":9,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":90}",
+      "provider_md5": "8eb4b95fd6b724c6ddb01c91e10d1321",
+      "character_coverage": {
+        "start": 1,
+        "end": 172,
+        "reviewed": 172
+      },
+      "semantics": "Default server character-set converter LATIN2 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 91,
+      "object": "pg_conversion:4494",
+      "oid": 4494,
+      "name": "utf8_to_iso_8859_3",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4494\",\"conname\":\"utf8_to_iso_8859_3\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":10,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":91}",
+      "provider_md5": "f17fe611838186bce5f57dbadc9270af",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN3; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 92,
+      "object": "pg_conversion:4495",
+      "oid": 4495,
+      "name": "iso_8859_3_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4495\",\"conname\":\"iso_8859_3_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":10,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":92}",
+      "provider_md5": "f2c5c5621c83ca5ebffd84f1c8b00932",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter LATIN3 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 93,
+      "object": "pg_conversion:4496",
+      "oid": 4496,
+      "name": "utf8_to_iso_8859_4",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4496\",\"conname\":\"utf8_to_iso_8859_4\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":11,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":93}",
+      "provider_md5": "236abff3784feb58756277bf72d664d1",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN4; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 94,
+      "object": "pg_conversion:4497",
+      "oid": 4497,
+      "name": "iso_8859_4_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4497\",\"conname\":\"iso_8859_4_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":11,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":94}",
+      "provider_md5": "cc47d63d2aef67037cf451b59e61a47d",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter LATIN4 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 95,
+      "object": "pg_conversion:4498",
+      "oid": 4498,
+      "name": "utf8_to_iso_8859_9",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4498\",\"conname\":\"utf8_to_iso_8859_9\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":12,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":95}",
+      "provider_md5": "24d5f6406cca3413aef2d227dca89597",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN5; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 96,
+      "object": "pg_conversion:4499",
+      "oid": 4499,
+      "name": "iso_8859_9_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4499\",\"conname\":\"iso_8859_9_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":12,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":96}",
+      "provider_md5": "8f5675b073f34222d5331d432ea6144f",
+      "character_coverage": {
+        "start": 1,
+        "end": 173,
+        "reviewed": 173
+      },
+      "semantics": "Default server character-set converter LATIN5 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 97,
+      "object": "pg_conversion:4500",
+      "oid": 4500,
+      "name": "utf8_to_iso_8859_10",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4500\",\"conname\":\"utf8_to_iso_8859_10\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":13,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":97}",
+      "provider_md5": "3d23376a8ba25caccebd91ff1b245458",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN6; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 98,
+      "object": "pg_conversion:4501",
+      "oid": 4501,
+      "name": "iso_8859_10_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4501\",\"conname\":\"iso_8859_10_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":13,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":98}",
+      "provider_md5": "b39247917d7a0caf4fbd2d243b9b6e0d",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter LATIN6 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 99,
+      "object": "pg_conversion:4502",
+      "oid": 4502,
+      "name": "utf8_to_iso_8859_13",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4502\",\"conname\":\"utf8_to_iso_8859_13\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":14,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":99}",
+      "provider_md5": "b2f38ceef00856307ce34adea5b208f5",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN7; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 100,
+      "object": "pg_conversion:4503",
+      "oid": 4503,
+      "name": "iso_8859_13_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4503\",\"conname\":\"iso_8859_13_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":14,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":100}",
+      "provider_md5": "7b22036b92170ee2eff30f90d59d0def",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter LATIN7 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 101,
+      "object": "pg_conversion:4504",
+      "oid": 4504,
+      "name": "utf8_to_iso_8859_14",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4504\",\"conname\":\"utf8_to_iso_8859_14\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":15,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":101}",
+      "provider_md5": "7506d1788b1f9c798a1eaa35aed34375",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN8; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 102,
+      "object": "pg_conversion:4505",
+      "oid": 4505,
+      "name": "iso_8859_14_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4505\",\"conname\":\"iso_8859_14_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":15,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":102}",
+      "provider_md5": "ff0aba29de54692489e94b1b4ec78302",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter LATIN8 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 103,
+      "object": "pg_conversion:4506",
+      "oid": 4506,
+      "name": "utf8_to_iso_8859_15",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4506\",\"conname\":\"utf8_to_iso_8859_15\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":16,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":103}",
+      "provider_md5": "b0651a2f68b337aa4ab152adc04f097e",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN9; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 104,
+      "object": "pg_conversion:4507",
+      "oid": 4507,
+      "name": "iso_8859_15_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4507\",\"conname\":\"iso_8859_15_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":16,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":104}",
+      "provider_md5": "b599695aaa9c7e140a7d6f8d9636364b",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter LATIN9 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 105,
+      "object": "pg_conversion:4508",
+      "oid": 4508,
+      "name": "utf8_to_iso_8859_16",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4508\",\"conname\":\"utf8_to_iso_8859_16\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":17,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":105}",
+      "provider_md5": "a313aa2eee38d26b33be76fb5b38d203",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN10; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 106,
+      "object": "pg_conversion:4509",
+      "oid": 4509,
+      "name": "iso_8859_16_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4509\",\"conname\":\"iso_8859_16_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":17,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":106}",
+      "provider_md5": "86b8f1ee524bd48735b07ced6d1133d5",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter LATIN10 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 107,
+      "object": "pg_conversion:4510",
+      "oid": 4510,
+      "name": "utf8_to_iso_8859_5",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4510\",\"conname\":\"utf8_to_iso_8859_5\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":25,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":107}",
+      "provider_md5": "6022413675ca5177cfc1b77af0b00b0b",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> ISO_8859_5; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 108,
+      "object": "pg_conversion:4511",
+      "oid": 4511,
+      "name": "iso_8859_5_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4511\",\"conname\":\"iso_8859_5_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":25,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":108}",
+      "provider_md5": "44a7ada75f8974b6809a3013f20c8d20",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter ISO_8859_5 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 109,
+      "object": "pg_conversion:4512",
+      "oid": 4512,
+      "name": "utf8_to_iso_8859_6",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4512\",\"conname\":\"utf8_to_iso_8859_6\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":26,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":109}",
+      "provider_md5": "2f9475cff145ed82fae3d32edb39996d",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> ISO_8859_6; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 110,
+      "object": "pg_conversion:4513",
+      "oid": 4513,
+      "name": "iso_8859_6_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4513\",\"conname\":\"iso_8859_6_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":26,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":110}",
+      "provider_md5": "1f8592eb5c3f03493c27f58b535a78b3",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter ISO_8859_6 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 111,
+      "object": "pg_conversion:4514",
+      "oid": 4514,
+      "name": "utf8_to_iso_8859_7",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4514\",\"conname\":\"utf8_to_iso_8859_7\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":27,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":111}",
+      "provider_md5": "bd283ca8d446007fed2eb8b31e56b715",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> ISO_8859_7; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 112,
+      "object": "pg_conversion:4515",
+      "oid": 4515,
+      "name": "iso_8859_7_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4515\",\"conname\":\"iso_8859_7_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":27,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":112}",
+      "provider_md5": "40d230d42aebfd03f8241bb080955ed5",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter ISO_8859_7 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 113,
+      "object": "pg_conversion:4516",
+      "oid": 4516,
+      "name": "utf8_to_iso_8859_8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4516\",\"conname\":\"utf8_to_iso_8859_8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":28,\"conproc\":\"utf8_to_iso8859\",\"condefault\":true,\"rn\":113}",
+      "provider_md5": "44e40e83f1120ebdc68e1094e4a5370a",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter UTF8 -> ISO_8859_8; C routine utf8_to_iso8859; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 114,
+      "object": "pg_conversion:4517",
+      "oid": 4517,
+      "name": "iso_8859_8_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4517\",\"conname\":\"iso_8859_8_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":28,\"contoencoding\":6,\"conproc\":\"iso8859_to_utf8\",\"condefault\":true,\"rn\":114}",
+      "provider_md5": "ab3c3ca59f369ab572560ee454664fd1",
+      "character_coverage": {
+        "start": 1,
+        "end": 174,
+        "reviewed": 174
+      },
+      "semantics": "Default server character-set converter ISO_8859_8 -> UTF8; C routine iso8859_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 115,
+      "object": "pg_conversion:4518",
+      "oid": 4518,
+      "name": "iso_8859_1_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4518\",\"conname\":\"iso_8859_1_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":8,\"contoencoding\":6,\"conproc\":\"iso8859_1_to_utf8\",\"condefault\":true,\"rn\":115}",
+      "provider_md5": "6e1cc29579b7eb6ced865a753c920241",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter LATIN1 -> UTF8; C routine iso8859_1_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 116,
+      "object": "pg_conversion:4519",
+      "oid": 4519,
+      "name": "utf8_to_iso_8859_1",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4519\",\"conname\":\"utf8_to_iso_8859_1\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":8,\"conproc\":\"utf8_to_iso8859_1\",\"condefault\":true,\"rn\":116}",
+      "provider_md5": "6200307f69412f5018caa13c16c87b93",
+      "character_coverage": {
+        "start": 1,
+        "end": 175,
+        "reviewed": 175
+      },
+      "semantics": "Default server character-set converter UTF8 -> LATIN1; C routine utf8_to_iso8859_1; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 117,
+      "object": "pg_conversion:4520",
+      "oid": 4520,
+      "name": "johab_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4520\",\"conname\":\"johab_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":40,\"contoencoding\":6,\"conproc\":\"johab_to_utf8\",\"condefault\":true,\"rn\":117}",
+      "provider_md5": "ffbcf8b456d693a3ac67d3795a365d9b",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter JOHAB -> UTF8; C routine johab_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 118,
+      "object": "pg_conversion:4521",
+      "oid": 4521,
+      "name": "utf8_to_johab",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4521\",\"conname\":\"utf8_to_johab\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":40,\"conproc\":\"utf8_to_johab\",\"condefault\":true,\"rn\":118}",
+      "provider_md5": "75d73c49c76a6aca8af6769a6f210094",
+      "character_coverage": {
+        "start": 1,
+        "end": 167,
+        "reviewed": 167
+      },
+      "semantics": "Default server character-set converter UTF8 -> JOHAB; C routine utf8_to_johab; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 119,
+      "object": "pg_conversion:4522",
+      "oid": 4522,
+      "name": "sjis_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4522\",\"conname\":\"sjis_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":35,\"contoencoding\":6,\"conproc\":\"sjis_to_utf8\",\"condefault\":true,\"rn\":119}",
+      "provider_md5": "5ff6b559d84b333619b497b183297f03",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter SJIS -> UTF8; C routine sjis_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 120,
+      "object": "pg_conversion:4523",
+      "oid": 4523,
+      "name": "utf8_to_sjis",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4523\",\"conname\":\"utf8_to_sjis\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":35,\"conproc\":\"utf8_to_sjis\",\"condefault\":true,\"rn\":120}",
+      "provider_md5": "ce367c94e56b3414b9ea1a779acbdb6b",
+      "character_coverage": {
+        "start": 1,
+        "end": 165,
+        "reviewed": 165
+      },
+      "semantics": "Default server character-set converter UTF8 -> SJIS; C routine utf8_to_sjis; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 121,
+      "object": "pg_conversion:4524",
+      "oid": 4524,
+      "name": "uhc_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4524\",\"conname\":\"uhc_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":38,\"contoencoding\":6,\"conproc\":\"uhc_to_utf8\",\"condefault\":true,\"rn\":121}",
+      "provider_md5": "ec34d628e15b1e32afc41c8e998b3bc4",
+      "character_coverage": {
+        "start": 1,
+        "end": 163,
+        "reviewed": 163
+      },
+      "semantics": "Default server character-set converter UHC -> UTF8; C routine uhc_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 122,
+      "object": "pg_conversion:4525",
+      "oid": 4525,
+      "name": "utf8_to_uhc",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4525\",\"conname\":\"utf8_to_uhc\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":38,\"conproc\":\"utf8_to_uhc\",\"condefault\":true,\"rn\":122}",
+      "provider_md5": "650f037f784a557bcac2a11adcad60d3",
+      "character_coverage": {
+        "start": 1,
+        "end": 163,
+        "reviewed": 163
+      },
+      "semantics": "Default server character-set converter UTF8 -> UHC; C routine utf8_to_uhc; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 123,
+      "object": "pg_conversion:4526",
+      "oid": 4526,
+      "name": "euc_jis_2004_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4526\",\"conname\":\"euc_jis_2004_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":5,\"contoencoding\":6,\"conproc\":\"euc_jis_2004_to_utf8\",\"condefault\":true,\"rn\":123}",
+      "provider_md5": "00f982dd9903b2d03ee777d78765debb",
+      "character_coverage": {
+        "start": 1,
+        "end": 180,
+        "reviewed": 180
+      },
+      "semantics": "Default server character-set converter EUC_JIS_2004 -> UTF8; C routine euc_jis_2004_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 124,
+      "object": "pg_conversion:4527",
+      "oid": 4527,
+      "name": "utf8_to_euc_jis_2004",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4527\",\"conname\":\"utf8_to_euc_jis_2004\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":5,\"conproc\":\"utf8_to_euc_jis_2004\",\"condefault\":true,\"rn\":124}",
+      "provider_md5": "572e968ca9831d64b8330a1f122d868c",
+      "character_coverage": {
+        "start": 1,
+        "end": 180,
+        "reviewed": 180
+      },
+      "semantics": "Default server character-set converter UTF8 -> EUC_JIS_2004; C routine utf8_to_euc_jis_2004; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 125,
+      "object": "pg_conversion:4528",
+      "oid": 4528,
+      "name": "shift_jis_2004_to_utf8",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4528\",\"conname\":\"shift_jis_2004_to_utf8\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":41,\"contoencoding\":6,\"conproc\":\"shift_jis_2004_to_utf8\",\"condefault\":true,\"rn\":125}",
+      "provider_md5": "c49c3c7b57352454910ea50dcdc7efab",
+      "character_coverage": {
+        "start": 1,
+        "end": 185,
+        "reviewed": 185
+      },
+      "semantics": "Default server character-set converter SHIFT_JIS_2004 -> UTF8; C routine shift_jis_2004_to_utf8; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 126,
+      "object": "pg_conversion:4529",
+      "oid": 4529,
+      "name": "utf8_to_shift_jis_2004",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4529\",\"conname\":\"utf8_to_shift_jis_2004\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":6,\"contoencoding\":41,\"conproc\":\"utf8_to_shift_jis_2004\",\"condefault\":true,\"rn\":126}",
+      "provider_md5": "487e59b46c488a4071ab624a71bd8d90",
+      "character_coverage": {
+        "start": 1,
+        "end": 185,
+        "reviewed": 185
+      },
+      "semantics": "Default server character-set converter UTF8 -> SHIFT_JIS_2004; C routine utf8_to_shift_jis_2004; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 127,
+      "object": "pg_conversion:4530",
+      "oid": 4530,
+      "name": "euc_jis_2004_to_shift_jis_2004",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4530\",\"conname\":\"euc_jis_2004_to_shift_jis_2004\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":5,\"contoencoding\":41,\"conproc\":\"euc_jis_2004_to_shift_jis_2004\",\"condefault\":true,\"rn\":127}",
+      "provider_md5": "7e9d03f1cbc2e1d61fa40876996f543e",
+      "character_coverage": {
+        "start": 1,
+        "end": 201,
+        "reviewed": 201
+      },
+      "semantics": "Default server character-set converter EUC_JIS_2004 -> SHIFT_JIS_2004; C routine euc_jis_2004_to_shift_jis_2004; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    },
+    {
+      "rank": 128,
+      "object": "pg_conversion:4531",
+      "oid": 4531,
+      "name": "shift_jis_2004_to_euc_jis_2004",
+      "schema": "pg_catalog",
+      "owner": "supabase_admin",
+      "full_catalog_row": "{\"oid\":\"4531\",\"conname\":\"shift_jis_2004_to_euc_jis_2004\",\"connamespace\":\"11\",\"conowner\":\"10\",\"conforencoding\":41,\"contoencoding\":5,\"conproc\":\"shift_jis_2004_to_euc_jis_2004\",\"condefault\":true,\"rn\":128}",
+      "provider_md5": "87f719b0a858bf296d0928dcfc543e4b",
+      "character_coverage": {
+        "start": 1,
+        "end": 201,
+        "reviewed": 201
+      },
+      "semantics": "Default server character-set converter SHIFT_JIS_2004 -> EUC_JIS_2004; C routine shift_jis_2004_to_euc_jis_2004; registered reverse direction 1; immutable helper",
+      "caller_compatibility": "PostgreSQL client/server encoding conversion infrastructure; core server dependency; absence of observed app usage is not removal proof",
+      "disposition": "RETAIN_CORE",
+      "native_binary_source": "UNVERIFIED"
+    }
+  ]
+}

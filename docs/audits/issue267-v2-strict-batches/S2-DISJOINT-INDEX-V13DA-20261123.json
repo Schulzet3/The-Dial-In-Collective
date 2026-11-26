@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13DA",
+  "status": "OPEN_IN_PROGRESS_NOT_READY_NOT_COMPLETE",
+  "frozen_source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "pinned_source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "preflight": {
+    "development_sha": "cc0fa8cd84e8f6e1296137d9017b38f7c793d82d",
+    "preflight_blob_sha": "c59d7d5097a2224fcd254d6a4133c2cf01ee3a0f",
+    "full_immutable_git_blob_verified": true
+  },
+  "receipts": [
+    "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F222-494-523-20261123-V13DA.json",
+    "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C84-54-83-20261123-V13DA.json"
+  ],
+  "prior_checked": "V13CZ 60/60 original source/path/blob/line/literal receipts independently revalidated WITHOUT new credit",
+  "new_lines": {
+    "frozen": 30,
+    "pinned": 30,
+    "total": 60,
+    "overlaps": 0
+  },
+  "parity": [
+    {
+      "manifest_index_1_based": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "source_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+      "physical_file_lines": 676,
+      "range": [
+        494,
+        523
+      ],
+      "full_immutable_git_file_equals_separately_fetched_blob": true,
+      "development_path_blob_sha": "a2dbc7843b6746b2fde2a5327d9b33e6065ca80a",
+      "live_path_identical": true,
+      "line_literal_comparison": "PASS"
+    },
+    {
+      "manifest_index_1_based": 84,
+      "path": "scripts/release/chat-release-request.mjs",
+      "source_blob_sha": "47e32f0d852391ffec94a4ffcede5dbb8f64129b",
+      "physical_file_lines": 136,
+      "range": [
+        54,
+        83
+      ],
+      "full_immutable_git_file_equals_separately_fetched_blob": true,
+      "development_path_blob_sha": "47e32f0d852391ffec94a4ffcede5dbb8f64129b",
+      "live_path_identical": true,
+      "line_literal_comparison": "PASS"
+    }
+  ],
+  "original_frozen_first_workflow_line_one_rechecked_no_new_credit": true,
+  "archive_json_parse": "PASS",
+  "historical_provisional_R2_C2": {
+    "frozen": 5451,
+    "pinned": 6462,
+    "recredited": 0
+  },
+  "separate_older_S2": {
+    "frozen": 7635,
+    "pinned": 9318,
+    "recredited": 0
+  },
+  "denominators": {
+    "frozen": 579961,
+    "pinned": 57913
+  },
+  "findings": "No current application or release-validator defect reproduced. Frozen PWA 4/4, Queen City 7/7 are archived historical test output, not today PASS. C84 enforces snapshot chronology and destructive latest-write snapshot-start bound; no real backup/provider test executed. Non-destructive/latest-write distinction retained as scoped risk-specific policy, NOT_PROVEN_DEFECT.",
+  "tests": {
+    "immutable_source_raw_git_parity": "PASS_2_OF_2",
+    "individual_line_literal": "PASS_60_OF_60",
+    "previous_receipts": "PASS_60_OF_60",
+    "archive_json_parse": "PASS",
+    "PR_head_actions": "PENDING_AT_CREATION",
+    "merged_push_actions": "PENDING_AT_CREATION",
+    "Node22_lint_build_browser_mobile_offline_SQL_Auth_RLS_original603_performance": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "post_pin_live_drift_new_renamed_nontext": "INCOMPLETE",
+  "next": {
+    "frozen": {
+      "index": 222,
+      "path": "docs/audits/application_pass3_tests.json",
+      "line": 524
+    },
+    "pinned": {
+      "index": 84,
+      "path": "scripts/release/chat-release-request.mjs",
+      "line": 84
+    }
+  },
+  "scope": "No Publish, Netlify, release, main, production, SQL, Auth, Edge, member, shot, history, offline, oracle, backups, schedule, provider, secrets or spending writes."
+}

@@ -582,6 +582,6 @@ DIC_PREFLIGHT_VERIFIED development_sha=112f31c48bf341cf2d915f3cf9c3f4267798d528 
 - This commit intentionally retains the entire first-parent development Git tree byte-for-byte for application/runtime/tests/workflows and adds only this documentation journal entry. Second parent links the prior published, CI-tested isolated source 0c320602bc1c979877259a6f34de0aaa61428fe3 into ancestry; it does NOT import its older application tree or deploy.
 - Previous repo-prescribed #28 published ancestry repair 67c748f34ed50a7c7b2382d3734684a99debd26b is precedent. Result remains BATCH_PREPARING; safe candidate isolation, dependencies and five exact candidate CI jobs required before a one-use grant and main request.
 
-## Release controller claim — 2026-11-23T07:35:12.520Z
-- Approved release DIC-20261123-INSTANT-3851-R3 from tested application SHA 2d22d448160d428a977f06482323646b92818fcf claimed exactly once against previous release ref 5ef0e190237a0fa8e391b086c5baeaaa962ae264. Five GitHub CI checks passed and one-use authorization ledger was written.
+## Release controller claim — 2026-11-26T19:49:43.212Z
+- Approved release DIC-20261126-READY63-01 from tested application SHA d8639edb2b4ee240afe6cd507086588c2493f2a5 claimed exactly once against previous release ref 5b256f1fc0717d3635f7148b934a1f91f8991685. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

@@ -528,6 +528,30 @@ export function collectCoffeePageGuidanceFacts(html,{source_url}={}){
   if(!value||value.length>10_000)continue;
   result.add(question,value,undefined,'Roaster general coffee guidance');count++;budget-=length;
  }
+ // Educational location examples belong in Source Review, not selected facts.
+ // Identity-scoped canonical extraction masks these labels; keep the
+ // original printed literal as an UNTYPED, bounded educational witness.
+ // Do not replay raw other-coffee captions into selected source rankings.
+ let educationalLevel=0,educationalActive=false,educationalCount=0;
+ for(let i=0;i<nodes.length&&educationalCount<12;i++){
+  const node=nodes[i];if(blocked.has(i))continue;
+  if(/^h[2-6]$/u.test(node.tag)&&node.contentEnd-node.headEnd<=400){
+   const level=Number(node.tag[1]);
+   if(!educationalActive||level<=educationalLevel){
+    const title=plain(html.slice(node.headEnd,node.contentEnd),105);
+    educationalActive=/^(?:origins? explained|learn(?:ing)? about (?:coffee )?origins?|understanding (?:coffee )?origins?)$/iu.test(title);
+    educationalLevel=educationalActive?level:0;
+   }
+   continue;
+  }
+  if(!educationalActive||!['p','li'].includes(node.tag)||node.contentEnd-node.headEnd>1200)continue;
+  const claim=plain(html.slice(node.headEnd,node.contentEnd),500)
+   .match(/^(Region(?:s)?|Origin|Country(?: of Origin)?)\s*[:：]\s*(.{3,360})$/iu);
+  if(!claim)continue;
+  result.add(claim[1],claim[2],undefined,'Roaster general coffee guidance');
+  educationalCount++;
+ }
+
  return result.finish();
 }
 
@@ -673,6 +697,17 @@ function addInlineWooVariations(html,nodes,blocked,result,source_url){
  }
 }
 
+// A storefront can animate a title one glyph at a time ("F i n c a" /
+ // "S a n t a"). These are literal fragments, not a Producer attribution.
+const fragmentedCoffeeLetters=value=>/^(?:[\p{L}]\s+){2,}[\p{L}]$/u.test(String(value||'').trim());
+// A bare place/name beneath a generic Harvest heading is not a crop year,
+// release or lot. Keep the raw heading and value for review, not a typed fact.
+const unqualifiedHarvestHeading=value=>{
+ const text=String(value||'').trim();
+ return /^[\p{Lu}][\p{L}\p{M}.'’–-]{2,50}(?:\s+[\p{Lu}][\p{L}\p{M}.'’–-]{2,50}){0,2}$/u.test(text)&&
+  !/^(?:january|february|march|april|may|june|july|august|september|october|november|december|spring|summer|autumn|fall|winter|limited|reserve|lot|edition|release|crop)\b/i.test(text);
+};
+
 // A complete selected-source review may merge several representations of one
 // Shopify product (visible HTML, chosen JSON, and preserved prose). Normalize
 // *review field attribution* only after those sources have merged: otherwise a
@@ -689,6 +724,10 @@ export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url,select
  const methods=facts.filter(f=>eligible(f)&&f.field==='process'&&normLabel(f)==='process').map(f=>normalized(f.value));
  for(const fact of facts){
   if(!eligible(fact))continue;
+  // Do not mark animated title letters as a grower or generic educational
+  // Harvest geography as a selected release. Preserve their actual raw text.
+  if(fact.field==='producer'&&(fragmentedCoffeeLetters(fact.label)||fragmentedCoffeeLetters(fact.value)))delete fact.field;
+  if(fact.field==='release_label'&&normLabel(fact)==='harvest'&&unqualifiedHarvestHeading(fact.value))delete fact.field;
   // Retain the raw Farm value/label but do not misattribute it as Producer.
   if(fact.field==='producer'&&normLabel(fact)==='farm'&&
      (labeledGrower||(distinctSelectedFarm&&normalized(fact.value)===normalized(selected_farm))))delete fact.field;
@@ -830,6 +869,11 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    /^(?:swiss|mountain)[ -]?water(?:[ -]?process)?$/iu.test(String(value).trim())&&
    /\bdecaf(?:feinated|feination)?\b/iu.test(String(section)))return undefined;
   const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
+  // Both rows were observed in exact #249 Onyx selected HTML: an animated
+  // "F i n c a: S a n t a" and an educational "Harvest: Mexico".
+  // Neither is a producer or release; retain the seller's literal row.
+  if(field==='producer'&&(fragmentedCoffeeLetters(label)||fragmentedCoffeeLetters(value)))return undefined;
+  if(field==='release_label'&&caption==='harvest'&&unqualifiedHarvestHeading(value))return undefined;
   if(field==='producer'&&caption==='farm'&&hasLabeledGrower)return undefined;
   if(field==='process'&&caption==='processing'&&selectedProcessMethods.length&&!selectedProcessMethods.includes(normalized(value))&&
    /^[\p{Lu}][\p{L}\p{M}.'’-]*(?:\s+[\p{Lu}][\p{L}\p{M}.'’-]*){0,4}$/u.test(value)&&

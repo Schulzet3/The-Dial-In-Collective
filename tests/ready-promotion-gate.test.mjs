@@ -1,5 +1,5 @@
 import test from 'node:test';
-import {frozenExcludedReadySource} from './helpers/release-published-restoration.mjs';
+import {frozenExcludedReadySource,reviewedCiOperationalWorkflowText} from './helpers/release-published-restoration.mjs';
 import assert from 'node:assert/strict';
 import {setImmediate} from 'node:timers';
 import {readFileSync} from 'node:fs';
@@ -144,7 +144,10 @@ test('approval workflow runs exactly one live immutable READY verifier with nega
   t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
  }
 
- const workflow=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ // The live verifier belongs to the reviewed operational workflow. The frozen
+ // candidate retains separately verified published workflow bytes.
+ const workflow=reviewedCiOperationalWorkflowText('.github/workflows/approval-continuity.yml')??
+  readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
  const evidence=readFileSync(new URL('../scripts/release/ready-evidence-gate.mjs',import.meta.url),'utf8');
  assert.equal(workflow.split('node scripts/release/ready-evidence-gate.mjs').length-1,1,
   'READY certification must be a single source-bound live read');

@@ -132,9 +132,12 @@ test('no subscribed device is skipped rather than generating fabricated push del
  assert.equal(f.sentPush.length,0);
  assert.ok(f.receipts.some(r=>r.p_channel==='push'&&r.p_outcome==='skipped'));
 });
+// These three regressions instantiate only createMemberApprovalBroker with an isolated mock fetcher.
+// Selecting an independent Admin broker must not turn on unselected member fixes.
+// The existing source-bound guard denies N/A for a selected member broker and verifies exact published bytes.
 test('Vault key RPC failure retries only push while independent approval email is sent',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  const f=fixture({vaultStatus:503});
@@ -148,8 +151,8 @@ test('Vault key RPC failure retries only push while independent approval email i
 });
 
 test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  const f=fixture({vaultStatus:503,pushItems:[]});
@@ -177,8 +180,8 @@ test('duplicate cron claim sends no email or push',async()=>{
 });
 
 test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async(t)=>{
- if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs','supabase/functions/dic-admin-push-broker/core.mjs'])){
-  t.skip('NOT_APPLICABLE: exact published unselected source restored; #3781 admission coverage remains active');return;
+ if(frozenExcludedReadySource(['supabase/functions/dic-member-approval-broker/core.mjs'])){
+  t.skip('NOT_APPLICABLE: exact published unselected member broker restored; member fix remains TESTING');return;
  }
 
  for(const pushStatus of [404,410]){
@@ -255,16 +258,18 @@ test('security-inspection PR filter covers the exact Edge gateway config without
  const path='.github/workflows/security-inspection.yml';
  const current=readFileSync(new URL('../'+path,import.meta.url),'utf8');
  let workflow=current;
- const receiptPath=new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
+ const testingReceipt=new URL('../docs/TESTING_3889_CANDIDATE.json',import.meta.url);
+ const receiptPath=existsSync(testingReceipt)?testingReceipt:new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
  if(existsSync(receiptPath)){
   // A READY-only candidate restores GitHub Actions workflows to published bytes.
   // Check the original immutable development workflow instead; never silently
   // waive the new Edge-gateway PR path check or mutate published workflow source.
   const receipt=JSON.parse(readFileSync(receiptPath,'utf8'));
-  assert.equal(receipt.kind,'DIC-READY-ONLY-SOURCE-1');
+  assert.ok(['DIC-READY-ONLY-SOURCE-1','DIC-TESTING-FROZEN-NONPUBLISHING-3889-V1'].includes(receipt.kind));
+  assert.equal(receipt.publication_authorized,false);
   assert.match(receipt.development_source_sha,/^[a-f0-9]{40}$/);
   assert.match(receipt.published_source_sha,/^[a-f0-9]{40}$/);
-  assert.ok(receipt.restored_unpublished_workflow_paths.includes(path));
+  assert.ok((receipt.restored_unpublished_workflow_paths||receipt.restored_to_published_paths||[]).includes(path));
   const sourceAt=sha=>execFileSync('git',['show',sha+':'+path],{encoding:'utf8',timeout:10000});
   assert.equal(current,sourceAt(receipt.published_source_sha),
    'isolated workflow must equal exact published Git bytes');

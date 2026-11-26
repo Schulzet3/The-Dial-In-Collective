@@ -1,20 +1,593 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261123-INSTANT-3851-R3",
-  "tested_source_sha": "2d22d448160d428a977f06482323646b92818fcf",
-  "previous_release_head_sha": "5ef0e190237a0fa8e391b086c5baeaaa962ae264",
-  "claimed_at_utc": "2026-11-23T07:35:12.520Z",
+  "release_id": "DIC-20261126-READY63-01",
+  "tested_source_sha": "d8639edb2b4ee240afe6cd507086588c2493f2a5",
+  "previous_release_head_sha": "5b256f1fc0717d3635f7148b934a1f91f8991685",
+  "claimed_at_utc": "2026-11-26T19:49:43.212Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-3851-cache-before-admission",
-      "issue": 3851,
-      "title": "Paint returning member's same-owner cached coffee before admission request; defer blocking vendor parse",
-      "merged_source_sha": "a9303f97d4aa0ae4e6ead4fe64283537821c8fc9",
+      "id": "DIC-Q-455-r462-optional-measured-temperature-step-any",
+      "issue": 455,
+      "title": "Allow measured fractional optional brew temperature in Log/Edit Shot HTML",
+      "merged_source_sha": "2f9228ed1fe07654896147472597c917a821a8d7",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r461-measured-dose-yield-time-step-any",
+      "issue": 455,
+      "title": "Match Log/Edit Shot measured dose, yield and time HTML inputs to permitted fractions",
+      "merged_source_sha": "43306c3d8ea38aaf01491e16ca9930fcbcce6c47",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r424-kati-selected-h1-free-richtext",
+      "issue": 33,
+      "title": "Exact selected Shopify main variant H1-free direct seller rich-text source and guarded comparative roast (original603 #173/#174)",
+      "merged_source_sha": "e2e11042c190d6640829f5b6a2a758f5e7645ab0",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-shopify-variant-richtext.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-stale-project-shot-comment-20261122",
+      "issue": 509,
+      "title": "Correct outdated project_shot worker-status comment",
+      "merged_source_sha": "5b5159823908f3ae660f45b3ad93c096be586aec",
+      "scope_paths": [
+        "supabase/migrations/20261122214500_dic_project_shot_comment_refresh.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r451-shot-modal-close-pending-save",
+      "issue": 455,
+      "title": "Keep Log Shot dialog header Close unavailable during pending Save",
+      "merged_source_sha": "375124af34d3eab396db5d94d37c1897f0dc8a0d",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r443-validation-recommendation-button-state",
+      "issue": 455,
+      "title": "Preserve unavailable recommendation-copy button state after invalid Log Shot Save",
+      "merged_source_sha": "893a83491956fe58e2472aecd783c262f1e20874",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r419-successful-grind-provenance",
+      "issue": 455,
+      "title": "Distinguish actually successful grinder dial values from rounded or unmeasured median starting estimates",
+      "merged_source_sha": "426fa52710ebb88574d1bf35712fc11299cc82fc",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
+      "issue": 33,
+      "title": "Withhold exact selected WooCommerce Danche growing-region contradiction between own H5 and Location specification",
+      "merged_source_sha": "fea352502587653ae02c99c8a941a76729d60767",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-woo-short-origin-conflict.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r415-grinder-tenth-boundary",
+      "issue": 455,
+      "title": "Prevent non-tenth or unchanged next-shot grind recommendations at fractional espresso-range boundaries",
+      "merged_source_sha": "a106ceca5fa55dedede482a69a46bf8d8fce982e",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
+      "issue": 455,
+      "title": "Avoid displaying unloggable cross-basket saved-recipe yield centers",
+      "merged_source_sha": "997b3c5d50f3a3d25999ddaf2f10044c906abcb7",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r362-original22-breadcrumb-roast-scope",
+      "issue": 33,
+      "title": "Exclude navigational collection breadcrumb Light Roast from selected Organic Honduras COMSA source autofill",
+      "merged_source_sha": "674926baf71e5d4d0c4705e0c4df26ed1c336d9a",
+      "scope_paths": [
+        "src/server/coffee-product-scope.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r381-recommendation-copy-accessible-names",
+      "issue": 455,
+      "title": "Differentiate Log Shot grind and temperature Use Recommendation button screen-reader names",
+      "merged_source_sha": "cdacca413a28d8d3cad5fa45e70e93836981be91",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-normalized-identity",
+      "issue": 509,
+      "title": "Reject NULL-normalized canonical name and roaster in admin approved coffee edits",
+      "merged_source_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+      "scope_paths": [
+        "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r232-selected-annual-release-role",
+      "issue": 33,
+      "title": "Exclude annual selection/offering marketing from selected coffee unique release labels (original603 Uraga/Wuri #371-372)",
+      "merged_source_sha": "b585b9cf646da868e6c7c8871289c82f6d96e6ca",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-source-path-case-guard-20261115",
+      "issue": 509,
+      "title": "Preserve HTTP source URL path case in coffee identity and verified-source matching",
+      "merged_source_sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "scope_paths": [
+        "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "issue": 509,
+      "title": "Preserve withdrawn Community state during unverified-coffee link recheck",
+      "merged_source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee",
+      "scope_paths": [
+        "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-recommendation-context-null-control-guard",
+      "issue": 509,
+      "title": "Reject JSON null recommendation control elements without changing recorded shots or private provenance",
+      "merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
+      "scope_paths": [
+        "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-pending-coffee-null-flags",
+      "issue": 509,
+      "title": "Fail closed on SQL NULL coffee promotion method or explicit confirmation flag",
+      "merged_source_sha": "af0537cc8313328269eca4f92a5e4439bf84848b",
+      "scope_paths": [
+        "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-member-approval-null-receipt-guard",
+      "issue": 509,
+      "title": "Reject NULL receipt channel/outcome for service-only approval delivery",
+      "merged_source_sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
+      "scope_paths": [
+        "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-pending-canonical-name-response",
+      "issue": 509,
+      "title": "Return current canonical name after an earlier Pending coffee becomes the global primary name",
+      "merged_source_sha": "e50727444db83e76a02a037c7575a995707a585f",
+      "scope_paths": [
+        "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-import-additional-credential-keys",
+      "issue": 509,
+      "title": "Reject additional credential-bearing key spellings in import backups before private source archive",
+      "merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
+      "scope_paths": [
+        "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-community-producer-search-parity",
+      "issue": 509,
+      "title": "Correct Community producer-only search count/page mismatch",
+      "merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+      "scope_paths": [
+        "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-preview-rollover-cooldown",
+      "issue": 509,
+      "title": "Preserve 15-second ordinary-member preview cooldown across 24-hour quota rollover",
+      "merged_source_sha": "849d89650006c545dc86045a947bb39e1d081146",
+      "scope_paths": [
+        "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-merge-null-normalized-name",
+      "issue": 509,
+      "title": "Reject NULL-normalized Pending coffee names in Admin duplicate merge",
+      "merged_source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+      "scope_paths": [
+        "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-source-retry-rollover-cooldown",
+      "issue": 509,
+      "title": "Preserve 15-minute trusted source retry cooldown across 24-hour budget rollover",
+      "merged_source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "scope_paths": [
+        "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-confirm-coffee-null-name",
+      "issue": 509,
+      "title": "Reject NULL-normalized titles in member self-confirmation of existing verified coffee",
+      "merged_source_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
+      "scope_paths": [
+        "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-first-entry-no-self-alias",
+      "issue": 509,
+      "title": "Avoid recording the first-entry canonical coffee's own name as an alias after rename",
+      "merged_source_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+      "scope_paths": [
+        "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-alias-manual-confirm",
+      "issue": 509,
+      "title": "Record historical coffee aliases as manual suggestions and allow gated explicit confirmation",
+      "merged_source_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+      "scope_paths": [
+        "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-retire-internal-hide-shot",
+      "issue": 509,
+      "title": "Remove obsolete internal Hide Shot branch while retaining active mutations and history",
+      "merged_source_sha": "97661eb98275008510ef0125e978e18bd7ed2466",
+      "scope_paths": [
+        "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-recommendation-unique-controls",
+      "issue": 509,
+      "title": "Reject duplicate controls in member-selected recommendation provenance",
+      "merged_source_sha": "8187c2cd99aa33c39fc686f199faf8957e6faf9e",
+      "scope_paths": [
+        "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-outlier-null-revision-guard",
+      "issue": 509,
+      "title": "Reject NULL expected revision during held Community outlier confirmation",
+      "merged_source_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "scope_paths": [
+        "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r311-original63-selected-sourcing-province",
+      "issue": 33,
+      "title": "Refine exact current selected Organic Sumatra growing region and province from direct present-lot sourcing prose",
+      "merged_source_sha": "1e326fb0683ee745a76108f38fb3c580141831e9",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-published-sourcing-region.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-search-recovery-visible",
+      "issue": 509,
+      "title": "Preserve unfinished account-deletion Retry Completion during Admin account search",
+      "merged_source_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+      "scope_paths": [
+        "site/admin/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-shot-delete-family-refresh",
+      "issue": 509,
+      "title": "Recalculate personal recipe family and Current after Admin deletes a shot",
+      "merged_source_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "scope_paths": [
+        "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-stale-family-statistics-reconcile",
+      "issue": 509,
+      "title": "Reconcile historical stale derived family counts, ratio ranges and metadata",
+      "merged_source_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
+      "scope_paths": [
+        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+        "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r327-original138-icon-labeled-source",
+      "issue": 33,
+      "title": "Preserve five directly printed selected coffee flavor notes and sugarcane decaf method from icon-labeled seller specifications",
+      "merged_source_sha": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-icon-specs.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-classify-family-single-refresh",
+      "issue": 509,
+      "title": "Eliminate duplicate personal-family refresh for same-family shot corrections",
+      "merged_source_sha": "9fa94afbee78f04598ac112b6fdb3b6d13c954d2",
+      "scope_paths": [
+        "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-calibration-order-fallback",
+      "issue": 509,
+      "title": "Deterministic compatible historical grinder-calibration fallback",
+      "merged_source_sha": "db2372f7c15e8c6aabf1468ffb6df18b6c8da873",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-completed-delete-retry-count",
+      "issue": 509,
+      "title": "Return stored Community removal count on completed Admin deletion retry",
+      "merged_source_sha": "367e290386b1f659af4d6a2e54e21fbd43bbb841",
+      "scope_paths": [
+        "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-member-approval-gone-push-receipt",
+      "issue": 509,
+      "title": "Record retired member approval push endpoints as skipped rather than falsely sent",
+      "merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "scope_paths": [
+        "supabase/functions/dic-member-approval-broker/core.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-shot-timestamp-determinism",
+      "issue": 509,
+      "title": "Deterministic latest-shot hydration for identical timestamp instants",
+      "merged_source_sha": "a788b3e31c2e1f0d7921a52f67a9035d3eda5a6a",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r342-original249-review-source-roles",
+      "issue": 33,
+      "title": "Retain actual selected #249 source captions but do not type animated Finca letters as producer or generic Harvest geography as coffee release",
+      "merged_source_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+      "scope_paths": [
+        "src/server/coffee-source-facts.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-workspace-inactive-selection-guards",
+      "issue": 509,
+      "title": "Disallow archived or hidden workspace and Make Current selection",
+      "merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+      "scope_paths": [
+        "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r347-original299-directions-source",
+      "issue": 33,
+      "title": "Preserve product-own Washed/Medium specs and remove duplicate compass-qualified country in selected original #299 origin",
+      "merged_source_sha": "3d1884b7b724d9ebdaa111d5db3e0d9d872ee839",
+      "scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r390-recommendation-copy-live-status",
+      "issue": 455,
+      "title": "Announce copied Log Shot recommendations to assistive technology without changing settings or measured shots",
+      "merged_source_sha": "bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9",
       "scope_paths": [
         "site/cloud/main.js",
-        "site/cloud.html"
+        "site/visual.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r352-original298-selected-analogy-and-sensory",
+      "issue": 33,
+      "title": "Reject comparative Central American sensory geography; recover selected Walia literal flavors and Colombian origin",
+      "merged_source_sha": "9d13dd2de90f5de4591a250f3ea8c57c0c9a1115",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-admin-push-lazy-vault-poll",
+      "issue": 509,
+      "title": "Avoid Vault key lookup for idle Admin push polls; cache one lookup for actionable devices",
+      "merged_source_sha": "cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72",
+      "scope_paths": [
+        "supabase/functions/dic-admin-push-broker/core.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r400-one-success-window-evidence-note",
+      "issue": 455,
+      "title": "Clarify that a one-shot successful recipe range is still a preliminary personal window",
+      "merged_source_sha": "6290cf1a6a87dc7452615933f8f1765eddcf9997",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r374-original41-selected-pagefly-sugarcane-method",
+      "issue": 33,
+      "title": "Bound current selected PageFly purchase H3 and own caffeine-removal sugarcane method, original603 Descafeinado #41",
+      "merged_source_sha": "84bf75f33918bd1f15f037344aedced15906d6f2",
+      "scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-pagefly-selected-h3.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r411-nonpersonal-starting-yield-boundary",
+      "issue": 455,
+      "title": "Guard unloggable tentative similar-coffee and Community starting yields",
+      "merged_source_sha": "3945a7353dadf81e7702170dde58cb95241e5782",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r417-measured-grind-precision",
+      "issue": 455,
+      "title": "Preserve original fractional grinder settings in new, offline and edited shot measurements",
+      "merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r421-grind-reference-grid",
+      "issue": 455,
+      "title": "Constrain fractional grinder starting reference and band to selectable calibrated one-tenths; abstain if none",
+      "merged_source_sha": "742a041a903db00bace7b19994e23835e3ff6fd9",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r428-null-temperature-copy",
+      "issue": 455,
+      "title": "Do not copy or attribute absent temperature recommendation on Log Shot",
+      "merged_source_sha": "52a506aff7c59018b07be0ffa8e90758aa9d3376",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r432-slowfeed-copied-reference-feedback",
+      "issue": 455,
+      "title": "Explain retained copied controls when changing Slow Feed before logging a shot",
+      "merged_source_sha": "d0d28c9dff4114651fd872f0da7cd0747d065fea",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r433-slowfeed-copy-action-availability",
+      "issue": 455,
+      "title": "Refresh Log Shot Grind/Temperature copy-button availability after Slow Feed mode changes",
+      "merged_source_sha": "d8f247aa63754adb52d9e8f9994f1821f46bcadc",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-3667-ci-parallel-full-suite",
+      "issue": 3667,
+      "title": "Accelerate CI with parallel full suite and scoped QA-only fast checks",
+      "merged_source_sha": "8e89dfe942422789bae59338364139b274143e63",
+      "scope_paths": [
+        "package.json"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r399-original99-producer-tenure-precision",
+      "issue": 33,
+      "title": "Exclude trailing cultivation tenure from named selected-product coffee producer without inventing a different grower",
+      "merged_source_sha": "513f98ac06cdd0fe569390354420158458342859",
+      "scope_paths": [
+        "src/server/coffee-narrative-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r403-original134-selected-swiss-water-method",
+      "issue": 33,
+      "title": "Exact selected full-decaf Swiss Water treatment corroborated by current product description, excluding other-coffee contamination",
+      "merged_source_sha": "e536ad7b12cb55966e2e1e23ec396d82b1f30f91",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r406-original114-country-origin-display",
+      "issue": 33,
+      "title": "Precision-only removal of repeated terminal selected-origin country from named locality tuple",
+      "merged_source_sha": "da3d9623642663f8ee0af9ff1752546ddc5417ce",
+      "scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r408-original123-producer-farm-roles",
+      "issue": 33,
+      "title": "Exact selected producer caption separates named person and estate only with current growing evidence",
+      "merged_source_sha": "96d8d08ded663012f9a9cfc30b298908b38174ab",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r444-pending-shot-form-lock",
+      "issue": 455,
+      "title": "Keep all Log Shot fields and five rating controls immutable during pending Save",
+      "merged_source_sha": "c1fb4b84acd315f6b68c5f1c3b3cdd409aa84b99",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r456-measured-grind-step-any",
+      "issue": 455,
+      "title": "Keep Log/Edit Shot measured grinder input fraction-compatible with stored originals",
+      "merged_source_sha": "b6468c6c7bf4fbc59da1f91222eff9c27d222585",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r458-optional-temperature-metric",
+      "issue": 455,
+      "title": "Show Not available for tracked recipe temperature without a recorded value",
+      "merged_source_sha": "d772b433be4e5d01ed734699ecc2a89685cf4c12",
+      "scope_paths": [
+        "site/lib/ui.js"
       ]
     }
   ]
