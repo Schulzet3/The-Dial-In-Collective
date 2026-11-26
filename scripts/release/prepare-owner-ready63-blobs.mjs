@@ -24,6 +24,10 @@ export const PIN=Object.freeze({
 export const OWNER='Owner November 26, 2026 current chat: Run the mandatory DIC preflight and publish all items in the queue; followed by Do what you need to do and get this deployed. Do not duplicate any efforts just fix what you need to. ONE frozen READY63 batch only, excluding all six IN_PROGRESS items, no future publication or unrelated provider/member changes.';
 export const RECEIPT='DIC_PREFLIGHT_VERIFIED development_sha='+PIN.development+' preflight_blob_sha='+PIN.preflight;
 export function blobSha(text){const b=Buffer.from(text);return createHash('sha1').update(Buffer.concat([Buffer.from('blob '+b.length+'\0'),b])).digest('hex');}
+export function assertRunIds(actual,expected){
+ const normalize=ids=>{assert.ok(Array.isArray(ids));const result=ids.map(String);assert.ok(result.every(id=>/^[1-9][0-9]*$/.test(id)));assert.equal(new Set(result).size,result.length);return result.sort();};
+ assert.deepEqual(normalize(actual),normalize(expected));
+}
 export function appendGrant(raw,ids,nowIso){
  const old=JSON.parse(raw);assert.equal(old.schema_version,1);assert.ok(Array.isArray(old.grants));
  assert.equal(ids.length,63);assert.equal(new Set(ids).size,63);assert.ok(ids.every(id=>/^DIC-Q-[A-Za-z0-9-]+$/.test(id)));
@@ -61,7 +65,7 @@ export async function main(){
  const queue=JSON.parse(show(PIN.candidate,'docs/RELEASE_QUEUE.json'));const ready=queue.items.filter(x=>x.state==='READY');assert.equal(ready.length,63);
  const certificate=JSON.parse(show(PIN.development,'docs/READY_BATCH_CERTIFICATION.json'));
  const {certifiedFrozenCandidateRuns}=await import('./ready-evidence-gate.mjs');
- assert.deepEqual(certifiedFrozenCandidateRuns({queue,certificate,candidateSha:PIN.candidate,candidateBranch:PIN.candidateBranch}),certificate.run_ids);
+ assertRunIds(certifiedFrozenCandidateRuns({queue,certificate,candidateSha:PIN.candidate,candidateBranch:PIN.candidateBranch}),certificate.run_ids);
  const runs=[[45733854744,['approval']],[45733854753,['validate']],[45733854697,['cloud-tests','mobile-browser-qa']],[45733854801,['sql']],[45734361908,['precertify-source']]];
  const checked=[];
  for(const [id,names] of runs){

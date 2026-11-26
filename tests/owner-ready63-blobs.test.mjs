@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PIN,OWNER,RECEIPT,blobSha,appendGrant,appendJournal,assertApiOperation} from '../scripts/release/prepare-owner-ready63-blobs.mjs';
+import {PIN,OWNER,RECEIPT,blobSha,appendGrant,appendJournal,assertApiOperation,assertRunIds} from '../scripts/release/prepare-owner-ready63-blobs.mjs';
 const ids=Array.from({length:63},(_,i)=>'DIC-Q-test-'+i);
 const raw=JSON.stringify({schema_version:1,history:'preserve',grants:[{id:'historical',data:{keep:[1,2,3]}}]},null,2)+'\n';
 const now='2026-11-26T16:00:00.000Z';
@@ -22,4 +22,9 @@ test('only unreachable blob writes; all ref, contents, dispatch and provider end
  assertApiOperation('POST','git/blobs');assertApiOperation('GET','git/ref/heads/main');assertApiOperation('GET','actions/runs/123/jobs?per_page=100');
  for(const method of ['POST','PUT','PATCH','DELETE'])for(const path of ['git/refs/heads/main','git/ref/heads/release/production','contents/docs/RELEASE_REQUEST.json','actions/workflows/1/dispatches','https://api.netlify.com/api/v1/deploys'])assert.throws(()=>assertApiOperation(method,path));
  assert.throws(()=>assertApiOperation('GET','../../secrets'));assert.throws(()=>assertApiOperation('GET','git/blobs/'+PIN.main+'?redirect=1'));
+});
+
+test('native run IDs compare canonically without accepting different or duplicated evidence',()=>{
+ assertRunIds(['45733854697','45733854744','45733854753','45733854801'],[45733854744,45733854753,45733854697,45733854801]);
+ for(const bad of [[1,2,3],[1,2,2],[1,2,4],[1,2,'03'],[1,2,null]])assert.throws(()=>assertRunIds(bad,[1,2,5]));
 });
